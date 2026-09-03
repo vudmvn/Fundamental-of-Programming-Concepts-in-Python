@@ -1,0 +1,81 @@
+# Byte-compiled / optimized / C-extensions
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env
+ENV/
+env.bak/
+venv.bak/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Type checkers and linters
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE / Editor configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# LaTeX auxiliary build files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Operating System files
+.DS_Store
+Thumbs.db
