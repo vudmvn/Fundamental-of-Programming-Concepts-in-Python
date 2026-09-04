@@ -2,9 +2,7 @@
 
 🌐 **Language:** [🇻🇳 Vietnamese Version (index.md)](index.md) | 🇬🇧 **English**
 
-> **Instructors:**  
-> • Dr. Vu Duc Minh (`minhvd@neu.edu.vn`)  
-> • MSc. Nguyen Thanh Hoang (`hoangnt@neu.edu.vn`)  
+> **Lecturer:** Dr. Vu Duc Minh  
 > **Department:** Department of Mathematical Economics – National Economics University (NEU)  
 > **Program:** Data Science in Finance and E-commerce (DSFE)  
 > **Credits:** 3 Credits (30h Lectures, 15h Practical Tutorials, 90h Self-study)  
@@ -57,4 +55,4 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 ---
 
-> © 2026 Dr. Vu Duc Minh & MSc. Nguyen Thanh Hoang – National Economics University (NEU). All rights reserved.
+> © 2026 Dr. Vu Duc Minh – National Economics University (NEU). All rights reserved.

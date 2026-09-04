@@ -26,9 +26,7 @@
 
 - **Department:** Mathematical Economics
 - **Office:** Suite 1105, Building A1, National Economics University (NEU)
-- **Instructors:**
-  - **Dr. Vu Duc Minh** – `minhvd@neu.edu.vn`
-  - **MSc. Nguyen Thanh Hoang** – `hoangnt@neu.edu.vn`
+- **Instructor:** Dr. Vu Duc Minh
 
 ---
 
@@ -149,4 +147,4 @@ The students will start from basic algorithmic design concepts and presentation 
 
 ---
 
-> © 2026 Dr. Vu Duc Minh & MSc. Nguyen Thanh Hoang – National Economics University (NEU). All rights reserved.
+> © 2026 Dr. Vu Duc Minh – National Economics University (NEU). All rights reserved.

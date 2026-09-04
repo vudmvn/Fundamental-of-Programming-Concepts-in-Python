@@ -26,9 +26,7 @@
 
 - **Bộ môn phụ trách:** Toán kinh tế
 - **Địa chỉ:** Phòng 1105, Nhà A1, Trường Đại học Kinh tế Quốc dân (NEU)
-- **Giảng viên:**
-  - **TS. Vũ Đức Minh** – `minhvd@neu.edu.vn`
-  - **ThS. Nguyễn Thanh Hoàng** – `hoangnt@neu.edu.vn`
+- **Giảng viên:** TS. Vũ Đức Minh
 
 ---
 
@@ -149,4 +147,4 @@ Sinh viên sẽ bắt đầu từ các khái niệm thiết kế giải thuật 
 
 ---
 
-> © 2026 TS. Vũ Đức Minh & ThS. Nguyễn Thanh Hoàng – Trường Đại học Kinh tế Quốc dân (NEU). Bản quyền thuộc về tác giả.
+> © 2026 TS. Vũ Đức Minh – Trường Đại học Kinh tế Quốc dân (NEU). Bản quyền thuộc về tác giả.

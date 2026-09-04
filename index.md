@@ -2,9 +2,7 @@
 
 🌐 **Ngôn ngữ:** 🇻🇳 **Tiếng Việt** | [🇬🇧 English Version (index-en.md)](index-en.md)
 
-> **Giảng viên:**  
-> • TS. Vũ Đức Minh (`minhvd@neu.edu.vn`)  
-> • ThS. Nguyễn Thanh Hoàng (`hoangnt@neu.edu.vn`)  
+> **Giảng viên:** TS. Vũ Đức Minh  
 > **Đơn vị phụ trách:** Bộ môn Toán kinh tế – Trường Đại học Kinh tế Quốc dân (NEU)  
 > **Chương trình:** Khoa học dữ liệu trong Tài chính và Thương mại điện tử (DSFE)  
 > **Số tín chỉ:** 3 Tín chỉ (30h lý thuyết, 15h thực hành/thảo luận, 90h tự học)  
@@ -57,4 +55,4 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 ---
 
-> © 2026 TS. Vũ Đức Minh & ThS. Nguyễn Thanh Hoàng – Trường Đại học Kinh tế Quốc dân (NEU). Bản quyền tài liệu thuộc về tác giả.
+> © 2026 TS. Vũ Đức Minh – Trường Đại học Kinh tế Quốc dân (NEU). Bản quyền tài liệu thuộc về tác giả.

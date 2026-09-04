@@ -100,7 +100,7 @@ python scripts/publish_lecture.py -m "feat(lecture): Hoàn thành bài giảng T
 ---
 
 ## 🌐 4. Thông tin Repository & Giảng viên
-- **Giảng viên:** TS. Vũ Đức Minh (`minhvd@neu.edu.vn`)
+- **Giảng viên:** TS. Vũ Đức Minh
 - **Khoa:** Khoa học dữ liệu & Trí tuệ nhân tạo (NEU)
 - **Học phần:** Lập trình Python (DSAI1003)
 - **GitHub Repository:** [https://github.com/vudmvn/introduction-to-python](https://github.com/vudmvn/introduction-to-python)
