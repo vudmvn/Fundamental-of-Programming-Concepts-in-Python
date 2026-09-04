@@ -103,5 +103,5 @@ python scripts/publish_lecture.py -m "feat(lecture): Hoàn thành bài giảng T
 - **Giảng viên:** TS. Vũ Đức Minh
 - **Khoa:** Khoa học dữ liệu & Trí tuệ nhân tạo (NEU)
 - **Học phần:** Lập trình Python (DSAI1003)
-- **GitHub Repository:** [https://github.com/vudmvn/introduction-to-python](https://github.com/vudmvn/introduction-to-python)
-- **Website:** [https://vudmvn.github.io/introduction-to-python/](https://vudmvn.github.io/introduction-to-python/)
+- **GitHub Repository:** [https://github.com/vudmvn/Fundamental-of-Programming-Concepts-in-Python](https://github.com/vudmvn/Fundamental-of-Programming-Concepts-in-Python)
+- **Website:** [https://vudmvn.github.io/Fundamental-of-Programming-Concepts-in-Python/](https://vudmvn.github.io/Fundamental-of-Programming-Concepts-in-Python/)
