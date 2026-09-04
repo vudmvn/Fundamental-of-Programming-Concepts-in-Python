@@ -5,7 +5,7 @@
 > **Giảng viên:** TS. Vũ Đức Minh  
 > **Đơn vị phụ trách:** Bộ môn Toán kinh tế – Trường Đại học Kinh tế Quốc dân (NEU)  
 > **Chương trình:** Khoa học dữ liệu trong Tài chính và Thương mại điện tử (DSFE)  
-> **Số tín chỉ:** 3 Tín chỉ (30h lý thuyết, 15h thực hành/thảo luận, 90h tự học)  
+> **Số tín chỉ:** 3 Tín chỉ (45h lý thuyết + 22.5h thực hành (option), 90h tự học)  
 > **Đề cương chi tiết:** Xem tệp [syllabus-vn.md](syllabus-vn.md)
 
 ---

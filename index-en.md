@@ -5,7 +5,7 @@
 > **Lecturer:** Dr. Vu Duc Minh  
 > **Department:** Department of Mathematical Economics – National Economics University (NEU)  
 > **Program:** Data Science in Finance and E-commerce (DSFE)  
-> **Credits:** 3 Credits (30h Lectures, 15h Practical Tutorials, 90h Self-study)  
+> **Credits:** 3 Credits (45h Lectures + 22.5h Practical Tutorials (option), 90h Self-study)  
 > **Syllabus:** See [syllabus-en.md](syllabus-en.md)
 
 ---

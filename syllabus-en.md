@@ -16,7 +16,7 @@
 | **Academic Program** | Data Science in Finance and E-commerce (DSFE) |
 | **Course Type** | Compulsory |
 | **Credits** | 3 Credits |
-| **Duration** | 30 hours lectures, 15 hours tutorials/labs, 90 hours self-study |
+| **Duration** | 45 hours lectures + 22.5 hours tutorials/labs (option), 90 hours self-study |
 | **Prerequisites** | None |
 | **Department** | Department of Mathematical Economics, Suite 1105, Building A1, National Economics University |
 

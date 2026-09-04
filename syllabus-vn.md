@@ -16,7 +16,7 @@
 | **Chương trình đào tạo** | Khoa học dữ liệu trong Tài chính và Thương mại điện tử (DSFE) |
 | **Loại học phần** | Bắt buộc cơ sở ngành |
 | **Số tín chỉ** | 3 tín chỉ |
-| **Thời lượng** | 30 giờ lý thuyết, 15 giờ bài tập/thực hành, 90 giờ tự học |
+| **Thời lượng** | 45 giờ lý thuyết + 22.5 giờ thực hành (option), 90 giờ tự học |
 | **Học phần tiên quyết** | Không có |
 | **Đơn vị phụ trách** | Bộ môn Toán kinh tế, Phòng 1105, Nhà A1, Trường Đại học Kinh tế Quốc dân (NEU) |
 
