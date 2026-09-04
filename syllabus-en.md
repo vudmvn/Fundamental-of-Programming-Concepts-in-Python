@@ -18,14 +18,13 @@
 | **Credits** | 3 Credits |
 | **Duration** | 45 hours lectures + 22.5 hours tutorials/labs (option), 90 hours self-study |
 | **Prerequisites** | None |
-| **Department** | Department of Mathematical Economics, Suite 1105, Building A1, National Economics University |
+| **Department** | Faculty of Data Science & Artificial Intelligence, School of Technology, National Economics University (NEU) |
 
 ---
 
-## 2. Department & Instructors
+## 2. Faculty & Instructors
 
-- **Department:** Mathematical Economics
-- **Office:** Suite 1105, Building A1, National Economics University (NEU)
+- **Faculty:** Faculty of Data Science & Artificial Intelligence, School of Technology, National Economics University (NEU)
 - **Instructor:** Dr. Vu Duc Minh
 
 ---

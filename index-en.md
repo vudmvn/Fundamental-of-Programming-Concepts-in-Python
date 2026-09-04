@@ -3,7 +3,7 @@
 🌐 **Language:** [🇻🇳 Vietnamese Version (index.md)](index.md) | 🇬🇧 **English**
 
 > **Lecturer:** Dr. Vu Duc Minh  
-> **Department:** Department of Mathematical Economics – National Economics University (NEU)  
+> **Faculty:** Faculty of Data Science & Artificial Intelligence, School of Technology, National Economics University (NEU)  
 > **Program:** Data Science in Finance and E-commerce (DSFE)  
 > **Credits:** 3 Credits (45h Lectures + 22.5h Practical Tutorials (option), 90h Self-study)  
 > **Syllabus:** See [syllabus-en.md](syllabus-en.md)

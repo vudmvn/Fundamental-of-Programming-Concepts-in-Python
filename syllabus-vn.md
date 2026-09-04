@@ -18,14 +18,13 @@
 | **Số tín chỉ** | 3 tín chỉ |
 | **Thời lượng** | 45 giờ lý thuyết + 22.5 giờ thực hành (option), 90 giờ tự học |
 | **Học phần tiên quyết** | Không có |
-| **Đơn vị phụ trách** | Bộ môn Toán kinh tế, Phòng 1105, Nhà A1, Trường Đại học Kinh tế Quốc dân (NEU) |
+| **Đơn vị phụ trách** | Khoa Khoa học dữ liệu & Trí tuệ nhân tạo, Trường Công nghệ, Đại học Kinh tế Quốc dân (NEU) |
 
 ---
 
-## 2. Bộ môn & Giảng viên giảng dạy
+## 2. Khoa & Giảng viên giảng dạy
 
-- **Bộ môn phụ trách:** Toán kinh tế
-- **Địa chỉ:** Phòng 1105, Nhà A1, Trường Đại học Kinh tế Quốc dân (NEU)
+- **Khoa phụ trách:** Khoa Khoa học dữ liệu & Trí tuệ nhân tạo, Trường Công nghệ, Đại học Kinh tế Quốc dân (NEU)
 - **Giảng viên:** TS. Vũ Đức Minh
 
 ---
