@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>DSAI1003 – Các nguyên lý lập trình cơ bản với Python</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Giáo trình & Bài giảng môn Các nguyên lý lập trình cơ bản với Python - Khoa KHDL & TTNT, NEU">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  
+  <!-- Docsify Theme (Clean Vue Theme) -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  
+  <style>
+    /* Custom clean styling */
+    :root {
+      --theme-color: #1e56a0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .markdown-section {
+      max-width: 980px;
+      padding: 30px 45px;
+      margin: 0 auto;
+    }
+    .markdown-section table {
+      display: table;
+      width: 100%;
+    }
+    .markdown-section table th, .markdown-section table td {
+      padding: 10px 12px;
+    }
+    .markdown-section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    /* Header link styling */
+    .app-name-link {
+      font-weight: 600;
+      color: #1e56a0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Đang tải tài liệu học phần...</div>
+  <script>
+    window.$docsify = {
+      name: 'DSAI1003 - Lập trình với Python',
+      repo: 'vudmvn/introduction-to-python',
+      homepage: 'index.md',
+      auto2top: true,
+      executeScript: true,
+      loadSidebar: false,
+      relativePath: true,
+      ext: '.md',
+      subMaxLevel: 3,
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: '🔍 Tìm kiếm bài giảng...',
+        noData: 'Không tìm thấy kết quả!',
+        depth: 3
+      },
+      copyCode: {
+        buttonText: 'Sao chép',
+        errorText: 'Lỗi',
+        successText: 'Đã sao chép'
+      },
+      plugins: [
+        function(hook, vm) {
+          hook.beforeEach(function(html) {
+            var currentPath = vm.route.file;
+            if (!currentPath) return html;
+            var lastSlash = currentPath.lastIndexOf('/');
+            var currentDir = lastSlash !== -1 ? currentPath.substring(0, lastSlash + 1) : '';
+            
+            // Rewrite relative image paths in <img src="..."> and ![alt](...)
+            html = html.replace(/(<img[^>]*src=["'])(?!\/|http|https)([^"']+)(["'])/gi, function(match, p1, p2, p3) {
+              if (currentDir && !p2.startsWith(currentDir) && !p2.startsWith('/')) {
+                var cleanP2 = p2.replace(/^\.\//, '');
+                return p1 + currentDir + cleanP2 + p3;
+              }
+              return match;
+            });
+            
+            html = html.replace(/(!\[[^\]]*\]\()(?!\/|http|https)([^)]+)(\))/gi, function(match, p1, p2, p3) {
+              if (currentDir && !p2.startsWith(currentDir) && !p2.startsWith('/')) {
+                var cleanP2 = p2.replace(/^\.\//, '');
+                return p1 + currentDir + cleanP2 + p3;
+              }
+              return match;
+            });
+            
+            return html;
+          });
+
+          hook.doneEach(function() {
+            // Force links to static files (.pdf, .ipynb, .zip, .csv) to bypass Docsify SPA router
+            var links = document.querySelectorAll('.markdown-section a');
+            links.forEach(function(link) {
+              var href = link.getAttribute('href');
+              if (href) {
+                var cleanHref = href.split('?')[0].split('#')[0].toLowerCase();
+                if (cleanHref.endsWith('.pdf') || cleanHref.endsWith('.ipynb') || cleanHref.endsWith('.zip') || cleanHref.endsWith('.csv')) {
+                  link.setAttribute('target', '_blank');
+                  link.setAttribute('rel', 'noopener');
+                }
+              }
+            });
+          });
+        }
+      ]
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- Search Plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- Copy Code Plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <!-- Syntax Highlighting -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <!-- MathJax / LaTeX support -->
+  <script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-latex@0/dist/docsify-latex.min.js"></script>
+</body>
+</html>
