@@ -64,30 +64,30 @@ Khi tạo, nhúng hoặc biên dịch tài liệu, Agent **BẮT BUỘC** thực
 - **Lệnh biên dịch chuẩn:** Sử dụng `xelatex -interaction=nonstopmode <filename>.tex` (chạy 2 lượt biên dịch để cập nhật đầy đủ chỉ mục, bookmark và số trang).
 - **Quy tắc Dọn dẹp Tệp Tạm (Temp Build Files Cleanup):** Ngay sau khi biên dịch hoàn tất tệp `.pdf`, Agent **BẮT BUỘC** phải xóa tất cả các tệp phụ trợ sinh ra trong quá trình biên dịch (`.aux`, `.log`, `.nav`, `.out`, `.snm`, `.toc`, `.vrb`, `.fls`, `.fdb_latexmk`, `.synctex.gz`) để giữ cho repository luôn sạch sẽ.
 
-### 6. Quy tắc Cập nhật Liên kết Slide PDF vào `README.md` & `README-en.md` (Anti-404 Docsify Link)
-- Ngay sau khi tệp PDF slide được tạo hoặc biên dịch lại, Agent **BẮT BUỘC** phải cập nhật liên kết tệp PDF vào cột Slide/Slides thuộc bảng Ma trận học phần ở cả 2 tệp **`README.md`** và **`README-en.md`**.
-- **Cú pháp thẻ mở PDF bắt buộc:** Do trang web Docsify là ứng dụng Single Page (SPA), liên kết tệp PDF **bắt buộc** phải dùng cú pháp thẻ HTML có `target="_blank"` để mở trực tiếp tệp PDF trên tab mới của trình duyệt, tránh bị Docsify SPA Router chặn trả về lỗi 404 Not Found:
+### 6. Quy tắc Cập nhật Liên kết Slide PDF vào `index.md` & `index-en.md`
+- Ngay sau khi tệp PDF slide được tạo hoặc biên dịch lại, Agent **BẮT BUỘC** phải cập nhật liên kết tệp PDF vào cột Slide/Slides thuộc bảng Ma trận học phần ở cả 2 tệp **`index.md`** và **`index-en.md`**.
+- **Cú pháp thẻ mở PDF bắt buộc:** Do trang web Docsify/GitHub Pages có thể dùng SPA routing, liên kết tệp PDF **bắt buộc** phải dùng cú pháp thẻ HTML có `target="_blank"` để mở trực tiếp tệp PDF trên tab mới của trình duyệt:
   ```html
   <a href="lectures/partXX-<slug>/<filename>.pdf" target="_blank">PDF</a>
   ```
 
 ### 7. Quy tắc Tự động Cập nhật Ngày chỉnh sửa (Auto Last-Updated Date Rule)
 - **BẮT BUỘC:** Mỗi tệp bài giảng Markdown (`.md`) phải có dòng thông tin ngày cập nhật ngay dưới tiêu đề bài học (dòng `#`):
-  - Tệp tiếng Việt: `**Cập nhật lần cuối:** <ngày> tháng <tháng> năm <năm>` (VD: `**Cập nhật lần cuối:** 3 tháng 9 năm 2026`)
-  - Tệp tiếng Anh: `**Last updated:** <Month> <Day>, <Year>` (VD: `**Last updated:** September 3, 2026`)
+  - Tệp tiếng Việt: `**Cập nhật lần cuối:** <ngày> tháng <tháng> năm <năm>` (VD: `**Cập nhật lần cuối:** 4 tháng 9 năm 2026`)
+  - Tệp tiếng Anh: `**Last updated:** <Month> <Day>, <Year>` (VD: `**Last updated:** September 4, 2026`)
 - Khi tạo mới bài giảng hoặc bất kỳ khi nào chỉnh sửa, cập nhật nội dung của tệp bài giảng `.md`, Agent **BẮT BUỘC** phải tự động cập nhật dòng này về **ngày hiện tại**.
 
-### 8. Quy tắc Phân định Ngôn ngữ Nghiêm ngặt cho `README-en.md` (Strict No-Vietnamese in `README-en.md` Rule)
-- **TUYỆT ĐỐI KHÔNG ĐƯA NỘI DUNG TIẾNG VIỆT VÀO `README-en.md`**: Tệp `README-en.md` là giao diện Tiếng Anh 100%. Không bao giờ chèn các bài đọc Tiếng Việt (`-vn.md`), tiêu đề Tiếng Việt hoặc mô tả Tiếng Việt vào tệp `README-en.md`.
-- Nếu bài đọc/bài giảng chưa có bản dịch Tiếng Anh (`-en.md`), tại ô Bài đọc trong `README-en.md` **bắt buộc hiển thị dấu gạch ngang `-`** (không tự động lấy link bài đọc Tiếng Việt làm fallback).
-- **Quy tắc Chiều ngược lại (Reverse Rule)**: Trong tệp Tiếng Việt `README.md`, có thể dẫn liên kết tham chiếu tài liệu Tiếng Anh nếu cần thiết hoặc thích hợp, nhưng chiều ngược lại (đưa nội dung Tiếng Việt sang `README-en.md`) là **HOÀN TOÀN BỊ CẤM**.
+### 8. Quy tắc Phân định Ngôn ngữ Nghiêm ngặt cho `index-en.md` (Strict No-Vietnamese in `index-en.md` Rule)
+- **TUYỆT ĐỐI KHÔNG ĐƯA NỘI DUNG TIẾNG VIỆT VÀO `index-en.md`**: Tệp `index-en.md` là giao diện Tiếng Anh 100%. Không bao giờ chèn các bài đọc Tiếng Việt (`-vn.md`), tiêu đề Tiếng Việt hoặc mô tả Tiếng Việt vào tệp `index-en.md`.
+- Nếu bài đọc/bài giảng chưa có bản dịch Tiếng Anh (`-en.md`), tại ô Bài đọc trong `index-en.md` **bắt buộc hiển thị dấu gạch ngang `-`** (không tự động lấy link bài đọc Tiếng Việt làm fallback).
+- **Quy tắc Chiều ngược lại (Reverse Rule)**: Trong tệp Tiếng Việt `index.md`, có thể dẫn liên kết tham chiếu tài liệu Tiếng Anh nếu cần thiết hoặc thích hợp, nhưng chiều ngược lại (đưa nội dung Tiếng Việt sang `index-en.md`) là **HOÀN TOÀN BỊ CẤM**.
 
 ---
 
 ## 🔄 3. Quy trình Soạn & Cập nhật Bài giảng (5 Bước)
 
 1. **Bước 1: Xác định Yêu cầu & Chuẩn đầu ra (CLOs)** theo `syllabus-vn.md` / `syllabus-en.md`.
-2. **Bước 2: Tạo Nội dung Bài đọc, Slide TeX & Hình ảnh** (`README.md`, `.md`, `.tex` & `images/`).
+2. **Bước 2: Tạo Nội dung Bài đọc, Slide TeX & Hình ảnh** (`README.md` trong bài học, `.md`, `.tex` & `images/`).
 3. **Bước 3: Biên dịch PDF & Xóa Tệp Tạm** (`xelatex` 2 pass + cleanup).
-4. **Bước 4: Cập nhật Liên kết Slide PDF vào `README.md` & `README-en.md`** (`target="_blank"`).
+4. **Bước 4: Cập nhật Liên kết Slide PDF vào `index.md` & `index-en.md`** (`target="_blank"`).
 5. **Bước 5: Kiểm tra & Đồng bộ lên GitHub (`git add`, `git commit`, `git push`)**.

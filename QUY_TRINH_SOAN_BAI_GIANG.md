@@ -34,8 +34,8 @@ Python/
 ├── assets/                         # Ảnh bìa sách tham khảo & tài nguyên dùng chung
 ├── syllabus-vn.md                  # Đề cương chi tiết học phần (Tiếng Việt)
 ├── syllabus-en.md                  # Đề cương chi tiết học phần (Tiếng Anh)
-├── README.md                       # Trang chủ repo + Mục lục bài giảng (Tiếng Việt)
-└── README-en.md                    # Trang chủ repo + Mục lục bài giảng (Tiếng Anh 100%)
+├── index.md                        # Trang chủ repo + Mục lục bài giảng (Tiếng Việt)
+└── index-en.md                     # Trang chủ repo + Mục lục bài giảng (Tiếng Anh 100%)
 ```
 
 ---
@@ -60,10 +60,10 @@ Python/
 5. **Quy chuẩn Slide TeX/PDF (.tex ➔ .pdf)**:
    - Biên dịch bằng `xelatex -interaction=nonstopmode <filename>.tex` (2 lượt).
    - Ngay sau khi xuất xong tệp PDF, Agent **bắt buộc dọn dẹp xóa các tệp tạm** (`.aux`, `.log`, `.nav`, `.out`, `.snm`, `.toc`, `.vrb`, `.fls`, `.synctex.gz`).
-6. **Quy tắc Cập nhật Link Slide PDF vào `README.md` & `README-en.md` (Anti-404 Docsify Link)**:
-   - Bắt buộc dùng thẻ HTML `target="_blank"`: `<a href="lectures/.../partXX_lecture_X.pdf" target="_blank">PDF</a>` để mở trực tiếp tab mới, tránh lỗi 404 Docsify router.
-7. **Quy tắc Phân định Ngôn ngữ Nghiêm ngặt cho `README-en.md`**:
-   - Tệp `README-en.md` là giao diện Tiếng Anh 100%. Không bao giờ chèn các bài đọc hoặc mô tả Tiếng Việt vào `README-en.md`.
+6. **Quy tắc Cập nhật Link Slide PDF vào `index.md` & `index-en.md`**:
+   - Bắt buộc dùng thẻ HTML `target="_blank"`: `<a href="lectures/.../partXX_lecture_X.pdf" target="_blank">PDF</a>` để mở trực tiếp tab mới.
+7. **Quy tắc Phân định Ngôn ngữ Nghiêm ngặt cho `index-en.md`**:
+   - Tệp `index-en.md` là giao diện Tiếng Anh 100%. Không bao giờ chèn các bài đọc hoặc mô tả Tiếng Việt vào `index-en.md`.
 
 ---
 
@@ -103,3 +103,5 @@ python scripts/publish_lecture.py -m "feat(lecture): Hoàn thành bài giảng T
 - **Giảng viên:** TS. Vũ Đức Minh (`minhvd@neu.edu.vn`)
 - **Khoa:** Khoa học dữ liệu & Trí tuệ nhân tạo (NEU)
 - **Học phần:** Lập trình Python (DSAI1003)
+- **GitHub Repository:** [https://github.com/vudmvn/introduction-to-python](https://github.com/vudmvn/introduction-to-python)
+- **Website:** [https://vudmvn.github.io/introduction-to-python/](https://vudmvn.github.io/introduction-to-python/)
