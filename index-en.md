@@ -1,6 +1,6 @@
 # 🐍 DSAI1003 – Fundamental Programming Concepts in Python
 
-🌐 **Language:** [🇻🇳 Vietnamese Version (README.md)](README.md) | 🇬🇧 **English**
+🌐 **Language:** [🇻🇳 Vietnamese Version (index.md)](index.md) | 🇬🇧 **English**
 
 > **Instructors:**  
 > • Dr. Vu Duc Minh (`minhvd@neu.edu.vn`)  
@@ -31,7 +31,7 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 | Week | Lecture / Topic | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | - | - | - | - | ⏳ *In Preparation* |
+| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | • [Lesson 1. Introduction to Programming and Python](lectures/part01-introduction/introduction-en.md) | - | - | - | ✅ *Ready* |
 | **Week 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |

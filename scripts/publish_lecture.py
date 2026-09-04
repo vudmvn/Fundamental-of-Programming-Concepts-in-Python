@@ -286,17 +286,44 @@ def generate_matrices():
 
     return "\n".join(vn_rows), "\n".join(en_rows), lecture_map
 
+def update_portal_files():
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    vn_table, en_table, lecture_map = generate_matrices()
+
+    index_vn = os.path.join(root_dir, "index.md")
+    index_en = os.path.join(root_dir, "index-en.md")
+
+    table_pattern = r"(\|:---:\|:---\|:---\|:---:\|:---:\|:---:\|:---:\|\n)([\s\S]*?)(\n\n---)"
+
+    if os.path.exists(index_vn):
+        with open(index_vn, "r", encoding="utf-8") as f:
+            content = f.read()
+        new_content = re.sub(table_pattern, r"\1" + vn_table.replace("\\", "\\\\") + r"\3", content)
+        with open(index_vn, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        print("✅ Đã cập nhật ma trận bài giảng trong index.md")
+
+    if os.path.exists(index_en):
+        with open(index_en, "r", encoding="utf-8") as f:
+            content = f.read()
+        new_content = re.sub(table_pattern, r"\1" + en_table.replace("\\", "\\\\") + r"\3", content)
+        with open(index_en, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        print("✅ Đã cập nhật ma trận bài giảng trong index-en.md")
+
+    return lecture_map
+
 def main():
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
 
     parser = argparse.ArgumentParser(description="Quản lý và xuất bản bài giảng Lập trình Python.")
     parser.add_argument("-m", "--message", help="Commit message cho Git và thực hiện git push")
-    parser.add_argument("--skip-git", action="store_true", help="Chỉ cập nhật ma trận README, không commit/push git")
+    parser.add_argument("--skip-git", action="store_true", help="Chỉ cập nhật ma trận README/index, không commit/push git")
     args = parser.parse_args()
 
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    vn_table, en_table, lecture_map = generate_matrices()
+    lecture_map = update_portal_files()
     print(f"🔍 Đã quét thấy {len(lecture_map)} thư mục bài giảng trong lectures/")
 
     if args.message and not args.skip_git:
@@ -311,3 +338,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

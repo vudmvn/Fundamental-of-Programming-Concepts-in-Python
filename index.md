@@ -1,6 +1,6 @@
 # 🐍 DSAI1003 – Các nguyên lý lập trình cơ bản với Python
 
-🌐 **Ngôn ngữ:** 🇻🇳 **Tiếng Việt** | [🇬🇧 English Version (README-en.md)](README-en.md)
+🌐 **Ngôn ngữ:** 🇻🇳 **Tiếng Việt** | [🇬🇧 English Version (index-en.md)](index-en.md)
 
 > **Giảng viên:**  
 > • TS. Vũ Đức Minh (`minhvd@neu.edu.vn`)  
@@ -31,7 +31,7 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 | Tuần | Bài học / Chủ đề | Bài giảng & Bài đọc (.md / .ipynb) | Slide | Bài tập Lab | Đáp án | Trạng thái |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài 1. Giới thiệu về lập trình và Python](lectures/part01-introduction/introduction-vn.md) | - | - | - | ✅ *Đã sẵn sàng* |
 | **Tuần 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | - | - | - | - | ⏳ *Đang biên soạn* |
 | **Tuần 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | - | - | - | - | ⏳ *Đang biên soạn* |
 | **Tuần 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | - | - | - | - | ⏳ *Đang biên soạn* |
