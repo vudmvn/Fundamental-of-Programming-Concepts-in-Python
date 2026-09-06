@@ -38,23 +38,20 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 ## 📚 2. Ma trận Bài giảng, Tài liệu & Bài tập Thực hành
 
-| Tuần | Bài học / Chủ đề | Bài giảng & Bài đọc (.md / .ipynb) | Slide | Bài tập Lab | Đáp án | Trạng thái |
+| Phần / Chủ đề | Nội dung bài học | Bài giảng & Bài đọc (.md / .ipynb) | Slide | Bài tập Lab | Đáp án | Trạng thái |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Bài giảng: Nhập/Xuất cơ bản](lectures/part01-introduction/simple_input_output-vn.md) | [Slide Bài 1 (PDF)](lectures/part00-starting-points/python_course_guide_slides.pdf ':ignore target=_blank') | • Setup môi trường<br>• [Lab 1: Nhập/Xuất cơ bản (.ipynb)](lectures/part01-introduction/simple_input_output_lab-vn.ipynb ':ignore target=_blank') | - | ✅ *Đã sẵn sàng* |
-| **Tuần 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 05** | **Bài 5: Thiết kế hàm & Phạm vi biến** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 06** | **Bài 6: Cấu trúc List và Tuple** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 07** | **Thi giữa kỳ (Midterm Exam)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 08** | **Bài 7: Thao tác Tệp và Xử lý Ngoại lệ (Phần 1)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 09** | **Bài 7: Thao tác Tệp và Xử lý Ngoại lệ (Phần 2)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 10** | **Bài 8: Tập hợp (Set) và Từ điển (Dictionary)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 11** | **Bài 9: Đối tượng và Lớp (OOP - Phần 1)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 12** | **Bài 9: Đối tượng và Lớp (OOP - Phần 2)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 13** | **Bài 10: Kế thừa và Đa hình (Phần 1)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 14** | **Bài 10: Kế thừa và Đa hình (Phần 2)** | - | - | - | - | ⏳ *Đang biên soạn* |
-| **Tuần 15** | **Tổng kết và Ôn tập cuối kỳ** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Bài giảng: Nhập/Xuất cơ bản](lectures/part01-introduction/simple_input_output-vn.md) | [Slide Bài 1 (PDF)](lectures/part00-starting-points/python_course_guide_slides.pdf ':ignore target=_blank') | • Setup môi trường<br>• [Lab 1: Nhập/Xuất cơ bản (.ipynb)](lectures/part01-introduction/simple_input_output_lab-vn.ipynb ':ignore target=_blank') | - | ✅ *Đã sẵn sàng* |
+| **Part 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 05** | **Bài 5: Thiết kế hàm & Phạm vi biến (Functions)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 06** | **Bài 6: Cấu trúc List và Tuple** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Đánh giá** | **Thi giữa kỳ (Midterm Exam - Nội dung Part 01 – 06)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 07** | **Bài 7: Thao tác Tệp và Xử lý Ngoại lệ (Files & Exceptions)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 08** | **Bài 8: Tập hợp (Set) và Từ điển (Dictionary)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 09** | **Bài 9: Đối tượng và Lớp (OOP - Classes & Objects)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Part 10** | **Bài 10: Kế thừa và Đa hình (Inheritance & Polymorphism)** | - | - | - | - | ⏳ *Đang biên soạn* |
+| **Tổng kết** | **Hệ thống hóa kiến thức & Ôn tập cuối kỳ** | - | - | - | - | ⏳ *Đang biên soạn* |
 
 ---
 

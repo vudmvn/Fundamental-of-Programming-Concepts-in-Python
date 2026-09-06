@@ -38,23 +38,20 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 ## 📚 2. Course Matrix & Learning Resources
 
-| Week | Lecture / Topic | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
+| Part / Topic | Lecture Title & Content | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Lecture: Basic Input/Output](lectures/part01-introduction/simple_input_output-en.md) | [Slides (PDF)](lectures/part00-starting-points/python_course_guide_slides-en.pdf ':ignore target=_blank') | • Environment setup<br>• [Lab 1: Basic Input/Output (.ipynb)](lectures/part01-introduction/simple_input_output_lab-en.ipynb ':ignore target=_blank') | - | ✅ *Ready* |
-| **Week 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 05** | **Lecture 5: Functions & Variable Scope** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 06** | **Lecture 6: Lists and Tuples** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 07** | **Midterm Examination** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 08** | **Lecture 7: Files and Exceptions (Part 1)** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 09** | **Lecture 7: Files and Exceptions (Part 2)** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 10** | **Lecture 8: Sets and Dictionaries** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 11** | **Lecture 9: Objects and Classes (OOP - Part 1)** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 12** | **Lecture 9: Objects and Classes (OOP - Part 2)** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 13** | **Lecture 10: Inheritance and Polymorphism (Part 1)** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 14** | **Lecture 10: Inheritance and Polymorphism (Part 2)** | - | - | - | - | ⏳ *In Preparation* |
-| **Week 15** | **Course Summary & Final Review** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 01** | **Lecture 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Lecture: Basic Input/Output](lectures/part01-introduction/simple_input_output-en.md) | [Slides (PDF)](lectures/part00-starting-points/python_course_guide_slides-en.pdf ':ignore target=_blank') | • Environment setup<br>• [Lab 1: Basic Input/Output (.ipynb)](lectures/part01-introduction/simple_input_output_lab-en.ipynb ':ignore target=_blank') | - | ✅ *Ready* |
+| **Part 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 05** | **Lecture 5: Functions & Variable Scope** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 06** | **Lecture 6: Lists and Tuples** | - | - | - | - | ⏳ *In Preparation* |
+| **Midterm** | **Midterm Examination (Core topics: Part 01 – 06)** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 07** | **Lecture 7: Files and Exceptions** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 08** | **Lecture 8: Sets and Dictionaries** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 09** | **Lecture 9: Objects and Classes (OOP)** | - | - | - | - | ⏳ *In Preparation* |
+| **Part 10** | **Lecture 10: Inheritance and Polymorphism** | - | - | - | - | ⏳ *In Preparation* |
+| **Final** | **Course Summary & Final Review** | - | - | - | - | ⏳ *In Preparation* |
 
 ---
 
