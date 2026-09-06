@@ -2,7 +2,7 @@
 
 ## 1. Giới thiệu bài học
 
-Trong hầu hết các chương trình, chúng ta cần thực hiện hai công việc cơ bản:
+Trong hầu hết các chương trình, dữ liệu được tiếp nhận, xử lý và sau đó trả kết quả cho người dùng. Hai thao tác nền tảng để thực hiện quá trình này là:
 
 - **Nhập dữ liệu (Input):** nhận dữ liệu từ người dùng.
 - **Xuất dữ liệu (Output):** hiển thị kết quả ra màn hình.
@@ -14,7 +14,7 @@ Ví dụ, một chương trình tính diện tích hình chữ nhật cần:
 3. Tính diện tích.
 4. In kết quả ra màn hình.
 
-Trong Python, hai công cụ cơ bản nhất cho nhập/xuất là:
+Trong Python, hai hàm cơ bản nhất để thực hiện nhập và xuất dữ liệu là:
 
 ```python
 input()
@@ -37,13 +37,13 @@ Sau bài học này, sinh viên có thể:
 8. Sử dụng f-string để định dạng output đơn giản.
 9. Phân biệt một số lỗi thường gặp khi làm việc với nhập/xuất.
 
-> **Lưu ý:** Ở giai đoạn này, các bài tập chỉ yêu cầu viết các câu lệnh trực tiếp. **Chưa cần viết hàm (`def`)**.
+> **Phạm vi bài học:** Các bài tập trong bài này được viết trực tiếp bằng các câu lệnh cơ bản; chưa sử dụng hàm tự định nghĩa (`def`).
 
 ---
 
-# 3. Xuất dữ liệu với `print()`
+## 3. Xuất dữ liệu với `print()`
 
-## 3.1. Cú pháp cơ bản
+### 3.1. Cú pháp cơ bản
 
 ```python
 print(value)
@@ -61,14 +61,14 @@ Output:
 Hello, Python!
 ```
 
-Có thể in số:
+Có thể xuất trực tiếp các giá trị số:
 
 ```python
 print(100)
 print(3.14)
 ```
 
-Hoặc in giá trị của biến:
+Hoặc xuất giá trị đang được lưu trong biến:
 
 ```python
 name = "An"
@@ -80,7 +80,7 @@ print(age)
 
 ---
 
-## 3.2. In nhiều giá trị
+### 3.2. In nhiều giá trị trong một lệnh
 
 `print()` có thể nhận nhiều giá trị cùng lúc.
 
@@ -99,7 +99,7 @@ Name: An
 Age: 18
 ```
 
-Python mặc định đặt một dấu cách giữa các đối tượng được truyền vào `print()`.
+Theo mặc định, `print()` chèn một dấu cách giữa các giá trị được truyền vào.
 
 ```python
 x = 10
@@ -115,7 +115,7 @@ Output:
 
 ---
 
-## 3.3. `sep` — thay đổi ký tự phân cách
+### 3.3. Tham số `sep` — điều khiển ký tự phân cách
 
 ```python
 print("2026", "09", "06", sep="-")
@@ -141,7 +141,7 @@ Python | Java | C++
 
 ---
 
-## 3.4. `end` — thay đổi ký tự kết thúc
+### 3.4. Tham số `end` — điều khiển ký tự kết thúc
 
 Mặc định, sau mỗi `print()`, Python xuống dòng.
 
@@ -172,7 +172,7 @@ Hello Python
 
 ---
 
-## Self-check 1
+### Câu hỏi tự kiểm tra 1
 
 ### Câu 1
 
@@ -211,7 +211,7 @@ Hello World
 
 ---
 
-# 4. Biến và xuất dữ liệu
+## 4. Xuất giá trị của biến
 
 Thông thường chúng ta không chỉ in giá trị cố định mà còn in dữ liệu được lưu trong biến.
 
@@ -232,9 +232,9 @@ print("Price:", price)
 
 ---
 
-# 5. Nhập dữ liệu với `input()`
+## 5. Nhập dữ liệu với `input()`
 
-## 5.1. Cú pháp
+### 5.1. Cú pháp
 
 ```python
 variable = input("Prompt")
@@ -256,7 +256,7 @@ print("Hello", name)
 
 ---
 
-## 5.2. `input()` luôn trả về `str`
+### 5.2. Kiểu dữ liệu trả về của `input()`
 
 ```python
 age = input("Enter your age: ")
@@ -273,11 +273,11 @@ Dù dữ liệu trông giống một số, `input()` vẫn trả về chuỗi.
 
 ---
 
-# 6. Chuyển kiểu dữ liệu sau khi nhập
+## 6. Chuyển đổi kiểu dữ liệu đầu vào
 
-Nếu cần tính toán, thường phải chuyển dữ liệu nhập sang kiểu số.
+Khi dữ liệu nhập được sử dụng trong các phép tính số học, cần chuyển chuỗi nhận được từ `input()` sang kiểu số phù hợp.
 
-## 6.1. Chuyển sang `int`
+### 6.1. Chuyển sang số nguyên với `int()`
 
 ```python
 age = int(input("Enter your age: "))
@@ -290,7 +290,7 @@ Nếu nhập `18`, output là:
 19
 ```
 
-## 6.2. Chuyển sang `float`
+### 6.2. Chuyển sang số thực với `float()`
 
 ```python
 price = float(input("Enter price: "))
@@ -299,9 +299,9 @@ print(price)
 
 ---
 
-## 6.3. So sánh hai trường hợp
+### 6.3. So sánh khi có và không có chuyển kiểu
 
-### Không chuyển kiểu
+#### Trường hợp 1 — Không chuyển kiểu
 
 ```python
 x = input("Enter x: ")
@@ -315,7 +315,7 @@ Nếu nhập `10` và `20`, output là:
 1020
 ```
 
-### Có chuyển kiểu
+#### Trường hợp 2 — Có chuyển kiểu
 
 ```python
 x = int(input("Enter x: "))
@@ -331,7 +331,7 @@ Output:
 
 ---
 
-## Self-check 2
+### Câu hỏi tự kiểm tra 2
 
 ### Câu 1
 
@@ -369,9 +369,9 @@ print(x * 3)
 
 ---
 
-# 7. Kết hợp Input → Process → Output
+## 7. Mô hình Input → Process → Output
 
-Một chương trình đơn giản thường có ba bước:
+Có thể mô tả cấu trúc của một chương trình nhập/xuất cơ bản bằng ba bước:
 
 ```text
 Input
@@ -400,9 +400,9 @@ Trong đó:
 
 ---
 
-# 8. Xuất dữ liệu với f-string
+## 8. Định dạng dữ liệu xuất với f-string
 
-F-string giúp kết hợp text và giá trị biến dễ đọc hơn.
+F-string cung cấp cách trình bày chuỗi kết hợp với giá trị của biến rõ ràng và thuận tiện.
 
 ```python
 name = "An"
@@ -426,7 +426,7 @@ Output:
 10 + 5 = 15
 ```
 
-## 8.1. Định dạng số thực đơn giản
+### 8.1. Định dạng số thực
 
 ```python
 price = 19.5678
@@ -443,9 +443,9 @@ Price: 19.57
 
 ---
 
-# 9. Những lỗi thường gặp
+## 9. Các lỗi thường gặp và cách nhận biết
 
-## 9.1. Quên chuyển kiểu dữ liệu
+### 9.1. Quên chuyển kiểu dữ liệu
 
 Sai:
 
@@ -467,7 +467,7 @@ age = int(input("Age: "))
 next_age = age + 1
 ```
 
-## 9.2. Chuyển kiểu không phù hợp
+### 9.2. Dữ liệu nhập không phù hợp với kiểu cần chuyển
 
 ```python
 age = int(input("Age: "))
@@ -475,9 +475,9 @@ age = int(input("Age: "))
 
 Nếu người dùng nhập `eighteen`, Python không thể chuyển chuỗi đó thành số nguyên.
 
-Ở giai đoạn này, chúng ta giả sử người dùng nhập đúng kiểu dữ liệu được yêu cầu. Việc xử lý input sai sẽ được học sau.
+Trong phạm vi bài học này, giả sử người dùng nhập dữ liệu đúng định dạng được yêu cầu. Kỹ thuật kiểm tra và xử lý dữ liệu nhập không hợp lệ sẽ được giới thiệu ở các bài sau.
 
-## 9.3. Nhầm giữa dữ liệu và text
+### 9.3. Nhầm lẫn giữa biến và chuỗi ký tự
 
 ```python
 x = 10
@@ -504,9 +504,9 @@ Output:
 
 ---
 
-# 10. Ví dụ tổng hợp
+## 10. Ví dụ tổng hợp
 
-## Ví dụ 1 — Thông tin cá nhân
+### Ví dụ 1 — Thông tin cá nhân
 
 ```python
 name = input("Name: ")
@@ -516,7 +516,7 @@ print(f"Hello {name}!")
 print(f"Next year you will be {age + 1}.")
 ```
 
-## Ví dụ 2 — Tính tổng tiền
+### Ví dụ 2 — Tính tổng tiền
 
 ```python
 price = float(input("Product price: "))
@@ -527,7 +527,7 @@ total = price * quantity
 print(f"Total: {total:.2f}")
 ```
 
-## Ví dụ 3 — Đổi Celsius sang Fahrenheit
+### Ví dụ 3 — Chuyển đổi Celsius sang Fahrenheit
 
 Công thức:
 
@@ -543,9 +543,9 @@ print(f"Fahrenheit: {fahrenheit:.2f}")
 
 ---
 
-# 11. Predict the Output
+## 11. Bài tập dự đoán kết quả (Predict the Output)
 
-## Bài 1
+### Bài 1
 
 ```python
 x = "10"
@@ -562,7 +562,7 @@ print(x + y)
 
 </details>
 
-## Bài 2
+### Bài 2
 
 ```python
 x = 10
@@ -579,7 +579,7 @@ Result: 15
 
 </details>
 
-## Bài 3
+### Bài 3
 
 ```python
 print("A", "B", sep=":", end=" ")
@@ -595,7 +595,7 @@ A:B C
 
 </details>
 
-## Bài 4
+### Bài 4
 
 ```python
 x = 7
@@ -613,11 +613,11 @@ x = 7, x^2 = 49
 
 ---
 
-# 12. Bài tập tự luyện
+## 12. Bài tập thực hành
 
-> **Yêu cầu chung:** Không viết hàm. Viết các câu lệnh trực tiếp theo thứ tự Input → Process → Output.
+> **Yêu cầu chung:** Viết các câu lệnh trực tiếp theo mô hình **Input → Process → Output**; chưa sử dụng hàm tự định nghĩa (`def`).
 
-## Bài 1 — Lời chào
+### Bài 1 — Lời chào
 
 Nhập tên của người dùng và in:
 
@@ -625,19 +625,19 @@ Nhập tên của người dùng và in:
 Hello, <name>!
 ```
 
-## Bài 2 — Tuổi năm sau
+### Bài 2 — Tuổi năm sau
 
 Nhập tuổi hiện tại và in tuổi của người dùng vào năm sau.
 
-## Bài 3 — Tổng và tích
+### Bài 3 — Tổng và tích
 
 Nhập hai số nguyên `a` và `b`. In tổng và tích.
 
-## Bài 4 — Hình chữ nhật
+### Bài 4 — Hình chữ nhật
 
 Nhập chiều dài và chiều rộng. Tính và in diện tích và chu vi.
 
-## Bài 5 — Mua hàng
+### Bài 5 — Tính tổng tiền mua hàng
 
 Nhập tên sản phẩm, đơn giá và số lượng. In hóa đơn dạng:
 
@@ -648,7 +648,7 @@ Quantity: 3
 Total: 46.50
 ```
 
-## Bài 6 — Nhiệt độ
+### Bài 6 — Chuyển đổi nhiệt độ
 
 Nhập nhiệt độ Celsius và đổi sang Fahrenheit:
 
@@ -658,11 +658,11 @@ $$
 
 Hiển thị kết quả với 2 chữ số sau dấu thập phân.
 
-## Bài 7 — Trung bình ba điểm
+### Bài 7 — Tính điểm trung bình
 
 Nhập ba điểm số thực. Tính và in điểm trung bình với 2 chữ số sau dấu thập phân.
 
-## Bài 8 — Số giây
+### Bài 8 — Chuyển đổi số giây
 
 Nhập một số giây. Tính tổng số phút và số giây còn lại.
 
@@ -683,7 +683,7 @@ Gợi ý:
 
 ---
 
-# 13. Mini Lab — Tính chi phí chuyến đi
+## 13. Bài thực hành tổng hợp — Tính chi phí chuyến đi
 
 Input:
 
@@ -714,7 +714,7 @@ Estimated cost: 431250.00
 
 ---
 
-# 14. Checklist cuối bài
+## 14. Tự đánh giá sau bài học
 
 - [ ] Tôi biết sử dụng `print()`.
 - [ ] Tôi biết in nhiều giá trị trong một lệnh.
@@ -730,7 +730,7 @@ Estimated cost: 431250.00
 
 ---
 
-# 15. Tóm tắt
+## 15. Tổng kết kiến thức
 
 Các công cụ quan trọng:
 

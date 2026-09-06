@@ -40,7 +40,7 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 | Tuần | Bài học / Chủ đề | Bài giảng & Bài đọc (.md / .ipynb) | Slide | Bài tập Lab | Đáp án | Trạng thái |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md) | [Slide Bài 1 (PDF)](lectures/part00-starting-points/python_course_guide_slides.pdf ':ignore target=_blank') | Setup môi trường | - | ✅ *Đã sẵn sàng* |
+| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Bài giảng: Nhập/Xuất cơ bản](lectures/part01-introduction/simple_input_output-vn.md) | [Slide Bài 1 (PDF)](lectures/part00-starting-points/python_course_guide_slides.pdf ':ignore target=_blank') | • Setup môi trường<br>• [Lab 1: Nhập/Xuất cơ bản (.ipynb)](lectures/part01-introduction/simple_input_output_lab-vn.ipynb ':ignore target=_blank') | - | ✅ *Đã sẵn sàng* |
 | **Tuần 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | - | - | - | - | ⏳ *Đang biên soạn* |
 | **Tuần 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | - | - | - | - | ⏳ *Đang biên soạn* |
 | **Tuần 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | - | - | - | - | ⏳ *Đang biên soạn* |
