@@ -53,7 +53,7 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 | Tuần | Bài học / Chủ đề | Bài giảng & Tài liệu đọc | Slide bài giảng | Thực hành / Bài tập | Trạng thái |
 |:---:|:---|:---|:---:|:---:|:---:|
-| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Cẩm nang tự học hiệu quả](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)<br>• [Chiến lược học cùng AI](lectures/part01-introduction/learning-python-with-AI-tool-vn.md) | [Slide Bài 1 (PDF)](python_course_guide_slides.pdf) | Cài đặt môi trường (Python 3.11+, VS Code, Colab) | ✅ *Đã sẵn sàng* |
+| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md) | [Slide Bài 1 (PDF)](python_course_guide_slides.pdf) | Cài đặt môi trường (Python 3.11+, VS Code, Colab) | ✅ *Đã sẵn sàng* |
 | **Tuần 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | Biểu thức số học, chuỗi, lệnh gán, biến, toán tử, module | - | Giao **Bài tập về nhà #1** | ⏳ *Đang biên soạn* |
 | **Tuần 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | Nhánh `if`, `if-else`, `if-elif-else`, logic Boolean | - | Nộp BT #1 | ⏳ *Đang biên soạn* |
 | **Tuần 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | Vòng lặp `while`, `for`, lặp lồng nhau, duyệt chuỗi | - | Giao **Bài tập về nhà #2** | ⏳ *Đang biên soạn* |

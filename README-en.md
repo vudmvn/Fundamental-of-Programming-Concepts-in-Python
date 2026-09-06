@@ -53,7 +53,7 @@ The course **Fundamental Programming Concepts in Python (DSAI1003)** is a compul
 
 | Week | Lecture / Topic | Lectures & Readings | Slides | Lab & Assignments | Status |
 |:---:|:---|:---|:---:|:---:|:---:|
-| **Week 01** | **Lesson 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Effective Python Self-Study Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)<br>• [Strategic AI Learning Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md) | [Slides (PDF)](python_course_guide_slides-en.pdf) | Environment setup (Python 3.11+, VS Code, Colab) | ✅ *Ready* |
+| **Week 01** | **Lesson 1: Introduction & Algorithm Design** | [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md) | [Slides (PDF)](python_course_guide_slides-en.pdf) | Environment setup (Python 3.11+, VS Code, Colab) | ✅ *Ready* |
 | **Week 02** | **Lesson 2: Software Process & Data Types** | Numbers, strings, arithmetic expressions, assignments, variables, modules | - | Assign **Homework #1** | ⏳ *In Preparation* |
 | **Week 03** | **Lesson 3: Decision Structures** | Branching `if`, `if-else`, `if-elif-else`, Boolean logic | - | Due: Homework #1 | ⏳ *In Preparation* |
 | **Week 04** | **Lesson 4: Loop Structures** | Loops `while`, `for`, nested iterations, string traversals | - | Assign **Homework #2** | ⏳ *In Preparation* |

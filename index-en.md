@@ -42,7 +42,7 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 | Week | Lecture / Topic | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Effective Python Self-Study Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)<br>• [Strategic AI Learning Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md) | [Slides (PDF)](python_course_guide_slides-en.pdf ':ignore target=_blank') | Environment setup | - | ✅ *Ready* |
+| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md) | [Slides (PDF)](python_course_guide_slides-en.pdf ':ignore target=_blank') | Environment setup | - | ✅ *Ready* |
 | **Week 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |
