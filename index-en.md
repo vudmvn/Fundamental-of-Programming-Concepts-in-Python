@@ -6,20 +6,23 @@
 > **Faculty:** Faculty of Data Science & Artificial Intelligence, School of Technology, National Economics University (NEU)  
 > **Program:** Data Science in Finance and E-commerce (DSFE)  
 > **Credits:** 3 Credits (45h Lectures + 22.5h Practical Tutorials (option), 90h Self-study)  
-> **Syllabus:** See [syllabus-en.md](syllabus-en.md) | [syllabus-vn.md](syllabus-vn.md)
+> **Syllabus:** See [syllabus-en.md](syllabus-en.md) | [syllabus-vn.md](syllabus-vn.md)  
+> **Self-Study & AI Guides:** [Effective Self-Study Guide](tutorial-effective-python-self-study-en.md) | [Strategic AI Learning](learning-python-with-AI-tool-en.md)
 
 ---
 
-## 🚀 Featured Resources & Course Handbook (PDFs & Slides)
+## 🚀 Featured Resources & Course Handbook (PDFs & Tutorials)
 
-| Document | Download PDF |
+| Document / Guide | Format / Link |
 | :--- | :---: |
 | 📘 **Course Handbook & Self-Study Guide** (Handbook A4, 11 pages) | [**Download PDF**](python_course_guide-en.pdf ':ignore target=_blank') |
 | 🖥️ **Course Presentation Slides** (Beamer 16:9, 26 slides) | [**Download Slides PDF**](python_course_guide_slides-en.pdf ':ignore target=_blank') |
+| 📖 **How to Self-Study Python Effectively** (Tutorial/Lab) | [**Read Tutorial**](tutorial-effective-python-self-study-en.md) |
+| 🤖 **Strategic AI (ChatGPT) Assisted Learning** (Tutorial/Lab) | [**Read Tutorial**](learning-python-with-AI-tool-en.md) |
 
 ### 💡 Dedicated Self-Study & AI Tutorials:
-* 📖 **How to Self-Study Python Effectively:** [Read Tutorial](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)
-* 🤖 **Strategic AI (ChatGPT) Assisted Learning:** [Read Tutorial](lectures/part01-introduction/learning-python-with-AI-tool-en.md)
+* 📖 **How to Self-Study Python Effectively:** [Read Tutorial](tutorial-effective-python-self-study-en.md)
+* 🤖 **Strategic AI (ChatGPT) Assisted Learning:** [Read Tutorial](learning-python-with-AI-tool-en.md)
 
 ---
 

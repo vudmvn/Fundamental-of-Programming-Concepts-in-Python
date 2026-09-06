@@ -13,23 +13,26 @@
 > **Số tín chỉ:** 3 Tín chỉ (45h Lý thuyết + 22.5h Thực hành/Lab, 90h Tự học)  
 > **Quyết định ban hành:** 975/QĐ-ĐHKTQD (30/03/2024)  
 > **Website bài giảng:** [https://vudmvn.github.io/Fundamental-of-Programming-Concepts-in-Python/](https://vudmvn.github.io/Fundamental-of-Programming-Concepts-in-Python/)  
-> **Đề cương chi tiết:** [syllabus-vn.md](syllabus-vn.md) | [syllabus-en.md](syllabus-en.md)
+> **Đề cương chi tiết:** [syllabus-vn.md](syllabus-vn.md) | [syllabus-en.md](syllabus-en.md)  
+> **Hướng dẫn tự học & AI:** [Cẩm nang tự học](tutorial-effective-python-self-study-vn.md) | [Học cùng AI](learning-python-with-AI-tool-vn.md)
 
 ---
 
-## 🚀 1. Tài nguyên Nổi bật & Cẩm nang Học phần (PDFs & Slides)
+## 🚀 1. Tài nguyên Nổi bật & Cẩm nang Học phần (PDFs & Tutorials)
 
-Học phần cung cấp bộ cẩm nang và tài liệu slide hoàn chỉnh (được biên soạn chuẩn mực bằng LaTeX/XeLaTeX) phục vụ quá trình học tập và tự học của sinh viên:
+Học phần cung cấp bộ cẩm nang, tài liệu slide và chuyên đề hướng dẫn phương pháp học tập chuẩn mực:
 
-| Tài liệu | Định dạng PDF |
+| Tài liệu / Chuyên đề | Định dạng / Liên kết |
 | :--- | :---: |
 | 📘 **Cẩm nang Học phần & Phương pháp Tự học** (Handbook A4, 11 trang) | [**Tải PDF**](python_course_guide.pdf) |
 | 🖥️ **Slide Giới thiệu & Định hướng Môn học** (Beamer 16:9, 26 slides) | [**Tải Slide PDF**](python_course_guide_slides.pdf) |
+| 📖 **Phương pháp Tự học Lập trình Python Hiệu quả** (Tutorial/Lab) | [**Xem tài liệu**](tutorial-effective-python-self-study-vn.md) |
+| 🤖 **Chiến lược Sử dụng Trí tuệ Nhân tạo (ChatGPT/AI) Hỗ trợ Học tập** (Tutorial/Lab) | [**Xem tài liệu**](learning-python-with-AI-tool-vn.md) |
 
 ### 💡 Chuyên đề Hướng dẫn Phương pháp Học tập:
-* 📖 **Phương pháp tự học lập trình Python hiệu quả:** [Xem tài liệu](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)  
+* 📖 **Phương pháp tự học lập trình Python hiệu quả:** [Xem tài liệu](tutorial-effective-python-self-study-vn.md)  
   *(Tránh 4 bẫy nhận thức, chu trình tự học 9 bước, Predict $\rightarrow$ Run $\rightarrow$ Explain, thang luyện tập 5 cấp độ, quy trình 8 bước Debugging và bảng Error Log).*
-* 🤖 **Chiến lược sử dụng Trí tuệ Nhân tạo (ChatGPT/AI) hỗ trợ học tập:** [Xem tài liệu](lectures/part01-introduction/learning-python-with-AI-tool-vn.md)  
+* 🤖 **Chiến lược sử dụng Trí tuệ Nhân tạo (ChatGPT/AI) hỗ trợ học tập:** [Xem tài liệu](learning-python-with-AI-tool-vn.md)  
   *(Định vị AI là Huấn luyện viên, Khung Prompt 4 thành phần, Nguyên tắc 5T, Hệ thống gợi ý 3 cấp độ, Bộ Prompt Toolkit mẫu và Bảng kiểm thẩm định 7 tiêu chí).*
 
 ---
