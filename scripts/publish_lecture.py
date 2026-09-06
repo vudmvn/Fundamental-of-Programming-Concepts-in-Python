@@ -290,7 +290,9 @@ def update_portal_files():
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     vn_table, en_table, lecture_map = generate_matrices()
 
-    index_vn = os.path.join(root_dir, "index.md")
+    index_vn = os.path.join(root_dir, "index-vn.md")
+    if not os.path.exists(index_vn):
+        index_vn = os.path.join(root_dir, "index.md")
     index_en = os.path.join(root_dir, "index-en.md")
 
     table_pattern = r"(\|:---:\|:---\|:---\|:---:\|:---:\|:---:\|:---:\|\n)([\s\S]*?)(\n\n---)"
@@ -301,7 +303,7 @@ def update_portal_files():
         new_content = re.sub(table_pattern, r"\1" + vn_table.replace("\\", "\\\\") + r"\3", content)
         with open(index_vn, "w", encoding="utf-8") as f:
             f.write(new_content)
-        print("✅ Đã cập nhật ma trận bài giảng trong index.md")
+        print(f"✅ Đã cập nhật ma trận bài giảng trong {os.path.basename(index_vn)}")
 
     if os.path.exists(index_en):
         with open(index_en, "r", encoding="utf-8") as f:

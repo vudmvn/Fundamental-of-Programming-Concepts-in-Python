@@ -1,6 +1,6 @@
 # 🐍 DSAI1003 – Fundamental Programming Concepts in Python
 
-🌐 **Language:** [🇻🇳 Vietnamese Version (index.md)](index.md) | 🇬🇧 **English**
+🌐 **Language:** [🇻🇳 Vietnamese Version (index-vn.md)](index-vn.md) | 🇬🇧 **English**
 
 > **Lecturer:** Dr. Vu Duc Minh  
 > **Faculty:** Faculty of Data Science & Artificial Intelligence, School of Technology, National Economics University (NEU)  
