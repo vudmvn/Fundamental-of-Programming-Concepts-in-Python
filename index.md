@@ -6,12 +6,11 @@
 > **Đơn vị phụ trách:** Khoa Khoa học dữ liệu & Trí tuệ nhân tạo, Trường Công nghệ, Đại học Kinh tế Quốc dân (NEU)  
 > **Chương trình:** Khoa học dữ liệu trong Tài chính và Thương mại điện tử (DSFE)  
 > **Số tín chỉ:** 3 Tín chỉ (45h lý thuyết + 22.5h thực hành (option), 90h tự học)  
-> **Đề cương chi tiết:** Xem tệp [syllabus-vn.md](syllabus-vn.md) | [syllabus-en.md](syllabus-en.md)  
-> **Hướng dẫn tự học & AI:** [Cẩm nang tự học](tutorial-effective-python-self-study-vn.md) | [Học cùng AI](learning-python-with-AI-tool-vn.md)
+> **Đề cương chi tiết:** Xem tệp [syllabus-vn.md](syllabus-vn.md) | [syllabus-en.md](syllabus-en.md)
 
 ---
 
-## 🚀 Tài nguyên Nổi bật & Cẩm nang Học phần (PDFs & Tutorials)
+## 🚀 Chuyên đề Phương pháp Học tập
 
 | Tài liệu / Chuyên đề | Định dạng / Liên kết |
 | :--- | :---: |
@@ -19,10 +18,6 @@
 | 🖥️ **Slide Giới thiệu & Định hướng Môn học** (Beamer 16:9, 26 slides) | [**Tải Slide PDF**](python_course_guide_slides.pdf ':ignore target=_blank') |
 | 📖 **Phương pháp Tự học Lập trình Python Hiệu quả** (Tutorial/Lab) | [**Xem tài liệu**](tutorial-effective-python-self-study-vn.md) |
 | 🤖 **Chiến lược Sử dụng Trí tuệ Nhân tạo (ChatGPT/AI) Hỗ trợ Học tập** (Tutorial/Lab) | [**Xem tài liệu**](learning-python-with-AI-tool-vn.md) |
-
-### 💡 Chuyên đề Phương pháp Học tập:
-* 📖 **Phương pháp tự học lập trình Python hiệu quả:** [Xem tài liệu](tutorial-effective-python-self-study-vn.md)
-* 🤖 **Chiến lược sử dụng Trí tuệ Nhân tạo (ChatGPT) hỗ trợ học tập:** [Xem tài liệu](learning-python-with-AI-tool-vn.md)
 
 ---
 
