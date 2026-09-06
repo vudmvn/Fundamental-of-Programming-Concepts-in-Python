@@ -1,0 +1,766 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{vietnamese}
+\setotherlanguage{english}
+\setmainfont{DejaVu Sans}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\setbeamertemplate{navigation symbols}{}
+\newcommand{\TotalFramesFixed}{42}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.6ex,dp=1.1ex,right]{page number in head/foot}%
+    \usebeamerfont{page number in head/foot}\insertframenumber/\TotalFramesFixed\hspace*{1.5ex}
+  \end{beamercolorbox}}%
+}
+
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{2CA02C}
+\definecolor{pyorange}{HTML}{FF7F0E}
+\definecolor{pypurple}{HTML}{9467BD}
+\definecolor{pygray}{HTML}{F2F4F8}
+\definecolor{dark}{HTML}{1F2937}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen},
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{pygray},
+  breaklines=true
+}
+\lstset{style=pythonstyle}
+
+\tikzset{
+  box/.style={draw=dark, rounded corners=2mm, very thick, align=center, fill=pygray, minimum height=10mm, inner sep=2.5mm},
+  bluebox/.style={box, fill=blue!12},
+  greenbox/.style={box, fill=green!12},
+  orangebox/.style={box, fill=orange!16},
+  purplebox/.style={box, fill=purple!12},
+  redbox/.style={box, fill=red!12},
+  arrow/.style={-{Latex[length=2.5mm]}, very thick, draw=dark}
+}
+
+\title[Nhập/Xuất cơ bản]{Nhập/Xuất cơ bản trong Python}
+\subtitle{Sử dụng \texttt{print()}, \texttt{input()}, chuyển kiểu và f-string}
+\author{Nhập môn lập trình Python}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Cấu trúc bài học}
+\begin{enumerate}
+  \item Xuất dữ liệu với \texttt{print()}
+  \item Nhập dữ liệu từ bàn phím với \texttt{input()}
+  \item Chuyển đổi kiểu dữ liệu đầu vào
+  \item Mô hình Input $\rightarrow$ Process $\rightarrow$ Output
+  \item Định dạng output với f-string
+  \item Các lỗi nhập/xuất thường gặp
+  \item Bài tập thực hành tổng hợp
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Mục tiêu học tập}
+Sau bài học này, sinh viên có thể:
+\begin{itemize}
+  \item sử dụng \texttt{print()} để xuất dữ liệu;
+  \item in nhiều giá trị với \texttt{sep} và \texttt{end};
+  \item sử dụng \texttt{input()} để nhận dữ liệu từ bàn phím;
+  \item giải thích vì sao \texttt{input()} trả về \texttt{str};
+  \item chuyển input sang \texttt{int} hoặc \texttt{float};
+  \item kết hợp nhập, xử lý và xuất trong một chương trình;
+  \item định dạng output bằng f-string cơ bản.
+\end{itemize}
+\begin{alertblock}{Phạm vi bài học}
+Tất cả chương trình được viết trực tiếp bằng các câu lệnh cơ bản. Chưa sử dụng hàm tự định nghĩa (\texttt{def}).
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Mẫu chương trình cơ bản}
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.2cm] (input) at (0,0) {Input\\nhận dữ liệu};
+  \node[orangebox, minimum width=3.2cm] (process) at (4.5,0) {Process\\tính toán / biến đổi};
+  \node[greenbox, minimum width=3.2cm] (output) at (9.0,0) {Output\\hiển thị kết quả};
+  \draw[arrow] (input.east) -- (process.west);
+  \draw[arrow] (process.east) -- (output.west);
+\end{tikzpicture}
+\end{center}
+\vspace{0.3cm}
+\begin{block}{Ví dụ: diện tích hình chữ nhật}
+Nhập chiều dài và chiều rộng $\rightarrow$ tính diện tích $\rightarrow$ in kết quả.
+\end{block}
+\end{frame}
+
+\section{Xuất dữ liệu với print()}
+
+\begin{frame}[fragile]{Xuất dữ liệu với \texttt{print()}}
+\begin{block}{Cú pháp cơ bản}
+\begin{lstlisting}
+print(value)
+\end{lstlisting}
+\end{block}
+\begin{exampleblock}{Ví dụ}
+\begin{lstlisting}
+print("Hello, Python!")
+\end{lstlisting}
+\end{exampleblock}
+\begin{block}{Output}
+\begin{verbatim}
+Hello, Python!
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{In số và biến}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Giá trị số}
+\begin{lstlisting}
+print(100)
+print(3.14)
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Biến}
+\begin{lstlisting}
+name = "An"
+age = 18
+print(name)
+print(age)
+\end{lstlisting}
+\end{block}
+\end{columns}
+\vspace{0.3cm}
+\begin{alertblock}{Ý chính}
+\texttt{print()} có thể in giá trị cố định và giá trị đang được lưu trong biến.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{In nhiều giá trị}
+\texttt{print()} có thể nhận nhiều giá trị cùng lúc.
+\begin{lstlisting}
+name = "An"
+age = 18
+print("Name:", name)
+print("Age:", age)
+\end{lstlisting}
+\begin{block}{Output}
+\begin{verbatim}
+Name: An
+Age: 18
+\end{verbatim}
+\end{block}
+\begin{itemize}
+  \item Theo mặc định, Python chèn một dấu cách giữa các giá trị được in.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Ký tự phân cách mặc định}
+\begin{lstlisting}
+x = 10
+y = 20
+print(x, y)
+\end{lstlisting}
+\begin{block}{Output}
+\begin{verbatim}
+10 20
+\end{verbatim}
+\end{block}
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  \node[bluebox, minimum width=1.3cm] (a) at (0,0) {10};
+  \node[box, minimum width=1.3cm] (space) at (2.0,0) {space};
+  \node[greenbox, minimum width=1.3cm] (b) at (4.0,0) {20};
+  \draw[arrow] (a) -- (space); \draw[arrow] (space) -- (b);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Tham số \texttt{sep}}
+\begin{block}{Mục đích}
+\texttt{sep} điều khiển ký tự được đặt giữa các giá trị khi in.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{lstlisting}
+print("2026", "09", "06", sep="-")
+\end{lstlisting}
+\begin{verbatim}
+2026-09-06
+\end{verbatim}
+\column{0.48\textwidth}
+\begin{lstlisting}
+print("Python", "Java", "C++", sep=" | ")
+\end{lstlisting}
+\begin{verbatim}
+Python | Java | C++
+\end{verbatim}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Tham số \texttt{end}}
+\begin{block}{Hành vi mặc định}
+Sau mỗi lệnh \texttt{print()}, Python tự động xuống dòng.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{lstlisting}
+print("Hello")
+print("Python")
+\end{lstlisting}
+\begin{verbatim}
+Hello
+Python
+\end{verbatim}
+\column{0.48\textwidth}
+\begin{lstlisting}
+print("Hello", end=" ")
+print("Python")
+\end{lstlisting}
+\begin{verbatim}
+Hello Python
+\end{verbatim}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Câu hỏi tự kiểm tra 1}
+\begin{block}{Câu 1}
+Output là gì?
+\begin{lstlisting}
+print("A", "B", "C", sep="-")
+\end{lstlisting}
+\end{block}
+\begin{block}{Câu 2}
+Output là gì?
+\begin{lstlisting}
+print("Hello", end=" ")
+print("World")
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Đáp án tự kiểm tra 1}
+\begin{enumerate}
+  \item \texttt{A-B-C}
+  \item \texttt{Hello World}
+\end{enumerate}
+\end{frame}
+
+\section{Nhập dữ liệu với input()}
+
+\begin{frame}[fragile]{Nhập dữ liệu với \texttt{input()}}
+\begin{block}{Cú pháp}
+\begin{lstlisting}
+variable = input("Prompt")
+\end{lstlisting}
+\end{block}
+\begin{exampleblock}{Ví dụ}
+\begin{lstlisting}
+name = input("Enter your name: ")
+print("Hello", name)
+\end{lstlisting}
+\end{exampleblock}
+\begin{alertblock}{Ý nghĩa}
+Prompt được hiển thị cho người dùng. Chương trình chờ đến khi người dùng nhập dữ liệu và nhấn Enter.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{\texttt{input()} làm gì?}
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={transform shape}]
+  \node[bluebox, minimum width=2.7cm] (prompt) at (0,0) {Hiển thị\\lời nhắc};
+  \node[orangebox, minimum width=2.7cm] (wait) at (3.8,0) {Chờ người dùng\\nhập dữ liệu};
+  \node[purplebox, minimum width=2.7cm] (enter) at (7.6,0) {Người dùng\\nhấn Enter};
+  \node[greenbox, minimum width=2.7cm] (return) at (11.4,0) {Trả về\\một chuỗi};
+  \draw[arrow] (prompt) -- (wait);
+  \draw[arrow] (wait) -- (enter);
+  \draw[arrow] (enter) -- (return);
+\end{tikzpicture}
+\end{center}
+\vspace{0.3cm}
+\begin{block}{Bốn bước}
+Hiển thị lời nhắc, chờ nhập, nhận dữ liệu vừa nhập và trả văn bản đó cho chương trình.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{input()} trả về chuỗi}
+\begin{lstlisting}
+age = input("Enter your age: ")
+print(type(age))
+\end{lstlisting}
+Nếu người dùng nhập \texttt{18}, kết quả vẫn là:
+\begin{verbatim}
+<class 'str'>
+\end{verbatim}
+\begin{alertblock}{Quan trọng}
+Ngay cả khi dữ liệu nhập trông giống một số, \texttt{input()} vẫn trả về dữ liệu kiểu \texttt{str}.
+\end{alertblock}
+\end{frame}
+
+\section{Chuyển đổi kiểu dữ liệu đầu vào}
+
+\begin{frame}{Vì sao cần chuyển kiểu?}
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.0cm] (raw) at (0,0) {Dữ liệu từ\\bàn phím};
+  \node[orangebox, minimum width=3.4cm] (str) at (4.0,0) {\texttt{input()} trả về\\\texttt{str}};
+  \node[greenbox, minimum width=3.7cm] (num) at (8.4,0) {Chuyển kiểu trước\\khi tính toán};
+  \draw[arrow] (raw) -- (str);
+  \draw[arrow] (str) -- node[above]{\texttt{int()} hoặc \texttt{float()}} (num);
+\end{tikzpicture}
+\end{center}
+\vspace{0.35cm}
+\begin{block}{Quy tắc}
+Khi dữ liệu nhập được dùng trong phép tính số học, hãy chuyển nó sang kiểu số phù hợp.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Chuyển sang số nguyên với \texttt{int()}}
+\begin{lstlisting}
+age = int(input("Enter your age: "))
+print(age + 1)
+\end{lstlisting}
+Nếu người dùng nhập \texttt{18}, output là:
+\begin{verbatim}
+19
+\end{verbatim}
+\begin{itemize}
+  \item Dùng \texttt{int()} cho số nguyên.
+  \item Ví dụ: tuổi, số lượng, số sinh viên.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Chuyển sang số thực với \texttt{float()}}
+\begin{lstlisting}
+price = float(input("Enter price: "))
+print(price)
+\end{lstlisting}
+\begin{itemize}
+  \item Dùng \texttt{float()} cho số có thể chứa phần thập phân.
+  \item Ví dụ: giá tiền, chiều cao, cân nặng, nhiệt độ.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Không chuyển kiểu}
+\begin{lstlisting}
+x = input("Enter x: ")
+y = input("Enter y: ")
+print(x + y)
+\end{lstlisting}
+Nếu người dùng nhập \texttt{10} và \texttt{20}, output là:
+\begin{verbatim}
+1020
+\end{verbatim}
+\begin{alertblock}{Vì sao?}
+\texttt{x} và \texttt{y} là chuỗi, nên \texttt{+} thực hiện phép nối chuỗi.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Có chuyển kiểu}
+\begin{lstlisting}
+x = int(input("Enter x: "))
+y = int(input("Enter y: "))
+print(x + y)
+\end{lstlisting}
+Output:
+\begin{verbatim}
+30
+\end{verbatim}
+\begin{alertblock}{Khác biệt}
+Sau khi chuyển kiểu, \texttt{x} và \texttt{y} là số nguyên, nên \texttt{+} thực hiện phép cộng.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Câu hỏi tự kiểm tra 2}
+\begin{block}{Câu 1}
+Đoạn code sau in gì nếu người dùng nhập \texttt{5}?
+\begin{lstlisting}
+x = input("x = ")
+print(x * 3)
+\end{lstlisting}
+\end{block}
+\begin{block}{Câu 2}
+Cần sửa đoạn code như thế nào để kết quả là \texttt{15}?
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Đáp án tự kiểm tra 2}
+\begin{enumerate}
+  \item Output là \texttt{555}. Giá trị là chuỗi \texttt{"5"}, nên nhân với 3 sẽ lặp lại chuỗi.
+  \item Chuyển input sang số nguyên:
+\end{enumerate}
+\begin{lstlisting}
+x = int(input("x = "))
+print(x * 3)
+\end{lstlisting}
+\end{frame}
+
+\section{Input - Process - Output}
+
+\begin{frame}{Mô hình Input - Process - Output}
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.4cm] (input) at (0,0) {Input\\\texttt{input()}};
+  \node[orangebox, minimum width=3.4cm] (process) at (4.8,0) {Process\\tính toán};
+  \node[greenbox, minimum width=3.4cm] (output) at (9.6,0) {Output\\\texttt{print()}};
+  \draw[arrow] (input.east) -- (process.west);
+  \draw[arrow] (process.east) -- (output.west);
+\end{tikzpicture}
+\end{center}
+\begin{block}{Thói quen lập trình}
+Với chương trình cho người mới bắt đầu, hãy xác định rõ input, xử lý và output trước khi viết code.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Ví dụ: diện tích hình chữ nhật}
+\begin{lstlisting}
+length = float(input("Length: "))
+width = float(input("Width: "))
+area = length * width
+print("Area:", area)
+\end{lstlisting}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\begin{block}{Input}
+\texttt{length}, \texttt{width}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Process}
+\texttt{length * width}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Output}
+\texttt{print(...)}
+\end{block}
+\end{columns}
+\end{frame}
+
+\section{Định dạng output với f-string}
+
+\begin{frame}[fragile]{Định dạng output với f-string}
+f-string cung cấp cách rõ ràng để kết hợp text với giá trị của biến.
+\begin{lstlisting}
+name = "An"
+age = 18
+print(f"My name is {name}.")
+print(f"I am {age} years old.")
+\end{lstlisting}
+\begin{block}{Output}
+\begin{verbatim}
+My name is An.
+I am 18 years old.
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Biểu thức bên trong f-string}
+\begin{lstlisting}
+x = 10
+y = 5
+print(f"{x} + {y} = {x + y}")
+\end{lstlisting}
+Output:
+\begin{verbatim}
+10 + 5 = 15
+\end{verbatim}
+\begin{alertblock}{Ý chính}
+Biểu thức trong \texttt{\{ \}} được tính trước khi chèn vào chuỗi.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Định dạng số thực}
+\begin{lstlisting}
+price = 19.5678
+print(f"Price: {price:.2f}")
+\end{lstlisting}
+Output:
+\begin{verbatim}
+Price: 19.57
+\end{verbatim}
+\begin{block}{Ý nghĩa}
+\texttt{.2f} hiển thị số thực với 2 chữ số sau dấu thập phân.
+\end{block}
+\end{frame}
+
+\section{Các lỗi thường gặp}
+
+\begin{frame}[fragile]{Lỗi thường gặp: quên chuyển kiểu}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{alertblock}{Sai}
+\begin{lstlisting}
+age = input("Age: ")
+next_age = age + 1
+\end{lstlisting}
+\end{alertblock}
+\column{0.48\textwidth}
+\begin{exampleblock}{Đúng}
+\begin{lstlisting}
+age = int(input("Age: "))
+next_age = age + 1
+\end{lstlisting}
+\end{exampleblock}
+\end{columns}
+\vspace{0.25cm}
+\begin{block}{Nguyên nhân}
+\texttt{age} là chuỗi, còn \texttt{1} là số nguyên. Không thể cộng trực tiếp hai kiểu này.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Lỗi thường gặp: input số không hợp lệ}
+\begin{lstlisting}
+age = int(input("Age: "))
+\end{lstlisting}
+\begin{block}{Vấn đề}
+Nếu người dùng nhập \texttt{eighteen}, Python không thể chuyển chuỗi đó thành số nguyên.
+\end{block}
+\begin{alertblock}{Phạm vi bài học}
+Hiện tại, giả sử người dùng nhập dữ liệu đúng định dạng yêu cầu. Kiểm tra dữ liệu nhập sẽ được học sau.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Lỗi thường gặp: biến và chuỗi ký tự}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{In text \texttt{x}}
+\begin{lstlisting}
+x = 10
+print("x")
+\end{lstlisting}
+Output:
+\begin{verbatim}
+x
+\end{verbatim}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{In giá trị của \texttt{x}}
+\begin{lstlisting}
+x = 10
+print(x)
+\end{lstlisting}
+Output:
+\begin{verbatim}
+10
+\end{verbatim}
+\end{block}
+\end{columns}
+\end{frame}
+
+\section{Ví dụ tổng hợp}
+
+\begin{frame}[fragile]{Ví dụ tổng hợp 1: thông tin cá nhân}
+\begin{lstlisting}
+name = input("Name: ")
+age = int(input("Age: "))
+
+print(f"Hello {name}!")
+print(f"Next year you will be {age + 1}.")
+\end{lstlisting}
+\begin{block}{Phân tích IPO}
+\begin{itemize}
+  \item Input: tên và tuổi
+  \item Process: tính \texttt{age + 1}
+  \item Output: lời chào và tuổi năm sau
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Ví dụ tổng hợp 2: tính tổng tiền}
+\begin{lstlisting}
+price = float(input("Product price: "))
+quantity = int(input("Quantity: "))
+total = price * quantity
+
+print(f"Total: {total:.2f}")
+\end{lstlisting}
+\begin{block}{Các chuyển đổi quan trọng}
+\begin{itemize}
+  \item \texttt{price}: dùng \texttt{float()}
+  \item \texttt{quantity}: dùng \texttt{int()}
+  \item \texttt{total}: hiển thị với \texttt{.2f}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Ví dụ tổng hợp 3: Celsius sang Fahrenheit}
+Công thức:
+\[
+F = \frac{9}{5}C + 32
+\]
+\begin{lstlisting}
+celsius = float(input("Celsius: "))
+fahrenheit = 9 / 5 * celsius + 32
+print(f"Fahrenheit: {fahrenheit:.2f}")
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Dự đoán output: bài tập}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Bài 1}
+\begin{lstlisting}
+x = "10"
+y = "5"
+print(x + y)
+\end{lstlisting}
+\end{block}
+\begin{block}{Bài 2}
+\begin{lstlisting}
+x = 10
+y = 5
+print("Result:", x + y)
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Bài 3}
+\begin{lstlisting}
+print("A", "B", sep=":", end=" ")
+print("C")
+\end{lstlisting}
+\end{block}
+\begin{block}{Bài 4}
+\begin{lstlisting}
+x = 7
+print(f"x = {x}, x^2 = {x * x}")
+\end{lstlisting}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Đáp án: dự đoán output}
+\begin{enumerate}
+  \item \texttt{105}
+  \item \texttt{Result: 15}
+  \item \texttt{A:B C}
+  \item \texttt{x = 7, x\string^2 = 49}
+\end{enumerate}
+\end{frame}
+
+\section{Bài tập thực hành}
+
+\begin{frame}{Bài tập thực hành 1-4}
+\begin{block}{Yêu cầu chung}
+Viết trực tiếp các câu lệnh theo mô hình Input - Process - Output. Chưa dùng \texttt{def}.
+\end{block}
+\begin{enumerate}
+  \item Lời chào: nhập tên và in \texttt{Hello, <name>!}
+  \item Tuổi năm sau: nhập tuổi và in tuổi năm sau.
+  \item Tổng và tích: nhập hai số nguyên, rồi in tổng và tích.
+  \item Hình chữ nhật: nhập chiều dài và chiều rộng, rồi in diện tích và chu vi.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Bài tập thực hành 5-8}
+\begin{enumerate}
+  \item Tổng tiền mua hàng: nhập tên sản phẩm, đơn giá và số lượng, rồi in hóa đơn.
+  \item Chuyển đổi nhiệt độ: đổi Celsius sang Fahrenheit và hiển thị 2 chữ số thập phân.
+  \item Điểm trung bình: nhập ba điểm và hiển thị điểm trung bình với 2 chữ số thập phân.
+  \item Chuyển đổi giây: nhập tổng số giây, rồi in số phút đầy đủ và số giây còn lại.
+\end{enumerate}
+\begin{block}{Toán tử hữu ích cho Bài 8}
+\texttt{//} để chia lấy phần nguyên và \texttt{\%} để lấy phần dư.
+\end{block}
+\end{frame}
+
+\begin{frame}{Bài thực hành tổng hợp: chi phí chuyến đi}
+\begin{block}{Input}
+Quãng đường đi được, mức tiêu hao nhiên liệu theo lít/100 km và giá nhiên liệu.
+\end{block}
+\begin{block}{Công thức}
+\[
+\text{fuel\_used} = \frac{\text{distance} \times \text{consumption}}{100}
+\]
+\[
+\text{cost} = \text{fuel\_used} \times \text{fuel\_price}
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Bài thực hành tổng hợp: output mẫu}
+\begin{verbatim}
+Distance: 250
+Consumption (L/100km): 7.5
+Fuel price: 23000
+Fuel used: 18.75 L
+Estimated cost: 431250.00
+\end{verbatim}
+\begin{alertblock}{Trọng tâm}
+Bài này kết hợp nhập dữ liệu, chuyển kiểu, tính toán và định dạng output.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Tự đánh giá sau bài học}
+\small
+\begin{itemize}
+  \item Tôi biết sử dụng \texttt{print()}.
+  \item Tôi hiểu \texttt{sep} và \texttt{end}.
+  \item Tôi biết sử dụng \texttt{input()}.
+  \item Tôi nhớ rằng \texttt{input()} trả về \texttt{str}.
+  \item Tôi biết khi nào cần dùng \texttt{int()} hoặc \texttt{float()}.
+  \item Tôi có thể viết chương trình theo mô hình Input - Process - Output.
+  \item Tôi có thể định dạng số thực bằng \texttt{.2f}.
+  \item Tôi có thể tự viết chương trình đơn giản mà chưa dùng \texttt{def}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Tổng kết kiến thức}
+Các công cụ quan trọng:
+\begin{lstlisting}
+print(...)
+input(...)
+int(...)
+float(...)
+type(...)
+\end{lstlisting}
+Các mẫu thường gặp:
+\begin{lstlisting}
+age = int(input("Age: "))
+price = float(input("Price: "))
+print(f"Result: {result:.2f}")
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Thông điệp cuối bài}
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.2cm] (predict) at (0,0) {Predict};
+  \node[greenbox, minimum width=3.2cm] (run) at (3.8,0) {Run};
+  \node[orangebox, minimum width=3.2cm] (explain) at (7.6,0) {Explain};
+  \node[purplebox, minimum width=3.2cm] (modify) at (3.8,-2.0) {Modify};
+  \node[bluebox, minimum width=3.2cm] (practice) at (7.6,-2.0) {Practice};
+  \draw[arrow] (predict) -- (run);
+  \draw[arrow] (run) -- (explain);
+  \draw[arrow] (explain.south) -- (practice.north);
+  \draw[arrow] (practice) -- (modify);
+  \draw[arrow] (modify.north) -- (run.south);
+\end{tikzpicture}
+\end{center}
+\begin{alertblock}{Quy trình học}
+Predict $\rightarrow$ Run $\rightarrow$ Explain $\rightarrow$ Modify $\rightarrow$ Practice.
+\end{alertblock}
+\end{frame}
+
+\end{document}

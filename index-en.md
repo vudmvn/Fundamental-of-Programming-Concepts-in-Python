@@ -40,7 +40,7 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 | Part / Topic | Lecture Title & Content | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Part 01** | **Lecture 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Lecture: Basic Input/Output](lectures/part01-introduction/simple_input_output-en.md) | [Slides (PDF)](lectures/part00-starting-points/python_course_guide_slides-en.pdf ':ignore target=_blank') | • Environment setup<br>• [Lab 1: Basic Input/Output (.ipynb)](lectures/part01-introduction/simple_input_output_lab-en.ipynb ':ignore target=_blank') | - | ✅ *Ready* |
+| **Part 01** | **Lecture 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Lecture: Basic Input/Output](lectures/part01-introduction/simple_input_output-en.md) | • [Slides: Overview (PDF)](lectures/part01-introduction/part01-introduction-en.pdf ':ignore target=_blank')<br>• [Slides: Basic I/O (PDF)](lectures/part01-introduction/simple_input_output_slide-en.pdf ':ignore target=_blank') | • Environment setup<br>• [Lab 1: Basic Input/Output (.ipynb)](lectures/part01-introduction/simple_input_output_lab-en.ipynb ':ignore target=_blank') | - | ✅ *Ready* |
 | **Part 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
 | **Part 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
 | **Part 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |
