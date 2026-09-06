@@ -145,4 +145,4 @@ Sinh viên sẽ bắt đầu từ các khái niệm thiết kế giải thuật 
 
 ---
 
-> © 2026 TS. Vũ Đức Minh – Trường Đại học Kinh tế Quốc dân (NEU). Bản quyền thuộc về tác giả.
+> © 2026 TS. Vũ Đức Minh – Đại học Kinh tế Quốc dân (NEU). Bản quyền thuộc về tác giả.

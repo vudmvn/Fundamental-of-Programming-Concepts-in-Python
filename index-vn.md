@@ -65,4 +65,4 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 ---
 
-> © 2026 TS. Vũ Đức Minh – Trường Đại học Kinh tế Quốc dân (NEU). Bản quyền tài liệu thuộc về tác giả.
+> © 2026 TS. Vũ Đức Minh – Đại học Kinh tế Quốc dân (NEU). Bản quyền tài liệu thuộc về tác giả.
