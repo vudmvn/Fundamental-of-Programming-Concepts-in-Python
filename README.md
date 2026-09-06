@@ -21,15 +21,15 @@
 
 Học phần cung cấp bộ cẩm nang và tài liệu slide hoàn chỉnh (được biên soạn chuẩn mực bằng LaTeX/XeLaTeX) phục vụ quá trình học tập và tự học của sinh viên:
 
-| Tài liệu | Định dạng PDF | Mã nguồn LaTeX | Phiên bản tiếng Anh |
-| :--- | :---: | :---: | :---: |
-| 📘 **Cẩm nang Học phần & Phương pháp Tự học** (Handbook A4, 11 trang) | [**Tải PDF (Tiếng Việt)**](python_course_guide.pdf) | [Mã nguồn .tex](python_course_guide.tex) | [**English PDF**](python_course_guide-en.pdf) \| [.tex](python_course_guide-en.tex) |
-| 🖥️ **Slide Giới thiệu & Định hướng Môn học** (Beamer 16:9, 26 slides) | [**Tải Slide PDF (Tiếng Việt)**](python_course_guide_slides.pdf) | [Mã nguồn .tex](python_course_guide_slides.tex) | [**English Slides PDF**](python_course_guide_slides-en.pdf) \| [.tex](python_course_guide_slides-en.tex) |
+| Tài liệu | Định dạng PDF |
+| :--- | :---: |
+| 📘 **Cẩm nang Học phần & Phương pháp Tự học** (Handbook A4, 11 trang) | [**Tải PDF**](python_course_guide.pdf) |
+| 🖥️ **Slide Giới thiệu & Định hướng Môn học** (Beamer 16:9, 26 slides) | [**Tải Slide PDF**](python_course_guide_slides.pdf) |
 
 ### 💡 Chuyên đề Hướng dẫn Phương pháp Học tập:
-* 📖 **Phương pháp tự học lập trình Python hiệu quả:** [Bản Tiếng Việt](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md) | [English Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)  
-  *(Tránh 4 bẫy nhận thức, chu trình tự học 9 bước, Predict $ightarrow$ Run $ightarrow$ Explain, thang luyện tập 5 cấp độ, quy trình 8 bước Debugging và bảng Error Log).*
-* 🤖 **Chiến lược sử dụng Trí tuệ Nhân tạo (ChatGPT/AI) hỗ trợ học tập:** [Bản Tiếng Việt](lectures/part01-introduction/learning-python-with-AI-tool-vn.md) | [English Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md)  
+* 📖 **Phương pháp tự học lập trình Python hiệu quả:** [Xem tài liệu](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)  
+  *(Tránh 4 bẫy nhận thức, chu trình tự học 9 bước, Predict $\rightarrow$ Run $\rightarrow$ Explain, thang luyện tập 5 cấp độ, quy trình 8 bước Debugging và bảng Error Log).*
+* 🤖 **Chiến lược sử dụng Trí tuệ Nhân tạo (ChatGPT/AI) hỗ trợ học tập:** [Xem tài liệu](lectures/part01-introduction/learning-python-with-AI-tool-vn.md)  
   *(Định vị AI là Huấn luyện viên, Khung Prompt 4 thành phần, Nguyên tắc 5T, Hệ thống gợi ý 3 cấp độ, Bộ Prompt Toolkit mẫu và Bảng kiểm thẩm định 7 tiêu chí).*
 
 ---
@@ -53,7 +53,7 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 | Tuần | Bài học / Chủ đề | Bài giảng & Tài liệu đọc | Slide bài giảng | Thực hành / Bài tập | Trạng thái |
 |:---:|:---|:---|:---:|:---:|:---:|
-| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Cẩm nang tự học hiệu quả](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)<br>• [Chiến lược học cùng AI](lectures/part01-introduction/learning-python-with-AI-tool-vn.md) | [Slide Bài 1 (PDF)](python_course_guide_slides.pdf)<br>[Slide English (PDF)](python_course_guide_slides-en.pdf) | Cài đặt môi trường (Python 3.11+, VS Code, Colab) | ✅ *Đã sẵn sàng* |
+| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Cẩm nang tự học hiệu quả](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)<br>• [Chiến lược học cùng AI](lectures/part01-introduction/learning-python-with-AI-tool-vn.md) | [Slide Bài 1 (PDF)](python_course_guide_slides.pdf) | Cài đặt môi trường (Python 3.11+, VS Code, Colab) | ✅ *Đã sẵn sàng* |
 | **Tuần 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | Biểu thức số học, chuỗi, lệnh gán, biến, toán tử, module | - | Giao **Bài tập về nhà #1** | ⏳ *Đang biên soạn* |
 | **Tuần 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | Nhánh `if`, `if-else`, `if-elif-else`, logic Boolean | - | Nộp BT #1 | ⏳ *Đang biên soạn* |
 | **Tuần 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | Vòng lặp `while`, `for`, lặp lồng nhau, duyệt chuỗi | - | Giao **Bài tập về nhà #2** | ⏳ *Đang biên soạn* |

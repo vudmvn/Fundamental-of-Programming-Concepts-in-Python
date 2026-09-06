@@ -17,19 +17,19 @@
 
 ---
 
-## 🚀 1. Featured Resources & Course Handbook (PDFs & Slides)
+### 🚀 1. Featured Resources & Course Handbook (PDFs & Slides)
 
 This repository provides comprehensive, academically styled guidebooks and lecture slide decks (compiled via XeLaTeX) to empower student self-study:
 
-| Document | PDF Download | LaTeX Source | Vietnamese Edition |
-| :--- | :---: | :---: | :---: |
-| 📘 **Course Handbook & Self-Study Guide** (Handbook A4, 11 pages) | [**Download PDF (English)**](python_course_guide-en.pdf) | [Source .tex](python_course_guide-en.tex) | [**Bản Tiếng Việt (PDF)**](python_course_guide.pdf) \| [.tex](python_course_guide.tex) |
-| 🖥️ **Course Presentation Slides** (Beamer 16:9, 26 slides) | [**Download Slides PDF (English)**](python_course_guide_slides-en.pdf) | [Source .tex](python_course_guide_slides-en.tex) | [**Slide Tiếng Việt (PDF)**](python_course_guide_slides.pdf) \| [.tex](python_course_guide_slides.tex) |
+| Document | PDF Download |
+| :--- | :---: |
+| 📘 **Course Handbook & Self-Study Guide** (Handbook A4, 11 pages) | [**Download PDF**](python_course_guide-en.pdf) |
+| 🖥️ **Course Presentation Slides** (Beamer 16:9, 26 slides) | [**Download Slides PDF**](python_course_guide_slides-en.pdf) |
 
 ### 💡 Dedicated Self-Study & AI Tutorials:
-* 📖 **How to Self-Study Python Effectively:** [English Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md) | [Bản Tiếng Việt](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)  
-  *(Avoiding 4 fatal cognitive traps, 9-step active study cycle, Predict $ightarrow$ Run $ightarrow$ Explain, 5-level learning ladder, standard 8-step debugging protocol, and personal Error Log).*
-* 🤖 **Strategic AI (ChatGPT) Assisted Learning:** [English Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md) | [Bản Tiếng Việt](lectures/part01-introduction/learning-python-with-AI-tool-vn.md)  
+* 📖 **How to Self-Study Python Effectively:** [Read Tutorial](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)  
+  *(Avoiding 4 fatal cognitive traps, 9-step active study cycle, Predict $\rightarrow$ Run $\rightarrow$ Explain, 5-level learning ladder, standard 8-step debugging protocol, and personal Error Log).*
+* 🤖 **Strategic AI (ChatGPT) Assisted Learning:** [Read Tutorial](lectures/part01-introduction/learning-python-with-AI-tool-en.md)  
   *(Positioning AI as Personal Tutor & Coach, 4-part structured prompt framework, 5T Principle, 3-level hint scaffolding, actionable Prompt Toolkit, and 7-point verification checklist).*
 
 ---
@@ -53,7 +53,7 @@ The course **Fundamental Programming Concepts in Python (DSAI1003)** is a compul
 
 | Week | Lecture / Topic | Lectures & Readings | Slides | Lab & Assignments | Status |
 |:---:|:---|:---|:---:|:---:|:---:|
-| **Week 01** | **Lesson 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Effective Python Self-Study Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)<br>• [Strategic AI Learning Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md) | [Slides English (PDF)](python_course_guide_slides-en.pdf)<br>[Slides Tiếng Việt (PDF)](python_course_guide_slides.pdf) | Environment setup (Python 3.11+, VS Code, Colab) | ✅ *Ready* |
+| **Week 01** | **Lesson 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Effective Python Self-Study Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)<br>• [Strategic AI Learning Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md) | [Slides (PDF)](python_course_guide_slides-en.pdf) | Environment setup (Python 3.11+, VS Code, Colab) | ✅ *Ready* |
 | **Week 02** | **Lesson 2: Software Process & Data Types** | Numbers, strings, arithmetic expressions, assignments, variables, modules | - | Assign **Homework #1** | ⏳ *In Preparation* |
 | **Week 03** | **Lesson 3: Decision Structures** | Branching `if`, `if-else`, `if-elif-else`, Boolean logic | - | Due: Homework #1 | ⏳ *In Preparation* |
 | **Week 04** | **Lesson 4: Loop Structures** | Loops `while`, `for`, nested iterations, string traversals | - | Assign **Homework #2** | ⏳ *In Preparation* |
