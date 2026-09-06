@@ -46,6 +46,26 @@
 <body>
   <div id="app">Đang tải tài liệu học phần...</div>
   <script>
+    // Intercept any direct hash navigation to static files (e.g. #/python_course_guide-en.pdf)
+    // and redirect immediately to the raw static asset
+    (function() {
+      function checkStaticHash() {
+        var hash = window.location.hash || '';
+        var clean = hash.replace(/^#\/?/, '').split('?')[0];
+        var lower = clean.toLowerCase();
+        var staticExts = ['.pdf', '.ipynb', '.zip', '.csv', '.tex'];
+        var isStatic = staticExts.some(function(ext) { return lower.endsWith(ext); });
+        if (isStatic) {
+          var base = window.location.pathname;
+          if (!base.endsWith('/')) base += '/';
+          window.location.replace(base + clean);
+        }
+      }
+      checkStaticHash();
+      window.addEventListener('hashchange', checkStaticHash);
+    })();
+  </script>
+  <script>
     window.$docsify = {
       name: 'DSAI1003 - Lập trình với Python',
       repo: 'vudmvn/Fundamental-of-Programming-Concepts-in-Python',
@@ -97,16 +117,20 @@
           });
 
           hook.doneEach(function() {
-            // Force links to static files (.pdf, .ipynb, .zip, .csv) to bypass Docsify SPA router
+            // Force links to static files (.pdf, .ipynb, .zip, .csv, .tex) to bypass Docsify SPA router
             var links = document.querySelectorAll('.markdown-section a');
+            var staticExts = ['.pdf', '.ipynb', '.zip', '.csv', '.tex'];
             links.forEach(function(link) {
               var href = link.getAttribute('href');
-              if (href) {
-                var cleanHref = href.split('?')[0].split('#')[0].toLowerCase();
-                if (cleanHref.endsWith('.pdf') || cleanHref.endsWith('.ipynb') || cleanHref.endsWith('.zip') || cleanHref.endsWith('.csv')) {
-                  link.setAttribute('target', '_blank');
-                  link.setAttribute('rel', 'noopener');
-                }
+              if (!href) return;
+              var target = href.replace(/^#\/?/, '').split('?')[0];
+              var lower = target.toLowerCase();
+              var isStatic = staticExts.some(function(ext) { return lower.endsWith(ext); });
+              if (isStatic) {
+                link.setAttribute('href', target);
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+                link.setAttribute('data-ignore', '');
               }
             });
           });

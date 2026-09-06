@@ -14,8 +14,8 @@
 
 | Tài liệu | Bản Tiếng Việt (PDF) | Bản Tiếng Anh (English PDF) |
 | :--- | :---: | :---: |
-| 📘 **Cẩm nang Học phần & Hướng dẫn Tự học** (Handbook A4, 11 trang) | [**Tải PDF Tiếng Việt**](python_course_guide.pdf) | [**Download English PDF**](python_course_guide-en.pdf) |
-| 🖥️ **Slide Giới thiệu & Định hướng Môn học** (Beamer 16:9, 26 slides) | [**Tải Slide Tiếng Việt**](python_course_guide_slides.pdf) | [**Download English Slides**](python_course_guide_slides-en.pdf) |
+| 📘 **Cẩm nang Học phần & Hướng dẫn Tự học** (Handbook A4, 11 trang) | [**Tải PDF Tiếng Việt**](python_course_guide.pdf ':ignore target=_blank') | [**Download English PDF**](python_course_guide-en.pdf ':ignore target=_blank') |
+| 🖥️ **Slide Giới thiệu & Định hướng Môn học** (Beamer 16:9, 26 slides) | [**Tải Slide Tiếng Việt**](python_course_guide_slides.pdf ':ignore target=_blank') | [**Download English Slides**](python_course_guide_slides-en.pdf ':ignore target=_blank') |
 
 ### 💡 Chuyên đề Phương pháp Học tập:
 * 📖 **Phương pháp tự học lập trình Python hiệu quả:** [Xem tài liệu](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)
@@ -42,7 +42,7 @@ Học phần **Các nguyên lý lập trình cơ bản với Python (DSAI1003)**
 
 | Tuần | Bài học / Chủ đề | Bài giảng & Bài đọc (.md / .ipynb) | Slide | Bài tập Lab | Đáp án | Trạng thái |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Cẩm nang tự học hiệu quả](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)<br>• [Chiến lược học cùng AI](lectures/part01-introduction/learning-python-with-AI-tool-vn.md) | [Slide Bài 1 (PDF)](python_course_guide_slides.pdf)<br>[Slide English (PDF)](python_course_guide_slides-en.pdf) | Setup môi trường | - | ✅ *Đã sẵn sàng* |
+| **Tuần 01** | **Bài 1: Giới thiệu chung & Thiết kế giải thuật** | • [Bài đọc 1: Giới thiệu lập trình & Python](lectures/part01-introduction/introduction-vn.md)<br>• [Cẩm nang tự học hiệu quả](lectures/part01-introduction/tutorial-effective-python-self-study-vn.md)<br>• [Chiến lược học cùng AI](lectures/part01-introduction/learning-python-with-AI-tool-vn.md) | [Slide Bài 1 (PDF)](python_course_guide_slides.pdf ':ignore target=_blank')<br>[Slide English (PDF)](python_course_guide_slides-en.pdf ':ignore target=_blank') | Setup môi trường | - | ✅ *Đã sẵn sàng* |
 | **Tuần 02** | **Bài 2: Quy trình phát triển phần mềm & Kiểu dữ liệu** | - | - | - | - | ⏳ *Đang biên soạn* |
 | **Tuần 03** | **Bài 3: Cấu trúc ra quyết định (Decision Making)** | - | - | - | - | ⏳ *Đang biên soạn* |
 | **Tuần 04** | **Bài 4: Cấu trúc vòng lặp (Loops)** | - | - | - | - | ⏳ *Đang biên soạn* |
