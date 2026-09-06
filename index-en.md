@@ -6,7 +6,20 @@
 > **Faculty:** Faculty of Data Science & Artificial Intelligence, School of Technology, National Economics University (NEU)  
 > **Program:** Data Science in Finance and E-commerce (DSFE)  
 > **Credits:** 3 Credits (45h Lectures + 22.5h Practical Tutorials (option), 90h Self-study)  
-> **Syllabus:** See [syllabus-en.md](syllabus-en.md)
+> **Syllabus:** See [syllabus-en.md](syllabus-en.md) | [syllabus-vn.md](syllabus-vn.md)
+
+---
+
+## 🚀 Featured Resources & Course Handbook (PDFs & Slides)
+
+| Document | English PDF | Vietnamese PDF |
+| :--- | :---: | :---: |
+| 📘 **Course Handbook & Self-Study Guide** (Handbook A4, 11 pages) | [**Download English PDF**](python_course_guide-en.pdf) | [**Tải PDF Tiếng Việt**](python_course_guide.pdf) |
+| 🖥️ **Course Presentation Slides** (Beamer 16:9, 26 slides) | [**Download English Slides**](python_course_guide_slides-en.pdf) | [**Tải Slide Tiếng Việt**](python_course_guide_slides.pdf) |
+
+### 💡 Dedicated Self-Study & AI Tutorials:
+* 📖 **How to Self-Study Python Effectively:** [Read Tutorial](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)
+* 🤖 **Strategic AI (ChatGPT) Assisted Learning:** [Read Tutorial](lectures/part01-introduction/learning-python-with-AI-tool-en.md)
 
 ---
 
@@ -29,7 +42,7 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 | Week | Lecture / Topic | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | • [Lesson 1. Introduction to Programming and Python](lectures/part01-introduction/introduction-en.md) | - | - | - | ✅ *Ready* |
+| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | • [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md)<br>• [Effective Python Self-Study Guide](lectures/part01-introduction/tutorial-effective-python-self-study-en.md)<br>• [Strategic AI Learning Guide](lectures/part01-introduction/learning-python-with-AI-tool-en.md) | [Slides English (PDF)](python_course_guide_slides-en.pdf)<br>[Slides Tiếng Việt (PDF)](python_course_guide_slides.pdf) | Environment setup | - | ✅ *Ready* |
 | **Week 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |
