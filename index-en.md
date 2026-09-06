@@ -14,10 +14,10 @@
 
 | Document / Guide | Format / Link |
 | :--- | :---: |
-| 📘 **Course Handbook & Self-Study Guide** (Handbook A4, 11 pages) | [**Download PDF**](python_course_guide-en.pdf ':ignore target=_blank') |
-| 🖥️ **Course Presentation Slides** (Beamer 16:9, 26 slides) | [**Download Slides PDF**](python_course_guide_slides-en.pdf ':ignore target=_blank') |
-| 📖 **How to Self-Study Python Effectively** (Tutorial/Lab) | [**Read Tutorial**](tutorial-effective-python-self-study-en.md) |
-| 🤖 **Strategic AI (ChatGPT) Assisted Learning** (Tutorial/Lab) | [**Read Tutorial**](learning-python-with-AI-tool-en.md) |
+| 📘 **Course Handbook & Self-Study Guide** (Handbook A4, 11 pages) | [**Download PDF**](lectures/part00-starting-points/python_course_guide-en.pdf ':ignore target=_blank') |
+| 🖥️ **Course Presentation Slides** (Beamer 16:9, 26 slides) | [**Download Slides PDF**](lectures/part00-starting-points/python_course_guide_slides-en.pdf ':ignore target=_blank') |
+| 📖 **How to Self-Study Python Effectively** (Tutorial/Lab) | [**Read Tutorial**](lectures/part00-starting-points/tutorial-effective-python-self-study-en.md) |
+| 🤖 **Strategic AI (ChatGPT) Assisted Learning** (Tutorial/Lab) | [**Read Tutorial**](lectures/part00-starting-points/learning-python-with-AI-tool-en.md) |
 
 ---
 
@@ -40,7 +40,7 @@ The **Fundamental Programming Concepts in Python (DSAI1003)** course provides st
 
 | Week | Lecture / Topic | Lectures & Readings (.md / .ipynb) | Slides | Lab Exercises | Solutions | Status |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
-| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md) | [Slides (PDF)](python_course_guide_slides-en.pdf ':ignore target=_blank') | Environment setup | - | ✅ *Ready* |
+| **Week 01** | **Lecture 1: Introduction & Algorithm Design** | [Reading 1: Introduction to Programming & Python](lectures/part01-introduction/introduction-en.md) | [Slides (PDF)](lectures/part00-starting-points/python_course_guide_slides-en.pdf ':ignore target=_blank') | Environment setup | - | ✅ *Ready* |
 | **Week 02** | **Lecture 2: Software Development & Data Types** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 03** | **Lecture 3: Decision Making** | - | - | - | - | ⏳ *In Preparation* |
 | **Week 04** | **Lecture 4: Loops** | - | - | - | - | ⏳ *In Preparation* |
