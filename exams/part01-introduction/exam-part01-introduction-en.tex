@@ -1,0 +1,674 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+\usepackage[top=1.45cm,bottom=1.55cm,left=1.7cm,right=1.7cm]{geometry}
+\usepackage{xcolor}
+
+% --- OFFICIAL EXAM HEADER COLORS ---
+\definecolor{ForestGreen}{RGB}{22,100,70}
+\definecolor{SoftGreen}{RGB}{229,244,235}
+\definecolor{CodeBgHeader}{RGB}{248,250,249}
+\definecolor{DarkGrayHeader}{RGB}{55,55,55}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% --- COMPACT EXAM LAYOUT ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist{topsep=1.5pt,itemsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1.5pt}
+
+
+\definecolor{primaryblue}{HTML}{0F3460}
+\definecolor{secondaryteal}{HTML}{0D9488}
+\definecolor{accentgold}{HTML}{D97706}
+\definecolor{darkgray}{HTML}{1F2937}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{boxbg}{HTML}{F8FAFC}
+\definecolor{borderblue}{HTML}{93C5FD}
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{15803D}
+\definecolor{pyorange}{HTML}{C2410C}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen}\itshape,
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4,
+  aboveskip=1.5pt,
+  belowskip=1.5pt
+}
+\lstset{style=pythonstyle}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=secondaryteal,
+  pdftitle={DSAI1003 - Exam Part 01: Introduction, Computers, Algorithms and Basic I/O},
+  pdfauthor={Dr. Vu Duc Minh - National Economics University (NEU)}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Midterm Progress Exam: Part 01 -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize National Economics University -- College of Technology}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\color{primaryblue}\Large\bfseries}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}{\color{secondaryteal}\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=borderblue,
+  arc=1.2mm,
+  boxrule=0.5pt,
+  before skip=2pt,
+  after skip=2pt,
+  top=1mm,bottom=1mm,left=2mm,right=2mm,
+  title=\textbf{\color{primaryblue}#2},
+  coltitle=primaryblue,
+  attach boxed title to top left={yshift=-1.5mm,xshift=2.5mm},
+  boxed title style={colback=lightgray,colframe=borderblue,arc=0.8mm,boxrule=0.5pt},
+  #1
+}
+
+
+% --- OFFICIAL EXAM HEADER BOX ---
+\newtcolorbox{headerbox}{
+    colback=white,
+    colframe=ForestGreen,
+    boxrule=0.7pt,
+    arc=1.5mm,
+    left=2.5mm,
+    right=2.5mm,
+    top=1.5mm,
+    bottom=1.5mm,
+    before skip=1mm,
+    after skip=1mm
+}
+
+\begin{document}
+
+
+% --- OFFICIAL EXAM HEADER ---
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}X >{\raggedleft\arraybackslash}p{6.2cm}@{}}
+    \textbf{NATIONAL ECONOMICS UNIVERSITY} & \textbf{OFFICIAL MIDTERM EXAMINATION} \\
+    \textbf{COLLEGE OF TECHNOLOGY} & {\small \shortstack[r]{Academic Year: 2026--2027 \\ Semester: Fall 2026}} \\
+    \shortstack[l]{\textbf{FACULTY OF DATA SCIENCE \&} \\ \textbf{ARTIFICIAL INTELLIGENCE (FDA)}} & Course Code: \textbf{DSAI1003} \\
+\end{tabularx}
+
+\vspace{0.15em}
+
+\begin{center}
+    {\Large\bfseries\color{ForestGreen} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.10em]
+    {\normalsize\textbf{Midterm Progress Exam: Part 01} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding paper distribution)}
+\end{center}
+
+\vspace{0.05em}
+
+\begin{headerbox}
+\begin{tabularx}{\textwidth}{@{}X X@{}}
+    \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.20em]
+    \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabularx}
+
+\vspace{0.20em}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{5pt}
+\centering
+\begin{tabular}{|l|c|c|c|c||c|c|}
+\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\
+\hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.25em]
+\cline{1-6}
+\textbf{Score} & & & & & & \\[0.38em]
+\hline
+\end{tabular}
+
+\vspace{0.18em}
+\raggedright\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and internet access are prohibited. Answer all questions directly in the designated areas. In Section D, use standard Python statements following the \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} pattern; do \textbf{not} define custom functions (\texttt{def}) or use loops/branching. Do not detach pages.
+\end{headerbox}
+
+\vspace{0.6mm}
+
+\noindent
+
+\textbf{MULTIPLE-CHOICE ANSWER SHEET}
+\textit{(Write A, B, C, or D in the corresponding box)}:
+
+\begin{center}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+
+  \hline
+
+  \textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} &
+  \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+
+  \hline
+
+  \textbf{Answer} & & & & & & & & & & \\[2mm]
+
+  \hline
+
+\end{tabular}
+
+\end{center}
+
+\vspace{-2.5mm}
+\hrule
+\vspace{0.8mm}
+
+% ==============================================================================
+
+% SECTION A
+
+% ==============================================================================
+
+\section*{Section A: Conceptual \& Architectural Fundamentals \hfill \normalsize\normalfont(20 points)}
+
+\textit{Answer all 10 questions. Each correct answer carries 2 points. Suggested time: 12 minutes.}
+
+\vspace{0.08cm}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=2pt,topsep=1pt]
+
+  \item Which computer hardware component is directly responsible for fetching, decoding, and executing program instructions?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item Primary Memory (RAM)
+
+    \item Central Processing Unit (CPU)
+
+    \item Secondary Storage (SSD / Hard Disk)
+
+    \item Input/Output Bus
+
+  \end{enumerate}
+
+  \item What happens to the information stored in \textbf{Primary Memory (RAM)} when the computer is shut down?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item It is permanently stored in memory cells.
+
+    \item It is lost because RAM is volatile memory.
+
+    \item It is automatically compressed and transferred to cache.
+
+    \item It is rewritten to CPU registers for immediate restart.
+
+  \end{enumerate}
+
+  \item Why can a single physical computer perform thousands of completely different tasks?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item The physical CPU hardware rewires itself automatically for each task.
+
+    \item It can load and execute different software programs consisting of instructions and decisions.
+
+    \item High-level languages bypass memory and directly command peripheral circuits.
+
+    \item Secondary storage replaces CPU registers during complex computation.
+
+  \end{enumerate}
+
+  \item Which sequence accurately describes the execution pipeline of a standard Python program?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item Source Code (\texttt{.py}) $\rightarrow$ Machine Code $\rightarrow$ Compiler $\rightarrow$ Execution
+
+    \item Source Code (\texttt{.py}) $\rightarrow$ Byte Code (\texttt{.pyc}) $\rightarrow$ Python Virtual Machine (PVM) $\rightarrow$ Running Program
+
+    \item Byte Code (\texttt{.pyc}) $\rightarrow$ Source Code (\texttt{.py}) $\rightarrow$ Operating System $\rightarrow$ CPU
+
+    \item Source Code (\texttt{.py}) $\rightarrow$ Linker $\rightarrow$ Binary File (\texttt{.exe}) $\rightarrow$ CPU
+
+  \end{enumerate}
+
+  \item Which of the following statements regarding high-level languages like Python is \textbf{FALSE}?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item Python code is portable across Windows, macOS, and Linux operating systems.
+
+    \item The CPU directly executes Python source code text without needing an interpreter or virtual machine.
+
+    \item High-level languages allow programmers to express algorithms using human-readable syntax.
+
+    \item High-level languages free programmers from manually managing CPU registers and memory addresses.
+
+  \end{enumerate}
+
+  \newpage
+
+  \item What are the \textbf{three essential characteristics} that every valid algorithm must satisfy?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item Fast, Portable, and Object-Oriented
+
+    \item Unambiguous, Executable, and Terminating
+
+    \item Compiled, Abstract, and Infinite
+
+    \item Linear, Mathematical, and Formatted
+
+  \end{enumerate}
+
+  \item What is the main objective of creating \textbf{pseudocode} before writing Python code?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item To enable the Python interpreter to pre-compile variables into bytecode.
+
+    \item To design and verify the algorithmic logic in plain language without getting bogged down by syntax details.
+
+    \item To eliminate the need for primary memory during program execution.
+
+    \item To generate automated unit tests for software applications.
+
+  \end{enumerate}
+
+  \item What data type does the built-in \texttt{input()} function \textbf{always} return in Python?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item \texttt{int}
+
+    \item \texttt{float}
+
+    \item \texttt{str}
+
+    \item Depends automatically on whether the input text contains numeric digits.
+
+  \end{enumerate}
+
+  \item According to good programming practice, which sequence of problem-solving steps is most appropriate?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item Write Code $\rightarrow$ Run Program $\rightarrow$ Understand Problem $\rightarrow$ Pseudocode
+
+    \item Understand Problem $\rightarrow$ Develop Algorithm/Pseudocode $\rightarrow$ Test by Hand $\rightarrow$ Translate to Python $\rightarrow$ Run \& Debug
+
+    \item Design Algorithm $\rightarrow$ Understand Problem $\rightarrow$ Write Code $\rightarrow$ Test by Hand
+
+    \item Write Code $\rightarrow$ Reverse-engineer Pseudocode $\rightarrow$ Debug
+
+  \end{enumerate}
+
+  \item Which of the following is the best example of a \textbf{Logic Error} (semantic error)?
+
+  \begin{enumerate}[label=\Alph*.,noitemsep,topsep=0.5pt,leftmargin=2em]
+
+    \item Omitting a closing parenthesis: \texttt{print("Hello"}.
+
+    \item Attempting to divide a number by zero: \texttt{print(25 / 0)}.
+
+    \item Calculating rectangle perimeter as \texttt{perimeter = length * width}\\
+    instead of \texttt{2 * (length + width)}.
+
+    \item Attempting to convert alphabetical letters to an integer: \texttt{int("twenty")}.
+
+  \end{enumerate}
+
+\end{enumerate}
+
+
+% ==============================================================================
+
+% SECTION B
+
+% ==============================================================================
+
+\section*{Section B: Code Tracing, Output Prediction \& Error Diagnosis \hfill \normalsize\normalfont(25 points)}
+
+\textit{Answer all 5 questions. Each question carries 5 points. Suggested time: 15 minutes.}
+
+\vspace{0.08cm}
+
+\subsection*{Q11. Precise Output Prediction: \texttt{sep} and \texttt{end} (5 points)}
+
+Carefully analyze the Python snippet below:
+
+\begin{lstlisting}
+print("2026", "09", "10", sep="-", end=" ")
+print("EXAM", "PYTHON", sep="::")
+print("DONE")
+\end{lstlisting}
+
+Write the \textbf{exact screen output} below. Clearly show any spaces and newlines:
+
+\begin{answerbox}[height=2.0cm]{Output Box for Q11}
+
+\vspace{0.03cm}
+
+\end{answerbox}
+
+\vspace{0.08cm}
+
+\newpage
+
+\subsection*{Q12. String Operations vs. Numeric Arithmetic (5 points)}
+
+Given the following variable assignments and statements:
+
+\begin{lstlisting}
+a = "5"
+b = "2"
+c = 5
+d = 2
+print(a + b)
+print(c + d)
+print(a * 3)
+print(c * 3)
+\end{lstlisting}
+
+Provide the exact printed output for each line:
+
+\begin{itemize}[noitemsep]
+
+  \item Output line 1 (\texttt{print(a + b)}): \underline{\hspace{4cm}}
+
+  \item Output line 2 (\texttt{print(c + d)}): \underline{\hspace{4cm}}
+
+  \item Output line 3 (\texttt{print(a * 3)}): \underline{\hspace{4cm}}
+
+  \item Output line 4 (\texttt{print(c * 3)}): \underline{\hspace{4cm}}
+
+\end{itemize}
+
+\vspace{0.08cm}
+
+\subsection*{Q13. Error Taxonomy and Classification (5 points)}
+
+For each code segment, classify the error into \textbf{Compile-Time / Syntax Error}, \textbf{Exception (Run-time Error)}, or \textbf{Logic Error}. Provide a 1-sentence technical explanation.
+
+\begin{center}
+
+\renewcommand{\arraystretch}{1.6}
+
+\begin{tabularx}{\textwidth}{|p{5.5cm}|p{4.2cm}|X|}
+
+\hline
+
+\textbf{Code Snippet} & \textbf{Error Classification} & \textbf{Technical Reason} \\
+
+\hline
+
+\textbf{A.} \texttt{print("Total is:" total)} & & \\[0.6cm]
+
+\hline
+
+\textbf{B.} \texttt{val = int("3.14159")} & & \\[0.6cm]
+
+\hline
+
+\textbf{C.} \texttt{avg = score1 + score2 + score3 / 3} \newline \textit{(Goal: calculate mean of 3 scores)} & & \\[0.8cm]
+
+\hline
+
+\end{tabularx}
+
+\end{center}
+
+\vspace{0.08cm}
+
+\subsection*{Q14. Deconstructing Python Statements (5 points)}
+
+Examine the following statement:
+
+\begin{lstlisting}
+# Display computed final score with bonus
+print("Final Score:", base_score + 10)
+\end{lstlisting}
+
+Identify each corresponding element from the statement:
+
+\begin{enumerate}[label=\alph*., noitemsep]
+
+  \item The \textbf{comment}: \underline{\hspace{10cm}}
+
+  \item The \textbf{built-in function name}: \underline{\hspace{8.2cm}}
+
+  \item The \textbf{string literal argument}: \underline{\hspace{8cm}}
+
+  \item The \textbf{arithmetic expression argument}: \underline{\hspace{7cm}}
+
+  \item The \textbf{variable name}: \underline{\hspace{9.4cm}}
+
+\end{enumerate}
+
+\vspace{0.08cm}
+
+\subsection*{Q15. Tracing Formatted f-Strings (5 points)}
+
+Predict the exact screen output produced by the following snippet:
+
+\begin{lstlisting}
+item = "USB Drive"
+quantity = 4
+unit_price = 12.5
+subtotal = quantity * unit_price
+print(f"Item: {item} | Qty: {quantity}")
+print(f"Subtotal: ${subtotal:.2f}")
+print(f"Discount (10%): ${subtotal * 0.10:.2f}")
+\end{lstlisting}
+
+\begin{answerbox}[height=1.8cm]{Output Box for Q15}
+
+\vspace{0.03cm}
+
+\end{answerbox}
+
+
+% ==============================================================================
+
+% SECTION C
+
+% ==============================================================================
+
+\newpage
+
+\section*{Section C: Algorithm Design \& Pseudocode \hfill \normalsize\normalfont(25 points)}
+
+\textit{Answer all tasks. Suggested time: 15 minutes.}
+
+\begin{tcolorbox}[colback=boxbg, colframe=secondaryteal, arc=1.5mm]
+
+\textbf{Problem Specification: Electric Scooter Rental Billing System}\\[0.1cm]
+
+A city electric scooter operator calculates trip fares based on the following rules:
+
+\begin{itemize}[noitemsep]
+
+  \item \textbf{Unlock Fee:} $\$1.50$ fixed rate per trip.
+
+  \item \textbf{Ride Time Rate:} $\$0.25$ for each minute ridden.
+
+  \item \textbf{Sales Tax:} An $8\%$ ($0.08$) municipal sales tax is added onto the subtotal fare (\text{Unlock Fee} + \text{Ride Cost}).
+
+\end{itemize}
+
+Your task is to design an algorithm that computes and outputs an itemized customer receipt.
+
+\end{tcolorbox}
+
+\vspace{0.08cm}
+
+\noindent\textbf{Task 1: Identify Inputs and Outputs} (5 points)
+
+\begin{itemize}[noitemsep]
+
+  \item \textbf{Required Input(s):} \hrulefill \\[0.25cm]
+
+  \item \textbf{Required Output(s):} \hrulefill
+
+\end{itemize}
+
+\vspace{0.08cm}
+
+\noindent\textbf{Task 2: Write Structured Pseudocode} (10 points)\\
+
+Write clear, sequential pseudocode adhering to the \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} paradigm:
+
+\begin{answerbox}[height=10.2cm]{Pseudocode Solution}
+
+\vspace{0.03cm}
+
+\end{answerbox}
+
+\vspace{0.08cm}
+
+\noindent\textbf{Task 3: Algorithm Verification} (5 points)\\
+
+Demonstrate how your algorithm fulfills the three mandatory algorithm characteristics:
+
+\begin{enumerate}[label=\alph*., noitemsep]
+
+  \item \textbf{Unambiguous:} \hrulefill
+
+  \item \textbf{Executable:} \hrulefill
+
+  \item \textbf{Terminating:} \hrulefill
+
+\end{enumerate}
+
+\vspace{0.08cm}
+
+\noindent\textbf{Task 4: Hand-Trace Calculation} (5 points)\\
+
+Verify your algorithm manually for a trip duration of \textbf{20 minutes}:
+
+\begin{itemize}[noitemsep]
+
+  \item Unlock Fee: \underline{\hspace{3cm}} \hfill Riding Charge ($20 \times \$0.25$): \underline{\hspace{3cm}}
+
+  \item Subtotal Before Tax: \underline{\hspace{3cm}} \hfill Tax Amount ($8\%$ of subtotal): \underline{\hspace{3cm}}
+
+  \item \textbf{Final Total Fare to Pay:} \underline{\hspace{3.5cm}}
+
+\end{itemize}
+
+
+% ==============================================================================
+
+% SECTION D
+
+% ==============================================================================
+
+\newpage
+
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+
+\textit{*Write complete, syntactically correct Python statements directly using the \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} pattern. Do \textbf{not} define custom functions (\texttt{def}), \texttt{import}, or loops. Suggested time: 18 minutes.*}
+
+\vspace{0.08cm}
+
+\subsection*{Problem 1: Commuter Fuel Cost Calculator (15 points)}
+
+Write a Python script that computes the fuel consumed and total monetary expense for a highway journey.
+
+\begin{itemize}[noitemsep]
+
+  \item Formulas:
+
+  $$\text{fuel\_used} = \frac{\text{distance} \times \text{consumption\_rate}}{100}, \quad \text{trip\_cost} = \text{fuel\_used} \times \text{fuel\_price}$$
+
+  \item Requirements:
+
+  \begin{enumerate}[noitemsep]
+
+    \item Prompt user for \texttt{distance} in km, \texttt{consumption\_rate} (L/100km), and \texttt{fuel\_price} per liter using \texttt{input()}. Ensure proper type conversion to \texttt{float}.
+
+    \item Compute \texttt{fuel\_used} and \texttt{trip\_cost}.
+
+    \item Display the summary using f-strings with values formatted to \textbf{2 decimal places (\texttt{:.2f})}.
+
+  \end{enumerate}
+
+\end{itemize}
+
+\begin{answerbox}[height=13.2cm]{Python Solution for Problem 1}
+
+\vspace{0.03cm}
+
+\end{answerbox}
+
+\vspace{0.12cm}
+
+\newpage
+
+\subsection*{Problem 2: Event Duration Breakdown (15 points)}
+
+Write a Python script that converts a total number of elapsed seconds into \textbf{hours, minutes, and remaining seconds} using integer floor division (\texttt{//}) and modulus (\texttt{\%}).
+
+\begin{itemize}[noitemsep]
+
+  \item Requirements:
+
+  \begin{enumerate}[noitemsep]
+
+    \item Prompt user for \texttt{total\_seconds} and cast to \texttt{int}.
+
+    \item Compute full hours ($1\text{ hr} = 3600\text{ s}$), remaining seconds, full minutes ($1\text{ min} = 60\text{ s}$), and leftover seconds.
+
+    \item Display the result in the format: \texttt{"X hours, Y minutes, Z seconds"}.
+
+  \end{enumerate}
+
+\end{itemize}
+
+\begin{answerbox}[height=16.0cm]{Python Solution for Problem 2}
+
+\vspace{0.03cm}
+
+\end{answerbox}
+
+\begin{center}
+
+  \vspace{0.15cm}
+
+  \rule{0.5\textwidth}{0.4pt}\\[0.08cm]
+
+  \textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+
+\end{center}
+
+\end{document}

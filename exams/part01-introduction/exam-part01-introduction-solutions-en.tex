@@ -1,0 +1,379 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- PACKAGES ---
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Consolas}[Scale=0.92]
+
+\usepackage[top=2cm, bottom=2.2cm, left=2cm, right=2cm]{geometry}
+\setlength{\headheight}{24pt}
+\addtolength{\topmargin}{-10pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% --- COLOR DEFINITIONS ---
+\definecolor{primaryblue}{HTML}{0F3460}
+\definecolor{secondaryteal}{HTML}{0D9488}
+\definecolor{accentgold}{HTML}{D97706}
+\definecolor{darkgray}{HTML}{1F2937}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{boxbg}{HTML}{F8FAFC}
+\definecolor{borderblue}{HTML}{93C5FD}
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{15803D}
+\definecolor{pyorange}{HTML}{C2410C}
+\definecolor{correctgreen}{HTML}{166534}
+
+% --- LISTINGS CONFIGURATION ---
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen}\itshape,
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+% --- HYPERREF SETUP ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Exam Part 01 Solutions and Grading Rubric},
+    pdfauthor={Dr. Vu Duc Minh - National Economics University (NEU)}
+}
+
+% --- HEADERS & FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{primaryblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\small\color{correctgreen}\textbf{Instructor Solutions \& Rubric}}
+\fancyfoot[L]{\footnotesize\color{darkgray}National Economics University (NEU)}
+\fancyfoot[C]{\footnotesize\color{darkgray}Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\color{darkgray}\textbf{Total: 100 Points}}
+
+% --- SECTION STYLING ---
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\thesection}{1em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{secondaryteal}\large\bfseries}
+  {\thesubsection}{1em}{}
+
+% Custom box for solutions
+\newtcolorbox{solbox}[2][]{%
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={colback=green!10, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+% --- EXAM HEADER ---
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.15cm]
+  {\large\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELIGENCE (FDA)}}\\[0.25cm]
+  \rule{\textwidth}{1.2pt}\\[0.3cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.15cm]
+  {\large\textbf{Course: Fundamental Programming Concepts in Python (DSAI1003)}}\\[0.15cm]
+  {\normalsize\textit{Unit: Part 01 Exam — Computers, Python Architecture, Errors, Algorithms \& Basic I/O}}\\[0.2cm]
+  \rule{\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.2cm}
+
+\begin{tcolorbox}[colback=green!8, colframe=correctgreen, arc=1.5mm]
+\small
+\textbf{Note for Instructors and TAs:}
+This document provides full solutions, rationale for theoretical questions, trace tables, sample Python scripts, and an itemized marking rubric designed for fair and consistent grading.
+\end{tcolorbox}
+
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION A
+% ==============================================================================
+\section*{Section A: Conceptual \& Architectural Fundamentals (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Lecture Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & The CPU fetches, decodes, and executes instructions. RAM holds active data; secondary storage stores persistent files. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{C} & Primary Memory (RAM) is volatile; its content is immediately lost when electrical power ceases. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & A computer is general-purpose because it executes different software programs (ordered instructions and decisions). & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{B} & Python pipeline: Source code (\texttt{.py}) $\rightarrow$ Byte code (\texttt{.pyc}) $\rightarrow$ Virtual Machine (PVM) $\rightarrow$ Execution. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{B} & CPUs cannot directly run high-level source text. It must be translated to bytecode and interpreted by PVM. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{B} & Chapter 1 defines the three essential properties: Unambiguous, Executable, and Terminating. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{B} & Pseudocode allows programmers to verify algorithm logic in human terms prior to syntactical implementation. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{C} & The built-in \texttt{input()} function unconditionally returns a string (\texttt{str}), requiring type conversion. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{B} & Canonical sequence: Understand problem $\rightarrow$ Algorithm/Pseudocode $\rightarrow$ Hand trace $\rightarrow$ Python code $\rightarrow$ Run/Debug. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{C} & A logic error compiles and runs without crash, but yields incorrect outputs due to an erroneous algorithm/formula. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.3cm}
+
+% ==============================================================================
+% SECTION B
+% ==============================================================================
+\section*{Section B: Code Tracing, Output Prediction \& Error Diagnosis (25 points)}
+
+\subsection*{Q11. Output Prediction: \texttt{sep} and \texttt{end} (5 points)}
+\begin{solbox}{Solution \& Marking Guide for Q11}
+\textbf{Exact Output:}
+\begin{lstlisting}
+2026-09-10 EXAM::PYTHON
+DONE
+\end{lstlisting}
+\textbf{Grading Breakdown:}
+\begin{itemize}[noitemsep]
+  \item \textbf{2.5 pts:} \texttt{2026-09-10} correctly joined with dashes and ended with a single space (no newline).
+  \item \textbf{1.5 pts:} \texttt{EXAM::PYTHON} printed on the same line right after the space, followed by a newline.
+  \item \textbf{1.0 pt:} \texttt{DONE} printed on the second line.
+\end{itemize}
+\end{solbox}
+
+\vspace{0.2cm}
+
+\subsection*{Q12. String Operations vs. Numeric Arithmetic (5 points)}
+\begin{solbox}{Solution \& Marking Guide for Q12}
+\textbf{Exact Answers:}
+\begin{itemize}[noitemsep]
+  \item Line 1 (\texttt{print(a + b)}): \textbf{\texttt{52}} \hfill (1.25 pts - string concatenation)
+  \item Line 2 (\texttt{print(c + d)}): \textbf{\texttt{7}} \hfill (1.25 pts - integer addition)
+  \item Line 3 (\texttt{print(a * 3)}): \textbf{\texttt{555}} \hfill (1.25 pts - string repetition 3 times)
+  \item Line 4 (\texttt{print(c * 3)}): \textbf{\texttt{15}} \hfill (1.25 pts - integer multiplication)
+\end{itemize}
+\end{solbox}
+
+\vspace{0.2cm}
+
+\subsection*{Q13. Error Taxonomy and Classification (5 points)}
+\begin{solbox}{Solution \& Marking Guide for Q13}
+\begin{itemize}
+  \item \textbf{A.} \texttt{print("Total is:" total)}
+  \begin{itemize}[noitemsep]
+    \item \textbf{Classification (1.0 pt):} Compile-Time Error / Syntax Error
+    \item \textbf{Reason (0.7 pt):} Missing comma separator between arguments inside the function call, violating grammar.
+  \end{itemize}
+  \item \textbf{B.} \texttt{val = int("3.14159")}
+  \begin{itemize}[noitemsep]
+    \item \textbf{Classification (1.0 pt):} Exception (Run-time Error) [\texttt{ValueError}]
+    \item \textbf{Reason (0.7 pt):} The string contains a decimal point; \texttt{int()} cannot convert floating-point text directly.
+  \end{itemize}
+  \item \textbf{C.} \texttt{avg = score1 + score2 + score3 / 3}
+  \begin{itemize}[noitemsep]
+    \item \textbf{Classification (1.0 pt):} Logic Error (Semantic Error)
+    \item \textbf{Reason (0.6 pt):} Operator precedence divides only \texttt{score3} by 3. Program runs without crashing but produces wrong average.
+  \end{itemize}
+\end{itemize}
+\end{solbox}
+
+\vspace{0.2cm}
+
+\subsection*{Q14. Deconstructing Python Statements (5 points)}
+\begin{solbox}{Solution \& Marking Guide for Q14}
+\begin{enumerate}[label=\alph*., noitemsep]
+  \item The comment: \textbf{\texttt{\# Display computed final score with bonus}} (1.0 pt)
+  \item The built-in function name: \textbf{\texttt{print}} (1.0 pt)
+  \item The string literal argument: \textbf{\texttt{"Final Score:"}} (1.0 pt)
+  \item The arithmetic expression argument: \textbf{\texttt{base\_score + 10}} (1.0 pt)
+  \item The variable name: \textbf{\texttt{base\_score}} (1.0 pt)
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.2cm}
+
+\subsection*{Q15. Tracing Formatted f-Strings (5 points)}
+\begin{solbox}{Solution \& Marking Guide for Q15}
+\textbf{Exact Output:}
+\begin{lstlisting}
+Item: USB Drive | Qty: 4
+Subtotal: $50.00
+Discount (10%): $5.00
+\end{lstlisting}
+\textbf{Grading Breakdown:}
+\begin{itemize}[noitemsep]
+  \item \textbf{1.5 pts:} Line 1 with exact text, pipe delimiter, and variable substitutions.
+  \item \textbf{1.75 pts:} Line 2 showing \texttt{\$50.00} formatted with 2 decimal places.
+  \item \textbf{1.75 pts:} Line 3 showing \texttt{\$5.00} ($50.0 \times 0.10$) with 2 decimal places.
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION C
+% ==============================================================================
+\section*{Section C: Algorithm Design \& Pseudocode (25 points)}
+
+\subsection*{Task 1: Identify Inputs and Outputs (5 points)}
+\begin{solbox}{Task 1 Solution}
+\begin{itemize}[noitemsep]
+  \item \textbf{Input (2.5 pts):} \texttt{minutes\_ridden} (ride duration, positive integer or float).
+  \item \textbf{Outputs (2.5 pts):} Itemized breakdown: unlock fee, ride duration charge, subtotal, sales tax ($8\%$), and total amount due.
+\end{itemize}
+\end{solbox}
+
+\subsection*{Task 2: Write Structured Pseudocode (10 points)}
+\begin{solbox}{Task 2 Model Pseudocode}
+\begin{lstlisting}
+Set UNLOCK_FEE to 1.50
+Set MINUTE_RATE to 0.25
+Set TAX_RATE to 0.08
+
+Prompt user for ride duration in minutes
+Read minutes_ridden
+Convert minutes_ridden to numeric value
+
+Set ride_cost to minutes_ridden * MINUTE_RATE
+Set subtotal to UNLOCK_FEE + ride_cost
+Set tax_amount to subtotal * TAX_RATE
+Set total_fare to subtotal + tax_amount
+
+Display "Unlock Fee: $", UNLOCK_FEE
+Display "Ride Cost: $", ride_cost
+Display "Subtotal: $", subtotal
+Display "Tax (8%): $", tax_amount
+Display "Total Amount Due: $", total_fare
+\end{lstlisting}
+\textbf{Marking Rubric (10 pts):}
+\begin{itemize}[noitemsep]
+  \item 2 pts: Clear constant and variable initialization.
+  \item 2 pts: Input acquisition and type readiness.
+  \item 4 pts: Mathematically correct sequential calculations (ride cost, subtotal, tax, final total).
+  \item 2 pts: Complete and descriptive display statements.
+\end{itemize}
+\end{solbox}
+
+\subsection*{Task 3: Algorithm Verification (5 points)}
+\begin{solbox}{Task 3 Solution}
+\begin{enumerate}[label=\alph*., noitemsep]
+  \item \textbf{Unambiguous (1.7 pts):} Every instruction uses explicit arithmetic operations ($+$, $\times$) without vague or subjective terms.
+  \item \textbf{Executable (1.7 pts):} Each step consists of basic primitive operations (reading input, multiplication, addition, screen printing) supported by real hardware.
+  \item \textbf{Terminating (1.6 pts):} The algorithm executes a deterministic, linear sequence of 9 steps with no infinite looping, halting immediately after displaying the receipt.
+\end{enumerate}
+\end{solbox}
+
+\subsection*{Task 4: Hand-Trace Verification for 20 Minutes (5 points)}
+\begin{solbox}{Task 4 Solution}
+\begin{itemize}[noitemsep]
+  \item \textbf{Unlock Fee:} $\$1.50$ (1.0 pt)
+  \item \textbf{Riding Charge:} $20 \times \$0.25 = \$5.00$ (1.0 pt)
+  \item \textbf{Subtotal Before Tax:} $\$1.50 + \$5.00 = \$6.50$ (1.0 pt)
+  \item \textbf{Tax Amount ($8\%$):} $\$6.50 \times 0.08 = \$0.52$ (1.0 pt)
+  \item \textbf{Final Total to Pay:} $\$6.50 + \$0.52 = \$7.02$ (1.0 pt)
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION D
+% ==============================================================================
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Commuter Fuel Cost Calculator (15 points)}
+\begin{solbox}{Problem 1 Model Code}
+\begin{lstlisting}[language=Python]
+# Commuter Fuel Cost Calculator
+# Step 1: Input with float conversion
+distance = float(input("Enter distance (km): "))
+consumption = float(input("Enter fuel consumption (L/100km): "))
+price = float(input("Enter fuel price per liter: "))
+
+# Step 2: Processing
+fuel_consumed = (distance * consumption) / 100
+total_cost = fuel_consumed * price
+
+# Step 3: Output with f-strings
+print("\nTrip Summary:")
+print(f"Fuel consumed: {fuel_consumed:.2f} L")
+print(f"Total cost: {total_cost:.2f}")
+\end{lstlisting}
+\textbf{Marking Rubric (15 points):}
+\begin{itemize}[noitemsep]
+  \item \textbf{Input \& Type Casting (5 pts):} 3 inputs correctly requested with \texttt{float(input(...))}. Deduct 2 pts if student used \texttt{int}, deduct 4 pts if conversion omitted.
+  \item \textbf{Processing / Formulas (5 pts):} Correct calculation of \texttt{fuel\_consumed} (2.5 pts) and \texttt{total\_cost} (2.5 pts).
+  \item \textbf{Formatted Output (5 pts):} Correct output labels and f-string precision specifier \texttt{:.2f} (3 pts for format, 2 pts for clarity).
+\end{itemize}
+\end{solbox}
+
+\vspace{0.3cm}
+
+\subsection*{Problem 2: Event Duration Breakdown (15 points)}
+\begin{solbox}{Problem 2 Model Code}
+\begin{lstlisting}[language=Python]
+# Event Duration Breakdown
+# Step 1: Input with int conversion
+total_seconds = int(input("Enter total seconds: "))
+
+# Step 2: Processing with // and %
+hours = total_seconds // 3600
+remaining_seconds = total_seconds % 3600
+
+minutes = remaining_seconds // 60
+seconds = remaining_seconds % 60
+
+# Step 3: Output
+print("\nConverted Time:")
+print(f"{hours} hours, {minutes} minutes, {seconds} seconds")
+\end{lstlisting}
+\textbf{Marking Rubric (15 points):}
+\begin{itemize}[noitemsep]
+  \item \textbf{Input \& Casting (4 pts):} Prompting and casting input to \texttt{int}. Deduct 2 pts if cast to \texttt{float}.
+  \item \textbf{Hours Extraction (4 pts):} Correctly using \texttt{// 3600} and extracting remainder with \texttt{\% 3600}.
+  \item \textbf{Minutes and Seconds Extraction (4 pts):} Correctly using \texttt{// 60} and \texttt{\% 60}.
+  \item \textbf{Output Formatting (3 pts):} Clear and structured print statement displaying hours, minutes, and seconds.
+\end{itemize}
+\end{solbox}
+
+\begin{center}
+  \vspace{0.4cm}
+  \rule{0.5\textwidth}{0.4pt}\\[0.15cm]
+  \textbf{\color{correctgreen}--- END OF INSTRUCTOR RUBRIC ---}
+\end{center}
+
+\end{document}

@@ -1,0 +1,3774 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+  \setmonofont[Scale=0.92]{Consolas}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+
+% Fix longtable glue shrinkage in Pandoc tables
+\AtBeginEnvironment{longtable}{%
+  \setlength{\parskip}{0pt}%
+}
+
+% Page headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{16pt}
+\lhead{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\rhead{\footnotesize\textbf{Lecture 2: Numbers, Strings and Operators}}
+\lfoot{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\rfoot{\footnotesize Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lesson 2: Programming with Numbers and Strings},
+  pdfauthor={Faculty of Data Science \& Artificial Intelligence (FDA) - National Economics University},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lesson 2: Programming with Numbers and Strings}
+\author{Faculty of Data Science \& Artificial Intelligence (FDA) -
+National Economics University}
+\date{Course Code: DSAI1003}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\section{Lesson 2. Programming with Numbers and
+Strings}\label{lesson-2.-programming-with-numbers-and-strings}
+
+\textbf{Last updated:} September 11, 2026
+
+\begin{quote}
+\textbf{Source:} Chapter 2 -- \emph{Programming with Numbers and
+Strings}, in \emph{Python for Everyone, 3rd Edition} by Cay Horstmann
+and Rance Necaise.
+
+This lecture preserves the structure, terminology, examples, and
+instructional focus of Chapter 2, while reorganizing the material for
+direct classroom use. The examples intentionally follow the conventions
+used in the textbook, including its variable-naming style and the
+\texttt{\%} string-format operator.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Lesson Introduction}\label{lesson-introduction}
+
+Chapter 1 introduced the idea of a computer program, the basic
+organization of a computer, the Python programming environment, and the
+role of algorithms. Chapter 2 begins the transition from
+\emph{understanding what programs are} to \emph{writing programs that
+perform useful computations}.
+
+The main building blocks introduced in this chapter are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Variables} for storing values.
+\item
+  \textbf{Numeric types} for representing integers and floating-point
+  values.
+\item
+  \textbf{Arithmetic expressions} for computing new values.
+\item
+  \textbf{Strings} for representing and manipulating text.
+\item
+  \textbf{Input and output} for communicating with the program user.
+\item
+  \textbf{Simple graphics} for producing drawings with geometric shapes
+  and text.
+\end{enumerate}
+
+A recurring theme throughout the chapter is that a program should not be
+written by immediately typing Python statements. A better workflow is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Understand the problem}
+\NormalTok{        ↓}
+\NormalTok{Work out a concrete example by hand}
+\NormalTok{        ↓}
+\NormalTok{Identify variables and constants}
+\NormalTok{        ↓}
+\NormalTok{Develop the computation / pseudocode}
+\NormalTok{        ↓}
+\NormalTok{Translate the solution into Python}
+\NormalTok{        ↓}
+\NormalTok{Run, inspect, and improve the result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Knowledge and Skills to Be
+Achieved}\label{knowledge-and-skills-to-be-achieved}
+
+After completing this lesson, students will be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Define and use \textbf{variables} and \textbf{constants}.
+\item
+  Explain the difference between \texttt{int} and \texttt{float} values.
+\item
+  Apply the assignment operator \texttt{=} correctly.
+\item
+  Choose valid and descriptive variable names.
+\item
+  Use comments to explain program intent.
+\item
+  Write arithmetic expressions using \texttt{+}, \texttt{-}, \texttt{*},
+  \texttt{/}, \texttt{//}, \texttt{\%}, and \texttt{**}.
+\item
+  Explain operator precedence and the role of parentheses.
+\item
+  Call built-in functions such as \texttt{abs()}, \texttt{round()},
+  \texttt{min()}, and \texttt{max()}.
+\item
+  Import and use functions from the \texttt{math} module.
+\item
+  Recognize floating-point \textbf{roundoff errors}.
+\item
+  Perform a computation by hand before programming it.
+\item
+  Create and manipulate \textbf{strings}.
+\item
+  Use string concatenation, repetition, indexing, and methods.
+\item
+  Convert between strings and numbers using \texttt{str()},
+  \texttt{int()}, and \texttt{float()}.
+\item
+  Use \texttt{input()} to obtain user input.
+\item
+  Format numeric and string output using the textbook's \texttt{\%}
+  formatting operator.
+\item
+  Write small programs according to an \textbf{Input → Process → Output}
+  structure.
+\item
+  Create simple graphical drawings using a graphics window and canvas.
+\item
+  Decompose a drawing into lines, rectangles, ovals, and text.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Lesson Structure}\label{lesson-structure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Variables
+\item
+  Arithmetic
+\item
+  Problem Solving: First Do It By Hand
+\item
+  Strings
+\item
+  Input and Output
+\item
+  Graphics: Simple Drawings
+\item
+  Optional Toolbox: Symbolic Processing with SymPy
+\item
+  Summary and Exercises
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{2.1 Variables}\label{variables}
+
+A program becomes useful when it can store values, modify them, and use
+them in later computations.
+
+A \textbf{variable} is a storage location in a computer program. Each
+variable has:
+
+\begin{itemize}
+\tightlist
+\item
+  a \textbf{name};
+\item
+  a \textbf{value} currently stored in that location.
+\end{itemize}
+
+A useful analogy is a labeled parking space:
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={alt text}]{image.png}}
+The name identifies the storage location; the value is its current
+content.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.1.1 Defining Variables}\label{defining-variables}
+
+A value is stored in a variable with an \textbf{assignment statement}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cansPerPack }\OperatorTok{=} \DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+The general form is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variableName = value}
+\end{Highlighting}
+\end{Shaded}
+
+The first time a variable is assigned a value, the variable is
+\textbf{created and initialized}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cansPerPack }\OperatorTok{=} \DecValTok{6}
+\BuiltInTok{print}\NormalTok{(cansPerPack)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+If the variable is assigned another value later, the previous value is
+replaced.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cansPerPack }\OperatorTok{=} \DecValTok{6}
+\NormalTok{cansPerPack }\OperatorTok{=} \DecValTok{8}
+\BuiltInTok{print}\NormalTok{(cansPerPack)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{8}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Assignment Is Not Mathematical
+Equality}\label{assignment-is-not-mathematical-equality}
+
+The symbol \texttt{=} in Python is the \textbf{assignment operator}. It
+does not mean mathematical equality.
+
+Consider:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cansPerPack }\OperatorTok{=}\NormalTok{ cansPerPack }\OperatorTok{+} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+If \texttt{cansPerPack} currently contains \texttt{8}, Python performs
+the following steps:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{1. Read the current value: 8}
+\NormalTok{2. Compute 8 + 2 = 10}
+\NormalTok{3. Store 10 back into cansPerPack}
+\end{Highlighting}
+\end{Shaded}
+
+After the statement executes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cansPerPack }\OperatorTok{==} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+conceptually, the variable now stores \texttt{10}.
+
+This is perfectly meaningful in programming, even though the algebraic
+statement \texttt{x\ =\ x\ +\ 2} would be impossible as an equation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.1.2 Number Types}\label{number-types}
+
+Every value in Python has a \textbf{data type}. The data type
+determines:
+
+\begin{itemize}
+\tightlist
+\item
+  how the value is represented;
+\item
+  which operations can be performed on the value.
+\end{itemize}
+
+Two important numeric types are:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Python type & Meaning & Examples \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{int} & integer / whole number & \texttt{6}, \texttt{0},
+\texttt{-25} \\
+\texttt{float} & floating-point number & \texttt{0.355}, \texttt{1.0},
+\texttt{-3.5} \\
+\end{longtable}
+}
+
+Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count }\OperatorTok{=} \DecValTok{6}
+\NormalTok{price }\OperatorTok{=} \FloatTok{2.95}
+\end{Highlighting}
+\end{Shaded}
+
+A numeric value written directly in a program is called a \textbf{number
+literal}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{6}
+\FloatTok{0.5}
+\FloatTok{1.0}
+\FloatTok{1E6}
+\FloatTok{2.96E{-}2}
+\end{Highlighting}
+\end{Shaded}
+
+Important observations:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{6} is an \texttt{int}.
+\item
+  \texttt{6.0} is a \texttt{float}.
+\item
+  Numbers written in exponential notation such as \texttt{1E6} are
+  floating-point values.
+\end{itemize}
+
+The type is associated with the \textbf{value}, not permanently with the
+variable name.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{taxRate }\OperatorTok{=} \DecValTok{5}
+\NormalTok{taxRate }\OperatorTok{=} \FloatTok{5.5}
+\end{Highlighting}
+\end{Shaded}
+
+Python allows this. However, the chapter recommends keeping the type of
+a variable conceptually consistent. If a variable represents a tax rate,
+initialize it as a floating-point value when fractional values are
+possible:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{taxRate }\OperatorTok{=} \FloatTok{5.0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.1.3 Variable Names}\label{variable-names}
+
+Variable names must follow Python's naming rules.
+
+\subsubsection{Rules}\label{rules}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A name must start with a letter or underscore \texttt{\_}.
+\item
+  Remaining characters may be letters, digits, or underscores.
+\item
+  Spaces and symbols such as \texttt{?}, \texttt{\%}, \texttt{.}, and
+  \texttt{/} are not allowed.
+\item
+  Names are \textbf{case sensitive}.
+\item
+  Reserved words such as \texttt{if} and \texttt{class} cannot be used
+  as variable names.
+\end{enumerate}
+
+Examples:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Valid?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Comment
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{canVolume1} & Yes & Letters and digits are allowed. \\
+\texttt{x} & Yes & Legal, but often not descriptive enough. \\
+\texttt{CanVolume} & Yes & Different from \texttt{canVolume}; violates
+the book's lowercase-variable convention. \\
+\texttt{6pack} & No & Cannot start with a digit. \\
+\texttt{can\ volume} & No & Cannot contain spaces. \\
+\texttt{class} & No & Reserved word. \\
+\texttt{ltr/fl.oz} & No & Contains \texttt{/} and \texttt{.}. \\
+\end{longtable}
+}
+
+\subsubsection{Descriptive Names}\label{descriptive-names}
+
+Compare:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv }\OperatorTok{=} \FloatTok{0.355}
+\end{Highlighting}
+\end{Shaded}
+
+with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{canVolume }\OperatorTok{=} \FloatTok{0.355}
+\end{Highlighting}
+\end{Shaded}
+
+The second name gives much more information about the meaning of the
+variable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.1.4 Constants}\label{constants}
+
+A \textbf{constant} is a value that should remain unchanged throughout
+the program.
+
+Python does not technically prevent a programmer from changing a
+constant. Instead, the chapter uses the convention of writing constant
+names in uppercase letters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BOTTLE\_VOLUME }\OperatorTok{=} \FloatTok{2.0}
+\NormalTok{MAX\_SIZE }\OperatorTok{=} \DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+Named constants make programs easier to understand.
+
+Less clear:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{totalVolume }\OperatorTok{=}\NormalTok{ bottles }\OperatorTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Clearer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BOTTLE\_VOLUME }\OperatorTok{=} \FloatTok{2.0}
+\NormalTok{totalVolume }\OperatorTok{=}\NormalTok{ bottles }\OperatorTok{*}\NormalTok{ BOTTLE\_VOLUME}
+\end{Highlighting}
+\end{Shaded}
+
+The named constant explains \emph{why} the value \texttt{2.0} appears in
+the computation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.1.5 Comments}\label{comments}
+
+A \textbf{comment} is an explanation written for human readers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CAN\_VOLUME }\OperatorTok{=} \FloatTok{0.355}  \CommentTok{\# Liters in a 12{-}ounce can}
+\end{Highlighting}
+\end{Shaded}
+
+Python ignores everything from \texttt{\#} to the end of the line.
+
+A file-level comment can explain the purpose of a program:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#}
+\CommentTok{\# This program computes the volume, in liters, of a six{-}pack of soda cans.}
+\CommentTok{\#}
+\end{Highlighting}
+\end{Shaded}
+
+Comments are particularly useful for explaining:
+
+\begin{itemize}
+\tightlist
+\item
+  program purpose;
+\item
+  non-obvious constants;
+\item
+  important assumptions;
+\item
+  major steps of a computation.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Example -- Computing Soda
+Volume}\label{example-computing-soda-volume}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#}
+\CommentTok{\# This program computes the volume of a six{-}pack of soda cans}
+\CommentTok{\# and the total volume when a two{-}liter bottle is added.}
+\CommentTok{\#}
+
+\NormalTok{CAN\_VOLUME }\OperatorTok{=} \FloatTok{0.355}
+\NormalTok{BOTTLE\_VOLUME }\OperatorTok{=} \FloatTok{2.0}
+
+\NormalTok{cansPerPack }\OperatorTok{=} \DecValTok{6}
+
+\NormalTok{totalVolume }\OperatorTok{=}\NormalTok{ cansPerPack }\OperatorTok{*}\NormalTok{ CAN\_VOLUME}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"A six{-}pack of 12{-}ounce cans contains"}\NormalTok{, totalVolume, }\StringTok{"liters."}\NormalTok{)}
+
+\NormalTok{totalVolume }\OperatorTok{=}\NormalTok{ totalVolume }\OperatorTok{+}\NormalTok{ BOTTLE\_VOLUME}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"A six{-}pack and a two{-}liter bottle contain"}\NormalTok{, totalVolume, }\StringTok{"liters."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Conceptually:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{6 cans × 0.355 L/can = 2.13 L}
+\NormalTok{2.13 L + 2.00 L       = 4.13 L}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Common Error 2.1 -- Using Undefined
+Variables}\label{common-error-2.1-using-undefined-variables}
+
+A variable must be created before it is used.
+
+Incorrect:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{canVolume }\OperatorTok{=} \DecValTok{12} \OperatorTok{*}\NormalTok{ literPerOunce}
+\NormalTok{literPerOunce }\OperatorTok{=} \FloatTok{0.0296}
+\end{Highlighting}
+\end{Shaded}
+
+When Python executes the first statement, \texttt{literPerOunce} does
+not yet exist.
+
+Python therefore raises a \textbf{\texttt{NameError}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NameError: name \textquotesingle{}literPerOunce\textquotesingle{} is not defined}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Why Does This Error Occur?}\label{why-does-this-error-occur}
+
+Python executes statements \textbf{from top to bottom}.
+
+At this point:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{canVolume }\OperatorTok{=} \DecValTok{12} \OperatorTok{*}\NormalTok{ literPerOunce}
+\end{Highlighting}
+\end{Shaded}
+
+Python tries to find the current value of \texttt{literPerOunce}, but
+that variable has not yet been assigned a value.
+
+Therefore, the name is \textbf{undefined}.
+
+Correct:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{literPerOunce }\OperatorTok{=} \FloatTok{0.0296}
+\NormalTok{canVolume }\OperatorTok{=} \DecValTok{12} \OperatorTok{*}\NormalTok{ literPerOunce}
+\end{Highlighting}
+\end{Shaded}
+
+Program statements are executed in order, so definitions must appear
+before uses.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Programming Tip 2.1 -- Choose Descriptive Variable
+Names}\label{programming-tip-2.1-choose-descriptive-variable-names}
+
+Prefer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{canVolume }\OperatorTok{=} \FloatTok{0.355}
+\end{Highlighting}
+\end{Shaded}
+
+over:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv }\OperatorTok{=} \FloatTok{0.355}
+\end{Highlighting}
+\end{Shaded}
+
+Descriptive names reduce the mental effort required to understand a
+program and make code easier to maintain.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Programming Tip 2.2 -- Do Not Use Magic
+Numbers}\label{programming-tip-2.2-do-not-use-magic-numbers}
+
+A \textbf{magic number} is an unexplained numeric literal in a program.
+
+Less clear:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{totalVolume }\OperatorTok{=}\NormalTok{ bottles }\OperatorTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Better:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BOTTLE\_VOLUME }\OperatorTok{=} \FloatTok{2.0}
+\NormalTok{totalVolume }\OperatorTok{=}\NormalTok{ bottles }\OperatorTok{*}\NormalTok{ BOTTLE\_VOLUME}
+\end{Highlighting}
+\end{Shaded}
+
+Using named constants makes changes safer. If the bottle size changes,
+only the constant definition needs to be updated.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Self Check 2.1}\label{self-check-2.1}
+
+\subsubsection{Question 1}\label{question-1}
+
+What happens the first time this statement is executed?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count }\OperatorTok{=} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+A variable named \texttt{count} is created and initialized with the
+integer value \texttt{10}.
+
+\subsubsection{Question 2}\label{question-2}
+
+Suppose:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{=} \DecValTok{7}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ x }\OperatorTok{+} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+What value does \texttt{x} contain afterwards?
+
+Answer
+
+\texttt{10}.
+
+Python first evaluates \texttt{x\ +\ 3}, then stores the result back
+into \texttt{x}.
+
+\subsubsection{Question 3}\label{question-3}
+
+What is the difference between \texttt{6} and \texttt{6.0}?
+
+Answer
+
+\texttt{6} has type \texttt{int}; \texttt{6.0} has type \texttt{float}.
+
+\subsubsection{Question 4}\label{question-4}
+
+Which name best represents a constant?
+
+A. \texttt{bottleVolume}\\
+B. \texttt{BOTTLE\_VOLUME}\\
+C. \texttt{bottle\ volume}\\
+D. \texttt{2liters}
+
+Answer
+
+\textbf{B. \texttt{BOTTLE\_VOLUME}}
+
+The chapter uses uppercase names for constants.
+
+\subsubsection{Question 5}\label{question-5}
+
+Why is the following code incorrect?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OperatorTok{=}\NormalTok{ price }\OperatorTok{*}\NormalTok{ quantity}
+\NormalTok{quantity }\OperatorTok{=} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\texttt{quantity} is used before it is created and initialized.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{2.2 Arithmetic}\label{arithmetic}
+
+Python can be used as a calculator, but arithmetic expressions must be
+written using Python's operators and syntax.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.2.1 Basic Arithmetic
+Operations}\label{basic-arithmetic-operations}
+
+The basic operators are:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrl@{}}
+\toprule\noalign{}
+Operation & Python operator & Example \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Addition & \texttt{+} & \texttt{a\ +\ b} \\
+Subtraction & \texttt{-} & \texttt{a\ -\ b} \\
+Multiplication & \texttt{*} & \texttt{a\ *\ b} \\
+Division & \texttt{/} & \texttt{a\ /\ b} \\
+\end{longtable}
+}
+
+For example, the mathematical expression
+
+\[
+\frac{a+b}{2}
+\]
+
+is written in Python as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(a }\OperatorTok{+}\NormalTok{ b) }\OperatorTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+The combination of literals, variables, operators, and parentheses is
+called an \textbf{expression}.
+
+\subsubsection{Operator Precedence}\label{operator-precedence}
+
+Python follows precedence rules similar to algebra:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Parentheses
+\item
+  Exponentiation
+\item
+  Multiplication and division
+\item
+  Addition and subtraction
+\end{enumerate}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{+}\NormalTok{ b }\OperatorTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+computes \texttt{b\ /\ 2} first.
+
+To average \texttt{a} and \texttt{b}, use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(a }\OperatorTok{+}\NormalTok{ b) }\OperatorTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Operators of the same precedence are generally evaluated from left to
+right.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \OperatorTok{{-}} \DecValTok{2} \OperatorTok{{-}} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+is evaluated as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(10 {-} 2) {-} 3 = 5}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{Mixing \texttt{int} and
+\texttt{float}}{Mixing int and float}}\label{mixing-int-and-float}
+
+If integer and floating-point values are mixed in an arithmetic
+expression, the result is a floating-point value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{7} \OperatorTok{+} \FloatTok{4.0}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{11.0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.2.2 Powers}\label{powers}
+
+Python uses \texttt{**} for exponentiation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \OperatorTok{**} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+means:
+
+\[
+2^3 = 8
+\]
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \OperatorTok{*} \DecValTok{2} \OperatorTok{**} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{80}
+\end{Highlighting}
+\end{Shaded}
+
+Exponentiation has higher precedence than multiplication.
+
+Power operations are evaluated from right to left:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \OperatorTok{**} \DecValTok{2} \OperatorTok{**} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+is interpreted as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{10 ** (2 ** 3)}
+\end{Highlighting}
+\end{Shaded}
+
+not:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(10 ** 2) ** 3}
+\end{Highlighting}
+\end{Shaded}
+
+A mathematical expression such as
+
+\[
+b\left(1 + \frac{r}{100}\right)^n
+\]
+
+becomes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b }\OperatorTok{*}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ r }\OperatorTok{/} \DecValTok{100}\NormalTok{) }\OperatorTok{**}\NormalTok{ n}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.2.3 Floor Division and
+Remainder}\label{floor-division-and-remainder}
+
+Normal division \texttt{/} produces a floating-point result.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{7} \OperatorTok{/} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{1.75}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{Floor Division
+\texttt{//}}{Floor Division //}}\label{floor-division}
+
+For positive integers, \texttt{//} computes the quotient and discards
+the fractional part.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{7} \OperatorTok{//} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{Remainder
+\texttt{\%}}{Remainder \%}}\label{remainder}
+
+The \texttt{\%} operator computes the remainder.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{7} \OperatorTok{\%} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Example -- Converting Pennies to Dollars and
+Cents}\label{example-converting-pennies-to-dollars-and-cents}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pennies }\OperatorTok{=} \DecValTok{1729}
+
+\NormalTok{dollars }\OperatorTok{=}\NormalTok{ pennies }\OperatorTok{//} \DecValTok{100}
+\NormalTok{cents }\OperatorTok{=}\NormalTok{ pennies }\OperatorTok{\%} \DecValTok{100}
+
+\BuiltInTok{print}\NormalTok{(dollars)}
+\BuiltInTok{print}\NormalTok{(cents)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{17}
+\NormalTok{29}
+\end{Highlighting}
+\end{Shaded}
+
+Useful patterns for a positive integer \texttt{n}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OperatorTok{\%} \DecValTok{10}       \CommentTok{\# last digit}
+\NormalTok{n }\OperatorTok{//} \DecValTok{10}      \CommentTok{\# all digits except the last}
+\NormalTok{n }\OperatorTok{\%} \DecValTok{100}      \CommentTok{\# last two digits}
+\NormalTok{n }\OperatorTok{\%} \DecValTok{2}        \CommentTok{\# 0 if even, 1 if odd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.2.4 Calling Functions}\label{calling-functions}
+
+A function may \textbf{return a value} that can be used in an
+expression, printed, or stored in a variable.
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{distance }\OperatorTok{=} \BuiltInTok{abs}\NormalTok{(}\OperatorTok{{-}}\DecValTok{173}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{abs()} returns the absolute value.
+
+Other useful built-in mathematical functions include:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Function & Purpose \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{abs(x)} & Absolute value of \texttt{x} \\
+\texttt{round(x)} & Round \texttt{x} to a whole number \\
+\texttt{round(x,\ n)} & Round \texttt{x} to \texttt{n} decimal places \\
+\texttt{max(x1,\ ...,\ xn)} & Largest argument \\
+\texttt{min(x1,\ ...,\ xn)} & Smallest argument \\
+\end{longtable}
+}
+
+Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{abs}\NormalTok{(}\OperatorTok{{-}}\DecValTok{10}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{round}\NormalTok{(}\FloatTok{7.627}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{min}\NormalTok{(}\FloatTok{7.25}\NormalTok{, }\FloatTok{10.95}\NormalTok{, }\FloatTok{5.95}\NormalTok{, }\FloatTok{6.05}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+A function must be called with an appropriate number of arguments.
+
+Incorrect:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{abs}\NormalTok{()}
+\BuiltInTok{abs}\NormalTok{(}\OperatorTok{{-}}\DecValTok{10}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{abs()} function expects exactly one argument.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{2.2.5 Mathematical Functions and the
+\texttt{math}
+Module}{2.2.5 Mathematical Functions and the math Module}}\label{mathematical-functions-and-the-math-module}
+
+Python's standard library contains reusable modules.
+
+The \texttt{math} module provides many mathematical functions.
+
+To use \texttt{sqrt()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ sqrt}
+
+\NormalTok{y }\OperatorTok{=}\NormalTok{ sqrt(}\DecValTok{25}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{5.0}
+\end{Highlighting}
+\end{Shaded}
+
+Selected functions include:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Function & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{sqrt(x)} & Square root \\
+\texttt{trunc(x)} & Truncate floating-point value to an integer \\
+\texttt{sin(x)} & Sine of \texttt{x} in radians \\
+\texttt{cos(x)} & Cosine of \texttt{x} in radians \\
+\texttt{tan(x)} & Tangent of \texttt{x} in radians \\
+\texttt{exp(x)} & \(e^x\) \\
+\texttt{degrees(x)} & Radians → degrees \\
+\texttt{radians(x)} & Degrees → radians \\
+\texttt{log(x)} & Natural logarithm \\
+\texttt{log(x,\ base)} & Logarithm with specified base \\
+\end{longtable}
+}
+
+The module also provides constants such as \texttt{pi}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ pi}
+
+\NormalTok{area }\OperatorTok{=}\NormalTok{ pi }\OperatorTok{*}\NormalTok{ radius }\OperatorTok{**} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Common Error 2.2 -- Roundoff
+Errors}\label{common-error-2.2-roundoff-errors}
+
+Floating-point numbers cannot always represent decimal values exactly.
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{price }\OperatorTok{=} \FloatTok{4.35}
+\NormalTok{quantity }\OperatorTok{=} \DecValTok{100}
+\NormalTok{total }\OperatorTok{=}\NormalTok{ price }\OperatorTok{*}\NormalTok{ quantity}
+\BuiltInTok{print}\NormalTok{(total)}
+\end{Highlighting}
+\end{Shaded}
+
+A computer may display a value close to, but not exactly, \texttt{435}.
+
+This is not necessarily a programming mistake. It is a consequence of
+representing many decimal fractions using a finite number of binary
+digits.
+
+For user-facing output, round the value or format it with a fixed number
+of decimal places.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Common Error 2.3 -- Unbalanced
+Parentheses}\label{common-error-2.3-unbalanced-parentheses}
+
+Consider:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{((a }\OperatorTok{+}\NormalTok{ b) }\OperatorTok{*}\NormalTok{ t }\OperatorTok{/} \DecValTok{2} \OperatorTok{*}\NormalTok{ (}\DecValTok{1} \OperatorTok{{-}}\NormalTok{ t)}
+\end{Highlighting}
+\end{Shaded}
+
+There are more opening parentheses than closing parentheses.
+
+A useful checking rule is:
+
+\begin{itemize}
+\tightlist
+\item
+  while scanning left to right, the number of closing parentheses should
+  never exceed the number of opening parentheses;
+\item
+  at the end, the counts must match.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Programming Tip 2.3 -- Use Spaces in
+Expressions}\label{programming-tip-2.3-use-spaces-in-expressions}
+
+Prefer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OperatorTok{=}\NormalTok{ (}\OperatorTok{{-}}\NormalTok{b }\OperatorTok{+}\NormalTok{ sqrt(b }\OperatorTok{**} \DecValTok{2} \OperatorTok{{-}} \DecValTok{4} \OperatorTok{*}\NormalTok{ a }\OperatorTok{*}\NormalTok{ c)) }\OperatorTok{/}\NormalTok{ (}\DecValTok{2} \OperatorTok{*}\NormalTok{ a)}
+\end{Highlighting}
+\end{Shaded}
+
+over:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1}\OperatorTok{=}\NormalTok{(}\OperatorTok{{-}}\NormalTok{b}\OperatorTok{+}\NormalTok{sqrt(b}\OperatorTok{**}\DecValTok{2}\OperatorTok{{-}}\DecValTok{4}\OperatorTok{*}\NormalTok{a}\OperatorTok{*}\NormalTok{c))}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+Spaces make the structure of an expression easier to read.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Special Topic 2.1 -- Other Ways to Import
+Modules}\label{special-topic-2.1-other-ways-to-import-modules}
+
+Import selected functions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ sqrt, sin, cos}
+\end{Highlighting}
+\end{Shaded}
+
+Import all names from a module:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import} \OperatorTok{*}
+\end{Highlighting}
+\end{Shaded}
+
+Import the module itself:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ math}
+
+\NormalTok{y }\OperatorTok{=}\NormalTok{ math.sqrt(x)}
+\end{Highlighting}
+\end{Shaded}
+
+The last style makes the origin of the function explicit.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Special Topic 2.2 -- Combining Assignment and
+Arithmetic}\label{special-topic-2.2-combining-assignment-and-arithmetic}
+
+Python provides augmented assignment operators.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total }\OperatorTok{+=}\NormalTok{ cans}
+\end{Highlighting}
+\end{Shaded}
+
+is equivalent to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total }\OperatorTok{=}\NormalTok{ total }\OperatorTok{+}\NormalTok{ cans}
+\end{Highlighting}
+\end{Shaded}
+
+Similarly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total }\OperatorTok{*=} \DecValTok{2}
+\NormalTok{count }\OperatorTok{+=} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Special Topic 2.3 -- Line
+Joining}\label{special-topic-2.3-line-joining}
+
+Long expressions can be split across lines when the break occurs inside
+parentheses.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OperatorTok{=}\NormalTok{ ((}\OperatorTok{{-}}\NormalTok{b }\OperatorTok{+}\NormalTok{ sqrt(b }\OperatorTok{**} \DecValTok{2} \OperatorTok{{-}} \DecValTok{4} \OperatorTok{*}\NormalTok{ a }\OperatorTok{*}\NormalTok{ c))}
+      \OperatorTok{/}\NormalTok{ (}\DecValTok{2} \OperatorTok{*}\NormalTok{ a))}
+\end{Highlighting}
+\end{Shaded}
+
+This is preferable to breaking a complete expression at an arbitrary
+point.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Self Check 2.2}\label{self-check-2.2}
+
+\subsubsection{Question 1}\label{question-1-1}
+
+What is the value of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \OperatorTok{+} \DecValTok{6} \OperatorTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\texttt{13.0}
+
+Division is performed before addition.
+
+\subsubsection{Question 2}\label{question-2-1}
+
+What is the result of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{17} \OperatorTok{//} \DecValTok{5}
+\DecValTok{17} \OperatorTok{\%} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{3}
+\NormalTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Question 3}\label{question-3-1}
+
+What is the last digit of a positive integer \texttt{n}?
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OperatorTok{\%} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Question 4}\label{question-4-1}
+
+Why is the following expression different from \texttt{(a\ +\ b)\ /\ 2}?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{+}\NormalTok{ b }\OperatorTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+Because division has higher precedence than addition. Python computes
+\texttt{b\ /\ 2} first, then adds \texttt{a}.
+
+\subsubsection{Question 5}\label{question-5-1}
+
+Which import is required before using \texttt{sqrt(x)} in the textbook
+style?
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ sqrt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{2.3 Problem Solving: First Do It By
+Hand}\label{problem-solving-first-do-it-by-hand}
+
+Before translating a problem into Python, work out at least one concrete
+example manually.
+
+The principle is:
+
+\begin{quote}
+If you cannot compute a solution yourself, it is unlikely that you can
+write a reliable program that automates the computation.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Example -- Alternating Tiles Along a
+Wall}\label{example-alternating-tiles-along-a-wall}
+
+Suppose black and white tiles are placed along a wall with the
+requirements:
+
+\begin{itemize}
+\tightlist
+\item
+  the first tile is black;
+\item
+  colors alternate;
+\item
+  the last tile must also be black.
+\end{itemize}
+
+Assume:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Total width = 100 inches}
+\NormalTok{Tile width  =   5 inches}
+\end{Highlighting}
+\end{Shaded}
+
+If we use 20 tiles, the last tile would be white. Instead, think of the
+pattern as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B | WB | WB | WB | ... | WB}
+\end{Highlighting}
+\end{Shaded}
+
+There is one initial black tile, followed by black/white pairs.
+
+The first tile uses \texttt{5} inches, leaving \texttt{95} inches.
+
+Each pair uses:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{2 × 5 = 10 inches}
+\end{Highlighting}
+\end{Shaded}
+
+Number of complete pairs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{95 // 10 = 9}
+\end{Highlighting}
+\end{Shaded}
+
+Number of tiles:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{1 + 2 × 9 = 19}
+\end{Highlighting}
+\end{Shaded}
+
+The tiles occupy:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{19 × 5 = 95 inches}
+\end{Highlighting}
+\end{Shaded}
+
+Total unused space:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{100 {-} 95 = 5 inches}
+\end{Highlighting}
+\end{Shaded}
+
+Gap at each end:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{5 / 2 = 2.5 inches}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{General Algorithm}\label{general-algorithm}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{number of pairs = integer part of}
+\NormalTok{                  (total width {-} tile width) / (2 × tile width)}
+
+\NormalTok{number of tiles = 1 + 2 × number of pairs}
+
+\NormalTok{gap at each end =}
+\NormalTok{    (total width {-} number of tiles × tile width) / 2}
+\end{Highlighting}
+\end{Shaded}
+
+Doing the arithmetic by hand exposes the structure needed for the
+algorithm.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Worked Example 2.1 -- Computing Travel
+Time}\label{worked-example-2.1-computing-travel-time}
+
+A robot travels toward an item. It can move faster on a road than across
+rocky terrain.
+
+Inputs:
+
+\begin{itemize}
+\tightlist
+\item
+  horizontal distance to the item;
+\item
+  vertical distance to the item;
+\item
+  speed on the road;
+\item
+  speed on rocky terrain;
+\item
+  length of the first road segment.
+\end{itemize}
+
+The total travel time consists of two parts.
+
+\subsubsection{Segment 1}\label{segment-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{time1 = length1 / speed1}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Segment 2}\label{segment-2}
+
+The second segment is the hypotenuse of a right triangle.
+
+\[
+\text{segment2Length}
+=
+\sqrt{(\text{xDistance}-\text{segment1Length})^2 + \text{yDistance}^2}
+\]
+
+Then:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{time2 = segment2Length / speed2}
+\end{Highlighting}
+\end{Shaded}
+
+Total:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{totalTime = time1 + time2}
+\end{Highlighting}
+\end{Shaded}
+
+Python version:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ sqrt}
+
+\NormalTok{segment1Time }\OperatorTok{=}\NormalTok{ segment1Length }\OperatorTok{/}\NormalTok{ segment1Speed}
+\NormalTok{segment2Length }\OperatorTok{=}\NormalTok{ sqrt((xDistance }\OperatorTok{{-}}\NormalTok{ segment1Length) }\OperatorTok{**} \DecValTok{2} \OperatorTok{+}\NormalTok{ yDistance }\OperatorTok{**} \DecValTok{2}\NormalTok{)}
+\NormalTok{segment2Time }\OperatorTok{=}\NormalTok{ segment2Length }\OperatorTok{/}\NormalTok{ segment2Speed}
+\NormalTok{totalTime }\OperatorTok{=}\NormalTok{ segment1Time }\OperatorTok{+}\NormalTok{ segment2Time}
+\end{Highlighting}
+\end{Shaded}
+
+The worked example also reinforces the use of descriptive variable names
+in the final program.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Self Check 2.3}\label{self-check-2.3}
+
+\subsubsection{Question 1}\label{question-1-2}
+
+Why should a programmer work out a concrete example by hand before
+coding?
+
+Answer
+
+Because a hand calculation helps reveal the required steps and exposes
+logical errors before Python syntax is introduced.
+
+\subsubsection{Question 2}\label{question-2-2}
+
+In the tile example, why is floor division useful?
+
+Answer
+
+Because only complete tile pairs can be placed. A fractional pair is not
+meaningful.
+
+\subsubsection{Question 3}\label{question-3-2}
+
+Which order is preferable?
+
+A. Write code → guess the algorithm → test\\
+B. Work out an example → derive the algorithm → write code\\
+C. Write code → choose variable names → understand the problem
+
+Answer
+
+\textbf{B.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{2.4 Strings}\label{strings}
+
+Many programs process text rather than numbers.
+
+A \textbf{string} is a sequence of characters.
+
+Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"Hello"}
+\CommentTok{"Python"}
+\CommentTok{"123 Main Street"}
+\end{Highlighting}
+\end{Shaded}
+
+Characters include:
+
+\begin{itemize}
+\tightlist
+\item
+  letters;
+\item
+  digits;
+\item
+  punctuation;
+\item
+  spaces;
+\item
+  Unicode symbols.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.4.1 The String Type}\label{the-string-type}
+
+A string can be stored in a variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{greeting }\OperatorTok{=} \StringTok{"Hello"}
+\BuiltInTok{print}\NormalTok{(greeting)}
+\end{Highlighting}
+\end{Shaded}
+
+A \textbf{string literal} is a specific string written directly in
+source code.
+
+Python supports both single and double quotation marks:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"This is a string."}
+\CommentTok{\textquotesingle{}So is this.\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+This allows one quotation style to appear inside the other:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{message }\OperatorTok{=} \StringTok{\textquotesingle{}He said "Hello"\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{String Length}\label{string-length}
+
+Use \texttt{len()} to obtain the number of characters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{length }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(}\StringTok{"World!"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{length} becomes \texttt{6}.
+
+Spaces count as characters.
+
+The \textbf{empty string} contains zero characters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{""}
+\CommentTok{\textquotesingle{}\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.4.2 Concatenation and
+Repetition}\label{concatenation-and-repetition}
+
+\subsubsection{\texorpdfstring{Concatenation
+\texttt{+}}{Concatenation +}}\label{concatenation}
+
+The \texttt{+} operator joins strings.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firstName }\OperatorTok{=} \StringTok{"Harry"}
+\NormalTok{lastName }\OperatorTok{=} \StringTok{"Morgan"}
+\NormalTok{name }\OperatorTok{=}\NormalTok{ firstName }\OperatorTok{+} \StringTok{" "} \OperatorTok{+}\NormalTok{ lastName}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Harry Morgan}
+\end{Highlighting}
+\end{Shaded}
+
+Both operands must be strings.
+
+Incorrect:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"Agent "} \OperatorTok{+} \DecValTok{1729}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{Repetition
+\texttt{*}}{Repetition *}}\label{repetition}
+
+A string can be repeated by an integer factor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dashes }\OperatorTok{=} \StringTok{"{-}"} \OperatorTok{*} \DecValTok{50}
+\end{Highlighting}
+\end{Shaded}
+
+Another example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{message }\OperatorTok{=} \StringTok{"Echo. "}
+\BuiltInTok{print}\NormalTok{(message }\OperatorTok{*} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.4.3 Converting Between Numbers and
+Strings}\label{converting-between-numbers-and-strings}
+
+\subsubsection{Number → String}\label{number-string}
+
+Use \texttt{str()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{id} \OperatorTok{=} \DecValTok{1729}
+\NormalTok{name }\OperatorTok{=} \StringTok{"Agent "} \OperatorTok{+} \BuiltInTok{str}\NormalTok{(}\BuiltInTok{id}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Agent 1729}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{String → Integer}\label{string-integer}
+
+Use \texttt{int()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{id} \OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\StringTok{"1729"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{String → Floating-Point
+Number}\label{string-floating-point-number}
+
+Use \texttt{float()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{price }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\StringTok{"17.29"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The string must represent a valid numeric literal for the requested
+conversion.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.4.4 Strings and Characters}\label{strings-and-characters}
+
+A string is a sequence of characters. Each character has an
+\textbf{index}.
+
+Python starts counting at \texttt{0}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{String:  H  a  r  r  y}
+\NormalTok{Index:   0  1  2  3  4}
+\end{Highlighting}
+\end{Shaded}
+
+Given:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name }\OperatorTok{=} \StringTok{"Harry"}
+\end{Highlighting}
+\end{Shaded}
+
+we can access individual characters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{first }\OperatorTok{=}\NormalTok{ name[}\DecValTok{0}\NormalTok{]}
+\NormalTok{last }\OperatorTok{=}\NormalTok{ name[}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Results:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{first = "H"}
+\NormalTok{last  = "y"}
+\end{Highlighting}
+\end{Shaded}
+
+The last valid index is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{len}\NormalTok{(name) }\OperatorTok{{-}} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+A general way to get the last character is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{last }\OperatorTok{=}\NormalTok{ name[}\BuiltInTok{len}\NormalTok{(name) }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Using an index outside the valid range causes an exception at run time.
+
+\subsubsection{Example -- Building
+Initials}\label{example-building-initials}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{first }\OperatorTok{=} \StringTok{"Rodolfo"}
+\NormalTok{second }\OperatorTok{=} \StringTok{"Sally"}
+\NormalTok{initials }\OperatorTok{=}\NormalTok{ first[}\DecValTok{0}\NormalTok{] }\OperatorTok{+} \StringTok{"\&"} \OperatorTok{+}\NormalTok{ second[}\DecValTok{0}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(initials)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{R\&S}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.4.5 String Methods}\label{string-methods}
+
+A \textbf{method} is an operation associated with an object.
+
+For a string object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name }\OperatorTok{=} \StringTok{"John Smith"}
+\end{Highlighting}
+\end{Shaded}
+
+we can call:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{uppercaseName }\OperatorTok{=}\NormalTok{ name.upper()}
+\NormalTok{lowercaseName }\OperatorTok{=}\NormalTok{ name.lower()}
+\end{Highlighting}
+\end{Shaded}
+
+Useful methods:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Method & Result \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{s.lower()} & Lowercase version of \texttt{s} \\
+\texttt{s.upper()} & Uppercase version of \texttt{s} \\
+\texttt{s.replace(old,\ new)} & New string with replacements \\
+\end{longtable}
+}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name2 }\OperatorTok{=}\NormalTok{ name.replace(}\StringTok{"John"}\NormalTok{, }\StringTok{"Jane"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Jane Smith}
+\end{Highlighting}
+\end{Shaded}
+
+These methods return new strings. They do not modify the original string
+object.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Special Topic 2.4 -- Character
+Values}\label{special-topic-2.4-character-values}
+
+Characters are represented internally by integer codes.
+
+Use \texttt{ord()} to obtain the code of a character:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{ord}\NormalTok{(}\StringTok{"H"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Use \texttt{chr()} to convert a numeric code back to a character:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{chr}\NormalTok{(}\DecValTok{97}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(}\StringTok{"The letter H has code"}\NormalTok{, }\BuiltInTok{ord}\NormalTok{(}\StringTok{"H"}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Code 97 represents"}\NormalTok{, }\BuiltInTok{chr}\NormalTok{(}\DecValTok{97}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Special Topic 2.5 -- Escape
+Sequences}\label{special-topic-2.5-escape-sequences}
+
+An \textbf{escape sequence} begins with a backslash and represents a
+special character inside a string.
+
+Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"You\textquotesingle{}re }\CharTok{\textbackslash{}"}\CommentTok{Welcome}\CharTok{\textbackslash{}"}\CommentTok{"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"C:}\CharTok{\textbackslash{}\textbackslash{}}\CommentTok{Temp}\CharTok{\textbackslash{}\textbackslash{}}\CommentTok{Secret.txt"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(}\StringTok{"*}\CharTok{\textbackslash{}n}\StringTok{**}\CharTok{\textbackslash{}n}\StringTok{***"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{*}
+\NormalTok{**}
+\NormalTok{***}
+\end{Highlighting}
+\end{Shaded}
+
+Common sequences:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Escape sequence & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{\textbackslash{}"} & Double quotation mark inside a
+double-quoted string \\
+\texttt{\textbackslash{}\textbackslash{}} & Backslash \\
+\texttt{\textbackslash{}n} & Newline \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Computing \& Society 2.1 -- International Alphabets and
+Unicode}\label{computing-society-2.1-international-alphabets-and-unicode}
+
+Text processing is not limited to the English alphabet.
+
+Different writing systems include:
+
+\begin{itemize}
+\tightlist
+\item
+  accented European alphabets;
+\item
+  Greek;
+\item
+  Cyrillic;
+\item
+  Hebrew;
+\item
+  Arabic;
+\item
+  Chinese characters;
+\item
+  Japanese and Korean writing systems;
+\item
+  symbols and emoji.
+\end{itemize}
+
+\textbf{Unicode} provides a common encoding system capable of
+representing characters from writing systems around the world.
+
+Python 3 strings support Unicode.
+
+Conceptually:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text }\OperatorTok{=} \StringTok{"£100"}
+\BuiltInTok{print}\NormalTok{(text[}\DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+Each string position corresponds to a Unicode character, not simply an
+ASCII byte.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Self Check 2.4}\label{self-check-2.4}
+
+\subsubsection{Question 1}\label{question-1-3}
+
+What is the value of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{len}\NormalTok{(}\StringTok{"Hello"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\texttt{5}
+
+\subsubsection{Question 2}\label{question-2-3}
+
+What is the value of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"Py"} \OperatorTok{+} \StringTok{"thon"}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Python}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Question 3}\label{question-3-3}
+
+What does this produce?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"{-}"} \OperatorTok{*} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{{-}{-}{-}{-}{-}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Question 4}\label{question-4-2}
+
+Given:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s }\OperatorTok{=} \StringTok{"Python"}
+\end{Highlighting}
+\end{Shaded}
+
+what are \texttt{s{[}0{]}} and \texttt{s{[}len(s)\ -\ 1{]}}?
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s[0]            → "P"}
+\NormalTok{s[len(s) {-} 1]   → "n"}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Question 5}\label{question-5-2}
+
+Why does this fail?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"Agent "} \OperatorTok{+} \DecValTok{1729}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+String concatenation requires strings on both sides. Convert the integer
+first:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"Agent "} \OperatorTok{+} \BuiltInTok{str}\NormalTok{(}\DecValTok{1729}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{2.5 Input and Output}\label{input-and-output}
+
+Most useful programs receive data from a user and produce results based
+on those inputs.
+
+A common structure is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Input}
+\NormalTok{  ↓}
+\NormalTok{Process}
+\NormalTok{  ↓}
+\NormalTok{Output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.5.1 User Input}\label{user-input}
+
+Use \texttt{input()} to read text from the keyboard.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{first }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter your first name: "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The string passed to \texttt{input()} is the \textbf{prompt}.
+
+Conceptually, \texttt{input()} performs these steps:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Display prompt}
+\NormalTok{     ↓}
+\NormalTok{Wait for keyboard input}
+\NormalTok{     ↓}
+\NormalTok{User presses Enter}
+\NormalTok{     ↓}
+\NormalTok{Return entered characters as a string}
+\end{Highlighting}
+\end{Shaded}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{first }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter your first name: "}\NormalTok{)}
+\NormalTok{second }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter your significant other\textquotesingle{}s first name: "}\NormalTok{)}
+
+\NormalTok{initials }\OperatorTok{=}\NormalTok{ first[}\DecValTok{0}\NormalTok{] }\OperatorTok{+} \StringTok{"\&"} \OperatorTok{+}\NormalTok{ second[}\DecValTok{0}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(initials)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.5.2 Numerical Input}\label{numerical-input}
+
+\texttt{input()} always returns a string.
+
+To read an integer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{userInput }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Please enter the number of bottles: "}\NormalTok{)}
+\NormalTok{bottles }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(userInput)}
+\end{Highlighting}
+\end{Shaded}
+
+To read a floating-point value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{userInput }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter price per bottle: "}\NormalTok{)}
+\NormalTok{price }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(userInput)}
+\end{Highlighting}
+\end{Shaded}
+
+These operations can also be combined:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bottles }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Please enter the number of bottles: "}\NormalTok{))}
+\NormalTok{price }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter price per bottle: "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.5.3 Formatted Output}\label{formatted-output}
+
+The chapter uses Python's \texttt{\%} \textbf{string format operator} to
+control how values are displayed.
+
+\subsubsection{Floating-Point Values}\label{floating-point-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{price }\OperatorTok{=} \FloatTok{1.215962441314554}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\SpecialCharTok{\%.2f}\StringTok{"} \OperatorTok{\%}\NormalTok{ price)}
+\end{Highlighting}
+\end{Shaded}
+
+Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{1.22}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Field Width}\label{field-width}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\SpecialCharTok{\%10.2f}\StringTok{"} \OperatorTok{\%}\NormalTok{ price)}
+\end{Highlighting}
+\end{Shaded}
+
+The value occupies a field of width \texttt{10} and is right-justified.
+
+\subsubsection{Common Format Specifiers}\label{common-format-specifiers}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Specifier & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{\%d} & Integer \\
+\texttt{\%f} & Floating-point value \\
+\texttt{\%.2f} & Float with 2 digits after decimal point \\
+\texttt{\%7.2f} & Width 7, 2 decimal places \\
+\texttt{\%s} & String \\
+\texttt{\%9s} & Right-justified string in width 9 \\
+\texttt{\%-9s} & Left-justified string in width 9 \\
+\texttt{\%\%} & Literal percent sign \\
+\texttt{\%+5d} & Show sign for positive/negative integer \\
+\end{longtable}
+}
+
+\subsubsection{Formatting Multiple
+Values}\label{formatting-multiple-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quantity }\OperatorTok{=} \DecValTok{24}
+\NormalTok{total }\OperatorTok{=} \FloatTok{17.29}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Quantity: }\SpecialCharTok{\%d}\StringTok{ Total: }\SpecialCharTok{\%10.2f}\StringTok{"} \OperatorTok{\%}\NormalTok{ (quantity, total))}
+\end{Highlighting}
+\end{Shaded}
+
+Values are matched to format specifiers from left to right.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Example -- Price per Ounce}\label{example-price-per-ounce}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#}
+\CommentTok{\# This program prints the price per ounce for a six{-}pack of cans.}
+\CommentTok{\#}
+
+\NormalTok{CANS\_PER\_PACK }\OperatorTok{=} \DecValTok{6}
+
+\NormalTok{packPrice }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Please enter the price for a six{-}pack: "}\NormalTok{))}
+\NormalTok{canVolume }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Please enter the volume for each can (in ounces): "}\NormalTok{))}
+
+\NormalTok{packVolume }\OperatorTok{=}\NormalTok{ canVolume }\OperatorTok{*}\NormalTok{ CANS\_PER\_PACK}
+\NormalTok{pricePerOunce }\OperatorTok{=}\NormalTok{ packPrice }\OperatorTok{/}\NormalTok{ packVolume}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Price per ounce: }\SpecialCharTok{\%8.2f}\StringTok{"} \OperatorTok{\%}\NormalTok{ pricePerOunce)}
+\end{Highlighting}
+\end{Shaded}
+
+This program demonstrates the full \textbf{Input → Process → Output}
+pattern.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Programming Tip 2.4 -- Don't Wait to
+Convert}\label{programming-tip-2.4-dont-wait-to-convert}
+
+When reading numeric input, convert it immediately.
+
+Less desirable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unitPrice }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter the unit price: "}\NormalTok{)}
+\NormalTok{price1 }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(unitPrice)}
+\NormalTok{price2 }\OperatorTok{=} \DecValTok{12} \OperatorTok{*} \BuiltInTok{float}\NormalTok{(unitPrice)}
+\end{Highlighting}
+\end{Shaded}
+
+Better:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unitPriceInput }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter the unit price: "}\NormalTok{)}
+\NormalTok{unitPrice }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(unitPriceInput)}
+
+\NormalTok{price1 }\OperatorTok{=}\NormalTok{ unitPrice}
+\NormalTok{price2 }\OperatorTok{=} \DecValTok{12} \OperatorTok{*}\NormalTok{ unitPrice}
+\end{Highlighting}
+\end{Shaded}
+
+Or combine the calls:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unitPrice }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter the unit price: "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Immediate conversion reduces repetition and makes it less likely that a
+string will accidentally be used in a numerical computation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{HOW TO 2.1 -- Writing Simple
+Programs}\label{how-to-2.1-writing-simple-programs}
+
+The chapter provides a systematic method for converting a problem
+statement into a Python program.
+
+\subsection{Problem -- Vending Machine
+Change}\label{problem-vending-machine-change}
+
+A customer:
+
+\begin{itemize}
+\tightlist
+\item
+  selects an item;
+\item
+  inserts a bill;
+\item
+  receives the purchased item;
+\item
+  receives change in dollar coins and quarters.
+\end{itemize}
+
+Assume item prices are multiples of 25 cents.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 1. Understand the Inputs and
+Outputs}\label{step-1.-understand-the-inputs-and-outputs}
+
+\subsubsection{Inputs}\label{inputs}
+
+\begin{itemize}
+\tightlist
+\item
+  bill denomination;
+\item
+  item price in pennies.
+\end{itemize}
+
+\subsubsection{Outputs}\label{outputs}
+
+\begin{itemize}
+\tightlist
+\item
+  number of dollar coins;
+\item
+  number of quarters.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 2. Work Out an Example by
+Hand}\label{step-2.-work-out-an-example-by-hand}
+
+Suppose:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Bill inserted = $5.00}
+\NormalTok{Item price    = $2.25}
+\end{Highlighting}
+\end{Shaded}
+
+Change:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{$5.00 {-} $2.25 = $2.75 = 275 pennies}
+\end{Highlighting}
+\end{Shaded}
+
+So the machine returns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{2 dollar coins}
+\NormalTok{3 quarters}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 3. Write Pseudocode}\label{step-3.-write-pseudocode}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{change due = 100 × bill value {-} item price}
+
+\NormalTok{dollar coins = change due // 100}
+
+\NormalTok{change due = change due \% 100}
+
+\NormalTok{quarters = change due // 25}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 4. Identify Variables and
+Constants}\label{step-4.-identify-variables-and-constants}
+
+Variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{billValue}
+\NormalTok{itemPrice}
+\NormalTok{changeDue}
+\NormalTok{dollarCoins}
+\NormalTok{quarters}
+\end{Highlighting}
+\end{Shaded}
+
+Constants:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PENNIES\_PER\_DOLLAR }\OperatorTok{=} \DecValTok{100}
+\NormalTok{PENNIES\_PER\_QUARTER }\OperatorTok{=} \DecValTok{25}
+\end{Highlighting}
+\end{Shaded}
+
+All values are integers because the computation uses floor division and
+remainders.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 5. Translate the Computation into
+Python}\label{step-5.-translate-the-computation-into-python}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{changeDue }\OperatorTok{=}\NormalTok{ PENNIES\_PER\_DOLLAR }\OperatorTok{*}\NormalTok{ billValue }\OperatorTok{{-}}\NormalTok{ itemPrice}
+
+\NormalTok{dollarCoins }\OperatorTok{=}\NormalTok{ changeDue }\OperatorTok{//}\NormalTok{ PENNIES\_PER\_DOLLAR}
+\NormalTok{changeDue }\OperatorTok{=}\NormalTok{ changeDue }\OperatorTok{\%}\NormalTok{ PENNIES\_PER\_DOLLAR}
+\NormalTok{quarters }\OperatorTok{=}\NormalTok{ changeDue }\OperatorTok{//}\NormalTok{ PENNIES\_PER\_QUARTER}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 6. Add Input and
+Output}\label{step-6.-add-input-and-output}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{billValue }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter bill value: "}\NormalTok{))}
+\NormalTok{itemPrice }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter item price in pennies: "}\NormalTok{))}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Dollar coins: }\SpecialCharTok{\%6d}\StringTok{"} \OperatorTok{\%}\NormalTok{ dollarCoins)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Quarters:     }\SpecialCharTok{\%6d}\StringTok{"} \OperatorTok{\%}\NormalTok{ quarters)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Step 7. Assemble the
+Program}\label{step-7.-assemble-the-program}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#}
+\CommentTok{\# This program simulates a vending machine that gives change.}
+\CommentTok{\#}
+
+\NormalTok{PENNIES\_PER\_DOLLAR }\OperatorTok{=} \DecValTok{100}
+\NormalTok{PENNIES\_PER\_QUARTER }\OperatorTok{=} \DecValTok{25}
+
+\NormalTok{billValue }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter bill value: "}\NormalTok{))}
+\NormalTok{itemPrice }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter item price in pennies: "}\NormalTok{))}
+
+\NormalTok{changeDue }\OperatorTok{=}\NormalTok{ PENNIES\_PER\_DOLLAR }\OperatorTok{*}\NormalTok{ billValue }\OperatorTok{{-}}\NormalTok{ itemPrice}
+
+\NormalTok{dollarCoins }\OperatorTok{=}\NormalTok{ changeDue }\OperatorTok{//}\NormalTok{ PENNIES\_PER\_DOLLAR}
+\NormalTok{changeDue }\OperatorTok{=}\NormalTok{ changeDue }\OperatorTok{\%}\NormalTok{ PENNIES\_PER\_DOLLAR}
+\NormalTok{quarters }\OperatorTok{=}\NormalTok{ changeDue }\OperatorTok{//}\NormalTok{ PENNIES\_PER\_QUARTER}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Dollar coins: }\SpecialCharTok{\%6d}\StringTok{"} \OperatorTok{\%}\NormalTok{ dollarCoins)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Quarters:     }\SpecialCharTok{\%6d}\StringTok{"} \OperatorTok{\%}\NormalTok{ quarters)}
+\end{Highlighting}
+\end{Shaded}
+
+The method is general:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Understand}
+\NormalTok{→ Calculate by hand}
+\NormalTok{→ Pseudocode}
+\NormalTok{→ Variables/constants}
+\NormalTok{→ Python computation}
+\NormalTok{→ Input/output}
+\NormalTok{→ Complete program}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Worked Example 2.2 -- Computing the Cost of
+Stamps}\label{worked-example-2.2-computing-the-cost-of-stamps}
+
+A stamp vending machine receives dollar bills and dispenses:
+
+\begin{itemize}
+\tightlist
+\item
+  first-class stamps;
+\item
+  penny stamps as change.
+\end{itemize}
+
+Assume the first-class stamp price is \texttt{49} cents, as in the
+textbook example.
+
+\subsubsection{Input}\label{input}
+
+\begin{itemize}
+\tightlist
+\item
+  number of dollars inserted.
+\end{itemize}
+
+\subsubsection{Outputs}\label{outputs-1}
+
+\begin{itemize}
+\tightlist
+\item
+  number of first-class stamps;
+\item
+  number of penny stamps.
+\end{itemize}
+
+\subsubsection{Hand Calculation for \$1}\label{hand-calculation-for-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{100 // 49 = 2 first{-}class stamps}
+\NormalTok{100 {-} 2 × 49 = 2 cents change}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{General Computation}\label{general-computation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRST\_CLASS\_STAMP\_PRICE }\OperatorTok{=} \DecValTok{49}
+
+\NormalTok{firstClassStamps }\OperatorTok{=} \DecValTok{100} \OperatorTok{*}\NormalTok{ dollars }\OperatorTok{//}\NormalTok{ FIRST\_CLASS\_STAMP\_PRICE}
+\NormalTok{change }\OperatorTok{=} \DecValTok{100} \OperatorTok{*}\NormalTok{ dollars }\OperatorTok{{-}}\NormalTok{ firstClassStamps }\OperatorTok{*}\NormalTok{ FIRST\_CLASS\_STAMP\_PRICE}
+\end{Highlighting}
+\end{Shaded}
+
+Complete example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRST\_CLASS\_STAMP\_PRICE }\OperatorTok{=} \DecValTok{49}
+
+\NormalTok{dollars }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter number of dollars: "}\NormalTok{))}
+
+\NormalTok{firstClassStamps }\OperatorTok{=} \DecValTok{100} \OperatorTok{*}\NormalTok{ dollars }\OperatorTok{//}\NormalTok{ FIRST\_CLASS\_STAMP\_PRICE}
+\NormalTok{change }\OperatorTok{=} \DecValTok{100} \OperatorTok{*}\NormalTok{ dollars }\OperatorTok{{-}}\NormalTok{ firstClassStamps }\OperatorTok{*}\NormalTok{ FIRST\_CLASS\_STAMP\_PRICE}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"First class stamps: }\SpecialCharTok{\%6d}\StringTok{"} \OperatorTok{\%}\NormalTok{ firstClassStamps)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Penny stamps:       }\SpecialCharTok{\%6d}\StringTok{"} \OperatorTok{\%}\NormalTok{ change)}
+\end{Highlighting}
+\end{Shaded}
+
+This example reinforces:
+
+\begin{itemize}
+\tightlist
+\item
+  named constants;
+\item
+  integer arithmetic;
+\item
+  floor division;
+\item
+  input conversion;
+\item
+  formatted output.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Computing \& Society 2.2 -- Bugs in
+Silicon}\label{computing-society-2.2-bugs-in-silicon}
+
+Not all incorrect numerical results are caused by application
+programmers.
+
+The chapter discusses the historical \textbf{Pentium floating-point
+division bug}. A defect in processor hardware caused a very small set of
+floating-point calculations to produce incorrect results.
+
+The broader lesson is important:
+
+\begin{itemize}
+\tightlist
+\item
+  software depends on hardware;
+\item
+  hardware itself can contain defects;
+\item
+  numerical computing relies on carefully designed standards and
+  implementations;
+\item
+  testing can reveal problems at multiple levels of a computing system.
+\end{itemize}
+
+The chapter also notes later processor-security issues related to
+speculative execution, reinforcing the idea that sophisticated
+optimizations can introduce unexpected risks.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Self Check 2.5}\label{self-check-2.5}
+
+\subsubsection{Question 1}\label{question-1-4}
+
+What type does \texttt{input()} return?
+
+Answer
+
+A string (\texttt{str}).
+
+\subsubsection{Question 2}\label{question-2-4}
+
+How can an integer be read directly from user input?
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{value }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter a value: "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Question 3}\label{question-3-4}
+
+What does \texttt{\%.2f} mean in the chapter's formatting syntax?
+
+Answer
+
+Display a floating-point value with two digits after the decimal point.
+
+\subsubsection{Question 4}\label{question-4-3}
+
+Why should numerical input be converted immediately?
+
+Answer
+
+It avoids repeated conversions and reduces the chance of accidentally
+using a string in arithmetic.
+
+\subsubsection{Question 5}\label{question-5-3}
+
+Which operators are particularly useful when computing change in whole
+coin units?
+
+Answer
+
+Floor division \texttt{//} and remainder \texttt{\%}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{TOOLBOX 2.1 -- Symbolic Processing with
+SymPy}\label{toolbox-2.1-symbolic-processing-with-sympy}
+
+This optional section illustrates the broader Python ecosystem.
+
+\textbf{SymPy} is a package for symbolic mathematics. Instead of only
+computing numeric values, it can manipulate mathematical expressions
+symbolically.
+
+Typical setup:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sympy }\ImportTok{import} \OperatorTok{*}
+\end{Highlighting}
+\end{Shaded}
+
+Create a symbolic expression:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f }\OperatorTok{=}\NormalTok{ sympify(}\StringTok{"x ** 2 * sin(x)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+SymPy can perform tasks such as:
+
+\subsubsection{Expanding Expressions}\label{expanding-expressions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{expand((x }\OperatorTok{{-}} \DecValTok{1}\NormalTok{) }\OperatorTok{*}\NormalTok{ (x }\OperatorTok{+} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Solving Equations}\label{solving-equations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{solve(x }\OperatorTok{**} \DecValTok{2} \OperatorTok{+} \DecValTok{2} \OperatorTok{*}\NormalTok{ x }\OperatorTok{{-}} \DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Differentiation}\label{differentiation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diff(f)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Integration}\label{integration}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g }\OperatorTok{=}\NormalTok{ integrate(f)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Substitution and Numerical
+Evaluation}\label{substitution-and-numerical-evaluation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OperatorTok{=}\NormalTok{ g.subs(x, }\DecValTok{0}\NormalTok{).evalf()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Plotting}\label{plotting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plot(x }\OperatorTok{**} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The main lesson is not to memorize all SymPy commands. It is to
+recognize that Python packages provide specialized expertise that can be
+reused inside Python programs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chapter 2 Summary}\label{chapter-2-summary}
+
+\subsection{Variables}\label{variables-1}
+
+\begin{itemize}
+\tightlist
+\item
+  A variable is a named storage location.
+\item
+  Assignment stores a value in a variable.
+\item
+  A variable is created when first assigned.
+\item
+  Reassignment replaces the previous value.
+\item
+  \texttt{=} is assignment, not mathematical equality.
+\item
+  Important numeric types include \texttt{int} and \texttt{float}.
+\item
+  Use descriptive names.
+\item
+  Use uppercase names for constants according to the chapter convention.
+\item
+  Use comments to explain intent.
+\end{itemize}
+
+\subsection{Arithmetic}\label{arithmetic-1}
+
+Important operators:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{+}  \OperatorTok{{-}}  \OperatorTok{*}  \OperatorTok{/}  \OperatorTok{//}  \OperatorTok{\%}  \OperatorTok{**}
+\end{Highlighting}
+\end{Shaded}
+
+Remember:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{/   → normal division}
+\NormalTok{//  → floor division}
+\NormalTok{\%   → remainder}
+\NormalTok{**  → power}
+\end{Highlighting}
+\end{Shaded}
+
+Useful functions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{abs}\NormalTok{()}
+\BuiltInTok{round}\NormalTok{()}
+\BuiltInTok{min}\NormalTok{()}
+\BuiltInTok{max}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{math} module provides additional functions such as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sqrt()}
+\NormalTok{sin()}
+\NormalTok{cos()}
+\NormalTok{log()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Problem Solving}\label{problem-solving}
+
+Before coding:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Choose concrete values}
+\NormalTok{→ solve by hand}
+\NormalTok{→ identify the general pattern}
+\NormalTok{→ write the algorithm}
+\NormalTok{→ translate into Python}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Strings}\label{strings-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Strings are sequences of characters.
+\item
+  \texttt{len()} returns string length.
+\item
+  \texttt{+} concatenates strings.
+\item
+  \texttt{*} repeats a string.
+\item
+  \texttt{str()}, \texttt{int()}, and \texttt{float()} perform
+  conversions.
+\item
+  String indices begin at \texttt{0}.
+\item
+  Methods such as \texttt{upper()}, \texttt{lower()}, and
+  \texttt{replace()} return new strings.
+\end{itemize}
+
+\subsection{Input and Output}\label{input-and-output-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{input()} returns a string.
+\item
+  Convert numeric input using \texttt{int()} or \texttt{float()}.
+\item
+  Convert as soon as practical after reading the input.
+\item
+  The chapter uses the \texttt{\%} string-format operator to control
+  output layout.
+\end{itemize}
+
+\subsection{Graphics}\label{graphics}
+
+\begin{itemize}
+\tightlist
+\item
+  Create a graphics window.
+\item
+  Obtain the canvas.
+\item
+  Draw shapes and text on the canvas.
+\item
+  The origin is at the upper-left corner.
+\item
+  Color can be set by name or RGB components.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Summary Quiz}\label{summary-quiz}
+
+\subsection{Question 1}\label{question-1-5}
+
+What does an assignment statement do?
+
+A. Tests equality\\
+B. Stores a value in a variable\\
+C. Prints a value\\
+D. Creates a comment
+
+Answer
+
+\textbf{B}
+
+\subsection{Question 2}\label{question-2-5}
+
+Which value has type \texttt{float}?
+
+A. \texttt{6}\\
+B. \texttt{0}\\
+C. \texttt{6.0}\\
+D. \texttt{-4}
+
+Answer
+
+\textbf{C}
+
+\subsection{Question 3}\label{question-3-5}
+
+What is the result of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{17} \OperatorTok{//} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+A. \texttt{2}\\
+B. \texttt{3}\\
+C. \texttt{3.4}\\
+D. \texttt{5}
+
+Answer
+
+\textbf{B}
+
+\subsection{Question 4}\label{question-4-4}
+
+What is the result of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{17} \OperatorTok{\%} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+A. \texttt{2}\\
+B. \texttt{3}\\
+C. \texttt{5}\\
+D. \texttt{17}
+
+Answer
+
+\textbf{A}
+
+\subsection{Question 5}\label{question-5-4}
+
+What does this expression produce?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"Py"} \OperatorTok{+} \StringTok{"thon"}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Python}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Question 6}\label{question-6}
+
+Given:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s }\OperatorTok{=} \StringTok{"Hello"}
+\end{Highlighting}
+\end{Shaded}
+
+what is \texttt{s{[}1{]}}?
+
+A. \texttt{"H"}\\
+B. \texttt{"e"}\\
+C. \texttt{"l"}\\
+D. Error
+
+Answer
+
+\textbf{B. \texttt{"e"}}
+
+\subsection{Question 7}\label{question-7}
+
+What type does \texttt{input()} return?
+
+A. Always \texttt{int}\\
+B. Always \texttt{float}\\
+C. \texttt{str}\\
+D. Depends on what the user types
+
+Answer
+
+\textbf{C. \texttt{str}}
+
+\subsection{Question 8}\label{question-8}
+
+Which statement reads a floating-point value from the user?
+
+A. \texttt{price\ =\ input()}\\
+B. \texttt{price\ =\ float(input("Price:\ "))}\\
+C. \texttt{price\ =\ str(input())}\\
+D. \texttt{price\ =\ print(input())}
+
+Answer
+
+\textbf{B}
+
+\subsection{Question 9}\label{question-9}
+
+Which is the best reason to use a named constant?
+
+A. It makes the program run faster in every case.\\
+B. It makes an unexplained numeric value easier to understand and
+change.\\
+C. It prevents Python from changing the value.\\
+D. It replaces comments entirely.
+
+Answer
+
+\textbf{B}
+
+\subsection{Question 10}\label{question-10}
+
+What should usually happen before translating a non-trivial computation
+into Python?
+
+A. Choose random syntax.\\
+B. Work through at least one example by hand.\\
+C. Install a graphics package.\\
+D. Convert every value to a string.
+
+Answer
+
+\textbf{B}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Review Exercises}\label{review-exercises}
+
+\subsection{Exercise 1. Trace
+Assignments}\label{exercise-1.-trace-assignments}
+
+Determine the final value of \texttt{mystery}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mystery }\OperatorTok{=} \DecValTok{1}
+\NormalTok{mystery }\OperatorTok{=} \DecValTok{1} \OperatorTok{{-}} \DecValTok{2} \OperatorTok{*}\NormalTok{ mystery}
+\NormalTok{mystery }\OperatorTok{=}\NormalTok{ mystery }\OperatorTok{+} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Initial: mystery = 1}
+\NormalTok{Second statement: mystery = 1 {-} 2 × 1 = {-}1}
+\NormalTok{Third statement: mystery = {-}1 + 1 = 0}
+\end{Highlighting}
+\end{Shaded}
+
+Final value: \texttt{0}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 2. Translate Mathematics into
+Python}\label{exercise-2.-translate-mathematics-into-python}
+
+Write Python expressions for:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The average of \texttt{a} and \texttt{b}.
+\item
+  \(a^2+b^2\).
+\item
+  \(\sqrt{x^2+y^2}\).
+\item
+  \(PV(1+r/100)^n\).
+\end{enumerate}
+
+Sample Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(a }\OperatorTok{+}\NormalTok{ b) }\OperatorTok{/} \DecValTok{2}
+
+\NormalTok{a }\OperatorTok{**} \DecValTok{2} \OperatorTok{+}\NormalTok{ b }\OperatorTok{**} \DecValTok{2}
+
+\NormalTok{sqrt(x }\OperatorTok{**} \DecValTok{2} \OperatorTok{+}\NormalTok{ y }\OperatorTok{**} \DecValTok{2}\NormalTok{)}
+
+\NormalTok{PV }\OperatorTok{*}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ r }\OperatorTok{/} \DecValTok{100}\NormalTok{) }\OperatorTok{**}\NormalTok{ n}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 3. Floor Division and
+Remainder}\label{exercise-3.-floor-division-and-remainder}
+
+Given:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OperatorTok{=} \DecValTok{1729}
+\end{Highlighting}
+\end{Shaded}
+
+predict:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OperatorTok{\%} \DecValTok{10}
+\NormalTok{n }\OperatorTok{//} \DecValTok{10}
+\NormalTok{n }\OperatorTok{\%} \DecValTok{100}
+\NormalTok{n }\OperatorTok{\%} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{9}
+\NormalTok{172}
+\NormalTok{29}
+\NormalTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 4. String
+Expressions}\label{exercise-4.-string-expressions}
+
+Given:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s }\OperatorTok{=} \StringTok{"Hello"}
+\NormalTok{t }\OperatorTok{=} \StringTok{"World"}
+\end{Highlighting}
+\end{Shaded}
+
+find the values of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{len}\NormalTok{(s) }\OperatorTok{+} \BuiltInTok{len}\NormalTok{(t)}
+\NormalTok{s[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\NormalTok{ s[}\DecValTok{2}\NormalTok{]}
+\NormalTok{s[}\BuiltInTok{len}\NormalTok{(s) }\OperatorTok{//} \DecValTok{2}\NormalTok{]}
+\NormalTok{s }\OperatorTok{+}\NormalTok{ t}
+\NormalTok{t }\OperatorTok{+}\NormalTok{ s}
+\NormalTok{s }\OperatorTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{10}
+\NormalTok{el}
+\NormalTok{l}
+\NormalTok{HelloWorld}
+\NormalTok{WorldHello}
+\NormalTok{HelloHello}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 5. Explain the
+Difference}\label{exercise-5.-explain-the-difference}
+
+Explain the differences among:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{2}
+\NormalTok{2.0}
+\NormalTok{\textquotesingle{}2\textquotesingle{}}
+\NormalTok{"2"}
+\NormalTok{"2.0"}
+\end{Highlighting}
+\end{Shaded}
+
+Answer
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{2} is an integer.
+\item
+  \texttt{2.0} is a floating-point number.
+\item
+  \texttt{\textquotesingle{}2\textquotesingle{}} and \texttt{"2"} are
+  strings containing one character.
+\item
+  \texttt{"2.0"} is a string containing three characters.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 6. Roundoff
+Error}\label{exercise-6.-roundoff-error}
+
+Consider:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{purchase }\OperatorTok{=} \FloatTok{19.93}
+\NormalTok{payment }\OperatorTok{=} \FloatTok{20.00}
+\NormalTok{change }\OperatorTok{=}\NormalTok{ payment }\OperatorTok{{-}}\NormalTok{ purchase}
+\BuiltInTok{print}\NormalTok{(change)}
+\end{Highlighting}
+\end{Shaded}
+
+Explain why a result such as \texttt{0.07000000000000028} may appear.
+
+Answer
+
+Many decimal fractions cannot be represented exactly in binary
+floating-point form. The internal approximations can produce a tiny
+numerical difference. Format or round the result when displaying money.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Practice Exercises}\label{practice-exercises}
+
+\subsection{Exercise 1. Paper
+Dimensions}\label{exercise-1.-paper-dimensions}
+
+A letter-size sheet is \texttt{8.5\ ×\ 11} inches. There are
+\texttt{25.4} millimeters per inch.
+
+Write a program that displays its dimensions in millimeters. Use named
+constants and comments.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 2. Powers of a
+Number}\label{exercise-2.-powers-of-a-number}
+
+Read a number and display:
+
+\begin{itemize}
+\tightlist
+\item
+  its square;
+\item
+  its cube;
+\item
+  its fourth power.
+\end{itemize}
+
+Use \texttt{**} only for the fourth power.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 3. Two Integers}\label{exercise-3.-two-integers}
+
+Read two integers and print:
+
+\begin{itemize}
+\tightlist
+\item
+  sum;
+\item
+  difference;
+\item
+  product;
+\item
+  average;
+\item
+  absolute difference;
+\item
+  maximum;
+\item
+  minimum.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 4. Split a Five-Digit
+Integer}\label{exercise-4.-split-a-five-digit-integer}
+
+Read a five-digit positive integer and display its digits separately.
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Input: 16384}
+\NormalTok{Output: 1 6 3 8 4}
+\end{Highlighting}
+\end{Shaded}
+
+Use floor division and remainder.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 5. First, Middle, and Last
+Character}\label{exercise-5.-first-middle-and-last-character}
+
+Read a word and print:
+
+\begin{itemize}
+\tightlist
+\item
+  first character;
+\item
+  last character;
+\item
+  character in the middle.
+\end{itemize}
+
+For an even-length word, use the character immediately before the
+middle.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 6. Monogram}\label{exercise-6.-monogram}
+
+Read a three-part name such as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Harold James Morgan}
+\end{Highlighting}
+\end{Shaded}
+
+and display:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{HJM}
+\end{Highlighting}
+\end{Shaded}
+
+First write pseudocode before attempting Python.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 7. Vending
+Machine}\label{exercise-7.-vending-machine}
+
+Modify the vending-machine algorithm so that change is returned using:
+
+\begin{itemize}
+\tightlist
+\item
+  quarters;
+\item
+  dimes;
+\item
+  nickels.
+\end{itemize}
+
+Assume the item price is a multiple of \texttt{5} cents.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 8. Temperature and Dew
+Point}\label{exercise-8.-temperature-and-dew-point}
+
+Using the formula and constants provided by your instructor or the
+textbook exercise, write a program that reads temperature and relative
+humidity and computes an approximate dew point.
+
+Focus on:
+
+\begin{itemize}
+\tightlist
+\item
+  importing \texttt{log} from \texttt{math};
+\item
+  translating the mathematical formula carefully;
+\item
+  using parentheses correctly.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Open Exercises}\label{open-exercises}
+
+\subsection{Exercise 1}\label{exercise-1}
+
+Give three examples of \textbf{magic numbers} that might appear in a
+real business program. Replace each with a meaningful named constant.
+
+\subsection{Exercise 2}\label{exercise-2}
+
+Explain why \texttt{=} in Python should be read as ``assign'' rather
+than ``equals''. Give an example that would be impossible as an
+algebraic equation but valid as a Python assignment.
+
+\subsection{Exercise 3}\label{exercise-3}
+
+Choose an everyday quantity that naturally requires:
+
+\begin{itemize}
+\tightlist
+\item
+  floor division;
+\item
+  remainder.
+\end{itemize}
+
+Describe a program that uses both operators.
+
+Examples include:
+
+\begin{itemize}
+\tightlist
+\item
+  converting seconds to minutes and seconds;
+\item
+  converting cents to dollars and cents;
+\item
+  packing items into complete boxes.
+\end{itemize}
+
+\subsection{Exercise 4}\label{exercise-4}
+
+Choose a short string and show every character together with its index.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Key Terms}\label{key-terms}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Variable & Named storage location \\
+Assignment & Storing a value in a variable \\
+Assignment operator & \texttt{=} \\
+Initialization & Giving a variable its first value \\
+Data type & Determines representation and valid operations \\
+\texttt{int} & Integer type \\
+\texttt{float} & Floating-point type \\
+Literal & Value written directly in source code \\
+Variable name & Identifier used to refer to a variable \\
+Constant & Value intended to remain unchanged \\
+Magic number & Unexplained numeric literal in code \\
+Comment & Human-readable explanation ignored by Python \\
+Operator & Symbol that performs an operation \\
+Expression & Combination of values, variables, operators, and calls \\
+Precedence & Rules controlling evaluation order \\
+Exponentiation & Power operation, \texttt{**} \\
+Floor division & Division with \texttt{//} \\
+Modulus / remainder & \texttt{\%} operation \\
+Function & Reusable operation that can receive arguments and return a
+value \\
+Standard library & Built-in collection of reusable modules \\
+Module & Group of related functions and data definitions \\
+Roundoff error & Small numerical error from finite floating-point
+representation \\
+String & Sequence of characters \\
+String literal & String written directly in source code \\
+Concatenation & Joining strings with \texttt{+} \\
+Repetition & Repeating a string with \texttt{*} \\
+Index & Position of a character in a string \\
+Method & Operation associated with an object \\
+Escape sequence & Backslash sequence representing a special character \\
+Unicode & Character encoding standard for world writing systems \\
+Prompt & Message that tells the user what input is expected \\
+Input & Data supplied to a program \\
+Output & Result produced by a program \\
+Format specifier & Pattern controlling output representation \\
+Canvas & Drawing area inside a graphics window \\
+RGB & Red-green-blue color representation \\
+Bounding box & Rectangle used to position an oval or other object \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Study Guidance}\label{study-guidance}
+
+After Chapter 2, students should be able to write small programs that
+manipulate numeric and text data. The most important habit is not
+memorizing isolated syntax, but following a disciplined process:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Understand the task}
+\NormalTok{→ choose meaningful variables and constants}
+\NormalTok{→ work through an example by hand}
+\NormalTok{→ write the computation clearly}
+\NormalTok{→ obtain input}
+\NormalTok{→ convert it to the correct type}
+\NormalTok{→ process the data}
+\NormalTok{→ format and display the output}
+\NormalTok{→ test with simple values}
+\NormalTok{→ inspect unexpected results}
+\NormalTok{→ improve the program}
+\end{Highlighting}
+\end{Shaded}
+
+A useful practice cycle is:
+
+\begin{quote}
+\textbf{Predict → Calculate by hand → Write → Run → Explain → Modify →
+Practice}
+\end{quote}
+
+\end{document}

@@ -1,0 +1,478 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\geometry{top=1.5cm,bottom=1.5cm,left=1.7cm,right=1.7cm}
+
+\definecolor{ForestGreen}{RGB}{22,100,70}
+\definecolor{SoftGreen}{RGB}{229,244,235}
+\definecolor{CodeBg}{RGB}{248,250,249}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{primaryblue}{RGB}{22,100,70}
+\definecolor{secondaryteal}{RGB}{22,100,70}
+\definecolor{boxbg}{RGB}{248,250,249}
+\definecolor{borderblue}{RGB}{159,198,178}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=1.5pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{ForestGreen},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{ForestGreen!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.2em,
+  belowskip=0.2em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Basic I/O Progress Exam -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize National Economics University -- College of Technology}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{ForestGreen}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{ForestGreen}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1.5pt}
+
+\newtcolorbox{headerbox}{
+  colback=white,
+  colframe=ForestGreen,
+  boxrule=0.7pt,
+  arc=1.5mm,
+  left=2.5mm,
+  right=2.5mm,
+  top=1.5mm,
+  bottom=1.5mm
+}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=DarkGray!45,
+  boxrule=0.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=1.2mm,
+  bottom=1.2mm,
+  title=\footnotesize\color{DarkGray}\textbf{#2},
+  #1
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ForestGreen,
+  urlcolor=ForestGreen,
+  pdftitle={DSAI1003 - Basic Input/Output in Python Exam},
+  pdfauthor={National Economics University (NEU)}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: OFFICIAL HEADER + ANSWER SHEET + SECTION A
+% =========================================================================
+
+\noindent
+\begin{minipage}[t]{0.64\textwidth}
+  \raggedright\small
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{COLLEGE OF TECHNOLOGY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.34\textwidth}
+  \raggedleft\footnotesize
+  \textbf{OFFICIAL MIDTERM EXAMINATION}\\
+  Academic Year: 2026--2027\\
+  Semester: Fall 2026 \quad Course Code: \textbf{DSAI1003}
+\end{minipage}
+
+\vspace{0.2em}
+
+\begin{center}
+  {\Large\bfseries\color{ForestGreen} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.10em]
+  {\normalsize\bfseries PROGRESS EXAM: BASIC INPUT/OUTPUT IN PYTHON}\\[0.10em]
+  {\normalsize\textbf{Paper Code:} \rule{1.6cm}{0.4pt} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding paper distribution)}
+\end{center}
+
+\vspace{0.1em}
+
+\begin{headerbox}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll@{}}
+  \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.25em]
+  \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabular*}
+
+\vspace{0.25em}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4.5pt}
+\centering
+\begin{tabular}{|l|c|c|c|c||c|c|}
+\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\
+\hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.35em]
+\cline{1-6}
+\textbf{Score} & & & & & & \\[0.45em]
+\hline
+\end{tabular}
+
+\vspace{0.2em}
+\raggedright
+\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and internet access are prohibited. Answer all questions directly in the designated spaces. In programming tasks, use the \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} pattern. Do \textbf{not} define user functions (\texttt{def}) or use loops/branching. Assume users enter data in the required format. Do not detach pages.
+\end{headerbox}
+
+\vspace{1mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write A, B, C, or D in the corresponding box)}:
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+\textbf{Answer} & & & & & & & & & & \\[2mm]
+\hline
+\end{tabular}
+\end{center}
+\vspace{-2mm}
+\section*{Section A: Basic Input/Output Concepts \hfill \normalsize\normalfont(20 points)}
+\textit{Answer all 10 questions. Each correct answer carries 2 points. Suggested time: 12 minutes.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=2pt,topsep=1pt]
+
+\item Which built-in Python function is primarily used to display data on the screen?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{input()}
+  \item \texttt{print()}
+  \item \texttt{type()}
+  \item \texttt{float()}
+\end{enumerate}
+
+\item What is printed by \texttt{print(10, 20)} using the default behavior of \texttt{print()}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{1020}
+  \item \texttt{10,20}
+  \item \texttt{10 20}
+  \item \texttt{10:20}
+\end{enumerate}
+
+\item What is the purpose of the \texttt{sep} parameter in \texttt{print()}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item It changes the data type of printed values.
+  \item It controls the separator placed between multiple printed values.
+  \item It controls whether the user may enter data.
+  \item It rounds floating-point values automatically.
+\end{enumerate}
+
+\item What is the exact output of \texttt{print("A", "B", "C", sep="-")}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{A B C}
+  \item \texttt{A-B-C}
+  \item \texttt{ABC-}
+  \item \texttt{A,B,C}
+\end{enumerate}
+
+\item What is the primary effect of specifying \texttt{end=" "} in a \texttt{print()} statement?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item It places a space after the output instead of the default newline.
+  \item It places spaces between all arguments.
+  \item It terminates the Python program.
+  \item It converts the output into a string.
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A, Q6--Q10 + SECTION B Q11
+% ==============================================================================
+
+\item What data type does \texttt{input()} return, even when the user types digits such as \texttt{18}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{int}
+  \item \texttt{float}
+  \item \texttt{str}
+  \item The type is selected automatically from the typed value.
+\end{enumerate}
+
+\item Suppose the user enters \texttt{10} and then \texttt{20}. What does the following program print?
+\begin{lstlisting}
+x = input("x = ")
+y = input("y = ")
+print(x + y)
+\end{lstlisting}
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{30}
+  \item \texttt{1020}
+  \item \texttt{10 20}
+  \item An error occurs before input is read.
+\end{enumerate}
+
+\item Which statement correctly reads a decimal price from the keyboard for use in arithmetic?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{price = input(float("Enter price: "))}
+  \item \texttt{price = float(input("Enter price: "))}
+  \item \texttt{price = int("Enter price: ")}
+  \item \texttt{price = print(input("Enter price: "))}
+\end{enumerate}
+
+\item What does \texttt{:.2f} mean in an f-string such as \texttt{f"Price: \{price:.2f\}"}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item Convert the value to an integer with two digits.
+  \item Display the floating-point value with two digits after the decimal point.
+  \item Repeat the value twice.
+  \item Add two to the value before displaying it.
+\end{enumerate}
+
+\item If \texttt{x = 10}, what is printed by \texttt{print("x")}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{10}
+  \item \texttt{x}
+  \item \texttt{"x"}
+  \item \texttt{int}
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Section B: Output Tracing, Type Conversion \& Error Diagnosis \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all 5 questions. Each question carries 5 points. Suggested time: 15 minutes.}
+
+\subsection*{Q11. Exact Output with \texttt{sep} and \texttt{end} (5 points)}
+Predict the \textbf{exact screen output}, including spaces and line breaks:
+
+\begin{lstlisting}
+print("Python", "I/O", sep="::", end=" | ")
+print("Input", "Process", "Output", sep=" -> ")
+print("Done")
+\end{lstlisting}
+
+\begin{answerbox}[height=3.0cm]{Output Box for Q11}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION B, Q12--Q15
+% ==============================================================================
+
+\subsection*{Q12. Strings versus Numbers after \texttt{input()} (5 points)}
+Assume the user enters \texttt{5} for each prompt. Determine the exact output of each part.
+
+\begin{lstlisting}
+a = input("a = ")
+print(a * 3)
+
+b = int(input("b = "))
+print(b * 3)
+\end{lstlisting}
+
+\begin{itemize}[leftmargin=2em]
+  \item Output of \texttt{print(a * 3)}: \underline{\hspace{5cm}}
+  \item Output of \texttt{print(b * 3)}: \underline{\hspace{5cm}}
+  \item Briefly explain why the two outputs differ: \hrulefill
+\end{itemize}
+
+\subsection*{Q13. Diagnose and Correct Common Input Errors (5 points)}
+For each case, state the problem and write a corrected statement where appropriate.
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{|p{4.9cm}|X|X|}
+\hline
+\textbf{Code / Situation} & \textbf{Problem} & \textbf{Correction / Result} \\
+\hline
+\texttt{age = input("Age: ")}\\
+\texttt{next\_age = age + 1} & & \\[4mm]
+\hline
+\texttt{age = int(input("Age: "))}\\
+User enters \texttt{eighteen} & & \\[4mm]
+\hline
+\texttt{x = 10}\\
+\texttt{print("x")}\\
+Goal: display the value of \texttt{x} & & \\[4mm]
+\hline
+\end{tabularx}
+
+\subsection*{Q14. f-String Tracing and Formatting (5 points)}
+Predict the exact output:
+
+\begin{lstlisting}
+product = "Notebook"
+price = 15.5
+quantity = 3
+total = price * quantity
+print(f"Product: {product}")
+print(f"Quantity: {quantity}")
+print(f"Total: {total:.2f}")
+\end{lstlisting}
+
+\begin{answerbox}[height=2.35cm]{Output Box for Q14}
+\end{answerbox}
+
+\subsection*{Q15. Identify Input, Process, and Output (5 points)}
+Consider the program:
+
+\begin{lstlisting}
+celsius = float(input("Celsius: "))
+fahrenheit = 9 / 5 * celsius + 32
+print(f"Fahrenheit: {fahrenheit:.2f}")
+\end{lstlisting}
+
+Identify the corresponding components of the Input $\rightarrow$ Process $\rightarrow$ Output model:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Input:} \hrulefill
+  \item \textbf{Process:} \hrulefill
+  \item \textbf{Output:} \hrulefill
+\end{itemize}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION C
+% ==============================================================================
+
+\section*{Section C: Program Design Using the Input $\rightarrow$ Process $\rightarrow$ Output Model \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all tasks. Suggested time: 15 minutes.}
+
+\begin{tcolorbox}[colback=boxbg,colframe=secondaryteal,arc=1.5mm,boxrule=0.6pt]
+\textbf{Problem Specification: Student Score Average Report}\\[1mm]
+A program receives three floating-point scores from the user, calculates their arithmetic average, and displays the result with exactly two digits after the decimal point.
+\end{tcolorbox}
+
+\vspace{1mm}
+\textbf{Task 1: Identify the IPO Components} (6 points)
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Input(s):} \hrulefill\\[4mm]
+  \item \textbf{Process:} \hrulefill\\[4mm]
+  \item \textbf{Output:} \hrulefill
+\end{itemize}
+
+\vspace{1mm}
+\textbf{Task 2: Write the Program Logic in Ordered Steps} (7 points)\\
+Write clear sequential steps using the Input $\rightarrow$ Process $\rightarrow$ Output structure. Your steps should state the required type conversion and output formatting.
+
+\begin{answerbox}[height=8.0cm]{Program-Logic Work Area}
+\end{answerbox}
+
+\vspace{1mm}
+\textbf{Task 3: Hand Trace} (6 points)\\
+For scores \textbf{7.5}, \textbf{8.0}, and \textbf{9.0}, show the calculation and the exact formatted result.
+
+\begin{answerbox}[height=3.7cm]{Hand-Trace Calculation}
+\end{answerbox}
+
+\vspace{1mm}
+\textbf{Task 4: Explain Two Design Choices} (6 points)
+\begin{enumerate}[label=\alph*),leftmargin=2em]
+  \item Why should each score be converted with \texttt{float()} rather than used directly from \texttt{input()}?\\[5mm]
+  \hrulefill
+  \item Why is \texttt{:.2f} useful when displaying the average score?\\[5mm]
+  \hrulefill
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION D, PROBLEM 1
+% ==============================================================================
+
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+\textit{Write complete, syntactically correct Python statements using the \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} pattern. Do \textbf{not} define custom functions (\texttt{def}), use loops, or use branching. Suggested time: 18 minutes.}
+
+\subsection*{Problem 1: Purchase Invoice Calculator (15 points)}
+Write a Python program that creates a simple purchase summary.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=2pt]
+  \item Read the \texttt{product\_name} using \texttt{input()}.
+  \item Read the \texttt{unit\_price} and convert it to \texttt{float}.
+  \item Read the \texttt{quantity} and convert it to \texttt{int}.
+  \item Compute \texttt{total = unit\_price * quantity}.
+  \item Display an invoice using f-strings. Show both \texttt{unit\_price} and \texttt{total} with exactly \textbf{2 digits after the decimal point}.
+\end{enumerate}
+
+The output should follow this general form:
+\begin{lstlisting}
+Product: Notebook
+Unit price: 15.50
+Quantity: 3
+Total: 46.50
+\end{lstlisting}
+
+\begin{answerbox}[height=14.7cm]{Python Solution for Problem 1}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION D, PROBLEM 2
+% ==============================================================================
+
+\subsection*{Problem 2: Convert Seconds into Minutes and Remaining Seconds (15 points)}
+Write a Python program that converts a total number of seconds into full minutes and remaining seconds.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=2pt]
+  \item Prompt the user for \texttt{total\_seconds} and convert the input to \texttt{int}.
+  \item Compute the number of full minutes using integer floor division (\texttt{//}).
+  \item Compute the remaining seconds using the remainder operator (\texttt{\%}).
+  \item Display the original number of seconds, the full minutes, and the remaining seconds clearly.
+\end{enumerate}
+
+For example, if the user enters \texttt{135}, the program should produce values equivalent to:
+\begin{lstlisting}
+Seconds: 135
+Minutes: 2
+Remaining seconds: 15
+\end{lstlisting}
+
+\begin{answerbox}[height=15.4cm]{Python Solution for Problem 2}
+\end{answerbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[1mm]
+  \textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+\end{center}
+
+\end{document}

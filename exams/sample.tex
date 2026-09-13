@@ -1,0 +1,476 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+
+\usepackage[a4paper,top=1.5cm,bottom=1.6cm,left=1.7cm,right=1.7cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{lastpage}
+
+% Colors for syntax highlighting and frames
+\definecolor{codegray}{rgb}{0.96,0.96,0.96}
+\definecolor{keywordblue}{rgb}{0.0,0.2,0.6}
+\definecolor{stringgreen}{rgb}{0.0,0.5,0.2}
+\definecolor{commentgray}{rgb}{0.4,0.4,0.4}
+\definecolor{boxborder}{rgb}{0.7,0.7,0.7}
+
+\lstset{
+  language=Python,
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{keywordblue}\bfseries,
+  stringstyle=\color{stringgreen},
+  commentstyle=\color{commentgray}\itshape,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{boxborder},
+  aboveskip=2.5pt,
+  belowskip=2.5pt,
+  numbers=none,
+  columns=fullflexible
+}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\lhead{\small \textbf{Course:} Data Analysis with Python (DSAI1005)}
+\rhead{\small \textbf{Exam (Weeks 1 -- 4) --- 60 Minutes}}
+\lfoot{\small Faculty of Data Science \& AI --- National Economics University}
+\rfoot{\small Page \thepage/6}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\newcommand{\answerbox}[2]{
+  \vspace{1mm}
+  \begin{tcolorbox}[
+    colback=white,
+    colframe=gray!60,
+    boxrule=0.6pt,
+    arc=2pt,
+    height=#1,
+    left=3mm, right=3mm, top=2mm, bottom=2mm
+  ]
+  \small\textit{\color{gray}#2}
+  \end{tcolorbox}
+  \vspace{1mm}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: HEADER + SCORE TABLE + ANSWER GRID + QUESTIONS 1 TO 4
+% =========================================================================
+\noindent
+\begin{minipage}[t]{0.54\textwidth}
+  \centering
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& AI}\\
+  \rule{4.5cm}{0.4pt}\\[1.5mm]
+  \textbf{MIDTERM EXAMINATION (PAPER-BASED)}\\
+  \textbf{Course:} Data Analysis with Python\\
+  \textbf{Scope:} Core Lectures 1 -- 4 (Intro, NumPy, Pandas, Viz)\\
+  \textbf{Course Code:} DSAI1005 --- \textbf{Duration:} 60 minutes\\
+  \textit{\small (No personal laptops, textbooks, or notes allowed)}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.43\textwidth}
+  \begin{tabular}{|p{2.2cm}|p{2.2cm}|p{2.2cm}|}
+    \hline
+    \centering \textbf{Section I} & \centering \textbf{Section II} & \centering \textbf{TOTAL} \tabularnewline
+    \hline
+    & & \\[0.8cm]
+    \hline
+    \multicolumn{3}{|l|}{\small \textit{Examiner 1:}} \tabularnewline
+    \multicolumn{3}{|l|}{\small \textit{Examiner 2:}} \tabularnewline
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{2mm}
+\noindent
+\textbf{Full Name:} \dotfill{} \textbf{Student ID:} \dotfill{} \textbf{Exam Code:} \textbf{201-EN}\\
+\textbf{Class / Cohort:} \dotfill{} \textbf{Exam Room:} \dotfill{} \textbf{Seat No:} \dotfill
+
+\vspace{2mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write letters A, B, C, or D in the corresponding boxes)}:
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  \textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+  \hline
+  \textbf{Answer} & & & & & & & & & & \\[3mm]
+  \hline
+  \hline
+  \textbf{Question} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} & \textbf{20} \\
+  \hline
+  \textbf{Answer} & & & & & & & & & & \\[3mm]
+  \hline
+\end{tabular}
+\end{center}
+
+\vspace{-3mm}
+\hrule
+\vspace{1.5mm}
+
+\section*{SECTION I: MULTIPLE-CHOICE QUESTIONS (5.0 pts --- 0.25 pts each)}
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+
+\item What is the core objective of the ``Exploratory Data Analysis (EDA)'' stage within the standardized 6-step data analysis lifecycle?
+\begin{enumerate}[label=\Alph*.]
+  \item Immediately train complex black-box machine learning models to maximize benchmark accuracy.
+  \item Understand data structure, test hypotheses, uncover underlying patterns, and detect anomalies/outliers.
+  \item Optimize the physical storage engine and indexes in a relational database server.
+  \item Export raw tabular files to third-party vector illustration software for visual touch-ups.
+\end{enumerate}
+
+\item If every observation in a numerical dataset is multiplied by a constant factor of 3, the standard deviation of the new dataset will:
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*.]
+  \item Increase by a factor of 9
+  \item Remain strictly unchanged
+  \item Increase by a factor of 3
+  \item Equal the square root of the original value
+\end{enumerate}
+\end{multicols}
+
+\item In a standard Tukey Box Plot, an observation $x$ is formally classified as a potential outlier if it falls outside which of the following intervals (where $\text{IQR} = Q_3 - Q_1$)?
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*.]
+  \item $[Q_1 - 1.5\times\text{IQR}, \; Q_3 + 1.5\times\text{IQR}]$
+  \item $[Q_1 - 3.0\times\text{IQR}, \; Q_3 + 3.0\times\text{IQR}]$
+  \item $[\text{Mean} - 1.5\times\text{Std}, \; \text{Mean} + 1.5\times\text{Std}]$
+  \item $[0, \; Q_3 + \text{IQR}]$
+\end{enumerate}
+\end{multicols}
+
+\item The Pearson correlation coefficient between two continuous variables $X$ and $Y$ evaluates to $r = 0$. Which of the following statements is most statistically sound?
+\begin{enumerate}[label=\Alph*.]
+  \item $X$ and $Y$ are completely independent and share no mathematical relationship whatsoever.
+  \item There is no linear association between $X$ and $Y$, although a strong non-linear relationship may still exist.
+  \item Whenever $X$ increases by 1 unit, $Y$ remains fixed at 0.
+  \item Both variables $X$ and $Y$ must follow a standard normal distribution.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+% =========================================================================
+% PAGE 2: QUESTIONS 5 TO 12 (8 QUESTIONS)
+% =========================================================================
+\begin{enumerate}[leftmargin=*,itemsep=2.5pt,resume]
+
+\item What array is generated by the NumPy expression \texttt{np.arange(3, 15, 4)}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{[3, 7, 11, 15]}
+  \item \texttt{[3, 7, 11]}
+  \item \texttt{[4, 8, 12]}
+  \item \texttt{[3, 6, 9, 12]}
+\end{enumerate}
+\end{multicols}
+
+\item Consider the following NumPy snippet:
+\begin{lstlisting}
+import numpy as np
+m = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print(m[::-1, 1])
+\end{lstlisting}
+What output is printed to the console?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{[2, 5, 8]}
+  \item \texttt{[8, 5, 2]}
+  \item \texttt{[9, 6, 3]}
+  \item \texttt{[7, 4, 1]}
+\end{enumerate}
+\end{multicols}
+
+\item Array $A$ has shape \texttt{(5, 1, 3)} and array $B$ has shape \texttt{(4, 1)}. Under NumPy broadcasting rules, what is the shape of the resulting array from \texttt{A * B}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{(5, 4, 3)}
+  \item \texttt{(5, 1, 3)}
+  \item \texttt{(4, 5, 3)}
+  \item Raises \texttt{ValueError}
+\end{enumerate}
+\end{multicols}
+
+\item Which NumPy function performs element-wise conditional substitution, returning elements chosen from $X$ or $Y$ depending on a boolean condition (equivalent to a vectorized ternary operator)?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{np.select()}
+  \item \texttt{np.where()}
+  \item \texttt{np.filter()}
+  \item \texttt{np.choose()}
+\end{enumerate}
+\end{multicols}
+
+\item For a two-dimensional array \texttt{arr} with shape \texttt{(4, 5)}, what is the shape of the result returned by \texttt{np.sum(arr, axis=0)}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{(4,)}
+  \item \texttt{(5,)}
+  \item \texttt{(1,)}
+  \item \texttt{(4, 5)}
+\end{enumerate}
+\end{multicols}
+
+\item Which primary Pandas data structure represents a one-dimensional labeled array capable of holding any data type?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{DataFrame}
+  \item \texttt{Series}
+  \item \texttt{IndexList}
+  \item \texttt{NDArray}
+\end{enumerate}
+\end{multicols}
+
+\item Given the Pandas Series \texttt{s = pd.Series([10, 20, 30, 40], index=['a', 'b', 'c', 'd'])}, what elements are returned by the slice \texttt{s.loc['a':'c']}?
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*.]
+  \item Only elements with index \texttt{'a'} and \texttt{'b'}
+  \item All three elements with index \texttt{'a'}, \texttt{'b'}, and \texttt{'c'}
+  \item A syntax error because string labels cannot be sliced
+  \item Only the single element with index \texttt{'c'}
+\end{enumerate}
+\end{multicols}
+
+\item In Pandas, which method is specifically designed to impute or replace missing entries (\texttt{NaN}) with a designated value or summary statistic (e.g., column mean)?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{df.dropna()}
+  \item \texttt{df.fillna()}
+  \item \texttt{df.replace\_na()}
+  \item \texttt{df.impute()}
+\end{enumerate}
+\end{multicols}
+
+\end{enumerate}
+
+\newpage
+% =========================================================================
+% PAGE 3: QUESTIONS 13 TO 20 (8 QUESTIONS)
+% =========================================================================
+\begin{enumerate}[leftmargin=*,itemsep=2.5pt,resume]
+
+\item Which statement correctly filters records in DataFrame \texttt{df} where \texttt{credit\_score >= 700} OR \texttt{income > 50000000}?
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{df[(df['credit\_score'] >= 700) or (df['income'] > 50000000)]}
+  \item \texttt{df[(df['credit\_score'] >= 700) | (df['income'] > 50000000)]}
+  \item \texttt{df[(df['credit\_score'] >= 700) || (df['income'] > 50000000)]}
+  \item \texttt{df.filter(credit\_score >= 700 or income > 50000000)}
+\end{enumerate}
+
+\item Given the following Pandas snippet:
+\begin{lstlisting}
+import pandas as pd
+df = pd.DataFrame({'Dept': ['Sales', 'IT', 'IT', 'Sales'], 'Salary': [30, 50, 70, 40]})
+print(df.groupby('Dept')['Salary'].agg(['min', 'max']).loc['IT', 'max'])
+\end{lstlisting}
+What value is printed?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{30}
+  \item \texttt{50}
+  \item \texttt{70}
+  \item \texttt{60}
+\end{enumerate}
+\end{multicols}
+
+\item When executing an inner merge between two DataFrames using \texttt{pd.merge(df1, df2, on='id', how='inner')}, a row appears in the output DataFrame if and only if:
+\begin{enumerate}[label=\Alph*.]
+  \item The key \texttt{'id'} is present in either \texttt{df1} or \texttt{df2}.
+  \item The key \texttt{'id'} matches simultaneously in both \texttt{df1} and \texttt{df2}.
+  \item \texttt{df1} contains strictly more rows than \texttt{df2}.
+  \item The key column contains strictly unique non-null integers.
+\end{enumerate}
+
+\item How many distinct subplot axes (\texttt{Axes}) are created by the call \texttt{fig, axes = plt.subplots(2, 3)} in Matplotlib?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item 5 axes
+  \item 6 axes
+  \item 2 axes
+  \item 3 axes
+\end{enumerate}
+\end{multicols}
+
+\item Which Seaborn function is best suited to estimate and visualize a smooth, continuous probability density curve (Kernel Density Estimation) for a financial variable?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{sns.kdeplot()}
+  \item \texttt{sns.scatterplot()}
+  \item \texttt{sns.countplot()}
+  \item \texttt{sns.barplot()}
+\end{enumerate}
+\end{multicols}
+
+\item In Seaborn, which high-level function automatically renders an $n \times n$ grid showing pairwise scatter plots across all quantitative features and univariate distributions along the diagonal?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{sns.jointplot()}
+  \item \texttt{sns.pairplot()}
+  \item \texttt{sns.heatmap()}
+  \item \texttt{sns.catplot()}
+\end{enumerate}
+\end{multicols}
+
+\item In Matplotlib, which utility function is commonly called prior to display or export to automatically adjust subplot margins, preventing axes labels and titles from overlapping?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{plt.align\_axis()}
+  \item \texttt{plt.tight\_layout()}
+  \item \texttt{plt.clean\_view()}
+  \item \texttt{plt.auto\_padding()}
+\end{enumerate}
+\end{multicols}
+
+\item To compare the mean values of a numerical metric across categorical groups while displaying confidence intervals (error bars) by default, which Seaborn function is optimal?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{sns.lineplot()}
+  \item \texttt{sns.barplot()}
+  \item \texttt{sns.histplot()}
+  \item \texttt{sns.heatmap()}
+\end{enumerate}
+\end{multicols}
+
+\end{enumerate}
+
+\newpage
+% =========================================================================
+% PAGE 4: SECTION II - QUESTION 1 (NUMPY) + LARGE ANSWER BOX
+% =========================================================================
+\section*{SECTION II: SHORT-ANSWER \& CODE COMPREHENSION (5.0 pts)}
+
+\subsection*{Question 1: Vectorized Computations \& Multidimensional Arrays with NumPy (1.0 pt) --- [Week 2]}
+Consider the exam score matrix of 4 students across 3 subjects (Math, Probability, Programming) and the corresponding course credit weights:
+\begin{lstlisting}
+import numpy as np
+
+scores = np.array([
+    [8.0, 7.0, 9.0],
+    [6.0, 8.0, 7.0],
+    [9.0, 9.0, 8.5],
+    [5.0, 6.0, 6.5]
+])  # Shape: (4, 3)
+
+weights = np.array([0.2, 0.3, 0.5])  # Shape: (3,)
+\end{lstlisting}
+
+\noindent
+\textbf{Tasks:}
+\begin{enumerate}[label=\textbf{\alph*)}]
+  \item \textbf{(0.5 pts)} Name the fundamental NumPy mechanism that enables direct multiplication between \texttt{scores} of shape \texttt{(4, 3)} and \texttt{weights} of shape \texttt{(3,)}. Write the exact numerical matrix for \texttt{weighted\_scores = scores * weights}.
+  \item \textbf{(0.5 pts)} Write a single NumPy statement to calculate the 1D array \texttt{gpa} (representing the weighted grade point average for each student by summing along the row axis of \texttt{weighted\_scores}), and determine the exact output printed by: \quad \texttt{print(scores[gpa >= 8.0, 0])}
+\end{enumerate}
+
+\answerbox{12.0cm}{
+\textbf{Work Area --- Question 1:}\\[3mm]
+\textbf{a) Name of mechanism:} \dotfill\\[4mm]
+\textbf{Resulting matrix weighted\_scores:}\\[28mm]
+\textbf{b) NumPy statement to compute gpa:}\\
+gpa = \dotfill\\[5mm]
+\textbf{Exact output printed by the print statement:}\\
+\dotfill\\[3mm]
+\textit{(Brief reasoning if applicable):} \dotfill
+}
+
+\newpage
+% =========================================================================
+% PAGE 5: QUESTION 2 (PANDAS) + LARGE ANSWER BOX
+% =========================================================================
+\subsection*{Question 2: Data Cleaning \& Aggregation with Pandas (1.5 pts) --- [Week 3]}
+You are given a Pandas DataFrame \texttt{df\_trans} representing retail banking transaction logs with columns:
+\texttt{'branch'} (branch code), \texttt{'amount'} (transaction value in VND), \texttt{'fee'} (service charge), and \texttt{'status'} (transaction outcome: \texttt{'SUCCESS'} or \texttt{'FAILED'}). The column \texttt{'fee'} contains several missing entries (\texttt{NaN}).
+
+\noindent
+\textbf{Tasks (write correct and concise Pandas code):}
+\begin{enumerate}[label=\textbf{\alph*)}]
+  \item \textbf{(0.5 pts)} Write Pandas code to filter rows satisfying two conditions: \texttt{'status'} equals \texttt{'SUCCESS'} and \texttt{'amount'} $\ge 5\,000\,000$ VND. Simultaneously, impute all missing values (\texttt{NaN}) in the \texttt{'fee'} column of this filtered subset with $0$.
+  \item \textbf{(1.0 pts)} Using the filtered dataset from part (a), construct a chained Pandas expression (using \texttt{groupby} and \texttt{agg}) to group by branch (\texttt{'branch'}), compute: total transaction volume named \texttt{'total\_amount'}, average fee named \texttt{'avg\_fee'}, and transaction count named \texttt{'trans\_count'}. Sort the final summary table in descending order of \texttt{'total\_amount'}.
+\end{enumerate}
+
+\answerbox{14.0cm}{
+\textbf{Work Area --- Question 2:}\\[3mm]
+\textbf{a) Filtering rows and imputing missing values (NaN):}\\
+df\_filtered = \dotfill\\[4mm]
+df\_filtered['fee'] = \dotfill\\[7mm]
+\textbf{b) Groupby, aggregation, and sorting expression:}\\
+df\_branch\_summary = (\dotfill\\[5mm]
+\hspace*{3.5cm}\dotfill\\[5mm]
+\hspace*{3.5cm}\dotfill\\[5mm]
+\hspace*{3.5cm}\dotfill\\[5mm]
+\hspace*{3.5cm}\dotfill)\\[5mm]
+\dotfill
+}
+
+\newpage
+% =========================================================================
+% PAGE 6: QUESTION 3 (MATPLOTLIB) + QUESTION 4 (EDA & VIZ) + END
+% =========================================================================
+\subsection*{Question 3: Multi-plot Layouts with Matplotlib (1.0 pt) --- [Week 4]}
+Given a DataFrame \texttt{df\_kpi} tracking monthly performance with columns \texttt{'month'} (integers 1 to 12) and \texttt{'profit'} (net profit in million VND).
+
+\noindent
+\textbf{Tasks (complete the code template by filling in the blanks):}
+\begin{enumerate}[label=\textbf{\alph*)}]
+  \item \textbf{(0.5 pts)} Write the statement to initialize a figure of size $12 \times 4$ inches containing 1 row and 2 columns of subplots, storing the objects in \texttt{fig} and array \texttt{axes}.
+  \item \textbf{(0.5 pts)} On \texttt{axes[0]}, render a line plot (\texttt{plot}) illustrating monthly profit trajectory (blue line with circular markers \texttt{'o'}). On \texttt{axes[1]}, render a bar chart (\texttt{bar}) of monthly profit. Finally, apply layout optimization.
+\end{enumerate}
+
+\answerbox{3.8cm}{
+\textbf{Work Area --- Question 3:}\\
+import matplotlib.pyplot as plt\\[1.5mm]
+fig, axes = \dotfill\\[2.5mm]
+axes[0].plot(\dotfill)\\[2.5mm]
+axes[1].bar(\dotfill)\\[2.5mm]
+\dotfill \quad \textit{(\# Command to prevent overlapping labels/titles)}
+}
+
+\subsection*{Question 4: Exploratory Visualization \& Business Insights (EDA) (1.5 pts) --- [Weeks 1 \& 4]}
+A bank's Risk Analytics division evaluates transaction data to detect card fraud. The DataFrame \texttt{df\_cards} contains: \texttt{'tx\_amount'} (monetary value), \texttt{'card\_type'} (categorical: \texttt{'Credit'} or \texttt{'Debit'}), and fraud flag \texttt{'is\_fraud'} ($1$ for fraudulent, $0$ for legitimate).
+
+\noindent
+\textbf{Tasks:}
+\begin{enumerate}[label=\textbf{\alph*)}]
+  \item \textbf{(0.75 pts)} Choose the most appropriate statistical chart type to inspect the distribution and detect potential extreme outliers of \texttt{'tx\_amount'} across fraud labels, stratified by card type. Write a single line of \textbf{Seaborn} (\texttt{sns}) code to render this visualization.
+  \item \textbf{(0.75 pts)} The resulting plot reveals: For \texttt{'Debit'} cards, both legitimate and fraudulent transactions cluster at low values with no significant outliers. Conversely, for \texttt{'Credit'} cards, fraudulent transactions display an extreme outlier spread from 50 to 200 million VND, whereas legitimate ones remain under 10 million VND.  
+  \textit{Formulate \textbf{2 concise analytical takeaways / policy recommendations (under 50 words)} to guide the bank's automated fraud prevention rule.}
+\end{enumerate}
+
+\answerbox{5.0cm}{
+\textbf{Work Area --- Question 4:}\\[1.5mm]
+\textbf{a) Chosen chart type:} \dotfill\\[2mm]
+\textbf{Seaborn statement:} \dotfill\\[3mm]
+\textbf{b) Analytical Takeaways \& Policy Recommendations:}\\
+- Takeaway 1: \dotfill\\[2mm]
+\hspace*{2.2cm}\dotfill\\[2mm]
+- Policy 2: \dotfill\\[2mm]
+\hspace*{2.2cm}\dotfill
+}
+
+\vspace{1mm}
+\begin{center}
+\textbf{------------------- END OF EXAM -------------------}\\
+\textit{\small (Proctors will not answer questions regarding exam content. Hand in all exam sheets upon completion.)}
+\end{center}
+
+\end{document}

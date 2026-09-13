@@ -1,0 +1,1564 @@
+
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{vietnamese}
+\setotherlanguage{english}
+\setmainfont{DejaVu Sans}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.6ex,dp=1.1ex,right]{page number in head/foot}%
+    \usebeamerfont{page number in head/foot}\insertframenumber/\inserttotalframenumber\hspace*{1.5ex}
+  \end{beamercolorbox}}%
+}
+
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{2CA02C}
+\definecolor{pyorange}{HTML}{FF7F0E}
+\definecolor{pypurple}{HTML}{9467BD}
+\definecolor{pygray}{HTML}{F2F4F8}
+\definecolor{dark}{HTML}{1F2937}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen},
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{pygray},
+  breaklines=true
+}
+\lstset{style=pythonstyle}
+
+\tikzset{
+  box/.style={draw=dark, rounded corners=2mm, very thick, align=center, fill=pygray, minimum height=10mm, inner sep=2.5mm},
+  bluebox/.style={box, fill=blue!12},
+  greenbox/.style={box, fill=green!12},
+  orangebox/.style={box, fill=orange!16},
+  purplebox/.style={box, fill=purple!12},
+  redbox/.style={box, fill=red!10},
+  arrow/.style={-{Latex[length=2.5mm]}, very thick, draw=dark}
+}
+
+\title[Bài 2: Số và chuỗi]{Bài 2. Lập trình với số và chuỗi}
+\subtitle{Dựa trên Chương 2 -- \textit{Python for Everyone}, 3rd Edition}
+\author{Học phần: Nhập môn lập trình Python}
+\date{}
+
+\begin{document}
+
+% 1
+\begin{frame}[plain]
+\vspace{0.35cm}
+\begin{columns}[c,onlytextwidth]
+\column{0.62\textwidth}
+{\LARGE\bfseries Bài 2. Lập trình với số và chuỗi\par}
+\vspace{0.28cm}
+{\large Programming with Numbers and Strings\par}
+\vspace{0.35cm}
+\begin{block}{Trọng tâm bài học}
+\small
+\begin{itemize}
+  \item Biến, hằng, kiểu số và phép gán.
+  \item Biểu thức số học, chuỗi và nhập/xuất dữ liệu.
+  \item Quy trình giải bài toán: tính bằng tay $\rightarrow$ thuật toán $\rightarrow$ Python.
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\centering
+\IfFileExists{images/book_cover.png}{\includegraphics[height=0.60\paperheight]{images/book_cover.png}\\[-0.05cm]{\scriptsize Nguồn học liệu chính}}{}
+\end{columns}
+\end{frame}
+
+% 2
+\begin{frame}{Mục tiêu học tập}
+Sau bài học này, sinh viên có thể:
+\begin{itemize}
+  \item sử dụng \textbf{biến}, \textbf{hằng}, \texttt{int}, \texttt{float};
+  \item viết biểu thức với \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, \texttt{//}, \texttt{\%}, \texttt{**};
+  \item thao tác với chuỗi: nối, lặp, truy cập theo chỉ số và sử dụng phương thức;
+  \item nhận dữ liệu đầu vào, chuyển kiểu và định dạng kết quả đầu ra;
+  \item giải bài toán theo mô hình \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} (Đầu vào $\rightarrow$ Xử lý $\rightarrow$ Đầu ra).
+\end{itemize}
+\end{frame}
+
+% 3
+\begin{frame}{Cấu trúc bài học}
+\begin{enumerate}
+  \item Biến (Variables)
+  \item Số học (Arithmetic)
+  \item Giải quyết bài toán: trước tiên hãy tính bằng tay
+  \item Chuỗi (Strings)
+  \item Nhập và xuất dữ liệu
+  \item Công cụ bổ sung: SymPy
+  \item Tổng kết và bài tập
+\end{enumerate}
+\end{frame}
+
+% 4
+
+
+\begin{frame}{Quy trình lập trình trong Chương 2}
+\begin{center}
+\begin{tikzpicture}[scale=0.88, every node/.style={transform shape}]
+  \node[bluebox, minimum width=2.75cm] (p) at (0,1.25) {Hiểu\\bài toán};
+  \node[greenbox, minimum width=3.05cm] (h) at (4.25,1.25) {Tính ví dụ\\bằng tay};
+  \node[orangebox, minimum width=3.05cm] (v) at (8.60,1.25) {Biến và\\hằng số};
+  \node[purplebox, minimum width=3.15cm] (a) at (4.25,-1.30) {Thuật toán /\\pseudocode};
+  \node[bluebox, minimum width=3.05cm] (c) at (8.60,-1.30) {Mã\\Python};
+  \draw[arrow] (p.east) -- (h.west);
+  \draw[arrow] (h.east) -- (v.west);
+  \draw[arrow] (v.south) -- ++(0,-0.42) -| (a.north);
+  \draw[arrow] (a.east) -- (c.west);
+  \node[box, minimum width=10.8cm] at (5.2,-3.35) {Không nên gõ code ngay; trước hết hãy làm rõ bài toán và cách giải.};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\section{Variables}
+
+% 5
+\begin{frame}{Biến là gì?}
+\small
+\begin{block}{Khái niệm biến}
+Một \textbf{biến} là tên dùng để tham chiếu đến một giá trị mà chương trình đang lưu trữ.
+\end{block}
+
+\vspace{0.25cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.40\textwidth}
+\begin{itemize}
+  \item \textbf{Tên biến} giúp Python xác định giá trị cần truy cập.
+  \item \textbf{Giá trị} là dữ liệu hiện được gắn với tên biến.
+  \item Khi sử dụng biến, Python lấy \textbf{giá trị hiện tại} gắn với tên biến đó.
+\end{itemize}
+
+\column{0.58\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.78, every node/.style={transform shape}]
+  \node[box, draw=dark, fill=gray!7, minimum width=9.3cm, minimum height=4.15cm] (mem) at (0,0) {};
+  \node[font=\bfseries] at (0,1.68) {Bộ nhớ chương trình};
+
+  \node[align=center, font=\bfseries] (nameLabel) at (-2.8,0.95) {Tên biến};
+  \node[align=center, font=\bfseries] (valueLabel) at (2.8,0.95) {Giá trị\\được lưu};
+
+  \node[bluebox, minimum width=4.0cm, minimum height=1.05cm, font=\ttfamily\large] (var) at (-2.8,-0.15) {cansPerPack};
+  \node[greenbox, minimum width=2.3cm, minimum height=1.05cm, font=\bfseries\Large] (val) at (2.8,-0.15) {6};
+
+  \draw[arrow] (nameLabel.south) -- (var.north);
+  \draw[arrow] (valueLabel.south) -- (val.north);
+  \draw[arrow] (var.east) -- node[above, font=\scriptsize]{tham chiếu tới} (val.west);
+
+  \node[orangebox, text width=7.5cm, minimum height=0.8cm, font=\footnotesize] (note) at (0,-1.55)
+  {Khi gặp \texttt{cansPerPack}, Python sử dụng giá trị hiện tại của biến là \texttt{6}.};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+\end{frame}
+
+% 6
+\begin{frame}[fragile]{Câu lệnh gán}
+\begin{block}{Dạng tổng quát}
+\texttt{variableName = value}
+\end{block}
+\begin{lstlisting}
+cansPerPack = 6
+print(cansPerPack)
+\end{lstlisting}
+\begin{itemize}
+  \item Ở lần gán đầu tiên, biến được tạo và nhận giá trị khởi tạo.
+  \item Khi gán lại, giá trị mới sẽ thay thế giá trị cũ.
+\end{itemize}
+\begin{lstlisting}
+cansPerPack = 6
+cansPerPack = 8
+print(cansPerPack)   # 8
+\end{lstlisting}
+\end{frame}
+
+% 7
+\begin{frame}[fragile]{Phép gán không phải dấu bằng toán học}
+\begin{lstlisting}
+cansPerPack = cansPerPack + 2
+\end{lstlisting}
+\begin{center}
+\begin{tikzpicture}[scale=0.88, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.0cm] (read) at (0,0) {Đọc giá trị\\hiện tại: 8};
+  \node[greenbox, minimum width=2.8cm] (compute) at (4,0) {Tính\\8 + 2 = 10};
+  \node[orangebox, minimum width=3.4cm] (store) at (8.2,0) {Lưu lại vào\\cansPerPack};
+  \draw[arrow] (read) -- (compute);
+  \draw[arrow] (compute) -- (store);
+\end{tikzpicture}
+\end{center}
+\begin{alertblock}{Cách hiểu đúng}
+Trong Python, \texttt{=} là toán tử \textbf{gán giá trị}, không phải dấu \textbf{bằng} trong toán học.
+\end{alertblock}
+\end{frame}
+
+% 8
+\begin{frame}{Kiểu dữ liệu số}
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\toprule
+Kiểu & Ý nghĩa & Ví dụ \\
+\midrule
+\texttt{int} & số nguyên & \texttt{6}, \texttt{0}, \texttt{-25} \\
+\texttt{float} & số thực & \texttt{0.355}, \texttt{1.0}, \texttt{-3.5} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{itemize}
+  \item \texttt{6} là \texttt{int}; \texttt{6.0} là \texttt{float}.
+  \item \texttt{1E6} và \texttt{2.96E-2} là giá trị dấu phẩy động.
+  \item Kiểu dữ liệu gắn với \textbf{giá trị}; tên biến không bị cố định vĩnh viễn với một kiểu.
+\end{itemize}
+\end{frame}
+
+% 9
+\begin{frame}{Tên biến}
+\begin{columns}[T,onlytextwidth]
+\column{0.52\textwidth}
+\begin{block}{Quy tắc}
+\small
+\begin{itemize}
+  \item Bắt đầu bằng chữ cái hoặc \texttt{\_}.
+  \item Sau đó có thể có chữ, số, \texttt{\_}.
+  \item Không chứa khoảng trắng, \texttt{?}, \texttt{\%}, \texttt{/}, \texttt{.}.
+  \item Phân biệt hoa/thường.
+  \item Không dùng từ khóa như \texttt{if}, \texttt{class}.
+\end{itemize}
+\end{block}
+\column{0.45\textwidth}
+\begin{block}{Nên dùng tên có ý nghĩa}
+\texttt{canVolume = 0.355}
+\end{block}
+\begin{alertblock}{Tránh}
+\texttt{cv = 0.355} nếu tên quá ngắn và khó hiểu.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+% 10
+\begin{frame}[fragile]{Hằng số và chú thích}
+\begin{block}{Hằng số (Constant)}
+Hằng số là giá trị được quy ước là không thay đổi trong suốt quá trình thực thi chương trình.
+\end{block}
+\begin{lstlisting}
+BOTTLE_VOLUME = 2.0
+MAX_SIZE = 100
+CAN_VOLUME = 0.355  # Liters in a 12-ounce can
+\end{lstlisting}
+\begin{itemize}
+  \item Giáo trình dùng quy ước tên hằng viết \textbf{IN HOA}.
+  \item Chú thích (comment) bắt đầu bằng \texttt{\#}, dành cho người đọc và không được Python thực thi.
+  \item Hằng có tên giúp tránh \textbf{magic number} -- các giá trị số xuất hiện mà không giải thích ý nghĩa.
+\end{itemize}
+\end{frame}
+
+% 11
+\begin{frame}[fragile]{Ví dụ: tính thể tích nước ngọt}
+\begin{lstlisting}
+CAN_VOLUME = 0.355
+BOTTLE_VOLUME = 2.0
+
+cansPerPack = 6
+totalVolume = cansPerPack * CAN_VOLUME
+print("Six-pack volume:", totalVolume)
+
+totalVolume = totalVolume + BOTTLE_VOLUME
+print("Total volume:", totalVolume)
+\end{lstlisting}
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={transform shape}]
+  \node[greenbox, minimum width=3.5cm] (a) at (0,0) {6 lon $\times$ 0.355};
+  \node[orangebox, minimum width=2.8cm] (b) at (4,0) {2.13 L};
+  \node[purplebox, minimum width=3.4cm] (c) at (8,0) {+ 2.00 L};
+  \node[bluebox, minimum width=2.8cm] (d) at (12,0) {4.13 L};
+  \draw[arrow] (a)--(b); \draw[arrow] (b)--(c); \draw[arrow] (c)--(d);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% 12
+\begin{frame}[fragile]{Lỗi thường gặp 2.1: dùng biến chưa định nghĩa}
+\begin{columns}[T,onlytextwidth]
+\column{0.50\textwidth}
+\begin{alertblock}{Sai}
+\begin{lstlisting}
+canVolume = 12 * literPerOunce
+literPerOunce = 0.0296
+\end{lstlisting}
+\end{alertblock}
+\column{0.47\textwidth}
+\begin{block}{Lỗi}
+\begin{lstlisting}[language={}]
+NameError: name 'literPerOunce' is not defined
+\end{lstlisting}
+\end{block}
+\end{columns}
+\begin{itemize}
+  \item Python thực thi các câu lệnh theo thứ tự từ trên xuống dưới.
+  \item Khi câu lệnh đầu tiên được thực thi, \texttt{literPerOunce} vẫn chưa được định nghĩa.
+\end{itemize}
+\begin{block}{Đúng}
+\begin{lstlisting}
+literPerOunce = 0.0296
+canVolume = 12 * literPerOunce
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+% 13
+\begin{frame}{Tự kiểm tra 2.1: Biến và phép gán}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra cơ bản}
+\begin{enumerate}
+  \item Khi chạy lần đầu \texttt{count = 10}, biến nào được tạo và giá trị là gì?
+  \item Nếu \texttt{x = 7} rồi \texttt{x = x + 3}, sau đó \texttt{x} bằng bao nhiêu?
+  \item \texttt{6} và \texttt{6.0} khác nhau ở điểm nào?
+\end{enumerate}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra thêm}
+\begin{enumerate}
+  \item Ký hiệu \texttt{=} trong Python dùng để làm gì?
+  \item Tên nào phù hợp cho hằng: \texttt{bottleVolume} hay \texttt{BOTTLE\_VOLUME}?
+  \item Tên nào hợp lệ: \texttt{6pack}, \texttt{canVolume}, \texttt{can volume}?
+  \item Vì sao dùng biến trước khi tạo có thể gây lỗi?
+\end{enumerate}
+\end{block}
+\end{columns}
+\begin{alertblock}{Gợi ý khi làm}
+Hãy tự trả lời trước, sau đó chạy thử hoặc trao đổi trên lớp để kiểm tra.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Bài tập lập trình ngắn: biến và hằng}
+\small
+\begin{block}{Yêu cầu}
+Viết chương trình tính tổng thể tích của một lốc nước ngọt và một chai lớn.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Dữ liệu cho trước}
+\begin{itemize}
+  \item Một lốc có \texttt{6} lon.
+  \item Mỗi lon có thể tích \texttt{0.355} lít.
+  \item Một chai lớn có thể tích \texttt{2.0} lít.
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Việc cần làm}
+\begin{itemize}
+  \item Đặt tên hằng phù hợp.
+  \item Tạo biến lưu tổng thể tích của lốc lon.
+  \item Cộng thêm thể tích chai lớn.
+  \item In kết quả ra màn hình.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\section{Arithmetic}
+
+% 14
+\begin{frame}{Các phép toán số học cơ bản}
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\toprule
+Phép toán & Toán tử & Ví dụ \\
+\midrule
+Cộng & \texttt{+} & \texttt{a + b} \\
+Trừ & \texttt{-} & \texttt{a - b} \\
+Nhân & \texttt{*} & \texttt{a * b} \\
+Chia & \texttt{/} & \texttt{a / b} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{block}{Biểu thức (Expression)}
+Biểu thức là sự kết hợp của giá trị, biến, toán tử, dấu ngoặc và lời gọi hàm để tạo ra một giá trị mới.
+\end{block}
+\[
+\frac{a+b}{2} \quad \Longrightarrow \quad \texttt{(a + b) / 2}
+\]
+\end{frame}
+
+% 15
+\begin{frame}[fragile]{Thứ tự ưu tiên toán tử}
+\begin{columns}[T,onlytextwidth]
+\column{0.45\textwidth}
+\begin{enumerate}
+  \item Dấu ngoặc
+  \item Lũy thừa
+  \item Nhân và chia
+  \item Cộng và trừ
+\end{enumerate}
+\column{0.52\textwidth}
+\begin{lstlisting}
+a + b / 2      # not average
+(a + b) / 2    # average
+
+10 - 2 - 3     # (10 - 2) - 3 = 5
+\end{lstlisting}
+\end{columns}
+\begin{alertblock}{Lưu ý}
+Dùng dấu ngoặc để thể hiện rõ thứ tự thực hiện các phép toán và tránh hiểu nhầm.
+\end{alertblock}
+\end{frame}
+
+% 16
+\begin{frame}[fragile]{Lũy thừa}
+\begin{lstlisting}
+2 ** 3          # 8
+10 * 2 ** 3     # 80
+10 ** 2 ** 3    # 10 ** (2 ** 3)
+\end{lstlisting}
+\[
+b\left(1+\frac{r}{100}\right)^n
+\quad \Longrightarrow \quad
+\texttt{b * (1 + r / 100) ** n}
+\]
+\begin{block}{Điểm cần nhớ}
+\texttt{**} có ưu tiên cao hơn phép nhân và được tính từ phải sang trái.
+\end{block}
+\end{frame}
+
+% 17
+\begin{frame}[fragile]{Chia lấy phần nguyên và phần dư}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{\texttt{//} -- Floor division}
+Chia lấy phần nguyên của thương.
+\begin{lstlisting}
+7 // 4    # 1
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{\texttt{\%} -- Remainder}
+Lấy phần dư của phép chia.
+\begin{lstlisting}
+7 % 4     # 3
+\end{lstlisting}
+\end{block}
+\end{columns}
+\vspace{0.2cm}
+\begin{lstlisting}
+pennies = 1729
+dollars = pennies // 100    # 17
+cents = pennies % 100       # 29
+\end{lstlisting}
+\end{frame}
+
+% 18
+\begin{frame}{Một số mẫu với \texttt{//} và \texttt{\%}}
+Với số nguyên dương \texttt{n}:
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+Biểu thức & Ý nghĩa \\
+\midrule
+\texttt{n \% 10} & chữ số cuối \\
+\texttt{n // 10} & bỏ chữ số cuối \\
+\texttt{n \% 100} & hai chữ số cuối \\
+\texttt{n \% 2} & 0 nếu chẵn, 1 nếu lẻ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{block}{Ứng dụng}
+Đổi đơn vị, tính tiền thừa, tách chữ số, kiểm tra chẵn/lẻ.
+\end{block}
+\end{frame}
+
+% 19
+\begin{frame}[fragile]{Gọi hàm}
+Một hàm có thể trả về giá trị để tiếp tục sử dụng trong biểu thức, lưu vào biến hoặc hiển thị ra màn hình.
+\begin{lstlisting}
+distance = abs(-173)
+print(round(7.627, 2))
+print(min(7.25, 10.95, 5.95, 6.05))
+\end{lstlisting}
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+Hàm & Mục đích \\
+\midrule
+\texttt{abs(x)} & trị tuyệt đối \\
+\texttt{round(x)} & làm tròn \\
+\texttt{round(x,n)} & làm tròn đến n chữ số \\
+\texttt{min(...)} / \texttt{max(...)} & nhỏ nhất / lớn nhất \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+% 20
+\begin{frame}[fragile]{Module \texttt{math}}
+\begin{lstlisting}
+from math import sqrt, pi
+
+y = sqrt(25)
+area = pi * radius ** 2
+\end{lstlisting}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{itemize}
+  \item \texttt{sqrt(x)}: căn bậc hai
+  \item \texttt{sin(x)}, \texttt{cos(x)}, \texttt{tan(x)}
+  \item \texttt{log(x)}, \texttt{exp(x)}
+\end{itemize}
+\column{0.48\textwidth}
+\begin{itemize}
+  \item \texttt{radians(x)}: độ $\rightarrow$ radian
+  \item \texttt{degrees(x)}: radian $\rightarrow$ độ
+  \item \texttt{trunc(x)}: cắt phần thập phân
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% 21
+
+\begin{frame}[fragile]{Lỗi thường gặp và mẹo viết biểu thức}
+\small
+\begin{columns}[T,totalwidth=0.94\textwidth]
+\column{0.45\textwidth}
+\begin{alertblock}{Sai số làm tròn (roundoff error)}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+price = 4.35
+total = price * 100
+print(total)
+\end{lstlisting}
+Số thực dấu phẩy động không thể biểu diễn chính xác mọi giá trị thập phân.
+\end{alertblock}
+\hfill
+\column{0.45\textwidth}
+\begin{alertblock}{Dấu ngoặc không cân bằng}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+((a + b) * t / 2 * (1 - t)
+\end{lstlisting}
+Dấu ngoặc mở và đóng không cân bằng.
+\end{alertblock}
+\end{columns}
+\vspace{0.35cm}
+\begin{block}{Mẹo}
+Dùng khoảng trắng hợp lý để cấu trúc biểu thức rõ ràng và dễ kiểm tra hơn.
+\end{block}
+\end{frame}
+
+% 22
+
+\begin{frame}[fragile]{Chủ đề bổ sung 2.1: Import module}
+\small
+\begin{block}{Vì sao cần import?}
+Python chỉ cung cấp trực tiếp một số hàm cơ bản. Các hàm chuyên biệt như \texttt{sqrt()}, \texttt{sin()}, \texttt{cos()} nằm trong các module, chẳng hạn \texttt{math}; cần import trước khi sử dụng.
+\end{block}
+\vspace{0.18cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{exampleblock}{Import module rõ nguồn}
+\begin{lstlisting}
+import math
+x = 25
+y = math.sqrt(x)
+\end{lstlisting}
+\end{exampleblock}
+\column{0.47\textwidth}
+\begin{exampleblock}{Import hàm cần dùng}
+\begin{lstlisting}
+from math import sqrt
+x = 25
+y = sqrt(x)
+\end{lstlisting}
+\end{exampleblock}
+\end{columns}
+\vspace{0.2cm}
+\begin{alertblock}{Khuyến nghị cho người mới học}
+Nên dùng \texttt{import math} khi muốn mã lệnh rõ nguồn gốc: \texttt{math.sqrt(x)} cho biết ngay \texttt{sqrt()} thuộc module \texttt{math}.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Chủ đề bổ sung 2.2: Gán kết hợp}
+\small
+\begin{block}{Ý tưởng}
+Phép gán kết hợp được dùng khi giá trị mới của một biến được tính trực tiếp từ giá trị hiện tại của chính biến đó.
+\end{block}
+\vspace{0.15cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.46\textwidth}
+\begin{exampleblock}{Dạng đầy đủ}
+\begin{lstlisting}
+total = total + cans
+count = count + 1
+price = price * 2
+\end{lstlisting}
+\end{exampleblock}
+\column{0.46\textwidth}
+\begin{exampleblock}{Dạng gán kết hợp}
+\begin{lstlisting}
+total += cans
+count += 1
+price *= 2
+\end{lstlisting}
+\end{exampleblock}
+\end{columns}
+\vspace{0.2cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.55\textwidth}
+\begin{block}{Cách đọc}
+\texttt{count += 1} nghĩa là lấy giá trị hiện tại của \texttt{count}, cộng thêm \texttt{1}, rồi gán kết quả trở lại cho \texttt{count}.
+\end{block}
+\column{0.39\textwidth}
+\begin{alertblock}{Lưu ý}
+Biến phải được khởi tạo trước khi sử dụng \texttt{+=}, \texttt{-=}, \texttt{*=} hoặc \texttt{/=}.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Chủ đề bổ sung 2.3: Viết biểu thức trên nhiều dòng}
+\small
+\begin{block}{Khi nào cần nối dòng?}
+Khi biểu thức quá dài, có thể tách thành nhiều dòng để mã lệnh dễ đọc hơn. Cách an toàn là xuống dòng khi biểu thức vẫn nằm bên trong cặp dấu ngoặc.
+\end{block}
+\vspace{0.18cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{alertblock}{Khó đọc}
+\begin{lstlisting}
+x1 = (-b + sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+\end{lstlisting}
+\end{alertblock}
+\column{0.47\textwidth}
+\begin{exampleblock}{Dễ đọc hơn}
+\begin{lstlisting}
+x1 = ((-b + sqrt(b ** 2 - 4 * a * c))
+      / (2 * a))
+\end{lstlisting}
+\end{exampleblock}
+\end{columns}
+\vspace{0.2cm}
+\begin{block}{Nguyên tắc thực hành}
+Giữ các thành phần liên quan trong cùng một nhóm dấu ngoặc và căn dòng tiếp theo để thể hiện rõ biểu thức vẫn còn tiếp tục.
+\end{block}
+\end{frame}
+
+% 23
+\begin{frame}{Tự kiểm tra 2.2: Số học và biểu thức}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra cơ bản}
+\begin{enumerate}
+  \item \texttt{10 + 6 / 2} cho kết quả gì? Vì sao?
+  \item \texttt{17 // 5} và \texttt{17 \% 5} lần lượt là gì?
+  \item Lấy chữ số cuối của số nguyên dương \texttt{n} bằng biểu thức nào?
+\end{enumerate}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra thêm}
+\begin{enumerate}
+  \item Toán tử nào dùng để tính lũy thừa?
+  \item Vì sao \texttt{a + b / 2} khác \texttt{(a + b) / 2}?
+  \item Muốn dùng \texttt{sqrt(x)} cần import gì?
+  \item Khi nào nên thêm dấu ngoặc trong biểu thức?
+\end{enumerate}
+\end{block}
+\end{columns}
+\begin{alertblock}{Gợi ý khi làm}
+Dự đoán kết quả trước khi chạy Python; chú ý thứ tự ưu tiên toán tử.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Bài tập lập trình ngắn: đổi giây}
+\small
+\begin{block}{Đề bài}
+Nhập một số giây nguyên dương. Tính số phút đầy đủ và số giây còn lại.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Đầu vào}
+\begin{itemize}
+  \item Một số nguyên dương biểu diễn tổng số giây.
+  \item Ví dụ dùng để kiểm thử: \texttt{135}.
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Yêu cầu tự làm}
+\begin{itemize}
+  \item Dùng phép chia lấy phần nguyên \texttt{//}.
+  \item Dùng phép lấy phần dư \texttt{\%}.
+  \item In số phút và số giây còn lại.
+\end{itemize}
+\end{block}
+\end{columns}
+\begin{alertblock}{Lưu ý}
+Không viết hàm \texttt{def}; chỉ dùng các câu lệnh cơ bản theo mô hình đầu vào $\rightarrow$ xử lý $\rightarrow$ đầu ra.
+\end{alertblock}
+\end{frame}
+
+\section{First Do It By Hand}
+
+% 24
+\begin{frame}{Trước tiên hãy tính bằng tay}
+\begin{alertblock}{Nguyên tắc}
+Nếu chưa thể tự giải một ví dụ cụ thể bằng tay, sẽ rất khó viết chương trình tự động hóa phép tính đó một cách đáng tin cậy.
+\end{alertblock}
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.2cm] (ex) at (0,0) {Ví dụ\\cụ thể};
+  \node[greenbox, minimum width=3.2cm] (hand) at (3.8,0) {Tính\\bằng tay};
+  \node[orangebox, minimum width=3.2cm] (pattern) at (7.6,0) {Nhận ra\\mẫu};
+  \node[purplebox, minimum width=3.2cm] (algo) at (11.4,0) {Thuật toán\\tổng quát};
+  \draw[arrow] (ex)--(hand); \draw[arrow] (hand)--(pattern); \draw[arrow] (pattern)--(algo);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% 25
+
+
+\begin{frame}{Ví dụ: xếp gạch xen kẽ}
+\small
+\begin{columns}[T,totalwidth=0.94\textwidth]
+\column{0.45\textwidth}
+\begin{block}{Đề bài tóm tắt}
+\begin{itemize}
+  \item \textbf{Đầu vào:} $W=100$ inch, $T=5$ inch.
+  \item \textbf{Ràng buộc:} gạch đen/trắng xen kẽ; viên đầu và cuối đều màu đen; chỉ dùng số viên nguyên.
+  \item \textbf{Đầu ra:} số viên gạch cần dùng và khoảng trống bằng nhau ở hai đầu tường.
+\end{itemize}
+\end{block}
+\hfill
+\column{0.45\textwidth}
+\begin{block}{Tính tay}
+\begin{itemize}
+  \item Còn lại sau viên đầu: $100-5=95$.
+  \item Mỗi cặp trắng-đen: $2\times 5=10$.
+  \item Số cặp hoàn chỉnh: $95//10=9$.
+  \item Số viên: $1+2\times 9=19$.
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{0.25cm}
+\[
+\text{khoảng trống mỗi đầu} = \frac{100 - 19\times 5}{2} = 2.5\text{ inch}
+\]
+\end{frame}
+
+% 26
+
+
+
+\begin{frame}{Ví dụ có lời giải 2.1: tính thời gian di chuyển}
+\small
+\begin{columns}[T,totalwidth=0.92\textwidth]
+\column{0.40\textwidth}
+\begin{block}{Đề bài tóm tắt}
+Robot cần di chuyển tới một vật thể: trước tiên đi trên đường, sau đó đi thẳng qua địa hình đá.
+\begin{itemize}
+  \item \textbf{Đầu vào:} $x,y,l_1,v_1,v_2$.
+  \item \textbf{Ràng buộc:} đoạn 1 dài $l_1$ trên đường; đoạn 2 đi thẳng qua địa hình đá; mỗi địa hình có tốc độ riêng.
+  \item \textbf{Đầu ra:} tổng thời gian cần thiết để robot đến vật thể.
+\end{itemize}
+\end{block}
+\hfill
+\column{0.46\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.55, every node/.style={transform shape}]
+  \draw[very thick] (0,0) -- (5,0);
+  \draw[very thick, dashed] (5,0) -- (8,2.4);
+  \draw[dotted, thick] (5,0) -- (8,0) -- (8,2.4);
+  \filldraw[blue] (0,0) circle (2pt) node[below]{Robot};
+  \filldraw[green!60!black] (5,0) circle (2pt) node[below]{hết đường};
+  \filldraw[red] (8,2.4) circle (2pt) node[right]{vật thể};
+  \node[box] at (2.5,0.55) {$l_1$ trên đường};
+  \node[box] at (6.8,1.6) {$d_2$ trên đá};
+  \node at (6.6,-0.35) {$x-l_1$};
+  \node[rotate=90] at (8.35,1.2) {$y$};
+\end{tikzpicture}
+\end{center}
+\vspace{0.18cm}
+\begin{block}{Công thức}
+\[
+ d_2=\sqrt{(x-l_1)^2+y^2}
+\]
+\[
+ totalTime=\frac{l_1}{v_1}+\frac{d_2}{v_2}
+\]
+\end{block}
+\end{columns}
+\end{frame}
+
+% 27
+\begin{frame}{Tự kiểm tra 2.3}
+\begin{enumerate}
+  \item Vì sao nên tính một ví dụ bằng tay trước khi viết code?
+  \item Trong ví dụ lát gạch, vì sao \texttt{//} hữu ích?
+  \item Thứ tự nào tốt hơn: viết code trước hay hiểu bài toán và suy ra thuật toán trước?
+\end{enumerate}
+\end{frame}
+
+\section{Strings}
+
+% 28
+\begin{frame}[fragile]{Chuỗi là gì?}
+\begin{block}{Chuỗi (String)}
+Chuỗi là một dãy ký tự, có thể gồm chữ cái, chữ số, dấu câu, khoảng trắng và các ký hiệu Unicode.
+\end{block}
+\begin{lstlisting}
+greeting = "Hello"
+print(greeting)
+
+length = len("World!")   # 6
+\end{lstlisting}
+\begin{itemize}
+  \item Chuỗi có thể dùng dấu nháy đơn hoặc nháy kép.
+  \item Chuỗi rỗng có độ dài 0: \texttt{""} hoặc \texttt{''}.
+\end{itemize}
+\end{frame}
+
+% 29
+\begin{frame}[fragile]{Nối chuỗi, lặp chuỗi, chuyển đổi}
+\begin{columns}[T,onlytextwidth]
+\column{0.50\textwidth}
+\begin{block}{Nối chuỗi}
+\begin{lstlisting}
+firstName = "Harry"
+lastName = "Morgan"
+name = firstName + " " + lastName
+\end{lstlisting}
+\end{block}
+\begin{block}{Lặp chuỗi}
+\begin{lstlisting}
+dashes = "-" * 50
+\end{lstlisting}
+\end{block}
+\column{0.47\textwidth}
+\begin{block}{Chuyển đổi}
+\begin{lstlisting}
+id = 1729
+name = "Agent " + str(id)
+
+id = int("1729")
+price = float("17.29")
+\end{lstlisting}
+\end{block}
+\end{columns}
+\end{frame}
+
+% 30
+\begin{frame}[fragile]{Chuỗi và chỉ số}
+Python bắt đầu đếm chỉ số từ \texttt{0}.
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  \foreach \x/\ch/\idx in {0/H/0,1/a/1,2/r/2,3/r/3,4/y/4}{
+    \node[bluebox, minimum width=1.2cm] at (\x*1.5,0) {\Large \ch};
+    \node at (\x*1.5,-0.9) {\texttt{\idx}};
+  }
+  \node[align=center] at (3,-1.6) {\small index};
+\end{tikzpicture}
+\end{center}
+\begin{lstlisting}
+name = "Harry"
+first = name[0]
+last = name[len(name) - 1]
+\end{lstlisting}
+\begin{alertblock}{Lưu ý}
+Dùng chỉ số ngoài phạm vi hợp lệ sẽ gây exception khi chạy.
+\end{alertblock}
+\end{frame}
+
+% 31
+\begin{frame}[fragile]{Phương thức của chuỗi}
+\begin{block}{Phương thức (Method)}
+Phương thức là thao tác được gắn với một đối tượng và được gọi thông qua đối tượng đó.
+\end{block}
+\begin{lstlisting}
+name = "John Smith"
+uppercaseName = name.upper()
+lowercaseName = name.lower()
+name2 = name.replace("John", "Jane")
+\end{lstlisting}
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+Method & Kết quả \\
+\midrule
+\texttt{s.lower()} & chuỗi chữ thường \\
+\texttt{s.upper()} & chuỗi chữ hoa \\
+\texttt{s.replace(old,new)} & chuỗi mới sau thay thế \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+% 32
+\begin{frame}[fragile]{Unicode và ký tự thoát}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Unicode}
+Python 3 hỗ trợ nhiều hệ chữ viết và ký hiệu.
+\begin{lstlisting}
+text = "£100"
+print(text[0])
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Ký tự thoát (escape sequence)}
+\begin{lstlisting}
+"You're \"Welcome\""
+"C:\\Temp\\Secret.txt"
+print("*\n**\n***")
+\end{lstlisting}
+\end{block}
+\end{columns}
+\begin{itemize}
+  \item \texttt{\textbackslash n}: xuống dòng.
+  \item \texttt{\textbackslash}: dấu backslash.
+  \item \texttt{\textbackslash\char`\"}: dấu nháy kép trong chuỗi.
+\end{itemize}
+\end{frame}
+
+% 33
+\begin{frame}{Tự kiểm tra 2.4: Chuỗi}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra cơ bản}
+\begin{enumerate}
+  \item \texttt{len("Hello")} bằng bao nhiêu?
+  \item \texttt{"Py" + "thon"} tạo ra chuỗi nào?
+  \item \texttt{"-" * 5} tạo ra gì?
+\end{enumerate}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra thêm}
+\begin{enumerate}
+  \item Với \texttt{s = "Python"}, \texttt{s[0]} và \texttt{s[len(s)-1]} là gì?
+  \item Vì sao \texttt{"Agent " + 1729} gây lỗi?
+  \item Muốn nối số \texttt{1729} vào chuỗi \texttt{"Agent "}, cần dùng hàm nào?
+\end{enumerate}
+\end{block}
+\end{columns}
+\begin{alertblock}{Gợi ý khi làm}
+Chỉ số chuỗi bắt đầu từ \texttt{0}; khi nối chuỗi, hai vế phải cùng là chuỗi.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Bài tập lập trình ngắn: xử lý chuỗi}
+\small
+\begin{block}{Đề bài}
+Nhập họ và tên riêng của một người. In tên đầy đủ, độ dài tên đầy đủ và chữ cái đầu của mỗi phần.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Ví dụ đầu vào}
+\begin{lstlisting}[language={}]
+First name: An
+Last name: Nguyen
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Việc cần làm}
+\begin{itemize}
+  \item Nối họ và tên bằng dấu cách.
+  \item Dùng \texttt{len()} để tính độ dài.
+  \item Dùng chỉ số \texttt{[0]} để lấy chữ cái đầu.
+  \item In các kết quả theo nhãn dễ đọc.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\section{Input and Output}
+
+% 34
+\begin{frame}{Mô hình Đầu vào $\rightarrow$ Xử lý $\rightarrow$ Đầu ra}
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={transform shape}]
+  \node[bluebox, minimum width=3.2cm] (in) at (0,0) {Input\\Đầu vào};
+  \node[orangebox, minimum width=3.2cm] (pro) at (4.5,0) {Process\\Xử lý};
+  \node[greenbox, minimum width=3.2cm] (out) at (9.0,0) {Output\\Đầu ra};
+  \draw[arrow] (in)--(pro); \draw[arrow] (pro)--(out);
+\end{tikzpicture}
+\end{center}
+\begin{block}{Ý tưởng}
+Một chương trình thường nhận dữ liệu đầu vào, xử lý dữ liệu theo yêu cầu và tạo ra kết quả đầu ra.
+\end{block}
+\end{frame}
+
+% 35
+\begin{frame}[fragile]{Nhập dữ liệu với \texttt{input()}}
+\begin{lstlisting}
+first = input("Enter your first name: ")
+\end{lstlisting}
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  \node[bluebox, minimum width=2.8cm] (p) at (0,0) {Hiển thị\\lời nhắc};
+  \node[greenbox, minimum width=2.8cm] (w) at (3.4,0) {Chờ dữ liệu\\từ bàn phím};
+  \node[orangebox, minimum width=2.8cm] (e) at (6.8,0) {Người dùng\\nhấn Enter};
+  \node[purplebox, minimum width=3.4cm] (r) at (10.5,0) {Trả về\\một chuỗi};
+  \draw[arrow] (p)--(w); \draw[arrow] (w)--(e); \draw[arrow] (e)--(r);
+\end{tikzpicture}
+\end{center}
+\begin{alertblock}{Quan trọng}
+\texttt{input()} luôn trả về dữ liệu kiểu \texttt{str}, ngay cả khi người dùng nhập các ký tự trông giống một số.
+\end{alertblock}
+\end{frame}
+
+% 36
+\begin{frame}[fragile]{Nhập dữ liệu số}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Số nguyên}
+\begin{lstlisting}
+userInput = input("Bottles: ")
+bottles = int(userInput)
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Số thực}
+\begin{lstlisting}
+userInput = input("Price: ")
+price = float(userInput)
+\end{lstlisting}
+\end{block}
+\end{columns}
+\vspace{0.2cm}
+\begin{block}{Có thể viết gọn}
+\begin{lstlisting}
+bottles = int(input("Bottles: "))
+price = float(input("Price: "))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+% 37
+\begin{frame}[fragile]{Định dạng đầu ra với \texttt{\%}}
+\begin{lstlisting}
+price = 1.215962441314554
+print("%.2f" % price)     # 1.22
+print("%10.2f" % price)   # width 10, 2 decimals
+\end{lstlisting}
+\begin{table}
+\scriptsize
+\centering
+\begin{tabular}{ll@{\quad}ll}
+\toprule
+Ký hiệu & Ý nghĩa & Ký hiệu & Ý nghĩa \\
+\midrule
+\texttt{\%d} & số nguyên & \texttt{\%s} & chuỗi \\
+\texttt{\%f} & số thực & \texttt{\%9s} & chuỗi căn phải \\
+\texttt{\%.2f} & 2 chữ số thập phân & \texttt{\%-9s} & chuỗi căn trái \\
+\texttt{\%7.2f} & rộng 7, 2 chữ số & \texttt{\%\%} & dấu \% \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+% 38
+\begin{frame}[fragile]{Ví dụ: tính giá trên mỗi ounce}
+\begin{lstlisting}
+CANS_PER_PACK = 6
+
+packPrice = float(input("Price for six-pack: "))
+canVolume = float(input("Can volume in ounces: "))
+
+packVolume = canVolume * CANS_PER_PACK
+pricePerOunce = packPrice / packVolume
+
+print("Price per ounce: %8.2f" % pricePerOunce)
+\end{lstlisting}
+\begin{center}
+\textbf{Input} $\rightarrow$ \textbf{Process} $\rightarrow$ \textbf{Output}
+\end{center}
+\end{frame}
+
+% 39
+\begin{frame}[fragile]{Mẹo lập trình 2.4: chuyển kiểu sớm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{alertblock}{Ít nên dùng}
+\begin{lstlisting}
+unitPrice = input("Price: ")
+price1 = float(unitPrice)
+price2 = 12 * float(unitPrice)
+\end{lstlisting}
+\end{alertblock}
+\column{0.48\textwidth}
+\begin{block}{Tốt hơn}
+\begin{lstlisting}
+unitPrice = float(input("Price: "))
+price1 = unitPrice
+price2 = 12 * unitPrice
+\end{lstlisting}
+\end{block}
+\end{columns}
+\vspace{0.15cm}
+Chuyển kiểu ngay sau khi đọc dữ liệu giúp giảm nguy cơ vô tình sử dụng chuỗi trong phép tính số học.
+\end{frame}
+
+% 40
+
+
+
+\begin{frame}{Hướng dẫn 2.1: Viết chương trình đơn giản}
+\small
+\begin{center}
+\begin{tikzpicture}[scale=0.80, every node/.style={transform shape}]
+  \node[bluebox, minimum width=2.55cm] (u) at (0,0.80) {Hiểu\\bài toán};
+  \node[greenbox, minimum width=2.65cm] (h) at (4.00,0.80) {Tính\\bằng tay};
+  \node[orangebox, minimum width=2.65cm] (p) at (8.00,0.80) {Pseudocode};
+  \node[purplebox, minimum width=2.65cm] (v) at (4.00,-1.35) {Biến\\hằng};
+  \node[bluebox, minimum width=2.85cm] (c) at (8.00,-1.35) {Mã Python\\hoàn chỉnh};
+  \draw[arrow] (u.east)--(h.west);
+  \draw[arrow] (h.east)--(p.west);
+  \draw[arrow] (p.south) -- ++(0,-0.38) -| (v.north);
+  \draw[arrow] (v.east)--(c.west);
+\end{tikzpicture}
+\end{center}
+\vspace{0.10cm}
+\begin{block}{Bài toán máy bán hàng - tóm tắt đề bài}
+\begin{itemize}
+  \item \textbf{Đầu vào:} mệnh giá tiền đưa vào $billValue$ (đô-la) và giá sản phẩm $itemPrice$ (penny).
+  \item \textbf{Ràng buộc:} giá là bội số của $25$ cent; máy chỉ trả bằng đồng 1 đô-la và quarter.
+  \item \textbf{Đầu ra:} số đồng 1 đô-la $dollarCoins$ và số quarter $quarters$ cần trả lại.
+\end{itemize}
+\end{block}
+\end{frame}
+
+% 41
+
+
+\begin{frame}{Máy bán hàng: tính bằng tay và pseudocode}
+\small
+\begin{columns}[T,totalwidth=0.92\textwidth]
+\column{0.38\textwidth}
+\begin{block}{Ví dụ cụ thể}
+\begin{itemize}
+  \item Đầu vào: $billValue=5$, $itemPrice=225$ pennies.
+  \item Tiền thừa: $5\times100-225=275$ pennies.
+  \item Đầu ra: $2$ đồng 1 đô-la và $3$ quarter.
+\end{itemize}
+\end{block}
+\hfill
+\column{0.48\textwidth}
+\begin{block}{Pseudocode}
+\ttfamily\scriptsize
+change due = 100 * bill value - item price\\[0.12cm]
+dollar coins = change due // 100\\[0.12cm]
+change due = change due \% 100\\[0.12cm]
+quarters = change due // 25
+\end{block}
+\end{columns}
+\vspace{0.28cm}
+\begin{center}
+\small \textbf{Ý tưởng:} dùng \texttt{//} để lấy số đồng nguyên và \texttt{\%} để giữ lại phần tiền còn dư.
+\end{center}
+\end{frame}
+
+% 42
+\begin{frame}[fragile]{Máy bán hàng: mã Python}
+\begin{lstlisting}
+PENNIES_PER_DOLLAR = 100
+PENNIES_PER_QUARTER = 25
+
+billValue = int(input("Enter bill value: "))
+itemPrice = int(input("Enter item price in pennies: "))
+
+changeDue = PENNIES_PER_DOLLAR * billValue - itemPrice
+
+dollarCoins = changeDue // PENNIES_PER_DOLLAR
+changeDue = changeDue % PENNIES_PER_DOLLAR
+quarters = changeDue // PENNIES_PER_QUARTER
+\end{lstlisting}
+\end{frame}
+
+% 43
+
+\begin{frame}[fragile]{Ví dụ có lời giải 2.2: tính số tem và tiền thừa}
+\small
+\begin{block}{Đề bài tóm tắt}
+\textbf{Đầu vào:} số đô-la \texttt{dollars} đưa vào máy. \quad
+\textbf{Ràng buộc:} tem hạng nhất giá 49 cent; máy phát tối đa số tem hạng nhất có thể và trả phần dư bằng tem 1 cent. \quad
+\textbf{Đầu ra:} số tem hạng nhất \texttt{firstClassStamps} và số cent còn dư \texttt{change}.
+\end{block}
+
+\vspace{0.12cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\begin{block}{Tính bằng tay với \$1}
+\begin{itemize}
+  \item Tổng tiền: $100$ cent.
+  \item Tem hạng nhất: $100 // 49 = 2$.
+  \item Phần dư: $100 - 2\times49 = 2$ cent.
+\end{itemize}
+\end{block}
+
+\column{0.31\textwidth}
+\begin{block}{Pseudocode}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+total cents = 100 * dollars
+first-class stamps =
+    total cents // 49
+change = total cents % 49
+\end{lstlisting}
+\end{block}
+
+\column{0.34\textwidth}
+\begin{block}{Phần tính toán chính}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+FIRST_CLASS_STAMP_PRICE = 49
+totalCents = 100 * dollars
+firstClassStamps = (
+    totalCents
+    // FIRST_CLASS_STAMP_PRICE
+)
+change = totalCents % FIRST_CLASS_STAMP_PRICE
+\end{lstlisting}
+\end{block}
+\end{columns}
+
+\vspace{0.08cm}
+\begin{center}
+\scriptsize Ý tưởng chính: dùng \texttt{//} để xác định số tem hạng nhất tối đa và dùng \texttt{\%} để lấy số cent còn dư.
+\end{center}
+\end{frame}
+
+% 44
+\begin{frame}{Điện toán \& Xã hội 2.2: lỗi trong phần cứng}
+\small
+\begin{block}{Lỗi chia số thực trên Pentium}
+Một lỗi phần cứng từng xuất hiện trong bộ chia số thực của một số CPU Pentium khiến một số phép chia hiếm gặp trả về kết quả không chính xác.
+\end{block}
+\vspace{0.16cm}
+\begin{columns}[T,totalwidth=0.92\textwidth]
+\column{0.46\textwidth}
+\begin{block}{Ví dụ cụ thể}
+\scriptsize
+Xét phép chia:
+\[
+\frac{4195835}{3145727}
+\]
+\begin{itemize}
+  \item Kết quả đúng: $\approx 1.333820449136$.
+  \item Pentium bị lỗi: $\approx 1.333739068902$.
+\end{itemize}
+Nếu nhân thương trở lại với $3145727$:
+\begin{itemize}
+  \item \textbf{Đúng:} $4195835$.
+  \item \textbf{CPU lỗi:} $4195579$.
+\end{itemize}
+\end{block}
+\hfill
+\column{0.40\textwidth}
+\begin{block}{Bài học}
+\scriptsize
+\begin{itemize}
+  \item Kết quả sai không phải lúc nào cũng xuất phát từ mã ứng dụng.
+  \item Nguyên nhân có thể nằm ở chính tầng phần cứng.
+  \item Ngay cả trường hợp hiếm cũng cần được kiểm thử bằng các giá trị chuẩn.
+  \item Với các phép tính quan trọng, nên đối chiếu và xác minh độc lập khi cần thiết.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% 45
+\begin{frame}{Tự kiểm tra 2.5: Nhập và xuất dữ liệu}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra cơ bản}
+\begin{enumerate}
+  \item \texttt{input()} luôn trả về kiểu dữ liệu nào?
+  \item Làm thế nào để đọc trực tiếp một số nguyên từ dữ liệu người dùng nhập?
+  \item \texttt{\%.2f} có ý nghĩa gì?
+\end{enumerate}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Tự kiểm tra thêm}
+\begin{enumerate}
+  \item Muốn đọc số nguyên từ bàn phím, kết hợp \texttt{input()} với hàm nào?
+  \item Vì sao nên chuyển kiểu dữ liệu số ngay sau khi đọc input?
+  \item Toán tử nào hữu ích khi tính tiền thừa bằng đơn vị tiền nguyên?
+\end{enumerate}
+\end{block}
+\end{columns}
+\begin{alertblock}{Gợi ý khi làm}
+Dữ liệu nhập từ bàn phím cần được chuyển kiểu trước khi dùng trong phép tính số học.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Bài tập lập trình ngắn: hóa đơn đơn giản}
+\small
+\begin{block}{Đề bài}
+Nhập tên sản phẩm, đơn giá và số lượng. Tính tổng tiền và in hóa đơn ngắn.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Đầu vào cần đọc}
+\begin{lstlisting}[language={}]
+Product name
+Unit price
+Quantity
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Định dạng đầu ra}
+\begin{lstlisting}[language={}]
+Product: <product name>
+Unit price: <unit price>
+Quantity: <quantity>
+Total: <total>
+\end{lstlisting}
+\end{block}
+\end{columns}
+\begin{alertblock}{Yêu cầu luyện tập}
+Kết hợp \texttt{input()}, \texttt{float()}, \texttt{int()}, phép nhân và định dạng số thực với 2 chữ số thập phân.
+\end{alertblock}
+\end{frame}
+
+\section{SymPy}
+
+
+% 46
+\begin{frame}[fragile]{Công cụ bổ sung 2.1: SymPy}
+\begin{block}{Ý tưởng}
+SymPy là một package cho toán học ký hiệu, hỗ trợ khai triển biểu thức, giải phương trình, đạo hàm, tích phân, thay thế và vẽ đồ thị.
+\end{block}
+\begin{lstlisting}
+from sympy import *
+
+f = sympify("x ** 2 * sin(x)")
+expand((x - 1) * (x + 1))
+solve(x ** 2 + 2 * x - 8)
+diff(f)
+g = integrate(f)
+\end{lstlisting}
+\end{frame}
+
+\section{Summary and Exercises}
+
+% 47
+\begin{frame}{Tổng kết: Biến và số học}
+\begin{columns}[T,onlytextwidth]
+\column{0.50\textwidth}
+\begin{block}{Biến}
+\small
+\begin{itemize}
+  \item Biến là vị trí lưu trữ có tên.
+  \item \texttt{=} là phép gán.
+  \item Dùng tên biến có ý nghĩa.
+  \item Dùng hằng có tên để tránh các magic number khó hiểu.
+\end{itemize}
+\end{block}
+\column{0.47\textwidth}
+\begin{block}{Số học}
+\small
+\begin{itemize}
+  \item \texttt{/}: chia thường.
+  \item \texttt{//}: chia lấy phần nguyên.
+  \item \texttt{\%}: phần dư.
+  \item \texttt{**}: lũy thừa.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% 48
+\begin{frame}{Tổng kết: Chuỗi và nhập/xuất}
+\begin{columns}[T,onlytextwidth]
+\column{0.50\textwidth}
+\begin{block}{Chuỗi}
+\small
+\begin{itemize}
+  \item Chuỗi là dãy ký tự.
+  \item \texttt{len()} trả về độ dài.
+  \item \texttt{+} nối chuỗi; \texttt{*} lặp chuỗi.
+  \item Chỉ số (index) bắt đầu từ \texttt{0}.
+\end{itemize}
+\end{block}
+\column{0.47\textwidth}
+\begin{block}{Nhập/Xuất dữ liệu}
+\small
+\begin{itemize}
+  \item \texttt{input()} trả về \texttt{str}.
+  \item Dùng \texttt{int()} hoặc \texttt{float()} để chuyển kiểu.
+  \item Dùng toán tử \texttt{\%} để định dạng đầu ra theo cú pháp của chương.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% 49
+\begin{frame}{Câu hỏi tổng kết 1--5}
+\small
+\begin{enumerate}
+  \item Câu lệnh gán làm gì?
+  \item Giá trị nào có kiểu \texttt{float}: \texttt{6}, \texttt{0}, \texttt{6.0}, \texttt{-4}?
+  \item \texttt{17 // 5} bằng bao nhiêu?
+  \item \texttt{17 \% 5} bằng bao nhiêu?
+  \item \texttt{"Py" + "thon"} tạo ra gì?
+\end{enumerate}
+\end{frame}
+
+% 50
+\begin{frame}{Câu hỏi tổng kết 6--10}
+\small
+\begin{enumerate}
+  \setcounter{enumi}{5}
+  \item Với \texttt{s = "Hello"}, \texttt{s[1]} là gì?
+  \item \texttt{input()} trả về kiểu nào?
+  \item Câu lệnh nào đọc số thực: \texttt{price = float(input("Price: "))}?
+  \item Vì sao nên dùng hằng có tên?
+  \item Trước khi lập trình phép tính không đơn giản, nên làm gì?
+\end{enumerate}
+\end{frame}
+
+% 51
+\begin{frame}[fragile]{Bài tập ôn tập}
+\small
+\begin{block}{Theo dõi các phép gán}
+\begin{lstlisting}
+mystery = 1
+mystery = 1 - 2 * mystery
+mystery = mystery + 1
+\end{lstlisting}
+\end{block}
+\begin{block}{Dịch toán sang Python}
+\begin{itemize}
+  \item Trung bình của \texttt{a} và \texttt{b}.
+  \item $a^2+b^2$.
+  \item $\sqrt{x^2+y^2}$.
+  \item $PV(1+r/100)^n$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+% 52
+\begin{frame}{Bài tập thực hành}
+\small
+\begin{enumerate}
+  \item Đổi kích thước giấy từ inch sang milimét.
+  \item Đọc một số và in bình phương, lập phương, lũy thừa bậc bốn.
+  \item Đọc hai số nguyên và in tổng, hiệu, tích, trung bình.
+  \item Tách một số nguyên dương 5 chữ số thành từng chữ số.
+  \item Đọc một từ và in ký tự đầu, giữa, cuối.
+  \item Viết thuật toán tạo chữ viết tắt tên (monogram) cho một tên gồm ba phần.
+  \item Mở rộng bài máy bán hàng với quarter, dime, nickel.
+\end{enumerate}
+\end{frame}
+
+% 53
+\begin{frame}{Thuật ngữ chính}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\column{0.33\textwidth}
+\begin{itemize}
+  \item variable
+  \item assignment
+  \item initialization
+  \item data type
+  \item int / float
+  \item literal
+  \item constant
+  \item magic number
+\end{itemize}
+\column{0.33\textwidth}
+\begin{itemize}
+  \item operator
+  \item expression
+  \item precedence
+  \item floor division
+  \item remainder
+  \item function
+  \item module
+  \item roundoff error
+\end{itemize}
+\column{0.33\textwidth}
+\begin{itemize}
+  \item string
+  \item index
+  \item method
+  \item Unicode
+  \item prompt
+  \item input / output
+  \item format specifier
+  \item canvas
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% 54
+
+
+\begin{frame}[fragile]{Bài tập tổng hợp ngắn: giá trên mỗi đơn vị}
+\small
+\begin{block}{Đề bài}
+Một gói hàng có nhiều sản phẩm giống nhau. Nhập giá cả gói và số lượng sản phẩm, sau đó tính giá trung bình của một sản phẩm.
+\end{block}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Ví dụ input}
+\begin{lstlisting}[language={}]
+Pack price: 120000
+Quantity: 8
+\end{lstlisting}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Ví dụ output}
+\begin{lstlisting}[language={}]
+Unit price: 15000.00
+\end{lstlisting}
+\end{block}
+\end{columns}
+\begin{exampleblock}{Yêu cầu}
+Viết trực tiếp các câu lệnh theo mô hình: Đầu vào $\rightarrow$ Xử lý $\rightarrow$ Đầu ra. Chưa dùng \texttt{def}.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hướng dẫn học tập}
+\begin{center}
+\begin{tikzpicture}[scale=0.82, every node/.style={transform shape}]
+  \node[bluebox, minimum width=2.4cm] (a) at (0,0) {Dự đoán};
+  \node[greenbox, minimum width=2.8cm] (b) at (3,0) {Tính\\bằng tay};
+  \node[orangebox, minimum width=2.4cm] (c) at (6,0) {Viết};
+  \node[purplebox, minimum width=2.4cm] (d) at (9,0) {Chạy};
+  \node[bluebox, minimum width=2.6cm] (e) at (12,0) {Giải thích};
+  \draw[arrow] (a)--(b); \draw[arrow] (b)--(c); \draw[arrow] (c)--(d); \draw[arrow] (d)--(e);
+  \draw[arrow, dashed] (e.south) .. controls +(0,-1.1) and +(0,-1.1) .. node[below]{điều chỉnh và luyện tập} (a.south);
+\end{tikzpicture}
+\end{center}
+\begin{alertblock}{Thông điệp}
+Mục tiêu không phải là ghi nhớ các mẩu cú pháp rời rạc, mà là hình thành quy trình rõ ràng để xây dựng, kiểm thử và cải thiện một chương trình nhỏ.
+\end{alertblock}
+\end{frame}
+
+\end{document}

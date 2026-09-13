@@ -1,0 +1,389 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- PACKAGES ---
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+
+\usepackage[top=2cm, bottom=2.2cm, left=2cm, right=2cm]{geometry}
+\setlength{\headheight}{24pt}
+\addtolength{\topmargin}{-10pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% --- COLOR DEFINITIONS ---
+\definecolor{primaryblue}{HTML}{0F3460}
+\definecolor{secondaryteal}{HTML}{0D9488}
+\definecolor{accentgold}{HTML}{D97706}
+\definecolor{darkgray}{HTML}{1F2937}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{boxbg}{HTML}{F8FAFC}
+\definecolor{borderblue}{HTML}{93C5FD}
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{15803D}
+\definecolor{pyorange}{HTML}{C2410C}
+\definecolor{correctgreen}{HTML}{166534}
+
+% --- LISTINGS CONFIGURATION ---
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen}\itshape,
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+% --- HYPERREF SETUP ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Numbers, Strings, and Operators Solutions and Rubric},
+    pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+% --- HEADERS & FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{primaryblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\small\color{correctgreen}\textbf{Instructor Solutions \& Rubric}}
+\fancyfoot[L]{\footnotesize\color{darkgray}Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[C]{\footnotesize\color{darkgray}Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\color{darkgray}\textbf{Total: 100 Points}}
+
+% --- SECTION STYLING ---
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\thesection}{1em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{secondaryteal}\large\bfseries}
+  {\thesubsection}{1em}{}
+
+% Custom box for solutions
+\newtcolorbox{solbox}[2][]{%
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={colback=green!10, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+% --- EXAM HEADER ---
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.15cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY}}\\[0.10cm]
+  {\large\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}}\\[0.25cm]
+  \rule{\textwidth}{1.2pt}\\[0.3cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.15cm]
+  {\large\textbf{Course: Fundamental Programming Concepts in Python (DSAI1003)}}\\[0.15cm]
+  {\normalsize\textit{Progress Exam: Numbers, Strings, and Operators in Python}}\\[0.2cm]
+  \rule{\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.2cm}
+
+\begin{tcolorbox}[colback=green!8, colframe=correctgreen, arc=1.5mm]
+\small
+\textbf{Note for Instructors and Teaching Assistants:}
+This document provides complete answer keys, rationale for conceptual questions, exact output traces, step-by-step program logic, reference Python implementations, and an itemized marking rubric designed for fair and consistent grading.
+\end{tcolorbox}
+
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION A
+% ==============================================================================
+\section*{Section A: Numbers, Strings \& Operators Concepts (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{C} & Python identifiers must begin with a letter or an underscore and contain only alphanumeric characters and underscores. \texttt{\_unit\_price} is valid. \texttt{2nd\_total} starts with a digit, \texttt{tax-rate} contains a hyphen (minus operator), and \texttt{class} is a reserved keyword. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{B} & The assignment operator \texttt{=} evaluates the expression on the right-hand side using the current value of \texttt{count}, and then updates the storage location named \texttt{count} with the new value. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & Floor division (\texttt{//}) discards the fractional part and returns the quotient rounded down to the nearest integer. $19 // 4 = 4$ of type \texttt{int}. True division (\texttt{/}) would yield \texttt{4.75} of type \texttt{float}. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{A} & Exponentiation \texttt{**} has highest precedence, followed by multiplication \texttt{*}, and then addition \texttt{+}. Thus, $2^{3} = 8$, then $3 \times 8 = 24$, and finally $2 + 24 = 26$. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{C} & For any base-10 integer, \texttt{n \% 10} yields the remainder when divided by 10, which corresponds exactly to the rightmost units digit. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{B} & Built-in functions such as \texttt{abs()}, \texttt{round()}, \texttt{min()}, and \texttt{max()} are part of Python's standard built-in namespace and do not require importing. Functions like \texttt{sqrt()} require \texttt{import math}. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{B} & Computers represent floating-point numbers internally using binary (base 2). Many decimal fractions (like 0.1 and 0.2) have repeating binary representations, leading to tiny roundoff errors ($0.1 + 0.2 \approx 0.30000000000000004$). & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{B} & Python uses 0-based indexing from the left and negative indexing from the right. In \texttt{"PYTHON"}, index 0 is \texttt{'P'}, index 1 is \texttt{'Y'}, and index $-1$ is the final character \texttt{'N'}. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{B} & String repetition \texttt{"5" * 2} has higher precedence than concatenation \texttt{+}, yielding \texttt{"55"}. Then \texttt{"Data" + "55"} concatenates them into \texttt{"Data55"}. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{B} & Strings in Python are \textbf{immutable}. Calling \texttt{word.upper()} returns a new uppercase string \texttt{"PYTHON"}, but does not modify \texttt{word} in place. Since the return value was not assigned back, \texttt{word} remains \texttt{"python"}. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION B
+% ==============================================================================
+\section*{Section B: Output Tracing, Type Conversion \& Error Diagnosis (25 points)}
+
+\subsection*{Q11. Exact Output Tracing with Arithmetic \& Modulo (5 points)}
+\begin{solbox}{Solution for Q11}
+\begin{lstlisting}
+q: | 4 | r: | 3;
+Check: True
+Power diff: 2
+\end{lstlisting}
+\textbf{Scoring Breakdown:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Line 1 (2 points):} Exact separator \texttt{" | "} between \texttt{q:}, \texttt{4}, \texttt{r:}, and \texttt{3}, ending with semicolon and newline (\texttt{;\textbackslash n}).
+  \item \textbf{Line 2 (1.5 points):} \texttt{Check: True} (calculates $4 \times 5 + 3 = 23$, which equals $a$, producing boolean \texttt{True}).
+  \item \textbf{Line 3 (1.5 points):} \texttt{Power diff: 2} ($5^{2} - 23 = 25 - 23 = 2$).
+\end{itemize}
+\end{solbox}
+
+\subsection*{Q12. String Operations and Indexing (5 points)}
+\begin{solbox}{Solution for Q12}
+\begin{itemize}[leftmargin=2em]
+  \item Output of \texttt{print(f"n = \{n\}")}: \textbf{\texttt{n = 8}} (1 point)
+  \item Output of \texttt{print(f"Parts: \{first\}-\{mid\}-\{last\}")}: \textbf{\texttt{Parts: C-u-r}} (1.5 points) \\
+  \textit{Explanation: \texttt{first = title[0] = 'C'}; $n // 2 = 8 // 2 = 4$, so \texttt{title[4] = 'u'}; \texttt{last = title[-1] = 'r'}.}
+  \item Output of \texttt{print(f"Result: \{combo * 2\}")}: \textbf{\texttt{Result: curcur}} (1.5 points) \\
+  \textit{Explanation: \texttt{combo = ("Cur").lower() = "cur"}; repeated twice is \texttt{"curcur"}.}
+  \item \textbf{Explanation (1 point):} String indices must be integers. True division (\texttt{n / 2}) produces a \texttt{float} (e.g. \texttt{4.0}), which raises a \texttt{TypeError: string indices must be integers}. Integer floor division (\texttt{n // 2}) returns an \texttt{int}.
+\end{itemize}
+\end{solbox}
+
+\subsection*{Q13. Diagnose and Correct Common Errors (5 points)}
+\begin{solbox}{Solution for Q13}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|p{4.5cm}|X|X|}
+\hline
+\textbf{Code / Situation} & \textbf{Problem / Error} & \textbf{Correction / Valid Code} \\
+\hline
+\texttt{radius = input("Radius: ")}\newline
+\texttt{area = 3.14159 * radius ** 2} &
+\texttt{input()} returns a string (\texttt{str}). Exponentiation \texttt{**} and multiplication with \texttt{float} raise a \texttt{TypeError}. &
+\texttt{radius = float(input("Radius: "))}\newline
+\texttt{area = 3.14159 * radius ** 2} \\
+\hline
+\texttt{s = "Python"}\newline
+\texttt{s[0] = "J"} &
+Strings are immutable; item assignment raises \texttt{TypeError: 'str' object does not support item assignment}. &
+\texttt{s = "J" + s[1:]} \\
+\hline
+\texttt{total = 150}\newline
+\texttt{msg = "Total is: " + total} &
+Concatenation \texttt{+} requires both operands to be strings. Combining \texttt{str} and \texttt{int} raises \texttt{TypeError}. &
+\texttt{msg = "Total is: " + str(total)}\newline
+\textit{or} \texttt{msg = f"Total is: \{total\}"} \\
+\hline
+\end{tabularx}
+\textit{Scoring: 1.5 pts for Row 1, 1.5 pts for Row 2, 2.0 pts for Row 3.}
+\end{solbox}
+
+\subsection*{Q14. Formula Evaluation with the \texttt{math} Module (5 points)}
+\begin{solbox}{Solution for Q14}
+\begin{lstlisting}
+Sides: 3.0, 4.0
+Hypotenuse: 5.00
+Triangle Area: 6.0
+\end{lstlisting}
+\textbf{Scoring Breakdown:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Line 1 (1.5 points):} \texttt{Sides: 3.0, 4.0} with 1 decimal digit each.
+  \item \textbf{Line 2 (2 points):} \texttt{Hypotenuse: 5.00} ($\sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5.0$, formatted as \texttt{5.00}).
+  \item \textbf{Line 3 (1.5 points):} \texttt{Triangle Area: 6.0} ($0.5 \times 3.0 \times 4.0 = 6.0$).
+\end{itemize}
+\end{solbox}
+
+\subsection*{Q15. Replacing Magic Numbers with Named Constants (5 points)}
+\begin{solbox}{Solution for Q15}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Magic numbers identified (2 points):} \texttt{0.355} (liters per can) and \texttt{2.0} (liters per bottle).
+  \item \textbf{PEP 8 naming convention (1 point):} Named constants are written in uppercase letters with words separated by underscores (\texttt{ALL\_CAPS\_WITH\_UNDERSCORES}).
+  \item \textbf{Refactored code (2 points):}
+\begin{lstlisting}
+CAN_VOLUME = 0.355
+BOTTLE_VOLUME = 2.0
+total_liters = cans * CAN_VOLUME + bottles * BOTTLE_VOLUME
+\end{lstlisting}
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION C
+% ==============================================================================
+\section*{Section C: Program Design Using the Input $\rightarrow$ Process $\rightarrow$ Output Model (25 points)}
+
+\begin{solbox}{Model Solution for Section C}
+\textbf{Task 1: Identify the IPO Components (6 points)}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Input(s):} Total change due to customer in cents (\texttt{total\_cents}, an integer entered via keyboard). (2 pts)
+  \item \textbf{Process:} (2 pts)
+    \begin{enumerate}[label=\arabic*.]
+      \item Compute full 1-dollar bills: \texttt{dollars = total\_cents // 100}
+      \item Compute remaining cents: \texttt{rem\_after\_dollars = total\_cents \% 100}
+      \item Compute 25-cent quarters: \texttt{quarters = rem\_after\_dollars // 25}
+      \item Compute leftover cents: \texttt{cents\_left = rem\_after\_dollars \% 25}
+      \item Compute total monetary value: \texttt{total\_currency = total\_cents / 100}
+    \end{enumerate}
+  \item \textbf{Output:} Display the original cents, count of 1-dollar bills, count of 25-cent quarters, leftover cents, and formatted currency amount \texttt{\$X.XX}. (2 pts)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Task 2: Program Logic in Ordered Sequential Steps (7 points)}
+\begin{enumerate}[leftmargin=2em, label=Step \arabic*:]
+  \item \textbf{Input:} Prompt user with \texttt{"Enter change in cents: "} and convert to integer: \texttt{total\_cents = int(input(...))}.
+  \item \textbf{Compute Dollars:} Use floor division \texttt{dollars = total\_cents // 100}.
+  \item \textbf{Compute Dollar Remainder:} Use modulo \texttt{remainder = total\_cents \% 100}.
+  \item \textbf{Compute Quarters:} Use floor division \texttt{quarters = remainder // 25}.
+  \item \textbf{Compute Leftover Cents:} Use modulo \texttt{cents\_left = remainder \% 25}.
+  \item \textbf{Output:} Print a clean report using f-strings:
+    \begin{itemize}
+      \item \texttt{f"Total Cents: \{total\_cents\}"}
+      \item \texttt{f"Dollars (\$1): \{dollars\}"}
+      \item \texttt{f"Quarters (25c): \{quarters\}"}
+      \item \texttt{f"Remaining Cents: \{cents\_left\}"}
+      \item \texttt{f"Total Amount: \$\{total\_cents / 100:.2f\}"}
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Task 3: Hand Trace for \texttt{total\_cents = 387} (6 points)}
+\begin{itemize}[leftmargin=2em]
+  \item $\text{dollars} = 387 // 100 = \mathbf{3}$ (1.5 pts)
+  \item $\text{remainder} = 387 \% 100 = \mathbf{87}$ (1.5 pts)
+  \item $\text{quarters} = 87 // 25 = \mathbf{3}$ (1.5 pts)
+  \item $\text{cents\_left} = 87 \% 25 = \mathbf{12}$ (1.5 pts)
+  \item Verification: $3 \times 100 + 3 \times 25 + 12 = 300 + 75 + 12 = 387$ cents (\$3.87).
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Task 4: Explain Design Choices (6 points)}
+\begin{enumerate}[label=\alph*),leftmargin=2em]
+  \item \textbf{Why use \texttt{int()} rather than \texttt{float()}? (3 points)} \\
+  Coins and cents are discrete counts of whole physical units. Using \texttt{float()} could introduce binary floating-point roundoff inaccuracies (e.g. $387.0 \% 100$ might yield $86.99999999999999$), causing incorrect integer division counts.
+  \item \textbf{Why use floor division (\texttt{//}) and remainder (\texttt{\%})? (3 points)} \\
+  True division (\texttt{/}) yields fractional values ($387 / 100 = 3.87$), which cannot directly state how many complete bills or coins to dispense. Floor division (\texttt{//}) gives the exact count of whole units, while remainder (\texttt{\%}) gives the exact unallocated portion passed to the next coin denomination.
+\end{enumerate}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION D
+% ==============================================================================
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Cylindrical Storage Tank Volume and Coating Cost (15 points)}
+\begin{solbox}{Reference Implementation for Problem 1}
+\begin{lstlisting}
+import math
+
+# Named constant
+COATING_COST_PER_SQM = 14.50
+
+# Input
+tank_id = input("Enter tank ID: ")
+radius = float(input("Enter radius in meters: "))
+height = float(input("Enter height in meters: "))
+
+# Process
+base_area = math.pi * radius ** 2
+wall_area = 2 * math.pi * radius * height
+surface_area = 2 * base_area + wall_area
+volume = base_area * height
+total_cost = surface_area * COATING_COST_PER_SQM
+
+# Output
+print(f"Tank ID: {tank_id}")
+print(f"Dimensions: Radius = {radius:.2f} m, Height = {height:.2f} m")
+print(f"Storage Volume: {volume:.3f} m^3")
+print(f"Total Surface Area: {surface_area:.2f} m^2")
+print(f"Total Coating Cost: ${total_cost:.2f}")
+\end{lstlisting}
+\textbf{Marking Rubric (15 points):}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Import and Constants (2 pts):} Correct \texttt{import math} and uppercase constant \texttt{COATING\_COST\_PER\_SQM = 14.50}.
+  \item \textbf{Inputs and Conversions (3 pts):} Read \texttt{tank\_id} as string, and convert \texttt{radius} and \texttt{height} to \texttt{float}.
+  \item \textbf{Calculations (5 pts):} Correct formula for volume ($V = \pi r^2 h$, 2 pts), total surface area ($A = 2\pi rh + 2\pi r^2$, 2 pts), and cost (1 pt).
+  \item \textbf{Output \& Formatting (5 pts):} Correct text structure, radius/height/surface area with \texttt{:.2f}, volume with \texttt{:.3f}, and cost prefixed with \texttt{\$} and \texttt{:.2f}.
+\end{itemize}
+\end{solbox}
+
+\subsection*{Problem 2: Customer Voucher and Masked Account Statement (15 points)}
+\begin{solbox}{Reference Implementation for Problem 2}
+\begin{lstlisting}
+# Named constant
+DIVIDER_LENGTH = 42
+
+# Input
+full_name = input("Enter customer full name: ")
+account_code = input("Enter 8-character account code: ")
+account_balance = float(input("Enter account balance: "))
+
+# Process
+name_upper = full_name.upper()
+name_length = len(full_name)
+first_initial = full_name[0].upper()
+masked_code = account_code[0] + account_code[1] + ("*" * 4) + account_code[-2] + account_code[-1]
+top_border = "=" * DIVIDER_LENGTH
+mid_divider = "-" * DIVIDER_LENGTH
+
+# Output
+print(top_border)
+print("OFFICIAL CUSTOMER ACCOUNT VOUCHER")
+print(mid_divider)
+print(f"Customer Name: {name_upper} ({name_length} chars)")
+print(f"Initial & Masked Code: {first_initial} | {masked_code}")
+print(f"Current Balance: ${account_balance:.2f}")
+print(top_border)
+\end{lstlisting}
+\textbf{Marking Rubric (15 points):}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Constant and Input (3 pts):} Constant \texttt{DIVIDER\_LENGTH = 42}; inputs for name, code, and balance converted to \texttt{float}.
+  \item \textbf{String Methods \& Functions (3 pts):} Correctly applies \texttt{.upper()} and \texttt{len(full\_name)}.
+  \item \textbf{String Indexing \& Masking (4 pts):} First initial extraction (\texttt{full\_name[0]}); slicing/indexing first 2 and last 2 characters of \texttt{account\_code} combined with \texttt{"*" * 4}.
+  \item \textbf{Repetition \& Divider Lines (2 pts):} Generates borders with \texttt{"=" * 42} and \texttt{"-" * 42}.
+  \item \textbf{Output Structure \& Formatting (3 pts):} Exact match to voucher format with \texttt{account\_balance:.2f}.
+\end{itemize}
+\end{solbox}
+
+\end{document}
