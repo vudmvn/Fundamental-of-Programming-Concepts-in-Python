@@ -1,6 +1,6 @@
 ---
 name: python-lecture-prep
-description: Quy trình và công cụ hỗ trợ chuẩn bị bài giảng, tài liệu thực hành, Jupyter Notebooks, Slide LaTeX Beamer / PDF, dữ liệu mẫu, hình ảnh minh họa (căn giữa ảnh, tự động đổi tên ảnh trùng không ghi đè, kiểm tra đường dẫn ảnh .tex, dọn dẹp file tạm .aux/.log sau khi biên dịch PDF, cập nhật link PDF vào README.md/README-en.md dạng target=_blank) và tự động xuất bản (publish) lên GitHub cho môn Lập trình Python. Kích hoạt khi người dùng yêu cầu soạn bài giảng, tạo notebook, thiết kế slide TeX/PDF, quản lý hình ảnh hoặc đẩy bài giảng mới lên GitHub.
+description: Quy trình và công cụ hỗ trợ chuẩn bị bài giảng, tài liệu thực hành, Jupyter Notebooks, Slide LaTeX Beamer / PDF, dữ liệu mẫu, hình ảnh minh họa (căn giữa ảnh, nhúng ảnh Base64 data URI trong notebook .ipynb tương thích Google Colab, tự động đổi tên ảnh trùng không ghi đè, kiểm tra đường dẫn ảnh .tex, dọn dẹp file tạm .aux/.log sau khi biên dịch PDF, cập nhật link PDF vào index.md/index-en.md dạng target=_blank) và tự động xuất bản (publish) lên GitHub cho môn Lập trình Python. Kích hoạt khi người dùng yêu cầu soạn bài giảng, tạo notebook, thiết kế slide TeX/PDF, quản lý hình ảnh hoặc đẩy bài giảng mới lên GitHub.
 ---
 
 # Skill: Hỗ trợ Soạn Bài giảng, Quản lý Slide TeX/PDF, Hình ảnh & Xuất bản GitHub - Lập trình Python
@@ -52,12 +52,13 @@ Khi tạo, nhúng hoặc biên dịch tài liệu, Agent **BẮT BUỘC** thực
 
 ### 4. Quy chuẩn Căn giữa Hình ảnh (Image Centering Mandatory Rule)
 - **TẤT CẢ HÌNH ẢNH** xuất hiện trong các tệp Markdown (`README.md`, `slides.md`, các bài đọc `.md`) và cell Markdown của Jupyter Notebook (`.ipynb`) **PHẢI ĐƯỢC CĂN GIỮA (CENTERED)** để tạo giao diện bài giảng chuyên nghiệp.
-- Cú pháp HTML Căn giữa Chuẩn:
+- Cú pháp HTML Căn giữa Chuẩn trong Markdown:
   ```html
   <p align="center">
     <img src="images/ten-anh.png" alt="Mô tả hình ảnh" width="800" />
   </p>
   ```
+- *Lưu ý riêng cho Jupyter Notebook (`.ipynb`):* Xem chi tiết Mục 9 về quy tắc nhúng Base64 data URI.
 
 ### 5. Quy chuẩn Biên dịch Slide LaTeX Beamer (.tex ➔ .pdf) & Kiểm tra Đường dẫn Ảnh
 - **Kiểm tra đường dẫn ảnh trong tệp `.tex`:** Mọi hình ảnh chèn vào Slide LaTeX Beamer phải được kiểm tra tồn tại thực tế tại thư mục `images/`. Macro `\imageplaceholder{#1}{#2}` phải được cấu hình tự động hiển thị hình ảnh thật qua `\IfFileExists{#1}{\includegraphics[...]{#1}}{...}`.
@@ -81,6 +82,17 @@ Khi tạo, nhúng hoặc biên dịch tài liệu, Agent **BẮT BUỘC** thực
 - **TUYỆT ĐỐI KHÔNG ĐƯA NỘI DUNG TIẾNG VIỆT VÀO `index-en.md`**: Tệp `index-en.md` là giao diện Tiếng Anh 100%. Không bao giờ chèn các bài đọc Tiếng Việt (`-vn.md`), tiêu đề Tiếng Việt hoặc mô tả Tiếng Việt vào tệp `index-en.md`.
 - Nếu bài đọc/bài giảng chưa có bản dịch Tiếng Anh (`-en.md`), tại ô Bài đọc trong `index-en.md` **bắt buộc hiển thị dấu gạch ngang `-`** (không tự động lấy link bài đọc Tiếng Việt làm fallback).
 - **Quy tắc Chiều ngược lại (Reverse Rule)**: Trong tệp Tiếng Việt `index.md`, có thể dẫn liên kết tham chiếu tài liệu Tiếng Anh nếu cần thiết hoặc thích hợp, nhưng chiều ngược lại (đưa nội dung Tiếng Việt sang `index-en.md`) là **HOÀN TOÀN BỊ CẤM**.
+
+### 9. Quy chuẩn Nhúng Hình ảnh trong Jupyter Notebook (`.ipynb`) Tương thích Google Colab (Base64 Data URI)
+- **Vấn đề trên Google Colab:** Khi sinh viên/học viên mở Notebook trực tiếp trên Google Colab qua liên kết GitHub, Google Colab **không hỗ trợ** cơ chế đính kèm `attachment:` của Jupyter và cũng không tải được ảnh từ đường dẫn tương đối cục bộ (như `images/ten-anh.png`), khiến hình ảnh bị vỡ/lỗi hiển thị.
+- **Quy tắc bắt buộc:** Cách ổn nhất và tương thích tuyệt đối cho Colab là **đổi ảnh thành Base64 data URI trực tiếp trong Markdown**:
+  ```html
+  <p align="center">
+    <img src="data:image/png;base64,iVBORw0KGgoAAA..." alt="Mô tả hình ảnh" />
+  </p>
+  ```
+  *(hoặc thẻ đơn `<img src="data:image/png;base64,iVBORw0KGgoAAA..." />`)*.
+- **Dọn dẹp Metadata:** Khi chuyển đổi sang Base64 trong Markdown, **bắt buộc xóa trường `attachments`** trong cell JSON của tệp `.ipynb` để loại bỏ dữ liệu dư thừa và tối ưu dung lượng tệp.
 
 ---
 

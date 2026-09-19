@@ -64,6 +64,14 @@ Python/
    - Bắt buộc dùng thẻ HTML `target="_blank"`: `<a href="lectures/.../partXX_lecture_X.pdf" target="_blank">PDF</a>` để mở trực tiếp tab mới.
 7. **Quy tắc Phân định Ngôn ngữ Nghiêm ngặt cho `index-en.md`**:
    - Tệp `index-en.md` là giao diện Tiếng Anh 100%. Không bao giờ chèn các bài đọc hoặc mô tả Tiếng Việt vào `index-en.md`.
+8. **Quy chuẩn Nhúng Hình ảnh trong Jupyter Notebook (`.ipynb`) Tương thích Google Colab**:
+   - Khi nhúng hình ảnh trong Notebook (`.ipynb`), để tránh lỗi không hiển thị trên Google Colab (do Colab không hỗ trợ `attachment:` hoặc đường dẫn tương đối), **bắt buộc chuyển đổi ảnh thành Base64 data URI trực tiếp trong Markdown**:
+     ```html
+     <p align="center">
+       <img src="data:image/png;base64,iVBORw0KGgoAAA..." alt="Mô tả hình ảnh" />
+     </p>
+     ```
+   - Xóa trường metadata `attachments` trong cell để tránh lưu trùng lặp dung lượng.
 
 ---
 
