@@ -1,0 +1,1392 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usetheme{AnnArbor}
+\usecolortheme{dolphin}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{fontspec}
+\setmainfont{Tinos}
+\setsansfont{Tinos}
+\setmonofont[Scale=0.88]{DejaVu Sans Mono}
+\usepackage{amsmath,amssymb,booktabs,array}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{ragged2e}
+
+\definecolor{neublue}{RGB}{22,78,140}
+\definecolor{neugreen}{RGB}{0,135,115}
+\definecolor{lightblue}{RGB}{235,244,255}
+\definecolor{lightgreen}{RGB}{235,250,245}
+\definecolor{codebg}{RGB}{248,248,248}
+
+\setbeamercolor{structure}{fg=neublue}
+\setbeamercolor{title}{fg=neublue}
+\setbeamercolor{frametitle}{fg=neublue}
+\setbeamercolor{block title}{bg=neublue,fg=white}
+\setbeamercolor{block body}{bg=lightblue,fg=black}
+\setbeamercolor{block title alerted}{bg=red!70!black,fg=white}
+\setbeamercolor{block body alerted}{bg=red!7,fg=black}
+\setbeamercolor{block title example}{bg=neugreen,fg=white}
+\setbeamercolor{block body example}{bg=lightgreen,fg=black}
+
+\lstdefinestyle{py}{
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{neublue}\bfseries,
+  stringstyle=\color{green!40!black},
+  commentstyle=\color{gray!70!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  framerule=0.2pt,
+  rulecolor=\color{gray!40},
+  breaklines=true,
+  tabsize=4
+}
+
+\lstdefinestyle{text}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  framerule=0.2pt,
+  rulecolor=\color{gray!40},
+  breaklines=true
+}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\key}[1]{\textbf{\textcolor{neublue}{#1}}}
+\newcommand{\smallgap}{\vspace{0.4em}}
+
+\title[Bài 3: Câu lệnh rẽ nhánh]{Bài 3: Câu lệnh rẽ nhánh}
+\subtitle{Fundamental Programming Concepts in Python}
+\author{Faculty of Data Science and Artificial Intelligence}
+\institute{National Economics University}
+\date{DSAI1003}
+
+\begin{document}
+
+% 1
+\begin{frame}
+  \titlepage
+  \vspace{-1em}
+  \begin{center}
+    \small Dựa trên Chương 3 -- \textit{Decisions}, \textit{Python for Everyone}.
+  \end{center}
+\end{frame}
+
+% 2
+\begin{frame}{Vì sao cần câu lệnh rẽ nhánh?}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+Ở Bài 2, chương trình chủ yếu chạy theo thứ tự từ trên xuống dưới.\smallgap
+
+Trong thực tế, chương trình cần \key{đưa ra quyết định}: chọn hành động khác nhau tùy theo dữ liệu.
+\end{column}
+\begin{column}{0.40\textwidth}
+\begin{exampleblock}{Ví dụ}
+\begin{itemize}
+  \item áp dụng giảm giá;
+  \item kiểm tra dữ liệu nhập;
+  \item phân loại điểm;
+  \item chọn công thức tính thuế;
+  \item xử lý chuỗi theo điều kiện.
+\end{itemize}
+\end{exampleblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% 3
+\begin{frame}{Ý tưởng trung tâm}
+\begin{center}
+\Large
+\key{Đánh giá điều kiện} $\rightarrow$ \key{Đúng/Sai} $\rightarrow$ \key{Chọn nhánh}
+\end{center}
+\vspace{1em}
+\begin{block}{Luồng điều khiển}
+\centering
+\begin{tabular}{c c c}
+Điều kiện đúng & $\Rightarrow$ & thực hiện hành động A \\
+Điều kiện sai & $\Rightarrow$ & thực hiện hành động B
+\end{tabular}
+\end{block}
+\vspace{1em}
+Sau khi một nhánh được thực hiện, chương trình tiếp tục với các lệnh phía sau cấu trúc rẽ nhánh.
+\end{frame}
+
+% 4
+\begin{frame}{Mục tiêu học tập}
+Sau bài này, sinh viên có thể:
+\begin{itemize}
+  \item sử dụng \code{if}, \code{if/else}, \code{if/elif/else};
+  \item dùng toán tử quan hệ để viết điều kiện;
+  \item tổ chức khối lệnh bằng thụt lề đúng;
+  \item thiết kế rẽ nhánh lồng nhau và nhiều phương án;
+  \item sử dụng \code{and}, \code{or}, \code{not};
+  \item thiết kế ca kiểm thử cho các nhánh và giá trị biên;
+  \item phân tích chuỗi và kiểm tra dữ liệu đầu vào.
+\end{itemize}
+\end{frame}
+
+% 5
+\begin{frame}{Cấu trúc bài học}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{enumerate}
+  \item Câu lệnh \code{if}
+  \item Toán tử quan hệ
+  \item Rẽ nhánh lồng nhau
+  \item Nhiều phương án
+  \item Lưu đồ
+\end{enumerate}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{enumerate}
+\setcounter{enumi}{5}
+  \item Ca kiểm thử
+  \item Boolean và toán tử Boolean
+  \item Phân tích chuỗi
+  \item Kiểm tra dữ liệu đầu vào
+  \item Tổng kết và bài tập
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{3.1 Câu lệnh if}
+
+% 6
+\begin{frame}[fragile]{Quyết định hai nhánh}
+Ví dụ: tòa nhà không dùng số tầng 13. Nếu người dùng chọn tầng hiển thị lớn hơn 13, tầng thực tế giảm đi 1.
+\smallgap
+\begin{lstlisting}[style=py]
+if floor > 13 :
+    actualFloor = floor - 1
+else :
+    actualFloor = floor
+\end{lstlisting}
+\smallgap
+\begin{block}{Điểm cần nhớ}
+Chỉ \textbf{một nhánh} được thực hiện. Điều kiện đúng thì chạy nhánh \code{if}; điều kiện sai thì chạy nhánh \code{else}.
+\end{block}
+\end{frame}
+
+% 7
+\begin{frame}[fragile]{Cú pháp tổng quát}
+\begin{columns}[T]
+\begin{column}{0.50\textwidth}
+\begin{block}{Có nhánh \code{else}}
+\begin{lstlisting}[style=py]
+if condition :
+    statements1
+else :
+    statements2
+\end{lstlisting}
+\end{block}
+\end{column}
+\begin{column}{0.47\textwidth}
+\begin{block}{Không có nhánh \code{else}}
+\begin{lstlisting}[style=py]
+if condition :
+    statements
+\end{lstlisting}
+\end{block}
+\end{column}
+\end{columns}
+\smallgap
+Nhánh \code{else} là tùy chọn. Dùng khi cần xử lý riêng trường hợp điều kiện sai.
+\end{frame}
+
+% 8
+\begin{frame}[fragile]{Câu lệnh ghép và khối lệnh}
+\begin{lstlisting}[style=py]
+if totalSales > 100.0 :
+    discount = totalSales * 0.05
+    totalSales = totalSales - discount
+    print("You received a discount of", discount)
+\end{lstlisting}
+\begin{itemize}
+  \item Dòng tiêu đề kết thúc bằng dấu hai chấm \code{:}.
+  \item Các lệnh trong cùng một khối phải thụt lề cùng mức.
+  \item Khối kết thúc khi mức thụt lề quay lại mức bên ngoài.
+\end{itemize}
+\begin{alertblock}{Quan trọng}
+Trong Python, thụt lề là một phần của cú pháp, không chỉ để trình bày đẹp hơn.
+\end{alertblock}
+\end{frame}
+
+% 9
+\begin{frame}[fragile]{Ví dụ: mô phỏng thang máy}
+\begin{lstlisting}[style=py]
+##
+# This program simulates an elevator panel that skips floor 13.
+#
+
+floor = int(input("Floor: "))
+
+if floor > 13 :
+    actualFloor = floor - 1
+else :
+    actualFloor = floor
+
+print("The elevator will travel to the actual floor", actualFloor)
+\end{lstlisting}
+\begin{block}{Ví dụ chạy}
+\begin{lstlisting}[style=text]
+Floor: 20
+The elevator will travel to the actual floor 19
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+% 10
+\begin{frame}[fragile]{Lỗi thường gặp: tab và thụt lề}
+Python yêu cầu các lệnh trong cùng khối có mức thụt lề nhất quán.
+\begin{lstlisting}[style=py]
+if score >= 50 :
+    print("Pass")
+    print("Continue to the next course")
+\end{lstlisting}
+\begin{alertblock}{Tránh lỗi}
+Không trộn tab và khoảng trắng. Nên cấu hình editor để phím Tab tạo 4 khoảng trắng.
+\end{alertblock}
+\end{frame}
+
+% 11
+\begin{frame}[fragile]{Mẹo: tránh lặp mã trong các nhánh}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{Kém hơn}
+\begin{lstlisting}[style=py]
+if floor > 13 :
+    actualFloor = floor - 1
+    print("Actual floor:", actualFloor)
+else :
+    actualFloor = floor
+    print("Actual floor:", actualFloor)
+\end{lstlisting}
+\end{alertblock}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{exampleblock}{Tốt hơn}
+\begin{lstlisting}[style=py]
+if floor > 13 :
+    actualFloor = floor - 1
+else :
+    actualFloor = floor
+
+print("Actual floor:", actualFloor)
+\end{lstlisting}
+\end{exampleblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% 12
+\begin{frame}[fragile]{Chủ đề bổ sung: biểu thức điều kiện}
+Python có dạng rút gọn cho một số quyết định đơn giản.
+\begin{lstlisting}[style=py]
+actualFloor = floor - 1 if floor > 13 else floor
+\end{lstlisting}
+\smallgap
+\begin{block}{Khi nào dùng?}
+\begin{itemize}
+  \item Khi hai nhánh đều là biểu thức ngắn.
+  \item Không nên dùng nếu làm mã khó đọc.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+% Added example
+\begin{frame}[fragile]{Ví dụ bổ sung: miễn phí giao hàng}
+Một cửa hàng miễn phí giao hàng nếu đơn hàng từ 500{,}000 đồng trở lên.
+\begin{lstlisting}[style=py]
+orderValue = float(input("Order value: "))
+
+if orderValue >= 500000 :
+    shippingFee = 0
+else :
+    shippingFee = 30000
+
+total = orderValue + shippingFee
+print("Shipping fee:", shippingFee)
+print("Total:", total)
+\end{lstlisting}
+\begin{block}{Điểm học được}
+Điều kiện \code{orderValue >= 500000} chia bài toán thành hai trường hợp rõ ràng: được miễn phí và không được miễn phí.
+\end{block}
+\end{frame}
+
+\begin{frame}{Quiz 3.1: \texttt{if/else}}
+Chọn đáp án đúng.
+\begin{enumerate}
+  \item Với \code{x = 10}, điều kiện \code{x > 10} có giá trị gì?
+  \item Dấu \code{:} trong dòng \code{if condition :} dùng để làm gì?
+  \item Nếu điều kiện của \code{if} sai và không có \code{else}, chương trình làm gì?
+\end{enumerate}
+\vspace{0.5em}
+\begin{exampleblock}{Thảo luận nhanh}
+Hãy dự đoán trước khi chạy code. Đây là thói quen quan trọng khi học lập trình.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Đáp án Quiz 3.1}
+\begin{enumerate}
+  \item \code{False}, vì \code{10} không lớn hơn \code{10}.
+  \item Dấu \code{:} báo hiệu bắt đầu một khối lệnh.
+  \item Chương trình bỏ qua khối \code{if} và tiếp tục với lệnh phía sau.
+\end{enumerate}
+\end{frame}
+
+\section{3.2 Toán tử quan hệ}
+
+% 13
+\begin{frame}{Các toán tử quan hệ}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Toán tử & Ý nghĩa \\
+\midrule
+\code{<}  & nhỏ hơn \\
+\code{<=} & nhỏ hơn hoặc bằng \\
+\code{>}  & lớn hơn \\
+\code{>=} & lớn hơn hoặc bằng \\
+\code{==} & bằng nhau \\
+\code{!=} & khác nhau \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.7em}
+Kết quả của phép so sánh là một giá trị Boolean: \code{True} hoặc \code{False}.
+\end{frame}
+
+% 14
+\begin{frame}[fragile]{Phép gán và phép so sánh bằng}
+\begin{columns}[T]
+\begin{column}{0.46\textwidth}
+\begin{block}{Phép gán}
+\begin{lstlisting}[style=py]
+floor = 13
+\end{lstlisting}
+Lưu giá trị \code{13} vào biến \code{floor}.
+\end{block}
+\end{column}
+\begin{column}{0.50\textwidth}
+\begin{block}{Phép kiểm tra bằng nhau}
+\begin{lstlisting}[style=py]
+if floor == 13 :
+    print("No such floor")
+\end{lstlisting}
+Kiểm tra \code{floor} có bằng \code{13} hay không.
+\end{block}
+\end{column}
+\end{columns}
+\begin{alertblock}{Lưu ý}
+Trong điều kiện, thường dùng \code{==}, không dùng \code{=}.
+\end{alertblock}
+\end{frame}
+
+% 15
+\begin{frame}[fragile]{So sánh số thực: không nên kiểm tra bằng tuyệt đối}
+Số thực trong máy tính có thể chứa sai số làm tròn rất nhỏ.
+\begin{lstlisting}[style=py]
+from math import sqrt
+
+r = sqrt(2.0)
+print(r * r)
+\end{lstlisting}
+\smallgap
+Kết quả có thể là một giá trị rất gần 2, nhưng không đúng bằng 2.
+\smallgap
+\begin{exampleblock}{Cách kiểm tra gần bằng}
+\begin{lstlisting}[style=py]
+EPSILON = 1E-14
+if abs(r * r - 2.0) < EPSILON :
+    print("Close enough")
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+
+% 16
+\begin{frame}[fragile]{So sánh chuỗi}
+Python có thể so sánh chuỗi theo thứ tự từ điển.
+\begin{lstlisting}[style=py]
+if name < "M" :
+    print("First half of the directory")
+else :
+    print("Second half of the directory")
+\end{lstlisting}
+\begin{itemize}
+  \item So sánh diễn ra từng ký tự từ trái sang phải.
+  \item Chữ hoa và chữ thường có mã ký tự khác nhau.
+  \item Nên chuẩn hóa chuỗi bằng \code{upper()} hoặc \code{lower()} khi cần.
+\end{itemize}
+\end{frame}
+
+% 17
+\begin{frame}{Cách làm: cài đặt một câu lệnh \texttt{if}}
+\begin{enumerate}
+  \item Xác định điều kiện rẽ nhánh.
+  \item Mô tả điều xảy ra khi điều kiện đúng.
+  \item Mô tả điều xảy ra khi điều kiện sai.
+  \item Kiểm tra toán tử quan hệ tại giá trị biên.
+  \item Loại bỏ phần xử lý lặp lại.
+  \item Kiểm thử cả hai nhánh.
+  \item Ghép thành chương trình Python.
+\end{enumerate}
+\end{frame}
+
+% 18
+\begin{frame}[fragile]{Ví dụ minh họa: lấy phần giữa của chuỗi}
+Bài toán: nhập một chuỗi và lấy phần giữa.
+\smallgap
+Nếu chuỗi có độ dài lẻ, lấy 1 ký tự giữa. Nếu độ dài chẵn, lấy 2 ký tự giữa.
+\begin{lstlisting}[style=py]
+string = input("Enter a string: ")
+length = len(string)
+
+if length % 2 == 1 :
+    position = length // 2
+    result = string[position]
+else :
+    position = length // 2
+    result = string[position - 1] + string[position]
+
+print("Middle:", result)
+\end{lstlisting}
+\end{frame}
+
+
+
+% Added example
+\begin{frame}[fragile]{Ví dụ bổ sung: kiểm tra tuổi xem phim}
+Một rạp phim yêu cầu người xem từ 18 tuổi trở lên đối với phim nhãn 18+.
+\begin{lstlisting}[style=py]
+age = int(input("Age: "))
+
+if age >= 18 :
+    print("Ticket allowed")
+else :
+    print("Not allowed for this movie")
+\end{lstlisting}
+\begin{block}{Giá trị biên}
+Với điều kiện \code{age >= 18}, cần kiểm tra ít nhất các giá trị \code{17}, \code{18}, \code{19}.
+\end{block}
+\end{frame}
+
+\begin{frame}{Quiz 3.2: toán tử quan hệ}
+Dự đoán kết quả \code{True}/\code{False}.
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Biểu thức & Kết quả? \\
+\midrule
+\code{7 == 7.0} & \\
+\code{7 != 7} & \\
+\code{10 <= 10} & \\
+\code{"An" < "Binh"} & \\
+\code{3 + 4 > 10} & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Đáp án Quiz 3.2}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Biểu thức & Kết quả \\
+\midrule
+\code{7 == 7.0} & \code{True} \\
+\code{7 != 7} & \code{False} \\
+\code{10 <= 10} & \code{True} \\
+\code{"An" < "Binh"} & \code{True} \\
+\code{3 + 4 > 10} & \code{False} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\section{3.3 Rẽ nhánh lồng nhau}
+
+% 19
+\begin{frame}{Khi nào cần rẽ nhánh lồng nhau?}
+Một số bài toán cần quyết định theo nhiều tầng.\smallgap
+
+Ví dụ: tính thuế phụ thuộc vào:
+\begin{itemize}
+  \item tình trạng hôn nhân;
+  \item mức thu nhập;
+  \item ngưỡng thuế tương ứng với từng nhóm.
+\end{itemize}
+\smallgap
+Khi đó, nhánh bên ngoài chọn nhóm chính, nhánh bên trong xử lý điều kiện chi tiết hơn.
+\end{frame}
+
+% 20
+\begin{frame}[fragile]{Ví dụ rẽ nhánh lồng nhau}
+\begin{lstlisting}[style=py]
+if maritalStatus == "s" :
+    if income <= 32000 :
+        tax = 0.10 * income
+    else :
+        tax = 3200 + 0.25 * (income - 32000)
+else :
+    if income <= 64000 :
+        tax = 0.10 * income
+    else :
+        tax = 6400 + 0.25 * (income - 64000)
+\end{lstlisting}
+\begin{block}{Cách đọc}
+Trước hết kiểm tra nhóm chính; sau đó, trong từng nhóm, kiểm tra ngưỡng thu nhập.
+\end{block}
+\end{frame}
+
+% 21
+\begin{frame}{Mẹo: mô phỏng bằng tay}
+\begin{block}{Hand-tracing}
+Mô phỏng chương trình trên giấy: ghi giá trị biến sau từng câu lệnh và đánh dấu nhánh được thực hiện.
+\end{block}
+\begin{exampleblock}{Khi nào rất hữu ích?}
+\begin{itemize}
+  \item rẽ nhánh lồng nhau;
+  \item biểu thức Boolean phức tạp;
+  \item lỗi kết quả không rõ nguyên nhân;
+  \item kiểm thử giá trị biên.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+
+
+% Added example
+\begin{frame}[fragile]{Ví dụ bổ sung: đăng nhập đơn giản}
+Một chương trình kiểm tra tên người dùng trước, sau đó mới kiểm tra mật khẩu.
+\begin{lstlisting}[style=py]
+userName = input("Username: ")
+password = input("Password: ")
+
+if userName == "admin" :
+    if password == "12345" :
+        print("Login successful")
+    else :
+        print("Wrong password")
+else :
+    print("Unknown username")
+\end{lstlisting}
+\begin{block}{Cách đọc}
+Nhánh trong chỉ được xét khi nhánh ngoài đã đúng.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Quiz 3.3: truy vết rẽ nhánh lồng nhau}
+Với đoạn code sau, chương trình in gì nếu \code{x = 5}, \code{y = 2}?
+\begin{lstlisting}[style=py]
+if x > 0 :
+    if y > 0 :
+        print("A")
+    else :
+        print("B")
+else :
+    print("C")
+\end{lstlisting}
+\vspace{0.5em}
+\begin{exampleblock}{Câu hỏi thêm}
+Kết quả thay đổi thế nào nếu \code{x = 5}, \code{y = -2}?
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Đáp án Quiz 3.3}
+\begin{itemize}
+  \item Nếu \code{x = 5}, \code{y = 2}: in \code{"A"}.
+  \item Nếu \code{x = 5}, \code{y = -2}: in \code{"B"}.
+  \item Nếu \code{x <= 0}: nhánh trong không được xét, chương trình in \code{"C"}.
+\end{itemize}
+\end{frame}
+
+\section{3.4 Nhiều phương án}
+
+% 22
+\begin{frame}[fragile]{Câu lệnh \texttt{if/elif/else}}
+Khi có nhiều phương án loại trừ lẫn nhau, dùng \code{elif} để tránh nhiều \code{if} độc lập.
+\begin{lstlisting}[style=py]
+if condition1 :
+    statements1
+elif condition2 :
+    statements2
+elif condition3 :
+    statements3
+else :
+    statements4
+\end{lstlisting}
+\begin{block}{Nguyên tắc}
+Python kiểm tra từ trên xuống. Nhánh đầu tiên có điều kiện đúng sẽ được thực hiện.
+\end{block}
+\end{frame}
+
+% 23
+\begin{frame}[fragile]{Ví dụ: phân loại động đất}
+\begin{lstlisting}[style=py]
+if richter >= 8.0 :
+    description = "Most structures fall"
+elif richter >= 7.0 :
+    description = "Many buildings destroyed"
+elif richter >= 6.0 :
+    description = "Many buildings damaged"
+elif richter >= 4.5 :
+    description = "Damage to poorly constructed buildings"
+else :
+    description = "No destruction of buildings"
+\end{lstlisting}
+\begin{block}{Điểm mấu chốt}
+Các ngưỡng phải được đặt theo thứ tự phù hợp. Với ví dụ này, kiểm tra từ lớn xuống nhỏ.
+\end{block}
+\end{frame}
+
+% 24
+\begin{frame}[fragile]{Thứ tự điều kiện rất quan trọng}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{Sai ý định}
+\begin{lstlisting}[style=py]
+if richter >= 4.5 :
+    description = "Damage"
+elif richter >= 6.0 :
+    description = "Many damaged"
+elif richter >= 8.0 :
+    description = "Most fall"
+\end{lstlisting}
+\end{alertblock}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{exampleblock}{Vì sao sai?}
+Nếu \code{richter = 8.5}, điều kiện đầu tiên \code{richter >= 4.5} đã đúng, nên các nhánh sau không bao giờ được xét.
+\end{exampleblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% 25
+\begin{frame}[fragile]{\texttt{elif} khác gì nhiều \texttt{if} độc lập?}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{Loại trừ lẫn nhau}
+\begin{lstlisting}[style=py]
+if score >= 90 :
+    grade = "A"
+elif score >= 80 :
+    grade = "B"
+elif score >= 70 :
+    grade = "C"
+\end{lstlisting}
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{Nhiều kiểm tra độc lập}
+\begin{lstlisting}[style=py]
+if hasLicense :
+    print("License OK")
+if hasInsurance :
+    print("Insurance OK")
+if hasRegistration :
+    print("Registration OK")
+\end{lstlisting}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+% Added example
+\begin{frame}[fragile]{Ví dụ bổ sung: tính phí vận chuyển theo vùng}
+\begin{lstlisting}[style=py]
+zone = input("Zone A/B/C: ").upper()
+
+if zone == "A" :
+    fee = 15000
+elif zone == "B" :
+    fee = 25000
+elif zone == "C" :
+    fee = 40000
+else :
+    fee = -1
+    print("Invalid zone")
+
+if fee >= 0 :
+    print("Shipping fee:", fee)
+\end{lstlisting}
+\begin{block}{Điểm học được}
+\code{if/elif/else} phù hợp khi các phương án loại trừ lẫn nhau.
+\end{block}
+\end{frame}
+
+\begin{frame}{Quiz 3.4: chọn cấu trúc phù hợp}
+Nên dùng \code{elif} hay nhiều \code{if} độc lập?
+\begin{enumerate}
+  \item Phân loại điểm A/B/C/D/F.
+  \item Kiểm tra một đơn hàng có: mã giảm giá, freeship, quà tặng.
+  \item Phân loại mức động đất theo ngưỡng Richter.
+  \item Kiểm tra username: đủ dài, không có khoảng trắng, chỉ chữ/số.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Đáp án Quiz 3.4}
+\begin{enumerate}
+  \item Dùng \code{if/elif/else}: các mức điểm loại trừ nhau.
+  \item Dùng nhiều \code{if}: các ưu đãi có thể cùng xảy ra.
+  \item Dùng \code{if/elif/else}: mỗi mức Richter thuộc một nhóm.
+  \item Thường dùng nhiều điều kiện kết hợp hoặc nhiều \code{if}, vì cần kiểm tra nhiều lỗi khác nhau.
+\end{enumerate}
+\end{frame}
+
+\section{3.5 Lưu đồ và ca kiểm thử}
+
+% 26
+\begin{frame}{Lưu đồ: công cụ mô tả quyết định}
+Lưu đồ giúp nhìn rõ luồng điều khiển trước khi viết mã.\smallgap
+
+\begin{block}{Các thành phần thường dùng}
+\begin{itemize}
+  \item điểm bắt đầu/kết thúc;
+  \item bước xử lý;
+  \item điều kiện rẽ nhánh;
+  \item mũi tên thể hiện luồng đi.
+\end{itemize}
+\end{block}
+\smallgap
+Trong bài học này, lưu đồ chủ yếu dùng để mô tả quyết định hai nhánh và nhiều phương án.
+\end{frame}
+
+% 27
+\begin{frame}{Tránh luồng điều khiển kiểu ``spaghetti''}
+Một chương trình tốt nên có luồng điều khiển dễ theo dõi.
+\begin{alertblock}{Dấu hiệu cần tránh}
+\begin{itemize}
+  \item quá nhiều nhánh lồng nhau không cần thiết;
+  \item điều kiện trùng lặp hoặc chồng lấn khó hiểu;
+  \item cùng một xử lý bị copy ở nhiều nhánh;
+  \item thứ tự kiểm tra không rõ lý do.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+% 28
+\begin{frame}{Ca kiểm thử: kiểm tra từng nhánh}
+\begin{block}{Bao phủ nhánh}
+Mỗi nhánh quan trọng của chương trình cần có ít nhất một ca kiểm thử.
+\end{block}
+\begin{exampleblock}{Ví dụ với điều kiện \code{floor > 13}}
+\begin{itemize}
+  \item \code{floor = 20}: nhánh đúng.
+  \item \code{floor = 10}: nhánh sai.
+  \item \code{floor = 13}: giá trị biên.
+  \item \code{floor = 14}: ngay sau biên.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+% 29
+\begin{frame}{Giá trị biên}
+Lỗi thường xuất hiện gần các ngưỡng so sánh.\smallgap
+
+Nếu điều kiện là \code{score >= 50}, hãy kiểm tra:
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+Giá trị & Ý nghĩa \\
+\midrule
+\code{49} & ngay dưới ngưỡng \\
+\code{50} & đúng tại ngưỡng \\
+\code{51} & ngay trên ngưỡng \\
+\bottomrule
+\end{tabular}
+\end{center}
+\smallgap
+Thiết kế ca kiểm thử trước khi lập trình giúp phát hiện lỗi logic sớm hơn.
+\end{frame}
+
+
+
+% Added exercise slide
+\begin{frame}{Ví dụ bổ sung: bảng ca kiểm thử cho phân loại điểm}
+\begin{center}
+\begin{tabular}{cll}
+\toprule
+Điểm & Trường hợp & Kết quả mong đợi \\
+\midrule
+\code{-1} & ngoài miền dưới & \code{Invalid} \\
+\code{0} & biên dưới & \code{F} \\
+\code{59} & ngay dưới 60 & \code{F} \\
+\code{60} & biên D & \code{D} \\
+\code{89} & ngay dưới A & \code{B} \\
+\code{90} & biên A & \code{A} \\
+\code{101} & ngoài miền trên & \code{Invalid} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{block}{Nhận xét}
+Bảng kiểm thử nên bao gồm cả nhánh hợp lệ, nhánh không hợp lệ và các giá trị sát ngưỡng.
+\end{block}
+\end{frame}
+
+\begin{frame}{Hoạt động nhanh: thiết kế ca kiểm thử}
+Bài toán: vé trẻ em nếu tuổi dưới 12; vé người lớn nếu từ 12 đến 59; vé người cao tuổi nếu từ 60 trở lên. Tuổi âm là không hợp lệ.
+\begin{block}{Yêu cầu}
+Hãy đề xuất ít nhất 6 ca kiểm thử, gồm:
+\begin{itemize}
+  \item một ca không hợp lệ;
+  \item các ca ngay dưới, đúng tại, và ngay trên mỗi ngưỡng;
+  \item một ca đại diện cho từng nhóm vé.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{3.7 Boolean và toán tử Boolean}
+
+% 30
+\begin{frame}[fragile]{Biến Boolean}
+Một biến Boolean lưu một trong hai giá trị: \code{True} hoặc \code{False}.
+\begin{lstlisting}[style=py]
+isValid = score >= 0 and score <= 100
+
+if isValid :
+    print("Valid score")
+else :
+    print("Invalid score")
+\end{lstlisting}
+\begin{block}{Lợi ích}
+Biến Boolean giúp đặt tên cho một điều kiện, làm chương trình dễ đọc hơn.
+\end{block}
+\end{frame}
+
+% 31
+\begin{frame}{Toán tử \texttt{and}}
+\code{and} đúng khi \textbf{cả hai} điều kiện đều đúng.
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+A & B & A \code{and} B \\
+\midrule
+False & False & False \\
+False & True  & False \\
+True  & False & False \\
+True  & True  & True \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{exampleblock}{Ví dụ}
+\code{score >= 0 and score <= 100}
+\end{exampleblock}
+\end{frame}
+
+% 32
+\begin{frame}{Toán tử \texttt{or}}
+\code{or} đúng khi \textbf{ít nhất một} điều kiện đúng.
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+A & B & A \code{or} B \\
+\midrule
+False & False & False \\
+False & True  & True \\
+True  & False & True \\
+True  & True  & True \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{exampleblock}{Ví dụ}
+\code{ch == "Y" or ch == "y"}
+\end{exampleblock}
+\end{frame}
+
+% 33
+\begin{frame}[fragile]{Toán tử \texttt{not} và thứ tự ưu tiên}
+\code{not} đảo giá trị Boolean.
+\begin{lstlisting}[style=py]
+if not isValid :
+    print("Invalid input")
+\end{lstlisting}
+\smallgap
+Thứ tự ưu tiên thường gặp:
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+Ưu tiên & Toán tử \\
+\midrule
+cao & toán tử quan hệ như \code{<}, \code{==} \\
+ & \code{not} \\
+ & \code{and} \\
+thấp & \code{or} \\
+\bottomrule
+\end{tabular}
+\end{center}
+Dùng ngoặc để làm rõ ý định.
+\end{frame}
+
+% 34
+\begin{frame}[fragile]{Lỗi thường gặp: nhầm \texttt{and} với \texttt{or}}
+Muốn kiểm tra điểm nằm ngoài khoảng 0 đến 100:
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{Sai}
+\begin{lstlisting}[style=py]
+if score < 0 and score > 100 :
+    print("Invalid")
+\end{lstlisting}
+Không có số nào vừa nhỏ hơn 0 vừa lớn hơn 100.
+\end{alertblock}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{exampleblock}{Đúng}
+\begin{lstlisting}[style=py]
+if score < 0 or score > 100 :
+    print("Invalid")
+\end{lstlisting}
+Một trong hai điều kiện xảy ra là đủ.
+\end{exampleblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% 35
+\begin{frame}[fragile]{Đánh giá ngắn mạch}
+Python đánh giá \code{and} và \code{or} từ trái sang phải và dừng khi đã biết kết quả.
+\begin{lstlisting}[style=py]
+if quantity > 0 and price / quantity < 10 :
+    print("Good price")
+\end{lstlisting}
+\smallgap
+Nếu \code{quantity > 0} sai, biểu thức thứ hai không được đánh giá. Điều này tránh lỗi chia cho 0.
+\smallgap
+\begin{block}{Ý nghĩa}
+Thứ tự các điều kiện có thể ảnh hưởng đến cả tính đúng đắn và độ an toàn của chương trình.
+\end{block}
+\end{frame}
+
+% 36
+\begin{frame}{Định luật De Morgan}
+De Morgan giúp biến đổi biểu thức phủ định.
+\begin{center}
+\begin{tabular}{ccl}
+\toprule
+Biểu thức & & Tương đương \\
+\midrule
+\code{not (A and B)} & $\Leftrightarrow$ & \code{not A or not B} \\
+\code{not (A or B)}  & $\Leftrightarrow$ & \code{not A and not B} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{exampleblock}{Ví dụ}
+\code{not (score >= 0 and score <= 100)} tương đương với \code{score < 0 or score > 100}.
+\end{exampleblock}
+\end{frame}
+
+
+
+% Added quiz
+\begin{frame}{Quiz 3.5: Boolean}
+Dự đoán kết quả nếu \code{score = 75} và \code{absent = 2}.
+\begin{enumerate}
+  \item \code{score >= 50 and absent <= 3}
+  \item \code{score >= 80 or absent <= 3}
+  \item \code{not (score < 50)}
+  \item \code{score < 0 or score > 100}
+\end{enumerate}
+\vspace{0.5em}
+\begin{exampleblock}{Câu hỏi thêm}
+Điều kiện nào phù hợp để kiểm tra \code{score} nằm trong đoạn 0--100?
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Đáp án Quiz 3.5}
+Với \code{score = 75}, \code{absent = 2}:
+\begin{enumerate}
+  \item \code{True}
+  \item \code{True}
+  \item \code{True}
+  \item \code{False}
+\end{enumerate}
+Điều kiện kiểm tra điểm hợp lệ:
+\begin{center}
+\code{score >= 0 and score <= 100}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Ví dụ bổ sung: điều kiện nhận học bổng}
+Sinh viên được xét học bổng nếu GPA từ 3.2 trở lên và số tín chỉ đạt ít nhất 15.
+\begin{lstlisting}[style=py]
+gpa = float(input("GPA: "))
+credits = int(input("Credits: "))
+
+if gpa >= 3.2 and credits >= 15 :
+    print("Scholarship candidate")
+else :
+    print("Not eligible")
+\end{lstlisting}
+\begin{block}{Điểm học được}
+\code{and} dùng khi tất cả điều kiện con đều phải đúng.
+\end{block}
+\end{frame}
+
+\section{3.8 Phân tích chuỗi}
+
+% 37
+\begin{frame}[fragile]{Toán tử thành viên \texttt{in} và \texttt{not in}}
+\begin{lstlisting}[style=py]
+if "@" in email :
+    print("May be an email address")
+
+if " " not in userName :
+    print("No spaces")
+\end{lstlisting}
+\begin{block}{Ý nghĩa}
+\code{in} kiểm tra một chuỗi con có xuất hiện trong chuỗi lớn hơn hay không.
+\end{block}
+\end{frame}
+
+% 38
+\begin{frame}{Một số phương thức chuỗi hữu ích}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Phương thức & Công dụng \\
+\midrule
+\code{s.startswith(t)} & kiểm tra bắt đầu bằng \code{t} \\
+\code{s.endswith(t)} & kiểm tra kết thúc bằng \code{t} \\
+\code{s.find(t)} & vị trí xuất hiện đầu tiên của \code{t} \\
+\code{s.count(t)} & số lần xuất hiện của \code{t} \\
+\code{s.lower()} & chuyển về chữ thường \\
+\code{s.upper()} & chuyển về chữ hoa \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+% 39
+\begin{frame}[fragile]{Kiểm tra đặc điểm của chuỗi}
+\begin{lstlisting}[style=py]
+if text.isdigit() :
+    number = int(text)
+
+if name.isalpha() :
+    print("Letters only")
+
+if code.isalnum() :
+    print("Letters and digits only")
+\end{lstlisting}
+\begin{itemize}
+  \item \code{isdigit()}: toàn chữ số.
+  \item \code{isalpha()}: toàn chữ cái.
+  \item \code{isalnum()}: chữ cái hoặc chữ số.
+\end{itemize}
+\end{frame}
+
+% 40
+\begin{frame}[fragile]{Ví dụ: khảo sát chuỗi con}
+\begin{lstlisting}[style=py]
+string = input("Enter a string: ")
+substring = input("Enter a substring: ")
+
+position = string.find(substring)
+
+if position == -1 :
+    print("Not found")
+else :
+    print("First occurrence starts at", position)
+    print("Number of occurrences:", string.count(substring))
+\end{lstlisting}
+\begin{block}{Kết nối với rẽ nhánh}
+Phương thức chuỗi thường tạo ra điều kiện để chương trình quyết định bước xử lý tiếp theo.
+\end{block}
+\end{frame}
+
+
+
+% Added example + quiz
+\begin{frame}[fragile]{Ví dụ bổ sung: kiểm tra mã sinh viên}
+Giả sử mã sinh viên hợp lệ nếu bắt đầu bằng \code{"SV"} và phần sau là chữ số.
+\begin{lstlisting}[style=py]
+studentID = input("Student ID: ").upper()
+
+if studentID.startswith("SV") and studentID[2:].isdigit() :
+    print("Valid student ID")
+else :
+    print("Invalid student ID")
+\end{lstlisting}
+\begin{alertblock}{Lưu ý}
+Cần cẩn thận nếu chuỗi quá ngắn. Khi dạy sâu hơn, nên bổ sung kiểm tra \code{len(studentID) >= 3}.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Quiz 3.6: phân tích chuỗi}
+Với \code{s = "Python 3"}, dự đoán kết quả:
+\begin{enumerate}
+  \item \code{"Py" in s}
+  \item \code{s.startswith("py")}
+  \item \code{s.upper().startswith("PY")}
+  \item \code{s.isalpha()}
+  \item \code{" " in s}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Đáp án Quiz 3.6}
+Với \code{s = "Python 3"}:
+\begin{enumerate}
+  \item \code{True}
+  \item \code{False}, vì phân biệt hoa/thường.
+  \item \code{True}, vì đã chuẩn hóa bằng \code{upper()}.
+  \item \code{False}, vì có khoảng trắng và chữ số.
+  \item \code{True}.
+\end{enumerate}
+\end{frame}
+
+\section{3.9 Kiểm tra dữ liệu đầu vào}
+
+% 41
+\begin{frame}{Vì sao cần kiểm tra dữ liệu đầu vào?}
+Người dùng có thể nhập dữ liệu ngoài phạm vi mong đợi.\smallgap
+
+Nếu chương trình xử lý ngay mà không kiểm tra, có thể xảy ra:
+\begin{itemize}
+  \item kết quả sai;
+  \item lỗi chạy chương trình;
+  \item thông báo khó hiểu;
+  \item dữ liệu không nhất quán.
+\end{itemize}
+\begin{block}{Nguyên tắc}
+Kiểm tra tính hợp lệ trước khi xử lý chính.
+\end{block}
+\end{frame}
+
+% 42
+\begin{frame}[fragile]{Kiểm tra miền giá trị}
+\begin{lstlisting}[style=py]
+score = int(input("Score: "))
+
+if score < 0 or score > 100 :
+    print("Invalid score")
+else :
+    if score >= 50 :
+        print("Pass")
+    else :
+        print("Fail")
+\end{lstlisting}
+\begin{block}{Mẫu xử lý}
+Trước hết loại bỏ dữ liệu không hợp lệ; sau đó xử lý các trường hợp hợp lệ.
+\end{block}
+\end{frame}
+
+% 43
+\begin{frame}[fragile]{Kiểm tra lựa chọn nhập vào}
+\begin{lstlisting}[style=py]
+choice = input("Continue? (Y/N): ")
+choice = choice.upper()
+
+if choice == "Y" :
+    print("Continue")
+elif choice == "N" :
+    print("Stop")
+else :
+    print("Invalid choice")
+\end{lstlisting}
+\begin{exampleblock}{Mẹo}
+Chuẩn hóa bằng \code{upper()} hoặc \code{lower()} để không phải kiểm tra cả chữ hoa và chữ thường.
+\end{exampleblock}
+\end{frame}
+
+% 44
+\begin{frame}{Hai đường tròn giao nhau: ý tưởng kiểm tra}
+Để kiểm tra hai đường tròn có giao nhau, có thể so sánh khoảng cách giữa hai tâm với bán kính.
+\begin{block}{Ba đại lượng chính}
+\begin{itemize}
+  \item khoảng cách giữa hai tâm: \code{distance};
+  \item tổng bán kính: \code{r1 + r2};
+  \item độ chênh bán kính: \code{abs(r1 - r2)}.
+\end{itemize}
+\end{block}
+\begin{exampleblock}{Điều kiện giao nhau thông thường}
+\code{abs(r1 - r2) <= distance and distance <= r1 + r2}
+\end{exampleblock}
+\end{frame}
+
+
+
+% Added example + quiz
+\begin{frame}[fragile]{Ví dụ bổ sung: kiểm tra số lượng mua hàng}
+\begin{lstlisting}[style=py]
+quantity = int(input("Quantity: "))
+
+if quantity <= 0 :
+    print("Quantity must be positive")
+elif quantity > 100 :
+    print("Quantity too large")
+else :
+    print("Accepted")
+\end{lstlisting}
+\begin{block}{Mẫu tư duy}
+Kiểm tra lỗi trước, sau đó xử lý trường hợp hợp lệ.
+\end{block}
+\end{frame}
+
+\begin{frame}{Quiz 3.7: input validation}
+Một chương trình đọc số giờ làm việc trong tuần. Giá trị hợp lệ là từ 0 đến 80.
+\begin{enumerate}
+  \item Viết điều kiện phát hiện giá trị không hợp lệ.
+  \item Nêu 5 ca kiểm thử nên dùng.
+  \item Vì sao không nên tính lương trước khi kiểm tra số giờ hợp lệ?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Gợi ý đáp án Quiz 3.7}
+\begin{enumerate}
+  \item Điều kiện không hợp lệ: \code{hours < 0 or hours > 80}.
+  \item Ca kiểm thử: \code{-1}, \code{0}, \code{1}, \code{80}, \code{81}.
+  \item Vì dữ liệu sai có thể tạo kết quả sai hoặc gây lỗi ở các bước xử lý sau.
+\end{enumerate}
+\end{frame}
+
+\section{Tổng kết và luyện tập}
+
+% 45
+\begin{frame}{Tổng kết: câu lệnh rẽ nhánh}
+\begin{itemize}
+  \item \code{if} chọn thực hiện một khối khi điều kiện đúng.
+  \item \code{else} xử lý trường hợp điều kiện sai.
+  \item \code{elif} phù hợp với nhiều phương án loại trừ lẫn nhau.
+  \item Thụt lề xác định khối lệnh trong Python.
+  \item Nên tránh lặp mã trong các nhánh.
+\end{itemize}
+\end{frame}
+
+% 46
+\begin{frame}{Tổng kết: điều kiện và Boolean}
+\begin{itemize}
+  \item Toán tử quan hệ tạo ra giá trị \code{True}/\code{False}.
+  \item \code{==} kiểm tra bằng nhau; \code{=} là phép gán.
+  \item Không nên so sánh bằng tuyệt đối với số thực sau tính toán.
+  \item \code{and}, \code{or}, \code{not} kết hợp điều kiện.
+  \item Đánh giá ngắn mạch có thể tránh lỗi và giảm tính toán.
+\end{itemize}
+\end{frame}
+
+% 47
+\begin{frame}{Tổng kết: kiểm thử và nhập liệu}
+\begin{itemize}
+  \item Mỗi nhánh quan trọng cần có ca kiểm thử.
+  \item Giá trị biên thường là nơi dễ phát sinh lỗi.
+  \item Kiểm tra dữ liệu đầu vào trước khi xử lý.
+  \item Với văn bản, nên chuẩn hóa khi không cần phân biệt hoa/thường.
+  \item Mô phỏng bằng tay giúp hiểu chương trình và tìm lỗi logic.
+\end{itemize}
+\end{frame}
+
+% 48
+\begin{frame}{Quiz nhanh}
+\begin{enumerate}
+  \item Sự khác nhau giữa \code{=} và \code{==} là gì?
+  \item Khi nào nên dùng \code{elif} thay vì nhiều \code{if} độc lập?
+  \item Vì sao điều kiện \code{score < 0 and score > 100} luôn sai?
+  \item Giá trị biên của điều kiện \code{age >= 18} là những giá trị nào?
+  \item \code{not (A and B)} tương đương với biểu thức nào?
+\end{enumerate}
+\end{frame}
+
+% 49
+\begin{frame}[fragile]{Bài tập trên lớp 1: phân loại điểm}
+Viết chương trình đọc một điểm số nguyên và in ra:
+\begin{itemize}
+  \item \code{Invalid} nếu điểm ngoài khoảng 0--100;
+  \item \code{A} nếu điểm từ 90 trở lên;
+  \item \code{B} nếu điểm từ 80 đến dưới 90;
+  \item \code{C} nếu điểm từ 70 đến dưới 80;
+  \item \code{D} nếu điểm từ 60 đến dưới 70;
+  \item \code{F} nếu điểm dưới 60.
+\end{itemize}
+\begin{block}{Yêu cầu}
+Dùng \code{if/elif/else} và thiết kế ít nhất 6 ca kiểm thử.
+\end{block}
+\end{frame}
+
+% 50
+\begin{frame}[fragile]{Bài tập trên lớp 2: kiểm tra tên người dùng}
+Viết chương trình đọc \code{username} và kiểm tra:
+\begin{itemize}
+  \item độ dài từ 6 đến 12 ký tự;
+  \item không chứa khoảng trắng;
+  \item chỉ gồm chữ cái và chữ số.
+\end{itemize}
+\smallgap
+Nếu hợp lệ, in \code{Valid username}; ngược lại in thông báo lỗi phù hợp.
+\smallgap
+\begin{exampleblock}{Gợi ý}
+Dùng \code{len()}, \code{" " in username}, \code{isalnum()}.
+\end{exampleblock}
+\end{frame}
+
+% 51
+
+
+% Added comprehensive quiz
+\begin{frame}{Quiz tổng hợp bổ sung}
+Trả lời nhanh.
+\begin{enumerate}
+  \item Điều kiện nào kiểm tra \code{x} nằm ngoài đoạn 1--10?
+  \item Với \code{name = "An"}, vì sao \code{name == "an"} là \code{False}?
+  \item Khi nào nên chuẩn hóa chuỗi bằng \code{upper()} hoặc \code{lower()}?
+  \item Vì sao cần kiểm thử \code{49}, \code{50}, \code{51} với điều kiện \code{score >= 50}?
+  \item \code{not (x < 0 or x > 100)} tương đương với điều kiện nào?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Đáp án quiz tổng hợp bổ sung}
+\begin{enumerate}
+  \item \code{x < 1 or x > 10}.
+  \item Vì Python phân biệt chữ hoa và chữ thường.
+  \item Khi không muốn phân biệt chữ hoa/chữ thường trong dữ liệu nhập.
+  \item Vì đó là các giá trị ngay dưới, đúng tại, và ngay trên ngưỡng.
+  \item \code{x >= 0 and x <= 100}.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Ví dụ tổng hợp: phân loại đơn hàng}
+\begin{lstlisting}[style=py]
+member = input("Member? (Y/N): ").upper()
+amount = float(input("Amount: "))
+
+if amount < 0 :
+    print("Invalid amount")
+else :
+    discount = 0
+    if member == "Y" and amount >= 1000000 :
+        discount = amount * 0.10
+    elif member == "Y" :
+        discount = amount * 0.05
+    total = amount - discount
+    print("Discount:", discount)
+    print("Total:", total)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Hướng dẫn học tập}
+Sau bài này, khi gặp một bài toán có điều kiện, hãy luyện theo chu trình:
+\begin{center}
+\Large
+\key{Hiểu bài toán} $\rightarrow$ \key{Xác định nhánh} $\rightarrow$ \key{Viết điều kiện} $\rightarrow$ \key{Kiểm thử biên}
+\end{center}
+\vspace{1em}
+\begin{block}{Thói quen quan trọng}
+Trước khi viết code, hãy tự hỏi: ``Có những trường hợp nào khác nhau? Mỗi trường hợp cần kiểm thử bằng dữ liệu nào?''
+\end{block}
+\end{frame}
+
+\end{document}

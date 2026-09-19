@@ -1,0 +1,3577 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Tinos}
+  \setmonofont[]{DejaVu Sans Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\setlength{\parskip}{0pt}}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{16pt}
+\lhead{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\rhead{\footnotesize\textbf{Bài 3: Câu lệnh rẽ nhánh}}
+\lfoot{\scriptsize Khoa Khoa học Dữ liệu và Trí tuệ Nhân tạo -- Đại học Kinh tế Quốc dân}
+\rfoot{\footnotesize Trang \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\emergencystretch}{3em}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Bài 3: Câu lệnh rẽ nhánh}
+\author{Khoa Khoa học Dữ liệu và Trí tuệ Nhân tạo (FDA) - Đại học Kinh tế Quốc dân}
+\date{Mã học phần: DSAI1003}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\section{Bài 3. Câu lệnh rẽ
+nhánh}\label{buxe0i-3.-cuxe2u-lux1ec7nh-rux1ebd-nhuxe1nh}
+
+\textbf{Cập nhật lần cuối:} 19/09/2026
+
+\begin{quote}
+\textbf{Nguồn:} Chương 3 -- \emph{Decisions}, trong giáo trình
+\emph{Python for Everyone} của Cay Horstmann và Rance Necaise (2/e).
+
+Bài giảng này giữ cấu trúc, thuật ngữ, ví dụ và trọng tâm sư phạm của
+Chương 3, đồng thời sắp xếp lại nội dung để thuận tiện cho giảng dạy
+trực tiếp trên lớp. Các ví dụ vẫn theo phong cách đặt tên biến và định
+dạng chuỗi bằng toán tử \texttt{\%} như trong giáo trình.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Giới thiệu bài
+học}\label{giux1edbi-thiux1ec7u-buxe0i-hux1ecdc}
+
+Ở Bài 2, phần lớn các chương trình được thực hiện theo thứ tự từ trên
+xuống dưới. Cách thực thi này phù hợp với các phép tính trực tiếp, nhưng
+các chương trình thực tế còn cần khả năng \textbf{đưa ra quyết định}.
+
+Một quyết định cho phép chương trình chọn hành động khác nhau tùy theo
+dữ liệu hoặc hoàn cảnh. Ví dụ, chương trình có thể cần:
+
+\begin{itemize}
+\tightlist
+\item
+  áp dụng mức giảm giá khác nhau cho đơn hàng nhỏ và đơn hàng lớn;
+\item
+  từ chối số tầng không hợp lệ trong chương trình mô phỏng thang máy;
+\item
+  phân loại động đất theo độ lớn;
+\item
+  kiểm tra một chuỗi có đúng định dạng yêu cầu hay không;
+\item
+  chọn công thức tính thuế theo tình trạng hôn nhân và thu nhập;
+\item
+  kiểm tra đồng thời nhiều điều kiện.
+\end{itemize}
+
+Ý tưởng trung tâm của bài học là:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Đánh giá một điều kiện}
+\NormalTok{          ↓}
+\NormalTok{    Đúng hay Sai?}
+\NormalTok{       ↙      ↘}
+\NormalTok{  Hành động A  Hành động B}
+\NormalTok{       ↘      ↙}
+\NormalTok{  Tiếp tục chương trình}
+\end{Highlighting}
+\end{Shaded}
+
+Nội dung được phát triển từ câu lệnh \texttt{if} hai nhánh, sau đó mở
+rộng sang rẽ nhánh lồng nhau, nhiều phương án, biểu thức Boolean, phân
+tích chuỗi, thiết kế ca kiểm thử và kiểm tra dữ liệu đầu vào.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Kiến thức và kỹ năng cần
+đạt}\label{kiux1ebfn-thux1ee9c-vuxe0-kux1ef9-nux103ng-cux1ea7n-ux111ux1ea1t}
+
+Sau khi hoàn thành bài học này, sinh viên có thể:
+
+\begin{itemize}
+\tightlist
+\item
+  Sử dụng các cấu trúc \texttt{if}, \texttt{if/else} và
+  \texttt{if/elif/else}.
+\item
+  Giải thích vai trò của \textbf{điều kiện} trong luồng điều khiển của
+  chương trình.
+\item
+  Sử dụng thụt lề đúng để xác định các khối lệnh.
+\item
+  So sánh số và chuỗi bằng các toán tử quan hệ.
+\item
+  Phân biệt phép gán \texttt{=} với phép kiểm tra bằng nhau \texttt{==}.
+\item
+  Tránh so sánh bằng tuyệt đối với các số thực được tạo ra từ phép tính
+  khi cần kiểm tra gần bằng.
+\item
+  Thiết kế quyết định hai nhánh từ mô tả bài toán.
+\item
+  Cài đặt \textbf{rẽ nhánh lồng nhau} cho các quyết định nhiều tầng.
+\item
+  Sử dụng \texttt{elif} cho các phương án loại trừ lẫn nhau.
+\item
+  Sắp xếp điều kiện theo thứ tự phù hợp, đặc biệt với các ngưỡng chồng
+  lấn.
+\item
+  Đọc và xây dựng \textbf{lưu đồ} đơn giản.
+\item
+  Thiết kế \textbf{ca kiểm thử} bao phủ các nhánh và giá trị biên.
+\item
+  Sử dụng hai giá trị Boolean \texttt{True} và \texttt{False}.
+\item
+  Kết hợp điều kiện bằng \texttt{and}, \texttt{or} và \texttt{not}.
+\item
+  Giải thích thứ tự ưu tiên và cơ chế đánh giá ngắn mạch.
+\item
+  Áp dụng định luật De Morgan để biến đổi biểu thức logic.
+\item
+  Phân tích chuỗi bằng toán tử thành viên và các phương thức chuỗi.
+\item
+  Kiểm tra tính hợp lệ của dữ liệu đầu vào trước khi xử lý.
+\item
+  Chuẩn hóa dữ liệu văn bản bằng \texttt{upper()} hoặc \texttt{lower()}
+  khi không cần phân biệt chữ hoa/chữ thường.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Cấu trúc bài học}\label{cux1ea5u-truxfac-buxe0i-hux1ecdc}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Câu lệnh \texttt{if}
+\item
+  Các toán tử quan hệ
+\item
+  Rẽ nhánh lồng nhau
+\item
+  Nhiều phương án
+\item
+  Giải quyết vấn đề: Lưu đồ
+\item
+  Giải quyết vấn đề: Ca kiểm thử
+\item
+  Biến Boolean và toán tử Boolean
+\item
+  Phân tích chuỗi
+\item
+  Ứng dụng: Kiểm tra dữ liệu đầu vào
+\item
+  Các chủ đề và Toolbox tùy chọn
+\item
+  Tổng kết và bài tập
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{3.1 Câu lệnh
+\texttt{if}}{3.1 Câu lệnh if}}\label{cuxe2u-lux1ec7nh-if}
+
+Chương trình thường cần thực hiện một hành động khi điều kiện đúng và
+một hành động khác khi điều kiện sai.
+
+Câu lệnh \texttt{if} cho phép chương trình thực hiện việc rẽ nhánh này.
+
+\subsection{3.1.1 Quyết định hai
+nhánh}\label{quyux1ebft-ux111ux1ecbnh-hai-nhuxe1nh}
+
+Xét hệ thống thang máy trong một tòa nhà bỏ qua số tầng 13. Khi người
+dùng chọn tầng hiển thị lớn hơn 13, tầng vật lý thực tế thấp hơn 1 đơn
+vị. Ví dụ, tầng hiển thị 20 tương ứng với tầng vật lý 19.
+
+Ta có thể viết:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+\end{Highlighting}
+\end{Shaded}
+
+Về mặt ý tưởng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{                 floor \textgreater{} 13 ?}
+\NormalTok{                  /       \textbackslash{}}
+\NormalTok{              Đúng        Sai}
+\NormalTok{               /            \textbackslash{}}
+\NormalTok{ actualFloor = floor {-} 1   actualFloor = floor}
+\end{Highlighting}
+\end{Shaded}
+
+Chỉ \textbf{một nhánh} được thực hiện.
+
+Nếu \texttt{floor\ \textgreater{}\ 13} là đúng, Python thực hiện khối
+lệnh đầu tiên và bỏ qua khối \texttt{else}. Nếu điều kiện sai, Python bỏ
+qua khối đầu và thực hiện nhánh \texttt{else}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.1.2 Cú pháp tổng
+quát}\label{cuxfa-phuxe1p-tux1ed5ng-quuxe1t}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ condition :}
+\NormalTok{    statements1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    statements2}
+\end{Highlighting}
+\end{Shaded}
+
+Nhánh \texttt{else} là tùy chọn:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ condition :}
+\NormalTok{    statements}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{actualFloor }\OperatorTok{=}\NormalTok{ floor}
+
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ actualFloor }\OperatorTok{{-}} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+Cách viết này phù hợp khi trường hợp sai không cần hành động đặc biệt
+nào.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.1.3 Câu lệnh ghép và khối
+lệnh}\label{cuxe2u-lux1ec7nh-ghuxe9p-vuxe0-khux1ed1i-lux1ec7nh}
+
+Câu lệnh \texttt{if} là một \textbf{câu lệnh ghép}. Dòng đầu của nó kết
+thúc bằng dấu hai chấm \texttt{:}, và các câu lệnh thuộc cùng nhánh phải
+được thụt lề.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ totalSales }\OperatorTok{\textgreater{}} \FloatTok{100.0}\NormalTok{ :}
+\NormalTok{    discount }\OperatorTok{=}\NormalTok{ totalSales }\OperatorTok{*} \FloatTok{0.05}
+\NormalTok{    totalSales }\OperatorTok{=}\NormalTok{ totalSales }\OperatorTok{{-}}\NormalTok{ discount}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"You received a discount of"}\NormalTok{, discount)}
+\end{Highlighting}
+\end{Shaded}
+
+Ba dòng được thụt lề tạo thành một khối lệnh.
+
+Các quy tắc quan trọng:
+
+\begin{itemize}
+\tightlist
+\item
+  Dòng tiêu đề kết thúc bằng \texttt{:}.
+\item
+  Các câu lệnh trong cùng một khối phải thụt lề ở cùng mức.
+\item
+  \texttt{if} và \texttt{else} tương ứng phải thẳng hàng.
+\item
+  Khối lệnh kết thúc khi mức thụt lề quay lại mức bên ngoài.
+\end{itemize}
+
+Trong Python, thụt lề là một phần của cú pháp, không chỉ để trình bày
+đẹp hơn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ví dụ -- Mô phỏng thang
+máy}\label{vuxed-dux1ee5-muxf4-phux1ecfng-thang-muxe1y}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#}
+\CommentTok{\# This program simulates an elevator panel that skips floor 13.}
+\CommentTok{\#}
+
+\NormalTok{floor }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Floor: "}\NormalTok{))}
+
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"The elevator will travel to the actual floor"}\NormalTok{, actualFloor)}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ chạy chương trình:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Floor: 20}
+\NormalTok{The elevator will travel to the actual floor 19}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lỗi thường gặp 3.1 -- Tab và thụt lề không nhất
+quán}\label{lux1ed7i-thux1b0ux1eddng-gux1eb7p-3.1-tab-vuxe0-thux1ee5t-lux1ec1-khuxf4ng-nhux1ea5t-quuxe1n}
+
+Python yêu cầu các câu lệnh trong cùng một khối phải có mức thụt lề nhất
+quán.
+
+Một đoạn mã nhìn có vẻ thẳng hàng trong trình soạn thảo vẫn có thể gặp
+lỗi nếu trộn ký tự tab và khoảng trắng.
+
+Nên cấu hình trình soạn thảo để phím Tab chèn khoảng trắng. Một quy ước
+phổ biến là dùng bốn khoảng trắng cho mỗi mức thụt lề:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{50}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Pass"}\NormalTok{)}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Continue to the next course"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Điều quan trọng nhất là \textbf{tính nhất quán}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mẹo lập trình 3.1 -- Tránh lặp mã trong các
+nhánh}\label{mux1eb9o-lux1eadp-truxecnh-3.1-truxe1nh-lux1eb7p-muxe3-trong-cuxe1c-nhuxe1nh}
+
+Xét đoạn mã:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Actual floor:"}\NormalTok{, actualFloor)}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Actual floor:"}\NormalTok{, actualFloor)}
+\end{Highlighting}
+\end{Shaded}
+
+Câu lệnh \texttt{print} bị lặp lại ở cả hai nhánh.
+
+Cách viết tốt hơn:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Actual floor:"}\NormalTok{, actualFloor)}
+\end{Highlighting}
+\end{Shaded}
+
+Đưa phần xử lý chung ra khỏi các nhánh giúp:
+
+\begin{itemize}
+\tightlist
+\item
+  giảm lặp mã;
+\item
+  chương trình ngắn hơn;
+\item
+  giảm nguy cơ sửa một bản nhưng quên sửa bản còn lại.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.1 -- Biểu thức điều
+kiện}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.1-biux1ec3u-thux1ee9c-ux111iux1ec1u-kiux1ec7n}
+
+Python có thể biểu diễn một lựa chọn hai trường hợp dưới dạng biểu thức:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1} \ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13} \ControlFlowTok{else}\NormalTok{ floor}
+\end{Highlighting}
+\end{Shaded}
+
+Tương đương với:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+\end{Highlighting}
+\end{Shaded}
+
+Ở giai đoạn đầu học lập trình, dạng \texttt{if/else} đầy đủ thường dễ
+đọc hơn, đặc biệt khi mỗi nhánh có nhiều hơn một hành động.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.1}\label{tux1ef1-kiux1ec3m-tra-3.1}
+
+\subsubsection{Câu 1}\label{cuxe2u-1}
+
+Giá trị của \texttt{actualFloor} là bao nhiêu khi \texttt{floor\ =\ 18}?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+\texttt{17}.
+
+\subsubsection{Câu 2}\label{cuxe2u-2}
+
+Giá trị của \texttt{actualFloor} là bao nhiêu khi \texttt{floor\ =\ 9}?
+
+\textbf{Đáp án}
+
+\texttt{9}.
+
+\subsubsection{Câu 3}\label{cuxe2u-3}
+
+Tại sao phải có dấu \texttt{:} sau điều kiện của \texttt{if}?
+
+\textbf{Đáp án}
+
+Dấu \texttt{:} đánh dấu dòng tiêu đề của câu lệnh ghép. Khối lệnh được
+thụt lề ngay sau đó thuộc về dòng tiêu đề này.
+
+\subsubsection{Câu 4}\label{cuxe2u-4}
+
+Có thể cải thiện đoạn mã sau như thế nào?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ balance }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{ :}
+\NormalTok{    status }\OperatorTok{=} \StringTok{"Overdrawn"}
+    \BuiltInTok{print}\NormalTok{(status)}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    status }\OperatorTok{=} \StringTok{"OK"}
+    \BuiltInTok{print}\NormalTok{(status)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+Đưa câu lệnh \texttt{print} ra ngoài hai nhánh:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ balance }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{ :}
+\NormalTok{    status }\OperatorTok{=} \StringTok{"Overdrawn"}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    status }\OperatorTok{=} \StringTok{"OK"}
+
+\BuiltInTok{print}\NormalTok{(status)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.2 Các toán tử quan
+hệ}\label{cuxe1c-touxe1n-tux1eed-quan-hux1ec7}
+
+Một câu lệnh \texttt{if} cần một điều kiện có giá trị là \texttt{True}
+hoặc \texttt{False}.
+
+Nhiều điều kiện được tạo bằng cách so sánh hai giá trị với \textbf{toán
+tử quan hệ}.
+
+\subsection{3.2.1 Các toán tử quan
+hệ}\label{cuxe1c-touxe1n-tux1eed-quan-hux1ec7-1}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Toán tử Python & Ý nghĩa \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{\textgreater{}} & Lớn hơn \\
+\texttt{\textgreater{}=} & Lớn hơn hoặc bằng \\
+\texttt{\textless{}} & Nhỏ hơn \\
+\texttt{\textless{}=} & Nhỏ hơn hoặc bằng \\
+\texttt{==} & Bằng \\
+\texttt{!=} & Khác \\
+\end{longtable}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3} \OperatorTok{\textless{}} \DecValTok{4}
+\DecValTok{4} \OperatorTok{\textless{}=} \DecValTok{4}
+\DecValTok{7} \OperatorTok{!=} \DecValTok{5}
+\DecValTok{10} \OperatorTok{==} \DecValTok{2} \OperatorTok{*} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Mỗi biểu thức trên cho kết quả là một giá trị Boolean.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{3.2.2 Phép gán \texttt{=} và phép kiểm tra
+bằng
+\texttt{==}}{3.2.2 Phép gán = và phép kiểm tra bằng ==}}\label{phuxe9p-guxe1n-vuxe0-phuxe9p-kiux1ec3m-tra-bux1eb1ng}
+
+Hai toán tử này có chức năng hoàn toàn khác nhau.
+
+Phép gán:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{floor }\OperatorTok{=} \DecValTok{13}
+\end{Highlighting}
+\end{Shaded}
+
+Phép kiểm tra bằng nhau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{==} \DecValTok{13}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Floor 13 selected"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Có thể đọc như sau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{=   → gán}
+\NormalTok{==  → có bằng nhau không?}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.2.3 So sánh chuỗi}\label{so-suxe1nh-chuux1ed7i}
+
+Chuỗi cũng có thể được so sánh.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name1 }\OperatorTok{=} \StringTok{"John Wayne"}
+\NormalTok{name2 }\OperatorTok{=} \StringTok{"John Wayne"}
+
+\ControlFlowTok{if}\NormalTok{ name1 }\OperatorTok{==}\NormalTok{ name2 :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"The strings are identical."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+So sánh chuỗi phân biệt chữ hoa và chữ thường:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"John"} \OperatorTok{==} \StringTok{"john"}
+\end{Highlighting}
+\end{Shaded}
+
+cho kết quả \texttt{False}.
+
+Để hai chuỗi bằng nhau, mọi ký tự và vị trí của ký tự phải trùng khớp.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.2.4 Thứ tự ưu tiên toán
+tử}\label{thux1ee9-tux1ef1-ux1b0u-tiuxean-touxe1n-tux1eed}
+
+Các toán tử số học có độ ưu tiên cao hơn toán tử quan hệ.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{floor }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{13}
+\end{Highlighting}
+\end{Shaded}
+
+Python tính trước:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{floor {-} 1}
+\end{Highlighting}
+\end{Shaded}
+
+sau đó mới so sánh kết quả với \texttt{13}.
+
+Với các biểu thức phức tạp, nên dùng dấu ngoặc để tăng tính dễ đọc.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lỗi thường gặp 3.2 -- So sánh chính xác số thực dấu phẩy
+động}\label{lux1ed7i-thux1b0ux1eddng-gux1eb7p-3.2-so-suxe1nh-chuxednh-xuxe1c-sux1ed1-thux1ef1c-dux1ea5u-phux1ea9y-ux111ux1ed9ng}
+
+Các phép tính với \texttt{float} có thể xuất hiện sai số làm tròn rất
+nhỏ.
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ sqrt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ sqrt(}\FloatTok{2.0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(x }\OperatorTok{*}\NormalTok{ x)}
+\end{Highlighting}
+\end{Shaded}
+
+Kết quả có thể rất gần \texttt{2.0}, nhưng biểu diễn bên trong không
+nhất thiết chính xác tuyệt đối bằng \texttt{2.0}.
+
+Vì vậy phép kiểm tra sau có thể không phù hợp:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ x }\OperatorTok{*}\NormalTok{ x }\OperatorTok{==} \FloatTok{2.0}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Exactly two"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Khi cần kiểm tra gần bằng, so sánh độ chênh với một ngưỡng nhỏ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EPSILON }\OperatorTok{=} \FloatTok{1E{-}14}
+
+\ControlFlowTok{if} \BuiltInTok{abs}\NormalTok{(x }\OperatorTok{*}\NormalTok{ x }\OperatorTok{{-}} \FloatTok{2.0}\NormalTok{) }\OperatorTok{\textless{}}\NormalTok{ EPSILON :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Approximately two"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Mẫu tổng quát:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \BuiltInTok{abs}\NormalTok{(x }\OperatorTok{{-}}\NormalTok{ y) }\OperatorTok{\textless{}}\NormalTok{ epsilon :}
+    \CommentTok{\# Coi x và y là gần bằng nhau.}
+\end{Highlighting}
+\end{Shaded}
+
+Giá trị \texttt{epsilon} phải được chọn phù hợp với thang đo và mục đích
+của phép tính.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.2 -- Thứ tự từ điển của
+chuỗi}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.2-thux1ee9-tux1ef1-tux1eeb-ux111iux1ec3n-cux1ee7a-chuux1ed7i}
+
+Các toán tử như \texttt{\textless{}} và \texttt{\textgreater{}} cũng có
+thể dùng với chuỗi.
+
+Python so sánh chuỗi theo thứ tự từ điển dựa trên mã ký tự.
+
+Ví dụ, chữ hoa/chữ thường có ảnh hưởng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"John"} \OperatorTok{\textless{}} \StringTok{"john"}
+\end{Highlighting}
+\end{Shaded}
+
+Kết quả dựa trên thứ tự mã ký tự, không phải quy tắc từ điển bỏ qua chữ
+hoa/chữ thường.
+
+Nếu muốn so sánh không phân biệt hoa thường, có thể chuẩn hóa trước:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name1 }\OperatorTok{=}\NormalTok{ name1.lower()}
+\NormalTok{name2 }\OperatorTok{=}\NormalTok{ name2.lower()}
+\end{Highlighting}
+\end{Shaded}
+
+sau đó mới so sánh.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{CÁCH LÀM 3.1 -- Cài đặt một câu lệnh
+\texttt{if}}{CÁCH LÀM 3.1 -- Cài đặt một câu lệnh if}}\label{cuxe1ch-luxe0m-3.1-cuxe0i-ux111ux1eb7t-mux1ed9t-cuxe2u-lux1ec7nh-if}
+
+Chương đưa ra một quy trình có hệ thống để xây dựng quyết định.
+
+Giả sử một cửa hàng áp dụng một mức giảm giá cho giá bán dưới một ngưỡng
+và mức giảm lớn hơn khi đạt hoặc vượt ngưỡng đó.
+
+\subsection{Bước 1. Xác định điều kiện rẽ
+nhánh}\label{bux1b0ux1edbc-1.-xuxe1c-ux111ux1ecbnh-ux111iux1ec1u-kiux1ec7n-rux1ebd-nhuxe1nh}
+
+Đặt một câu hỏi có thể trả lời bằng \texttt{True} hoặc \texttt{False}.
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Giá ban đầu có nhỏ hơn 128 không?}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bước 2. Mô tả điều xảy ra khi điều kiện
+đúng}\label{bux1b0ux1edbc-2.-muxf4-tux1ea3-ux111iux1ec1u-xux1ea3y-ra-khi-ux111iux1ec1u-kiux1ec7n-ux111uxfang}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Dùng mức giảm giá thấp hơn.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bước 3. Mô tả điều xảy ra khi điều kiện
+sai}\label{bux1b0ux1edbc-3.-muxf4-tux1ea3-ux111iux1ec1u-xux1ea3y-ra-khi-ux111iux1ec1u-kiux1ec7n-sai}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Dùng mức giảm giá cao hơn.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bước 4. Kiểm tra toán tử quan hệ tại giá trị
+biên}\label{bux1b0ux1edbc-4.-kiux1ec3m-tra-touxe1n-tux1eed-quan-hux1ec7-tux1ea1i-giuxe1-trux1ecb-biuxean}
+
+Nếu mức giảm cao hơn bắt đầu ngay tại \texttt{128}, điều kiện cho mức
+thấp phải là:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{originalPrice }\OperatorTok{\textless{}} \DecValTok{128}
+\end{Highlighting}
+\end{Shaded}
+
+không phải:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{originalPrice }\OperatorTok{\textless{}=} \DecValTok{128}
+\end{Highlighting}
+\end{Shaded}
+
+Các giá trị biên thường giúp phát hiện lỗi chọn \texttt{\textless{}} hay
+\texttt{\textless{}=}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bước 5. Loại bỏ phần xử lý lặp
+lại}\label{bux1b0ux1edbc-5.-loux1ea1i-bux1ecf-phux1ea7n-xux1eed-luxfd-lux1eb7p-lux1ea1i}
+
+Thay vì tính toàn bộ giá sau giảm trong cả hai nhánh, chỉ chọn hệ số
+giảm giá bên trong nhánh:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ originalPrice }\OperatorTok{\textless{}} \DecValTok{128}\NormalTok{ :}
+\NormalTok{    discountRate }\OperatorTok{=} \FloatTok{0.92}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    discountRate }\OperatorTok{=} \FloatTok{0.84}
+
+\NormalTok{discountedPrice }\OperatorTok{=}\NormalTok{ discountRate }\OperatorTok{*}\NormalTok{ originalPrice}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bước 6. Kiểm thử cả hai
+nhánh}\label{bux1b0ux1edbc-6.-kiux1ec3m-thux1eed-cux1ea3-hai-nhuxe1nh}
+
+Chọn ít nhất một giá trị dưới ngưỡng và một giá trị trên ngưỡng.
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{100  → nhánh giảm thấp hơn}
+\NormalTok{200  → nhánh giảm cao hơn}
+\NormalTok{128  → giá trị biên}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bước 7. Ghép thành chương trình
+Python}\label{bux1b0ux1edbc-7.-ghuxe9p-thuxe0nh-chux1b0ux1a1ng-truxecnh-python}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{originalPrice }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Original price before discount: "}\NormalTok{))}
+
+\ControlFlowTok{if}\NormalTok{ originalPrice }\OperatorTok{\textless{}} \DecValTok{128}\NormalTok{ :}
+\NormalTok{    discountRate }\OperatorTok{=} \FloatTok{0.92}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    discountRate }\OperatorTok{=} \FloatTok{0.84}
+
+\NormalTok{discountedPrice }\OperatorTok{=}\NormalTok{ discountRate }\OperatorTok{*}\NormalTok{ originalPrice}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Discounted price: }\SpecialCharTok{\%.2f}\StringTok{"} \OperatorTok{\%}\NormalTok{ discountedPrice)}
+\end{Highlighting}
+\end{Shaded}
+
+Điều quan trọng không phải ghi nhớ ví dụ cụ thể này, mà là biết cách
+chuyển một quy tắc hai trường hợp thành một điều kiện đúng và hai nhánh
+tương ứng.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Ví dụ minh họa 3.1 -- Lấy phần giữa của một
+chuỗi}\label{vuxed-dux1ee5-minh-hux1ecda-3.1-lux1ea5y-phux1ea7n-giux1eefa-cux1ee7a-mux1ed9t-chuux1ed7i}
+
+Giả sử chương trình cần lấy:
+
+\begin{itemize}
+\tightlist
+\item
+  một ký tự ở giữa nếu độ dài chuỗi là lẻ;
+\item
+  hai ký tự ở giữa nếu độ dài chuỗi là chẵn.
+\end{itemize}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{"crate"   → "a"}
+\NormalTok{"crates"  → "at"}
+\end{Highlighting}
+\end{Shaded}
+
+Điều kiện rẽ nhánh dựa vào tính chẵn/lẻ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{len}\NormalTok{(text) }\OperatorTok{\%} \DecValTok{2} \OperatorTok{==} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+Vị trí giữa có thể tính một lần:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{position }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(text) }\OperatorTok{//} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Sau đó:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \BuiltInTok{len}\NormalTok{(text) }\OperatorTok{\%} \DecValTok{2} \OperatorTok{==} \DecValTok{1}\NormalTok{ :}
+\NormalTok{    result }\OperatorTok{=}\NormalTok{ text[position]}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    result }\OperatorTok{=}\NormalTok{ text[position }\OperatorTok{{-}} \DecValTok{1}\NormalTok{] }\OperatorTok{+}\NormalTok{ text[position]}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ này kết hợp:
+
+\begin{itemize}
+\tightlist
+\item
+  độ dài chuỗi;
+\item
+  chia lấy phần nguyên;
+\item
+  phép chia lấy dư;
+\item
+  truy cập bằng chỉ số;
+\item
+  quyết định hai nhánh;
+\item
+  tránh tính toán lặp lại.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.2}\label{tux1ef1-kiux1ec3m-tra-3.2}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-1}
+
+Giá trị của:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4} \OperatorTok{\textless{}=} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+là gì?
+
+\textbf{Đáp án}
+
+\texttt{True}.
+
+\subsubsection{Câu 2}\label{cuxe2u-2-1}
+
+Tại sao đoạn sau sai?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{=} \DecValTok{100}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Perfect"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+\texttt{=} là phép gán. Muốn kiểm tra bằng nhau phải dùng \texttt{==}.
+
+\subsubsection{Câu 3}\label{cuxe2u-3-1}
+
+Điều kiện nào kiểm tra \texttt{n} là số lẻ?
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OperatorTok{\%} \DecValTok{2} \OperatorTok{==} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Câu 4}\label{cuxe2u-4-1}
+
+Kết quả phần giữa của:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text }\OperatorTok{=} \StringTok{"monitor"}
+\end{Highlighting}
+\end{Shaded}
+
+là gì?
+
+\textbf{Đáp án}
+
+\texttt{"i"}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.3 Rẽ nhánh lồng nhau}\label{rux1ebd-nhuxe1nh-lux1ed3ng-nhau}
+
+Đôi khi chương trình phải đưa ra một quyết định, rồi tiếp tục đưa ra một
+quyết định khác bên trong nhánh đã được chọn.
+
+Đó là \textbf{rẽ nhánh lồng nhau}.
+
+Cấu trúc ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ condition1 :}
+    \ControlFlowTok{if}\NormalTok{ condition2 :}
+\NormalTok{        statementA}
+    \ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{        statementB}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    statementC}
+\end{Highlighting}
+\end{Shaded}
+
+Câu lệnh \texttt{if} thứ hai nằm bên trong nhánh đầu của \texttt{if} bên
+ngoài.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.3.1 Quyết định nhiều
+tầng}\label{quyux1ebft-ux111ux1ecbnh-nhiux1ec1u-tux1ea7ng}
+
+Một ví dụ điển hình là phép tính thuế đơn giản hóa:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  trước tiên chương trình xác định nhóm người nộp thuế;
+\item
+  sau đó xác định mức thu nhập áp dụng trong nhóm đó.
+\end{enumerate}
+
+Về mặt ý tưởng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{                     status?}
+\NormalTok{                 /             \textbackslash{}}
+\NormalTok{             single           married}
+\NormalTok{              /                  \textbackslash{}}
+\NormalTok{        income limit?        income limit?}
+\NormalTok{          /      \textbackslash{}             /      \textbackslash{}}
+\NormalTok{      lower     upper       lower     upper}
+\NormalTok{      rate      rate        rate      rate}
+\end{Highlighting}
+\end{Shaded}
+
+Mẫu cài đặt:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ status }\OperatorTok{==} \StringTok{"s"}\NormalTok{ :}
+    \ControlFlowTok{if}\NormalTok{ income }\OperatorTok{\textless{}=}\NormalTok{ SINGLE\_LIMIT :}
+        \CommentTok{\# mức thuế thấp cho người độc thân}
+\NormalTok{        ...}
+    \ControlFlowTok{else}\NormalTok{ :}
+        \CommentTok{\# mức thuế cao cho người độc thân}
+\NormalTok{        ...}
+\ControlFlowTok{else}\NormalTok{ :}
+    \ControlFlowTok{if}\NormalTok{ income }\OperatorTok{\textless{}=}\NormalTok{ MARRIED\_LIMIT :}
+        \CommentTok{\# mức thuế thấp cho người đã kết hôn}
+\NormalTok{        ...}
+    \ControlFlowTok{else}\NormalTok{ :}
+        \CommentTok{\# mức thuế cao cho người đã kết hôn}
+\NormalTok{        ...}
+\end{Highlighting}
+\end{Shaded}
+
+Rẽ nhánh có thể lồng sâu hơn, nhưng quá nhiều mức lồng nhau làm chương
+trình khó đọc. Ở các bài sau, hàm sẽ giúp tổ chức logic phức tạp tốt
+hơn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mẹo lập trình 3.2 -- Mô phỏng bằng
+tay}\label{mux1eb9o-lux1eadp-truxecnh-3.2-muxf4-phux1ecfng-bux1eb1ng-tay}
+
+\textbf{Mô phỏng bằng tay} (\emph{hand-tracing}) là thực hiện chương
+trình thủ công, từng câu lệnh một.
+
+Có thể tạo bảng nhỏ như sau:
+
+\begin{longtable}[]{@{}lrlrr@{}}
+\toprule\noalign{}
+Bước & \texttt{income} & \texttt{status} & \texttt{tax1} &
+\texttt{tax2} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Nhập & 80000 & \texttt{"m"} & & \\
+Khởi tạo & 80000 & \texttt{"m"} & 0 & 0 \\
+Rẽ nhánh & 80000 & \texttt{"m"} & \ldots{} & \ldots{} \\
+\end{longtable}
+
+Mỗi khi một biến thay đổi, cập nhật giá trị của biến trong bảng.
+
+Kỹ thuật này đặc biệt hữu ích khi:
+
+\begin{itemize}
+\tightlist
+\item
+  có nhiều \texttt{if} lồng nhau;
+\item
+  chương trình có nhiều biến;
+\item
+  cần hiểu vì sao chương trình đi vào một nhánh nào đó;
+\item
+  cần so sánh kết quả mong đợi với kết quả thực tế.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Máy tính và xã hội 3.1 -- Hệ thống phức tạp và logic quyết
+định}\label{muxe1y-tuxednh-vuxe0-xuxe3-hux1ed9i-3.1-hux1ec7-thux1ed1ng-phux1ee9c-tux1ea1p-vuxe0-logic-quyux1ebft-ux111ux1ecbnh}
+
+Chương sử dụng hệ thống xử lý hành lý của Sân bay Quốc tế Denver như một
+ví dụ về độ phức tạp của phần mềm và hệ thống. Một logic quyết định có
+thể rất đơn giản khi xét riêng lẻ, nhưng trở nên khó quản lý khi kết hợp
+nhiều thành phần vật lý, ràng buộc thời gian, trường hợp ngoại lệ và
+tương tác giữa các thành phần.
+
+Bài học thực tế cho người mới học lập trình là:
+
+\begin{quote}
+Mỗi quyết định cần đủ rõ để có thể hiểu và kiểm thử. Không nên giả định
+rằng một hệ thống lớn sẽ đúng chỉ vì từng mảnh nhỏ của nó đều có vẻ đúng
+khi xét riêng.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.3}\label{tux1ef1-kiux1ec3m-tra-3.3}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-2}
+
+Khi nào nên dùng rẽ nhánh lồng nhau?
+
+\textbf{Đáp án}
+
+Khi quyết định thứ hai chỉ có ý nghĩa sau khi một kết quả cụ thể của
+quyết định trước đã xảy ra.
+
+\subsubsection{Câu 2}\label{cuxe2u-2-2}
+
+Tại sao thụt lề đặc biệt quan trọng trong rẽ nhánh lồng nhau?
+
+\textbf{Đáp án}
+
+Vì thụt lề xác định câu lệnh bên trong thuộc nhánh nào của câu lệnh bên
+ngoài.
+
+\subsubsection{Câu 3}\label{cuxe2u-3-2}
+
+Mô phỏng bằng tay giúp hiểu điều gì?
+
+\textbf{Đáp án}
+
+Giúp hiểu thứ tự thực hiện, nhánh nào được chọn và giá trị các biến thay
+đổi như thế nào.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.4 Nhiều phương án}\label{nhiux1ec1u-phux1b0ux1a1ng-uxe1n}
+
+Nhiều quyết định có nhiều hơn hai kết quả có thể xảy ra.
+
+Python dùng \texttt{elif} để biểu diễn chuỗi các phương án loại trừ lẫn
+nhau.
+
+Cấu trúc tổng quát:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ condition1 :}
+\NormalTok{    statements1}
+\ControlFlowTok{elif}\NormalTok{ condition2 :}
+\NormalTok{    statements2}
+\ControlFlowTok{elif}\NormalTok{ condition3 :}
+\NormalTok{    statements3}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    defaultStatements}
+\end{Highlighting}
+\end{Shaded}
+
+Python kiểm tra điều kiện từ trên xuống dưới. Khi gặp điều kiện đầu tiên
+đúng, nhánh tương ứng được thực hiện và các nhánh còn lại bị bỏ qua.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ví dụ -- Phân loại động
+đất}\label{vuxed-dux1ee5-phuxe2n-loux1ea1i-ux111ux1ed9ng-ux111ux1ea5t}
+
+Một cách phân loại đơn giản có thể dùng các ngưỡng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{richter }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Enter a magnitude: "}\NormalTok{))}
+
+\ControlFlowTok{if}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{8.0}\NormalTok{ :}
+\NormalTok{    description }\OperatorTok{=} \StringTok{"Very severe structural damage"}
+\ControlFlowTok{elif}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{7.0}\NormalTok{ :}
+\NormalTok{    description }\OperatorTok{=} \StringTok{"Severe damage in many areas"}
+\ControlFlowTok{elif}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{6.0}\NormalTok{ :}
+\NormalTok{    description }\OperatorTok{=} \StringTok{"Considerable damage is possible"}
+\ControlFlowTok{elif}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{4.5}\NormalTok{ :}
+\NormalTok{    description }\OperatorTok{=} \StringTok{"Some poorly constructed buildings may be damaged"}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    description }\OperatorTok{=} \StringTok{"Little or no structural damage"}
+
+\BuiltInTok{print}\NormalTok{(description)}
+\end{Highlighting}
+\end{Shaded}
+
+Điểm cần chú ý là cấu trúc rẽ nhánh, không phải nội dung cụ thể của các
+mô tả.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.4.1 Thứ tự điều kiện rất quan
+trọng}\label{thux1ee9-tux1ef1-ux111iux1ec1u-kiux1ec7n-rux1ea5t-quan-trux1ecdng}
+
+Giả sử điều kiện được viết từ ngưỡng nhỏ lên ngưỡng lớn:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{4.5}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{6.0}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ richter }\OperatorTok{\textgreater{}=} \FloatTok{7.0}\NormalTok{ :}
+\NormalTok{    ...}
+\end{Highlighting}
+\end{Shaded}
+
+Với \texttt{richter\ =\ 7.1}, điều kiện đầu tiên đã đúng nên các nhánh
+sau không bao giờ được kiểm tra.
+
+Khi các khoảng chồng lấn, cần kiểm tra \textbf{ngưỡng cao hơn / trường
+hợp cụ thể hơn trước}.
+
+Mẫu đúng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ value }\OperatorTok{\textgreater{}=} \DecValTok{80}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ value }\OperatorTok{\textgreater{}=} \DecValTok{70}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ value }\OperatorTok{\textgreater{}=} \DecValTok{60}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    ...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{3.4.2 \texttt{elif} và các câu lệnh
+\texttt{if} độc
+lập}{3.4.2 elif và các câu lệnh if độc lập}}\label{elif-vuxe0-cuxe1c-cuxe2u-lux1ec7nh-if-ux111ux1ed9c-lux1eadp}
+
+Hai cách này không tương đương.
+
+Các phương án loại trừ lẫn nhau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{90}\NormalTok{ :}
+\NormalTok{    grade }\OperatorTok{=} \StringTok{"A"}
+\ControlFlowTok{elif}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{80}\NormalTok{ :}
+\NormalTok{    grade }\OperatorTok{=} \StringTok{"B"}
+\ControlFlowTok{elif}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{70}\NormalTok{ :}
+\NormalTok{    grade }\OperatorTok{=} \StringTok{"C"}
+\end{Highlighting}
+\end{Shaded}
+
+Chỉ một nhánh được thực hiện.
+
+Các kiểm tra độc lập:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{90}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"At least 90"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{80}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"At least 80"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{70}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"At least 70"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Với \texttt{score\ =\ 95}, cả ba dòng đều được in.
+
+Dùng \texttt{if/elif/else} khi các trường hợp loại trừ lẫn nhau. Dùng
+nhiều \texttt{if} độc lập khi nhiều điều kiện có thể đồng thời kích hoạt
+nhiều hành động.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.4}\label{tux1ef1-kiux1ec3m-tra-3.4}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-3}
+
+Viết logic đặt \texttt{sign} bằng \texttt{1}, \texttt{0} hoặc
+\texttt{-1} tùy theo \texttt{x} dương, bằng 0 hay âm.
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ x }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{ :}
+\NormalTok{    sign }\OperatorTok{=} \DecValTok{1}
+\ControlFlowTok{elif}\NormalTok{ x }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{ :}
+\NormalTok{    sign }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{1}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    sign }\OperatorTok{=} \DecValTok{0}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Câu 2}\label{cuxe2u-2-3}
+
+Tại sao các điều kiện ngưỡng chồng lấn thường nên sắp xếp từ lớn xuống
+nhỏ?
+
+\textbf{Đáp án}
+
+Vì Python dừng ở nhánh đúng đầu tiên. Nếu đặt một điều kiện rộng ở
+trước, nó có thể chặn một trường hợp cụ thể hơn ở phía sau.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{TOOLBOX 3.1 -- Gửi e-mail}\label{toolbox-3.1-gux1eedi-e-mail}
+
+Giáo trình dùng tự động hóa e-mail để minh họa cách kết hợp dữ liệu,
+quyết định và thư viện Python.
+
+Ý tưởng lập trình cốt lõi là tạo nội dung thông điệp khác nhau tùy theo
+điều kiện:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{score }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Score: "}\NormalTok{))}
+\NormalTok{body }\OperatorTok{=} \StringTok{"Your score on the last exam is "} \OperatorTok{+} \BuiltInTok{str}\NormalTok{(score) }\OperatorTok{+} \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textless{}=} \DecValTok{50}\NormalTok{ :}
+\NormalTok{    body }\OperatorTok{+=} \StringTok{"Please consider visiting the tutoring center."}
+\ControlFlowTok{elif}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{90}\NormalTok{ :}
+\NormalTok{    body }\OperatorTok{+=} \StringTok{"Excellent work."}
+\end{Highlighting}
+\end{Shaded}
+
+Chi tiết thư viện gửi mail không phải trọng tâm chính của bài. Điều cần
+hiểu là chương trình có thể tùy biến hành động hoặc nội dung dựa trên dữ
+liệu.
+
+\begin{quote}
+Với tài khoản thật, yêu cầu xác thực của nhà cung cấp e-mail có thể thay
+đổi theo thời gian. Không nên đặt mật khẩu thật trực tiếp trong mã nguồn
+bài giảng hoặc notebook chia sẻ.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.5 Giải quyết vấn đề: Lưu
+đồ}\label{giux1ea3i-quyux1ebft-vux1ea5n-ux111ux1ec1-lux1b0u-ux111ux1ed3}
+
+\textbf{Lưu đồ} (\emph{flowchart}) mô tả trực quan luồng điều khiển của
+thuật toán.
+
+Các thành phần thường gặp:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[ Xử lý / công việc ]}
+
+\NormalTok{\textless{} Nhập / xuất \textgreater{}}
+
+\NormalTok{      / Điều kiện? \textbackslash{}}
+\NormalTok{     /             \textbackslash{}}
+\NormalTok{   Đúng            Sai}
+\end{Highlighting}
+\end{Shaded}
+
+Lưu đồ hữu ích khi bài toán có nhiều quyết định và chưa rõ cách các
+nhánh liên kết với nhau.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.5.1 Quyết định hai
+nhánh}\label{quyux1ebft-ux111ux1ecbnh-hai-nhuxe1nh-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{              temperature \textless{} 0 ?}
+\NormalTok{                  /        \textbackslash{}}
+\NormalTok{               Đúng        Sai}
+\NormalTok{                |           |}
+\NormalTok{        print("Frozen")    tiếp tục}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.5.2 Nhiều phương
+án}\label{nhiux1ec1u-phux1b0ux1a1ng-uxe1n-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{                score \textgreater{}= 90 ?}
+\NormalTok{                 /       \textbackslash{}}
+\NormalTok{              Đúng       Sai}
+\NormalTok{               |           |}
+\NormalTok{             điểm A      score \textgreater{}= 80 ?}
+\NormalTok{                         /       \textbackslash{}}
+\NormalTok{                      Đúng       Sai}
+\NormalTok{                       |           |}
+\NormalTok{                    điểm B      ...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.5.3 Tránh luồng điều khiển kiểu
+``spaghetti''}\label{truxe1nh-luux1ed3ng-ux111iux1ec1u-khiux1ec3n-kiux1ec3u-spaghetti}
+
+Một nguyên tắc thiết kế quan trọng là:
+
+\begin{quote}
+Không vẽ mũi tên từ một nhánh chui vào giữa một nhánh khác.
+\end{quote}
+
+Các nhánh nên được tổ chức rõ ràng: tách ra, thực hiện riêng, rồi có thể
+nhập lại sau đó.
+
+Cách tổ chức này phù hợp với \texttt{if}, \texttt{if/else} và các cấu
+trúc lồng nhau có cấu trúc rõ ràng.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ví dụ -- Chi phí vận
+chuyển}\label{vuxed-dux1ee5-chi-phuxed-vux1eadn-chuyux1ec3n}
+
+Giả sử:
+
+\begin{itemize}
+\tightlist
+\item
+  vận chuyển trong phần lục địa của Hoa Kỳ có một mức giá;
+\item
+  Alaska hoặc Hawaii có mức khác;
+\item
+  vận chuyển quốc tế dùng mức cao hơn.
+\end{itemize}
+
+Một lời giải có cấu trúc:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{country }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter the country: "}\NormalTok{)}
+\NormalTok{state }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter the state or province: "}\NormalTok{)}
+
+\ControlFlowTok{if}\NormalTok{ country }\OperatorTok{==} \StringTok{"USA"}\NormalTok{ :}
+    \ControlFlowTok{if}\NormalTok{ state }\OperatorTok{==} \StringTok{"AK"} \KeywordTok{or}\NormalTok{ state }\OperatorTok{==} \StringTok{"HI"}\NormalTok{ :}
+\NormalTok{        shippingCost }\OperatorTok{=} \FloatTok{10.0}
+    \ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{        shippingCost }\OperatorTok{=} \FloatTok{5.0}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    shippingCost }\OperatorTok{=} \FloatTok{10.0}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Shipping cost to }\SpecialCharTok{\%s}\StringTok{, }\SpecialCharTok{\%s}\StringTok{: $}\SpecialCharTok{\%.2f}\StringTok{"} \OperatorTok{\%}
+\NormalTok{      (state, country, shippingCost))}
+\end{Highlighting}
+\end{Shaded}
+
+Có thể vẽ lưu đồ trước rồi mới dịch sang Python.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.5}\label{tux1ef1-kiux1ec3m-tra-3.5}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-4}
+
+Mục đích chính của lưu đồ là gì?
+
+\textbf{Đáp án}
+
+Trực quan hóa các công việc, quyết định và các đường đi có thể xảy ra
+của chương trình trước hoặc trong khi cài đặt thuật toán.
+
+\subsubsection{Câu 2}\label{cuxe2u-2-4}
+
+Tại sao không nên để mũi tên đi vào giữa một nhánh khác?
+
+\textbf{Đáp án}
+
+Vì nó tạo ra luồng điều khiển thiếu cấu trúc, khó dịch sang chương
+trình, khó kiểm thử và khó bảo trì.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.6 Giải quyết vấn đề: Ca kiểm
+thử}\label{giux1ea3i-quyux1ebft-vux1ea5n-ux111ux1ec1-ca-kiux1ec3m-thux1eed}
+
+Chương trình có rẽ nhánh phải được kiểm thử bằng các đầu vào đi qua các
+đường thực hiện khác nhau.
+
+Chỉ thử một trường hợp thông thường là chưa đủ.
+
+Một kế hoạch kiểm thử tốt hướng tới:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{bao phủ nhánh} -- mỗi nhánh được thực hiện bởi ít nhất một ca
+  kiểm thử;
+\item
+  \textbf{kiểm thử biên} -- kiểm tra các giá trị đúng tại hoặc gần
+  ngưỡng quyết định;
+\item
+  \textbf{kiểm thử đầu vào không hợp lệ} -- khi chương trình có nhiệm vụ
+  xác thực dữ liệu.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.6.1 Bao phủ nhánh}\label{bao-phux1ee7-nhuxe1nh}
+
+Với quyết định hai nhánh:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ age }\OperatorTok{\textgreater{}=} \DecValTok{18}\NormalTok{ :}
+\NormalTok{    category }\OperatorTok{=} \StringTok{"Adult"}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    category }\OperatorTok{=} \StringTok{"Minor"}
+\end{Highlighting}
+\end{Shaded}
+
+Cần ít nhất một ca cho mỗi kết quả:
+
+\begin{longtable}[]{@{}rll@{}}
+\toprule\noalign{}
+Đầu vào & Kết quả mong đợi & Mục đích \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{20} & Adult & Nhánh đúng \\
+\texttt{15} & Minor & Nhánh sai \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.6.2 Các giá trị
+biên}\label{cuxe1c-giuxe1-trux1ecb-biuxean}
+
+Ngưỡng ở đây là \texttt{18}.
+
+Các ca hữu ích:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{17}
+\NormalTok{18}
+\NormalTok{19}
+\end{Highlighting}
+\end{Shaded}
+
+Giá trị \texttt{18} đặc biệt quan trọng vì giúp phân biệt
+\texttt{\textgreater{}=} với \texttt{\textgreater{}}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.6.3 Thiết kế ca kiểm thử trước khi lập
+trình}\label{thiux1ebft-kux1ebf-ca-kiux1ec3m-thux1eed-trux1b0ux1edbc-khi-lux1eadp-truxecnh}
+
+Viết trước kết quả mong đợi có nhiều lợi ích:
+
+\begin{itemize}
+\tightlist
+\item
+  buộc ta hiểu rõ quy tắc;
+\item
+  phát hiện điều kiện biên chưa rõ ràng;
+\item
+  cho phép kiểm chứng chương trình ngay sau khi cài đặt;
+\item
+  tránh xu hướng chấp nhận mọi kết quả mà chương trình tình cờ in ra.
+\end{itemize}
+
+Mẫu bảng kiểm thử:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Ca kiểm thử & Kết quả mong đợi & Lý do \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+trường hợp thường A & \ldots{} & nhánh thứ nhất \\
+trường hợp thường B & \ldots{} & nhánh thứ hai \\
+giá trị biên & \ldots{} & đúng tại ngưỡng \\
+giá trị không hợp lệ & báo lỗi & kiểm tra validation \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mẹo lập trình 3.3 -- Dành thời gian cho kiểm thử và gỡ
+lỗi}\label{mux1eb9o-lux1eadp-truxecnh-3.3-duxe0nh-thux1eddi-gian-cho-kiux1ec3m-thux1eed-vuxe0-gux1ee1-lux1ed7i}
+
+Lập trình không chỉ là gõ mã. Một kế hoạch thực tế cần có thời gian cho:
+
+\begin{itemize}
+\tightlist
+\item
+  hiểu và thiết kế lời giải;
+\item
+  chuẩn bị ca kiểm thử;
+\item
+  nhập chương trình và sửa lỗi cú pháp;
+\item
+  chạy thử và gỡ lỗi hành vi không mong đợi.
+\end{itemize}
+
+Chương trình càng nhiều nhánh thì càng có nhiều đường thực hiện và
+thường cần nhiều công sức kiểm thử hơn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.6}\label{tux1ef1-kiux1ec3m-tra-3.6}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-5}
+
+Với điều kiện:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ value }\OperatorTok{\textless{}} \DecValTok{100}\NormalTok{ :}
+\end{Highlighting}
+\end{Shaded}
+
+giá trị biên quan trọng là gì?
+
+\textbf{Đáp án}
+
+\texttt{100}. Các giá trị \texttt{99} và \texttt{101} cũng hữu ích để
+kiểm tra lân cận ngưỡng.
+
+\subsubsection{Câu 2}\label{cuxe2u-2-5}
+
+Tại sao một ca kiểm thử thường không đủ cho \texttt{if/else}?
+
+\textbf{Đáp án}
+
+Vì nó có thể chỉ thực hiện một nhánh và để nhánh còn lại chưa từng được
+kiểm tra.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.7 Biến Boolean và các toán tử
+Boolean}\label{biux1ebfn-boolean-vuxe0-cuxe1c-touxe1n-tux1eed-boolean}
+
+Kiểu Boolean \texttt{bool} chỉ có hai giá trị:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{True}
+\VariableTok{False}
+\end{Highlighting}
+\end{Shaded}
+
+Một biến Boolean có thể lưu kết quả của một điều kiện logic.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{failed }\OperatorTok{=} \VariableTok{True}
+
+\ControlFlowTok{if}\NormalTok{ failed :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"The operation failed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Biến Boolean đôi khi được gọi là \textbf{cờ} (\emph{flag}) vì trạng thái
+của nó biểu diễn một điều kiện đang đúng hay sai.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{3.7.1 Toán tử
+\texttt{and}}{3.7.1 Toán tử and}}\label{touxe1n-tux1eed-and}
+
+\texttt{and} chỉ đúng khi \textbf{cả hai} toán hạng đều đúng.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ temp }\OperatorTok{\textgreater{}} \DecValTok{0} \KeywordTok{and}\NormalTok{ temp }\OperatorTok{\textless{}} \DecValTok{100}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Liquid water"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Bảng chân trị:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+A & B & \texttt{A\ and\ B} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{True} & \texttt{True} & \texttt{True} \\
+\texttt{True} & \texttt{False} & \texttt{False} \\
+\texttt{False} & \texttt{True} & \texttt{False} \\
+\texttt{False} & \texttt{False} & \texttt{False} \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{3.7.2 Toán tử
+\texttt{or}}{3.7.2 Toán tử or}}\label{touxe1n-tux1eed-or}
+
+\texttt{or} đúng khi \textbf{ít nhất một} toán hạng đúng.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ temp }\OperatorTok{\textless{}=} \DecValTok{0} \KeywordTok{or}\NormalTok{ temp }\OperatorTok{\textgreater{}=} \DecValTok{100}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Not liquid water"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Bảng chân trị:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+A & B & \texttt{A\ or\ B} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{True} & \texttt{True} & \texttt{True} \\
+\texttt{True} & \texttt{False} & \texttt{True} \\
+\texttt{False} & \texttt{True} & \texttt{True} \\
+\texttt{False} & \texttt{False} & \texttt{False} \\
+\end{longtable}
+
+Lưu ý: \texttt{or} là phép ``hoặc bao hàm'', tức là vẫn đúng khi
+\textbf{cả hai} điều kiện đều đúng.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{3.7.3 Toán tử
+\texttt{not}}{3.7.3 Toán tử not}}\label{touxe1n-tux1eed-not}
+
+\texttt{not} đảo giá trị Boolean.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \KeywordTok{not}\NormalTok{ frozen :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Not frozen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+A & \texttt{not\ A} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{True} & \texttt{False} \\
+\texttt{False} & \texttt{True} \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.7.4 Thứ tự ưu tiên}\label{thux1ee9-tux1ef1-ux1b0u-tiuxean}
+
+Một thứ tự đơn giản để ghi nhớ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{số học}
+\NormalTok{  ↓}
+\NormalTok{toán tử quan hệ}
+\NormalTok{  ↓}
+\NormalTok{not}
+\NormalTok{  ↓}
+\NormalTok{and}
+\NormalTok{  ↓}
+\NormalTok{or}
+\end{Highlighting}
+\end{Shaded}
+
+Do đó:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{\textgreater{}} \DecValTok{0} \KeywordTok{and}\NormalTok{ y }\OperatorTok{\textless{}} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+được hiểu là:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(x }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\KeywordTok{and}\NormalTok{ (y }\OperatorTok{\textless{}} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Với biểu thức logic phức tạp, dấu ngoặc vẫn nên được dùng để tăng tính
+dễ đọc.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{Lỗi thường gặp 3.3 -- Nhầm \texttt{and} với
+\texttt{or}}{Lỗi thường gặp 3.3 -- Nhầm and với or}}\label{lux1ed7i-thux1b0ux1eddng-gux1eb7p-3.3-nhux1ea7m-and-vux1edbi-or}
+
+Giả sử một giá trị hợp lệ khi nằm trong khoảng từ \texttt{0} đến
+\texttt{100}.
+
+Đúng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ value }\OperatorTok{\textgreater{}=} \DecValTok{0} \KeywordTok{and}\NormalTok{ value }\OperatorTok{\textless{}=} \DecValTok{100}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Valid"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Cả hai điều kiện phải cùng đúng.
+
+Để phát hiện giá trị không hợp lệ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ value }\OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ value }\OperatorTok{\textgreater{}} \DecValTok{100}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Invalid"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Chỉ cần một trong các điều kiện không hợp lệ là đúng.
+
+Câu hỏi gợi ý:
+
+\begin{itemize}
+\tightlist
+\item
+  Có cần \textbf{tất cả} điều kiện cùng đúng không? → dùng \texttt{and}.
+\item
+  Chỉ cần \textbf{một} điều kiện đúng là đủ không? → dùng \texttt{or}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mẹo lập trình 3.4 -- Tính dễ
+đọc}\label{mux1eb9o-lux1eadp-truxecnh-3.4-tuxednh-dux1ec5-ux111ux1ecdc}
+
+Không nên so sánh biến Boolean một cách thừa thãi với \texttt{True} hoặc
+\texttt{False}.
+
+Kém rõ ràng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ frozen }\OperatorTok{==} \VariableTok{False}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Not frozen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Nên viết:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \KeywordTok{not}\NormalTok{ frozen :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Not frozen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Tương tự:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ valid :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Input accepted"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+thường dễ đọc hơn:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ valid }\OperatorTok{==} \VariableTok{True}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Input accepted"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Tên biến Boolean nên mô tả rõ một trạng thái hoặc điều kiện:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{valid}
+\NormalTok{finished}
+\NormalTok{found}
+\NormalTok{isEmpty}
+\NormalTok{hasError}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.3 -- Nối chuỗi các phép so
+sánh}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.3-nux1ed1i-chuux1ed7i-cuxe1c-phuxe9p-so-suxe1nh}
+
+Python cho phép viết:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{0} \OperatorTok{\textless{}=}\NormalTok{ value }\OperatorTok{\textless{}=} \DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+Tương đương với:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{value }\OperatorTok{\textgreater{}=} \DecValTok{0} \KeywordTok{and}\NormalTok{ value }\OperatorTok{\textless{}=} \DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+Cách nối này gọn và tự nhiên trong Python, nhưng người mới học nên hiểu
+rõ biểu thức Boolean tương đương.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.4 -- Đánh giá ngắn
+mạch}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.4-ux111uxe1nh-giuxe1-ngux1eafn-mux1ea1ch}
+
+Python đánh giá \texttt{and} và \texttt{or} từ trái sang phải và dừng
+ngay khi đã xác định được kết quả cuối cùng.
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quantity }\OperatorTok{\textgreater{}} \DecValTok{0} \KeywordTok{and}\NormalTok{ price }\OperatorTok{/}\NormalTok{ quantity }\OperatorTok{\textless{}} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+Nếu \texttt{quantity\ \textgreater{}\ 0} là sai, Python không thực hiện
+phép chia. Điều này tránh chia cho 0 khi \texttt{quantity\ ==\ 0}.
+
+Với \texttt{or}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{conditionA }\KeywordTok{or}\NormalTok{ conditionB}
+\end{Highlighting}
+\end{Shaded}
+
+nếu \texttt{conditionA} đã đúng, \texttt{conditionB} sẽ không được đánh
+giá.
+
+Cơ chế này gọi là \textbf{đánh giá ngắn mạch} (\emph{short-circuit
+evaluation}).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.5 -- Định luật De
+Morgan}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.5-ux111ux1ecbnh-luux1eadt-de-morgan}
+
+Định luật De Morgan giúp biến đổi các điều kiện ghép có phủ định.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{not (A and B)  ≡  (not A) or (not B)}
+
+\NormalTok{not (A or B)   ≡  (not A) and (not B)}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{not}\NormalTok{ (state }\OperatorTok{==} \StringTok{"AK"} \KeywordTok{or}\NormalTok{ state }\OperatorTok{==} \StringTok{"HI"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+tương đương với:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{state }\OperatorTok{!=} \StringTok{"AK"} \KeywordTok{and}\NormalTok{ state }\OperatorTok{!=} \StringTok{"HI"}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ khác:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{not}\NormalTok{ (country }\OperatorTok{==} \StringTok{"USA"} \KeywordTok{and}\NormalTok{ state }\OperatorTok{!=} \StringTok{"AK"} \KeywordTok{and}\NormalTok{ state }\OperatorTok{!=} \StringTok{"HI"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+có thể viết lại trực tiếp hơn:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{country }\OperatorTok{!=} \StringTok{"USA"} \KeywordTok{or}\NormalTok{ state }\OperatorTok{==} \StringTok{"AK"} \KeywordTok{or}\NormalTok{ state }\OperatorTok{==} \StringTok{"HI"}
+\end{Highlighting}
+\end{Shaded}
+
+Mục tiêu không chỉ là viết ngắn hơn mà là làm logic rõ ràng hơn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.7}\label{tux1ef1-kiux1ec3m-tra-3.7}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-6}
+
+Làm thế nào kiểm tra cả \texttt{x} và \texttt{y} đều dương?
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{\textgreater{}} \DecValTok{0} \KeywordTok{and}\NormalTok{ y }\OperatorTok{\textgreater{}} \DecValTok{0}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Câu 2}\label{cuxe2u-2-6}
+
+Làm thế nào kiểm tra ít nhất một trong \texttt{x}, \texttt{y} bằng 0?
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{==} \DecValTok{0} \KeywordTok{or}\NormalTok{ y }\OperatorTok{==} \DecValTok{0}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Câu 3}\label{cuxe2u-3-3}
+
+Giá trị của:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{not} \KeywordTok{not} \VariableTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+là gì?
+
+\textbf{Đáp án}
+
+\texttt{True}.
+
+\subsubsection{Câu 4}\label{cuxe2u-4-2}
+
+Tại sao biểu thức sau vẫn an toàn khi \texttt{quantity\ ==\ 0}?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quantity }\OperatorTok{\textgreater{}} \DecValTok{0} \KeywordTok{and}\NormalTok{ price }\OperatorTok{/}\NormalTok{ quantity }\OperatorTok{\textless{}} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+Vì đánh giá ngắn mạch dừng ngay sau điều kiện đầu tiên sai, nên phép
+chia không được thực hiện.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.8 Phân tích chuỗi}\label{phuxe2n-tuxedch-chuux1ed7i}
+
+Logic rẽ nhánh thường được dùng để kiểm tra dữ liệu văn bản.
+
+Python cung cấp nhiều toán tử và phương thức để xác định một chuỗi có
+chứa chuỗi con hay có đặc điểm nhất định hay không.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{3.8.1 Toán tử thành viên \texttt{in} và
+\texttt{not\ in}}{3.8.1 Toán tử thành viên in và not in}}\label{touxe1n-tux1eed-thuxe0nh-viuxean-in-vuxe0-not-in}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name }\OperatorTok{=} \StringTok{"John Wayne"}
+
+\ControlFlowTok{if} \StringTok{"Way"} \KeywordTok{in}\NormalTok{ name :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Substring found"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Kiểm tra ngược lại:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \StringTok{"{-}"} \KeywordTok{not} \KeywordTok{in}\NormalTok{ name :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"The name does not contain a hyphen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Kiểm tra thành viên phân biệt chữ hoa/chữ thường.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.8.2 Một số phương thức chuỗi con hữu
+ích}\label{mux1ed9t-sux1ed1-phux1b0ux1a1ng-thux1ee9c-chuux1ed7i-con-hux1eefu-uxedch}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Phép toán
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ý nghĩa
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{substring\ in\ s} & \texttt{s} có chứa \texttt{substring} hay
+không? \\
+\texttt{s.count(substring)} & Số lần xuất hiện không chồng lấn \\
+\texttt{s.startswith(substring)} & \texttt{s} có bắt đầu bằng chuỗi con
+không? \\
+\texttt{s.endswith(substring)} & \texttt{s} có kết thúc bằng chuỗi con
+không? \\
+\texttt{s.find(substring)} & Chỉ số lần xuất hiện đầu tiên, hoặc
+\texttt{-1} nếu không tìm thấy \\
+\end{longtable}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filename }\OperatorTok{=} \StringTok{"report.html"}
+
+\ControlFlowTok{if}\NormalTok{ filename.endswith(}\StringTok{".html"}\NormalTok{) :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"HTML file"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text }\OperatorTok{=} \StringTok{"banana"}
+\BuiltInTok{print}\NormalTok{(text.count(}\StringTok{"an"}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(text.find(}\StringTok{"na"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.8.3 Kiểm tra đặc điểm của
+chuỗi}\label{kiux1ec3m-tra-ux111ux1eb7c-ux111iux1ec3m-cux1ee7a-chuux1ed7i}
+
+Một số phương thức hữu ích:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Phương thức
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Trả về \texttt{True} khi\ldots{}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{s.isalnum()} & mọi ký tự đều là chữ hoặc số và chuỗi không
+rỗng \\
+\texttt{s.isalpha()} & mọi ký tự đều là chữ cái và chuỗi không rỗng \\
+\texttt{s.isdigit()} & mọi ký tự đều là chữ số và chuỗi không rỗng \\
+\texttt{s.islower()} & có ít nhất một chữ cái và mọi chữ cái đều viết
+thường \\
+\texttt{s.isupper()} & có ít nhất một chữ cái và mọi chữ cái đều viết
+hoa \\
+\texttt{s.isspace()} & mọi ký tự đều là khoảng trắng và chuỗi không
+rỗng \\
+\end{longtable}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"1729"}\NormalTok{.isdigit()}
+\end{Highlighting}
+\end{Shaded}
+
+trả về \texttt{True}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"{-}1729"}\NormalTok{.isdigit()}
+\end{Highlighting}
+\end{Shaded}
+
+trả về \texttt{False} vì \texttt{-} không phải chữ số.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"John Smith"}\NormalTok{.isalpha()}
+\end{Highlighting}
+\end{Shaded}
+
+trả về \texttt{False} vì chuỗi chứa khoảng trắng.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ví dụ -- Khảo sát chuỗi
+con}\label{vuxed-dux1ee5-khux1ea3o-suxe1t-chuux1ed7i-con}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theString }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter a string: "}\NormalTok{)}
+\NormalTok{theSubstring }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter a substring: "}\NormalTok{)}
+
+\ControlFlowTok{if}\NormalTok{ theSubstring }\KeywordTok{in}\NormalTok{ theString :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"The string contains the substring."}\NormalTok{)}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Count:"}\NormalTok{, theString.count(theSubstring))}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"First position:"}\NormalTok{, theString.find(theSubstring))}
+
+    \ControlFlowTok{if}\NormalTok{ theString.startswith(theSubstring) :}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"It appears at the beginning."}\NormalTok{)}
+
+    \ControlFlowTok{if}\NormalTok{ theString.endswith(theSubstring) :}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"It appears at the end."}\NormalTok{)}
+\ControlFlowTok{else}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"The string does not contain the substring."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tự kiểm tra 3.8}\label{tux1ef1-kiux1ec3m-tra-3.8}
+
+\subsubsection{Câu 1}\label{cuxe2u-1-7}
+
+Làm thế nào đếm số khoảng trắng trong \texttt{text}?
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text.count(}\StringTok{" "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Câu 2}\label{cuxe2u-2-7}
+
+Làm thế nào kiểm tra tên file kết thúc bằng \texttt{.jpg} hoặc
+\texttt{.jpeg}?
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filename.endswith(}\StringTok{".jpg"}\NormalTok{) }\KeywordTok{or}\NormalTok{ filename.endswith(}\StringTok{".jpeg"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Nếu muốn không phân biệt chữ hoa/thường, hãy chuẩn hóa bằng
+\texttt{lower()} trước.
+
+\subsubsection{Câu 3}\label{cuxe2u-3-4}
+
+\texttt{find()} trả về gì khi không tìm thấy chuỗi con?
+
+\textbf{Đáp án}
+
+\texttt{-1}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3.9 Ứng dụng: Kiểm tra dữ liệu đầu
+vào}\label{ux1ee9ng-dux1ee5ng-kiux1ec3m-tra-dux1eef-liux1ec7u-ux111ux1ea7u-vuxe0o}
+
+\textbf{Kiểm tra dữ liệu đầu vào} (\emph{input validation}) là xác minh
+dữ liệu do người dùng cung cấp trước khi sử dụng.
+
+Chương trình không nên giả định mọi dữ liệu nhập đều thỏa mãn yêu cầu.
+
+Giả sử thang máy chấp nhận các tầng từ \texttt{1} đến \texttt{20}, trừ
+tầng \texttt{13}.
+
+Các đầu vào không hợp lệ gồm:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{13};
+\item
+  \texttt{0} hoặc số âm;
+\item
+  số lớn hơn \texttt{20}.
+\end{itemize}
+
+Phiên bản có validation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{floor }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Floor: "}\NormalTok{))}
+
+\ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{==} \DecValTok{13}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Error: There is no thirteenth floor."}\NormalTok{)}
+\ControlFlowTok{elif}\NormalTok{ floor }\OperatorTok{\textless{}=} \DecValTok{0} \KeywordTok{or}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{20}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Error: The floor must be between 1 and 20."}\NormalTok{)}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    actualFloor }\OperatorTok{=}\NormalTok{ floor}
+
+    \ControlFlowTok{if}\NormalTok{ floor }\OperatorTok{\textgreater{}} \DecValTok{13}\NormalTok{ :}
+\NormalTok{        actualFloor }\OperatorTok{=}\NormalTok{ floor }\OperatorTok{{-}} \DecValTok{1}
+
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"The elevator will travel to the actual floor"}\NormalTok{, actualFloor)}
+\end{Highlighting}
+\end{Shaded}
+
+Mẫu tổng quát:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Đọc dữ liệu}
+\NormalTok{   ↓}
+\NormalTok{Kiểm tra hợp lệ}
+\NormalTok{   ↓}
+\NormalTok{Không hợp lệ? → báo lỗi}
+\NormalTok{Hợp lệ?       → xử lý}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.9.1 Kiểm tra miền giá
+trị}\label{kiux1ec3m-tra-miux1ec1n-giuxe1-trux1ecb}
+
+Ví dụ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ age }\OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ age }\OperatorTok{\textgreater{}} \DecValTok{130}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Invalid age"}\NormalTok{)}
+\ControlFlowTok{else}\NormalTok{ :}
+    \CommentTok{\# Có thể xử lý giá trị an toàn hơn.}
+\NormalTok{    ...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.9.2 Kiểm tra lựa chọn nhập
+vào}\label{kiux1ec3m-tra-lux1ef1a-chux1ecdn-nhux1eadp-vuxe0o}
+
+Giả sử người dùng phải nhập \texttt{s} hoặc \texttt{m}.
+
+Một cách:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{status }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter s or m: "}\NormalTok{)}
+
+\ControlFlowTok{if}\NormalTok{ status }\OperatorTok{==} \StringTok{"s"} \KeywordTok{or}\NormalTok{ status }\OperatorTok{==} \StringTok{"S"}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ status }\OperatorTok{==} \StringTok{"m"} \KeywordTok{or}\NormalTok{ status }\OperatorTok{==} \StringTok{"M"}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{else}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Invalid status"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Cách dễ mở rộng hơn là chuẩn hóa trước:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{status }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter s or m: "}\NormalTok{)}
+\NormalTok{status }\OperatorTok{=}\NormalTok{ status.lower()}
+
+\ControlFlowTok{if}\NormalTok{ status }\OperatorTok{==} \StringTok{"s"}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ status }\OperatorTok{==} \StringTok{"m"}\NormalTok{ :}
+\NormalTok{    ...}
+\ControlFlowTok{else}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Invalid status"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Tương tự, mã nhiều ký tự có thể chuẩn hóa bằng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{country }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Country code: "}\NormalTok{)}
+\NormalTok{country }\OperatorTok{=}\NormalTok{ country.upper()}
+\end{Highlighting}
+\end{Shaded}
+
+Sau đó chỉ cần so sánh với một dạng chuẩn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.9.3 Giới hạn ở giai đoạn hiện
+tại}\label{giux1edbi-hux1ea1n-ux1edf-giai-ux111oux1ea1n-hiux1ec7n-tux1ea1i}
+
+Đoạn mã:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{floor }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{"Floor: "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+vẫn phát sinh ngoại lệ nếu người dùng nhập:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{five}
+\end{Highlighting}
+\end{Shaded}
+
+Xử lý lỗi chuyển đổi kiểu cần cơ chế exception, được giới thiệu ở chương
+sau.
+
+Ở giai đoạn này cần phân biệt:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{kiểm tra giá trị sau khi chuyển đổi} -- ví dụ kiểm tra có nằm
+  trong khoảng hợp lệ không;
+\item
+  \textbf{xử lý việc chuyển đổi thất bại} -- chủ đề về ngoại lệ học ở
+  phần sau.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.6 -- Kết thúc chương
+trình}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.6-kux1ebft-thuxfac-chux1b0ux1a1ng-truxecnh}
+
+Với chương trình văn bản nhỏ, dữ liệu sai đôi khi có thể xử lý bằng cách
+kết thúc chương trình ngay.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sys }\ImportTok{import}\NormalTok{ exit}
+
+\NormalTok{response }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Enter y or n: "}\NormalTok{)}
+
+\ControlFlowTok{if} \KeywordTok{not}\NormalTok{ (response }\OperatorTok{==} \StringTok{"y"} \KeywordTok{or}\NormalTok{ response }\OperatorTok{==} \StringTok{"n"}\NormalTok{) :}
+\NormalTok{    exit(}\StringTok{"Error: you must enter y or n."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Sau khi validation thành công, phần mã phía sau có thể giả định đầu vào
+đã thỏa điều kiện.
+
+Không nên lạm dụng việc kết thúc sớm. Trong chương trình lớn hơn, hàm và
+ngoại lệ thường giúp tổ chức mã tốt hơn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chủ đề bổ sung 3.7 -- Chương trình đồ họa tương
+tác}\label{chux1ee7-ux111ux1ec1-bux1ed5-sung-3.7-chux1b0ux1a1ng-truxecnh-ux111ux1ed3-hux1ecda-tux1b0ux1a1ng-tuxe1c}
+
+Logic rẽ nhánh cũng áp dụng trong chương trình đồ họa.
+
+Một chương trình có thể:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  đọc dữ liệu;
+\item
+  kiểm tra tọa độ hoặc kích thước;
+\item
+  chỉ vẽ khi dữ liệu hợp lệ;
+\item
+  phản ứng với một cú nhấp chuột và rẽ nhánh theo vị trí nhấp.
+\end{enumerate}
+
+Điểm quan trọng là giao diện đồ họa không làm mất nhu cầu kiểm tra dữ
+liệu đầu vào.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Máy tính và xã hội 3.2 -- Trí tuệ nhân
+tạo}\label{muxe1y-tuxednh-vuxe0-xuxe3-hux1ed9i-3.2-truxed-tuux1ec7-nhuxe2n-tux1ea1o}
+
+Chương giới thiệu trí tuệ nhân tạo như một bối cảnh rộng hơn cho phần
+mềm ra quyết định. Chương trình truyền thống tuân theo các quy tắc do
+lập trình viên mô tả rõ, trong khi AI hướng đến những hệ thống có hành
+vi linh hoạt hoặc thông minh hơn.
+
+Liên hệ với bài học này chủ yếu mang tính khái niệm: ngay cả các hệ
+thống phức tạp vẫn phải biểu diễn thông tin, đánh giá phương án và chọn
+hành động. Các kỹ thuật AI hiện đại có thể học một phần quy tắc quyết
+định từ dữ liệu, nhưng hiểu luồng điều khiển tường minh vẫn là nền tảng
+của lập trình.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Ví dụ minh họa 3.2 -- Hai đường tròn giao
+nhau}\label{vuxed-dux1ee5-minh-hux1ecda-3.2-hai-ux111ux1b0ux1eddng-truxf2n-giao-nhau}
+
+Ví dụ đồ họa của chương xác định quan hệ giữa hai đường tròn.
+
+Giả sử tâm hai đường tròn là:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(x0, y0)}
+\NormalTok{(x1, y1)}
+\end{Highlighting}
+\end{Shaded}
+
+và bán kính:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{r0}
+\NormalTok{r1}
+\end{Highlighting}
+\end{Shaded}
+
+Khoảng cách giữa hai tâm:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ math }\ImportTok{import}\NormalTok{ sqrt}
+
+\NormalTok{dist }\OperatorTok{=}\NormalTok{ sqrt((x1 }\OperatorTok{{-}}\NormalTok{ x0) }\OperatorTok{**} \DecValTok{2} \OperatorTok{+}\NormalTok{ (y1 }\OperatorTok{{-}}\NormalTok{ y0) }\OperatorTok{**} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Có thể phân loại quan hệ bằng rẽ nhánh:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ dist }\OperatorTok{\textgreater{}}\NormalTok{ r0 }\OperatorTok{+}\NormalTok{ r1 :}
+\NormalTok{    message }\OperatorTok{=} \StringTok{"The circles are separate."}
+\ControlFlowTok{elif}\NormalTok{ dist }\OperatorTok{\textless{}} \BuiltInTok{abs}\NormalTok{(r0 }\OperatorTok{{-}}\NormalTok{ r1) :}
+\NormalTok{    message }\OperatorTok{=} \StringTok{"One circle is inside the other."}
+\ControlFlowTok{elif}\NormalTok{ dist }\OperatorTok{==}\NormalTok{ r0 }\OperatorTok{+}\NormalTok{ r1 :}
+\NormalTok{    message }\OperatorTok{=} \StringTok{"The circles touch externally."}
+\ControlFlowTok{elif}\NormalTok{ dist }\OperatorTok{==} \DecValTok{0} \KeywordTok{and}\NormalTok{ r0 }\OperatorTok{==}\NormalTok{ r1 :}
+\NormalTok{    message }\OperatorTok{=} \StringTok{"The circles coincide."}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    message }\OperatorTok{=} \StringTok{"The circles intersect at two points."}
+\end{Highlighting}
+\end{Shaded}
+
+Ví dụ này kết hợp:
+
+\begin{itemize}
+\tightlist
+\item
+  kiểm tra đầu vào;
+\item
+  số học;
+\item
+  toán tử quan hệ;
+\item
+  toán tử Boolean;
+\item
+  nhiều phương án;
+\item
+  hình học;
+\item
+  đầu ra đồ họa.
+\end{itemize}
+
+Với các phép tính hình học dùng \texttt{float}, nên cân nhắc kiểm tra
+gần bằng thay vì bằng tuyệt đối.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{TOOLBOX 3.2 -- Vẽ đồ thị đơn
+giản}\label{toolbox-3.2-vux1ebd-ux111ux1ed3-thux1ecb-ux111ux1a1n-giux1ea3n}
+
+Chương giới thiệu \texttt{matplotlib.pyplot} như một ví dụ tùy chọn về
+thư viện Python dùng để trực quan hóa dữ liệu.
+
+Biểu đồ cột đơn giản:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ matplotlib }\ImportTok{import}\NormalTok{ pyplot}
+
+\NormalTok{pyplot.bar(}\DecValTok{1}\NormalTok{, }\FloatTok{1.1}\NormalTok{)}
+\NormalTok{pyplot.bar(}\DecValTok{2}\NormalTok{, }\FloatTok{10.0}\NormalTok{)}
+\NormalTok{pyplot.bar(}\DecValTok{3}\NormalTok{, }\FloatTok{25.4}\NormalTok{)}
+\NormalTok{pyplot.bar(}\DecValTok{4}\NormalTok{, }\FloatTok{44.5}\NormalTok{)}
+\NormalTok{pyplot.bar(}\DecValTok{5}\NormalTok{, }\FloatTok{61.0}\NormalTok{)}
+
+\NormalTok{pyplot.xlabel(}\StringTok{"Month"}\NormalTok{)}
+\NormalTok{pyplot.ylabel(}\StringTok{"Temperature"}\NormalTok{)}
+\NormalTok{pyplot.show()}
+\end{Highlighting}
+\end{Shaded}
+
+Đồ thị đường đơn giản:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ matplotlib }\ImportTok{import}\NormalTok{ pyplot}
+
+\NormalTok{months }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{]}
+\NormalTok{temperatures }\OperatorTok{=}\NormalTok{ [}\FloatTok{1.1}\NormalTok{, }\FloatTok{10.0}\NormalTok{, }\FloatTok{25.4}\NormalTok{, }\FloatTok{44.5}\NormalTok{, }\FloatTok{61.0}\NormalTok{]}
+
+\NormalTok{pyplot.plot(months, temperatures)}
+\NormalTok{pyplot.xlabel(}\StringTok{"Month"}\NormalTok{)}
+\NormalTok{pyplot.ylabel(}\StringTok{"Temperature"}\NormalTok{)}
+\NormalTok{pyplot.show()}
+\end{Highlighting}
+\end{Shaded}
+
+Toolbox về đồ thị là phần tùy chọn. Mục tiêu chính của chương vẫn là câu
+lệnh rẽ nhánh và logic Boolean.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Tổng kết Bài 3}\label{tux1ed5ng-kux1ebft-buxe0i-3}
+
+\subsection{\texorpdfstring{Câu lệnh
+\texttt{if}}{Câu lệnh if}}\label{cuxe2u-lux1ec7nh-if-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{if} thay đổi đường thực hiện của chương trình dựa trên một
+  điều kiện.
+\item
+  \texttt{else} cung cấp phương án thay thế khi điều kiện sai.
+\item
+  \texttt{elif} hỗ trợ nhiều phương án loại trừ lẫn nhau.
+\item
+  Câu lệnh ghép có dòng tiêu đề và một khối thụt lề.
+\item
+  Thụt lề nhất quán là một phần của cú pháp Python.
+\item
+  Tránh lặp mã giữa các nhánh khi phần chung có thể đưa ra ngoài.
+\end{itemize}
+
+\subsection{Các toán tử quan
+hệ}\label{cuxe1c-touxe1n-tux1eed-quan-hux1ec7-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{\textless{}}  \OperatorTok{\textless{}=}  \OperatorTok{\textgreater{}}  \OperatorTok{\textgreater{}=}  \OperatorTok{==}  \OperatorTok{!=}
+\end{Highlighting}
+\end{Shaded}
+
+Ghi nhớ:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{=   gán}
+\NormalTok{==  kiểm tra bằng nhau}
+\end{Highlighting}
+\end{Shaded}
+
+Chuỗi cũng có thể được so sánh và phép so sánh mặc định phân biệt chữ
+hoa/chữ thường.
+
+Số thực được tạo từ phép tính thường nên so sánh bằng sai số cho phép
+thay vì bằng tuyệt đối.
+
+\subsection{Rẽ nhánh lồng nhau}\label{rux1ebd-nhuxe1nh-lux1ed3ng-nhau-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Một câu lệnh \texttt{if} có thể nằm trong một nhánh khác.
+\item
+  Rẽ nhánh lồng nhau phù hợp với quyết định nhiều tầng.
+\item
+  Thụt lề cho biết quyết định bên trong thuộc nhánh nào.
+\item
+  Mô phỏng bằng tay giúp kiểm tra logic lồng nhau.
+\end{itemize}
+
+\subsection{Nhiều phương án}\label{nhiux1ec1u-phux1b0ux1a1ng-uxe1n-2}
+
+Dùng:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ ... :}
+\NormalTok{    ...}
+\ControlFlowTok{elif}\NormalTok{ ... :}
+\NormalTok{    ...}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    ...}
+\end{Highlighting}
+\end{Shaded}
+
+Chỉ nhánh đúng đầu tiên được thực hiện.
+
+Với các ngưỡng chồng lấn, phải sắp xếp điều kiện cẩn thận.
+
+\subsection{Lưu đồ}\label{lux1b0u-ux111ux1ed3}
+
+Lưu đồ biểu diễn trực quan:
+
+\begin{itemize}
+\tightlist
+\item
+  công việc xử lý;
+\item
+  nhập/xuất;
+\item
+  quyết định;
+\item
+  nhánh và điểm nhập lại.
+\end{itemize}
+
+Nên dùng cấu trúc rõ ràng và tránh các mũi tên ``nhảy'' vào giữa nhánh
+khác.
+
+\subsection{Ca kiểm thử}\label{ca-kiux1ec3m-thux1eed}
+
+Ca kiểm thử tốt nên gồm:
+
+\begin{itemize}
+\tightlist
+\item
+  ít nhất một ca cho mỗi nhánh;
+\item
+  giá trị biên;
+\item
+  các giá trị ngay bên dưới và bên trên biên;
+\item
+  giá trị không hợp lệ khi có yêu cầu validation.
+\end{itemize}
+
+Thiết kế kết quả mong đợi trước khi viết mã giúp cả việc xây dựng thuật
+toán lẫn kiểm thử.
+
+\subsection{Logic Boolean}\label{logic-boolean}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{True}
+\VariableTok{False}
+\KeywordTok{and}
+\KeywordTok{or}
+\KeywordTok{not}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{and} yêu cầu tất cả điều kiện thành phần đúng.
+\item
+  \texttt{or} yêu cầu ít nhất một điều kiện đúng.
+\item
+  \texttt{not} đảo giá trị Boolean.
+\item
+  Python sử dụng đánh giá ngắn mạch.
+\item
+  Định luật De Morgan giúp biến đổi điều kiện phủ định phức tạp.
+\end{itemize}
+
+\subsection{Phân tích chuỗi}\label{phuxe2n-tuxedch-chuux1ed7i-1}
+
+Các phép toán hữu ích:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{substring }\KeywordTok{in}\NormalTok{ text}
+\NormalTok{substring }\KeywordTok{not} \KeywordTok{in}\NormalTok{ text}
+\NormalTok{text.count(...)}
+\NormalTok{text.find(...)}
+\NormalTok{text.startswith(...)}
+\NormalTok{text.endswith(...)}
+\NormalTok{text.isalpha()}
+\NormalTok{text.isdigit()}
+\NormalTok{text.isalnum()}
+\NormalTok{text.islower()}
+\NormalTok{text.isupper()}
+\NormalTok{text.isspace()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Kiểm tra dữ liệu đầu
+vào}\label{kiux1ec3m-tra-dux1eef-liux1ec7u-ux111ux1ea7u-vuxe0o}
+
+Trước khi xử lý dữ liệu do người dùng nhập:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Đọc}
+\NormalTok{→ chuẩn hóa nếu cần}
+\NormalTok{→ kiểm tra hợp lệ}
+\NormalTok{→ từ chối giá trị sai}
+\NormalTok{→ xử lý giá trị đúng}
+\end{Highlighting}
+\end{Shaded}
+
+Kiểm tra miền giá trị và các lựa chọn hợp lệ có thể làm bằng điều kiện.
+Lỗi chuyển đổi số cần xử lý ngoại lệ, sẽ học sau.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Quiz tổng kết}\label{quiz-tux1ed5ng-kux1ebft}
+
+\subsection{Câu 1}\label{cuxe2u-1-8}
+
+Toán tử nào kiểm tra bằng nhau?
+
+A. \texttt{=}\\
+B. \texttt{==}\\
+C. \texttt{!=}\\
+D. \texttt{\textless{}=}
+
+\textbf{Đáp án}
+
+\textbf{B. \texttt{==}}
+
+\subsection{Câu 2}\label{cuxe2u-2-8}
+
+Điều gì xảy ra khi điều kiện của \texttt{if/else} là đúng?
+
+A. Cả hai nhánh đều chạy.\\
+B. Chỉ nhánh \texttt{else} chạy.\\
+C. Nhánh \texttt{if} chạy và \texttt{else} bị bỏ qua.\\
+D. Chương trình luôn kết thúc.
+
+\textbf{Đáp án}
+
+\textbf{C}
+
+\subsection{Câu 3}\label{cuxe2u-3-5}
+
+Giá trị của:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \OperatorTok{\textgreater{}=} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+là gì?
+
+A. \texttt{True}\\
+B. \texttt{False}\\
+C. \texttt{5}\\
+D. Lỗi
+
+\textbf{Đáp án}
+
+\textbf{A. \texttt{True}}
+
+\subsection{Câu 4}\label{cuxe2u-4-3}
+
+Điều kiện nào kiểm tra \texttt{x} nằm \emph{nghiêm ngặt} giữa \texttt{0}
+và \texttt{10}?
+
+A. \texttt{x\ \textgreater{}\ 0\ or\ x\ \textless{}\ 10}\\
+B. \texttt{x\ \textgreater{}\ 0\ and\ x\ \textless{}\ 10}\\
+C. \texttt{x\ \textgreater{}=\ 0\ or\ x\ \textless{}=\ 10}\\
+D. \texttt{not\ x}
+
+\textbf{Đáp án}
+
+\textbf{B}
+
+\subsection{Câu 5}\label{cuxe2u-5}
+
+Kết quả của:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{True} \KeywordTok{or} \VariableTok{False}
+\end{Highlighting}
+\end{Shaded}
+
+là gì?
+
+\textbf{Đáp án}
+
+\texttt{True}.
+
+\subsection{Câu 6}\label{cuxe2u-6}
+
+Tại sao phép kiểm tra sau có thể không an toàn sau các phép tính số
+thực?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ result }\OperatorTok{==}\NormalTok{ expected :}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+Vì sai số làm tròn nhỏ có thể khiến hai giá trị về mặt toán học bằng
+nhau nhưng biểu diễn \texttt{float} hơi khác nhau. Trong nhiều trường
+hợp nên so sánh theo một ngưỡng sai số.
+
+\subsection{Câu 7}\label{cuxe2u-7}
+
+Cấu trúc nào thường phù hợp nhất cho các loại điểm loại trừ lẫn nhau?
+
+A. Nhiều \texttt{if} độc lập\\
+B. \texttt{if/elif/else}\\
+C. Chỉ \texttt{else}\\
+D. Không cần điều kiện
+
+\textbf{Đáp án}
+
+\textbf{B. \texttt{if/elif/else}}
+
+\subsection{Câu 8}\label{cuxe2u-8}
+
+Biểu thức sau kiểm tra điều gì?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{".csv"} \KeywordTok{in}\NormalTok{ filename}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+Kiểm tra chuỗi con chính xác \texttt{".csv"} có xuất hiện ở bất kỳ vị
+trí nào trong \texttt{filename} hay không.
+
+\subsection{Câu 9}\label{cuxe2u-9}
+
+\texttt{text.find("abc")} trả về gì khi không có \texttt{"abc"}?
+
+A. \texttt{False}\\
+B. \texttt{None}\\
+C. \texttt{-1}\\
+D. Lỗi
+
+\textbf{Đáp án}
+
+\textbf{C. \texttt{-1}}
+
+\subsection{Câu 10}\label{cuxe2u-10}
+
+Giá trị biên cho:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ score }\OperatorTok{\textgreater{}=} \DecValTok{50}\NormalTok{ :}
+\end{Highlighting}
+\end{Shaded}
+
+là gì?
+
+\textbf{Đáp án}
+
+\texttt{50} là giá trị biên quan trọng. \texttt{49} và \texttt{51} là
+hai giá trị lân cận hữu ích.
+
+\subsection{Câu 11}\label{cuxe2u-11}
+
+Tại sao thứ tự điều kiện trong chuỗi \texttt{if/elif} có thể ảnh hưởng
+kết quả?
+
+\textbf{Đáp án}
+
+Vì Python dừng ở nhánh đúng đầu tiên. Một điều kiện quá rộng đặt quá sớm
+có thể khiến điều kiện cụ thể hơn ở phía sau không bao giờ được kiểm
+tra.
+
+\subsection{Câu 12}\label{cuxe2u-12}
+
+Mục tiêu chính của kiểm tra dữ liệu đầu vào là gì?
+
+A. Làm mã dài hơn.\\
+B. Đảm bảo dữ liệu người dùng nhập thỏa các giả định của chương trình
+trước khi xử lý.\\
+C. Chuyển mọi giá trị thành chuỗi.\\
+D. Loại bỏ tất cả câu lệnh \texttt{if}.
+
+\textbf{Đáp án}
+
+\textbf{B}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Bài tập ôn tập}\label{buxe0i-tux1eadp-uxf4n-tux1eadp}
+
+\subsection{Bài 1. Theo dõi quyết định hai
+nhánh}\label{buxe0i-1.-theo-duxf5i-quyux1ebft-ux111ux1ecbnh-hai-nhuxe1nh}
+
+Xác định giá trị cuối cùng của \texttt{fee}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OperatorTok{=} \DecValTok{16}
+
+\ControlFlowTok{if}\NormalTok{ age }\OperatorTok{\textless{}} \DecValTok{18}\NormalTok{ :}
+\NormalTok{    fee }\OperatorTok{=} \DecValTok{5}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    fee }\OperatorTok{=} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+\texttt{fee\ =\ 5}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 2. Chọn đúng toán tử quan
+hệ}\label{buxe0i-2.-chux1ecdn-ux111uxfang-touxe1n-tux1eed-quan-hux1ec7}
+
+Điền toán tử để thông báo được in khi \texttt{temperature} không lớn hơn
+\texttt{0}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ temperature \_\_\_ }\DecValTok{0}\NormalTok{ :}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Freezing or below"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{\textless{}=}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 3. Viết lại để tránh lặp
+mã}\label{buxe0i-3.-viux1ebft-lux1ea1i-ux111ux1ec3-truxe1nh-lux1eb7p-muxe3}
+
+Cải thiện đoạn sau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ quantity }\OperatorTok{\textgreater{}=} \DecValTok{10}\NormalTok{ :}
+\NormalTok{    rate }\OperatorTok{=} \FloatTok{0.90}
+\NormalTok{    total }\OperatorTok{=}\NormalTok{ rate }\OperatorTok{*}\NormalTok{ price }\OperatorTok{*}\NormalTok{ quantity}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    rate }\OperatorTok{=} \FloatTok{1.00}
+\NormalTok{    total }\OperatorTok{=}\NormalTok{ rate }\OperatorTok{*}\NormalTok{ price }\OperatorTok{*}\NormalTok{ quantity}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Đáp án tham khảo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ quantity }\OperatorTok{\textgreater{}=} \DecValTok{10}\NormalTok{ :}
+\NormalTok{    rate }\OperatorTok{=} \FloatTok{0.90}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    rate }\OperatorTok{=} \FloatTok{1.00}
+
+\NormalTok{total }\OperatorTok{=}\NormalTok{ rate }\OperatorTok{*}\NormalTok{ price }\OperatorTok{*}\NormalTok{ quantity}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 4. Thiết kế ca kiểm
+thử}\label{buxe0i-4.-thiux1ebft-kux1ebf-ca-kiux1ec3m-thux1eed}
+
+Với:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ balance }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{ :}
+\NormalTok{    status }\OperatorTok{=} \StringTok{"Overdrawn"}
+\ControlFlowTok{else}\NormalTok{ :}
+\NormalTok{    status }\OperatorTok{=} \StringTok{"OK"}
+\end{Highlighting}
+\end{Shaded}
+
+hãy đề xuất ba giá trị kiểm thử hữu ích.
+
+\textbf{Đáp án tham khảo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{{-}1   → Overdrawn}
+\NormalTok{0    → OK       (biên)}
+\NormalTok{1    → OK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 5. Biểu thức
+Boolean}\label{buxe0i-5.-biux1ec3u-thux1ee9c-boolean}
+
+Viết điều kiện cho các trường hợp:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{x} và \texttt{y} đều dương.
+\item
+  Ít nhất một trong \texttt{x}, \texttt{y} âm.
+\item
+  \texttt{age} nằm trong khoảng từ \texttt{18} đến \texttt{65}, kể cả
+  hai đầu.
+\item
+  \texttt{answer} không phải \texttt{"y"} cũng không phải \texttt{"n"}.
+\end{enumerate}
+
+\textbf{Đáp án tham khảo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{\textgreater{}} \DecValTok{0} \KeywordTok{and}\NormalTok{ y }\OperatorTok{\textgreater{}} \DecValTok{0}
+\NormalTok{x }\OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ y }\OperatorTok{\textless{}} \DecValTok{0}
+\NormalTok{age }\OperatorTok{\textgreater{}=} \DecValTok{18} \KeywordTok{and}\NormalTok{ age }\OperatorTok{\textless{}=} \DecValTok{65}
+\NormalTok{answer }\OperatorTok{!=} \StringTok{"y"} \KeywordTok{and}\NormalTok{ answer }\OperatorTok{!=} \StringTok{"n"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 6. Phân tích
+chuỗi}\label{buxe0i-6.-phuxe2n-tuxedch-chuux1ed7i}
+
+Cho:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filename }\OperatorTok{=} \StringTok{"report.Final.PDF"}
+\end{Highlighting}
+\end{Shaded}
+
+viết điều kiện không phân biệt chữ hoa/thường để kiểm tra file có kết
+thúc bằng \texttt{.pdf} hay không.
+
+\textbf{Đáp án}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filename.lower().endswith(}\StringTok{".pdf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Bài tập thực hành}\label{buxe0i-tux1eadp-thux1ef1c-huxe0nh}
+
+\subsection{Bài 1. Đạt / Không đạt / Điểm không hợp
+lệ}\label{buxe0i-1.-ux111ux1ea1t-khuxf4ng-ux111ux1ea1t-ux111iux1ec3m-khuxf4ng-hux1ee3p-lux1ec7}
+
+Nhập một điểm thi.
+
+\begin{itemize}
+\tightlist
+\item
+  Nếu điểm nhỏ hơn \texttt{0} hoặc lớn hơn \texttt{100}, in thông báo
+  lỗi.
+\item
+  Nếu hợp lệ, in \texttt{"Pass"} cho điểm từ \texttt{50} trở lên và
+  \texttt{"Fail"} cho điểm thấp hơn.
+\end{itemize}
+
+Hãy vẽ lưu đồ trước khi viết Python.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 2. Số lớn hơn trong hai
+số}\label{buxe0i-2.-sux1ed1-lux1edbn-hux1a1n-trong-hai-sux1ed1}
+
+Nhập hai số và in:
+
+\begin{itemize}
+\tightlist
+\item
+  số lớn hơn;
+\item
+  \texttt{"Equal"} nếu hai số bằng nhau.
+\end{itemize}
+
+Dùng \texttt{if/elif/else}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 3. Số lớn nhất trong ba
+số}\label{buxe0i-3.-sux1ed1-lux1edbn-nhux1ea5t-trong-ba-sux1ed1}
+
+Nhập ba số và xác định số lớn nhất.
+
+Trước tiên giải bằng rẽ nhánh lồng nhau. Sau đó xem có thể viết rõ hơn
+bằng biểu thức Boolean hoặc nhiều phương án hay không.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 4. Quy tắc vận
+chuyển}\label{buxe0i-4.-quy-tux1eafc-vux1eadn-chuyux1ec3n}
+
+Nhập:
+
+\begin{itemize}
+\tightlist
+\item
+  quốc gia đích;
+\item
+  bang hoặc tỉnh.
+\end{itemize}
+
+Chuẩn hóa hai đầu vào bằng \texttt{upper()}.
+
+Dùng quy tắc:
+
+\begin{itemize}
+\tightlist
+\item
+  phần lục địa Hoa Kỳ: \texttt{\$5};
+\item
+  Alaska hoặc Hawaii: \texttt{\$10};
+\item
+  ngoài Hoa Kỳ: \texttt{\$15}.
+\end{itemize}
+
+In phí vận chuyển với hai chữ số thập phân.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 5. Phân loại điểm
+chữ}\label{buxe0i-5.-phuxe2n-loux1ea1i-ux111iux1ec3m-chux1eef}
+
+Nhập điểm từ \texttt{0} đến \texttt{100} và phân loại:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{90–100 → A}
+\NormalTok{80–89  → B}
+\NormalTok{70–79  → C}
+\NormalTok{60–69  → D}
+\NormalTok{0–59   → F}
+\end{Highlighting}
+\end{Shaded}
+
+Từ chối điểm không hợp lệ trước khi phân loại.
+
+Tạo ca kiểm thử cho:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{{-}1, 0, 59, 60, 69, 70, 79, 80, 89, 90, 100, 101}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 6. Kiểm tra tên người
+dùng}\label{buxe0i-6.-kiux1ec3m-tra-tuxean-ngux1b0ux1eddi-duxf9ng}
+
+Nhập một username và kiểm tra:
+
+\begin{itemize}
+\tightlist
+\item
+  không được rỗng;
+\item
+  chỉ gồm chữ cái và chữ số;
+\item
+  có ít nhất một ký tự.
+\end{itemize}
+
+Dùng các phương thức phân tích chuỗi ở Mục 3.8.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 7. Phân loại loại
+file}\label{buxe0i-7.-phuxe2n-loux1ea1i-loux1ea1i-file}
+
+Nhập tên file và phân loại:
+
+\begin{itemize}
+\tightlist
+\item
+  mã Python: \texttt{.py};
+\item
+  notebook: \texttt{.ipynb};
+\item
+  dữ liệu CSV: \texttt{.csv};
+\item
+  file văn bản: \texttt{.txt};
+\item
+  loại khác.
+\end{itemize}
+
+Kiểm tra không phân biệt chữ hoa/chữ thường.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 8. So sánh gần
+bằng}\label{buxe0i-8.-so-suxe1nh-gux1ea7n-bux1eb1ng}
+
+Nhập hai số thực và xác định chúng có chênh nhau ít hơn \texttt{0.001}
+hay không.
+
+Không dùng phép bằng tuyệt đối cho phép so sánh gần bằng.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 9. Phân loại tam giác theo độ dài
+cạnh}\label{buxe0i-9.-phuxe2n-loux1ea1i-tam-giuxe1c-theo-ux111ux1ed9-duxe0i-cux1ea1nh}
+
+Nhập ba độ dài cạnh dương.
+
+Trước tiên kiểm tra chúng có tạo thành tam giác hay không:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a + b \textgreater{} c}
+\NormalTok{and}
+\NormalTok{b + c \textgreater{} a}
+\NormalTok{and}
+\NormalTok{c + a \textgreater{} b}
+\end{Highlighting}
+\end{Shaded}
+
+Nếu hợp lệ, phân loại:
+
+\begin{itemize}
+\tightlist
+\item
+  tam giác đều;
+\item
+  tam giác cân;
+\item
+  tam giác thường.
+\end{itemize}
+
+Chuẩn bị ca kiểm thử cho từng nhánh và các giá trị biên trước khi viết
+mã.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Bài 10. Kiểm tra mã truy cập đơn
+giản}\label{buxe0i-10.-kiux1ec3m-tra-muxe3-truy-cux1eadp-ux111ux1a1n-giux1ea3n}
+
+Nhập một mã truy cập ngắn.
+
+Quy tắc:
+
+\begin{itemize}
+\tightlist
+\item
+  đúng 6 ký tự;
+\item
+  chỉ gồm chữ và số;
+\item
+  phải chứa chuỗi con \texttt{"NEU"}, không phân biệt hoa/thường.
+\end{itemize}
+
+In thông báo cụ thể cho trường hợp hợp lệ hoặc không hợp lệ.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Bài tập mở}\label{buxe0i-tux1eadp-mux1edf}
+
+\subsection{Bài 1}\label{buxe0i-1}
+
+Đưa ra ba ví dụ thực tế trong đó một quyết định chỉ có đúng hai kết quả.
+Viết quy tắc cho mỗi ví dụ bằng mã giả.
+
+\subsection{Bài 2}\label{buxe0i-2}
+
+Đưa ra một ví dụ thực tế có ít nhất bốn phương án loại trừ lẫn nhau.
+Giải thích vì sao \texttt{if/elif/else} phù hợp.
+
+\subsection{Bài 3}\label{buxe0i-3}
+
+Chọn một điều kiện dạng khoảng và xác định:
+
+\begin{itemize}
+\tightlist
+\item
+  một giá trị hợp lệ điển hình;
+\item
+  giá trị biên dưới;
+\item
+  giá trị biên trên;
+\item
+  một giá trị ngay dưới khoảng;
+\item
+  một giá trị ngay trên khoảng.
+\end{itemize}
+
+\subsection{Bài 4}\label{buxe0i-4}
+
+Tạo ví dụ trong đó nhiều \texttt{if} độc lập là đúng nhưng
+\texttt{if/elif} lại sai. Giải thích vì sao có thể cần thực hiện nhiều
+hành động cùng lúc.
+
+\subsection{Bài 5}\label{buxe0i-5}
+
+Viết một điều kiện Boolean phức tạp dùng \texttt{not}, \texttt{and},
+\texttt{or}. Sau đó đơn giản hóa bằng định luật De Morgan.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Thuật ngữ chính}\label{thuux1eadt-ngux1eef-chuxednh}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Thuật ngữ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ý nghĩa
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Decision & Quyết định -- chọn hành động dựa trên điều kiện \\
+Condition & Điều kiện -- biểu thức cho kết quả đúng hoặc sai \\
+\texttt{if} statement & Câu lệnh \texttt{if} -- thực hiện một khối khi
+điều kiện đúng \\
+\texttt{else} branch & Nhánh thay thế khi điều kiện \texttt{if} sai \\
+\texttt{elif} & Thêm một điều kiện khác vào quyết định nhiều nhánh \\
+Compound statement & Câu lệnh ghép gồm dòng tiêu đề và các câu lệnh lồng
+bên dưới \\
+Statement block & Nhóm câu lệnh ở cùng mức thụt lề \\
+Indentation & Khoảng trắng đầu dòng xác định cấu trúc khối trong
+Python \\
+Relational operator & Toán tử quan hệ so sánh hai giá trị \\
+Equality test & Kiểm tra bằng nhau bằng \texttt{==} \\
+Boundary value & Giá trị nằm đúng tại biên của một khoảng quyết định \\
+Floating-point tolerance & Sai số cho phép dùng khi so sánh gần bằng \\
+Nested branch & Câu lệnh quyết định nằm trong một nhánh khác \\
+Hand-tracing & Mô phỏng thủ công quá trình chạy chương trình \\
+Multiple alternatives & Quyết định có nhiều hơn hai nhánh \\
+Flowchart & Sơ đồ mô tả công việc và luồng điều khiển \\
+Branch coverage & Kiểm thử để mọi nhánh đều được chạy ít nhất một lần \\
+Test case & Đầu vào cùng kết quả mong đợi để kiểm chứng chương trình \\
+Boolean & Kiểu dữ liệu có hai giá trị \texttt{True} và \texttt{False} \\
+Flag & Biến Boolean biểu diễn trạng thái hoặc điều kiện \\
+Boolean operator & \texttt{and}, \texttt{or}, \texttt{not} \\
+Short-circuit evaluation & Dừng đánh giá Boolean khi đã biết kết quả
+cuối \\
+De Morgan's laws & Quy tắc biến đổi phủ định của biểu thức
+\texttt{and}/\texttt{or} \\
+Substring & Chuỗi con nằm trong một chuỗi khác \\
+Membership test & Kiểm tra bằng \texttt{in} hoặc \texttt{not\ in} \\
+Input validation & Kiểm tra dữ liệu đầu vào thỏa các ràng buộc \\
+Normalization & Chuyển dữ liệu về một dạng thống nhất trước khi so
+sánh \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Hướng dẫn học
+tập}\label{hux1b0ux1edbng-dux1eabn-hux1ecdc-tux1eadp}
+
+Sau Bài 3, sinh viên không nên còn xem chương trình chỉ là một danh sách
+phép tính cố định. Chương trình giờ đã có thể \textbf{chọn đường thực
+hiện}.
+
+Một quy trình phù hợp cho bài toán có rẽ nhánh là:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Hiểu quy tắc}
+\NormalTok{→ xác định các kết quả có thể xảy ra}
+\NormalTok{→ xây dựng điều kiện}
+\NormalTok{→ kiểm tra giá trị biên}
+\NormalTok{→ vẽ lưu đồ khi cần}
+\NormalTok{→ viết mã giả}
+\NormalTok{→ chọn if / if{-}else / if{-}elif{-}else / if lồng nhau}
+\NormalTok{→ loại bỏ phần xử lý lặp lại}
+\NormalTok{→ chuẩn bị ca kiểm thử cho mọi nhánh}
+\NormalTok{→ cài đặt bằng Python}
+\NormalTok{→ chạy ca thường, ca biên và ca không hợp lệ}
+\NormalTok{→ mô phỏng khi kết quả bất thường}
+\end{Highlighting}
+\end{Shaded}
+
+Một chu trình thực hành hữu ích:
+
+\begin{quote}
+\textbf{Dự đoán → Mô phỏng → Chạy → So sánh → Giải thích → Sửa đổi →
+Kiểm tra biên → Luyện tập}
+\end{quote}
+
+Thói quen quan trọng nhất của chương này là coi mỗi quyết định là một
+cấu trúc cần được \textbf{thiết kế và kiểm thử}, không chỉ đơn thuần là
+gõ vài câu lệnh \texttt{if}.
+
+\end{document}
