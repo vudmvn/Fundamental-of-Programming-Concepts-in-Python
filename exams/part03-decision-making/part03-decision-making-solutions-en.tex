@@ -1,0 +1,441 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- PACKAGES ---
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+
+\usepackage[top=2cm, bottom=2.2cm, left=2cm, right=2cm]{geometry}
+\setlength{\headheight}{24pt}
+\addtolength{\topmargin}{-10pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% --- COLOR DEFINITIONS ---
+\definecolor{primaryblue}{HTML}{0F3460}
+\definecolor{secondaryteal}{HTML}{0D9488}
+\definecolor{accentgold}{HTML}{D97706}
+\definecolor{darkgray}{HTML}{1F2937}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{boxbg}{HTML}{F8FAFC}
+\definecolor{borderblue}{HTML}{93C5FD}
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{15803D}
+\definecolor{pyorange}{HTML}{C2410C}
+\definecolor{correctgreen}{HTML}{166534}
+
+% --- LISTINGS CONFIGURATION ---
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen}\itshape,
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+% --- HYPERREF SETUP ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Decision Making Solutions and Rubric},
+    pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+% --- HEADERS & FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{primaryblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\small\color{correctgreen}\textbf{Instructor Solutions \& Rubric}}
+\fancyfoot[L]{\footnotesize\color{darkgray}Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[C]{\footnotesize\color{darkgray}Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\color{darkgray}\textbf{Total: 100 Points}}
+
+% --- SECTION STYLING ---
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\thesection}{1em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{secondaryteal}\large\bfseries}
+  {\thesubsection}{1em}{}
+
+% Custom box for solutions
+\newtcolorbox{solbox}[2][]{%
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={colback=green!10, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+% --- EXAM HEADER ---
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.15cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY}}\\[0.10cm]
+  {\large\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}}\\[0.25cm]
+  \rule{\textwidth}{1.2pt}\\[0.3cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.15cm]
+  {\large\textbf{Course: Fundamental Programming Concepts in Python (DSAI1003)}}\\[0.15cm]
+  {\normalsize\textit{Progress Exam: Decision Making and Boolean Logic in Python}}\\[0.2cm]
+  \rule{\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.2cm}
+
+\begin{tcolorbox}[colback=green!8, colframe=correctgreen, arc=1.5mm]
+\small
+\textbf{Note for Instructors and Teaching Assistants:}
+This document provides complete answer keys, rationale for conceptual questions, exact output traces, step-by-step program logic, reference Python implementations, and an itemized marking rubric designed for fair and consistent grading across all cohorts.
+\end{tcolorbox}
+
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION A
+% ==============================================================================
+\section*{Section A: Decision Making \& Boolean Logic Concepts (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & In Python, block structure is determined solely by consistent indentation. Mixing tabs and spaces or varying indentation within a block raises an \texttt{IndentationError}. Colons are mandatory, braces are not used for block delimiters, and \texttt{else} cannot exist standalone. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{C} & The single equals sign \texttt{=} is the assignment operator. Python disallows assignment inside condition headers, raising a compile-time \texttt{SyntaxError: invalid syntax}. Equality must use \texttt{==}. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & Binary representation causes inexact precision for many decimal fractions ($0.1 + 0.2 \approx 0.30000000000000004$). Direct equality comparison \texttt{x == 0.3} evaluates to \texttt{False}. The standard numerical method is checking proximity: \texttt{abs(x - target) < EPSILON}. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{B} & String comparison in Python is lexicographical, based on Unicode code points. Uppercase letters have lower numerical values than lowercase letters (ASCII/Unicode: \texttt{'B'} is 66, \texttt{'a'} is 97). Thus, \texttt{"apple" > "Banana"} is \texttt{True}, making \texttt{"apple" < "Banana"} evaluate to \texttt{False}. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{B} & Python evaluates \texttt{if-elif} ladders sequentially from top to bottom. As soon as a condition evaluates to \texttt{True}, its block executes and all subsequent \texttt{elif} and \texttt{else} branches are bypassed. Since $85 \ge 60$, \texttt{grade = "D"} executes immediately. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{A} & Operator precedence for boolean operators is: \texttt{not} (highest), followed by \texttt{and}, and finally \texttt{or} (lowest). Evaluation: \texttt{not False} $\rightarrow$ \texttt{True}; \texttt{True and False} $\rightarrow$ \texttt{False}; \texttt{False or True} $\rightarrow$ \texttt{True}. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{B} & Python uses \textbf{short-circuit evaluation}. In an \texttt{and} expression, if the left operand is \texttt{False}, the overall expression cannot be true, so Python stops and returns \texttt{False} without evaluating the right operand, safely avoiding \texttt{ZeroDivisionError}. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{B} & De Morgan's Law states: $\neg(A \lor B) \equiv (\neg A) \land (\neg B)$. Negating \texttt{status == "VIP"} gives \texttt{status != "VIP"}; negating \texttt{points >= 100} gives \texttt{points < 100}; the \texttt{or} operator flips to \texttt{and}. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{C} & The built-in string method \texttt{s.isdigit()} returns \texttt{True} if all characters in the string are digits and there is at least one character; otherwise it returns \texttt{False}. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{C} & Full branch coverage requires executing every possible control flow path. An \texttt{if-elif-elif-else} construct has four distinct executable branches; thus, at least four test cases are required (one triggering each branch). & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION B
+% ==============================================================================
+\section*{Section B: Output Tracing, Logic Diagnosis \& Error Correction (25 points)}
+
+\subsection*{Q11. Exact Output Tracing with Nested Decisions \& Surcharges (5 points)}
+\begin{solbox}{Solution for Q11}
+\begin{lstlisting}
+Base: $40.00 | Discount: 30%
+Payable: $28.00
+Eligible: True
+\end{lstlisting}
+\textbf{Scoring Breakdown:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Line 1 (2 points):} \texttt{Base: \$40.00 | Discount: 30\%} ($age = 19 < 25$, $is\_student = True \rightarrow discount = 0.30$).
+  \item \textbf{Line 2 (1.5 points):} \texttt{Payable: \$28.00} ($final\_fare = 40.0 \times (1.0 - 0.30) = 40.0 \times 0.70 = 28.0$, formatted as \texttt{\$28.00}).
+  \item \textbf{Line 3 (1.5 points):} \texttt{Eligible: True} ($0.30 \ge 0.30$ is \texttt{True} and $19 \ge 18$ is \texttt{True} $\rightarrow$ \texttt{True and True} evaluates to \texttt{True}).
+\end{itemize}
+\end{solbox}
+
+\subsection*{Q12. Evaluation of Boolean Expressions and Short-Circuiting (5 points)}
+\begin{solbox}{Solution for Q12}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{a)} \texttt{10 < 20 <= 25}: \textbf{\texttt{True}} (1 pt) -- Chained comparison equivalent to \texttt{(10 < 20) and (20 <= 25)}.
+  \item \textbf{b)} \texttt{"py" in "Python".lower() and not (5 > 8)}: \textbf{\texttt{True}} (1 pt) -- \texttt{"py" in "python"} is \texttt{True}; \texttt{not False} is \texttt{True}.
+  \item \textbf{c)} \texttt{False or not False and not True}: \textbf{\texttt{False}} (1 pt) -- \texttt{not False} is \texttt{True}, \texttt{not True} is \texttt{False}; \texttt{True and False} is \texttt{False}; \texttt{False or False} is \texttt{False}.
+  \item \textbf{d)} \texttt{"cat" > "Cat" and "10" < "2"}: \textbf{\texttt{True}} (1 pt) -- \texttt{'c'} (99) $>$ \texttt{'C'} (67) is \texttt{True}; \texttt{'1'} (49) $<$ \texttt{'2'} (50) is \texttt{True}.
+  \item \textbf{e)} \texttt{len("neu") == 3 or (1 / 0 == 1)}: \textbf{\texttt{True}} (1 pt) -- Left operand is \texttt{True}; short-circuit skips division by zero.
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+\subsection*{Q13. Diagnose and Correct Common Decision Logic Errors (5 points)}
+\begin{solbox}{Solution for Q13}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|p{4.5cm}|X|X|}
+\hline
+\textbf{Code / Situation} & \textbf{Problem / Logic Flaw} & \textbf{Correction / Valid Code} \\
+\hline
+\texttt{choice = input("Option: ")}\newline
+\texttt{if choice == "A" or "B":} &
+\texttt{"B"} is a non-empty string and thus always evaluates to truthy. The condition evaluates to \texttt{True} regardless of the user's input. &
+\texttt{if choice == "A" or choice == "B":}\newline
+\textit{or} \texttt{if choice in ("A", "B"):} \\
+\hline
+\texttt{x = 0.1 + 0.2}\newline
+\texttt{if x == 0.3:} &
+Floating-point binary roundoff error ($0.1 + 0.2 \ne 0.3$ exactly). Condition erroneously evaluates to \texttt{False}. &
+\texttt{EPSILON = 1E-14}\newline
+\texttt{if abs(x - 0.3) < EPSILON:} \\
+\hline
+\texttt{val = input("Enter int: ")}\newline
+\texttt{if int(val) > 0:} &
+If the user enters non-numeric text (\texttt{"abc"}), \texttt{int()} crashes with a \texttt{ValueError} before the condition is tested. &
+\texttt{if val.isdigit() and int(val) > 0:}\newline
+(short-circuit ensures safety) \\
+\hline
+\end{tabularx}
+\textit{Scoring: 1.5 pts for Row 1, 1.5 pts for Row 2, 2.0 pts for Row 3.}
+\end{solbox}
+
+\subsection*{Q14. String Analysis Methods and Substring Inspection (5 points)}
+\begin{solbox}{Solution for Q14}
+\begin{lstlisting}
+Prefix: True, Dash: True
+Suffix Digits: True
+Alphanumeric: False
+\end{lstlisting}
+\textbf{Scoring Breakdown:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Line 1 (1.5 points):} \texttt{code.startswith("NEU")} is \texttt{True}; \texttt{"-" in code} is \texttt{True}.
+  \item \textbf{Line 2 (1.5 points):} \texttt{code[-4:]} extracts \texttt{"2026"}; all characters are digits, so \texttt{.isdigit()} is \texttt{True}.
+  \item \textbf{Line 3 \& Explanation (2.0 points):} \texttt{Alphanumeric: False} (1 pt). Explanation (1 pt): The hyphen character \texttt{'-'} is neither a letter nor a numeric digit; thus \texttt{.isalnum()} evaluates to \texttt{False}.
+\end{itemize}
+\end{solbox}
+
+\subsection*{Q15. De Morgan's Laws and Boundary Test Cases (5 points)}
+\begin{solbox}{Solution for Q15}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{De Morgan's rewrite (2.5 points):}
+  $$\texttt{temp < 18 or temp > 26}$$
+  \textit{Full credit for exact boolean equivalence without outer \texttt{not}.}
+  \item \textbf{Critical boundary values (2.5 points):}
+  The critical boundary test values are: \textbf{17, 18, 19} (testing lower boundary) and \textbf{25, 26, 27} (testing upper boundary).
+  \textit{Full credit for stating the exact boundary edge values (18 and 26) along with their immediate adjacent values (17, 19, 25, 27).}
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION C
+% ==============================================================================
+\section*{Section C: Program Design \& Logic Specification (25 points)}
+
+\begin{solbox}{Model Solution for Section C (Tasks 1 \& 2)}
+\textbf{Task 1: Identify Decision Criteria, Inputs \& Outputs (6 points)}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Inputs \& Types (2 pts):} \texttt{weight} (\texttt{float}), \texttt{service} (\texttt{str}), \texttt{is\_member} (\texttt{bool}).
+  \item \textbf{Validation Criteria (2 pts):} $0 < \text{weight} \le 50.0$ and $\text{service} \in \{\texttt{"S"}, \texttt{"E"}\}$.
+  \item \textbf{Outputs (2 pts):} Base cost, express surcharge (if applicable), member discount (if applicable), and final payable amount.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Task 2: Structured Decision Logic in Ordered Steps (7 points)}
+\begin{enumerate}[leftmargin=2em, label=Step \arabic*:]
+  \item \textbf{Input Validation:} Check if $\text{weight} \le 0$ or $\text{weight} > 50.0$ or $\text{service} \notin \{\texttt{"S"}, \texttt{"E"}\}$. If true, print error and terminate.
+  \item \textbf{Base Cost Calculation (Tiered Branching):}
+    \begin{itemize}
+      \item If $\text{weight} \le 2.0$: $\text{base\_cost} = 10.00$.
+      \item Else if $\text{weight} \le 10.0$: $\text{base\_cost} = 10.00 + (\text{weight} - 2.0) \times 3.50$.
+      \item Else: $\text{base\_cost} = 38.00 + (\text{weight} - 10.0) \times 2.00$.
+    \end{itemize}
+  \item \textbf{Surcharge Calculation:}
+    \begin{itemize}
+      \item If $\text{service} == \texttt{"E"}$: $\text{surcharge} = \max(0.40 \times \text{base\_cost}, 8.00)$.
+      \item Else: $\text{surcharge} = 0.00$.
+    \end{itemize}
+  \item \textbf{Subtotal \& Loyalty Discount:}
+    \begin{itemize}
+      \item $\text{subtotal} = \text{base\_cost} + \text{surcharge}$.
+      \item If $\text{is\_member} == \texttt{True}$ and $\text{subtotal} > 30.00$: $\text{discount} = 5.00$; else $\text{discount} = 0.00$.
+    \end{itemize}
+  \item \textbf{Final Cost:} $\text{total} = \text{subtotal} - \text{discount}$. Display formatted receipt.
+\end{enumerate}
+\end{solbox}
+
+\vspace{0.2cm}
+
+\begin{solbox}{Model Solution for Section C (Tasks 3 \& 4)}
+\textbf{Task 3: Hand Trace Calculation for $w = 6.0$, \texttt{service = "E"}, \texttt{is\_member = True} (6 points)}
+\begin{itemize}[leftmargin=2em]
+  \item Weight $w = 6.0 \in \text{Tier 2} \rightarrow \text{base\_cost} = 10.00 + (6.0 - 2.0) \times 3.50 = 10.00 + 14.00 = \mathbf{\$24.00}$ (2 pts).
+  \item Express Surcharge: $40\% \times 24.00 = \$9.60$. Since $\$9.60 \ge \$8.00$ minimum, $\text{surcharge} = \mathbf{\$9.60}$ (1.5 pts).
+  \item Subtotal: $\$24.00 + \$9.60 = \$33.60$.
+  \item Member Discount: Since $\text{is\_member} = \texttt{True}$ and $\$33.60 > \$30.00$, $\text{discount} = \mathbf{\$5.00}$ (1.5 pts).
+  \item Final Payable Cost: $\$33.60 - \$5.00 = \mathbf{\$28.60}$ (1 pt).
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Task 4: Explain Design Decisions (6 points)}
+\begin{enumerate}[label=\alph*),leftmargin=2em]
+  \item \textbf{Why use \texttt{if-elif-else} rather than independent \texttt{if} statements? (3 points)} \\
+  Weight tiers are mutually exclusive. With independent \texttt{if} statements, a parcel weighing 1.5 kg would match multiple conditions if not carefully guarded, and all conditions would be evaluated redundantly. The \texttt{if-elif} construct guarantees that exactly one tier is selected and execution halts as soon as the correct branch is matched.
+  \item \textbf{Why execute validation prior to calculations? (3 points)} \\
+  Validating early (the "guard condition" pattern) prevents invalid or impossible operations (such as calculating negative weights or processing unrecognized service codes), prevents runtime errors, and saves computational overhead.
+\end{enumerate}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION D
+% ==============================================================================
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Residential Electricity Billing with Progressive Tiered Tariff (15 points)}
+\begin{solbox}{Reference Implementation for Problem 1}
+\begin{lstlisting}
+# Input
+customer_name = input("Enter customer name: ")
+prev_reading = float(input("Enter previous meter reading: "))
+curr_reading = float(input("Enter current meter reading: "))
+
+# Validation
+if prev_reading < 0 or curr_reading < prev_reading:
+    print("ERROR: Invalid meter readings. Readings must be non-negative and current >= previous.")
+else:
+    kwh = curr_reading - prev_reading
+
+    # Tiered energy charge calculation
+    if kwh <= 50:
+        energy_charge = kwh * 0.12
+    elif kwh <= 100:
+        energy_charge = (50 * 0.12) + (kwh - 50) * 0.15
+    elif kwh <= 200:
+        energy_charge = (50 * 0.12) + (50 * 0.15) + (kwh - 100) * 0.20
+    else:
+        energy_charge = (50 * 0.12) + (50 * 0.15) + (100 * 0.20) + (kwh - 200) * 0.25
+
+    # Excess consumption surcharge
+    if kwh > 200:
+        surcharge = 10.00
+    else:
+        surcharge = 0.00
+
+    # Tax and Total
+    subtotal = energy_charge + surcharge
+    vat = subtotal * 0.08
+    total_bill = subtotal + vat
+
+    # Output
+    print(f"Customer Name: {customer_name}")
+    print(f"Electricity Consumed: {kwh:.1f} kWh")
+    print(f"Energy Charge: ${energy_charge:.2f}")
+    print(f"Excess Surcharge: ${surcharge:.2f}")
+    print(f"VAT (8%): ${vat:.2f}")
+    print(f"Total Bill: ${total_bill:.2f}")
+\end{lstlisting}
+\end{solbox}
+
+\vspace{0.15cm}
+\begin{solbox}{Marking Rubric for Problem 1 (15 points)}
+\begin{itemize}[leftmargin=2em, itemsep=1pt]
+  \item \textbf{Input \& Data Types (2 pts):} Reads strings and correctly casts readings to \texttt{float}.
+  \item \textbf{Input Validation (3 pts):} Correctly checks $\text{prev\_reading} \ge 0$ and $\text{curr\_reading} \ge \text{prev\_reading}$, issuing error message if invalid.
+  \item \textbf{Tiered Progressive Calculation (5 pts):} Correctly implements tiered bracket mathematics: Tier 1 (\$0.12, 1 pt), Tier 2 (first 50 at \$0.12 + remainder at \$0.15, 1.5 pts), Tier 3 (1.5 pts), Tier 4 (\$0.25 on remainder above 200, 1 pt).
+  \item \textbf{Surcharge \& VAT (2 pts):} Flat \$10.00 surcharge when $\text{kwh} > 200$; 8\% VAT calculated on subtotal.
+  \item \textbf{Formatted Output (3 pts):} Displays itemized receipt with exact formatting and \texttt{:.2f} currency values.
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+\subsection*{Problem 2: University Course Enrollment \& Eligibility Verification (15 points)}
+\begin{solbox}{Reference Implementation for Problem 2}
+\begin{lstlisting}
+# Constants
+DIVIDER = "=" * 45
+SUB_DIVIDER = "-" * 45
+
+# Input
+student_id = input("Enter Student ID: ").strip()
+gpa = float(input("Enter Cumulative GPA: "))
+credits_earned = int(input("Enter Completed Credits: "))
+prereq_status = input("Prerequisite Status (pass/fail): ").strip()
+warning_flag = input("Disciplinary Warning (yes/no): ").strip()
+
+# Student ID Validation
+if len(student_id) != 8 or not student_id.startswith("NEU") or not student_id[3:].isdigit():
+    print("ERROR: Invalid Student ID format. Must be 'NEU' followed by 5 digits.")
+else:
+    # Eligibility Verification
+    is_prereq_ok = (prereq_status.lower() == "pass")
+    is_warning_free = (warning_flag.lower() == "no")
+    is_credits_ok = (credits_earned >= 30)
+    is_gpa_ok = (gpa >= 2.50)
+
+    is_eligible = is_prereq_ok and is_warning_free and is_credits_ok and is_gpa_ok
+
+    # Enrollment Classification
+    if is_eligible:
+        if gpa >= 3.60 and credits_earned >= 60:
+            status = "APPROVED (Honors Priority)"
+        else:
+            status = "APPROVED (Standard)"
+    else:
+        # Determine rejection reason
+        reasons = []
+        if not is_prereq_ok:
+            reasons.append("Prerequisite not passed")
+        if not is_warning_free:
+            reasons.append("Active disciplinary warning")
+        if not is_credits_ok:
+            reasons.append("Insufficient credits (< 30)")
+        if not is_gpa_ok:
+            reasons.append("GPA below 2.50 threshold")
+        status = f"REJECTED ({', '.join(reasons)})"
+
+    # Formatted Output
+    print(DIVIDER)
+    print("ENROLLMENT ELIGIBILITY REPORT: DSAI2001")
+    print(SUB_DIVIDER)
+    print(f"Student ID: {student_id} | Cumulative GPA: {gpa:.2f}")
+    print(f"Completed Credits: {credits_earned}")
+    print(f"Enrollment Status: {status}")
+    print(DIVIDER)
+\end{lstlisting}
+\end{solbox}
+
+\vspace{0.15cm}
+\begin{solbox}{Marking Rubric for Problem 2 (15 points)}
+\begin{itemize}[leftmargin=2em, itemsep=1pt]
+  \item \textbf{Input Collection \& Type Conversion (2 pts):} Prompts all 5 variables with appropriate type casting (\texttt{float}, \texttt{int}, \texttt{str}).
+  \item \textbf{Student ID Format Validation (4 pts):} Correctly verifies length == 8, prefix \texttt{"NEU"} with \texttt{.startswith()}, and digits with \texttt{.isdigit()}; halts on failure.
+  \item \textbf{Eligibility Decision Logic (4 pts):} Correctly evaluates the conjunction of all four criteria (\texttt{prereq}, \texttt{warning}, \texttt{credits}, \texttt{gpa}) using boolean operators.
+  \item \textbf{Classification (Honors vs Standard vs Rejected) (3 pts):} Correct nested condition for Honors priority ($\text{gpa} \ge 3.60 \land \text{credits} \ge 60$); provides informative status.
+  \item \textbf{Output Formatting (2 pts):} Formats report card with divider borders and properly aligned fields.
+\end{itemize}
+\end{solbox}
+
+\end{document}

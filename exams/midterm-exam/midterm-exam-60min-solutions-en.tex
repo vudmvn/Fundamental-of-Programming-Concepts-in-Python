@@ -1,0 +1,547 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.88]}{\setmonofont{Liberation Mono}[Scale=0.88]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\geometry{top=1.35cm,bottom=1.35cm,left=1.65cm,right=1.65cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{correctgreen}{RGB}{10,120,40}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.0pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=1.0pt,topsep=0.6pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.3em,itemsep=1.0pt,topsep=0.6pt,parsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.15em,
+  belowskip=0.15em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Midterm Exam Solutions \& Marking Scheme --- Code: 101}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{3.0pt}{1.2pt}
+\titlespacing*{\subsection}{0pt}{2.2pt}{1.0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Midterm Exam Solutions (60 Minutes)},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% --- EXAM HEADER ---
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.08cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY}}\\[0.05cm]
+  {\large\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}}\\[0.15cm]
+  \rule{\textwidth}{1.2pt}\\[0.15cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.08cm]
+  {\large\textbf{Course: Fundamental Programming Concepts in Python (DSAI1003)}}\\[0.08cm]
+  {\normalsize\textbf{Progress Midterm Examination (60 Minutes) --- Paper Code: 101}}\\[0.06cm]
+  {\footnotesize\textbf{Weighting:} 40\% Quiz, 30\% Fill-in, 30\% Full Code \quad | \quad \textbf{Difficulty:} 80\% Basic (80 pts), 20\% Medium (20 pts)}\\[0.10cm]
+  \rule{\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.08cm}
+
+\begin{tcolorbox}[colback=green!8, colframe=correctgreen, arc=1.2mm, boxrule=0.6pt, left=2.0mm, right=2.0mm, top=1.0mm, bottom=1.0mm]
+\small
+\textbf{Note for Instructors and Teaching Assistants:}
+This document contains the official answer keys, conceptual explanations, reference Python implementations, sample outputs, and itemized grading rubrics for the 60-minute Midterm Exam. All grading must follow the rubrics consistently.
+\end{tcolorbox}
+
+\vspace{0.08cm}
+
+% ==============================================================================
+% SECTION A: QUIZ (PART 1: Q1 - Q10)
+% ==============================================================================
+\section*{Section A: Multiple-Choice Quiz Solutions (40 points --- 20 questions, 2 pts each)}
+\textit{Difficulty: 16 Basic questions (32 pts, 80\%), 4 Medium questions (8 pts, 20\%).}
+
+\subsection*{Part 1: Questions 1 to 10}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Level} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & Basic & CPython compiles source into platform-independent bytecode (\texttt{.pyc}), executed by the Python Virtual Machine (PVM). & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{C} & Basic & Variable names cannot start with a digit. \texttt{2nd\_quarter} raises a \texttt{SyntaxError: invalid decimal literal}. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & Basic & The built-in \texttt{input()} function unconditionally returns a string (\texttt{str}), requiring explicit type casting for arithmetic. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{A} & Basic & \texttt{sep="->"} separates arguments; \texttt{end="\#"} prevents newline. Next print appends immediately: \texttt{DSFE->2026\#NEU}. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{B} & Basic & Division by zero is syntactically valid but raises a runtime exception: \texttt{ZeroDivisionError} during execution. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{A} & Medium & Precedence: \texttt{**} (highest) $\rightarrow$ \texttt{//}, \texttt{*}, \texttt{\%} (left-to-right) $\rightarrow$ \texttt{+}. $5^2=25$; $17//4=4$; $4\times 2=8$; $19\%25=19$; $8+19=27$. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{B} & Basic & Decimal fractions ($0.1, 0.2$) cannot be stored exactly in IEEE 754 binary floating-point, causing roundoff error ($0.1+0.2 \ne 0.3$). & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{B} & Basic & Strings are immutable in Python. In-place index modification (\texttt{name[0] = "J"}) raises a \texttt{TypeError}. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{B} & Basic & String replication: \texttt{"2"*3} is \texttt{"222"}; \texttt{"4"*2} is \texttt{"44"}. String concatenation joins them into \texttt{"22244"}. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{B} & Basic & Format specifier \texttt{:.2f} inside an f-string formats a float to fixed-point representation with exactly 2 decimal places. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% SECTION A: QUIZ (PART 2: Q11 - Q20)
+% ==============================================================================
+\subsection*{Part 2: Questions 11 to 20}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Level} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q11} & \textbf{A} & Medium & Slice \texttt{[start:stop:step]} with negative step traverses backwards. Indices $8, 6, 4, 2$ yield \texttt{'n'}, \texttt{'i'}, \texttt{'S'}, \texttt{'t'} $\rightarrow$ \texttt{"niSt"}. & 2 pts \\
+\hline
+\textbf{Q12} & \textbf{A} & Basic & Single equals \texttt{=} is the assignment operator. Double equals \texttt{==} is the relational equality comparison operator. & 2 pts \\
+\hline
+\textbf{Q13} & \textbf{B} & Basic & Chained comparison \texttt{10 < x <= 25} is evaluated as \texttt{10 < x and x <= 25}, evaluating \texttt{x} only once. & 2 pts \\
+\hline
+\textbf{Q14} & \textbf{A} & Basic & Precedence hierarchy for boolean operators is strictly: \texttt{not} (highest), followed by \texttt{and}, then \texttt{or} (lowest). & 2 pts \\
+\hline
+\textbf{Q15} & \textbf{B} & Basic & \texttt{s.isdigit()} returns \texttt{True} if all characters are digits and length $\ge 1$; returns \texttt{False} otherwise. & 2 pts \\
+\hline
+\textbf{Q16} & \textbf{A} & Medium & De Morgan's Law: $\neg(A \land B) \equiv (\neg A) \lor (\neg B)$. Result: \texttt{score < 50 or status == "probation"}. & 2 pts \\
+\hline
+\textbf{Q17} & \textbf{B} & Basic & In \texttt{if-elif-else}, branches evaluate top-down. The first \texttt{True} condition ($82 \ge 50$) executes and remaining branches are bypassed. & 2 pts \\
+\hline
+\textbf{Q18} & \textbf{A} & Basic & In short-circuit \texttt{A or B}, if \texttt{A} is \texttt{True}, \texttt{B} is completely bypassed because the result is already known. & 2 pts \\
+\hline
+\textbf{Q19} & \textbf{A} & Basic & Strings are compared lexicographically by Unicode code point. Lowercase \texttt{'b'} (98) is greater than uppercase \texttt{'A'} (65). & 2 pts \\
+\hline
+\textbf{Q20} & \textbf{D} & Medium & In B: \texttt{x != 0} is \texttt{False}, short-circuiting \texttt{and}. In C: \texttt{x == 0} is \texttt{True}, short-circuiting \texttt{or}. Both avoid division by zero. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1mm}
+\begin{tcolorbox}[colback=boxbg, colframe=primaryblue!45, arc=1.2mm, left=2.0mm, right=2.0mm, top=1.0mm, bottom=1.0mm]
+\small
+\textbf{Section A Summary:}\\
+$\bullet$ Basic: 16 Qs $\times$ 2 pts (Q1--Q5, Q7--Q10, Q12--Q15, Q17--Q19) = \textbf{32 points (80.0\% of Section A)}\\
+$\bullet$ Medium: 4 Qs $\times$ 2 pts (Q6, Q11, Q16, Q20) = \textbf{8 points (20.0\% of Section A)}\\
+$\bullet$ Section A Total: \textbf{40 points (40.0\% of total exam)}
+\end{tcolorbox}
+
+% ==============================================================================
+% SECTION B: FILL-IN PROBLEMS
+% ==============================================================================
+\section*{Section B: Coding --- Fill-in Problems Solutions (30 points)}
+\textit{Difficulty: 24 points Basic (80\%), 6 points Medium (20\%).}
+
+\subsection*{Problem B1: Currency Exchange Teller Utility (12 points --- 4 blanks, 3 pts each [All Basic])}
+
+\begin{lstlisting}
+exchange_rate, fee_rate, ref_code = 25450.0, 0.02, "TERM04-TX99281"
+usd_amount = float(input("Enter exchange amount in USD: "))       # [B1.1] (3 pts - Basic)
+base_vnd = usd_amount * exchange_rate
+fee_vnd = base_vnd * fee_rate                                    # [B1.2] (3 pts - Basic)
+total_vnd = base_vnd + fee_vnd
+terminal_id = ref_code[:6]                                       # [B1.3] (3 pts - Basic)
+print(f"Total Payable: {total_vnd:,.2f} VND")                    # [B1.4] (3 pts - Basic)
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Blank} & \textbf{Level} & \textbf{Accepted Answer(s) \& Grading Criteria} & \textbf{Marks} \\
+\hline
+\textbf{[B1.1]} & Basic & \texttt{float(input("Enter exchange amount in USD: "))} or \texttt{float(input())}\newline
+\textit{Award 3 pts for correct \texttt{float(input(...))}. Deduct 1 pt if \texttt{int()} used.} & 3 pts \\
+\hline
+\textbf{[B1.2]} & Basic & \texttt{base\_vnd * fee\_rate} or \texttt{usd\_amount * exchange\_rate * fee\_rate}\newline
+\textit{Award 3 pts for valid fee formula.} & 3 pts \\
+\hline
+\textbf{[B1.3]} & Basic & \texttt{ref\_code[:6]} or \texttt{ref\_code[0:6]}\newline
+\textit{Award 3 pts. Award 1.5 pts if off-by-one (e.g. \texttt{[:7]}).} & 3 pts \\
+\hline
+\textbf{[B1.4]} & Basic & \texttt{total\_vnd:,.2f} or \texttt{total\_vnd:,.2F}\newline
+\textit{Award 3 pts for comma and 2 decimals. Award 1.5 pts if comma omitted (\texttt{total\_vnd:.2f}).} & 3 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% SECTION B: PROBLEM B2
+% ==============================================================================
+\subsection*{Problem B2: Bank Loan Risk Tier Classifier (18 points --- 6 blanks, 3 pts each)}
+
+\begin{lstlisting}
+credit_score = int(input("Enter Credit Score (300-850): "))
+monthly_income = float(input("Enter Monthly Income (USD): "))
+monthly_debt = float(input("Enter Monthly Debt (USD): "))
+has_delinquency = input("Any Delinquency? (yes/no): ").strip().lower() == "yes"
+has_guarantor = input("Guarantor available? (yes/no): ").strip().lower() == "yes"
+
+# [B2.1] Basic: Validate credit_score is within bounds [300, 850]:
+if not (300 <= credit_score <= 850):
+    print("ERROR: Invalid credit score."); exit()
+
+# [B2.2] Basic: Healthy Debt-to-Income (DTI) condition (monthly_debt / monthly_income <= 0.40):
+is_dti_healthy = (monthly_debt / monthly_income) <= 0.40
+
+# [B2.3] Basic: Tier 1 check: score >= 750 AND income >= 3000 AND NO delinquency:
+tier1_eligible = credit_score >= 750 and monthly_income >= 3000 and not has_delinquency
+
+card_tier = "DECLINED"
+if tier1_eligible and is_dti_healthy:
+    card_tier = "PLATINUM PRIME"
+# [B2.4] Basic: Second tier check: score >= 650 AND income >= 1800:
+elif credit_score >= 650 and monthly_income >= 1800:
+    card_tier = "GOLD STANDARD"
+
+# [B2.5] Medium: Short-circuit division guard: income > 0 AND debt ratio < 0.50:
+safe_debt_check = monthly_income > 0 and (monthly_debt / monthly_income < 0.50)
+
+# [B2.6] Medium: Fallback check: guarantor AND (score >= 600 OR income >= 2500) AND NOT delinquency:
+if card_tier == "DECLINED" and safe_debt_check:
+    if has_guarantor and (credit_score >= 600 or monthly_income >= 2500) and not has_delinquency:
+        card_tier = "BASIC SECURED"
+print(f"Decision: {card_tier}")
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Blank} & \textbf{Level} & \textbf{Accepted Answer(s) \& Grading Criteria} & \textbf{Marks} \\
+\hline
+\textbf{[B2.1]} & Basic & \texttt{300 <= credit\_score <= 850} or \texttt{credit\_score >= 300 and credit\_score <= 850}\newline
+\textit{Award 3 pts. Award 1.5 pts if strict inequality ($<$) used.} & 3 pts \\
+\hline
+\textbf{[B2.2]} & Basic & \texttt{(monthly\_debt / monthly\_income) <= 0.40} or \texttt{monthly\_debt / monthly\_income <= 0.4}\newline
+\textit{Award 3 pts for correct ratio comparison.} & 3 pts \\
+\hline
+\textbf{[B2.3]} & Basic & \texttt{credit\_score >= 750 and monthly\_income >= 3000 and not has\_delinquency}\newline
+\textit{Also accept \texttt{... and has\_delinquency == False}. Deduct 1 pt if \texttt{not} omitted.} & 3 pts \\
+\hline
+\textbf{[B2.4]} & Basic & \texttt{credit\_score >= 650 and monthly\_income >= 1800}\newline
+\textit{Award 3 pts for correct combined condition in the elif header.} & 3 pts \\
+\hline
+\textbf{[B2.5]} & Medium & \texttt{monthly\_income > 0 and (monthly\_debt / monthly\_income < 0.50)}\newline
+\textit{Award 3 pts for proper short-circuit ordering (\texttt{monthly\_income > 0} MUST come before division). Deduct 2 pts if division placed first.} & 3 pts \\
+\hline
+\textbf{[B2.6]} & Medium & \texttt{has\_guarantor and (credit\_score >= 600 or monthly\_income >= 2500) and not has\_delinquency}\newline
+\textit{Award 3 pts. Mandatory parentheses around \texttt{(... or ...)}; deduct 1.5 pts if parentheses omitted due to operator precedence violation.} & 3 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1mm}
+\begin{tcolorbox}[colback=boxbg, colframe=primaryblue!45, arc=1.2mm, left=2.0mm, right=2.0mm, top=1.0mm, bottom=1.0mm]
+\small
+\textbf{Section B Summary:}\\
+$\bullet$ Basic: [B1.1]--[B1.4] (12 pts) + [B2.1]--[B2.4] (12 pts) = \textbf{24 points (80.0\% of Section B)}\\
+$\bullet$ Medium: [B2.5] (3 pts) + [B2.6] (3 pts) = \textbf{6 points (20.0\% of Section B)}\\
+$\bullet$ Section B Total: \textbf{30 points (30.0\% of total exam)}
+\end{tcolorbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION C: PROBLEM C1 & PROBLEM C2
+% ==============================================================================
+\section*{Section C: Applied Full-Code Programming \& Design Solutions (30 points)}
+\textit{Difficulty Distribution: 24 points Basic (80\%), 6 points Medium (20\%). Problems C1 and C2 share a common business scenario with two distinct requirements. Problem C3 evaluates conditional branching and string methods.}
+
+\begin{tcolorbox}[colback=boxbg, colframe=secondaryteal, arc=1.2mm, boxrule=0.6pt, left=2.0mm, right=2.0mm, top=0.8mm, bottom=0.8mm]
+\textbf{\small Problem Scenario for C1 \& C2: University Banquet Event Dining Invoice Engine}\\[0.2mm]
+\footnotesize
+A university banquet dining hall generates an itemized bill for student club dinner reservations and calculates equal payment splits among attendees based on the following specifications:
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item \textbf{Inputs:} Food \& beverage subtotal (\texttt{subtotal} in USD, float), number of dining guests (\texttt{num\_diners}, int), and catering service charge rate (\texttt{service\_rate}, float, e.g. \texttt{0.10} for 10\%).
+  \item \textbf{Financial Formulas:}
+    \begin{itemize}[itemsep=0.1pt]
+      \item $\text{Service Charge} = \text{subtotal} \times \text{service\_rate}$
+      \item $\text{Taxable Subtotal} = \text{subtotal} + \text{Service Charge}$
+      \item $\text{Value Added Tax (8\% VAT)} = \text{Taxable Subtotal} \times 0.08$
+      \item $\text{Grand Total Bill} = \text{Taxable Subtotal} + \text{VAT}$
+      \item $\text{Per-Diner Payment Share} = \text{Grand Total Bill} / \text{num\_diners}$
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.4mm}
+\subsection*{Problem C1: Algorithmic Specification \& Pseudocode (8 points --- [All Basic])}
+\textit{Requirement: Formulate structured \textbf{pseudocode} only (e.g., using \texttt{INPUT}, \texttt{COMPUTE} / \texttt{SET}, \texttt{PRINT}, \texttt{BEGIN}, \texttt{END}). Do NOT write Python code.}
+
+\begin{lstlisting}[language={}]
+BEGIN
+    PROMPT AND READ subtotal, num_diners, service_rate
+    COMPUTE service_charge = subtotal * service_rate
+    COMPUTE taxable_subtotal = subtotal + service_charge
+    COMPUTE vat = taxable_subtotal * 0.08
+    COMPUTE grand_total = taxable_subtotal + vat
+    COMPUTE per_diner_share = grand_total / num_diners
+    PRINT "Subtotal:", subtotal
+    PRINT "Service Charge:", service_charge
+    PRINT "VAT (8%):", vat
+    PRINT "Grand Total:", grand_total
+    PRINT "Per-Diner Share:", per_diner_share
+END
+\end{lstlisting}
+
+\vspace{0.4mm}
+\subsection*{Problem C2: Sequential Python Implementation (10 points --- [All Basic])}
+\textit{Requirement: Complete Python program following sequential \textbf{Input $\rightarrow$ Process $\rightarrow$ Output}. Strictly NO conditional statements (\texttt{if-then}) or string methods.}
+
+\begin{lstlisting}
+# Step 1: Input collection with explicit numeric casting
+subtotal = float(input("Enter food and beverage subtotal ($): "))
+num_diners = int(input("Enter number of dining guests: "))
+service_rate = float(input("Enter service rate (e.g. 0.10 for 10%): "))
+
+# Step 2: Sequential calculations (strictly no branching)
+service_charge = subtotal * service_rate
+taxable_subtotal = subtotal + service_charge
+vat = taxable_subtotal * 0.08
+grand_total = taxable_subtotal + vat
+per_diner_share = grand_total / num_diners
+
+# Step 3: Formatted receipt display (2 decimals with $)
+print(f"Subtotal: ${subtotal:.2f} | Service ({service_rate*100:.0f}%): ${service_charge:.2f} | VAT (8%): ${vat:.2f}")
+print(f"GRAND TOTAL: ${grand_total:.2f} | EACH PERSON PAYS ({num_diners} diners): ${per_diner_share:.2f}")
+\end{lstlisting}
+
+\vspace{0.4mm}
+\begin{center}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|X|c|c|}
+\hline
+\textbf{Combined Grading Rubric for Problems C1 \& C2 (18 points total)} & \textbf{Level} & \textbf{Marks} \\
+\hline
+\textbf{[C1] Input Specification:} Correctly prompts and reads \texttt{subtotal}, \texttt{num\_diners}, \texttt{service\_rate}. & Basic & 2.0 pts \\
+\hline
+\textbf{[C1] Sequential Computation Flow:} Accurately evaluates formulas in correct dependency order (service $\rightarrow$ taxable $\rightarrow$ VAT $\rightarrow$ grand total $\rightarrow$ per-diner share). & Basic & 4.0 pts \\
+\hline
+\textbf{[C1] Output Display \& Conventions:} Uses standard pseudocode keywords (\texttt{BEGIN}, \texttt{END}, \texttt{READ}, \texttt{COMPUTE}, \texttt{PRINT}) without Python syntax artifacts. & Basic & 2.0 pts \\
+\hline
+\hline
+\textbf{[C2] Input Collection \& Casting:} Reads \texttt{subtotal} (float), \texttt{num\_diners} (int), \texttt{service\_rate} (float) with explicit typecasting. & Basic & 2.5 pts \\
+\hline
+\textbf{[C2] Sequential Processing:} Accurately evaluates service charge, taxable amount, 8\% VAT, grand total, and per-guest split. & Basic & 4.5 pts \\
+\hline
+\textbf{[C2] Formatted Receipt \& Compliance:} Uses f-strings with \texttt{:.2f} and \texttt{\$}. Strictly avoids any \texttt{if/elif/else} structures or string methods. & Basic & 3.0 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: PROBLEM C3 IMPLEMENTATION & VERIFICATION TRACE
+% ==============================================================================
+\subsection*{Problem C3: Logistics Freight Shipping \& Dimensional Weight Engine (12 points)}
+\textit{Difficulty Breakdown: 6 points Basic + 6 points Medium. Note: This is the \textbf{ONLY} problem requiring string processing methods and conditional branching (\texttt{if-elif-else}).}
+
+\textbf{Reference Python Implementation:}
+\begin{lstlisting}
+# Step 1: Input Collection
+pkg_id = input("Enter Package Tracking ID: ").strip()
+weight_kg = float(input("Enter actual weight (kg): "))
+length_cm = float(input("Enter package length (cm): "))
+width_cm = float(input("Enter package width (cm): "))
+height_cm = float(input("Enter package height (cm): "))
+zone = input("Enter destination zone (DOMESTIC/INTERNATIONAL): ").strip().upper()
+
+# Step 2: Input Validation with String Methods [4 pts - Basic]
+is_id_valid = pkg_id.startswith("PKG-") and len(pkg_id) >= 8
+is_dims_valid = weight_kg > 0 and length_cm > 0 and width_cm > 0 and height_cm > 0
+is_zone_valid = zone in ("DOMESTIC", "INTERNATIONAL")
+
+if not (is_id_valid and is_dims_valid and is_zone_valid):
+    print("ERROR: Invalid package parameters.")
+else:
+    # Step 3: Dimensional & Billable Weight [1 pt - Basic]
+    vol_weight = (length_cm * width_cm * height_cm) / 5000.0
+    billable_weight = max(weight_kg, vol_weight)
+
+    # Step 4: Tiered Progressive Base Freight [1 pt - Basic]
+    if billable_weight <= 2.0:
+        base_freight = 12.00
+    elif billable_weight <= 10.0:
+        base_freight = 12.00 + 3.50 * (billable_weight - 2.0)
+    else:
+        base_freight = 40.00 + 2.00 * (billable_weight - 10.0)
+
+    # Step 5: International Customs Surcharge with $25.00 floor [6 pts - Medium]
+    if zone == "INTERNATIONAL":
+        intl_surcharge = max(0.30 * base_freight, 25.00)
+    else:
+        intl_surcharge = 0.00
+
+    total_shipping = base_freight + intl_surcharge
+
+    # Step 6: Formatted Manifest Output
+    print("========================================================")
+    print("LOGISTICS FREIGHT DISPATCH MANIFEST")
+    print("========================================================")
+    print(f"Package ID: {pkg_id} | Billable Weight: {billable_weight:.1f} kg")
+    print(f"Base Freight Charge:     ${base_freight:6.2f} | International Surcharge: ${intl_surcharge:6.2f}")
+    print("--------------------------------------------------------")
+    print(f"TOTAL SHIPPING PAYABLE:  ${total_shipping:6.2f}")
+    print("========================================================")
+\end{lstlisting}
+
+\vspace{1.5mm}
+\textbf{Sample Verification Test Runs:}
+\begin{tcolorbox}[colback=CodeBg, colframe=primaryblue!35, arc=1.0mm, boxrule=0.5pt, left=2.0mm, right=2.0mm, top=1.0mm, bottom=1.0mm]
+\scriptsize\ttfamily
+\textbf{Case 1: Standard Domestic Package (Volumetric weight dominates)}\\
+Input: PKG-88120, weight: 3.0 kg, dims: 40x30x20 cm, zone: DOMESTIC\\
+$\rightarrow$ vol\_weight = 24000/5000 = 4.8 kg $\rightarrow$ billable = 4.8 kg\\
+$\rightarrow$ base\_freight = 12.00 + 3.50 * 2.8 = \$21.80 | intl\_surcharge = \$0.00 | Total = \$21.80\\[1.5mm]
+\textbf{Case 2: International Express (Floor surcharge applies)}\\
+Input: PKG-77291, weight: 4.8 kg, dims: 30x20x10 cm, zone: INTERNATIONAL\\
+$\rightarrow$ billable = 4.8 kg $\rightarrow$ base = \$21.80\\
+$\rightarrow$ $0.30 \times 21.80 = \$6.54 < \$25.00 \rightarrow$ intl\_surcharge = \$25.00 (minimum floor applied)\\
+$\rightarrow$ Total = \$21.80 + \$25.00 = \$46.80\\[1.5mm]
+\textbf{Case 3: Validation Rejection}\\
+Input: PKG-12 (length < 8) $\rightarrow$ Displays: \texttt{"ERROR: Invalid package parameters."}
+\end{tcolorbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: RUBRIC FOR C3 + COMMON PITFALLS + OVERALL ASSESSMENT MATRIX
+% ==============================================================================
+
+\subsection*{Problem C3: Itemized Marking Rubric (12 points --- 6 Basic + 6 Medium)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.18}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|X|c|c|}
+\hline
+\textbf{Grading Component \& Criteria} & \textbf{Level} & \textbf{Marks} \\
+\hline
+\textbf{1. Input Collection \& Validation with String Methods:}
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item Prompts and parses tracking code, weight, 3 dimensions, destination zone (1.0 pt)
+  \item Checks \texttt{startswith("PKG-")} and \texttt{len(pkg\_id) >= 8} (1.5 pts)
+  \item Checks all dimensions and weight are strictly positive ($> 0$) (0.5 pt)
+  \item Validates zone with \texttt{zone.strip().upper() in ("DOMESTIC", "INTERNATIONAL")} (0.5 pt)
+  \item Prints specified error message and halts calculation on failure (0.5 pt)
+\end{itemize} & Basic & 4.0 pts \\
+\hline
+\textbf{2. Dimensional Weight \& Progressive Base Freight:}
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item Computes $\text{vol\_weight} = (L \times W \times H) / 5000$ and $\text{billable\_weight} = \max(\text{weight}, \text{vol})$ (1.0 pt)
+  \item Correct 3-tier progressive freight: tier 1 ($\le 2$: \$12), tier 2 ($2 < w \le 10$: $\$12 + 3.5(w-2)$), tier 3 ($> 10$: $\$40 + 2(w-10)$) (1.0 pt)
+\end{itemize} & Basic & 2.0 pts \\
+\hline
+\textbf{3. International Customs Surcharge Logic (Medium):}
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item Identifies international shipments and sets domestic surcharge to \$0.00 (1.5 pts)
+  \item Computes 30\% surcharge: $0.30 \times \text{base\_freight}$ (1.5 pts)
+  \item Strictly enforces the \textbf{\$25.00 minimum surcharge floor} using \texttt{max(0.30 * base, 25.0)} or equivalent condition (3.0 pts)
+\end{itemize} & Medium & 6.0 pts \\
+\hline
+\textbf{Total for Problem C3} & \textbf{6 Basic + 6 Medium} & \textbf{12.0 pts} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1.0mm}
+\begin{tcolorbox}[colback=yellow!8, colframe=orange!80!black, arc=1.0mm, boxrule=0.5pt, left=2.0mm, right=2.0mm, top=1.0mm, bottom=1.0mm]
+\small
+\textbf{Common Student Misconceptions \& Instructor Grading Notes for Section C:}
+\begin{itemize}[itemsep=0.2pt,topsep=0.2pt]
+  \item \textbf{C1 (Pseudocode):} Penalize if students write actual Python code (deduct 3.0 pts). The goal of C1 is language-agnostic algorithmic design.
+  \item \textbf{C2 (Sequential Code):} Penalize if students use \texttt{if/else} branching (deduct 3.0 pts). All computations must be purely sequential.
+  \item \textbf{C3 (International Floor):} Many students calculate $0.30 \times \text{base\_freight}$ but omit the $\ge \$25.00$ floor condition. Enforce full 3.0 pts deduction for this omission.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{1.0mm}
+\section*{Overall Exam Assessment Matrix}
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4.0pt}
+\begin{tabularx}{\textwidth}{|X|c|c||c|c|}
+\hline
+\textbf{Component} & \textbf{Basic (80\%)} & \textbf{Medium (20\%)} & \textbf{Total Points} & \textbf{Weight (\%)} \\
+\hline
+\textbf{Section A: Multiple-Choice Quiz} & 32 pts (16 Qs) & 8 pts (4 Qs) & 40 pts & 40\% \\
+\hline
+\textbf{Section B: Coding --- Fill-in Problems} & 24 pts (8 blanks) & 6 pts (2 blanks) & 30 pts & 30\% \\
+\hline
+\textbf{Section C: Applied Full-Code Programming} & 24 pts (C1: 8 + C2: 10 + C3: 6) & 6 pts (C3 Medium) & 30 pts & 30\% \\
+\hline
+\hline
+\textbf{Grand Total} & \textbf{80 pts (80.0\%)} & \textbf{20 pts (20.0\%)} & \textbf{100 pts} & \textbf{100.0\%} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\end{document}

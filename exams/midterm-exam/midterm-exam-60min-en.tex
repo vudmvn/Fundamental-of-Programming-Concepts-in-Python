@@ -1,0 +1,568 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.88]}{\setmonofont{Liberation Mono}[Scale=0.88]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\geometry{top=1.3cm,bottom=1.3cm,left=1.65cm,right=1.65cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+\definecolor{borderblue}{RGB}{150,185,215}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.3pt,topsep=0.3pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.3em,itemsep=0.5pt,topsep=0.3pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.1pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.15em,
+  xrightmargin=0.15em,
+  aboveskip=0.12em,
+  belowskip=0.12em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Midterm Examination (60 Minutes) --- Paper Code: 101}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\small\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{2.2pt}{0.6pt}
+\titlespacing*{\subsection}{0pt}{1.6pt}{0.4pt}
+
+\newtcolorbox{headerbox}{
+  colback=white,
+  colframe=primaryblue,
+  boxrule=0.7pt,
+  arc=1.2mm,
+  left=2.0mm,
+  right=2.0mm,
+  top=0.8mm,
+  bottom=0.8mm
+}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=DarkGray!45,
+  boxrule=0.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=0.8mm,
+  bottom=0.8mm,
+  title=\footnotesize\color{DarkGray}\textbf{#2},
+  #1
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Midterm Examination (60 Minutes)},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: OFFICIAL HEADER + SCORE TABLE + ANSWER SHEET + Q1 - Q5
+% =========================================================================
+
+\noindent
+\begin{minipage}[t]{0.64\textwidth}
+  \raggedright\small
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{COLLEGE OF TECHNOLOGY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.34\textwidth}
+  \raggedleft\footnotesize
+  \textbf{OFFICIAL MIDTERM EXAMINATION}\\
+  Academic Year: 2026--2027\\
+  Semester: Fall 2026 \quad Course: \textbf{DSAI1003}
+\end{minipage}
+
+\vspace{0.08em}
+
+\begin{center}
+  {\large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.04em]
+  {\normalsize\bfseries PROGRESS MIDTERM EXAM (40\% QUIZ -- 60\% CODING PROBLEMS)}\\[0.04em]
+  {\footnotesize\textbf{Paper Code:} \textbf{101} \quad | \quad \textbf{Duration: 60 Minutes} \quad | \quad \textbf{Difficulty:} 80\% Basic, 20\% Medium}
+\end{center}
+
+\vspace{0.04em}
+
+\begin{headerbox}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+  \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.10em]
+  \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabular*}
+
+\vspace{0.12em}
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3.0pt}
+\begin{tabularx}{\linewidth}{|l|c|c|c||c|X|}
+\hline
+\textbf{Section} & \textbf{\shortstack{Sec A: Quiz\\(40\%)}} & \textbf{\shortstack{Sec B: Fill-in\\(30\%)}} & \textbf{\shortstack{Sec C: Code\\(30\%)}} & \textbf{\shortstack{Total\\(100\%)}} & \centering\arraybackslash \textbf{\shortstack{Examiner\\Signature}} \\
+\hline
+\textbf{Max Score} & 40 pts & 30 pts & 30 pts & \textbf{100 pts} & \\[0.22em]
+\cline{1-5}
+\textbf{Score} & & & & & \\[0.32em]
+\hline
+\end{tabularx}
+
+\vspace{0.10em}
+\raggedright
+\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and calculators are prohibited. Total score: 100 points (40\% Quiz, 30\% Fill-in, 30\% Full Code; 80\% Basic, 20\% Medium). Mark MCQs directly in the answer sheet grid. Write code solutions in designated boxes. Do not detach pages.
+\end{headerbox}
+
+\vspace{1.0mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write letters A, B, C, or D into corresponding boxes)}:
+\begin{center}
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Q} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+\textbf{Ans} & & & & & & & & & & \\[1.4mm]
+\hline
+\hline
+\textbf{Q} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} & \textbf{20} \\
+\hline
+\textbf{Ans} & & & & & & & & & & \\[1.4mm]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2.5mm}
+\section*{Section A: Multiple-Choice Quiz \hfill \normalsize\normalfont(40 points --- 20 questions, 2 pts each)}
+\textit{Select the single best answer. Questions marked [Basic] test core concepts; [Medium] test composite logic.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=1.8em,itemsep=0.6pt,topsep=0.2pt]
+
+\item \textbf{[Basic]} How does the standard CPython implementation execute a Python source file (\texttt{.py})?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item Directly compiles Python code into native x86/ARM machine code binaries prior to execution.
+  \item Compiles source into bytecode (\texttt{.pyc}), which is executed by the Python Virtual Machine (PVM).
+  \item Transpiles Python into intermediate JavaScript code to execute inside a runtime engine.
+  \item Interprets source code purely line-by-line without any bytecode compilation stage.
+\end{enumerate}
+
+\item \textbf{[Basic]} Which of the following is an \textbf{invalid} variable identifier according to Python syntax rules?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{\_student\_gpa}
+  \item \texttt{totalRevenue}
+  \item \texttt{2nd\_quarter}
+  \item \texttt{MAX\_LIMIT}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} What is the data type returned by the built-in function call \texttt{val = input("Enter quantity: ")}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{int} if the user enters only integer digits, and \texttt{float} if a decimal point is present.
+  \item Always \texttt{str}, regardless of whether the entered characters represent numerical digits.
+  \item Automatically inferred as \texttt{int}, \texttt{float}, or \texttt{str} based on content parsing.
+  \item \texttt{NoneType} until an explicit typecast function is called.
+\end{enumerate}
+
+\item \textbf{[Basic]} What is the exact console output produced by the following two Python statements?\\
+\texttt{print("DSFE", "2026", sep="->", end="\#")}\\
+\texttt{print("NEU")}
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{DSFE->2026\#NEU}
+  \item \texttt{DSFE->2026\#\char`\\nNEU}
+  \item \texttt{DSFE 2026->\#NEU}
+  \item \texttt{DSFE->2026\char`\\n\#NEU}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} Which type of error occurs when executing the statement \texttt{result = 100 / 0}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{SyntaxError}, because division by zero is caught by the compiler parser.
+  \item \texttt{RuntimeError} (\texttt{ZeroDivisionError}), raised dynamically during program execution.
+  \item \texttt{LogicError}, which silently sets \texttt{result} to \texttt{inf} without terminating.
+  \item \texttt{TypeError}, because integer division cannot accept zero as an argument.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A (Q6 - Q13)
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=1.8em,itemsep=0.8pt,topsep=0.3pt,resume]
+
+\item \textbf{[Medium]} What is the exact numerical result of evaluating \texttt{17 // 4 * 2 + 19 \% 5 ** 2}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{27}
+  \item \texttt{12}
+  \item \texttt{23}
+  \item \texttt{4}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} In Python, what is the boolean outcome of \texttt{0.1 + 0.2 == 0.3} and why?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{True}, because Python automatically rounds floating-point values to 2 decimal places.
+  \item \texttt{False}, because decimal fractions cannot be represented exactly in IEEE 754 binary floating-point representation.
+  \item \texttt{True}, because the equality operator compares abstract numeric values.
+  \item A \texttt{TypeError} is raised because binary floats cannot be compared directly with literals.
+\end{enumerate}
+
+\item \textbf{[Basic]} Given the string \texttt{name = "Python"}, what happens when executing \texttt{name[0] = "J"}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{name} is successfully modified to \texttt{"Jython"}.
+  \item A \texttt{TypeError} is raised because strings in Python are immutable objects.
+  \item A new copy of the string is created while the original \texttt{name} remains unchanged.
+  \item A \texttt{ValueError} is raised because index 0 is protected.
+\end{enumerate}
+
+\item \textbf{[Basic]} What is the resulting string evaluated from \texttt{"2" * 3 + "4" * 2}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{"14"}
+  \item \texttt{"22244"}
+  \item \texttt{"2342"}
+  \item Raises \texttt{TypeError}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} Which formatted string literal (f-string) correctly formats \texttt{val = 3.1415926} to 2 decimal places?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{f"\{val\%2f\}"}
+  \item \texttt{f"\{val:.2f\}"}
+  \item \texttt{f"\{val.round(2)\}"}
+  \item \texttt{f"\{round:val:2\}"}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Medium]} Given \texttt{text = "DataScience"}, what value is produced by the slice \texttt{text[8:1:-2]}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{"niSt"}
+  \item \texttt{"ecni"}
+  \item \texttt{"eicS"}
+  \item \texttt{"nS"}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} What is the fundamental distinction between the operators \texttt{=} and \texttt{==} in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{=} assigns a value to a variable, whereas \texttt{==} tests equality between two operands.
+  \item \texttt{=} tests numeric equality, whereas \texttt{==} tests string equality.
+  \item They are interchangeable within \texttt{if} condition headers.
+  \item \texttt{=} performs identity comparison, whereas \texttt{==} creates an alias reference.
+\end{enumerate}
+
+\item \textbf{[Basic]} How does Python interpret the chained relational comparison \texttt{10 < x <= 25}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item Evaluates \texttt{(10 < x) <= 25}, comparing the boolean result of \texttt{10 < x} against 25.
+  \item Equivalent to \texttt{10 < x and x <= 25}, with \texttt{x} evaluated only once.
+  \item Raises a \texttt{SyntaxError} because comparison operators cannot be chained.
+  \item Equivalent to \texttt{10 < x or x <= 25}.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION A (Q14 - Q20) + SECTION B INTRO & PROBLEM B1
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=1.8em,itemsep=0.7pt,topsep=0.3pt,resume]
+
+\item \textbf{[Basic]} What is the precedence hierarchy among boolean operators \texttt{not}, \texttt{and}, and \texttt{or} in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{not} (highest), followed by \texttt{and}, followed by \texttt{or} (lowest).
+  \item \texttt{and} (highest), followed by \texttt{or}, followed by \texttt{not} (lowest).
+  \item \texttt{or} (highest), followed by \texttt{and}, followed by \texttt{not} (lowest).
+  \item Equal precedence; strictly evaluated from left to right.
+\end{enumerate}
+
+\item \textbf{[Basic]} Which built-in string method checks whether all characters in string \texttt{s} are digits (and non-empty)?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{s.isnumeric\_int()}
+  \item \texttt{s.isdigit()}
+  \item \texttt{s.has\_digits()}
+  \item \texttt{s.isnumber()}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Medium]} Applying De Morgan's Laws, which condition is logically equivalent to \texttt{not (score >= 50 and status != "probation")}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{score < 50 or status == "probation"}
+  \item \texttt{score < 50 and status == "probation"}
+  \item \texttt{score <= 50 or status != "probation"}
+  \item \texttt{not (score >= 50) and not (status != "probation")}
+\end{enumerate}
+
+\item \textbf{[Basic]} Given \texttt{score = 82}, what is the final value assigned to \texttt{grade} in the following block?\\
+\texttt{if score >= 50: grade = "Pass"}\\
+\texttt{elif score >= 80: grade = "Distinction"}\\
+\texttt{else: grade = "Fail"}
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{"Distinction"}
+  \item \texttt{"Pass"}
+  \item \texttt{"Pass, Distinction"}
+  \item \texttt{"Fail"}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} How does Python handle short-circuit evaluation in the expression \texttt{A or B}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item If \texttt{A} is \texttt{True}, \texttt{B} is not evaluated; the overall expression immediately evaluates to \texttt{True}.
+  \item If \texttt{A} is \texttt{True}, Python still evaluates \texttt{B} to verify syntax.
+  \item If \texttt{A} is \texttt{False}, \texttt{B} is skipped and \texttt{False} is returned.
+  \item Both expressions are evaluated concurrently.
+\end{enumerate}
+
+\item \textbf{[Basic]} What is the boolean outcome of the comparison \texttt{"banana" > "Apple"} and why?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{True}, because lowercase \texttt{'b'} has a higher Unicode code point (98) than uppercase \texttt{'A'} (65).
+  \item \texttt{False}, because uppercase letters precede lowercase letters in reverse ASCII ordering.
+  \item \texttt{False}, because \texttt{"Apple"} has a shorter length.
+  \item Raises a \texttt{TypeError} because strings cannot be compared with relational operators.
+\end{enumerate}
+
+\item \textbf{[Medium]} Given \texttt{x = 0}, which expression evaluates safely \textbf{without} raising \texttt{ZeroDivisionError}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{(10 / x > 2) and x != 0}
+  \item \texttt{x != 0 and (10 / x > 2)}
+  \item \texttt{x == 0 or (10 / x > 2)}
+  \item Both \textbf{B} and \textbf{C} evaluate safely due to short-circuit evaluation.
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{-1.5mm}
+\section*{Section B: Coding --- Fill-in Problems \hfill \normalsize\normalfont(30 points --- 2 problems, 10 blanks)}
+\textit{Write missing Python expressions directly into designated answer slots. Difficulty: 24 pts Basic (80\%), 6 pts Medium (20\%).}
+
+\subsection*{Problem B1: Currency Exchange Teller Utility (12 points --- 4 blanks, 3 pts each [All Basic])}
+Complete the program below by providing expressions for blanks \textbf{[B1.1]} to \textbf{[B1.4]}.
+The utility converts USD to VND (rate: 25,450 VND/USD), assesses a 2.0\% service fee, extracts a terminal code, and prints a receipt.
+
+\begin{lstlisting}
+exchange_rate, fee_rate, ref_code = 25450.0, 0.02, "TERM04-TX99281"
+# [B1.1] Prompt user for USD amount and convert input to float:
+usd_amount = ___________________________________________________________  # Blank [B1.1] (3 pts - Basic)
+base_vnd = usd_amount * exchange_rate
+# [B1.2] Calculate service fee in VND (base_vnd multiplied by fee_rate):
+fee_vnd = ______________________________________________________________  # Blank [B1.2] (3 pts - Basic)
+total_vnd = base_vnd + fee_vnd
+# [B1.3] Extract first 6 characters ("TERM04") from ref_code using string slicing:
+terminal_id = __________________________________________________________  # Blank [B1.3] (3 pts - Basic)
+# [B1.4] Print final total formatted with commas and 2 decimals (e.g. 2,595,900.00 VND):
+print(f"Total Payable: {___________________________________________} VND") # Blank [B1.4] (3 pts - Basic)
+\end{lstlisting}
+
+\begin{answerbox}[height=2.0cm]{Answer Slots for Problem B1}
+\textbf{[B1.1]}: \dotfill \quad \textbf{[B1.2]}: \dotfill\\[1.5mm]
+\textbf{[B1.3]}: \dotfill \quad \textbf{[B1.4]}: \dotfill
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION B --- PROBLEM B2
+% ==============================================================================
+
+\subsection*{Problem B2: Bank Loan Risk Tier Classifier (18 points --- 6 blanks, 3 pts each)}
+\textit{Difficulty: Blanks [B2.1]--[B2.4] are Basic (12 pts); Blanks [B2.5]--[B2.6] are Medium (6 pts).}
+
+Complete the risk assessment engine below by providing expressions for blanks \textbf{[B2.1]} to \textbf{[B2.6]}.
+
+\begin{lstlisting}
+credit_score = int(input("Enter Credit Score (300-850): "))
+monthly_income = float(input("Enter Monthly Income (USD): "))
+monthly_debt = float(input("Enter Monthly Debt (USD): "))
+has_delinquency = input("Any Delinquency? (yes/no): ").strip().lower() == "yes"
+has_guarantor = input("Guarantor available? (yes/no): ").strip().lower() == "yes"
+# [B2.1] Basic: Validate credit_score is within bounds [300, 850]:
+if not (_________________________________________________________________):  # Blank [B2.1] (3 pts - Basic)
+    print("ERROR: Invalid credit score."); exit()
+# [B2.2] Basic: Healthy Debt-to-Income (DTI) condition (monthly_debt / monthly_income <= 0.40):
+is_dti_healthy = ________________________________________________________    # Blank [B2.2] (3 pts - Basic)
+# [B2.3] Basic: Tier 1 check: score >= 750 AND income >= 3000 AND NO delinquency:
+tier1_eligible = ________________________________________________________    # Blank [B2.3] (3 pts - Basic)
+card_tier = "DECLINED"
+if tier1_eligible and is_dti_healthy:
+    card_tier = "PLATINUM PRIME"
+# [B2.4] Basic: Second tier check: score >= 650 AND income >= 1800:
+elif ____________________________________________________________________:   # Blank [B2.4] (3 pts - Basic)
+    card_tier = "GOLD STANDARD"
+# [B2.5] Medium: Short-circuit division guard: income > 0 AND debt ratio < 0.50:
+safe_debt_check = _______________________________________________________   # Blank [B2.5] (3 pts - Medium)
+# [B2.6] Medium: Fallback check: guarantor AND (score >= 600 OR income >= 2500) AND NOT delinquency:
+if card_tier == "DECLINED" and safe_debt_check:
+    if __________________________________________________________________:  # Blank [B2.6] (3 pts - Medium)
+        card_tier = "BASIC SECURED"
+print(f"Decision: {card_tier}")
+\end{lstlisting}
+
+\vspace{0.6mm}
+\begin{answerbox}[height=2.0cm]{Answer Slots for Problem B2}
+\textbf{[B2.1] (Basic):} \dotfill \quad \textbf{[B2.2] (Basic):} \dotfill\\[1.1mm]
+\textbf{[B2.3] (Basic):} \dotfill \quad \textbf{[B2.4] (Basic):} \dotfill\\[1.1mm]
+\textbf{[B2.5] (Medium):} \dotfill \quad \textbf{[B2.6] (Medium):} \dotfill
+\end{answerbox}
+
+\vspace{0.8mm}
+% ==============================================================================
+% SECTION C: IMMEDIATELY FOLLOWS SECTION B ON PAGE 4 (NO PAGEBREAK)
+% ==============================================================================
+\section*{Section C: Applied Full-Code Programming \& Design \hfill \normalsize\normalfont(30 points --- 3 problems)}
+\textit{Difficulty: 24 pts Basic (80\%), 6 pts Medium (20\%). Problems C1 and C2 share the common business scenario below with two distinct requirements. Problem C3 evaluates decision making with branching and string methods.}
+
+\begin{tcolorbox}[colback=boxbg, colframe=secondaryteal, arc=1.2mm, boxrule=0.6pt, left=2.0mm, right=2.0mm, top=0.6mm, bottom=0.6mm]
+\textbf{\small Problem Scenario for C1 \& C2: University Banquet Event Dining Invoice Engine}\\[0.2mm]
+\footnotesize
+A university banquet dining hall generates an itemized bill for student dinner reservations and calculates equal payment splits among attendees based on the following specifications:
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item \textbf{Inputs:} Food \& beverage subtotal (\texttt{subtotal} in USD, float), dining guests count (\texttt{num\_diners}, int), catering service charge rate (\texttt{service\_rate}, float, e.g. \texttt{0.10} for 10\%).
+  \item \textbf{Financial Formulas:}
+    $\text{Service Charge} = \text{subtotal} \times \text{service\_rate}$; \quad
+    $\text{Taxable Subtotal} = \text{subtotal} + \text{Service Charge}$;\\
+    $\text{VAT (8\%)} = \text{Taxable Subtotal} \times 0.08$; \quad
+    $\text{Grand Total} = \text{Taxable Subtotal} + \text{VAT}$; \quad
+    $\text{Per-Diner Share} = \text{Grand Total} / \text{num\_diners}$.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.3mm}
+\subsection*{Problem C1: Algorithmic Specification \& Pseudocode (8 points --- [All Basic])}
+\textit{Requirement: Formulate structured \textbf{pseudocode} only (e.g., using \texttt{INPUT}, \texttt{COMPUTE} / \texttt{SET}, \texttt{PRINT}, \texttt{BEGIN}, \texttt{END}). Do NOT write Python code.}
+
+Write a complete algorithm in pseudocode for the Banquet Dining Invoice Engine that reads the inputs, sequentially applies the financial formulas, and outputs the itemized bill and each guest's share.
+
+\begin{answerbox}[height=5.5cm]{Structured Pseudocode for Problem C1 (8 points --- Basic)}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION C --- PROBLEM C2 (MAXIMIZED CODING AREA)
+% ==============================================================================
+
+\subsection*{Problem C2: Sequential Python Implementation (10 points --- [All Basic])}
+\textit{Requirement: Write a complete Python program for the banquet engine. Strictly do \textbf{NOT} use conditional statements (\texttt{if}, \texttt{elif}, \texttt{else}) or string methods.}
+
+Implement the program following the sequential \textbf{Input $\rightarrow$ Process $\rightarrow$ Output} pattern. Prompt for \texttt{subtotal}, \texttt{num\_diners}, and \texttt{service\_rate}, compute all metrics, and print the formatted receipt (monetary values with 2 decimals and \texttt{\$}):
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Subtotal: $150.00 | Service (10%): $15.00 | VAT (8%): $13.20
+GRAND TOTAL: $178.20 | EACH PERSON PAYS (4 diners): $44.55
+\end{lstlisting}
+
+\vspace{0.8mm}
+\begin{answerbox}[height=20.5cm]{Python Implementation for Problem C2 (10 points --- Basic, No If-Then)}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION C --- PROBLEM C3 (WITH IF-THEN & STRING METHODS)
+% ==============================================================================
+
+\subsection*{Problem C3: Logistics Freight Shipping \& Dimensional Weight Engine (12 points)}
+\textit{Difficulty Breakdown: 6 points Basic + 6 points Medium. Note: This is the \textbf{ONLY} problem requiring string processing methods and conditional branching (\texttt{if-elif-else}).}
+
+An international express courier calculates shipping charges based on tracking code format validation, actual vs. dimensional weight, destination zones, and progressive tariffs. Write a complete Python program according to these specifications:
+
+\textbf{Requirements:}
+\begin{enumerate}[label=\arabic*.,leftmargin=1.8em,itemsep=0.6pt]
+  \item \textbf{Input \& Validation [4 pts --- Basic]:}
+    Prompt for tracking code \texttt{pkg\_id} (str), weight \texttt{weight\_kg} (float), dimensions (\texttt{length\_cm}, \texttt{width\_cm}, \texttt{height\_cm}), and destination \texttt{zone} (\texttt{"DOMESTIC"} or \texttt{"INTERNATIONAL"}).\\
+    \textbf{Validation with String Methods:} \texttt{pkg\_id} must start with \texttt{"PKG-"} and have $\text{length} \ge 8$. Weight and all dimensions must be $> 0$. Destination \texttt{zone.strip().upper()} must be \texttt{"DOMESTIC"} or \texttt{"INTERNATIONAL"}. If invalid, display \texttt{"ERROR: Invalid package parameters."} and terminate immediately.
+  \item \textbf{Dimensional Weight \& Progressive Freight [2 pts --- Basic]:}
+    Compute volumetric weight: $\text{vol\_weight} = (\text{length\_cm} \times \text{width\_cm} \times \text{height\_cm}) / 5000$.\\
+    Determine billable weight: $\text{billable\_weight} = \max(\text{weight\_kg}, \text{vol\_weight})$.\\
+    Compute progressive base freight:
+    \begin{itemize}[itemsep=0.2pt]
+      \item If $\text{billable\_weight} \le 2.0$ kg: Flat charge of \textbf{\$12.00}.
+      \item If $2.0 < \text{billable\_weight} \le 10.0$ kg: \textbf{\$12.00} + \textbf{\$3.50}/kg for the portion exceeding 2.0 kg.
+      \item If $\text{billable\_weight} > 10.0$ kg: \textbf{\$40.00} + \textbf{\$2.00}/kg for the portion exceeding 10.0 kg.
+    \end{itemize}
+  \item \textbf{International Customs Surcharge [6 pts --- Medium]:}
+    If \texttt{zone.strip().upper() == "INTERNATIONAL"}, apply a 30\% customs surcharge on base freight, subject to a \textbf{minimum surcharge of \$25.00} ($\max(0.30 \times \text{base}, 25.0)$). For domestic packages, customs surcharge is \$0.00.\\
+    $\text{Total Shipping Cost} = \text{base freight} + \text{international surcharge}$.
+  \item \textbf{Output Format:} Display formatted manifest (weights with 1 decimal, costs with 2 decimals):
+\end{enumerate}
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+========================================================
+LOGISTICS FREIGHT DISPATCH MANIFEST
+========================================================
+Package ID: PKG-77291 | Billable Weight: 4.8 kg
+Base Freight Charge:     $21.80 | International Surcharge: $25.00
+--------------------------------------------------------
+TOTAL SHIPPING PAYABLE:  $46.80
+========================================================
+\end{lstlisting}
+
+\begin{answerbox}[height=11.0cm]{Python Implementation for Problem C3 (12 points --- 6 Basic + 6 Medium)}
+\end{answerbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[0.8mm]
+  \textbf{\color{primaryblue}--- END OF EXAMINATION PAPER ---}
+\end{center}
+
+\end{document}

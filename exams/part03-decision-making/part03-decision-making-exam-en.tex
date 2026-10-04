@@ -1,0 +1,503 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\geometry{top=1.5cm,bottom=1.5cm,left=1.7cm,right=1.7cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+\definecolor{borderblue}{RGB}{150,185,215}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=1.5pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.2em,
+  belowskip=0.2em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Decision Making Exam -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{3.5pt}{1.5pt}
+\titlespacing*{\subsection}{0pt}{2.5pt}{1pt}
+
+\newtcolorbox{headerbox}{
+  colback=white,
+  colframe=primaryblue,
+  boxrule=0.7pt,
+  arc=1.5mm,
+  left=2.5mm,
+  right=2.5mm,
+  top=1.2mm,
+  bottom=1.2mm
+}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=DarkGray!45,
+  boxrule=0.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=1.2mm,
+  bottom=1.2mm,
+  title=\footnotesize\color{DarkGray}\textbf{#2},
+  #1
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Decision Making in Python Exam},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: OFFICIAL HEADER + ANSWER SHEET + SECTION A (Q1 - Q5)
+% =========================================================================
+
+\noindent
+\begin{minipage}[t]{0.64\textwidth}
+  \raggedright\small
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{COLLEGE OF TECHNOLOGY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.34\textwidth}
+  \raggedleft\footnotesize
+  \textbf{OFFICIAL MIDTERM EXAMINATION}\\
+  Academic Year: 2026--2027\\
+  Semester: Fall 2026 \quad Course Code: \textbf{DSAI1003}
+\end{minipage}
+
+\vspace{0.15em}
+
+\begin{center}
+  {\Large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.08em]
+  {\normalsize\bfseries PROGRESS EXAM: DECISION MAKING \& BOOLEAN LOGIC}\\[0.08em]
+  {\normalsize\textbf{Paper Code:} \rule{1.6cm}{0.4pt} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding paper distribution)}
+\end{center}
+
+\vspace{0.05em}
+
+\begin{headerbox}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll@{}}
+  \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.2em]
+  \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabular*}
+
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{4.5pt}
+\centering
+\begin{tabular}{|l|c|c|c|c||c|c|}
+\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\
+\hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.3em]
+\cline{1-6}
+\textbf{Score} & & & & & & \\[0.4em]
+\hline
+\end{tabular}
+
+\vspace{0.15em}
+\raggedright
+\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and internet access are prohibited. Answer all questions directly in the designated spaces. In programming tasks, apply conditional statements (\texttt{if}, \texttt{elif}, \texttt{else}), relational/Boolean operators, and input validation. Do \textbf{not} use loops or custom functions (\texttt{def}) unless explicitly requested. Assume users enter data in expected types unless validation is specifically instructed. Do not detach pages.
+\end{headerbox}
+
+\vspace{1mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write A, B, C, or D in the corresponding box)}:
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+\textbf{Answer} & & & & & & & & & & \\[1.8mm]
+\hline
+\end{tabular}
+\end{center}
+\vspace{-2.5mm}
+\section*{Section A: Decision Making \& Boolean Logic Concepts \hfill \normalsize\normalfont(20 points)}
+\textit{Answer all 10 questions. Each correct answer carries 2 points. Suggested time: 12 minutes.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt]
+
+\item Which statement correctly describes compound statements and code blocks in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item A colon (\texttt{:}) is optional after the \texttt{if} condition as long as the block is indented.
+  \item Every branch block must be consistently indented; mixing tabs and spaces raises an \texttt{IndentationError}.
+  \item Python uses curly braces \texttt{\{\}} to delimit blocks; indentation is solely for readability.
+  \item An \texttt{else} clause can exist independently without a preceding \texttt{if} or \texttt{elif} statement.
+\end{enumerate}
+
+\item What happens when executing the statement \texttt{if x = 10:} in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item It assigns \texttt{10} to \texttt{x} and executes the branch because \texttt{10} is considered truthy.
+  \item It checks if \texttt{x} equals \texttt{10} and returns a boolean value.
+  \item It causes a \texttt{SyntaxError} because \texttt{=} is assignment, not the equality operator \texttt{==}.
+  \item It automatically converts \texttt{x} to an integer before comparing.
+\end{enumerate}
+
+\item Why is the direct comparison \texttt{if x == 0.3:} hazardous when \texttt{x = 0.1 + 0.2}, and what is the standard fix?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item Relational operators cannot compare floats; one must convert to strings using \texttt{str(x) == "0.3"}.
+  \item Binary representation causes roundoff error; one should verify \texttt{abs(x - 0.3) < 1E-14}.
+  \item Floating-point values are automatically rounded to integers inside conditional statements.
+  \item One must always use the identity operator instead: \texttt{if x is 0.3:}.
+\end{enumerate}
+
+\item In Python, what is the boolean value of the expression \texttt{"apple" < "Banana"} and what is the reason?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{True}, because \texttt{"apple"} precedes \texttt{"Banana"} in standard alphabetical order.
+  \item \texttt{False}, because uppercase letters have smaller Unicode values than lowercase letters (\texttt{'B'} is 66, \texttt{'a'} is 97).
+  \item \texttt{True}, because \texttt{"apple"} has fewer characters than \texttt{"Banana"}.
+  \item A \texttt{TypeError} is raised because strings cannot be compared with relational operators.
+\end{enumerate}
+
+\item Given \texttt{score = 85} in \texttt{if score >= 60: g = "D"} followed by \texttt{elif score >= 80: g = "B"} and \texttt{elif score >= 90: g = "A"}, what is \texttt{g}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{"B"}, because $85 \ge 80$ is the most specific matching range.
+  \item \texttt{"D"}, because \texttt{score >= 60} is evaluated first and evaluates to \texttt{True}; remaining branches are skipped.
+  \item \texttt{"A"}, because Python evaluates \texttt{elif} branches in descending numerical order.
+  \item \texttt{"F"}, because matching multiple conditions produces an ambiguous branch error.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A (Q6 - Q10) + SECTION B Q11
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt,resume]
+
+\item Following Python's operator precedence rules, what is the truth value of \texttt{not False and False or True}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{True}, because \texttt{not} evaluates first (\texttt{True}), then \texttt{and} (\texttt{False}), then \texttt{or} (\texttt{True}).
+  \item \texttt{False}, because \texttt{and} has higher precedence than \texttt{not}.
+  \item \texttt{False}, because boolean operators are evaluated strictly from left to right.
+  \item A \texttt{TypeError} occurs because parentheses are required when mixing logical operators.
+\end{enumerate}
+
+\item Given \texttt{x = 0}, what is the outcome of evaluating the expression \texttt{x != 0 and (10 / x > 2)}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item A \texttt{ZeroDivisionError} is raised because \texttt{10 / x} is evaluated.
+  \item \texttt{False}, because the first operand is \texttt{False}, so Python short-circuits and skips the division.
+  \item \texttt{True}, because Python treats division by zero as positive infinity.
+  \item \texttt{None}, because the expression terminates abnormally without a return value.
+\end{enumerate}
+
+\item According to De Morgan's Laws, which condition is logically equivalent to \texttt{not (status == "VIP" or points >= 100)}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{status != "VIP" or points < 100}
+  \item \texttt{status != "VIP" and points < 100}
+  \item \texttt{not (status == "VIP") or not (points >= 100)}
+  \item \texttt{status == "VIP" and points < 100}
+\end{enumerate}
+
+\item Which string method checks whether all characters in string \texttt{s} are digits and \texttt{s} has at least one character?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{s.isnumeric\_int()}
+  \item \texttt{s.count()}
+  \item \texttt{s.isdigit()}
+  \item \texttt{s.all\_digits()}
+\end{enumerate}
+
+\item What is the minimum number of test cases required to achieve full branch coverage for an \texttt{if-elif-elif-else} construct?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item 1 test case
+  \item 3 test cases
+  \item 4 test cases (one for \texttt{if}, one for each of the two \texttt{elif} blocks, and one for \texttt{else})
+  \item 8 test cases
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Section B: Output Tracing, Logic Diagnosis \& Error Correction \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all 5 questions. Each question carries 5 points. Suggested time: 15 minutes.}
+
+\subsection*{Q11. Exact Output Tracing with Nested Decisions \& Surcharges (5 points)}
+Predict the \textbf{exact screen output}, including punctuation, spaces, and line breaks:
+
+\begin{lstlisting}
+age = 19
+is_student = True
+base_fare = 40.0
+discount = 0.0
+
+if age < 12:
+    discount = 0.50
+elif age < 25:
+    if is_student:
+        discount = 0.30
+    else:
+        discount = 0.15
+elif age >= 65:
+    discount = 0.40
+else:
+    discount = 0.0
+
+final_fare = base_fare * (1.0 - discount)
+print(f"Base: ${base_fare:.2f} | Discount: {discount * 100:.0f}%")
+print(f"Payable: ${final_fare:.2f}")
+print(f"Eligible: {discount >= 0.30 and age >= 18}")
+\end{lstlisting}
+
+\begin{answerbox}[height=3.0cm]{Output Box for Q11}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION B, Q12--Q15
+% ==============================================================================
+
+\subsection*{Q12. Evaluation of Boolean Expressions and Short-Circuiting (5 points)}
+Write the exact boolean result (\texttt{True} or \texttt{False}) for each expression:
+
+\begin{enumerate}[label=\alph*),leftmargin=2em,itemsep=2pt]
+  \item \texttt{10 < 20 <= 25}: \underline{\hspace{4cm}}
+  \item \texttt{"py" in "Python".lower() and not (5 > 8)}: \underline{\hspace{4cm}}
+  \item \texttt{False or not False and not True}: \underline{\hspace{4cm}}
+  \item \texttt{"cat" > "Cat" and "10" < "2"}: \underline{\hspace{4cm}}
+  \item \texttt{len("neu") == 3 or (1 / 0 == 1)}: \underline{\hspace{4cm}}
+\end{enumerate}
+
+\subsection*{Q13. Diagnose and Correct Common Decision Logic Errors (5 points)}
+For each code scenario, state the underlying defect and provide the corrected Python statement.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|p{5.1cm}|X|X|}
+\hline
+\textbf{Code / Situation} & \textbf{Problem / Logic Flaw} & \textbf{Correction / Valid Code} \\
+\hline
+\texttt{choice = input("Option: ")}\\
+\texttt{if choice == "A" or "B":}\\
+\texttt{\ \ \ \ print("Accepted")} & & \\[3.5mm]
+\hline
+\texttt{x = 0.1 + 0.2}\\
+\texttt{if x == 0.3:}\\
+\texttt{\ \ \ \ print("Equal")} & & \\[3.5mm]
+\hline
+\texttt{val = input("Enter int: ")}\\
+\texttt{if int(val) > 0:}\\
+(Risk: user enters \texttt{"abc"}) & & \\[3.5mm]
+\hline
+\end{tabularx}
+
+\subsection*{Q14. String Analysis Methods and Substring Inspection (5 points)}
+Predict the exact screen output of the following verification routine:
+
+\begin{lstlisting}
+code = "NEU-DSFE2026"
+is_prefix = code.startswith("NEU")
+has_dash = "-" in code
+suffix_digits = code[-4:].isdigit()
+is_clean = code.isalnum()
+print(f"Prefix: {is_prefix}, Dash: {has_dash}")
+print(f"Suffix Digits: {suffix_digits}")
+print(f"Alphanumeric: {is_clean}")
+\end{lstlisting}
+
+\begin{answerbox}[height=2.35cm]{Output Box for Q14}
+\end{answerbox}
+
+\subsection*{Q15. De Morgan's Laws and Boundary Test Cases (5 points)}
+\begin{itemize}[leftmargin=2em]
+  \item Apply De Morgan's Law to rewrite the condition without the outer \texttt{not}:\\
+  Original: \texttt{not (temp >= 18 and temp <= 26)}\\
+  Rewritten: \underline{\hspace{10cm}}
+  \item State the \textbf{critical boundary values} that must be tested to thoroughly verify \texttt{18 <= temp <= 26}: \hrulefill
+\end{itemize}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION C
+% ==============================================================================
+
+\section*{Section C: Program Design \& Logic Specification \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all tasks. Suggested time: 15 minutes.}
+
+\begin{tcolorbox}[colback=boxbg,colframe=secondaryteal,arc=1.5mm,boxrule=0.6pt,top=1.5mm,bottom=1.5mm]
+\textbf{Problem Specification: Air Cargo \& Express Courier Pricing Engine}\\[0.5mm]
+\small
+A logistics platform computes parcel delivery cost based on weight $w$ (kg), service speed (\texttt{"S"} for Standard, \texttt{"E"} for Express), and corporate membership status (\texttt{is\_member}):
+\begin{itemize}[itemsep=0.5pt,topsep=0.5pt]
+  \item \textbf{Input Validation:} Weight must satisfy $0 < w \le 50.0$; service must be \texttt{"S"} or \texttt{"E"}. Otherwise, reject as invalid.
+  \item \textbf{Base Tiers:} Tier 1 ($0 < w \le 2$ kg): flat \$10.00. Tier 2 ($2 < w \le 10$ kg): \$10.00 + \$3.50/kg for weight over 2.0 kg. Tier 3 ($10 < w \le 50$ kg): \$38.00 + \$2.00/kg for weight over 10.0 kg.
+  \item \textbf{Express Surcharge:} If \texttt{service == "E"}, add 40\% surcharge on base cost (minimum surcharge \$8.00).
+  \item \textbf{Member Discount:} If \texttt{is\_member} is \texttt{True} and subtotal exceeds \$30.00, deduct a \$5.00 loyalty credit.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5mm}
+\textbf{Task 1: Identify Decision Criteria, Inputs \& Outputs} (6 points)
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Inputs \& Types:} \hrulefill\\[3mm]
+  \item \textbf{Validation Criteria:} \hrulefill\\[3mm]
+  \item \textbf{Outputs:} \hrulefill
+\end{itemize}
+
+\vspace{0.5mm}
+\textbf{Task 2: Write the Structured Decision Logic in Ordered Steps} (7 points)\\
+Formulate sequential pseudo-logic showing the order of validation, tiered branching, surcharges, and discount.
+
+\begin{answerbox}[height=5.2cm]{Program-Logic Work Area}
+\end{answerbox}
+
+\vspace{0.5mm}
+\textbf{Task 3: Hand Trace / Test Case Calculation} (6 points)\\
+For $w = 6.0\text{ kg}$, \texttt{service = "E"}, and \texttt{is\_member = True}, show step-by-step arithmetic and final payable cost.
+
+\begin{answerbox}[height=3.5cm]{Calculation Box for Task 3}
+\end{answerbox}
+
+\vspace{0.5mm}
+\textbf{Task 4: Explain Two Design Decisions} (6 points)
+\begin{enumerate}[label=\alph*),leftmargin=2em]
+  \item Why is an \texttt{if-elif-else} ladder mandatory rather than consecutive independent \texttt{if} statements for tiered pricing?\\[3.5mm]
+  \hrulefill
+  \item Why must input validation be executed \textbf{prior} to calculating tiered prices or surcharges?\\[3.5mm]
+  \hrulefill
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION D, PROBLEM 1
+% ==============================================================================
+
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+\textit{Write complete, syntactically correct Python statements. Apply proper conditional statements (\texttt{if}, \texttt{elif}, \texttt{else}), boolean operators, and input validation. Do \textbf{not} define custom functions (\texttt{def}) or loops. Suggested time: 18 minutes.}
+
+\subsection*{Problem 1: Residential Electricity Billing with Progressive Tiered Tariff (15 points)}
+Write a Python program that calculates the monthly electricity bill under a progressive tiered tariff structure with an excess surcharge and VAT.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=1pt]
+  \item Prompt for the customer name \texttt{customer\_name} (string).
+  \item Prompt for previous meter reading \texttt{prev\_reading} and current reading \texttt{curr\_reading} in kWh (convert to \texttt{float}).
+  \item \textbf{Input Validation:} Both readings must be $\ge 0$, and $\text{curr\_reading} \ge \text{prev\_reading}$. If invalid, display an error message and do not compute the bill.
+  \item Compute electricity consumed: $\text{kwh} = \text{curr\_reading} - \text{prev\_reading}$.
+  \item Calculate the progressive energy charge: Tier 1 (\$0.12/kWh for first 50 kWh), Tier 2 (\$0.15/kWh for next 50 kWh, 51--100), Tier 3 (\$0.20/kWh for next 100 kWh, 101--200), and Tier 4 (\$0.25/kWh for consumption exceeding 200 kWh).
+  \item \textbf{Excess Surcharge:} If total consumption exceeds 200 kWh, add a flat surcharge of \$10.00.
+  \item \textbf{VAT Calculation:} Compute 8\% VAT on the subtotal (energy charge + surcharge).
+  \item Display formatted receipt: Customer Name, Consumed kWh (1 decimal), Energy Charge, Surcharge, VAT (8\%), and Total Bill (all monetary values formatted to 2 decimals with \texttt{\$}).
+\end{enumerate}
+
+The output should follow this format when valid:
+\begin{lstlisting}
+Customer Name: Nguyen Van A
+Electricity Consumed: 240.0 kWh
+Energy Charge: $43.50
+Excess Surcharge: $10.00
+VAT (8%): $4.28
+Total Bill: $57.78
+\end{lstlisting}
+
+\begin{answerbox}[height=12.2cm]{Python Solution for Problem 1}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION D, PROBLEM 2
+% ==============================================================================
+
+\subsection*{Problem 2: University Course Enrollment \& Eligibility Verification (15 points)}
+Write a Python program that validates student eligibility to register for an advanced course (\texttt{DSAI2001 - Machine Learning}).
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=1pt]
+  \item Prompt for: \texttt{student\_id} (string), \texttt{gpa} (float), \texttt{credits\_earned} (int), \texttt{prereq\_status} (\texttt{"pass"}/\texttt{"fail"}), and \texttt{warning\_flag} (\texttt{"yes"}/\texttt{"no"}).
+  \item \textbf{Student ID Format Validation:} ID must be 8 characters, start with \texttt{"NEU"}, and last 5 characters must be digits (\texttt{student\_id[3:].isdigit()}). If invalid, display: \texttt{"ERROR: Invalid Student ID format."} and terminate.
+  \item \textbf{Eligibility Evaluation:} Eligible if and only if \texttt{prereq\_status.lower() == "pass"}, \texttt{warning\_flag.lower() == "no"}, $\text{credits\_earned} \ge 30$, and $\text{gpa} \ge 2.50$.
+  \item \textbf{Enrollment Classification:}
+    If eligible and $\text{gpa} \ge 3.60$ and $\text{credits\_earned} \ge 60$: status is \texttt{"APPROVED (Honors Priority)"}.
+    If eligible otherwise: status is \texttt{"APPROVED (Standard)"}.
+    If ineligible: status is \texttt{"REJECTED"}, stating the reason (e.g. missing prerequisite, low GPA, or warning).
+  \item Display the formatted result card bordered with divider lines (\texttt{"=" * 45}).
+\end{enumerate}
+
+For example, given \texttt{NEU12345}, \texttt{3.75}, \texttt{64}, \texttt{pass}, and \texttt{no}:
+\begin{lstlisting}
+=============================================
+ENROLLMENT ELIGIBILITY REPORT: DSAI2001
+---------------------------------------------
+Student ID: NEU12345 | Cumulative GPA: 3.75
+Completed Credits: 64
+Enrollment Status: APPROVED (Honors Priority)
+=============================================
+\end{lstlisting}
+
+\begin{answerbox}[height=12.0cm]{Python Solution for Problem 2}
+\end{answerbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[1mm]
+  \textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+\end{center}
+
+\end{document}
