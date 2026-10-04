@@ -1,0 +1,524 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\geometry{top=1.35cm,bottom=1.35cm,left=1.65cm,right=1.65cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+\definecolor{borderblue}{RGB}{150,185,215}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.2em,
+  belowskip=0.2em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Functions \& Modular Design Exam -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{3pt}{1pt}
+\titlespacing*{\subsection}{0pt}{2pt}{1pt}
+
+\newtcolorbox{headerbox}{
+  colback=white,
+  colframe=primaryblue,
+  boxrule=0.7pt,
+  arc=1.5mm,
+  left=2.5mm,
+  right=2.5mm,
+  top=1.0mm,
+  bottom=1.0mm
+}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=DarkGray!45,
+  boxrule=0.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=1.0mm,
+  bottom=1.0mm,
+  title=\footnotesize\color{DarkGray}\textbf{#2},
+  #1
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Functions and Modular Design in Python Exam},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: OFFICIAL HEADER + ANSWER SHEET + SECTION A (Q1 - Q5)
+% =========================================================================
+
+\noindent
+\begin{minipage}[t]{0.64\textwidth}
+  \raggedright\small
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{COLLEGE OF TECHNOLOGY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.34\textwidth}
+  \raggedleft\footnotesize
+  \textbf{OFFICIAL PROGRESS EXAMINATION}\\
+  Academic Year: 2026--2027\\
+  Semester: Fall 2026 \quad Course Code: \textbf{DSAI1003}
+\end{minipage}
+
+\vspace{0.1em}
+
+\begin{center}
+  {\Large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.05em]
+  {\normalsize\bfseries PROGRESS EXAM: FUNCTIONS, MODULAR DESIGN \& VARIABLE SCOPE}\\[0.05em]
+  {\normalsize\textbf{Paper Code:} \rule{1.6cm}{0.4pt} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding paper distribution)}
+\end{center}
+
+\vspace{0.05em}
+
+\begin{headerbox}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll@{}}
+  \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.15em]
+  \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabular*}
+
+\vspace{0.15em}
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{4.5pt}
+\centering
+\begin{tabular}{|l|c|c|c|c||c|c|}
+\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\
+\hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.25em]
+\cline{1-6}
+\textbf{Score} & & & & & & \\[0.35em]
+\hline
+\end{tabular}
+
+\vspace{0.1em}
+\raggedright
+\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and internet access are prohibited. Answer all questions directly in the designated spaces. In programming tasks, apply modular programming principles, function definitions (\texttt{def}), parameter passing, return statements, and proper variable scope. Do \textbf{not} use global variables or third-party libraries. Organize scripts cleanly with helper functions and a designated \texttt{main()} driver. Do not detach pages.
+\end{headerbox}
+
+\vspace{0.5mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write A, B, C, or D in the corresponding box)}:
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+\textbf{Answer} & & & & & & & & & & \\[1.5mm]
+\hline
+\end{tabular}
+\end{center}
+\vspace{-3mm}
+\section*{Section A: Functions, Modular Design \& Scope Concepts \hfill \normalsize\normalfont(20 points)}
+\textit{Answer all 10 questions. Each correct answer carries 2 points. Suggested time: 12 minutes.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1pt,topsep=1pt]
+
+\item What is the central engineering principle behind treating a function as a ``black box''?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item The caller must inspect every internal line of code before making a function call.
+  \item The caller relies only on the function's interface (inputs, outputs, specification) without needing internal details.
+  \item A black-box function cannot accept parameters or return computed values to the caller.
+  \item It guarantees that the function executes with zero memory consumption.
+\end{enumerate}
+
+\item What is the precise distinction between a \textbf{parameter} and an \textbf{argument} in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item A parameter is the passed value; an argument is the variable declared in the function header.
+  \item Parameters and arguments are identical synonyms with no syntactic or conceptual distinction.
+  \item A parameter is the variable in the function header; an argument is the concrete value supplied in the call.
+  \item Arguments can only be string literals; parameters can only be numeric types.
+\end{enumerate}
+
+\item What is the fundamental operational difference between \texttt{return value} and \texttt{print(value)}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{print()} passes data back to the calling expression; \texttt{return} only displays characters on screen.
+  \item \texttt{return} sends computed data back to the caller for further use; \texttt{print()} displays text and returns \texttt{None}.
+  \item \texttt{print()} halts the function immediately; \texttt{return} allows subsequent lines to execute.
+  \item Both statements are functionally identical and interchangeable in arithmetic expressions.
+\end{enumerate}
+
+\item In Python, if a function finishes executing its body without a \texttt{return} statement, what does it return?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item The integer \texttt{0}.
+  \item An empty string \texttt{""}.
+  \item The special singleton value \texttt{None} of type \texttt{NoneType}.
+  \item A fatal compile-time \texttt{MissingReturnError} is raised.
+\end{enumerate}
+
+\item Given \texttt{def modify(x): x = x + 10}, if a caller runs \texttt{a = 5} followed by \texttt{modify(a)}, what is \texttt{a}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{15}, because integer arguments are passed by reference and modified in place.
+  \item \texttt{5}, because parameter \texttt{x} is a local variable; reassigning \texttt{x} does not modify caller variable \texttt{a}.
+  \item \texttt{10}, because the parameter replaces the caller's variable in memory.
+  \item An \texttt{UnboundLocalError} occurs because \texttt{a} was not declared as global.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A (Q6 - Q10) + SECTION B Q11
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt,resume]
+
+\item Which statement correctly defines the \textbf{lifetime} and \textbf{scope} of a local variable inside a function?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item It exists for the entire program duration and can be accessed from any function.
+  \item It is created when the function executes and destroyed upon exit; it cannot be referenced outside.
+  \item It retains its value across separate function calls without using the \texttt{global} keyword.
+  \item It is saved directly to disk and reloaded whenever any module is imported.
+\end{enumerate}
+
+\item What happens when a local variable inside a function shares the same name as an existing global variable?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item Python raises a \texttt{NameCollisionError} when the script starts.
+  \item The global variable overrides the local variable, preventing the local variable from being assigned.
+  \item The local variable \textbf{shadows} (hides) the global variable within the function's local scope.
+  \item Python automatically merges both variables into a two-element tuple.
+\end{enumerate}
+
+\item In the engineering process of \textbf{stepwise refinement} (top-down design), how should a complex problem be approached?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item Write all calculations sequentially inside one continuous global script without functions.
+  \item Decompose the complex problem into smaller sub-tasks, each implemented as an independent helper function.
+  \item Always implement recursion first before considering iterative or procedural decomposition.
+  \item Combine user inputs, validations, mathematical formulas, and screen formatting into a single function.
+\end{enumerate}
+
+\item In software development, what is a function \textbf{stub}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item A permanent syntax error that halts Python compilation.
+  \item A temporary placeholder implementation with a valid signature that returns a default value for incremental testing.
+  \item A built-in Python keyword used to terminate infinite loops.
+  \item A compiled binary extension written in C.
+\end{enumerate}
+
+\item Why is organizing program logic within a \texttt{def main():} function considered a best practice in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item It accelerates Python bytecode execution by 100 times.
+  \item It is mandatory because Python cannot run any statements outside a function named \texttt{main}.
+  \item It prevents accidental global variables, provides a clear program entry point, and promotes modular testing.
+  \item It automatically converts all input variables into floating-point numbers.
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Section B: Output Tracing, Scope Diagnosis \& Error Correction \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all 5 questions. Each question carries 5 points. Suggested time: 15 minutes.}
+
+\subsection*{Q11. Exact Output Tracing with Parameter Passing \& Return Tuples (5 points)}
+Predict the \textbf{exact screen output}, including punctuation, spaces, and line breaks:
+
+\begin{lstlisting}
+def compute_discount(subtotal, rate=0.10):
+    discount = subtotal * rate
+    return discount
+
+def finalize_bill(amount, is_member):
+    tax = amount * 0.08
+    rate = 0.15 if is_member else 0.05
+    disc = compute_discount(amount, rate)
+    net_total = amount - disc + tax
+    return disc, net_total
+
+total = 100.0
+discount, final_due = finalize_bill(total, True)
+print(f"Subtotal: ${total:.2f} | Discount: ${discount:.2f}")
+print(f"Final Due: ${final_due:.2f}")
+print(f"Saved: {discount >= 15.0 and total == 100.0}")
+\end{lstlisting}
+
+\begin{answerbox}[height=2.8cm]{Output Box for Q11}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION B, Q12--Q15
+% ==============================================================================
+
+\subsection*{Q12. Evaluation of Function Calls and Return Values (5 points)}
+Write the exact evaluated value (or boolean result \texttt{True} / \texttt{False}) for each expression:
+
+\begin{enumerate}[label=\alph*),leftmargin=2em,itemsep=1pt]
+  \item \texttt{def notify(msg): print(msg)}\\
+  Result of \texttt{notify("Done") is None}: \hrulefill
+  \item \texttt{def cap(v, m=50): return m if v > m else v * 2}\\
+  Result of \texttt{cap(20) + cap(60)}: \hrulefill
+  \item \texttt{def valid(c): return len(c) == 6 and c[:2].isalpha() and c[2:].isdigit()}\\
+  Result of \texttt{valid("NE2026")}: \hrulefill
+  \item \texttt{def step(x): x = x + 5; return x * 2} with \texttt{a = 4; b = step(a)}\\
+  Value of \texttt{a + b}: \hrulefill
+  \item Evaluated result of \texttt{max(round(3.456, 1), min(4.2, 3.8))}: \hrulefill
+\end{enumerate}
+
+\subsection*{Q13. Diagnose and Correct Common Function Defects (5 points)}
+For each code scenario, state the underlying defect and provide the corrected Python statement.
+
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{|p{5.1cm}|X|X|}
+\hline
+\textbf{Code / Situation} & \textbf{Problem / Logic Flaw} & \textbf{Correction / Valid Code} \\
+\hline
+\texttt{def calc\_area(w, h):}\\
+\texttt{\ \ \ \ print(w * h)}\\
+\texttt{ans = calc\_area(5, 4) + 10} & & \\[2.0mm]
+\hline
+\texttt{def reset\_counter(c):}\\
+\texttt{\ \ \ \ c = 0}\\
+\texttt{count = 15}\\
+\texttt{reset\_counter(count)} & & \\[2.0mm]
+\hline
+\texttt{def prepare\_total():}\\
+\texttt{\ \ \ \ subtotal = 100.0}\\
+\texttt{prepare\_total()}\\
+\texttt{print(subtotal)} & & \\[2.0mm]
+\hline
+\end{tabularx}
+
+\subsection*{Q14. Variable Scope, Name Shadowing \& State Isolation (5 points)}
+Predict the exact screen output of the following script:
+
+\begin{lstlisting}
+rate = 0.05
+
+def apply_surcharge(base):
+    rate = 0.12
+    surcharge = base * rate
+    return surcharge
+
+def process_order(base):
+    fee = apply_surcharge(base)
+    total = base + fee + (base * rate)
+    return total
+
+amt = 200.0
+due = process_order(amt)
+print(f"Global Rate: {rate * 100:.0f}%")
+print(f"Payable Due: ${due:.2f}")
+print(f"Base Unchanged: {amt == 200.0}")
+\end{lstlisting}
+
+\begin{answerbox}[height=1.5cm]{Output Box for Q14}
+\end{answerbox}
+
+\subsection*{Q15. Function Specification, Docstrings \& Stubs (5 points)}
+\begin{itemize}[leftmargin=2em]
+  \item Write a standard Python \textbf{docstring} for a function \texttt{calculate\_fuel(distance, consumption\_rate)} explaining parameters, pre-conditions, and return value:\\
+  \rule{\linewidth}{0.4pt}
+  \item Write a syntactically valid \textbf{function stub} for \texttt{verify\_token(token\_str)} that accepts a string and returns a safe default boolean value \texttt{False}:\\
+  \rule{\linewidth}{0.4pt}
+\end{itemize}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION C
+% ==============================================================================
+
+\section*{Section C: Program Design \& Modular Decomposition \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all tasks. Suggested time: 15 minutes.}
+
+\begin{tcolorbox}[colback=boxbg,colframe=secondaryteal,arc=1.5mm,boxrule=0.6pt,top=1.5mm,bottom=1.5mm]
+\textbf{Problem Specification: Logistics Fleet Trip Reimbursement Engine}\\[0.5mm]
+\small
+A logistics dispatch platform calculates driver trip compensation based on travel distance $d$ (km), cargo weight $w$ (kg), driving duration $t$ (hours), shift timing (\texttt{is\_night}), and diesel fuel price per liter $p$:
+\begin{itemize}[itemsep=0.5pt,topsep=0.5pt]
+  \item \textbf{Input Validation:} Distance must satisfy $d > 0$; cargo weight must satisfy $0 < w \le 5000.0$; driving time must satisfy $t > 0$. Otherwise, reject as invalid.
+  \item \textbf{Fuel Cost Computation:} Base fuel consumption is 10.0~L/100km. If cargo weight exceeds 2000.0~kg, heavy-load friction increases consumption by 15\% (i.e. 11.5~L/100km). Fuel cost is: $\text{liters} \times p$, where $\text{liters} = (d \times \text{consumption\_rate}) / 100.0$.
+  \item \textbf{Driver Pay Calculation:} Driver receives a base wage of \$20.00/hour plus a mileage allowance of \$0.30/km. If \texttt{is\_night} is \texttt{True}, the hourly rate receives a 25\% premium (\$25.00/hour).
+  \item \textbf{Total Reimbursement:} Sum of fuel cost and driver pay. If total trip distance exceeds 400.0~km, add a flat \$50.00 long-haul bonus.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5mm}
+\textbf{Task 1: Identify Functions, Parameters \& Return Types} (6 points)
+Identify three independent helper functions suitable for this modular decomposition:
+\begin{itemize}[leftmargin=1.8em,itemsep=2.5pt]
+  \item \textbf{Function 1:} \texttt{validate\_trip(d, w, t)} $\rightarrow$ Return Type: \rule{2.2cm}{0.4pt} | Purpose: \dotfill
+  \item \textbf{Function 2:} \texttt{compute\_fuel\_cost(d, w, p)} $\rightarrow$ Return Type: \rule{2.2cm}{0.4pt} | Purpose: \dotfill
+  \item \textbf{Function 3:} \texttt{compute\_driver\_pay(t, d, is\_night)} $\rightarrow$ Return Type: \rule{2.2cm}{0.4pt} | Purpose: \dotfill
+\end{itemize}
+
+\vspace{0.5mm}
+\textbf{Task 2: Write the Structured Modular Call Hierarchy in Ordered Steps} (7 points)\\
+Formulate sequential pseudo-logic showing how \texttt{compute\_total\_reimbursement} coordinates validation, invokes helper functions, applies conditional bonuses, and returns the net total.
+
+\begin{answerbox}[height=4.5cm]{Program-Logic Work Area}
+\end{answerbox}
+
+\vspace{0.5mm}
+\textbf{Task 3: Hand Trace / Step-by-Step Test Calculation} (6 points)\\
+For $d = 300.0\text{ km}$, $w = 2500.0\text{ kg}$, $t = 5.0\text{ hours}$, $\text{is\_night} = \text{True}$, and fuel price $p = \$1.50/\text{L}$, calculate the fuel cost, driver pay, and final total reimbursement.
+
+\begin{answerbox}[height=3.0cm]{Calculation Box for Task 3}
+\end{answerbox}
+
+\vspace{0.5mm}
+\textbf{Task 4: Explain Two Software Engineering Design Decisions} (6 points)
+\begin{enumerate}[label=\alph*),leftmargin=1.8em,itemsep=2pt]
+  \item Why must functions return calculated values rather than directly calling \texttt{print()} inside helper functions?\\
+  \rule{\linewidth}{0.4pt}
+  \item Why is passing data via explicit parameters and return values superior to relying on shared global variables?\\
+  \rule{\linewidth}{0.4pt}
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION D, PROBLEM 1
+% ==============================================================================
+
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+\textit{Write complete, syntactically correct Python code. Design well-structured modular functions with explicit parameters and return values. Do \textbf{not} use global variables or third-party libraries. Organize code with clean helper functions and a \texttt{main()} entry point. Suggested time: 18 minutes.}
+
+\subsection*{Problem 1: Modular Retail Inventory \& Tiered Volume Billing System (15 points)}
+Write a modular Python program that computes customer order charges with volume discounting, weight-based shipping, and sales tax.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=1pt]
+  \item Implement \texttt{get\_discount\_rate(quantity)}: Returns a float discount rate based on units purchased:
+    0\% if $\text{quantity} < 10$; 5\% if $10 \le \text{quantity} < 50$; 10\% if $50 \le \text{quantity} < 100$; 15\% if $\text{quantity} \ge 100$.
+  \item Implement \texttt{compute\_shipping(weight, is\_express)}: Base fee is \$5.00 for $\text{weight} \le 5.0$~kg. For weight exceeding 5.0~kg, add \$1.50 per excess kg. If \texttt{is\_express} is \texttt{True}, add a flat \$12.00 express fee.
+  \item Implement \texttt{compute\_order\_total(unit\_price, quantity, weight, is\_express, tax\_rate)}:
+    \begin{itemize}[itemsep=0.5pt]
+      \item Gross subtotal = $\text{unit\_price} \times \text{quantity}$. Discount amount = $\text{gross} \times \text{get\_discount\_rate(quantity)}$.
+      \item Net merchandise = $\text{gross} - \text{discount}$.
+      \item Shipping fee: calculated via \texttt{compute\_shipping(weight, is\_express)}. \textbf{Free shipping rule:} if net merchandise $\ge \$200.00$ and \texttt{is\_express} is \texttt{False}, shipping fee is waived (\$0.00).
+      \item Tax = $\text{net merchandise} \times \text{tax\_rate}$. Total payable = $\text{net merchandise} + \text{shipping} + \text{tax}$.
+      \item Return a tuple: \texttt{(gross, discount, net\_merchandise, shipping, tax, total\_payable)}.
+    \end{itemize}
+  \item Implement \texttt{main()}: Prompt user for inputs, validate positive price/quantity/weight, call \texttt{compute\_order\_total} with 8\% tax rate (\texttt{0.08}), and display a formatted invoice.
+\end{enumerate}
+
+Sample formatted output for \$25.00 unit price, 12 units, 8.0~kg, standard delivery (not express):
+\begin{lstlisting}
+Gross Subtotal: $300.00
+Volume Discount (5%): $15.00
+Net Merchandise: $285.00
+Shipping Fee (Waived): $0.00
+Sales Tax (8%): $22.80
+Total Payable: $307.80
+\end{lstlisting}
+
+\begin{answerbox}[height=7.8cm]{Python Solution for Problem 1}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION D, PROBLEM 2
+% ==============================================================================
+
+\subsection*{Problem 2: Student Academic Standing \& Merit Scholarship Evaluator (15 points)}
+Write a modular Python program to evaluate student academic performance and financial scholarship grants.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=1.8em,label=\arabic*.,itemsep=1.5pt]
+  \item Implement \texttt{validate\_student\_record(student\_id, gpa, credits)}: Returns \texttt{True} if \texttt{student\_id} has length 8, starts with \texttt{"NEU"}, ends with 5 digits (\texttt{student\_id[3:].isdigit()}), $0.0 \le \text{gpa} \le 4.0$, and $\text{credits} \ge 0$; otherwise \texttt{False}.
+  \item Implement \texttt{determine\_standing(gpa, credits)}: Returns a standing string:
+    \texttt{"Dean's List"} if $\text{gpa} \ge 3.60$ and $\text{credits} \ge 15$;
+    \texttt{"Good Standing"} if $\text{gpa} \ge 2.50$;
+    \texttt{"Academic Warning"} if $2.00 \le \text{gpa} < 2.50$;
+    or \texttt{"Academic Probation"} if $\text{gpa} < 2.00$.
+  \item Implement \texttt{calculate\_scholarship(gpa, credits, is\_financial\_aid)}:
+    \begin{itemize}[itemsep=0.5pt]
+      \item Merit tier: \$1200.00 if $\text{gpa} \ge 3.80$; \$800.00 if $3.50 \le \text{gpa} < 3.80$; \$400.00 if $3.20 \le \text{gpa} < 3.50$; else \$0.00.
+      \item Need supplement: If \texttt{is\_financial\_aid} is \texttt{True} and $\text{gpa} \ge 2.50$, add \$350.00.
+      \item Full-time course grant: If $\text{credits} \ge 15$ and initial scholarship $> \$0.00$, add \$150.00.
+      \item Return the total calculated scholarship amount as a \texttt{float}.
+    \end{itemize}
+  \item Implement \texttt{main()}: Prompt user for student details, validate via \texttt{validate\_student\_record}, and display a clean academic report card enclosed with border lines (\texttt{"=" * 45}).
+\end{enumerate}
+
+Sample output for \texttt{NEU54321}, GPA \texttt{3.85}, \texttt{16} credits, financial aid \texttt{"yes"}:
+\begin{lstlisting}
+=============================================
+ACADEMIC STANDING & SCHOLARSHIP REPORT
+---------------------------------------------
+Student ID: NEU54321 | GPA: 3.85 | Credits: 16
+Academic Standing: Dean's List
+Merit & Need Scholarship: $1700.00
+=============================================
+\end{lstlisting}
+
+\begin{answerbox}[height=8.5cm]{Python Solution for Problem 2}
+\end{answerbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[1mm]
+  \textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+\end{center}
+
+\end{document}

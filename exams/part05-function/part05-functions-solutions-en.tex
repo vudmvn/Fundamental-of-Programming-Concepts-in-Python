@@ -1,0 +1,534 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- PACKAGES ---
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+
+\usepackage[top=2cm, bottom=2.2cm, left=2cm, right=2cm]{geometry}
+\setlength{\headheight}{24pt}
+\addtolength{\topmargin}{-10pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% --- COLOR DEFINITIONS ---
+\definecolor{primaryblue}{HTML}{0F3460}
+\definecolor{secondaryteal}{HTML}{0D9488}
+\definecolor{accentgold}{HTML}{D97706}
+\definecolor{darkgray}{HTML}{1F2937}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{boxbg}{HTML}{F8FAFC}
+\definecolor{borderblue}{HTML}{93C5FD}
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pygreen}{HTML}{15803D}
+\definecolor{pyorange}{HTML}{C2410C}
+\definecolor{correctgreen}{HTML}{166534}
+
+% --- LISTINGS CONFIGURATION ---
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{pyblue}\bfseries,
+  commentstyle=\color{pygreen}\itshape,
+  stringstyle=\color{pyorange},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+% --- HYPERREF SETUP ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Functions Solutions and Marking Rubric},
+    pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+% --- HEADERS & FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{primaryblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\small\color{correctgreen}\textbf{Instructor Solutions \& Rubric}}
+\fancyfoot[L]{\footnotesize\color{darkgray}Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[C]{\footnotesize\color{darkgray}Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\color{darkgray}\textbf{Total: 100 Points}}
+
+% --- SECTION STYLING ---
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\thesection}{1em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{secondaryteal}\large\bfseries}
+  {\thesubsection}{1em}{}
+
+% Custom box for solutions
+\newtcolorbox{solbox}[2][]{%
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  boxrule=0.8pt,
+  top=2mm,
+  bottom=2mm,
+  left=3mm,
+  right=3mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={colback=green!10, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+% ==============================================================================
+% PAGE 1: TITLE & INSTRUCTOR OVERVIEW
+% ==============================================================================
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.15cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY}}\\[0.10cm]
+  {\large\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}}\\[0.25cm]
+  \rule{\textwidth}{1.2pt}\\[0.3cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.15cm]
+  {\large\textbf{Course: Fundamental Programming Concepts in Python (DSAI1003)}}\\[0.15cm]
+  {\normalsize\textit{Progress Exam: Functions, Modular Design and Variable Scope in Python}}\\[0.2cm]
+  \rule{\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.2cm}
+
+\begin{tcolorbox}[colback=green!8, colframe=correctgreen, arc=1.5mm]
+\small
+\textbf{Note for Instructors and Teaching Assistants:}
+This document provides complete answer keys, detailed rationale for conceptual questions, exact output traces, step-by-step modular program design, complete reference implementations, and an itemized marking rubric designed for rigorous and consistent grading across all student cohorts.
+\end{tcolorbox}
+
+\vspace{0.3cm}
+
+\section*{Section A: Functions, Modular Design \& Scope Concepts (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\vfill
+\begin{center}
+  \textit{\color{darkgray}The comprehensive answer key and rationale table for Section A begins on the following page.}
+\end{center}
+\vfill
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A COMPLETE ANSWER KEY TABLE & SECTION B INTRODUCTION
+% ==============================================================================
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & The black-box abstraction specifies that a caller only interacts with a function through its documented interface (parameters, return types, pre/post-conditions). The internal implementation details are hidden and can be refactored without breaking the caller. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{C} & A \textbf{parameter} is a variable declared in the function definition header (\texttt{def}) that serves as a placeholder. An \textbf{argument} is the actual value or expression evaluated and passed into the function when it is invoked. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & The \texttt{return} statement passes computed data back to the calling expression for storage, branching, or further math. In contrast, \texttt{print()} is an I/O side effect that writes text to standard output and returns \texttt{None}. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{C} & In Python, every function returns a value. If execution reaches the end of the body without encountering a \texttt{return} statement, or executes a bare \texttt{return}, Python implicitly returns the special singleton value \texttt{None} of type \texttt{NoneType}. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{B} & Parameter variables are local variables initialized with the argument values. In Python, reassigning a parameter variable (\texttt{x = x + 10}) merely points the local name \texttt{x} to a new integer object, leaving the caller's variable \texttt{a} completely unchanged at \texttt{5}. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{B} & A local variable has local scope and function-duration lifetime: it is allocated upon function entry, exists only during execution of the function call frame, is destroyed upon return, and is strictly inaccessible outside the function. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{C} & When a local variable inside a function shares the name of a global variable, the local variable \textbf{shadows} (masks) the global variable. Inside that function, references to the name resolve to the local variable. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{B} & \textbf{Stepwise refinement} (top-down design) is the software engineering practice of decomposing a large, complex problem into smaller, intellectually manageable, and independently testable sub-tasks, each implemented as a dedicated helper function. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{B} & A \textbf{stub} is a minimal placeholder function with a valid signature and return statement (returning a safe dummy value such as \texttt{0}, \texttt{False}, or \texttt{""}) used during incremental top-down development to test calling structures before full implementation. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{C} & Encapsulating the main application logic inside a \texttt{def main():} function avoids polluting the global namespace with script-level variables, provides an explicit execution entry point, and enables modularity and automated unit testing. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.3cm}
+
+\section*{Section B: Output Tracing, Scope Diagnosis \& Error Correction (25 points)}
+\textit{Questions 11 through 15 evaluate concrete understanding of call semantics, variable scope, mutation isolation, syntax defects, and formal specification. 5 points each. Total = 25 points.}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: Q11 & Q12
+% ==============================================================================
+\subsection*{Q11. Exact Output Tracing with Parameter Passing \& Return Tuples (5 points)}
+\begin{solbox}{Solution for Q11}
+\begin{lstlisting}
+Subtotal: $100.00 | Discount: $15.00
+Final Due: $93.00
+Saved: True
+\end{lstlisting}
+\textbf{Scoring Breakdown:}
+\begin{itemize}[leftmargin=2em, itemsep=1pt]
+  \item \textbf{Line 1 (2 points):} \texttt{Subtotal: \$100.00 | Discount: \$15.00} ($total = 100.0$ remains unchanged; $is\_member = True \rightarrow rate = 0.15$; $compute\_discount(100.0, 0.15)$ returns $15.0$).
+  \item \textbf{Line 2 (1.5 points):} \texttt{Final Due: \$93.00} ($tax = 100.0 \times 0.08 = 8.0$; $net\_total = 100.0 - 15.0 + 8.0 = 93.0$, formatted as \texttt{\$93.00}).
+  \item \textbf{Line 3 (1.5 points):} \texttt{Saved: True} ($15.0 \ge 15.0$ is \texttt{True} and $100.0 == 100.0$ is \texttt{True} $\rightarrow$ \texttt{True and True} evaluates to \texttt{True}).
+\end{itemize}
+\end{solbox}
+
+\vspace{0.3cm}
+
+\subsection*{Q12. Evaluation of Function Calls and Return Values (5 points)}
+\begin{solbox}{Solution for Q12}
+\begin{itemize}[leftmargin=2em, itemsep=3pt]
+  \item \textbf{a)} \texttt{notify("Done") is None}: \textbf{\texttt{True}} (1 pt) -- Function has no \texttt{return} statement, so it returns \texttt{None}; \texttt{None is None} evaluates to \texttt{True}.
+  \item \textbf{b)} \texttt{cap(20) + cap(60)}: \textbf{\texttt{90}} (1 pt) -- $cap(20) = 20 \times 2 = 40$ (since $20 \le 50$); $cap(60) = 50$ (since $60 > 50$); $40 + 50 = 90$.
+  \item \textbf{c)} \texttt{valid("NE2026")}: \textbf{\texttt{True}} (1 pt) -- Length is 6, \texttt{"NE".isalpha()} is \texttt{True}, and \texttt{"2026".isdigit()} is \texttt{True}.
+  \item \textbf{d)} \texttt{a + b}: \textbf{\texttt{22}} (1 pt) -- Parameter $x = 4 + 5 = 9$, returns $9 \times 2 = 18 = b$. Variable $a$ remains 4; $4 + 18 = 22$.
+  \item \textbf{e)} \texttt{max(round(3.456, 1), min(4.2, 3.8))}: \textbf{\texttt{3.8}} (1 pt) -- $round(3.456, 1) = 3.5$; $min(4.2, 3.8) = 3.8$; $max(3.5, 3.8) = 3.8$.
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: Q13, Q14 & Q15
+% ==============================================================================
+\subsection*{Q13. Diagnose and Correct Common Function Defects (5 points)}
+\begin{solbox}{Solution for Q13}
+\renewcommand{\arraystretch}{1.2}
+\small
+\begin{tabularx}{\linewidth}{|p{4.2cm}|X|X|}
+\hline
+\textbf{Code / Defect} & \textbf{Problem / Logic Flaw} & \textbf{Correction / Valid Code} \\
+\hline
+\texttt{def calc\_area(w, h):}\newline
+\texttt{\ \ \ \ print(w * h)}\newline
+\texttt{ans = calc\_area(5, 4) + 10} &
+Prints area instead of returning it. Without \texttt{return}, yields \texttt{None}, raising \texttt{TypeError} on addition with \texttt{10}. (0.8 pt) &
+Replace \texttt{print} with \texttt{return}:\newline
+\texttt{def calc\_area(w, h):}\newline
+\texttt{\ \ \ \ return w * h}\newline
+(0.8 pt) \\
+\hline
+\texttt{def reset\_counter(c):}\newline
+\texttt{\ \ \ \ c = 0}\newline
+\texttt{count = 15}\newline
+\texttt{reset\_counter(count)} &
+Assigning \texttt{c = 0} only rebinds local parameter \texttt{c}. Does not modify caller variable \texttt{count} (remains 15). (0.8 pt) &
+Return new value and assign in caller:\newline
+\texttt{def reset\_counter(): return 0}\newline
+\texttt{count = reset\_counter()}\newline
+(0.8 pt) \\
+\hline
+\texttt{def prepare\_total():}\newline
+\texttt{\ \ \ \ subtotal = 100.0}\newline
+\texttt{prepare\_total()}\newline
+\texttt{print(subtotal)} &
+\texttt{subtotal} is local to \texttt{prepare\_total()}. Access outside raises \texttt{NameError: name 'subtotal' is not defined}. (0.8 pt) &
+Return value and assign to caller variable:\newline
+\texttt{def prepare\_total(): return 100.0}\newline
+\texttt{subtotal = prepare\_total()}\newline
+(1.0 pt) \\
+\hline
+\end{tabularx}
+\end{solbox}
+
+\vspace{0.15cm}
+
+\subsection*{Q14. Variable Scope, Name Shadowing \& State Isolation (5 points)}
+\begin{solbox}{Solution for Q14}
+\begin{lstlisting}
+Global Rate: 5%
+Payable Due: $234.00
+Base Unchanged: True
+\end{lstlisting}
+\small
+\textbf{Scoring Breakdown:}
+\begin{itemize}[leftmargin=2em, itemsep=1pt]
+  \item \textbf{Line 1 (1.5 pts):} \texttt{Global Rate: 5\%} -- Inside \texttt{apply\_surcharge}, local \texttt{rate = 0.12} shadows global variable only within that scope; global \texttt{rate = 0.05} remains unchanged.
+  \item \textbf{Line 2 (2.0 pts):} \texttt{Payable Due: \$234.00} -- In \texttt{apply\_surcharge(200.0)}, $fee = 200 \times 0.12 = 24.0$. In \texttt{process\_order}, $total = 200 + 24.0 + (200 \times 0.05) = 234.0$.
+  \item \textbf{Line 3 (1.5 pts):} \texttt{Base Unchanged: True} -- Parameter reassignments do not alter caller's \texttt{amt = 200.0}.
+\end{itemize}
+\end{solbox}
+
+\vspace{0.15cm}
+
+\subsection*{Q15. Function Specification, Docstrings \& Stubs (5 points)}
+\begin{solbox}{Solution for Q15}
+\small
+\textbf{Part 1: Standard Python Docstring (2.5 points)}
+\begin{lstlisting}
+def calculate_fuel(distance, consumption_rate):
+    """Computes total estimated diesel fuel consumption in liters.
+    Parameters: distance (float > 0), consumption_rate (float > 0, L/100km).
+    Returns: float -- Estimated fuel volume required in liters.
+    """
+\end{lstlisting}
+\textbf{Part 2: Syntactically Valid Function Stub (2.5 points)}
+\begin{lstlisting}
+def verify_token(token_str):
+    # TODO: Implement cryptographic token signature validation
+    return False
+\end{lstlisting}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION C (TASKS 1 & 2)
+% ==============================================================================
+\section*{Section C: Program Design \& Modular Decomposition (25 points)}
+
+\begin{solbox}{Model Solution for Section C (Tasks 1 \& 2) (13 points)}
+\textbf{Task 1: Identify Functions, Parameters \& Return Types (6 points, 2 pts each)}
+\begin{itemize}[leftmargin=2em, itemsep=2pt]
+  \item \textbf{Function 1:} \texttt{validate\_trip(distance, cargo\_weight, hours\_driven)} $\rightarrow$ Return Type: \textbf{\texttt{bool}}.\\
+    \textit{Purpose:} Verifies that distance $d > 0$, cargo weight $0 < w \le 5000.0$, and duration $t > 0$.
+  \item \textbf{Function 2:} \texttt{compute\_fuel\_cost(distance, cargo\_weight, fuel\_price)} $\rightarrow$ Return Type: \textbf{\texttt{float}}.\\
+    \textit{Purpose:} Determines applicable fuel consumption rate ($10.0$ vs $11.5$ L/100km if $w > 2000$) and computes total fuel cost.
+  \item \textbf{Function 3:} \texttt{compute\_driver\_pay(hours\_driven, distance, is\_night)} $\rightarrow$ Return Type: \textbf{\texttt{float}}.\\
+    \textit{Purpose:} Calculates base hourly wage (\$20/hr, or \$25/hr if night shift) plus mileage allowance (\$0.30/km).
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Task 2: Modular Call Hierarchy \& Coordination Logic (7 points)}
+\begin{lstlisting}
+def compute_total_reimbursement(distance, cargo_weight, hours_driven, is_night, fuel_price):
+    # Step 1: Input Validation Guard
+    if not validate_trip(distance, cargo_weight, hours_driven):
+        return 0.0
+
+    # Step 2: Component Calculations via Dedicated Helper Functions
+    fuel_cost = compute_fuel_cost(distance, cargo_weight, fuel_price)
+    driver_pay = compute_driver_pay(hours_driven, distance, is_night)
+
+    # Step 3: Subtotal and Long-Haul Bonus Application
+    subtotal = fuel_cost + driver_pay
+    bonus = 50.0 if distance > 400.0 else 0.0
+
+    # Step 4: Final Total Return
+    return subtotal + bonus
+\end{lstlisting}
+\small
+\textit{Scoring Breakdown for Task 2: 2 pts for validation guard; 2 pts for delegating to helper functions; 1.5 pts for subtotal \& bonus logic; 1.5 pts for proper return type and zero side-effects.}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION C (TASKS 3 & 4)
+% ==============================================================================
+\begin{solbox}{Model Solution for Section C (Tasks 3 \& 4) (12 points)}
+\textbf{Task 3: Hand-Trace / Test Calculation for Given Scenario (6 points)}
+\begin{itemize}[leftmargin=2em, itemsep=3pt]
+  \item \textbf{Given Scenario:} $d = 300.0\text{ km}$, $w = 2500.0\text{ kg}$, $t = 5.0\text{ hrs}$, $\text{is\_night} = \text{True}$, $p = \$1.50/\text{L}$.
+  \item \textbf{Fuel Consumption Rate (1.5 pts):} Since $w = 2500.0 > 2000.0$, rate $= 10.0 \times 1.15 = 11.5\text{ L/100km}$.
+  \item \textbf{Fuel Volume \& Cost (1.5 pts):}
+    $$\text{Liters} = \frac{300.0 \times 11.5}{100.0} = 34.5\text{ L} \implies \text{Fuel Cost} = 34.5 \times \$1.50 = \mathbf{\$51.75}$$
+  \item \textbf{Driver Pay (1.5 pts):}
+    $$\text{Hourly Rate} = \$20.00 \times 1.25 = \$25.00/\text{hr} \implies \text{Wage} = 5.0 \times \$25.00 = \$125.00$$
+    $$\text{Mileage Allowance} = 300.0 \times \$0.30 = \$90.00 \implies \text{Driver Pay} = 125.00 + 90.00 = \mathbf{\$215.00}$$
+  \item \textbf{Final Reimbursement Total (1.5 pts):} Distance $300.0 \le 400.0 \implies \text{Bonus} = \$0.00$.
+    $$\text{Total Reimbursement} = \$51.75 + \$215.00 + \$0.00 = \mathbf{\$266.75}$$
+\end{itemize}
+
+\vspace{0.25cm}
+\textbf{Task 4: Software Engineering Design Decisions (6 points, 3 pts each)}
+\begin{enumerate}[label=\alph*),leftmargin=2em, itemsep=4pt]
+  \item \textbf{Returning Values vs. Direct Screen Printing (3 points):} \\
+    Returning values enables functions to be modular, composable, and testable. A function that returns a value can be utilized in further calculations, automated unit test suites, GUI controls, or web APIs. A function that prints directly hardcodes presentation to standard output, produces uncapturable side effects, and prevents caller logic from reusing the result.
+  \item \textbf{Explicit Parameters vs. Global Variables (3 points):} \\
+    Passing explicit arguments and returning results maintains \textbf{referential transparency} and state isolation. Each function execution operates strictly on its own local activation record. In contrast, global variables introduce hidden dependencies, make hand-tracing difficult, create insidious side-effect bugs across functions, and violate encapsulation.
+\end{enumerate}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 7: SECTION D (PROBLEM 1 IMPLEMENTATION & RUBRIC)
+% ==============================================================================
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Modular Retail Inventory \& Tiered Volume Billing System (15 points)}
+
+\begin{solbox}[top=1.5mm, bottom=1.5mm]{Reference Implementation for Problem 1}
+\begin{lstlisting}
+def get_discount_rate(quantity):
+    """Returns volume discount rate based on units purchased."""
+    if quantity >= 100: return 0.15
+    elif quantity >= 50: return 0.10
+    elif quantity >= 10: return 0.05
+    return 0.0
+
+def compute_shipping(weight, is_express):
+    """Computes shipping fee based on weight tier and speed."""
+    base_shipping = 5.00
+    if weight > 5.0:
+        base_shipping += (weight - 5.0) * 1.50
+    if is_express:
+        base_shipping += 12.00
+    return base_shipping
+
+def compute_order_total(unit_price, quantity, weight, is_express, tax_rate=0.08):
+    """Computes all invoice line items and final order payable."""
+    gross = unit_price * quantity
+    discount = gross * get_discount_rate(quantity)
+    net = gross - discount
+    shipping = 0.0 if (net >= 200.0 and not is_express) else compute_shipping(weight, is_express)
+    tax = net * tax_rate
+    total = net + shipping + tax
+    return gross, discount, net, shipping, tax, total
+
+def main():
+    try:
+        price = float(input("Enter unit price ($): "))
+        qty = int(input("Enter quantity: "))
+        weight = float(input("Enter total weight (kg): "))
+        is_express = (input("Express delivery (yes/no)? ").strip().lower() == "yes")
+        if price <= 0 or qty <= 0 or weight <= 0:
+            print("Error: Price, quantity, and weight must be positive.")
+            return
+        gross, disc, net, ship, tax, total = compute_order_total(price, qty, weight, is_express)
+        print(f"Gross Subtotal: ${gross:.2f}")
+        print(f"Volume Discount ({get_discount_rate(qty)*100:.0f}%): ${disc:.2f}")
+        print(f"Net Merchandise: ${net:.2f}")
+        print(f"Shipping Fee: ${ship:.2f}" if ship > 0 else "Shipping Fee: Free")
+        print(f"Sales Tax (8%): ${tax:.2f}")
+        print(f"Total Payable: ${total:.2f}")
+    except ValueError:
+        print("Error: Invalid numeric input entered.")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\vspace{0.12cm}
+\begin{solbox}[top=1.5mm, bottom=1.5mm]{Marking Rubric for Problem 1 (15 points)}
+\small
+\begin{itemize}[leftmargin=2em, itemsep=0.5pt]
+  \item \textbf{Function \texttt{get\_discount\_rate} (3 points):} Correct tiered volume logic ($0\%, 5\%, 10\%, 15\%$) with mutually exclusive conditions and proper return statements.
+  \item \textbf{Function \texttt{compute\_shipping} (3 points):} Correct base fee (\$5.00), excess weight math above 5.0 kg (\$1.50/kg), and express surcharge (\$12.00).
+  \item \textbf{Function \texttt{compute\_order\_total} (4 points):} Correct calculation of gross, discount amount, net merchandise, conditional free shipping waiver evaluation, tax, and 6-tuple return.
+  \item \textbf{Function \texttt{main()} \& Driver (3 points):} Prompting user inputs, data type conversions, validation guard, helper coordination, and receipt formatting.
+  \item \textbf{Code Architecture \& Scope (2 points):} Zero global variables, proper parameter passing, pure helper functions.
+\end{itemize}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 8: SECTION D (PROBLEM 2 IMPLEMENTATION)
+% ==============================================================================
+\subsection*{Problem 2: Student Academic Standing \& Merit Scholarship Evaluator (15 points)}
+
+\begin{solbox}{Reference Implementation for Problem 2}
+\begin{lstlisting}
+def validate_student_record(student_id, gpa, credits_earned):
+    """Validates student ID format, GPA boundary, and non-negative credits."""
+    if len(student_id) != 8 or not student_id.startswith("NEU"):
+        return False
+    if not student_id[3:].isdigit():
+        return False
+    if not (0.0 <= gpa <= 4.0) or credits_earned < 0:
+        return False
+    return True
+
+def determine_standing(gpa, credits_earned):
+    """Categorizes student academic standing based on GPA and credit thresholds."""
+    if gpa >= 3.60 and credits_earned >= 15:
+        return "Dean's List"
+    elif gpa >= 2.50:
+        return "Good Standing"
+    elif gpa >= 2.00:
+        return "Academic Warning"
+    return "Academic Probation"
+
+def calculate_scholarship(gpa, credits_earned, is_financial_aid):
+    """Calculates merit, need-based, and full-time scholarship grant amounts."""
+    if gpa >= 3.80:
+        merit = 1200.0
+    elif gpa >= 3.50:
+        merit = 800.0
+    elif gpa >= 3.20:
+        merit = 400.0
+    else:
+        merit = 0.0
+
+    need_aid = 350.0 if (is_financial_aid and gpa >= 2.50) else 0.0
+    ft_grant = 150.0 if (credits_earned >= 15 and merit > 0.0) else 0.0
+    return merit + need_aid + ft_grant
+
+def main():
+    student_id = input("Enter Student ID: ").strip()
+    try:
+        gpa = float(input("Enter Cumulative GPA (0.0 - 4.0): "))
+        credits_earned = int(input("Enter Earned Credits: "))
+    except ValueError:
+        print("Error: GPA must be a float and credits must be an integer.")
+        return
+    is_aid = (input("Financial Aid Eligible (yes/no)? ").strip().lower() == "yes")
+
+    if not validate_student_record(student_id, gpa, credits_earned):
+        print("ERROR: Invalid Student Record format or values.")
+        return
+
+    standing = determine_standing(gpa, credits_earned)
+    scholarship = calculate_scholarship(gpa, credits_earned, is_aid)
+
+    print("=" * 45)
+    print("ACADEMIC STANDING & SCHOLARSHIP REPORT")
+    print("-" * 45)
+    print(f"Student ID: {student_id} | GPA: {gpa:.2f} | Credits: {credits_earned}")
+    print(f"Academic Standing: {standing}")
+    print(f"Merit & Need Scholarship: ${scholarship:.2f}")
+    print("=" * 45)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 9: SECTION D (PROBLEM 2 RUBRIC & CONCLUSION)
+% ==============================================================================
+\begin{solbox}{Marking Rubric for Problem 2 (15 points)}
+\small
+\begin{itemize}[leftmargin=2em, itemsep=3pt]
+  \item \textbf{Function \texttt{validate\_student\_record} (3 points):} Accurate string validation (length 8, \texttt{"NEU"} prefix, 5 trailing digits) and range checks for GPA ($0.0 \le \text{gpa} \le 4.0$) and credits ($\ge 0$).
+  \item \textbf{Function \texttt{determine\_standing} (3 points):} Correct ladder logic for Dean's List (GPA $\ge 3.60 \land$ credits $\ge 15$), Good Standing, Warning, and Probation with clean return values.
+  \item \textbf{Function \texttt{calculate\_scholarship} (4 points):} Correct merit tiers (\$1200, \$800, \$400), need-based supplement (\$350 if aid $\land$ GPA $\ge 2.50$), and full-time course grant (\$150 if credits $\ge 15 \land$ merit $> 0$).
+  \item \textbf{Function \texttt{main()} \& Report Formatting (3 points):} Safe input collection, validation call guard, helper function invocations, and cleanly formatted bordered report card.
+  \item \textbf{Code Architecture \& Modularity (2 points):} Pure helper functions, proper parameter passing, zero global mutations.
+\end{itemize}
+\end{solbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[1mm]
+  \textbf{\color{primaryblue}--- END OF SOLUTIONS \& RUBRIC ---}
+\end{center}
+
+\end{document}
