@@ -53,8 +53,8 @@
         var hash = window.location.hash || '';
         var clean = hash.replace(/^#\/?/, '').split('?')[0];
         var lower = clean.toLowerCase();
-        var staticExts = ['.pdf', '.ipynb', '.zip', '.csv', '.tex'];
-        var isStatic = staticExts.some(function(ext) { return lower.endsWith(ext); });
+        var staticExts = ['.pdf', '.ipynb', '.zip', '.csv', '.tex', '.html'];
+        var isStatic = staticExts.some(function(ext) { return lower.endsWith(ext); }) && !lower.endsWith('index.html');
         if (isStatic) {
           var base = window.location.pathname;
           if (!base.endsWith('/')) base += '/';
@@ -119,13 +119,13 @@
           hook.doneEach(function() {
             // Force links to static files (.pdf, .ipynb, .zip, .csv, .tex) to bypass Docsify SPA router
             var links = document.querySelectorAll('.markdown-section a');
-            var staticExts = ['.pdf', '.ipynb', '.zip', '.csv', '.tex'];
+            var staticExts = ['.pdf', '.ipynb', '.zip', '.csv', '.tex', '.html'];
             links.forEach(function(link) {
               var href = link.getAttribute('href');
               if (!href) return;
               var target = href.replace(/^#\/?/, '').split('?')[0];
               var lower = target.toLowerCase();
-              var isStatic = staticExts.some(function(ext) { return lower.endsWith(ext); });
+              var isStatic = staticExts.some(function(ext) { return lower.endsWith(ext); }) && !lower.endsWith('index.html');
               if (isStatic) {
                 link.setAttribute('href', target);
                 link.setAttribute('target', '_blank');
