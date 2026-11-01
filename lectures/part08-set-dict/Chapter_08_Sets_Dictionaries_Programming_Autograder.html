@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 8 · Sets & Dictionaries — Programming Exercises · Tự chấm Python</title>
+<style>
+:root{--ink:#142f43;--sub:#587284;--navy:#122c42;--navy2:#193c54;--line:#d9e6ed;--bg:#f3f8fb;--mint:#0c8179;--mintlight:#e3f6ef;--blue:#2b638f;--red:#a72d4b;--redlight:#fff0f2;--amber:#9d591f;--amberlight:#fff4db;--code:#13283e;--white:#fff}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:14px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg)}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #83c7d7;outline-offset:2px}
+.app{display:grid;grid-template-columns:292px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;overflow:auto;background:var(--navy);padding:20px 15px 18px;color:#d8ecf3;display:flex;flex-direction:column}.brand{padding:6px 10px 17px;border-bottom:1px solid #3a5366;display:flex;align-items:center;gap:11px}.logo{width:43px;height:43px;border:1px solid #72ccbd;border-radius:14px;display:grid;place-items:center;font-weight:900;font-family:monospace;font-size:18px;color:#94eee0;background:#16394d}.brand strong{font-size:14px;display:block;line-height:1.25;color:#fff}.brand small{color:#a5bbc9;display:block;font-size:11px;letter-spacing:.03em;margin-top:4px}.nav-stat{padding:18px 10px 12px}.nav-stat-top{display:flex;align-items:center;justify-content:space-between;font-size:12px}.nav-stat b{color:#a5efe2}.bar{height:8px;background:#355169;border-radius:99px;margin-top:11px;overflow:hidden}.bar>span{height:100%;background:linear-gradient(90deg,#33bcae,#9be6cc);display:block;width:0;transition:width .25s}.search{border:1px solid #496275;border-radius:10px;background:#183950;color:white;width:100%;padding:10px 11px;margin-bottom:9px;font-size:12px}.search::placeholder{color:#a6bbc6}.navgroups{padding:0 2px;display:flex;flex-direction:column;gap:17px;flex:1}.grouptitle{font-size:10px;letter-spacing:.11em;font-weight:800;color:#9fb9c7;padding:0 10px 7px;display:flex;justify-content:space-between}.navitem{border:1px solid transparent;background:transparent;color:#d2e1ea;padding:9px 9px;border-radius:10px;display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;margin-bottom:4px}.navitem:hover{background:#20445a}.navitem.active{background:#265267;border-color:#448b91}.navitem.done{color:#bcf5df}.navnum{width:43px;min-width:43px;height:27px;display:grid;place-items:center;border-radius:7px;background:#27485c;font-weight:800;color:#dceef5;font-size:11px}.navitem.done .navnum{background:#0d6e62;color:#d9fff5}.navitem strong{font-weight:680;font-size:11.6px;display:block;line-height:1.28}.navitem small{font-size:10px;color:#99bbc8;display:block;line-height:1.35;margin-top:3px}.sidefoot{border-top:1px solid #355469;padding:13px 10px 0;color:#adc4cf;font-size:11px}.sidefoot button{border:0;background:none;padding:0;margin-top:7px;text-decoration:underline;color:#b9d5de;font-size:11px}
+.main{min-width:0;padding:27px clamp(20px,3vw,45px) 38px;max-width:1650px;width:100%;margin:0 auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.breadcrumb{font-size:11px;letter-spacing:.12em;font-weight:790;color:#658596}.breadcrumb strong{color:var(--mint)}.topctrl{display:flex;align-items:center;gap:10px}.pill{font-size:11px;padding:7px 11px;border-radius:30px;background:#dff4f1;color:#176d6b;font-weight:740}.tinybtn{font-weight:740;border:1px solid #cbdce3;background:#fff;border-radius:11px;padding:8px 12px;color:#284659;font-size:12px}.hero{background:linear-gradient(120deg,#15394f,#155c65);color:#fff;padding:24px clamp(20px,3vw,36px);border-radius:19px;display:grid;grid-template-columns:1fr auto;gap:14px;box-shadow:0 15px 25px #16364d14}.hero .eyebrow{font-size:11px;font-weight:790;letter-spacing:.17em;color:#95ead8}.hero h1{font-size:clamp(26px,2.5vw,36px);margin:6px 0 9px;line-height:1.18;letter-spacing:-.022em}.hero p{font-size:13px;color:#c9e0e8;max-width:970px;margin:0}.hero-count{align-self:center;min-width:110px;text-align:center;border-left:1px solid #61919b65;padding-left:22px}.hero-count b{font-size:40px;line-height:1.1;display:block}.hero-count small{font-size:11px;color:#bde1db}.statrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:17px 0}.statbox{border:1px solid #d8e7ed;border-radius:14px;background:#fff;padding:14px 17px;box-shadow:0 5px 20px #10344a08}.statbox b{display:block;font-size:21px;line-height:1.3;margin-top:4px;color:#173f56}.statbox small{font-size:10.5px;font-weight:790;text-transform:uppercase;letter-spacing:.07em;color:#678090}
+.maincard{background:#fff;border:1px solid #dbe6ed;border-radius:17px;padding:clamp(18px,2.1vw,30px);box-shadow:0 10px 35px #16394f0b}.blocktop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.tag{display:inline-flex;align-items:center;padding:4px 9px;border-radius:8px;background:#e8f5f5;color:#187579;font-size:10px;font-weight:800;letter-spacing:.05em}.tag.gray{background:#edf3f6;color:#557182}.tag.amber{background:#fff0d6;color:#915b22}.maincard h2{font-size:clamp(23px,2.1vw,30px);line-height:1.23;margin:13px 0 12px}.prompt{color:#435d6c;font-size:14.2px;line-height:1.7;max-width:1140px}.contract{border:1px solid #cfe3e9;background:#f0f8fa;border-radius:12px;padding:13px 16px;margin-top:15px}.contract b{font-size:12px;color:#1b6575}.contract p{margin:5px 0 0;font-size:12.3px;line-height:1.65;color:#3f6571}.notice{padding:10px 13px;background:#fff8e9;border-left:3px solid #edb869;border-radius:7px;color:#87612d;font-size:12px;margin-top:12px}.workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(350px,.95fr);gap:19px;margin-top:21px;align-items:start}.codecard{border:1px solid #b9d0dd;background:var(--code);border-radius:13px;overflow:hidden}.codehead{padding:11px 14px;background:#1f4059;display:flex;align-items:center;justify-content:space-between;color:#bdd4e1;font-size:11px;font-weight:700}.dotset{display:flex;gap:5px}.dotset i{border-radius:50%;width:8px;height:8px;background:#cf8497}.dotset i:nth-child(2){background:#edc27b}.dotset i:nth-child(3){background:#91d8ad}#code{display:block;width:100%;min-height:330px;background:#12293e;color:#e2f3ff;border:0;resize:vertical;padding:16px 17px;white-space:pre;tab-size:4;line-height:1.65;font:12.9px/1.65 ui-monospace,Consolas,"Liberation Mono",monospace}#code:focus{outline:0}.codefoot{color:#9bc0d2;background:#1b3a50;padding:10px 14px;font-size:10px}.actionrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.btn{border:1px solid #c5dbe3;background:#fff;color:#294e64;border-radius:10px;font-size:12px;font-weight:750;padding:10px 13px}.btn.primary{background:#0b817b;color:white;border-color:#0b817b}.btn.primary:hover{background:#086e69}.btn.dark{background:#193d56;color:white;border-color:#193d56}.btn.warn{color:#8b5c27;border-color:#ebd3a5}.btn.ghost{background:#f6fafc}.btn:disabled{opacity:.48}.hint{display:none;margin-top:12px;border:1px solid #f0d7aa;background:#fff9ed;padding:11px 13px;border-radius:9px;color:#765828;font-size:12.5px}.hint.show{display:block}.rightstack{display:flex;flex-direction:column;gap:12px}.samplebox{border:1px solid #d9e7eb;background:#fbfdfe;border-radius:12px;padding:15px 17px}.boxheading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.boxheading strong{font-size:13px}.boxheading span{font-size:10px;background:#e8f3f4;color:#47727a;border-radius:99px;padding:4px 8px;font-weight:800}.filegroup{margin-bottom:12px}.filegroup b{display:block;font-size:11px;color:#597786;margin-bottom:6px}.filepill{border:1px solid #d5e4e9;border-radius:8px;margin-bottom:6px;background:white;overflow:hidden}.filepill summary{padding:7px 10px;font:700 11.2px ui-monospace,Consolas,monospace;cursor:pointer;color:#176d78}.filepill pre{margin:0;padding:11px;background:#f2f7f9;border-top:1px solid #d5e4e9;font:11px/1.5 ui-monospace,Consolas,monospace;max-height:170px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}.littlecode{background:#e9f2f6;color:#285368;padding:9px 10px;border-radius:8px;white-space:pre-wrap;word-break:break-word;font:11px/1.55 ui-monospace,Consolas,monospace}.muted{color:#6e8996;font-size:11px}.outputarea{background:#11293c;border-radius:10px;padding:13px;overflow:auto;max-height:230px;color:#dcf2fa;white-space:pre-wrap;word-break:break-word;min-height:56px;font:11.8px/1.6 ui-monospace,Consolas,monospace}.outputarea.empty{color:#88acbb}.judgebox{background:#f5fafb;border:1px solid #d9e7eb;border-radius:12px;padding:15px 17px;min-height:148px}.judgebox h3{font-size:13px;margin:0 0 10px}.judge-status{font-size:12px;font-weight:800;display:inline-flex;align-items:center;border-radius:8px;padding:6px 9px;background:#e8f1f4;color:#456473}.judge-status.good{background:#dff7eb;color:#0b7857}.judge-status.bad{background:#ffe8ec;color:#a6344f}.judge-status.loading{background:#fff1d4;color:#986125}.testline{display:flex;gap:10px;align-items:flex-start;font-size:11.8px;margin:10px 0;padding:10px;border-radius:9px;background:#fff;border:1px solid #e0e9ee}.testline .check{font-size:14px}.testline.good .check{color:#14836f}.testline.bad .check{color:#c0435b}.testline b{font-size:12px}.testline small{display:block;color:#61808c;margin-top:3px;line-height:1.45}.footerline{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:10px}.footerline .left{font-size:11px;color:#70909f}.summarybox{margin-top:20px;background:linear-gradient(120deg,#eaf8f3,#f1f8fd);border:1px solid #badfd3;border-radius:15px;padding:18px 20px}.summarybox h3{margin:0;font-size:15px}.summarybox p{color:#4a6572;font-size:12px;margin:6px 0}.summarybox .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.field{display:block;font-size:11.3px;color:#3e6875;font-weight:740}.field input{width:100%;border:1px solid #c9dfe5;border-radius:9px;background:#fff;color:#17394f;margin-top:5px;padding:9px 11px}.summaryactions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.smalltext{color:#5a7683;font-size:11px;margin-top:8px}.guide{margin-top:13px;border-top:1px solid #e5eef2;padding-top:11px;font-size:12px;color:#507081}.guide code,.contract code{color:#165c78;background:#dfeef3;padding:1px 4px;border-radius:4px}.mobilemenu{display:none}
+@media(max-width:1250px){.app{grid-template-columns:250px minmax(0,1fr)}.workspace{grid-template-columns:1fr}.rightstack{display:grid;grid-template-columns:1fr 1fr}.hero-count{display:none}}
+@media(max-width:850px){.app{display:block}.sidebar{position:static;height:auto;max-height:none;padding:12px 13px}.brand{border:0;padding:5px}.nav-stat{padding:10px}.navgroups{display:none}.sidebar.open .navgroups{display:flex}.sidefoot{display:none}.mobilemenu{display:inline-block}.main{padding:16px 13px}.hero{padding:20px}.statrow{grid-template-columns:repeat(2,1fr)}.workspace{display:block}.rightstack{display:flex;margin-top:15px}.summarybox .fields{grid-template-columns:1fr}}
+@media print{.sidebar,.topline,.statrow,.actionrow,.footerline{display:none}.app{display:block}.main{padding:0}.maincard{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <aside class="sidebar" id="side">
+  <div class="brand"><div class="logo">{8}</div><div><strong>PYTHON FOR EVERYONE</strong><small>Chapter 8 · Tự chấm bài lập trình</small></div></div>
+  <div class="nav-stat"><div class="nav-stat-top"><span>Đã hoàn thành</span><b id="sidecount">0 / 22</b></div><div class="bar"><span id="sidebar"></span></div><p style="font-size:10.5px;color:#a4beca;margin:11px 0 0">22 bài P8.1–P8.22. Không gồm Toolbox P8.23–P8.25; không có bài Science trong danh sách.</p></div>
+  <input class="search" id="search" placeholder="Tìm mã bài / chủ đề…" aria-label="Tìm bài tập">
+  <div class="navgroups" id="navgroups"></div>
+  <div class="sidefoot">Tiến độ lưu ở trình duyệt đang dùng.<div><button type="button" id="resetProgress">Đặt lại toàn bộ tiến độ</button></div></div>
+ </aside>
+ <main class="main">
+  <div class="topline"><div class="breadcrumb"><strong>CHƯƠNG 08</strong> &nbsp; / &nbsp; SETS & DICTIONARIES &nbsp; / &nbsp; PROGRAMMING EXERCISES</div><div class="topctrl"><span class="pill" id="coursePill">Bộ bài tập tự chấm</span><button class="tinybtn mobilemenu" id="mobilemenu">☰ Danh sách</button><button class="tinybtn" id="fullscreen">⛶ Toàn màn hình</button></div></div>
+  <header class="hero"><div><div class="eyebrow">THỰC HÀNH PYTHON · CHƯƠNG 8</div><h1>Sets and Dictionaries</h1><p>22 bài P8.1–P8.22 dựa trên phần <i>Programming Exercises</i> của sách <i>Python for Everyone</i>. Rèn luyện set, dictionary, đếm tần suất, đa thức, lập chỉ mục, xử lý văn bản, tra cứu dữ liệu và mê cung. Không có bài Toolbox/Science.</p></div><div class="hero-count"><b>22</b><small>Bài tập · 67 ca kiểm thử</small></div></header>
+  <div class="statrow"><div class="statbox"><small>Bài đã đạt</small><b id="statPass">0/22</b></div><div class="statbox"><small>Ca kiểm thử đạt</small><b id="statTests">0/67</b></div><div class="statbox"><small>Tiến độ</small><b id="statPercent">0%</b></div><div class="statbox"><small>Bài hiện tại</small><b id="statCurrent">P8.1</b></div></div>
+  <section class="maincard" id="problem" aria-live="polite"></section>
+  <section class="summarybox" id="profileArea"><h3>Ghi nhận tiến độ học tập</h3><p>Nhập thông tin sinh viên để đưa vào ảnh PNG báo cáo kết quả. Báo cáo thể hiện tiến độ hiện tại, không phải chứng nhận chính thức.</p><div class="fields"><label class="field">Mã sinh viên<input id="studentId" maxlength="50" placeholder="Ví dụ: 11234567"></label><label class="field">Họ và tên<input id="studentName" maxlength="100" placeholder="Nguyễn Văn A"></label><label class="field">Lớp<input id="studentClass" maxlength="60" placeholder="DSEB65A"></label></div><div class="summaryactions"><button class="btn dark" id="exportPNG">Xuất PNG thống kê</button><button class="btn" id="exportJSON">Xuất JSON tiến độ</button></div><div class="smalltext" id="profileStatus">Dữ liệu học tập lưu cục bộ trên trình duyệt; mã nguồn và kết quả có thể được sinh viên tự thay đổi. Chức năng phù hợp tự học, không chống gian lận.</div></section>
+ </main>
+</div>
+<script id="pythonRunner" type="text/plain">
+let pyodide = null;
+const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+const CODE = String.raw`
+import os, io, sys, base64, json, tempfile, builtins, contextlib, traceback, pathlib
+payload = json.loads(__payload)
+program = payload['code']
+checks = payload['cases']
+results=[]
+
+def normalize(s):
+    return '\n'.join(line.rstrip() for line in s.replace('\r\n','\n').replace('\r','\n').strip().split('\n')) if s.strip() else ''
+
+def datum(spec):
+    if isinstance(spec,dict) and '__base64__' in spec:
+        return base64.b64decode(spec['__base64__'])
+    return spec.encode('utf-8')
+
+def match_file(actual, expectation):
+    exp=base64.b64decode(expectation)
+    if actual == exp: return True
+    try:
+        return normalize(actual.decode('utf-8')) == normalize(exp.decode('utf-8'))
+    except (UnicodeDecodeError,ValueError): return False
+
+for i,case in enumerate(checks):
+    oldcwd=os.getcwd(); oldargv=sys.argv; oldstdin=sys.stdin; oldinput=builtins.input
+    stdout=io.StringIO(); stderr=io.StringIO(); error=None; actual_files={}
+    try:
+        # Pyodide/Emscripten can raise OSError(EBUSY) when rmdir()
+        # removes a previously-active cwd. Do not use TemporaryDirectory here:
+        # each case gets a unique workspace which remains in the Worker's
+        # in-memory filesystem until this page/Worker is closed.
+        folder=tempfile.mkdtemp(prefix='pfe_ch8_')
+        os.chdir(folder)
+        for name,content in case.get('files',{}).items():
+            pathlib.Path(name).parent.mkdir(parents=True,exist_ok=True)
+            pathlib.Path(name).write_bytes(datum(content))
+        sys.argv=['main.py']+case.get('argv',[])
+        sys.stdin=io.StringIO(case.get('stdin',''))
+        builtins.input=lambda prompt='': oldinput()
+        scope={'__name__':'__main__','__file__':'main.py'}
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            try:
+                exec(compile(program,'<student-program>','exec'),scope,scope)
+                if case.get('postlude'):
+                    exec(compile(case['postlude'],'<function-check>','exec'),scope,scope)
+            except SystemExit as ex:
+                if ex.code not in (None,0): raise
+        expected=case['expected']
+        expout=expected.get('stdout','')
+        ok_stdout=normalize(stdout.getvalue())==normalize(expout)
+        checks_file=[]
+        expfiles=expected.get('files',{})
+        for filename, value in expfiles.items():
+            alt='output.bmp' if filename=='image.bmp' else filename
+            if alt!=filename and os.path.isfile(alt):
+                actualname=alt
+            else: actualname=filename
+            if os.path.isfile(actualname):
+                data=pathlib.Path(actualname).read_bytes()
+                same=match_file(data,value)
+                if payload.get('sample') and len(data)<=6000:
+                    actual_files[actualname]=base64.b64encode(data).decode()
+            else:same=False
+            checks_file.append((filename,same))
+        ok_files=all(x[1] for x in checks_file)
+        ok=ok_stdout and ok_files
+        if not ok:
+            fails=[]
+            if not ok_stdout: fails.append('Đầu ra print() chưa khớp mẫu')
+            fails.extend(f'Tệp {fname} chưa khớp' for fname,status in checks_file if not status)
+            detail='; '.join(fails)
+        else: detail='Kết quả và tệp đầu ra khớp.'
+    except BaseException as e:
+        ok=False;detail=f'{type(e).__name__}: {str(e)[:180]}'
+        error=''.join(traceback.format_exception_only(type(e),e)).strip()[:300]
+    finally:
+        os.chdir(oldcwd);sys.argv=oldargv;sys.stdin=oldstdin;builtins.input=oldinput
+    results.append(dict(name=case['name'],ok=ok,detail=detail,stdout=stdout.getvalue()[:12000],stderr=stderr.getvalue()[:2000],files=actual_files,error=error))
+answer=json.dumps({'passed':sum(bool(r['ok']) for r in results),'total':len(results),'cases':results},ensure_ascii=False)
+answer  # Return the JSON string from Pyodide.runPython() to JavaScript.
+`;
+async function ensurePyodide(){
+ if(pyodide) return;
+ importScripts(PYODIDE+'pyodide.js');
+ pyodide=await loadPyodide({indexURL:PYODIDE});
+ self.postMessage({type:'ready'});
+}
+self.onmessage=async ev=>{
+ const {id,type,payload}=ev.data;
+ if(type!=='run')return;
+ try{
+  await ensurePyodide();
+  pyodide.globals.set('__payload',JSON.stringify(payload));
+  const raw=pyodide.runPython(CODE);
+  if(typeof raw !== 'string'){
+   throw new Error('Bộ chấm Python chưa trả về kết quả (không nhận được chuỗi JSON).');
+  }
+  let value;
+  try{ value=JSON.parse(raw); }
+  catch(parseError){ throw new Error('Bộ chấm trả về dữ liệu JSON không hợp lệ: '+parseError.message); }
+  if(!value || !Array.isArray(value.cases) || !Number.isInteger(value.passed) || !Number.isInteger(value.total)){
+   throw new Error('Bộ chấm trả về dữ liệu thiếu các trường kết quả.');
+  }
+  self.postMessage({type:'result',id,value});
+ }catch(e){self.postMessage({type:'error',id,error:String(e)});}
+};
+</script>
+<script>
+const EXERCISES=[
+  {
+    "id": "P8.1",
+    "n": 1,
+    "group": "01 · Dictionary cơ bản",
+    "title": "Đọc số nguyên bằng tiếng Anh",
+    "desc": "Viết lại chương trình intname.py ở Chương 5 bằng cách dùng dictionary ánh xạ số đến từ tiếng Anh thay cho chuỗi if/elif.",
+    "io_desc": "Một dòng input(): số nguyên 1–999. In tên tiếng Anh viết thường; các thành phần phân cách bằng một dấu cách, không thêm “and”, không có khoảng trắng thừa.",
+    "cases": [
+      {
+        "name": "274",
+        "files": {},
+        "stdin": "274\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "two hundred seventy four\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tròn trăm",
+        "files": {},
+        "stdin": "500\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "five hundred\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số teen",
+        "files": {},
+        "stdin": "19\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "nineteen\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số một chữ số",
+        "files": {},
+        "stdin": "7\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "seven\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tạo ba dictionary cho hàng đơn vị, 10–19 và hàng chục. Ghép các thành phần bằng \" \".",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P8.1 — Đọc số nguyên bằng tiếng Anh\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.2",
+    "n": 2,
+    "group": "01 · Dictionary cơ bản",
+    "title": "Đếm tần suất từ trong tệp",
+    "desc": "Đọc tệp văn bản và dùng dictionary đếm số lần xuất hiện của mỗi từ.",
+    "io_desc": "Một dòng input(): tên tệp. Quy ước chấm: từ là chuỗi chữ cái A–Z liên tiếp, không phân biệt hoa/thường; in mỗi dòng `word count` theo thứ tự từ tăng dần.",
+    "cases": [
+      {
+        "name": "Văn bản ngắn",
+        "files": {
+          "notes.txt": "Python is easy. Python is useful!\n"
+        },
+        "stdin": "notes.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "easy 1\nis 2\npython 2\nuseful 1\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hoa/thường và dấu câu",
+        "files": {
+          "x.txt": "A, a, a! B b. C\n"
+        },
+        "stdin": "x.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "a 3\nb 2\nc 1\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "File rỗng",
+        "files": {
+          "empty.txt": ""
+        },
+        "stdin": "empty.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "re.findall(r\"[A-Za-z]+\", text.lower()), sau đó counts[word] = counts.get(word,0) + 1.",
+    "difficulty": 1,
+    "note": "Sách không quy định chi tiết cách tách từ; bộ chấm dùng từ gồm chữ A–Z và chuyển về chữ thường.",
+    "starter": "# P8.2 — Đếm tần suất từ trong tệp\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.3",
+    "n": 3,
+    "group": "01 · Dictionary cơ bản",
+    "title": "100 từ xuất hiện nhiều nhất",
+    "desc": "Phát triển P8.2: tìm tối đa 100 từ có tần suất cao nhất trong tệp văn bản.",
+    "io_desc": "input(): tên tệp. Chuẩn hóa từ như P8.2. In `word count` từng dòng; sắp xếp theo số lần giảm dần, nếu đồng hạng thì từ tăng dần; tối đa 100 dòng.",
+    "cases": [
+      {
+        "name": "Nhiều mức tần suất",
+        "files": {
+          "a.txt": "dog cat cat dog dog bird bird dog\n"
+        },
+        "stdin": "a.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "dog 4\nbird 2\ncat 2\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đồng hạng",
+        "files": {
+          "a.txt": "Zoo apple zoo APPLE banana\n"
+        },
+        "stdin": "a.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "apple 2\nzoo 2\nbanana 1\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Trên 100 từ duy nhất",
+        "files": {
+          "a.txt": "waa wab wac wad wae waf wag wah wai waj wak wal wam wan wao wap waq war was wat wau wav waw wax way waz wba wbb wbc wbd wbe wbf wbg wbh wbi wbj wbk wbl wbm wbn wbo wbp wbq wbr wbs wbt wbu wbv wbw wbx wby wbz wca wcb wcc wcd wce wcf wcg wch wci wcj wck wcl wcm wcn wco wcp wcq wcr wcs wct wcu wcv wcw wcx wcy wcz wda wdb wdc wdd wde wdf wdg wdh wdi wdj wdk wdl wdm wdn wdo wdp wdq wdr wds wdt wdu wdv wdw wdx wdy wdz wea web wec wed wee wef weg weh wei wej wek wel wem wen weo wep weq wer wes wet weu"
+        },
+        "stdin": "a.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "waa 1\nwab 1\nwac 1\nwad 1\nwae 1\nwaf 1\nwag 1\nwah 1\nwai 1\nwaj 1\nwak 1\nwal 1\nwam 1\nwan 1\nwao 1\nwap 1\nwaq 1\nwar 1\nwas 1\nwat 1\nwau 1\nwav 1\nwaw 1\nwax 1\nway 1\nwaz 1\nwba 1\nwbb 1\nwbc 1\nwbd 1\nwbe 1\nwbf 1\nwbg 1\nwbh 1\nwbi 1\nwbj 1\nwbk 1\nwbl 1\nwbm 1\nwbn 1\nwbo 1\nwbp 1\nwbq 1\nwbr 1\nwbs 1\nwbt 1\nwbu 1\nwbv 1\nwbw 1\nwbx 1\nwby 1\nwbz 1\nwca 1\nwcb 1\nwcc 1\nwcd 1\nwce 1\nwcf 1\nwcg 1\nwch 1\nwci 1\nwcj 1\nwck 1\nwcl 1\nwcm 1\nwcn 1\nwco 1\nwcp 1\nwcq 1\nwcr 1\nwcs 1\nwct 1\nwcu 1\nwcv 1\nwcw 1\nwcx 1\nwcy 1\nwcz 1\nwda 1\nwdb 1\nwdc 1\nwdd 1\nwde 1\nwdf 1\nwdg 1\nwdh 1\nwdi 1\nwdj 1\nwdk 1\nwdl 1\nwdm 1\nwdn 1\nwdo 1\nwdp 1\nwdq 1\nwdr 1\nwds 1\nwdt 1\nwdu 1\nwdv 1\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng sorted(counts.items(), key=lambda pair: (-pair[1],pair[0])) rồi lấy [:100].",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P8.3 — 100 từ xuất hiện nhiều nhất\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.4",
+    "n": 4,
+    "group": "01 · Dictionary cơ bản",
+    "title": "Sàng Eratosthenes bằng Set",
+    "desc": "Viết hàm tìm tất cả số nguyên tố ≤ n theo thuật toán sàng Eratosthenes, dùng set loại các bội số. Lưu ý loại 1 khỏi tập nguyên tố.",
+    "io_desc": "Định nghĩa hàm `primes_up_to(n)` trả về set các số nguyên tố ≤ n. Không cần tự gọi hàm hoặc in gì; bộ kiểm thử sẽ gọi hàm và in kết quả dưới dạng danh sách tăng dần.",
+    "cases": [
+      {
+        "name": "n = 30",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "print(sorted(primes_up_to(30)))",
+        "expected": {
+          "stdout": "[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Giá trị rất nhỏ",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "print(sorted(primes_up_to(1)))",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "n = 97",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "print(sorted(primes_up_to(97)))",
+        "expected": {
+          "stdout": "[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Khởi tạo set(range(2,n+1)), duyệt p đến căn bậc hai của n, xóa các bội số p*p, p*p+p, ...",
+    "difficulty": 2,
+    "note": "Hàm được gọi bởi bộ kiểm thử, thay cho yêu cầu viết một chương trình nhập n ở đầu bài.",
+    "starter": "# P8.4 — Sàng Eratosthenes bằng Set\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.5",
+    "n": 5,
+    "group": "01 · Dictionary cơ bản",
+    "title": "Quản lý điểm sinh viên",
+    "desc": "Lưu tên sinh viên và điểm chữ bằng dictionary. Cho phép thêm, xóa, sửa điểm và in danh sách sinh viên có sắp xếp.",
+    "io_desc": "Nhập các lệnh mỗi dòng: `ADD name grade`, `REMOVE name`, `UPDATE name grade`, `PRINT`, `QUIT`; tên không chứa khoảng trắng. PRINT in `name: grade` theo tên tăng dần; lệnh khác không in gì. Nếu REMOVE/UPDATE tên chưa có, bỏ qua.",
+    "cases": [
+      {
+        "name": "Thêm sửa xóa",
+        "files": {},
+        "stdin": "ADD Sarah A\nADD Joe C\nADD Carl B+\nPRINT\nUPDATE Joe A-\nREMOVE Sarah\nPRINT\nQUIT\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "Carl: B+\nJoe: C\nSarah: A\nCarl: B+\nJoe: A-\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Xóa người không có",
+        "files": {},
+        "stdin": "REMOVE X\nADD Minh B\nPRINT\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "Minh: B\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "In khi rỗng và UPDATE thiếu",
+        "files": {},
+        "stdin": "PRINT\nUPDATE X C\nADD Lan A\nPRINT\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "Lan: A\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng dict[name] = grade, pop(name, None), và for name in sorted(grades).",
+    "difficulty": 2,
+    "note": "Quy ước lệnh ADD/UPDATE/REMOVE/PRINT/QUIT được bổ sung để chấm tự động thao tác tương tác của bài gốc.",
+    "starter": "# P8.5 — Quản lý điểm sinh viên\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.6",
+    "n": 6,
+    "group": "02 · Chỉ mục và đa thức",
+    "title": "Chỉ mục tên biến trong mã Python",
+    "desc": "Đọc mã nguồn Python rồi lập bảng chỉ mục: mỗi chuỗi dạng định danh xuất hiện ở các dòng nào.",
+    "io_desc": "input(): tên tệp .py. Quy ước đơn giản: tìm mẫu `[A-Za-z_][A-Za-z0-9_]*` trong từng dòng, kể cả trong comment/string và cả từ khóa. In `identifier: n1,n2,...` theo thứ tự định danh tăng dần, không lặp dòng.",
+    "cases": [
+      {
+        "name": "Ba dòng mã",
+        "files": {
+          "demo.py": "total = 1\ntotal = total + x2\nprint(total)\n"
+        },
+        "stdin": "demo.py\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "print: 3\ntotal: 1,2,3\nx2: 2\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Định danh gạch dưới",
+        "files": {
+          "a.py": "_a=1\n__name__=_a\n"
+        },
+        "stdin": "a.py\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "__name__: 2\n_a: 1,2\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Từ trong comment",
+        "files": {
+          "a.py": "# hello hello\nprint(\"hello\")\n"
+        },
+        "stdin": "a.py\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "hello: 1,2\nprint: 2\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "enumerate(file,1), re.findall() và dict[str,set[int]].",
+    "difficulty": 3,
+    "note": "Quy ước tách từ là phiên bản đơn giản đúng tinh thần bài sách; không thực hiện phân tích từ vựng Python đầy đủ.",
+    "starter": "# P8.6 — Chỉ mục tên biến trong mã Python\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.7",
+    "n": 7,
+    "group": "02 · Chỉ mục và đa thức",
+    "title": "Đa thức dưới dạng list of terms",
+    "desc": "Biểu diễn đa thức thành list các cặp (hệ số, số mũ). Viết các thao tác tạo đa thức, thêm hạng tử, cộng và nhân.",
+    "io_desc": "Cung cấp `newPolynomial(coef, power) -> list`, `addTerm(p, coef, power)` thay đổi p, `add(p,q) -> list`, `multiply(p,q) -> list`. Các hạng tử có cùng số mũ phải gộp; loại hệ số 0. Trong phần tự chấm, viết hàm cùng một tệp và hệ thống gọi trực tiếp.",
+    "cases": [
+      {
+        "name": "Tạo rồi cộng hạng tử",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "p=newPolynomial(-10,0);addTerm(p,-1,1);addTerm(p,9,7);addTerm(p,5,10)\nprint(sorted(p,key=lambda t:t[1],reverse=True))\nq=multiply(p,p)\nprint(sorted(q,key=lambda t:t[1],reverse=True))",
+        "expected": {
+          "stdout": "[(5, 10), (9, 7), (-1, 1), (-10, 0)]\n[(25, 20), (90, 17), (81, 14), (-10, 11), (-100, 10), (-18, 8), (-180, 7), (1, 2), (20, 1), (100, 0)]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Cộng hai đa thức",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "a=newPolynomial(2,2);addTerm(a,3,1)\nb=newPolynomial(1,2);addTerm(b,-3,1);addTerm(b,4,0)\nprint(sorted(add(a,b),key=lambda t:t[1],reverse=True))",
+        "expected": {
+          "stdout": "[(3, 2), (4, 0)]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hệ số triệt tiêu",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "a=newPolynomial(1,1);addTerm(a,-1,1)\nb=newPolynomial(2,0)\nprint(sorted(a,key=lambda t:t[1],reverse=True))\nprint(sorted(multiply(a,b),key=lambda t:t[1],reverse=True))",
+        "expected": {
+          "stdout": "[]\n[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Đổi về dict theo số mũ khi cộng/nhân, rồi chuyển lại list các cặp; kiểm thử sắp xếp theo số mũ.",
+    "difficulty": 3,
+    "note": "Sách yêu cầu tách module và có printPolynomial; phiên bản HTML chấm trực tiếp bốn hàm lõi. Có thể tách module khi làm trên IDE.",
+    "starter": "# P8.7 — Đa thức dưới dạng list of terms\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.8",
+    "n": 8,
+    "group": "02 · Chỉ mục và đa thức",
+    "title": "Đa thức dưới dạng dictionary",
+    "desc": "Thực hiện lại P8.7 nhưng sử dụng dictionary ánh xạ số mũ → hệ số. Không lưu các hạng tử có hệ số bằng 0.",
+    "io_desc": "Cung cấp `newPolynomial(coef, power) -> dict`, `addTerm(p,coef,power)`, `add(p,q) -> dict`, `multiply(p,q) -> dict`. `addTerm` sửa trực tiếp p. Bộ kiểm thử sẽ in sorted(p.items(), reverse=True).",
+    "cases": [
+      {
+        "name": "Tính bình phương",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "p=newPolynomial(-10,0);addTerm(p,-1,1);addTerm(p,9,7);addTerm(p,5,10)\nprint(sorted(p.items(),reverse=True));print(sorted(multiply(p,p).items(),reverse=True))",
+        "expected": {
+          "stdout": "[(10, 5), (7, 9), (1, -1), (0, -10)]\n[(20, 25), (17, 90), (14, 81), (11, -10), (10, -100), (8, -18), (7, -180), (2, 1), (1, 20), (0, 100)]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Cộng đa thức",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "p=newPolynomial(3,2);addTerm(p,2,0)\nq=newPolynomial(-1,2);addTerm(q,8,1)\nprint(sorted(add(p,q).items(),reverse=True))",
+        "expected": {
+          "stdout": "[(2, 2), (1, 8), (0, 2)]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đa thức không",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "p=newPolynomial(0,0);addTerm(p,2,1);addTerm(p,-2,1)\nprint(sorted(p.items()));print(sorted(multiply(p,newPolynomial(3,0)).items()))",
+        "expected": {
+          "stdout": "[]\n[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng dictionary theo số mũ, tận dụng .get(power,0) và xóa hạng tử có hệ số 0.",
+    "difficulty": 3,
+    "note": "Như P8.7, kiểm thử tập trung vào các hàm lõi và sử dụng một tệp nguồn.",
+    "starter": "# P8.8 — Đa thức dưới dạng dictionary\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.9",
+    "n": 9,
+    "group": "03 · Phép toán Set",
+    "title": "So sánh các ký tự của hai chuỗi",
+    "desc": "Với hai chuỗi do người dùng nhập, tìm ký tự chung, ký tự chỉ nằm trong một chuỗi, và chữ cái không xuất hiện ở chuỗi nào.",
+    "io_desc": "Hai dòng input(): hai chuỗi. Chỉ xét chữ a–z, chuyển về chữ thường; bỏ ký tự khác. In 3 dòng: `BOTH: ...`, `ONLY_ONE: ...`, `NEITHER: ...`, chữ cái sắp tăng dần và viết liền nhau; dùng dấu `-` nếu một nhóm rỗng.",
+    "cases": [
+      {
+        "name": "Hai chuỗi giao nhau",
+        "files": {},
+        "stdin": "apple\nplane\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "BOTH: aelp\nONLY_ONE: n\nNEITHER: bcdfghijkmoqrstuvwxyz\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không giao",
+        "files": {},
+        "stdin": "abc\nxyz\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "BOTH: -\nONLY_ONE: abcxyz\nNEITHER: defghijklmnopqrstuvw\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Trùng hoàn toàn",
+        "files": {},
+        "stdin": "ABC!\naBc\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "BOTH: abc\nONLY_ONE: -\nNEITHER: defghijklmnopqrstuvwxyz\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Chuyển chuỗi thành set; dùng &, ^ và set(\"abcdefghijklmnopqrstuvwxyz\") - (a | b).",
+    "difficulty": 2,
+    "note": "Bộ chấm chỉ xét 26 chữ cái ASCII và quy ước ký tự chỉ có ở một chuỗi là hiệu đối xứng.",
+    "starter": "# P8.9 — So sánh các ký tự của hai chuỗi\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.10",
+    "n": 10,
+    "group": "03 · Phép toán Set",
+    "title": "Từ xuất hiện ở cả hai tệp",
+    "desc": "Đọc hai tệp văn bản, lấy tập các từ trong mỗi tệp, sau đó in những từ chung.",
+    "io_desc": "Hai dòng input(): tên tệp thứ nhất và thứ hai. Chuẩn hóa từ giống P8.2 (A–Z, không phân biệt hoa/thường). Mỗi từ chung in một dòng, thứ tự tăng dần.",
+    "cases": [
+      {
+        "name": "Một số từ chung",
+        "files": {
+          "a.txt": "Python and data!\n",
+          "b.txt": "Data with Python and maps.\n"
+        },
+        "stdin": "a.txt\nb.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "and\ndata\npython\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không chung",
+        "files": {
+          "a.txt": "abc def",
+          "b.txt": "ghi jkl"
+        },
+        "stdin": "a.txt\nb.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      },
+      {
+        "name": "Trùng và hoa/thường",
+        "files": {
+          "a.txt": "apple Apple banana",
+          "b.txt": "BANANA apple"
+        },
+        "stdin": "a.txt\nb.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "apple\nbanana\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng set(words_of_first) & set(words_of_second), rồi sorted().",
+    "difficulty": 1,
+    "note": "",
+    "starter": "# P8.10 — Từ xuất hiện ở cả hai tệp\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.11",
+    "n": 11,
+    "group": "03 · Phép toán Set",
+    "title": "Tạo chỉ mục chữ cái → các từ",
+    "desc": "Đọc tệp văn bản và lập dictionary trong đó mỗi khóa là một chữ cái viết thường, giá trị là tập các từ chứa chữ cái đó.",
+    "io_desc": "Một dòng input(): tên tệp. Từ theo quy ước P8.2. In các chữ cái có ít nhất một từ, theo thứ tự a–z: `a: apple, banana`, các từ sắp tăng dần và không lặp.",
+    "cases": [
+      {
+        "name": "Các từ trùng",
+        "files": {
+          "a.txt": "Apple banana apple\n"
+        },
+        "stdin": "a.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "a: apple, banana\nb: banana\ne: apple\nl: apple\nn: banana\np: apple\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một từ",
+        "files": {
+          "a.txt": "Zebra!"
+        },
+        "stdin": "a.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "a: zebra\nb: zebra\ne: zebra\nr: zebra\nz: zebra\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tệp rỗng",
+        "files": {
+          "a.txt": ""
+        },
+        "stdin": "a.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt từng từ, rồi từng ký tự trong set(word); dùng setdefault(letter,set()).add(word).",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P8.11 — Tạo chỉ mục chữ cái → các từ\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.12",
+    "n": 12,
+    "group": "03 · Phép toán Set",
+    "title": "Tìm các từ chứa mọi ký tự được hỏi",
+    "desc": "Dựa trên chỉ mục P8.11, nhập một từ khóa và tìm mọi từ trong tệp chứa tất cả chữ cái của từ khóa (không cần là chuỗi con liên tiếp).",
+    "io_desc": "Hai dòng input(): tên tệp, từ khóa (chữ a–z). In các từ phù hợp theo thứ tự tăng dần, một từ mỗi dòng. Với từ khóa rỗng, in mọi từ trong tệp.",
+    "cases": [
+      {
+        "name": "Các từ chứa h a t",
+        "files": {
+          "words.txt": "hat that heat theater hate cat\n"
+        },
+        "stdin": "words.txt\nhat\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "hat\nhate\nheat\nthat\ntheater\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có kết quả",
+        "files": {
+          "words.txt": "dog fog log\n"
+        },
+        "stdin": "words.txt\nxyz\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      },
+      {
+        "name": "Từ khóa rỗng",
+        "files": {
+          "words.txt": "banana apple apple\n"
+        },
+        "stdin": "words.txt\n\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "apple\nbanana\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Bắt đầu với tập toàn bộ từ; lấy giao với index.get(letter,set()) cho từng chữ của query.",
+    "difficulty": 3,
+    "note": "",
+    "starter": "# P8.12 — Tìm các từ chứa mọi ký tự được hỏi\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.13",
+    "n": 13,
+    "group": "03 · Phép toán Set",
+    "title": "Multiset bằng dictionary",
+    "desc": "Một multiset lưu số lần xuất hiện của mỗi phần tử. Viết ba hàm hợp, giao và hiệu trên hai multiset, mỗi multiset được biểu diễn bằng dictionary.",
+    "io_desc": "Cung cấp các hàm `union(a,b)`, `intersection(a,b)`, `difference(a,b)` trả về dict. Với từng khóa: union cộng tần suất; intersection lấy min; difference lấy max(0,a−b). Không lưu khóa có tần suất 0; không sửa a,b.",
+    "cases": [
+      {
+        "name": "Chuối và táo",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "a={'apple':3,'banana':2};b={'apple':1,'pear':4}\nprint(sorted(union(a,b).items())); print(sorted(intersection(a,b).items())); print(sorted(difference(a,b).items()))",
+        "expected": {
+          "stdout": "[('apple', 4), ('banana', 2), ('pear', 4)]\n[('apple', 1)]\n[('apple', 2), ('banana', 2)]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tập rỗng",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "a={};b={'a':2}; print(sorted(union(a,b).items())); print(sorted(intersection(a,b).items())); print(sorted(difference(a,b).items()))",
+        "expected": {
+          "stdout": "[('a', 2)]\n[]\n[]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Triệt tiêu tần suất",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "a={'x':3,'y':1};b={'x':9,'y':1};print(sorted(union(a,b).items()));print(sorted(intersection(a,b).items()));print(sorted(difference(a,b).items()))",
+        "expected": {
+          "stdout": "[('x', 12), ('y', 2)]\n[('x', 3), ('y', 1)]\n[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng keys() | keys(), keys() & keys(), a.get(k,0), b.get(k,0).",
+    "difficulty": 3,
+    "note": "",
+    "starter": "# P8.13 — Multiset bằng dictionary\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.14",
+    "n": 14,
+    "group": "04 · Ứng dụng văn bản",
+    "title": "Lọc từ nhạy cảm trong văn bản",
+    "desc": "Đọc tệp từ cần kiểm duyệt, sau đó thay mỗi ký tự trong các lần xuất hiện của từ đó bằng dấu `*` và ghi thành tệp mới.",
+    "io_desc": "sys.argv[1:4] lần lượt là file bad_words, file văn bản vào, file văn bản ra. Tệp bad_words: mỗi dòng một từ/cụm. Thay không phân biệt hoa/thường, kể cả nằm bên trong từ dài; ưu tiên mẫu dài hơn khi trùng nhau; giữ nguyên dấu câu và xuống dòng.",
+    "cases": [
+      {
+        "name": "Hai từ bị chặn",
+        "files": {
+          "bad.txt": "bad\ndrugs\n",
+          "in.txt": "Bad ideas about drugs.\n"
+        },
+        "stdin": "",
+        "argv": [
+          "bad.txt",
+          "in.txt",
+          "out.txt"
+        ],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "KioqIGlkZWFzIGFib3V0ICoqKioqLgo="
+          }
+        }
+      },
+      {
+        "name": "Trong từ lớn",
+        "files": {
+          "bad.txt": "bad\n",
+          "in.txt": "badminton BADbad\n"
+        },
+        "stdin": "",
+        "argv": [
+          "bad.txt",
+          "in.txt",
+          "out.txt"
+        ],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "KioqbWludG9uICoqKioqKgo="
+          }
+        }
+      },
+      {
+        "name": "Danh sách rỗng",
+        "files": {
+          "bad.txt": "",
+          "in.txt": "No censorship here!\n"
+        },
+        "stdin": "",
+        "argv": [
+          "bad.txt",
+          "in.txt",
+          "out.txt"
+        ],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "Tm8gY2Vuc29yc2hpcCBoZXJlIQo="
+          }
+        }
+      }
+    ],
+    "hint": "re.compile(\"|\".join(re.escape(...)), re.I) và sub(lambda match: \"*\"*len(match.group()), text).",
+    "difficulty": 2,
+    "note": "Nội dung ví dụ được thay bằng từ trung tính; quy tắc kiểm thử dựa trên thay thế chuỗi con không phân biệt chữ hoa/thường.",
+    "starter": "# P8.14 — Lọc từ nhạy cảm trong văn bản\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.15",
+    "n": 15,
+    "group": "04 · Ứng dụng văn bản",
+    "title": "Viết tắt văn bản bằng dictionary",
+    "desc": "Đọc bảng quy tắc rút gọn như `8:ate`, `2:too`, `4:for` rồi thay mọi lần xuất hiện của cụm bên phải bằng ký hiệu bên trái.",
+    "io_desc": "argv[1:4]: file patterns.txt, input.txt, output.txt. Mỗi dòng quy tắc `replacement:original`. Thay phân biệt hoa/thường, từ trái sang phải, ưu tiên chuỗi original dài hơn nếu chồng lấp. Ví dụ `fortunate` → `4tun8` và `tattoo` → `t@2`.",
+    "cases": [
+      {
+        "name": "Ví dụ giáo trình",
+        "files": {
+          "pat.txt": "8:ate\n2:to\n2:too\n4:for\n@:at\n&:and\n",
+          "in.txt": "fortunate tattoo\n"
+        },
+        "stdin": "",
+        "argv": [
+          "pat.txt",
+          "in.txt",
+          "out.txt"
+        ],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "NHR1bjggdEAyCg=="
+          }
+        }
+      },
+      {
+        "name": "Mẫu chồng lấp",
+        "files": {
+          "pat.txt": "X:abc\nY:ab\n",
+          "in.txt": "abcab\n"
+        },
+        "stdin": "",
+        "argv": [
+          "pat.txt",
+          "in.txt",
+          "out.txt"
+        ],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "WFkK"
+          }
+        }
+      },
+      {
+        "name": "Không có mẫu",
+        "files": {
+          "pat.txt": "2:to\n",
+          "in.txt": "hello world\n"
+        },
+        "stdin": "",
+        "argv": [
+          "pat.txt",
+          "in.txt",
+          "out.txt"
+        ],
+        "postlude": "",
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "aGVsbG8gd29ybGQK"
+          }
+        }
+      }
+    ],
+    "hint": "Đọc dictionary từ file, dùng re.escape và regex alternation theo độ dài giảm dần.",
+    "difficulty": 3,
+    "note": "",
+    "starter": "# P8.15 — Viết tắt văn bản bằng dictionary\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.16",
+    "n": 16,
+    "group": "04 · Ứng dụng văn bản",
+    "title": "Báo cáo doanh số với tên cột",
+    "desc": "Mở rộng chương trình bảng doanh số tại Section 8.3.2: dòng đầu tiên của tệp chứa tiêu đề các cột cửa hàng, phân cách dấu hai chấm.",
+    "io_desc": "Một dòng input(): tên tệp. Dòng đầu là tên các cửa hàng; các dòng sau `flavor:sale1:sale2:...`. In tiêu đề `FLAVOR | <store1> | ... | TOTAL`, sau đó mỗi hương vị theo thứ tự từ điển và cuối cùng `TOTAL | ... | grand_total`. Các số định dạng 2 chữ số thập phân. Các dòng dữ liệu có đúng số cột.",
+    "cases": [
+      {
+        "name": "Ba cửa hàng",
+        "files": {
+          "sales.txt": "Downtown Store:Pleasantville Mall:College Corner\nVanilla:100:200:300\nChocolate:50:60:70\n"
+        },
+        "stdin": "sales.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "FLAVOR | Downtown Store | Pleasantville Mall | College Corner | TOTAL\nChocolate | 50.00 | 60.00 | 70.00 | 180.00\nVanilla | 100.00 | 200.00 | 300.00 | 600.00\nTOTAL | 150.00 | 260.00 | 370.00 | 780.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một cửa hàng",
+        "files": {
+          "sales.txt": "Campus Store\nVanilla:75.5\n"
+        },
+        "stdin": "sales.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "FLAVOR | Campus Store | TOTAL\nVanilla | 75.50 | 75.50\nTOTAL | 75.50 | 75.50\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Bảng trống",
+        "files": {
+          "sales.txt": "Store A:Store B\n"
+        },
+        "stdin": "sales.txt\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "FLAVOR | Store A | Store B | TOTAL\nTOTAL | 0.00 | 0.00 | 0.00\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Bóc dòng đầu thành stores; duyệt sales theo sorted và cộng tổng theo từng cột.",
+    "difficulty": 2,
+    "note": "Định dạng bảng dùng dấu |, đơn giản hơn định dạng căn cột trong ví dụ sách nhưng giữ mô hình dữ liệu.",
+    "starter": "# P8.16 — Báo cáo doanh số với tên cột\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.17",
+    "n": 17,
+    "group": "05 · Tra cứu và Cache",
+    "title": "Tra cứu thu nhập bình quân đầu người",
+    "desc": "Đọc tệp gồm tên quốc gia và thu nhập bình quân đầu người vào dictionary; sau đó tra cứu theo tên quốc gia đến khi gõ quit.",
+    "io_desc": "Đọc tệp `income.txt` có định dạng `Country<TAB>income` (nội dung mẫu mô phỏng). Những dòng input() tiếp theo là tên quốc gia, kết thúc bởi `quit`; in `Country: income` hoặc `NOT FOUND`. Tra cứu không phân biệt hoa/thường.",
+    "cases": [
+      {
+        "name": "Tra cứu theo tên đầy đủ",
+        "files": {
+          "income.txt": "Viet Nam\t2500\nUnited States\t80000\nJapan\t33000\nSouth Africa\t6000\nNew Zealand\t48000\n"
+        },
+        "stdin": "Viet Nam\nJapan\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "Viet Nam: 2500\nJapan: 33000\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tên không có",
+        "files": {
+          "income.txt": "Viet Nam\t2500\nUnited States\t80000\nJapan\t33000\nSouth Africa\t6000\nNew Zealand\t48000\n"
+        },
+        "stdin": "France\nQUIT\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "NOT FOUND\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không phân biệt hoa/thường",
+        "files": {
+          "income.txt": "Argentina\t12000\nAustralia\t66000\nAustria\t54000\nBelgium\t53000\nBrazil\t11000\n"
+        },
+        "stdin": "australia\nAUSTRIA\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "Australia: 66000\nAustria: 54000\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Đọc từng dòng, split(\"\\t\", 1), dùng country.casefold() làm khóa.",
+    "difficulty": 2,
+    "note": "Liên kết CIA Factbook trong bài sách là nguồn cũ; HTML dùng income.txt mô phỏng, không tự tải dữ liệu từ Internet.",
+    "starter": "# P8.17 — Tra cứu thu nhập bình quân đầu người\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.18",
+    "n": 18,
+    "group": "05 · Tra cứu và Cache",
+    "title": "Tra cứu quốc gia theo chữ cái đầu",
+    "desc": "Mở rộng P8.17: nếu người dùng nhập một chữ cái, in các quốc gia bắt đầu bằng chữ đó; nếu nhập tên đầy đủ thì in thu nhập.",
+    "io_desc": "Đọc income.txt giống P8.17. Nhập truy vấn cho tới `quit`. Nếu truy vấn đúng 1 chữ cái A–Z: in tên các quốc gia tương ứng, tăng dần, mỗi tên một dòng; nếu không có in NOT FOUND. Nếu truy vấn là tên nước: in `Country: income` hoặc NOT FOUND.",
+    "cases": [
+      {
+        "name": "Chữ N và tên đầy đủ",
+        "files": {
+          "income.txt": "Viet Nam\t2500\nUnited States\t80000\nJapan\t33000\nSouth Africa\t6000\nNew Zealand\t48000\n"
+        },
+        "stdin": "n\nViet Nam\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "New Zealand\nViet Nam: 2500\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Nhiều quốc gia cùng đầu",
+        "files": {
+          "income.txt": "Argentina\t12000\nAustralia\t66000\nAustria\t54000\nBelgium\t53000\nBrazil\t11000\n"
+        },
+        "stdin": "A\naustria\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "Argentina\nAustralia\nAustria\nAustria: 54000\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có đầu chữ",
+        "files": {
+          "income.txt": "Viet Nam\t2500\nUnited States\t80000\nJapan\t33000\nSouth Africa\t6000\nNew Zealand\t48000\n"
+        },
+        "stdin": "q\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "NOT FOUND\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "index[letter] = set các country; country.lower() để tra cứu chính xác.",
+    "difficulty": 2,
+    "note": "Sử dụng cùng bộ dữ liệu mô phỏng P8.17.",
+    "starter": "# P8.18 — Tra cứu quốc gia theo chữ cái đầu\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.19",
+    "n": 19,
+    "group": "05 · Tra cứu và Cache",
+    "title": "Cache kết quả đếm từ của nhiều tệp",
+    "desc": "Phát triển P8.2 để người dùng có thể nhập lặp lại tên tệp. Nếu từng đọc tệp đó thì trả kết quả từ dictionary cache thay vì tính lại.",
+    "io_desc": "Nhập tên tệp mỗi dòng, dừng khi `quit`; in `filename: count` (tổng số từ theo quy ước P8.2). Nếu tệp không tồn tại, in `NOT FOUND` và không cache lỗi. Với tệp đã cache, không đọc lại. Bộ chấm kiểm tra kết quả in ra, không thể xác nhận tuyệt đối việc dùng cache.",
+    "cases": [
+      {
+        "name": "Lặp cùng tệp",
+        "files": {
+          "a.txt": "one two two\n"
+        },
+        "stdin": "a.txt\na.txt\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "a.txt: 3\na.txt: 3\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hai file",
+        "files": {
+          "a.txt": "alpha beta",
+          "b.txt": "cat"
+        },
+        "stdin": "b.txt\na.txt\nb.txt\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "b.txt: 1\na.txt: 2\nb.txt: 1\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Thiếu tệp",
+        "files": {
+          "a.txt": "hello"
+        },
+        "stdin": "missing.txt\na.txt\nquit\n",
+        "argv": [],
+        "postlude": "",
+        "expected": {
+          "stdout": "NOT FOUND\na.txt: 1\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dictionary cache: nếu key đã có thì dùng giá trị lưu, không open(file) lại.",
+    "difficulty": 2,
+    "note": "Bộ chấm kiểm tra đầu ra theo ca mẫu; không thể xác thực tuyệt đối việc tránh đọc lại file chỉ từ đầu ra.",
+    "starter": "# P8.19 — Cache kết quả đếm từ của nhiều tệp\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.20",
+    "n": 20,
+    "group": "06 · Mê cung và dữ liệu thưa",
+    "title": "Dictionary đồ thị hành lang mê cung",
+    "desc": "Đọc mê cung ASCII: ký tự * là tường, dấu cách là hành lang. Với từng ô hành lang, lập dictionary các ô hành lang kề theo 4 hướng.",
+    "io_desc": "Cung cấp `mazeGraph(lines) -> dict[tuple, set[tuple]]` với `lines` là list các dòng mê cung không chứa newline. Key `(row,column)` dùng chỉ số bắt đầu từ 0; value là set ô kề hợp lệ trên/dưới/trái/phải. Bộ chấm in danh sách các cặp đã sắp xếp để so sánh.",
+    "cases": [
+      {
+        "name": "Mê cung 7 × 7",
+        "files": {
+          "maze.txt": "* *****\n*   * *\n* *** *\n* *   *\n* * ***\n*   * *\n***** *\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "postlude": "lines=open('maze.txt',encoding='utf-8').read().splitlines()\ng=mazeGraph(lines)\nprint([(k,sorted(g[k])) for k in sorted(g)])",
+        "expected": {
+          "stdout": "[((0, 1), [(1, 1)]), ((1, 1), [(0, 1), (1, 2), (2, 1)]), ((1, 2), [(1, 1), (1, 3)]), ((1, 3), [(1, 2)]), ((1, 5), [(2, 5)]), ((2, 1), [(1, 1), (3, 1)]), ((2, 5), [(1, 5), (3, 5)]), ((3, 1), [(2, 1), (4, 1)]), ((3, 3), [(3, 4), (4, 3)]), ((3, 4), [(3, 3), (3, 5)]), ((3, 5), [(2, 5), (3, 4)]), ((4, 1), [(3, 1), (5, 1)]), ((4, 3), [(3, 3), (5, 3)]), ((5, 1), [(4, 1), (5, 2)]), ((5, 2), [(5, 1), (5, 3)]), ((5, 3), [(4, 3), (5, 2)]), ((5, 5), [(6, 5)]), ((6, 5), [(5, 5)])]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hành lang dọc",
+        "files": {
+          "maze.txt": "***\n* *\n* *\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "postlude": "lines=open('maze.txt',encoding='utf-8').read().splitlines()\ng=mazeGraph(lines)\nprint([(k,sorted(g[k])) for k in sorted(g)])",
+        "expected": {
+          "stdout": "[((1, 1), [(2, 1)]), ((2, 1), [(1, 1)])]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Lưới trống",
+        "files": {
+          "maze.txt": "  \n  \n"
+        },
+        "stdin": "",
+        "argv": [],
+        "postlude": "lines=open('maze.txt',encoding='utf-8').read().splitlines()\ng=mazeGraph(lines)\nprint([(k,sorted(g[k])) for k in sorted(g)])",
+        "expected": {
+          "stdout": "[((0, 0), [(0, 1), (1, 0)]), ((0, 1), [(0, 0), (1, 1)]), ((1, 0), [(0, 0), (1, 1)]), ((1, 1), [(0, 1), (1, 0)])]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt từng (r,c) là khoảng trắng, xét 4 phần tử dịch chuyển (-1,0),(1,0),(0,-1),(0,1).",
+    "difficulty": 3,
+    "note": "",
+    "starter": "# P8.20 — Dictionary đồ thị hành lang mê cung\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.21",
+    "n": 21,
+    "group": "06 · Mê cung và dữ liệu thưa",
+    "title": "Đánh dấu lối thoát trong mê cung",
+    "desc": "Từ dictionary đồ thị hành lang (P8.20), tìm hướng đi từng bước về một ô thoát trên biên mê cung. Ô bị chặn đường không tới biên được đánh dấu `?`.",
+    "io_desc": "Cung cấp `escapeDirections(lines) -> list[str]`. Trả về mê cung có ký tự * không đổi, còn ô hành lang thay bởi N/E/S/W chỉ hướng bước tiếp theo. Từ ô biên, ký tự chỉ hướng thoát ra ngoài. Để kết quả xác định khi có nhiều hướng: dùng đường đi ngắn nhất; hòa được ưu tiên N, E, S, W theo thứ tự đó. Ô không thoát được ghi ?.",
+    "cases": [
+      {
+        "name": "Mê cung 7 × 7",
+        "files": {
+          "maze.txt": "* *****\n*   * *\n* *** *\n* *   *\n* * ***\n*   * *\n***** *\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "postlude": "print('\\n'.join(escapeDirections(open('maze.txt').read().splitlines())))",
+        "expected": {
+          "stdout": "*N*****\n*NWW*S*\n*N***S*\n*N*SWW*\n*N*S***\n*NWW*S*\n*****E*\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Lối đi cụt",
+        "files": {
+          "maze.txt": "***\n* *\n* *\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "postlude": "print('\\n'.join(escapeDirections(open('maze.txt').read().splitlines())))",
+        "expected": {
+          "stdout": "***\n*S*\n*E*\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Mê cung trống",
+        "files": {
+          "maze.txt": "  \n  \n"
+        },
+        "stdin": "",
+        "argv": [],
+        "postlude": "print('\\n'.join(escapeDirections(open('maze.txt').read().splitlines())))",
+        "expected": {
+          "stdout": "NN\nSE\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "BFS từ các ô hành lang nằm trên biên; dùng khoảng cách để chọn bước về biên (N→E→S→W).",
+    "difficulty": 3,
+    "note": "Sách mô tả thuật toán lan truyền hướng thoát không ràng buộc cách phá hòa; bản tự chấm bổ sung quy ước đường ngắn nhất và N,E,S,W để có đầu ra duy nhất.",
+    "starter": "# P8.21 — Đánh dấu lối thoát trong mê cung\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  },
+  {
+    "id": "P8.22",
+    "n": 22,
+    "group": "06 · Mê cung và dữ liệu thưa",
+    "title": "Cộng hai mảng thưa",
+    "desc": "Mảng thưa được lưu bằng dictionary ánh xạ vị trí chỉ số → giá trị khác 0. Viết hàm cộng hai mảng thưa.",
+    "io_desc": "Cung cấp `sparseArraySum(a,b) -> dict`. Giá trị tại chỉ số i là a.get(i,0) + b.get(i,0), không lưu khóa có tổng 0; không thay đổi hai đối số. Bộ chấm in sorted(result.items()).",
+    "cases": [
+      {
+        "name": "Ví dụ thưa",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "print(sorted(sparseArraySum({5:4,9:2,10:9},{5:3,10:-9,11:7}).items()))",
+        "expected": {
+          "stdout": "[(5, 7), (9, 2), (11, 7)]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Triệt tiêu",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "print(sorted(sparseArraySum({1:5,2:-3},{1:-5,2:3}).items()))",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không chồng vị trí",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "postlude": "print(sorted(sparseArraySum({0:2,4:8},{2:7,5:1}).items()))",
+        "expected": {
+          "stdout": "[(0, 2), (2, 7), (4, 8), (5, 1)]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt set(a)|set(b), dùng get(key,0) và chỉ lưu tổng khác 0.",
+    "difficulty": 1,
+    "note": "",
+    "starter": "# P8.22 — Cộng hai mảng thưa\n# Đọc đề bài và quy ước đầu vào/đầu ra.\n# Viết lời giải của bạn dưới đây.\n\n"
+  }
+];
+const STORE='pfe-ch8-exercises-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+const initial=()=>({current:0, drafts:{},passed:{},lastResults:{},bestTests:{},attempts:{},studentId:'',studentName:'',studentClass:'',startedAt:Date.now(),completedAt:null});
+let state=initial();try{const saved=JSON.parse(localStorage.getItem(STORE));if(saved&&typeof saved==='object')state={...initial(),...saved};}catch(_){}
+let current=Number.isInteger(state.current)&&state.current>=0&&state.current<EXERCISES.length?state.current:0;
+let worker=null,workerReady=false,pending=null,watchdog=null,seq=0;
+function save(){state.current=current;if(passedCount()===EXERCISES.length&&!state.completedAt)state.completedAt=Date.now();try{localStorage.setItem(STORE,JSON.stringify(state));}catch(_){} }
+function passedCount(){return EXERCISES.filter(x=>state.passed[x.id]).length}
+function totalTests(){return EXERCISES.reduce((n,x)=>n+x.cases.length,0)}
+function passedTests(){return EXERCISES.reduce((n,x)=>n+(Number(state.bestTests[x.id])||0),0)}
+function fmt(ts){return ts?new Date(ts).toLocaleString('vi-VN',{dateStyle:'medium',timeStyle:'short'}):'—'}
+function bytesFromBase64(s){const raw=atob(s);return Uint8Array.from(raw,c=>c.charCodeAt(0))}
+function fileText(content){
+ if(typeof content==='string')return content;
+ const data=bytesFromBase64(content.__base64__);
+ if(data[0]===66&&data[1]===77&&data.length>54){
+  const view=new DataView(data.buffer),w=view.getInt32(18,true),h=view.getInt32(22,true);
+  return `[Ảnh BMP 24-bit: ${w} × ${h} pixels, ${data.length} bytes. Dữ liệu nhị phân được cung cấp sẵn cho bài làm.]`;
+ }
+ return `[Tệp nhị phân: ${data.length} bytes]`;
+}
+function b64Text(s){
+ const bin=atob(s);const arr=Uint8Array.from(bin,c=>c.charCodeAt(0));
+ try{return new TextDecoder('utf-8',{fatal:true}).decode(arr);}catch{return `[${arr.length} bytes dữ liệu nhị phân]`}
+}
+function groupName(g){return g.split(' · ')[1]||g}
+function redrawNav(){
+ const search=$('search').value.toLowerCase().trim();
+ const groups=[...new Set(EXERCISES.map(x=>x.group))];
+ $('navgroups').innerHTML=groups.map(group=>{
+  const matches=EXERCISES.map((x,i)=>({...x,i})).filter(x=>x.group===group&&(!search||`${x.id} ${x.title} ${x.desc}`.toLowerCase().includes(search)));
+  if(!matches.length)return '';
+  const count=matches.filter(x=>state.passed[x.id]).length;
+  return `<div class="navgroup"><div class="grouptitle"><span>${esc(group)}</span><span>${count}/${matches.length}</span></div>${matches.map(x=>`<button type="button" class="navitem ${current===x.i?'active':''} ${state.passed[x.id]?'done':''}" data-index="${x.i}"><span class="navnum">${state.passed[x.id]?'✓':esc(x.id)}</span><span><strong>${esc(x.title)}</strong><small>${x.cases.length} ca kiểm thử · Mức ${x.difficulty}</small></span></button>`).join('')}</div>`;
+ }).join('');
+ $('navgroups').querySelectorAll('[data-index]').forEach(btn=>btn.onclick=()=>navigate(+btn.dataset.index));
+ $('sidecount').textContent=`${passedCount()} / ${EXERCISES.length}`;
+ $('sidebar').style.width=`${100*passedCount()/EXERCISES.length}%`;
+}
+function updateStats(){
+ $('statPass').textContent=`${passedCount()}/${EXERCISES.length}`;
+ $('statTests').textContent=`${passedTests()}/${totalTests()}`;
+ $('statPercent').textContent=Math.round(100*passedCount()/EXERCISES.length)+'%';
+ $('statCurrent').textContent=EXERCISES[current].id;
+ $('coursePill').textContent=passedCount()===EXERCISES.length?'✓ Đã đạt toàn bộ':'Bài tự chấm · Không cần nộp file';
+ redrawNav();
+}
+function previewSample(c){
+ const files=Object.entries(c.files||{});
+ const filehtml=files.length?files.map(([name,data])=>`<details class="filepill"><summary>📄 ${esc(name)} <span class="muted">(${typeof data==='string'?new TextEncoder().encode(data).length:bytesFromBase64(data.__base64__).length} bytes)</span></summary><pre>${esc(fileText(data))}</pre></details>`).join(''):'<div class="muted">Không có tệp đầu vào.</div>';
+ const outfiles=Object.entries(c.expected.files||{});
+ let expectedhtml=outfiles.map(([name,base])=>`<details class="filepill"><summary>✓ ${esc(name)} · tệp cần tạo</summary><pre>${esc(b64Text(base))}</pre></details>`).join('');
+ if(!expectedhtml)expectedhtml='<div class="muted">Không yêu cầu tạo tệp đầu ra.</div>';
+ return `<div class="samplebox"><div class="boxheading"><strong>Dữ liệu mẫu · ${esc(c.name)}</strong><span>TEST 1</span></div><div class="filegroup"><b>Tệp đầu vào có sẵn</b>${filehtml}</div><div class="filegroup"><b>sys.argv[1:]</b><div class="littlecode">${esc(JSON.stringify(c.argv||[]))}</div></div><div class="filegroup"><b>input() — mỗi dòng là một giá trị</b><div class="littlecode">${esc(c.stdin||'(không có)')}</div></div>${c.postlude?`<div class="filegroup"><b>Bộ kiểm thử gọi các hàm (mẫu)</b><div class="littlecode">${esc(c.postlude)}</div></div>`:''}<div class="filegroup"><b>Kết quả print() dự kiến</b><div class="littlecode">${esc(c.expected.stdout||'(không in ra màn hình)')}</div></div><div class="filegroup"><b>Tệp đầu ra cần tạo</b>${expectedhtml}</div></div>`;
+}
+function render(){
+ const t=EXERCISES[current],draft=state.drafts[t.id]??t.starter;
+ $('problem').innerHTML=`<div class="blocktop"><span class="tag">${esc(t.id)}</span><span class="tag gray">${esc(groupName(t.group))}</span><span class="tag amber">MỨC ${t.difficulty}/3</span><span class="tag ${state.passed[t.id]?'':'gray'}">${state.passed[t.id]?'✓ ĐÃ ĐẠT':'CHƯA ĐẠT'}</span></div><h2>${esc(t.title)}</h2><div class="prompt">${esc(t.desc)}</div><div class="contract"><b>QUY ƯỚC ĐẦU VÀO / ĐẦU RA ĐỂ TỰ CHẤM</b><p>${esc(t.io_desc)}</p></div>${t.note?`<div class="notice">${esc(t.note)}</div>`:''}<div class="workspace"><div><div class="codecard"><div class="codehead"><div class="dotset"><i></i><i></i><i></i></div><span>main.py · Python 3</span><span>Tab = 4 dấu cách</span></div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Mã nguồn bài tập Python"></textarea><div class="codefoot">Ctrl + Enter: chạy thử mẫu · Mỗi ca kiểm thử sử dụng thư mục tệp ảo riêng · Mã nguồn lưu tự động</div></div><div class="actionrow"><button class="btn dark" id="testSample">▶ Chạy thử mẫu</button><button class="btn primary" id="grade">✓ Chấm ${t.cases.length} ca kiểm thử</button><button class="btn ghost" id="showHint">💡 Gợi ý</button><button class="btn warn" id="resetCode">↺ Khôi phục</button></div><div class="hint" id="hint">${esc(t.hint)}</div><div class="guide">Đề bài được diễn giải từ <i>Python for Everyone, Chapter 8</i>; những bài phụ thuộc tệp sách được cấp dữ liệu thử tương đương. Bộ chấm chạy Python bằng Pyodide, cần Internet cho lần tải đầu tiên. Tùy bài có thể dùng <code>set</code>, <code>dict</code>, <code>open()</code>, <code>input()</code>, <code>sys.argv</code> và thư viện chuẩn. Bài yêu cầu viết hàm sẽ được chấm bằng cách gọi hàm trực tiếp.</div></div><div class="rightstack">${previewSample(t.cases[0])}<div class="judgebox" id="resultsBox"><h3>Kiểm tra kết quả</h3><div id="judgeContent"></div><div id="consoleContainer" style="display:none;margin-top:12px"><div class="filegroup"><b>Đầu ra Python</b><pre class="outputarea" id="consoleText"></pre></div></div></div></div></div><div class="footerline"><div class="left">${current+1}/${EXERCISES.length} · ${t.id} · Lần chấm: ${state.attempts[t.id]||0}</div><div style="display:flex;gap:8px"><button type="button" class="btn" id="prev" ${current===0?'disabled':''}>← Bài trước</button><button type="button" class="btn primary" id="next" ${current===EXERCISES.length-1?'disabled':''}>Bài tiếp theo →</button></div></div>`;
+ $('code').value=draft;
+ const editor=$('code');
+ editor.addEventListener('input',()=>{state.drafts[t.id]=editor.value;save()});
+ editor.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){
+   e.preventDefault();let a=editor.selectionStart,b=editor.selectionEnd;
+   editor.setRangeText('    ',a,b,'end');editor.dispatchEvent(new Event('input'));
+  }
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();run('sample');}
+ });
+ $('testSample').onclick=()=>run('sample');$('grade').onclick=()=>run('grade');
+ $('showHint').onclick=()=>{$('hint').classList.toggle('show');};
+ $('resetCode').onclick=()=>{if(confirm('Khôi phục mã bắt đầu?')){editor.value=t.starter;state.drafts[t.id]=editor.value;save();}};
+ $('prev').onclick=()=>navigate(current-1);$('next').onclick=()=>navigate(current+1);
+ if(state.lastResults[t.id]) showResult(state.lastResults[t.id],false);
+ else $('judgeContent').innerHTML='<div class="muted">Viết chương trình và bấm “Chạy thử mẫu” hoặc “Chấm”.</div>';
+ updateStats();
+}
+function navigate(idx){
+ if(idx<0||idx>=EXERCISES.length)return;
+ if(pending){abortRun('Đã dừng kiểm tra khi chuyển bài.');}
+ current=idx;save();render();window.scrollTo({top:0,behavior:'instant'});
+ if(window.innerWidth<850) $('side').classList.remove('open');
+}
+function newWorker(){
+ const url=URL.createObjectURL(new Blob([$('pythonRunner').textContent],{type:'text/javascript'}));
+ let w=new Worker(url); URL.revokeObjectURL(url);
+ workerReady=false;
+ w.onmessage=e=>{
+  const m=e.data;
+  if(m.type==='ready'){workerReady=true; if(pending){clearTimeout(watchdog);watchdog=setTimeout(()=>abortRun('Quá thời gian thực thi (20 giây). Kiểm tra vòng lặp vô hạn.'),20000);setStatus('Python đã sẵn sàng. Đang chạy kiểm thử…','loading');}return;}
+  if(!pending || m.id!==pending.id)return;
+  clearTimeout(watchdog);const runInfo=pending;pending=null;toggleRun(false);
+  if(m.type==='error'){setStatus('Lỗi môi trường Python: '+m.error,'bad');return;}
+  const result={...m.value,mode:runInfo.mode,when:Date.now()};
+  const t=EXERCISES[runInfo.idx];
+  if(runInfo.idx===current){showResult(result,true);}
+  if(runInfo.mode==='grade'){
+    state.attempts[t.id]=(state.attempts[t.id]||0)+1;
+    state.bestTests[t.id]=Math.max(state.bestTests[t.id]||0,result.passed);
+    if(result.passed===t.cases.length)state.passed[t.id]=true;
+    state.lastResults[t.id]=result;save();updateStats();
+    if(runInfo.idx===current) $('problem').querySelector('.blocktop .tag:last-child').textContent=state.passed[t.id]?'✓ ĐÃ ĐẠT':'CHƯA ĐẠT';
+  }
+ };
+ w.onerror=e=>{abortRun('Không thể chạy Python: '+(e.message||'Worker error'));};
+ return w;
+}
+function toggleRun(busy){for(const id of ['testSample','grade']){const el=$(id);if(el)el.disabled=busy}}
+function setStatus(label,type=''){const host=$('judgeContent');if(!host)return;host.innerHTML=`<div class="judge-status ${type}">${esc(label)}</div>`;}
+function abortRun(message){if(watchdog)clearTimeout(watchdog);if(worker){worker.terminate();worker=null;}workerReady=false;pending=null;toggleRun(false);setStatus(message,'bad');}
+function run(mode){
+ if(pending)return;
+ const t=EXERCISES[current],code=$('code').value;
+ if(!code.trim()){setStatus('Hãy nhập mã Python trước khi chạy.','bad');return;}
+ if(!worker){try{worker=newWorker()}catch(e){setStatus('Không thể tạo Python Worker: '+e.message,'bad');return;}}
+ const id=++seq;pending={id,idx:current,mode};toggleRun(true);
+ const tests=mode==='sample'?[t.cases[0]]:t.cases;
+ setStatus(workerReady?'Đang chạy Python…':'Đang tải Python (Pyodide) lần đầu; cần Internet…','loading');
+ watchdog=setTimeout(()=>abortRun('Hết thời gian tải/chạy Python. Vui lòng thử lại khi có Internet.'),workerReady?20000:90000);
+ worker.postMessage({type:'run',id,payload:{code,cases:tests,sample:mode==='sample'}});
+}
+function showResult(r,fresh){
+ const t=EXERCISES[current];
+ const passed=r.passed===r.total&&r.total>0;
+ const label=r.mode==='sample'?'KẾT QUẢ CHẠY THỬ':'KẾT QUẢ CHẤM BÀI';
+ $('judgeContent').innerHTML=`<div class="judge-status ${passed?'good':'bad'}">${passed?'✓':'✗'} ${label} · ${r.passed}/${r.total} ca đạt</div><div>${(r.cases||[]).map((x,i)=>`<div class="testline ${x.ok?'good':'bad'}"><span class="check">${x.ok?'✓':'✗'}</span><div><b>${esc(x.name)}</b><small>${esc(x.detail)}${x.error?' · '+esc(x.error):''}</small></div></div>`).join('')}</div>${r.mode==='sample'?'<div class="muted">Chạy thử chỉ kiểm tra dữ liệu mẫu, không đánh dấu hoàn thành. Bấm “Chấm” để kiểm tra tất cả ca.</div>':''}`;
+ if(r.mode==='sample'&&r.cases&&r.cases[0]){
+  const c=r.cases[0];$('consoleContainer').style.display='block';$('consoleText').textContent=c.stdout||'(Chương trình không in kết quả ra màn hình)';
+  if(Object.keys(c.files||{}).length){
+   const note=document.createElement('div');note.className='muted';note.textContent='Tệp đầu ra đã được hệ thống kiểm tra trực tiếp trong thư mục tệp ảo.';
+   $('consoleContainer').appendChild(note);
+  }
+ }
+}
+function exportJson(){
+ const payload={course:'Python for Everyone – Chapter 8',timestamp:new Date().toISOString(),student:{id:state.studentId,name:state.studentName,class:state.studentClass},passed:state.passed,bestTests:state.bestTests,attempts:state.attempts,completedAt:state.completedAt};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});downloadBlob(blob,'ch08_progress_'+(state.studentId||'anonymous')+'.json');
+}
+function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportPng(){
+ const miss=[['studentId','mã sinh viên'],['studentName','họ và tên'],['studentClass','lớp']].find(([k])=>!String(state[k]||'').trim());
+ if(miss){$('profileStatus').textContent='Vui lòng điền '+miss[1]+' trước khi xuất PNG.';$(miss[0]).focus();return;}
+ const W=1500,H=1050,cv=document.createElement('canvas');cv.width=W*2;cv.height=H*2;const ctx=cv.getContext('2d');ctx.scale(2,2);
+ const grad=ctx.createLinearGradient(0,0,W,H);grad.addColorStop(0,'#f2fbf8');grad.addColorStop(1,'#edf6fb');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+ ctx.fillStyle='#13384f';ctx.fillRect(0,0,W,155);
+ ctx.fillStyle='#84dfcb';ctx.font='bold 22px system-ui,sans-serif';ctx.fillText('PYTHON FOR EVERYONE · CHAPTER 8',70,56);
+ ctx.fillStyle='#ffffff';ctx.font='bold 42px system-ui,sans-serif';ctx.fillText(passedCount()===EXERCISES.length?'BÁO CÁO HOÀN THÀNH BÀI TẬP':'BÁO CÁO TIẾN ĐỘ BÀI TẬP',70,112);
+ ctx.fillStyle='#fff';ctx.fillRect(55,180,W-110,H-240);ctx.strokeStyle='#d6e7ed';ctx.lineWidth=2;ctx.strokeRect(55,180,W-110,H-240);
+ const text=(s,x,y,font,color='#15384b')=>{ctx.font=font;ctx.fillStyle=color;ctx.fillText(String(s),x,y);};
+ text('THÔNG TIN SINH VIÊN',90,236,'bold 20px system-ui,sans-serif','#087a73');
+ text('Mã sinh viên',90,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentId,90,314,'bold 26px system-ui,sans-serif');
+ text('Họ và tên',570,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentName,570,314,'bold 26px system-ui,sans-serif');
+ text('Lớp',1110,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentClass,1110,314,'bold 26px system-ui,sans-serif');
+ const boxes=[['Bài tập đạt',passedCount()+'/'+EXERCISES.length],['Ca kiểm thử đạt',passedTests()+'/'+totalTests()],['Tiến độ',Math.round(100*passedCount()/EXERCISES.length)+'%'],['Tình trạng',passedCount()===EXERCISES.length?'Hoàn tất':'Đang học']];
+ boxes.forEach(([label,v],i)=>{let x=90+i*335,y=355;ctx.fillStyle='#f0f8fa';ctx.fillRect(x,y,312,122);ctx.strokeStyle='#d5e8ea';ctx.strokeRect(x,y,312,122);text(label,x+16,y+33,'bold 15px system-ui,sans-serif','#6b8896');text(v,x+16,y+86,'bold 27px system-ui,sans-serif','#153e51');});
+ text('THỐNG KÊ THEO NHÓM BÀI',90,530,'bold 20px system-ui,sans-serif','#087a73');
+ const groups=[...new Set(EXERCISES.map(x=>x.group))];
+ groups.forEach((g,i)=>{const x=i%2?760:90,y=575+Math.floor(i/2)*64;const all=EXERCISES.filter(t=>t.group===g);const n=all.filter(t=>state.passed[t.id]).length;text(g.replace(/^\d+ · /,''),x,y,'bold 16px system-ui,sans-serif');text(n+'/'+all.length,x+540,y,'bold 18px system-ui,sans-serif','#0a8174');ctx.fillStyle='#dbe8ec';ctx.fillRect(x,y+10,580,6);ctx.fillStyle='#18a592';ctx.fillRect(x,y+10,580*n/all.length,6);});
+ const fY=935;ctx.strokeStyle='#d5e4e8';ctx.beginPath();ctx.moveTo(90,fY-36);ctx.lineTo(W-90,fY-36);ctx.stroke();
+ text('Ngày bắt đầu: '+fmt(state.startedAt),90,fY,'14px system-ui,sans-serif','#66818e');
+ text('Hoàn thành: '+fmt(state.completedAt),580,fY,'14px system-ui,sans-serif','#66818e');
+ text('Xuất báo cáo: '+fmt(Date.now()),1000,fY,'14px system-ui,sans-serif','#66818e');
+ text('Bản ghi được tạo và lưu trên trình duyệt của sinh viên; không phải kết quả thi được xác thực.',90,976,'14px system-ui,sans-serif','#6b8490');
+ cv.toBlob(b=>{if(b){downloadBlob(b,'ch08_'+state.studentId.replace(/[^a-z0-9_-]/gi,'_')+'_progress.png');$('profileStatus').textContent='Đã tạo PNG báo cáo tiến độ.';}},'image/png');
+}
+$('search').addEventListener('input',redrawNav);
+$('mobilemenu').onclick=()=>$('side').classList.toggle('open');
+$('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.()};
+$('resetProgress').onclick=()=>{if(confirm('Xóa toàn bộ mã đang viết, kết quả chấm và thông tin sinh viên trong trình duyệt này?')){state=initial();current=0;save();render();for(const k of ['studentId','studentName','studentClass'])$(k).value='';}};
+for(const k of ['studentId','studentName','studentClass']){$(k).value=state[k]||'';$(k).addEventListener('input',()=>{state[k]=$(k).value;save()})}
+$('exportPNG').onclick=exportPng;$('exportJSON').onclick=exportJson;
+save();render();
+</script>
+</body>
+</html>

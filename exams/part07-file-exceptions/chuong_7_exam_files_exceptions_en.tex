@@ -1,0 +1,304 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.90]}{\setmonofont{Liberation Mono}[Scale=0.90]}
+\usepackage[english]{babel}
+\usepackage[top=1.35cm,bottom=1.35cm,left=1.65cm,right=1.65cm]{geometry}
+\usepackage{xcolor,enumitem,listings,booktabs,array,amsmath,amssymb,titlesec,fancyhdr,parskip,tabularx,lastpage,hyperref}
+\usepackage[most]{tcolorbox}
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\lstset{language=Python,basicstyle=\ttfamily\scriptsize,keywordstyle=\color{blue!75!black}\bfseries,stringstyle=\color{red!65!black},commentstyle=\color{primaryblue!80!black}\itshape,showstringspaces=false,columns=fullflexible,keepspaces=true,breaklines=true,frame=single,rulecolor=\color{primaryblue!45},backgroundcolor=\color{CodeBg},xleftmargin=0.2em,xrightmargin=0.2em,aboveskip=0.2em,belowskip=0.2em,tabsize=4}
+\pagestyle{fancy}\fancyhf{}\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Files \& Exceptions Exam -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0.3pt}
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{3pt}{1pt}\titlespacing*{\subsection}{0pt}{2pt}{1pt}
+\newtcolorbox{headerbox}{colback=white,colframe=primaryblue,boxrule=0.7pt,arc=1.5mm,left=2.5mm,right=2.5mm,top=1mm,bottom=1mm}
+\newtcolorbox{answerbox}[2][]{enhanced,colback=white,colframe=DarkGray!45,boxrule=0.5pt,arc=1mm,left=2mm,right=2mm,top=1mm,bottom=1mm,title=\footnotesize\color{DarkGray}\textbf{#2},#1}
+\hypersetup{colorlinks=true,linkcolor=primaryblue,urlcolor=primaryblue,pdftitle={DSAI1003 - Files and Exceptions Progress Exam},pdfauthor={Faculty of Data Science and Artificial Intelligence - NEU}}
+\begin{document}
+% PAGE 1: institutional header, answer sheet, Q1-Q5
+\noindent
+\begin{minipage}[t]{0.63\textwidth}\raggedright\small
+\textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+\textbf{COLLEGE OF TECHNOLOGY}\\
+\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.35\textwidth}\raggedleft\footnotesize
+\textbf{PROGRESS EXAMINATION}\\
+Academic Year: 2026--2027\\
+Semester: Fall 2026 \quad \textbf{DSAI1003}
+\end{minipage}
+\vspace{0.1em}
+\begin{center}
+{\Large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.05em]
+{\normalsize\bfseries PROGRESS EXAM: FILE PROCESSING \& EXCEPTION HANDLING}\\[0.05em]
+{\normalsize\textbf{Paper Code:} \rule{1.5cm}{0.4pt} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding distribution)}
+\end{center}
+\begin{headerbox}
+\begin{tabularx}{\linewidth}{@{}X X@{}}
+\textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.15em]
+\textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabularx}
+\vspace{1.5mm}
+\centering\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{|l|c|c|c|c||c|c|}\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\ \hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.2em] \cline{1-6}
+\textbf{Score} & & & & & & \\[0.35em] \hline
+\end{tabular}
+\vspace{1mm}\raggedright\scriptsize
+\textbf{Instructions:} Closed-book examination; no electronic devices or Internet access. Answer all questions. Unless otherwise specified, assume Python 3 and UTF-8 text files. Standard-library modules (such as \texttt{csv} and \texttt{sys}) are permitted, but third-party libraries are not. For program-design tasks, write reusable functions and a \texttt{main()} driver. State any assumptions clearly. Do not detach pages.
+\end{headerbox}
+\vspace{1mm}
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write A, B, C, or D in each cell.)}
+\begin{center}\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}\hline
+\textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\ \hline
+\textbf{Answer} & & & & & & & & & & \\[1.5mm] \hline
+\end{tabular}\end{center}
+\vspace{-2.5mm}
+\section*{Section A: File Processing \& Exception Concepts \hfill \normalsize\normalfont(20 points)}
+\textit{Answer all 10 questions. Each correct answer is worth 2 points. Suggested time: 12 minutes.}
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1pt,topsep=1pt]
+\item What happens when \texttt{open("results.txt", "w")} is called and the file already exists?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item The existing content is preserved and new data is appended.
+\item The file is truncated before writing begins.
+\item Python raises \texttt{FileExistsError} in all cases.
+\item The file becomes read-only.
+\end{enumerate}
+\item Which statement correctly describes \texttt{readline()} for a text file?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item It always returns the entire file as one string.
+\item It removes all newline characters automatically.
+\item It returns one line, normally including its terminating \texttt{\\n}, and \texttt{""} at end-of-file.
+\item It returns a list of integers representing character codes.
+\end{enumerate}
+\item Which mode appends new text without first truncating an existing file?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{"r"} \item \texttt{"w"} \item \texttt{"a"} \item \texttt{"rb"}
+\end{enumerate}
+\item What is the principal advantage of \texttt{with open(path, "r") as infile:}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item The file is automatically closed when the block exits, including on exceptions.
+\item It allows writing to a file opened in read mode.
+\item It guarantees the specified file exists before the program starts.
+\item It converts every line automatically into a floating-point number.
+\end{enumerate}
+\item Which standard-library tool handles quoted commas correctly when reading CSV records?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{line.split(",")} \item \texttt{csv.reader(...)} \item \texttt{str.strip()} \item \texttt{int(...)}
+\end{enumerate}
+\end{enumerate}
+\newpage
+% PAGE 2: Q6-Q10 and Q11
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt,resume]
+\item If a program starts as \texttt{python report.py input.txt out.txt}, what is \texttt{sys.argv[1]}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{"report.py"} \item \texttt{"input.txt"} \item \texttt{"out.txt"} \item \texttt{3}
+\end{enumerate}
+\item Which exception is normally raised by \texttt{int("12x")}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{TypeError} \item \texttt{IndexError} \item \texttt{ValueError} \item \texttt{FileNotFoundError}
+\end{enumerate}
+\item Which statement about \texttt{try}/\texttt{except}/\texttt{else} is correct?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item The \texttt{else} block executes whenever an exception is caught.
+\item The \texttt{else} block executes only if the \texttt{try} block finishes without an exception.
+\item The \texttt{else} block must always contain a \texttt{return} statement.
+\item The \texttt{except} block executes before the \texttt{try} block.
+\end{enumerate}
+\item What is the purpose of \texttt{finally} in exception handling?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item It runs only after \texttt{ValueError}.
+\item It suppresses every exception automatically.
+\item It runs when control leaves the \texttt{try} statement, whether or not an exception was raised.
+\item It turns all file data into binary format.
+\end{enumerate}
+\item Which expression opens a file in binary-read mode?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{open("data.bin", "wb")} \item \texttt{open("data.bin", "rb")}
+\item \texttt{open("data.bin", "wr")} \item \texttt{open("data.bin", "r+")}
+\end{enumerate}
+\end{enumerate}
+\section*{Section B: Output Tracing, File Errors \& Exception Diagnosis \hfill \normalsize\normalfont(25 points)}
+\textit{Answer Q11--Q15. Each question is worth 5 points. Suggested time: 15 minutes.}
+\subsection*{Q11. Exact Output of a Text-File Processing Program (5 points)}
+Predict the \textbf{exact output} of the following Python program, including punctuation and spaces. Assume the file can be created successfully.
+\begin{lstlisting}
+with open("marks.txt", "w", encoding="utf-8") as f:
+    f.write("An,70\nBinh,85\nChi,45\n")
+
+passed = 0
+total = 0
+with open("marks.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        name, score_text = line.strip().split(",")
+        score = int(score_text)
+        total += score
+        if score >= 50:
+            passed += 1
+print("Records:", 3)
+print("Passed:", passed)
+print("Average: %.1f" % (total / 3))
+\end{lstlisting}
+\begin{answerbox}[height=3.0cm]{Output Box for Q11}\end{answerbox}
+\newpage
+% PAGE 3: Q12-Q15
+\subsection*{Q12. Evaluate File and Exception Expressions (5 points)}
+Write the exact result for each independent statement (1 point each):
+\begin{enumerate}[label=\alph*),leftmargin=2em,itemsep=2pt]
+\item After \texttt{s = "a,b,c"}, the value of \texttt{s.split(",")[1]}: \hrulefill
+\item After \lstinline|s = "42\n"|, the value of \texttt{int(s.strip())}: \hrulefill
+\item The value of \texttt{len(["sales.csv", "input.txt", "output.txt"])}: \hrulefill
+\item The value of \texttt{bytes([65, 66])[0]}: \hrulefill
+\item The exception class raised by \texttt{float("oops")}: \hrulefill
+\end{enumerate}
+\subsection*{Q13. Diagnose and Correct Three File-Processing Defects (5 points)}
+For each scenario, identify the defect and write a corrected statement or short code fragment.\par
+\renewcommand{\arraystretch}{1.22}\small
+\begin{tabularx}{\linewidth}{|p{5.05cm}|X|X|}\hline
+\textbf{Code / Situation} & \textbf{Problem / Cause} & \textbf{Correction} \\ \hline
+{\ttfamily\scriptsize f = open("ledger.txt", "w")}\newline{\ttfamily\scriptsize Existing data must be preserved} & & \\[7mm]\hline
+{\ttfamily\scriptsize amount = int("10.5")}\newline{\ttfamily\scriptsize Decimal amount is expected} & & \\[7mm]\hline
+{\ttfamily\scriptsize f = open("missing.txt", "r")}\newline{\ttfamily\scriptsize Absent file must be handled} & & \\[7mm]\hline
+\end{tabularx}\normalsize
+\subsection*{Q14. Exception Flow: \texttt{except}, \texttt{else}, \texttt{finally} (5 points)}
+Predict the exact output. Explain briefly why the \texttt{else} branch is or is not executed.
+\begin{lstlisting}
+for text in ["8", "zero"]:
+    try:
+        number = int(text)
+        print("Parsed:", number)
+    except ValueError:
+        print("Invalid:", text)
+    else:
+        print("Accepted")
+    finally:
+        print("Checked")
+\end{lstlisting}
+\begin{answerbox}[height=2.4cm]{Output and Explanation for Q14}\end{answerbox}
+\subsection*{Q15. CSV Record Validation (5 points)}
+Suppose a CSV reader produces the following data rows (after the header):
+\begin{lstlisting}
+["A01", "4", "25.00"]
+["A02", "x", "20.00"]
+["A03", "2", "-5.00"]
+["A04", "3", "12.50"]
+\end{lstlisting}
+A record is valid only if it has exactly three fields, quantity is a positive integer, and unit price is a positive float. Identify all valid record IDs, compute their \textbf{combined inventory value} (quantity $\times$ price), and give the number of invalid records.
+\begin{answerbox}[height=1.65cm]{Answer Box for Q15}\end{answerbox}
+\newpage
+% PAGE 4: design
+\section*{Section C: File-Processing Design \& Modular Decomposition \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all four tasks. Suggested time: 15 minutes.}
+\begin{tcolorbox}[colback=boxbg,colframe=secondaryteal,arc=1.5mm,boxrule=0.6pt,top=1.5mm,bottom=1.5mm]
+\textbf{Problem Specification: Logistics Route Billing from a Text File}\\[0.5mm]
+\small
+A dispatch company stores route information in a plain text file. Each nonblank line has three comma-separated fields: \texttt{route\_id,distance\_km,rate\_per\_km}. Records with missing fields, an empty route ID, nonnumeric values, nonpositive distance, or nonpositive rate are invalid and must be \textbf{skipped} (the processing of other records continues).
+\begin{itemize}
+\item \textbf{Charge:} \texttt{distance\_km * rate\_per\_km}. Add a flat \$25.00 surcharge when distance is strictly greater than 100 km.
+\item \textbf{Results:} Report the number of valid records, the number of invalid nonblank records, and the total charge of valid records.
+\item \textbf{Error handling:} If the input file cannot be opened, report the failure and do not create a misleading bill.
+\item \textbf{Execution:} The source path is supplied as \texttt{sys.argv[1]}. A missing argument is an error.
+\end{itemize}
+\textbf{Example input (\texttt{routes.txt}):}\\[-0.1em]
+\begin{lstlisting}
+R01,50,2.0
+R02,120,1.5
+R03,abc,3.0
+R04,100,2.0
+\end{lstlisting}
+\end{tcolorbox}
+\vspace{0.5mm}
+\textbf{Task 1: Identify Functions, Parameters and Return Types (6 points)}
+For each helper, state its return type and purpose:
+\begin{itemize}[leftmargin=1.8em,itemsep=2.5pt]
+\item \texttt{parse\_route(line)} $\rightarrow$ Return Type: \rule{2cm}{0.4pt} \quad Purpose: \dotfill
+\item \texttt{compute\_charge(distance, rate)} $\rightarrow$ Return Type: \rule{2cm}{0.4pt} \quad Purpose: \dotfill
+\item \texttt{process\_routes(path)} $\rightarrow$ Return Type: \rule{2cm}{0.4pt} \quad Purpose: \dotfill
+\end{itemize}
+\textbf{Task 2: Write the Modular Processing Logic (7 points)}
+Using pseudocode or Python, outline the control flow of \texttt{process\_routes(path)}, including reading records, validating/skipping invalid rows, accumulating totals and dealing with a missing file. State the return convention you use on failure.
+\begin{answerbox}[height=4.0cm]{Program-Logic Work Area}\end{answerbox}
+\textbf{Task 3: Hand-Trace the Sample Input (6 points)}
+For the example file, compute the valid/invalid counts, the charge for each accepted record, and the grand total.
+\begin{answerbox}[height=2.6cm]{Calculation Box for Task 3}\end{answerbox}
+\textbf{Task 4: Explain Two Design Decisions (6 points)}
+\begin{enumerate}[label=\alph*),leftmargin=1.8em,itemsep=2pt]
+\item Why should invalid \emph{records} normally be skipped, but a missing \emph{file} be handled separately?\\[-1pt]\rule{\linewidth}{0.4pt}
+\item Why is \texttt{with open(...)} generally preferable to opening a file without guaranteed cleanup?\\[-1pt]\rule{\linewidth}{0.4pt}
+\end{enumerate}
+\newpage
+% PAGE 5: coding problem 1
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+\textit{Write complete Python 3 programs. Use helper functions and a \texttt{main()} driver, \texttt{with open(...)} for file access, meaningful exceptions, and the standard library only. Suggested time: 18 minutes.}
+\subsection*{Problem 1: Student Score Report from a Text File (15 points)}
+Write a program that reads \texttt{students.txt} containing one \texttt{student\_id,score} record per nonblank line and creates \texttt{summary.txt}.
+\textbf{Requirements:}
+\begin{enumerate}[label=\arabic*.,leftmargin=2em,itemsep=2pt]
+\item Implement \texttt{parse\_score(line)} to validate exactly two comma-separated fields, nonempty student ID, and \textbf{integer} score between 0 and 100 inclusive. Return the ID and score on success; signal malformed rows with \texttt{ValueError}.
+\item Implement \texttt{summarize\_scores(input\_path, output\_path)} to read lines, count \textbf{valid} records, count \textbf{invalid nonblank} lines, compute average score of valid records and count scores $\ge 50$. An empty valid set has average \texttt{0.0}.
+\item Write the four-line report to the specified output file. Format the average with one decimal place. The file must not be created if the input file cannot be opened. Handle \texttt{OSError} for file I/O and report a helpful error.
+\item Implement \texttt{main()} using \texttt{students.txt} and \texttt{summary.txt}. Avoid global state and external packages.
+\end{enumerate}
+\textbf{Example input (\texttt{students.txt}):}
+\begin{lstlisting}
+NEU001,85
+NEU002,49
+BROKEN
+NEU003,66
+NEU004,105
+\end{lstlisting}
+\textbf{Expected content of \texttt{summary.txt}:}
+\begin{lstlisting}
+Valid records: 3
+Invalid records: 2
+Passed: 2
+Average score: 66.7
+\end{lstlisting}
+\begin{answerbox}[height=8.0cm]{Python Solution for Problem 1}\end{answerbox}
+\newpage
+% PAGE 6: coding problem 2
+\subsection*{Problem 2: Robust Inventory Valuation from CSV (15 points)}
+Write a Python program to read a CSV inventory file, validate each record, and produce an inventory valuation report.
+\textbf{Requirements:}
+\begin{enumerate}[label=\arabic*.,leftmargin=2em,itemsep=2pt]
+\item Use the standard-library \texttt{csv} module to read \texttt{inventory.csv}. Its header is \texttt{sku,quantity,unit\_price}; subsequent rows may have quoted fields containing commas.
+\item Implement \texttt{parse\_item(row)}: validate exactly 3 fields, a nonempty SKU, positive integer quantity and positive floating-point unit price. Return \texttt{(sku, quantity, price)} or raise \texttt{ValueError} for an invalid row.
+\item Implement \texttt{inventory\_report(input\_path, output\_path)}: skip invalid data rows, count valid/invalid rows, calculate $\sum (\text{quantity}\times\text{price})$, and write the specified report to \texttt{inventory\_report.txt}, with total formatted to two decimals.
+\item Catch relevant file I/O errors. Do not generate the output report if the input cannot be opened. Implement \texttt{main()} with the specified filenames.
+\end{enumerate}
+\textbf{Example CSV input (\texttt{inventory.csv}):}
+\begin{lstlisting}
+sku,quantity,unit_price
+"A,01",2,12.50
+B02,3,20.00
+C03,-1,10.00
+D04,abc,5.00
+\end{lstlisting}
+\textbf{Expected content of \texttt{inventory\_report.txt}:}
+\begin{lstlisting}
+Valid items: 2
+Invalid items: 2
+Total inventory value: $85.00
+\end{lstlisting}
+\begin{answerbox}[height=9cm]{Python Solution for Problem 2}\end{answerbox}
+\vfill
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[1mm]
+\textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+\end{center}
+\end{document}

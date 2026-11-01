@@ -1,0 +1,2538 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+\usepackage{fvextra}
+\usepackage{hyperref}
+\defaultfontfeatures{}
+\setsansfont{Noto Sans}[Scale=0.94]
+\setmainfont{Noto Sans}[Scale=0.94]
+\setmonofont{Noto Sans Mono}[Scale=0.87]
+\usetheme{Madrid}
+\usecolortheme{default}
+\definecolor{deepnavy}{HTML}{112A40}
+\definecolor{teal}{HTML}{087E86}
+\definecolor{sky}{HTML}{EAF5F8}
+\definecolor{softteal}{HTML}{E9F7F4}
+\definecolor{muted}{HTML}{54717D}
+\definecolor{coral}{HTML}{CE6B42}
+\definecolor{softorange}{HTML}{FFF4E9}
+\setbeamercolor{structure}{fg=teal}
+\setbeamercolor{frametitle}{bg=deepnavy,fg=white}
+\setbeamercolor{title}{fg=deepnavy}
+\setbeamercolor{block title}{bg=teal,fg=white}
+\setbeamercolor{block body}{bg=softteal,fg=deepnavy}
+\setbeamercolor{block title alerted}{bg=coral,fg=white}
+\setbeamercolor{block body alerted}{bg=softorange,fg=deepnavy}
+\setbeamercolor{footline}{bg=deepnavy,fg=white}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize item}{\color{teal}\large\textbullet}
+\setbeamertemplate{footline}{%
+ \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.64\paperwidth,ht=3ex,dp=1.5ex,leftskip=1.5ex]{footline}\scriptsize Python for Everyone / Chương 8: Sets \& Dictionaries\end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.36\paperwidth,ht=3ex,dp=1.5ex,rightskip=1.5ex plus 1fil]{footline}\scriptsize \insertsectionhead\hfill \insertframenumber/\inserttotalframenumber\end{beamercolorbox}}
+}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setlength{\parskip}{2pt}
+\newcommand{\term}[1]{\textcolor{teal}{\textbf{#1}}}
+\newcommand{\py}[1]{{\color{deepnavy}\texttt{#1}}}
+\newcommand{\tagline}[1]{\par{\small\color{muted}#1}\par\medskip}
+\title[Chương 8: Sets \& Dictionaries]{Chương 8\\Sets \& Dictionaries}
+\subtitle{Minh họa và ví dụ từ \textit{Python for Everyone}, Chương 8}
+\author{Bài giảng lập trình Python}
+\institute{Tài liệu học tập / Python for Everyone}
+\date{\today}
+\begin{document}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+ \fill[deepnavy] (current page.south west) rectangle (current page.north east);
+ \fill[teal] ([xshift=-1.2cm]current page.north east) circle (4.8cm);
+ \fill[white,opacity=.06] ([xshift=-.2cm,yshift=-1cm]current page.north east) circle (3.7cm);
+\end{tikzpicture}
+\vspace{1.05cm}
+{\color{white}\Large PYTHON FOR EVERYONE \hspace{.2em}\rule{3cm}{.5pt}}\\[.6cm]
+{\color{white}\fontsize{28}{33}\selectfont\bfseries CHƯƠNG 08}\\[.23cm]
+{\color{white}\fontsize{27}{31}\selectfont\bfseries SETS \& DICTIONARIES}\\[.45cm]
+{\color{white!88}\large Từ tập hợp đến ánh xạ khóa--giá trị}\\[.8cm]
+{\color{white!75}\small 8 chặng học \quad $\cdot$ \quad Ví dụ Python \quad $\cdot$ \quad Kiểm tra ngắn \quad $\cdot$ \quad Bài tập thực hành}
+\end{frame}
+
+\begin{frame}[t]{Mục tiêu bài học}
+
+\begin{enumerate}
+ \item Hiểu cấu trúc và mục đích sử dụng \term{set} trong Python.
+ \item Thực hiện các phép \term{hợp, giao, hiệu, tập con}.
+ \item Tạo và thao tác \term{dictionary} dưới dạng ánh xạ khóa--giá trị.
+ \item Sử dụng dictionary để \term{tra cứu} và \term{tổng hợp} dữ liệu.
+ \item Kết hợp dictionary với set hoặc list để lưu \term{cấu trúc lồng nhau}.
+\end{enumerate}
+\begin{block}{Tổ chức chương}
+8 chặng học. Mỗi chặng gồm lý thuyết, bảng phương thức/cú pháp, ví dụ Python, 2 câu kiểm tra nhanh, 3 câu quiz và một bài lập trình.
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Chuẩn đầu ra (Learning Outcomes)}
+
+\small
+\begin{tabularx}{\linewidth}{>{\bfseries\color{teal}}p{1.0cm}X >{\raggedright\arraybackslash}p{2cm}}
+\toprule
+LO1 & Phân biệt và lựa chọn list, set, dict phù hợp với yêu cầu. & Chặng 1, 5\\\midrule
+LO2 & Khởi tạo, thêm/xóa, kiểm tra thành viên set. & Chặng 1--2\\\midrule
+LO3 & Sử dụng hợp, giao, hiệu và quan hệ tập con. & Chặng 3\\\midrule
+LO4 & Khởi tạo, tra cứu an toàn, duyệt và cập nhật dict. & Chặng 5--6\\\midrule
+LO5 & Đếm giá trị/từ duy nhất sau khi chuẩn hóa dữ liệu. & Chặng 4\\\midrule
+LO6 & Thiết kế dictionary of sets/lists cho lập chỉ mục, báo cáo. & Chặng 7--8\\
+\bottomrule
+\end{tabularx}
+\vspace{2mm}
+\begin{alertblock}{Tiêu chí hoàn thành trong bản bài học HTML}
+Mỗi chặng đạt ít nhất 2/3 câu quiz \textbf{và} vượt tất cả bộ kiểm thử của bài Python.
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Bản đồ kiến thức Chương 8}
+
+\centering
+\begin{tikzpicture}[node distance=9mm and 10mm, every node/.style={font=\small},box/.style={rounded corners=3pt,draw=teal!60,fill=softteal,align=center,text width=3.0cm,minimum height=1.3cm},ar/.style={-{Stealth[length=2mm]},thick,draw=teal}]
+\node[box] (set) {\textbf{Set}\\Dữ liệu duy nhất};
+\node[box,right=of set] (dict) {\textbf{Dictionary / Map}\\Khóa $\mapsto$ giá trị};
+\node[box,below=of set] (op) {\textbf{Set operations}\\Hợp, giao, hiệu};
+\node[box,below=of dict] (nested) {\textbf{Cấu trúc lồng nhau}\\dict of sets/lists};
+\draw[ar] (set)--(op);
+\draw[ar] (dict)--(nested);
+\draw[ar,dashed] (set)--(nested);
+\end{tikzpicture}
+\vspace{4mm}
+\begin{block}{Câu hỏi lựa chọn}
+Cần \term{dữ liệu duy nhất}, \term{tra cứu theo khóa}, hay \term{mỗi khóa có nhiều giá trị}?
+\end{block}
+
+\end{frame}
+
+\section{Chặng 1: Set: bản chất và khởi tạo}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 1 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Set: bản chất và khởi tạo}\par\bigskip
+{\color{white!80}\large Nhận biết dữ liệu duy nhất và kiểm tra thành viên.}\par\medskip
+{\color{white!80}\normalsize 8.1.1 \hspace{1.2cm} LO1–LO2}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 1 · LO1–LO2}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Set là gì?}
+Tập phần tử duy nhất, không có chỉ số vị trí; thứ tự duyệt không nên được coi là cố định.
+\end{block}
+\begin{block}{Khi dùng?}
+Loại mã hàng trùng; đếm khách hàng duy nhất; kiểm tra một mã đã xuất hiện.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Khởi tạo}
+Dùng set() cho tập rỗng, set(iterable) để loại trùng, \{a, b\} cho tập không rỗng.
+\end{block}
+\begin{block}{Lưu ý}
+Phần tử phải hashable; [] và \{\} không tạo set rỗng.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Hình 1 – Tập hợp các màu trên quốc kỳ}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=3.7cm,width=.95\linewidth,keepaspectratio]{figures/fig01_flag_colors.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 1, tr. 458.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ từ sách: Tạo tập hợp cast}
+\framesubtitle{8.1.1 · Creating and Using Sets}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+cast = { "Luigi", "Gumbys", "Spiny" }
+
+names = ["Luigi", "Gumbys", "Spiny"]
+cast = set(names)
+
+cast = set()           # A new empty set
+numberOfCharacters = len(cast)
+\end{Verbatim}
+\begin{block}{Quan sát}
+Dùng dấu ngoặc nhọn để tạo set có phần tử; dùng set() để tạo set rỗng. Trái lại, {} là dictionary rỗng.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.1.1, tr. 458–459.}
+\end{frame}
+
+
+\begin{frame}[t]{Set và List khác nhau thế nào?}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{List}
+\centering\begin{tikzpicture}[every node/.style={draw=deepnavy!30,fill=sky,minimum width=1.2cm,minimum height=.9cm}]
+\node (a) {Tea}; \node[right=0mm of a] (b) {Coffee}; \node[right=0mm of b] (c) {Tea};
+\end{tikzpicture}
+\medskip\begin{itemize}\item Có thể trùng\item Có vị trí/chỉ số\item Giữ thứ tự\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Set}
+\centering\begin{tikzpicture}[every node/.style={draw=teal!60,fill=softteal,minimum width=1.4cm,minimum height=.9cm}]
+\node (a) {Tea}; \node[right=0mm of a] (b) {Coffee};
+\end{tikzpicture}
+\medskip\begin{itemize}\item Không có trùng\item Không có chỉ số\item Kiểm tra membership\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\begin{alertblock}{Ghi nhớ} \py{\{\}} là dict rỗng; \py{set()} mới là set rỗng. \end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 1 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries set()} & Tạo set rỗng. & Một set rỗng: set() & Không dùng \{\} vì đó là dict rỗng. \\
+\midrule
+\textcolor{teal}{\bfseries set(iterable)} & Tạo set từ list, tuple, chuỗi...; tự bỏ phần tử trùng. & Đối tượng set mới. & Phần tử phải hashable. \\
+\midrule
+\textcolor{teal}{\bfseries \{a, b, c\}} & Tạo set trực tiếp. & Đối tượng set mới. & Các phần tử trùng chỉ xuất hiện một lần. \\
+\midrule
+\textcolor{teal}{\bfseries len(s)} & Đếm số phần tử duy nhất. & int. & Không làm thay đổi s. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 1 · Bảng 1, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries x in s / 
+ewline x not in s} & Kiểm tra thành viên. & bool: True hoặc False. & Nếu x không hashable: TypeError. \\
+\midrule
+\textcolor{teal}{\bfseries sorted(s)} & Sắp xếp để hiển thị. & list mới có thứ tự. & Có thể TypeError nếu các phần tử không so sánh được. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Mã hàng không trùng}
+\framesubtitle{Chặng 1 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+products = ["Tea", "Coffee", "Tea", "Juice"]
+unique = set(products)
+print(len(unique))
+print(sorted(unique))
+print("Tea" in unique)
+print(type({}).__name__, type(set()).__name__)
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+3
+['Coffee', 'Juice', 'Tea']
+True
+dict set
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: List giữ phần tử lặp}
+\framesubtitle{Chặng 1 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+items = ["Tea", "Coffee", "Tea"]
+print(len(items))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+3
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Set tự bỏ phần tử lặp}
+\framesubtitle{Chặng 1 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+items = {"Tea", "Coffee", "Tea"}
+print(len(items))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+2
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Khởi tạo và membership}
+\framesubtitle{Chặng 1 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+cast = {"Luigi", "Gumbys", "Spiny"}
+other = set(["Luigi", "Gumbys"])
+empty = set()   # set rỗng
+notASet = {}    # dict rỗng
+
+print(len(cast))
+print("Luigi" in cast)
+print("Arthur" not in cast)
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+3
+True
+True
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 1 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item \{\} tạo dictionary rỗng, không phải set.
+\item set không hỗ trợ s[0] (TypeError).
+\item sorted(s) tạo list mới; không sắp xếp set tại chỗ.
+\end{itemize}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 1 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Đặc điểm của set}
+Vì sao set phù hợp để thống kê số mã sản phẩm khác nhau từ một danh sách có giá trị lặp?
+\medskip
+\quad \textcolor{teal}{A.} Set tự giữ mỗi phần tử duy nhất một lần\hspace{3mm}
+\quad \textcolor{teal}{B.} Set lưu các phần tử theo chỉ số 0, 1, 2, ...\hspace{3mm}
+\quad \textcolor{teal}{C.} Set tự sắp xếp các mã theo thứ tự chữ cái\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Kiểm tra thành viên}
+Điền toán tử kiểm tra mã Tea có thuộc tập unique hay không: "Tea" \_\_\_\_ unique
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 1 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Câu lệnh nào tạo set rỗng?\par\smallskip
+\begin{enumerate}
+\item \{\}
+\item set()
+\item []
+\item dict()
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Sau s = \{1, 1, 2\} , giá trị len(s) là?\par\smallskip
+\begin{enumerate}
+\item 1
+\item 2
+\item 3
+\item Báo lỗi
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 1 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Lệnh nào kiểm tra phần tử "An" thuộc set names ?\par\smallskip
+\begin{enumerate}
+\item names["An"]
+\item "An" in names
+\item names.index("An")
+\item names == "An"
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Đếm sản phẩm khác nhau}
+\framesubtitle{Chặng 1 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Cho danh sách tên sản phẩm. Tạo set uniqueProducts , sau đó gán số lượng phần tử khác nhau vào uniqueCount . Hãy thay \_\_\_ bằng lệnh đúng.
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+products = ["Tea", "Coffee", "Tea", "Juice"]
+# === BAI LAM ===
+uniqueProducts = ___
+uniqueCount = ___
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 2: Set: thêm, xóa và ngoại lệ}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 2 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Set: thêm, xóa và ngoại lệ}\par\bigskip
+{\color{white!80}\large Thao tác set và phân biệt thay đổi tại chỗ với giá trị trả về.}\par\medskip
+{\color{white!80}\normalsize 8.1.2 \hspace{1.2cm} LO2}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 2 · LO2}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Thêm phần tử}
+s.add(x): thêm duy nhất một giá trị; s.update(iterable): thêm nhiều giá trị.
+\end{block}
+\begin{block}{Xóa an toàn}
+s.discard(x) không phát sinh KeyError khi x vắng mặt.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Xóa bắt buộc}
+s.remove(x) phát sinh KeyError khi x không có; s.pop() lấy và xóa phần tử bất kỳ.
+\end{block}
+\begin{block}{Giá trị trả về}
+add, update, discard, remove, clear trả về None; pop trả về phần tử bị lấy.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Hình 2 – Thêm và xóa các phần tử}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=5.1cm,width=.95\linewidth,keepaspectratio]{figures/fig02_add_discard.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 2, tr. 460.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ từ sách: add, discard, remove, clear}
+\framesubtitle{8.1.2 · Adding and Removing Elements}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+cast = set(["Luigi", "Gumbys", "Spiny"])
+cast.add("Arthur")
+cast.add("Spiny")
+cast.discard("Arthur")
+cast.discard("The Colonel")  # No effect
+
+# cast.remove("The Colonel")  # Raises KeyError
+# cast.clear()                 # Empties the set
+\end{Verbatim}
+\begin{block}{Quan sát}
+Thêm phần tử đã có không thay đổi set. discard không báo lỗi khi thiếu phần tử, còn remove sẽ gây KeyError.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.1.2, tr. 459–460.}
+\end{frame}
+
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 2 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries s.add(x)} & Thêm x; không tạo bản sao của phần tử đã có. & None. & TypeError nếu x không hashable. \\
+\midrule
+\textcolor{teal}{\bfseries s.update(iterable)} & Thêm nhiều phần tử từ iterable vào s. & None. & Phần tử không hashable gây TypeError. \\
+\midrule
+\textcolor{teal}{\bfseries s.discard(x)} & Xóa x nếu có. & None. & Không phát sinh KeyError nếu x vắng mặt. \\
+\midrule
+\textcolor{teal}{\bfseries s.remove(x)} & Xóa x. & None. & KeyError nếu x vắng mặt. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 2 · Bảng 1, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries s.pop()} & Lấy và xóa một phần tử bất kỳ. & Phần tử vừa lấy. & KeyError nếu set rỗng; không biết trước phần tử nào được chọn. \\
+\midrule
+\textcolor{teal}{\bfseries s.clear()} & Xóa toàn bộ phần tử. & None. & s trở thành set rỗng. \\
+\midrule
+\textcolor{teal}{\bfseries s.copy()} & Tạo bản sao nông. & Một set mới. & Không thay đổi s. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Giá trị trả về của add}
+\framesubtitle{Chặng 2 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+s = {"Tea", "Coffee"}
+result = s.add("Juice")
+print(result is None)
+print(sorted(s))
+s.discard("Milk")
+s.remove("Tea")
+print(sorted(s))
+print(sorted(s.copy()))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+True
+['Coffee', 'Juice', 'Tea']
+['Coffee', 'Juice']
+['Coffee', 'Juice']
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Thử remove và discard}
+\framesubtitle{Chặng 2 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+codes = {"A", "B"}
+print(codes.discard("Z"))
+try:
+    codes.remove("Z")
+except KeyError as error:
+    print(type(error).__name__)
+print(sorted(codes))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+None
+KeyError
+['A', 'B']
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Ví dụ gây KeyError có chủ đích}
+\framesubtitle{Chặng 2 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+customers = {"An", "Bình"}
+customers.remove("Chi")
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+KeyError: 'Chi'
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Khách đăng ký khuyến mãi}
+\framesubtitle{Chặng 2 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+registered = {"KH01", "KH02"}
+registered.add("KH03")
+registered.add("KH01")
+registered.discard("KH02")
+print(len(registered))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+2
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 2 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item Không viết s = s.add(x): s sẽ trở thành None.
+\item s.remove(x) ném KeyError nếu x chưa có; dùng discard nếu thiếu là bình thường.
+\item s.pop() trên set rỗng ném KeyError.
+\end{itemize}
+\end{alertblock}
+\begin{block}{Cách xử lý}
+\begin{itemize}
+\item Chủ động phân biệt khi nào dùng thao tác an toàn và khi nào cần báo lỗi.
+\item Sử dụng try/except KeyError hoặc TypeError chỉ khi cần thiết.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 2 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Giá trị trả về}
+Sau lệnh result = s.add("Juice"), biến result nhận giá trị nào?
+\medskip
+\quad \textcolor{teal}{A.} True nếu thêm thành công\hspace{3mm}
+\quad \textcolor{teal}{B.} None\hspace{3mm}
+\quad \textcolor{teal}{C.} Set mới chứa thêm Juice\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Xóa an toàn khi vắng phần tử}
+Điền phương thức để xóa "Unknown" mà không gây KeyError khi phần tử vắng mặt: s.\_\_\_\_("Unknown")
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 2 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Thêm phần tử mới vào set s bằng?\par\smallskip
+\begin{enumerate}
+\item s.append(x)
+\item s.add(x)
+\item s.insert(x)
+\item s.push(x)
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+s.discard(99) khi 99 không có trong s sẽ?\par\smallskip
+\begin{enumerate}
+\item Không thay đổi s
+\item Xóa toàn bộ s
+\item Ném KeyError
+\item Thêm 99
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 2 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Lệnh nào xóa toàn bộ set s ?\par\smallskip
+\begin{enumerate}
+\item s.popall()
+\item s.empty()
+\item s.clear()
+\item clear(s)
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Cập nhật khách hàng đang tham gia}
+\framesubtitle{Chặng 2 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Từ set active , thêm khách newCustomer và loại khách leavingCustomer nếu có. Gán số khách còn lại vào nActive .
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+active = {"KH01", "KH02"}
+newCustomer = "KH03"
+leavingCustomer = "KH02"
+# === BAI LAM ===
+active.___(newCustomer)
+active.___(leavingCustomer)
+nActive = ___
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 3: Set: phép toán và quan hệ}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 3 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Set: phép toán và quan hệ}\par\bigskip
+{\color{white!80}\large So sánh các nhóm khách hàng bằng hợp, giao, hiệu và tập con.}\par\medskip
+{\color{white!80}\normalsize 8.1.3–8.1.4 \hspace{1.2cm} LO3}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 3 · LO3}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Hợp và giao}
+A | B gồm giá trị thuộc ít nhất một tập; A \& B gồm giá trị thuộc cả hai.
+\end{block}
+\begin{block}{Hiệu và đối xứng}
+A - B gồm giá trị chỉ thuộc A; A \textasciicircum{} B gồm giá trị chỉ thuộc một trong hai tập.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Tập con}
+A <= B hoặc A.issubset(B): bool cho biết mọi phần tử A nằm trong B.
+\end{block}
+\begin{block}{Phân tích nghiệp vụ}
+Tệp khách hợp nhất, khách trùng kênh, khách riêng một kênh.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Hình 3 – Quan hệ tập con qua màu quốc kỳ}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=3.3cm,width=.95\linewidth,keepaspectratio]{figures/fig03_subset.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 3, tr. 461.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ từ sách: Kiểm tra tập con}
+\framesubtitle{8.1.3 · Subsets}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+canadian = { "Red", "White" }
+british = { "Red", "Blue", "White" }
+italian = { "Red", "White", "Green" }
+
+print(canadian.issubset(british))
+print(italian.issubset(british))
+\end{Verbatim}
+\begin{block}{Quan sát}
+Canada là tập con của tập màu Anh; Italy không phải tập con vì có màu Green.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.1.3, tr. 461.}
+\end{frame}
+
+\begin{frame}[t]{Hình 4 – Phép hợp (Union)}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.45cm,width=.95\linewidth,keepaspectratio]{figures/fig04_union.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 4, tr. 461.}
+\end{frame}
+
+\begin{frame}[t]{Hình 5 – Phép giao (Intersection)}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.2cm,width=.95\linewidth,keepaspectratio]{figures/fig05_intersection.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 5, tr. 462.}
+\end{frame}
+
+\begin{frame}[t]{Hình 6 – Phép hiệu (Difference)}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.2cm,width=.95\linewidth,keepaspectratio]{figures/fig06_difference.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 6, tr. 462.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ từ sách: Union và Difference}
+\framesubtitle{8.1.4 · Union, Intersection, Difference}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+british = {"Red", "Blue", "White"}
+italian = {"Red", "White", "Green"}
+
+inEither = british.union(italian)
+inBoth = british.intersection(italian)
+print(italian.difference(british))  # {'Green'}
+print(british.difference(italian))  # {'Blue'}
+\end{Verbatim}
+\begin{block}{Quan sát}
+Hợp và giao không phụ thuộc thứ tự hai tập; phép hiệu phụ thuộc thứ tự các toán hạng.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.1.4, tr. 461–462.}
+\end{frame}
+
+
+\begin{frame}[t]{Minh họa: hai tập khách hàng}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.53\linewidth}
+\centering
+\begin{tikzpicture}[scale=.94]
+ \fill[teal!25,opacity=.85] (-.7,0) circle (1.7);
+ \fill[coral!30,opacity=.8] (.8,0) circle (1.7);
+ \draw[teal,very thick] (-.7,0) circle (1.7);
+ \draw[coral,very thick] (.8,0) circle (1.7);
+ \node at (-1.45,.2) {An}; \node at (-1.45,-.3) {Chi};
+ \node at (.05,-.1) {Binh}; \node at (1.55,.05) {Dung};
+ \node[teal] at (-1.4,1.5) {Online}; \node[coral] at (1.65,1.5) {Store};
+\end{tikzpicture}
+\end{column}
+\begin{column}{.45\linewidth}
+\small
+\begin{block}{Các tập kết quả}
+\py{online | store}: tất cả khách\\[5pt]
+\py{online \& store}: khách cả hai kênh\\[5pt]
+\py{online - store}: chỉ mua online\\[5pt]
+\py{online \^{} store}: chỉ mua ở một kênh
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 3 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries a.union(b) / 
+ewline a | b} & Phép hợp: phần tử thuộc a hoặc b. & set mới. & Toán tử | cần toán hạng dạng set; union() nhận iterable. \\
+\midrule
+\textcolor{teal}{\bfseries a.intersection(b) / 
+ewline a \& b} & Phép giao: phần tử thuộc cả hai. & set mới. & Không làm thay đổi a, b. \\
+\midrule
+\textcolor{teal}{\bfseries a.difference(b) / 
+ewline a - b} & Phép hiệu: thuộc a nhưng không thuộc b. & set mới. & a-b khác b-a nói chung. \\
+\midrule
+\textcolor{teal}{\bfseries a.symmetric\_\allowbreak{}difference(b) / 
+ewline a \textasciicircum{} b} & Phần chỉ thuộc đúng một trong hai tập. & set mới. & Mở rộng thêm so với ba phép toán cơ bản của sách. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 3 · Bảng 1, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries a.issubset(b) / 
+ewline a <= b} & Mọi phần tử của a đều có trong b. & bool. & Set rỗng là tập con của mọi set. \\
+\midrule
+\textcolor{teal}{\bfseries a.issuperset(b) / 
+ewline a >= b} & a chứa mọi phần tử của b. & bool. & Mở rộng. \\
+\midrule
+\textcolor{teal}{\bfseries a.isdisjoint(b)} & Hai tập không có phần tử chung. & bool. & Mở rộng. \\
+\midrule
+\textcolor{teal}{\bfseries a.intersection\_\allowbreak{}update(b)} & Giữ lại trong a những phần tử chung. & None; a bị sửa. & Không phải kết quả set mới. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Khách hàng ở hai kênh}
+\framesubtitle{Chặng 3 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+online = {"An", "Binh", "Chi"}
+store = {"Binh", "Dung"}
+print(sorted(online | store))
+print(sorted(online & store))
+print(sorted(online - store))
+print(sorted(online ^ store))
+print({"Binh"}.issubset(online))
+print(online.isdisjoint(store))
+\end{Verbatim}
+\begin{block}{Câu hỏi lớp học} Hãy dự đoán kết quả và chạy thử trong HTML. \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Hợp, giao, hiệu}
+\framesubtitle{Chặng 3 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+a = {"An", "Bình", "Chi"}
+b = {"Bình", "Chi", "Dũng"}
+
+print(sorted(a.union(b)))
+print(sorted(a.intersection(b)))
+print(sorted(a.difference(b)))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+['An', 'Bình', 'Chi', 'Dũng']
+['Bình', 'Chi']
+['An']
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Hiệu không có tính giao hoán}
+\framesubtitle{Chặng 3 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+online = {"KH1", "KH2", "KH3"}
+inStore = {"KH2", "KH4"}
+onlyOnline = online.difference(inStore)
+onlyStore = inStore.difference(online)
+print(sorted(onlyOnline))
+print(sorted(onlyStore))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+['KH1', 'KH3']
+['KH4']
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 3 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item A - B và B - A có thể khác nhau.
+\item Các phép union/intersection/difference thông thường tạo set mới, không sửa đầu vào.
+\item Tên có hậu tố \_update thường cập nhật tại chỗ và trả về None.
+\end{itemize}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 3 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Ý nghĩa phép hiệu}
+Nếu online và store là hai set tên khách hàng, online - store biểu diễn nhóm nào?
+\medskip
+\quad \textcolor{teal}{A.} Khách mua ở cả hai kênh\hspace{3mm}
+\quad \textcolor{teal}{B.} Khách chỉ có trong nhóm online\hspace{3mm}
+\quad \textcolor{teal}{C.} Toàn bộ khách của hai kênh, không trùng\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Kiểm tra quan hệ tập con}
+Điền phương thức để kiểm tra set a có là tập con của b: a.\_\_\_\_(b)
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 3 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Phép nào tìm các phần tử thuộc cả A và B?\par\smallskip
+\begin{enumerate}
+\item A.union(B)
+\item A.intersection(B)
+\item A.difference(B)
+\item A.issubset(B)
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Với A=\{1,2\}, B=\{2,3\}, A.difference(B) là?\par\smallskip
+\begin{enumerate}
+\item \{2\}
+\item \{1\}
+\item \{3\}
+\item \{1,3\}
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 3 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Lệnh kiểm tra A là tập con của B là?\par\smallskip
+\begin{enumerate}
+\item A.issubset(B)
+\item A.union(B)
+\item A.clear(B)
+\item A[0] in B
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Phân loại khách hàng của hai kênh}
+\framesubtitle{Chặng 3 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Với các set online , store , tính both (khách ở cả hai kênh), allCustomers và onlineOnly .
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+online = {"An", "Bình", "Chi"}
+store = {"Bình", "Dũng"}
+# === BAI LAM ===
+both = online.___(store)
+allCustomers = online.___(store)
+onlineOnly = online.___(store)
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 4: Set trong xử lý văn bản}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 4 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Set trong xử lý văn bản}\par\bigskip
+{\color{white!80}\large Chuẩn hóa từ và tính số giá trị khác nhau trong dữ liệu.}\par\medskip
+{\color{white!80}\normalsize 8.1 / Ứng dụng \hspace{1.2cm} LO5}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 4 · LO5}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Làm sạch dữ liệu}
+Chuyển về chữ thường bằng lower(), tách token bằng split().
+\end{block}
+\begin{block}{Xóa dấu câu}
+strip(".,!?") xóa ký tự chỉ định ở hai đầu, không xóa giữa từ.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Đếm duy nhất}
+set(words) loại trùng rồi dùng len() để đếm.
+\end{block}
+\begin{block}{Tình huống thực tế}
+Đếm từ khóa, mã đơn, khách hàng hoặc mặt hàng khác nhau.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Worked Example 8.1 – Đếm từ không trùng}
+\framesubtitle{8.1 · Counting Unique Words}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+uniqueWords = set()
+inputFile = open("nurseryrhyme.txt", "r")
+for line in inputFile:
+    theWords = line.split()
+    for word in theWords:
+        cleaned = clean(word)
+        if cleaned != "":
+            uniqueWords.add(cleaned)
+
+print(len(uniqueWords))
+\end{Verbatim}
+\begin{block}{Quan sát}
+Ví dụ trong sách cần file văn bản và hàm clean(). Sử dụng set đảm bảo mỗi từ chỉ xuất hiện một lần trong thống kê.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, Worked Example 8.1, tr. 465–466.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Worked Example 8.1 – Làm sạch từ}
+\framesubtitle{8.1 · Counting Unique Words}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+def clean(string):
+    result = ""
+    for char in string:
+        if char.isalpha():
+            result = result + char.lower()
+    return result
+\end{Verbatim}
+\begin{block}{Quan sát}
+Loại dấu câu, giữ chữ cái, đưa về chữ thường trước khi thêm vào set.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, Worked Example 8.1, tr. 465–466.}
+\end{frame}
+
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 4 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries text.lower()} & Chuyển chữ về dạng thường. & str mới. & Không sửa text gốc. \\
+\midrule
+\textcolor{teal}{\bfseries text.split()} & Tách theo khoảng trắng. & list[str] . & Không tự loại dấu câu. \\
+\midrule
+\textcolor{teal}{\bfseries word.strip('.,!?')} & Loại các ký tự chỉ định ở hai đầu. & str mới. & Không tự xóa dấu trong giữa từ. \\
+\midrule
+\textcolor{teal}{\bfseries set(words)} & Loại phần tử lặp. & set mới. & Phần tử phải hashable. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 4 · Bảng 1, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries len(unique)} & Đếm phần tử. & int . & Không thay đổi set. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Đếm từ duy nhất}
+\framesubtitle{Chặng 4 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+text = "Coffee tea, coffee! Juice tea."
+words = [w.strip(".,!?") for w in text.lower().split()]
+unique_words = set(words)
+print(sorted(unique_words))
+print("Số từ duy nhất:", len(unique_words))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+['coffee', 'juice', 'tea']
+Số từ duy nhất: 3
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Vòng lặp làm sạch từ}
+\framesubtitle{Chặng 4 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+text = "Data is useful. Data is valuable!"
+uniqueWords = set()
+for word in text.split():
+    cleaned = word.strip(".,!?").lower()
+    if cleaned:
+        uniqueWords.add(cleaned)
+print(len(uniqueWords))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+4
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Vì sao cần chuẩn hóa}
+\framesubtitle{Chặng 4 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+text = "Sale, sale SALE!"
+print(len(set(text.split())))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+3
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 4 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item set(text) tạo tập ký tự; cần split() để được tập từ.
+\item Không bỏ qua dấu câu nếu muốn "tea" và "tea!" được tính cùng một từ.
+\item strip() chỉ xử lý các ký tự được chỉ định ở hai đầu, không phải mọi dấu câu trong giữa chuỗi.
+\end{itemize}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 4 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Phân biệt ký tự và từ}
+Nếu text là một chuỗi, set(text) trực tiếp tạo tập hợp gồm những gì?
+\medskip
+\quad \textcolor{teal}{A.} Các từ sau khi tách bằng khoảng trắng\hspace{3mm}
+\quad \textcolor{teal}{B.} Các ký tự khác nhau trong chuỗi\hspace{3mm}
+\quad \textcolor{teal}{C.} Số lần xuất hiện của mỗi từ\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Chuẩn hóa chữ hoa và chữ thường}
+Điền phương thức chuyển text về chữ thường trước khi tách từ: words = text.\_\_\_\_().split()
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 4 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Để đếm số từ khác nhau, cấu trúc phù hợp nhất là?\par\smallskip
+\begin{enumerate}
+\item list
+\item tuple
+\item set
+\item int
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Vì sao sử dụng word.lower() trước khi thêm vào set?\par\smallskip
+\begin{enumerate}
+\item Tăng số phần tử
+\item Không phân biệt chữ hoa/chữ thường
+\item Đổi từ thành số
+\item Tự động xóa từ trùng
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 4 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Đếm phần tử của words sau khi loại trùng bằng?\par\smallskip
+\begin{enumerate}
+\item count(words)
+\item len(words)
+\item size(words)
+\item words.length
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Đếm từ khác nhau}
+\framesubtitle{Chặng 4 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Biến tokens là danh sách từ được tách sẵn. Tạo uniqueWords , làm sạch mỗi từ (bỏ các dấu .,!? ở đầu/cuối và chuyển thành chữ thường), không thêm chuỗi rỗng. Gán kết quả vào nUnique .
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+tokens = ["Data,", "science", "data", "Python!", "python"]
+# === BAI LAM ===
+uniqueWords = set()
+for word in tokens:
+    # Làm sạch từ và thêm vào uniqueWords
+    pass
+nUnique = ___
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 5: Map / Dictionary: khởi tạo và tra cứu}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 5 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Map / Dictionary: khởi tạo và tra cứu}\par\bigskip
+{\color{white!80}\large Ánh xạ khóa đến giá trị và sử dụng tra cứu an toàn.}\par\medskip
+{\color{white!80}\normalsize 8.2.1–8.2.3 \hspace{1.2cm} LO1–LO4}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 5 · LO1–LO4}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Map trong Python}
+Dictionary biểu diễn ánh xạ key $\rightarrow$ value. Không nhầm với hàm map(function, iterable).
+\end{block}
+\begin{block}{Khóa duy nhất}
+Key phải hashable; value có thể là số, list, set hoặc dict khác.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Tra cứu}
+d[key] lấy giá trị nhưng thiếu khóa gây KeyError; d.get(key, default) trả dự phòng.
+\end{block}
+\begin{block}{Thêm hoặc sửa}
+d[key] = value thêm khóa mới hoặc cập nhật giá trị của khóa đã có.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Syntax 8.1 – Phân biệt Set và Dictionary}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.3cm,width=.95\linewidth,keepaspectratio]{figures/syntax81_literals.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Syntax 8.1, tr. 469.}
+\end{frame}
+
+\begin{frame}[t]{Hình 7 – Khóa và giá trị trong Dictionary}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=3.5cm,width=.95\linewidth,keepaspectratio]{figures/fig07_dictionary.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 7, tr. 469.}
+\end{frame}
+
+\begin{frame}[t]{Hình 8 – Dictionary của danh bạ}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=3.5cm,width=.95\linewidth,keepaspectratio]{figures/fig08_dict_entries.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 8, tr. 469.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ từ sách: Tạo danh bạ bằng Dictionary}
+\framesubtitle{8.2.1 · Creating Dictionaries}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+contacts = { "Fred": 7235591,
+             "Mary": 3841212,
+             "Bob": 3841212,
+             "Sarah": 2213278 }
+
+print(contacts["Fred"])
+print("John" in contacts)
+\end{Verbatim}
+\begin{block}{Quan sát}
+Một số điện thoại có thể liên kết với nhiều tên; ngược lại, mỗi khóa tên chỉ có một giá trị trong dictionary.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.2.1–8.2.2, tr. 469–470.}
+\end{frame}
+
+
+\begin{frame}[t]{Map/Dictionary: ánh xạ khóa đến giá trị}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.55\linewidth}
+\centering
+\begin{tikzpicture}[node distance=9mm and 25mm,kn/.style={draw=teal,fill=softteal,rounded corners=3pt,minimum width=1.9cm,minimum height=.67cm},vl/.style={draw=deepnavy!40,fill=sky,rounded corners=3pt,minimum width=2.0cm,minimum height=.67cm},>={Stealth}]
+\node[kn] (a) {Tea}; \node[kn,below=of a] (b) {Coffee};\node[kn,below=of b] (c) {Juice};
+\node[vl,right=of a] (va) {25,000}; \node[vl,right=of b] (vb) {35,000};\node[vl,right=of c] (vc) {30,000};
+\draw[->,thick,teal] (a)--(va);\draw[->,thick,teal] (b)--(vb);\draw[->,thick,teal] (c)--(vc);
+\end{tikzpicture}
+\end{column}
+\begin{column}{.44\linewidth}
+\begin{block}{Phù hợp khi cần}
+\begin{itemize}
+\item Tra tên hàng $\to$ giá
+\item Tra mã SV $\to$ điểm
+\item Tra từ $\to$ tần suất
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\medskip
+\begin{alertblock}{Phân biệt} Dictionary là CTDL \term{Map}; khác với hàm dựng sẵn \py{map()}. \end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 5 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries \{\} / 
+ewline dict()} & Tạo dictionary rỗng. & Đối tượng dict mới. & \{\} không phải set. \\
+\midrule
+\textcolor{teal}{\bfseries \{"A": 10, "B": 20\}} & Tạo dictionary với các cặp key: value. & Đối tượng dict. & Khóa lặp trong literal: giá trị cuối cùng được giữ. \\
+\midrule
+\textcolor{teal}{\bfseries d[key]} & Đọc giá trị tại key. & Giá trị tương ứng. & KeyError nếu key chưa tồn tại. \\
+\midrule
+\textcolor{teal}{\bfseries d.get(key[, default])} & Tra cứu với giá trị dự phòng. & Giá trị hoặc default; nếu không truyền default là None. & Không thêm key vào dict. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 5 · Bảng 1, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries key in d} & Kiểm tra key có tồn tại hay không. & bool. & Kiểm tra khóa, không kiểm tra value. \\
+\midrule
+\textcolor{teal}{\bfseries len(d)} & Đếm số cặp key: value. & int. & Không thay đổi d. \\
+\midrule
+\textcolor{teal}{\bfseries d[key] = value} & Thêm mới hoặc cập nhật khóa. & Câu lệnh gán, không có giá trị trả về. & Khóa phải hashable. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Bảng giá và tra cứu an toàn}
+\framesubtitle{Chặng 5 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+prices = {"Tea": 25000, "Coffee": 35000}
+print(prices["Tea"])
+print(prices.get("Milk", -1))
+print("Coffee" in prices)
+prices["Tea"] = 27000
+prices["Juice"] = 30000
+print(prices["Tea"], len(prices))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+25000
+-1
+True
+27000 3
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Từ điển khóa – giá trị}
+\framesubtitle{Chặng 5 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+prices = {
+    "Tea": 25000,
+    "Coffee": 35000,
+    "Juice": 40000
+}
+print(prices["Coffee"])
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+35000
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Tra cứu bằng [] và get()}
+\framesubtitle{Chặng 5 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+contacts = {"An": "0901", "Bình": "0902"}
+print(contacts["An"])
+print(contacts.get("Chi", "Chưa có"))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+0901
+Chưa có
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 5 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item \{\} và dict() là dictionary rỗng; set() mới là set rỗng.
+\item in kiểm tra key, không phải value: "Tea" in prices.
+\item Từ Python 3.7, dict giữ thứ tự chèn nhưng không có nghĩa là tự sắp theo key.
+\end{itemize}
+\end{alertblock}
+\begin{block}{Cách xử lý}
+\begin{itemize}
+\item Chủ động phân biệt khi nào dùng thao tác an toàn và khi nào cần báo lỗi.
+\item Sử dụng try/except KeyError hoặc TypeError chỉ khi cần thiết.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 5 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Cấu trúc khóa–giá trị}
+Trong một dictionary d, biểu thức "Tea" in d kiểm tra điều gì?
+\medskip
+\quad \textcolor{teal}{A.} "Tea" có xuất hiện trong các giá trị hay không\hspace{3mm}
+\quad \textcolor{teal}{B.} "Tea" có là một khóa trong dictionary hay không\hspace{3mm}
+\quad \textcolor{teal}{C.} Giá trị gắn với "Tea" có lớn hơn 0 hay không\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Tra cứu khóa thiếu an toàn}
+Điền phương thức tra cứu khóa "Milk" và trả về 0 nếu chưa có: d.\_\_\_\_("Milk", 0)
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 5 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Trong dictionary, điều nào đúng?\par\smallskip
+\begin{enumerate}
+\item Một khóa xuất hiện nhiều lần ở nhiều mục
+\item Mọi giá trị phải khác nhau
+\item Mỗi khóa là duy nhất
+\item Truy cập luôn bằng vị trí
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Khi không có khóa "X" , biểu thức d.get("X", 0) trả về?\par\smallskip
+\begin{enumerate}
+\item 0
+\item KeyError
+\item "X"
+\item []
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 5 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Biểu thức \{\} tạo ra?\par\smallskip
+\begin{enumerate}
+\item set rỗng
+\item dict rỗng
+\item list rỗng
+\item tuple rỗng
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Tra cứu giá bán}
+\framesubtitle{Chặng 5 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Dựa trên dictionary prices , lấy giá của product ; nếu không tồn tại, dùng -1 . Đồng thời xác định biến Boolean available cho biết sản phẩm có trong bảng giá hay không.
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+prices = {"Tea": 25000, "Coffee": 35000}
+product = "Tea"
+# === BAI LAM ===
+price = prices.___(product, -1)
+available = product ___ prices
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 6: Dictionary: cập nhật, duyệt, ngoại lệ}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 6 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Dictionary: cập nhật, duyệt, ngoại lệ}\par\bigskip
+{\color{white!80}\large Sửa, xóa, duyệt dictionary và đếm tần suất.}\par\medskip
+{\color{white!80}\normalsize 8.2.4–8.2.5 \hspace{1.2cm} LO4}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 6 · LO4}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Cập nhật}
+update() sửa hoặc thêm nhiều cặp key–value và trả None.
+\end{block}
+\begin{block}{Duyệt}
+for k in d duyệt key; d.items() duyệt (key, value); keys()/values() tạo view.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Lấy và xóa}
+pop(k, default) trả giá trị đã xóa hoặc dự phòng; popitem() trả tuple.
+\end{block}
+\begin{block}{Đếm tần suất}
+counts[w] = counts.get(w, 0) + 1.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Hình 9 – Thêm và thay đổi giá trị}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.9cm,width=.95\linewidth,keepaspectratio]{figures/fig09_dict_modify.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 9, tr. 471.}
+\end{frame}
+
+\begin{frame}[t]{Hình 10 – Xóa một mục khỏi Dictionary}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.7cm,width=.95\linewidth,keepaspectratio]{figures/fig10_dict_remove.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 10, tr. 471.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ từ sách: Gán và thay đổi số điện thoại}
+\framesubtitle{8.2.3 · Adding and Modifying Items}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+contacts = { "Fred": 7235591,
+             "Mary": 3841212,
+             "Bob": 3841212,
+             "Sarah": 2213278 }
+
+contacts["John"] = 4578102
+contacts["John"] = 2228102
+# Remove an entry using pop:
+contacts.pop("John")
+\end{Verbatim}
+\begin{block}{Quan sát}
+Gán cho khóa mới là thêm mục; gán cho khóa đã tồn tại là cập nhật mục. pop(x) xóa khóa và trả về giá trị trước đó.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.2.3–8.2.4, tr. 470–471.}
+\end{frame}
+
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 6 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries d.pop(k)} & Xóa cặp có khóa k. & Giá trị đã xóa. & KeyError nếu k không tồn tại. \\
+\midrule
+\textcolor{teal}{\bfseries d.pop(k, default)} & Xóa k nếu có, dự phòng nếu thiếu. & Giá trị đã xóa hoặc default. & Không KeyError nếu đã cho default. \\
+\midrule
+\textcolor{teal}{\bfseries del d[k]} & Xóa cặp có khóa k. & Câu lệnh, không trả về giá trị. & KeyError nếu k không tồn tại. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 6 · Bảng 1, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries d.popitem()} & Xóa cặp được thêm cuối (Python $\geq$3.7). & tuple (key, value). & KeyError nếu dict rỗng. \\
+\midrule
+\textcolor{teal}{\bfseries d.update(other)} & Thêm mới hoặc cập nhật nhiều cặp. & None. & Lỗi nếu dữ liệu đầu vào không hợp lệ. \\
+\midrule
+\textcolor{teal}{\bfseries d.setdefault(k, default)} & Lấy giá trị của k hoặc thêm default nếu thiếu. & Giá trị đang lưu tại k. & Có thể làm thay đổi d. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 6 · Bảng 1, phần 3}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries d.keys()} & Lấy góc nhìn các khóa. & dict\_keys view (không phải list). & View phản ánh thay đổi của dict. \\
+\midrule
+\textcolor{teal}{\bfseries d.values()} & Lấy góc nhìn các giá trị. & dict\_values view. & Có thể có giá trị trùng. \\
+\midrule
+\textcolor{teal}{\bfseries d.items()} & Lấy góc nhìn các cặp. & dict\_items view gồm (key, value). & Thường dùng: for k, v in d.items(). \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 6 · Bảng 1, phần 4}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries d.copy()} & Sao chép nông dictionary. & dict mới. & Các đối tượng lồng nhau chưa được sao chép sâu. \\
+\midrule
+\textcolor{teal}{\bfseries d.clear()} & Xóa toàn bộ mục. & None. & Dictionary rỗng. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Bảng ngoại lệ thường gặp}
+\framesubtitle{Chặng 6 · Bảng 2, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries s.remove(x)} & Xóa một phần tử khỏi set. & None nếu thành công. & KeyError khi x không có. \\
+\midrule
+\textcolor{teal}{\bfseries s.pop()} & Xóa phần tử bất kỳ. & Phần tử vừa lấy. & KeyError nếu set rỗng. \\
+\midrule
+\textcolor{teal}{\bfseries d[key] / 
+ewline del d[key]} & Tra/xóa theo khóa bắt buộc tồn tại. & Giá trị / không có return. & KeyError khi thiếu khóa. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Bảng ngoại lệ thường gặp}
+\framesubtitle{Chặng 6 · Bảng 2, phần 2}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries d.pop(key) / 
+ewline d.popitem()} & Xóa khóa hoặc cặp cuối. & Giá trị / cặp (key,value). & KeyError nếu thiếu key hoặc dict rỗng. \\
+\midrule
+\textcolor{teal}{\bfseries s.add([]) / 
+ewline d[[]] = 1} & Dùng list làm phần tử/khóa. & Không có kết quả hợp lệ. & TypeError: unhashable type: list. \\
+\midrule
+\textcolor{teal}{\bfseries s[0]} & Truy cập theo chỉ số. & Không hợp lệ. & TypeError: set is not subscriptable. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[t]{Bảng ngoại lệ thường gặp}
+\framesubtitle{Chặng 6 · Bảng 2, phần 3}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries for k in d: ... del d[k]} & Vừa duyệt vừa thay đổi kích thước dict. & Không hợp lệ. & Thường gặp RuntimeError: dictionary changed size during iteration. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: update, setdefault và pop}
+\framesubtitle{Chặng 6 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+inventory = {"Tea": 10, "Coffee": 7}
+print(inventory.setdefault("Milk", 0))
+print(inventory.setdefault("Tea", 99))
+print(inventory.update({"Tea": 12}))
+print(inventory.pop("Coffee"))
+print(inventory.pop("Unknown", -1))
+for product, stock in inventory.items():
+    print(product, stock)
+\end{Verbatim}
+\begin{block}{Câu hỏi lớp học} Hãy dự đoán kết quả và chạy thử trong HTML. \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: keys, values và items}
+\framesubtitle{Chặng 6 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+sales = {"Tea": 12, "Coffee": 8}
+keys_view = sales.keys()
+print(type(keys_view).__name__)
+print(list(keys_view))
+print(list(sales.values()))
+print(list(sales.items()))
+sales["Milk"] = 5
+print(list(keys_view))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+dict_keys
+['Tea', 'Coffee']
+[12, 8]
+[('Tea', 12), ('Coffee', 8)]
+['Tea', 'Coffee', 'Milk']
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Bắt ngoại lệ}
+\framesubtitle{Chặng 6 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+data = {"A": 3}
+try:
+    print(data["B"])
+except KeyError:
+    print("KeyError: chưa có khóa B")
+
+myset = set()
+try:
+    myset.remove("Z")
+except KeyError:
+    print("KeyError: chưa có phần tử Z")
+
+try:
+    myset.add([])
+except TypeError:
+    print("TypeError: list không hashable")
+\end{Verbatim}
+\vspace{1mm}{\small\color{muted}Dự đoán kết quả rồi đối chiếu ở slide tiếp theo.}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Giải thích kết quả: Bắt ngoại lệ}
+\framesubtitle{Chặng 6 · Ngoại lệ và cách xử lý}
+\begin{block}{Kết quả khi thực thi}
+\begin{Verbatim}[fontsize=\footnotesize,breaklines=true]
+KeyError: chưa có khóa B
+KeyError: chưa có phần tử Z
+TypeError: list không hashable
+\end{Verbatim}
+\end{block}
+\begin{block}{Thảo luận} Các nhánh try/except được thực thi khi nào? Lệnh nào phát sinh KeyError? Lệnh nào phát sinh TypeError? \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Đếm tần suất mặt hàng}
+\framesubtitle{Chặng 6 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+words = ["tea", "coffee", "tea", "juice"]
+counts = {}
+for word in words:
+    counts[word] = counts.get(word, 0) + 1
+print(counts)
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+{'tea': 2, 'coffee': 1, 'juice': 1}
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 6 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item d.update(...) trả None, không trả về dictionary.
+\item del d[k] hoặc d.pop(k) không có dự phòng có thể phát sinh KeyError.
+\item Không tăng/giảm kích thước dict ngay khi đang duyệt dict đó: RuntimeError.
+\end{itemize}
+\end{alertblock}
+\begin{block}{Cách xử lý}
+\begin{itemize}
+\item Chủ động phân biệt khi nào dùng thao tác an toàn và khi nào cần báo lỗi.
+\item Sử dụng try/except KeyError hoặc TypeError chỉ khi cần thiết.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 6 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Dạng dữ liệu khi duyệt}
+Phương thức d.items() trả về đối tượng nào trong Python 3?
+\medskip
+\quad \textcolor{teal}{A.} Một dict\_items view chứa các cặp (key, value)\hspace{3mm}
+\quad \textcolor{teal}{B.} Một list mới chỉ gồm value\hspace{3mm}
+\quad \textcolor{teal}{C.} Một set mới chỉ gồm key\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Xóa khóa có giá trị dự phòng}
+Điền phương thức xóa khóa "Unknown" và trả về -1 khi khóa thiếu: inventory.\_\_\_\_("Unknown", -1)
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 6 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Duyệt for x in d: với d là dictionary thì x lần lượt là?\par\smallskip
+\begin{enumerate}
+\item Các giá trị
+\item Các khóa
+\item Các cặp (khóa, giá trị)
+\item Chỉ số 0, 1, 2
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Biểu thức d.items() dùng để?\par\smallskip
+\begin{enumerate}
+\item Trả danh sách khóa
+\item Duyệt cặp (key, value)
+\item Xóa mọi mục
+\item Sắp xếp dữ liệu
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 6 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Lệnh nào tăng bộ đếm của từ w lên 1 an toàn cả khi chưa có?\par\smallskip
+\begin{enumerate}
+\item counts[w] += 1
+\item counts[w] = counts.get(w, 0) + 1
+\item counts.add(w)
+\item counts.remove(w)
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Đếm số lần xuất hiện của mặt hàng}
+\framesubtitle{Chặng 6 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Với list orders , tạo dictionary counts sao cho mỗi mặt hàng có số lần xuất hiện tương ứng. Không dùng thư viện bổ sung.
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+orders = ["Tea", "Coffee", "Tea", "Juice", "Tea"]
+# === BAI LAM ===
+counts = {}
+for item in orders:
+    # Cập nhật bộ đếm theo item
+    pass
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 7: Dictionary of Sets: lập chỉ mục}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 7 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Dictionary of Sets: lập chỉ mục}\par\bigskip
+{\color{white!80}\large Một khóa liên kết với nhiều giá trị duy nhất.}\par\medskip
+{\color{white!80}\normalsize 8.3.1 \hspace{1.2cm} LO6}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 7 · LO6}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Cấu trúc}
+dict[str, set] lưu mỗi khóa một tập giá trị không trùng.
+\end{block}
+\begin{block}{Bài toán}
+Từ $\rightarrow$ số trang; sản phẩm $\rightarrow$ các kho còn hàng.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Cập nhật}
+Tạo set rỗng nếu khóa chưa có, sau đó gọi index[key].add(value).
+\end{block}
+\begin{block}{Hiển thị}
+sorted(index[key]) cho danh sách có thứ tự để trình bày.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Hình 11 – Dictionary of Sets để tạo chỉ mục}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.3cm,width=.95\linewidth,keepaspectratio]{figures/fig11_dict_of_sets.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 11, tr. 479.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ sách: Lập chỉ mục từ – số trang}
+\framesubtitle{8.3.1 · A Dictionary of Sets}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+entries = {}
+records = [("example", 7), ("example", 10),
+           ("index", 7), ("program", 7),
+           ("program", 11), ("type", 6)]
+for term, page in records:
+    if term not in entries:
+        entries[term] = set()
+    entries[term].add(page)
+for term in sorted(entries):
+    print(term, sorted(entries[term]))
+\end{Verbatim}
+\begin{block}{Quan sát}
+Mỗi term là một khóa duy nhất; số trang được lưu trong set, tránh trùng lặp. Đoạn mã là phiên bản rút gọn theo dữ liệu ví dụ của sách.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.3.1, tr. 479–481; mã minh họa rút gọn từ bài toán trong sách.}
+\end{frame}
+
+
+\begin{frame}[t]{Một khóa -- nhiều giá trị duy nhất}
+
+\centering
+\begin{tikzpicture}[node distance=7mm and 27mm,kn/.style={draw=teal,fill=softteal,rounded corners=4pt,minimum width=2.3cm,minimum height=.7cm},vl/.style={draw=deepnavy!40,fill=sky,rounded corners=4pt,minimum width=4.2cm,minimum height=.7cm},>={Stealth}]
+\node[kn] (a) {Tea}; \node[kn,below=of a] (b) {Coffee};
+\node[vl,right=of a] (va) {\{WH1, WH2\}}; \node[vl,right=of b] (vb) {\{WH2\}};
+\draw[->,thick,teal] (a)--(va); \draw[->,thick,teal] (b)--(vb);
+\end{tikzpicture}
+\vspace{5mm}
+\begin{block}{Ứng dụng}
+Một mã hàng có thể có mặt ở nhiều kho. Dùng \py{dict[str, set]} để không lưu một kho hai lần.
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Cú pháp và kết quả trả về}
+\framesubtitle{Chặng 7 · Bảng 1, phần 1}
+\begingroup\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.42cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.15cm}}
+\toprule
+\textbf{Cú pháp / PT} & \textbf{Mục đích} & \textbf{Trả về} & \textbf{Lỗi / lưu ý} \\
+\midrule
+\textcolor{teal}{\bfseries d[key] = set()} & Tạo nhóm dữ liệu cho key. & Câu lệnh gán, không có giá trị trả về. & Khóa cần hashable. \\
+\midrule
+\textcolor{teal}{\bfseries d[key].add(x)} & Đưa x vào nhóm. & None . & Phải tồn tại key ; x hashable. \\
+\midrule
+\textcolor{teal}{\bfseries d.setdefault(key, set())} & Lấy set hiện tại hoặc tạo khi thiếu. & Set đang lưu trong dict. & Phương thức có thể làm thay đổi dict. \\
+\midrule
+\textcolor{teal}{\bfseries sorted(d[key])} & Hiển thị nhóm có thứ tự. & list . & Các phần tử phải so sánh được. \\
+\midrule
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Mã sản phẩm theo kho}
+\framesubtitle{Chặng 7 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+records = [("Tea", "WH1"), ("Tea", "WH2"),
+           ("Tea", "WH1"), ("Coffee", "WH2")]
+warehouses = {}
+for product, warehouse in records:
+    if product not in warehouses:
+        warehouses[product] = set()
+    warehouses[product].add(warehouse)
+for product in sorted(warehouses):
+    print(product, sorted(warehouses[product]))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+Coffee ['WH2']
+Tea ['WH1', 'WH2']
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Từ và trang trong sách}
+\framesubtitle{Chặng 7 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+records = [("type", 6), ("index", 7),
+           ("type", 8), ("type", 8)]
+index = {}
+for term, page in records:
+    if term not in index:
+        index[term] = set()
+    index[term].add(page)
+
+print(sorted(index["type"]))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+[6, 8]
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: In bảng chỉ mục có thứ tự}
+\framesubtitle{Chặng 7 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+index = {"A": {2, 3}}
+for term in sorted(index):
+    print(term, sorted(index[term]))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+A [2, 3]
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 7 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item Thêm vào index[k] khi k chưa có gây KeyError.
+\item Phần tử set phải hashable; không thể thêm list trực tiếp.
+\item Dùng dict of lists thay thế nếu cần giữ thứ tự hoặc giá trị lặp.
+\end{itemize}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 7 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Lựa chọn kiểu dữ liệu cho nhóm}
+Muốn lưu mỗi sản phẩm tương ứng nhiều kho và không lặp mã kho, nên chọn cấu trúc nào?
+\medskip
+\quad \textcolor{teal}{A.} Dictionary of lists vì luôn giữ trùng\hspace{3mm}
+\quad \textcolor{teal}{B.} Dictionary of sets\hspace{3mm}
+\quad \textcolor{teal}{C.} Một set đơn không phân biệt sản phẩm\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Thêm kho vào nhóm có sẵn}
+Sau khi index["Tea"] đã là một set, điền phương thức để ghi nhận kho WH1: index["Tea"].\_\_\_\_("WH1")
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 7 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Cấu trúc phù hợp để lưu các trang không trùng theo từng từ là?\par\smallskip
+\begin{enumerate}
+\item dict of sets
+\item set of lists
+\item list of floats
+\item str
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Với index["data"] = \{3, 4\} , lệnh thêm trang 4 sẽ?\par\smallskip
+\begin{enumerate}
+\item Tạo hai số 4
+\item Không đổi tập
+\item Báo lỗi
+\item Xóa trang 3
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 7 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Trước khi gọi index[term].add(page) với khóa mới, cần?\par\smallskip
+\begin{enumerate}
+\item Gán index[term] = set()
+\item Gán index[term] = 0
+\item Gán index[term] = []
+\item Gán index[term] = ""
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Xây dựng chỉ mục trang}
+\framesubtitle{Chặng 7 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Cho records là list các cặp (từ, số trang). Tạo dictionary index ánh xạ mỗi từ tới set các trang khác nhau.
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+records = [("data", 2), ("python", 3), ("data", 5), ("data", 2)]
+# === BAI LAM ===
+index = {}
+for term, page in records:
+    # Tạo set mới nếu từ chưa có, rồi thêm page
+    pass
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Chặng 8: Dictionary of Lists: báo cáo dữ liệu}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+\fill[deepnavy] (current page.south west) rectangle (current page.north east);
+\fill[teal] ([xshift=-.45cm,yshift=.2cm]current page.north east) circle (3.5cm);
+\end{tikzpicture}
+\vfill
+{\color{white!65}\Large CHẶNG 8 / 08}\par\medskip
+{\color{white}\fontsize{26}{30}\selectfont\bfseries Dictionary of Lists: báo cáo dữ liệu}\par\bigskip
+{\color{white!80}\large Lưu chuỗi giá trị cho mỗi khóa và tính báo cáo.}\par\medskip
+{\color{white!80}\normalsize 8.3.2 \hspace{1.2cm} LO6}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Khái niệm và mục đích sử dụng}
+\framesubtitle{Chặng 8 · LO6}
+\begin{columns}[t,onlytextwidth]
+\begin{column}{.49\linewidth}
+\begin{block}{Cấu trúc}
+dict[str, list] cho phép một khóa gắn với dãy có thứ tự và chấp nhận phần tử lặp.
+\end{block}
+\begin{block}{Bài toán}
+Mặt hàng $\rightarrow$ doanh số theo cửa hàng; sinh viên $\rightarrow$ điểm từng học phần.
+\end{block}
+\end{column}
+\begin{column}{.49\linewidth}
+\begin{block}{Tổng hợp}
+Duyệt items(), dùng sum(values) để tính tổng của mỗi khóa.
+\end{block}
+\begin{block}{Lựa chọn CTDL}
+set để duy nhất; dict để tra cứu; dict of sets để nhóm không trùng; dict of lists để giữ dãy.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Hình 12 – Dictionary of Lists cho dữ liệu bảng}
+\framesubtitle{Minh họa gốc trong giáo trình}
+\centering
+\includegraphics[height=4.35cm,width=.95\linewidth,keepaspectratio]{figures/fig12_dict_of_lists.png}\par
+\vspace{2mm}
+{\scriptsize\color{muted}Nguồn: C. S. Horstmann \& R. D. Necaise, \textit{Python for Everyone}, Chương 8, Hình 12, tr. 482.}
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ sách: Doanh số kem theo cửa hàng}
+\framesubtitle{8.3.2 · A Dictionary of Lists}
+{\small\color{teal}\textbf{VÍ DỤ TỪ GIÁO TRÌNH}}\par\medskip
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+salesData = {
+ "vanilla": [8580.0, 7201.25, 8900.0],
+ "strawberry": [9285.15, 8276.10, 8705.0],
+ "chocolate": [10225.25, 9025.0, 9505.0]
+}
+for flavor in sorted(salesData):
+    total = sum(salesData[flavor])
+    print(flavor, "total:", round(total, 2))
+\end{Verbatim}
+\begin{block}{Quan sát}
+Dictionary lưu từng hương vị theo khóa, danh sách giá trị là doanh số theo từng cửa hàng. Trường hợp thực tế có thể đọc từ file dữ liệu.
+\end{block}
+\vfill
+{\scriptsize\color{muted}Nguồn: Horstmann \& Necaise, \textit{Python for Everyone}, Chương 8, mục 8.3.2, tr. 481–482; mã minh họa rút gọn từ dữ liệu sách.}
+\end{frame}
+
+
+\begin{frame}[t]{Phân biệt dictionary of sets / lists}
+
+\small
+\begin{tabularx}{\linewidth}{>{\bfseries}p{3.1cm}XX}
+\toprule
+Tiêu chí & dict of sets & dict of lists\\\midrule
+Trùng lặp & Không & Có\\\midrule
+Thứ tự giá trị & Không dùng như vị trí & Có, truy cập bằng chỉ số\\\midrule
+Trường hợp dùng & Sản phẩm $\to$ tập kho & Sản phẩm $\to$ doanh số từng cửa hàng\\\midrule
+Thêm phần tử & \py{d[k].add(x)} & \py{d[k].append(x)}\\
+\bottomrule
+\end{tabularx}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Khách hàng và số lần mua}
+\framesubtitle{Chặng 8 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+sales = [("An", "Tea"), ("An", "Tea"),
+         ("Binh", "Coffee"), ("Chi", "Tea")]
+customers = set()
+productCounts = {}
+for customer, product in sales:
+    customers.add(customer)
+    productCounts[product] = productCounts.get(product, 0) + 1
+print(sorted(customers))
+print(productCounts)
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+['An', 'Binh', 'Chi']
+{'Tea': 3, 'Coffee': 1}
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Doanh số theo cửa hàng}
+\framesubtitle{Chặng 8 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+salesData = {
+  "Tea": [120, 150, 100],
+  "Coffee": [200, 180, 220],
+  "Juice": [80, 95, 110]
+}
+print(sum(salesData["Tea"]))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+370
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Ví dụ Python: Tổng theo sản phẩm và toàn bộ}
+\framesubtitle{Chặng 8 · Đọc mã, dự đoán kết quả}
+\vspace{-1mm}
+{\small\color{muted}\textbf{MÃ NGUỒN PYTHON}}\par\vspace{1mm}
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=4mm,rulecolor=\color{teal!35},breaklines=true]
+salesData = {
+    "Tea": [120, 150],
+    "Coffee": [200, 180]
+}
+productTotals = {}
+for product, sales in salesData.items():
+    productTotals[product] = sum(sales)
+
+print(productTotals)
+print(sum(productTotals.values()))
+\end{Verbatim}
+\vspace{1mm}\textcolor{teal}{\scriptsize\textbf{KẾT QUẢ DỰ KIẾN}}
+\begin{Verbatim}[fontsize=\scriptsize,breaklines=true]
+{'Tea': 270, 'Coffee': 380}
+650
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}[t]{Lỗi thường gặp và cách phòng tránh}
+\framesubtitle{Chặng 8 · Các lỗi liên quan}
+\begin{alertblock}{Ghi nhớ khi viết chương trình}
+\begin{itemize}
+\item Không thay list bằng set nếu vị trí cửa hàng có ý nghĩa hoặc giá trị có thể trùng.
+\item Nếu các list có chiều dài khác nhau, tổng theo từng vị trí cần được xử lý cẩn thận.
+\item Tổng doanh số toàn bộ có thể tính từ tổng từng sản phẩm.
+\end{itemize}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Kiểm tra nhanh sau lý thuyết}
+\framesubtitle{Chặng 8 · Không hiển thị đáp án}
+\small\begin{block}{Câu 1 — Lựa chọn cấu trúc cho lịch sử giao dịch}
+Một mã hàng cần lưu mọi lượt bán theo đúng thứ tự, kể cả hai lượt có số tiền bằng nhau. Nên dùng kiểu giá trị nào trong dictionary?
+\medskip
+\quad \textcolor{teal}{A.} set\hspace{3mm}
+\quad \textcolor{teal}{B.} list\hspace{3mm}
+\quad \textcolor{teal}{C.} bool\hspace{3mm}
+\end{block}
+\begin{block}{Câu 2 — Đếm tần suất bằng dictionary}
+Điền phương thức để đếm số lần xuất hiện của product (mặc định 0): counts[product] = counts.\_\_\_\_(product, 0) + 1
+\end{block}
+\vspace{1mm}{\scriptsize\color{muted}Hai câu kiểm tra hai nội dung khác nhau. Sinh viên tự dự đoán trước khi thử mã Python.}
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (1/2)}
+\framesubtitle{Chặng 8 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 1}
+Để giữ doanh số từng cửa hàng theo vị trí, value nên là?\par\smallskip
+\begin{enumerate}
+\item set
+\item list
+\item int
+\item bool
+\end{enumerate}
+\end{block}
+\begin{block}{Câu 2}
+Với d = \{"Tea": [10, 20]\} , sum(d["Tea"]) bằng?\par\smallskip
+\begin{enumerate}
+\item 2
+\item 10
+\item 20
+\item 30
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Quiz cuối chặng (2/2)}
+\framesubtitle{Chặng 8 · Chọn một phương án đúng}
+\small
+\begin{block}{Câu 3}
+Cấu trúc dict of sets phù hợp hơn dict of lists khi?\par\smallskip
+\begin{enumerate}
+\item Cần giữ mọi giá trị trùng
+\item Muốn truy cập vị trí số 0
+\item Không muốn có giá trị trùng theo mỗi khóa
+\item Phải giữ thứ tự nhập
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Bài tập lập trình: Lập báo cáo tổng doanh số}
+\framesubtitle{Chặng 8 · Tự hoàn thiện chương trình}
+\begin{block}{Yêu cầu bài tập}
+Cho salesData là dictionary of lists. Tạo productTotals : tổng của từng mặt hàng; và grandTotal : tổng doanh số tất cả mặt hàng.
+\end{block}
+\textcolor{teal}{\scriptsize\textbf{MẪU CODE / ĐIỀN VÀO CHỖ TRỐNG}}\par
+\begin{Verbatim}[fontsize=\scriptsize,frame=single,framesep=3mm,rulecolor=\color{teal!35},breaklines=true]
+salesData = {"Tea": [120, 150], "Coffee": [200, 180]}
+# === BAI LAM ===
+productTotals = {}
+for product, sales in salesData.items():
+    # Tính tổng theo product
+    pass
+grandTotal = ___
+\end{Verbatim}
+\vspace{1mm}{\scriptsize\color{muted}Trong HTML tương tác, bài này được chấm bằng các ca kiểm thử Python; slide không cung cấp lời giải.}
+\end{frame}
+
+\section{Tổng kết chương}
+
+\begin{frame}[t]{Tổng kết kiến thức: Set}
+
+\begin{itemize}
+\item \term{Tính duy nhất}: \py{set(iterable)} loại phần tử trùng.
+\item \term{Kiểm tra thành viên}: \py{x in s} $\rightarrow$ bool.
+\item \term{Sửa tại chỗ}: \py{add}, \py{discard}, \py{remove} $\rightarrow$ None khi thành công.
+\item \term{Phép toán tập hợp}: \py{|}, \py{\&}, \py{-}, \py{\^{}}, \py{issubset}.
+\item \term{Ngoại lệ}: \py{remove} khi thiếu phần tử $\rightarrow$ KeyError.
+\end{itemize}
+\begin{block}{Quy tắc lựa chọn} Chọn set khi muốn quản lý các giá trị \textbf{không trùng lặp}. \end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Tổng kết kiến thức: Map / Dictionary}
+
+\begin{itemize}
+\item \term{Ánh xạ}: mỗi khóa duy nhất trỏ tới một giá trị; truy xuất qua key.
+\item \term{Tra cứu an toàn}: \py{d.get(k, default)} không gây KeyError khi thiếu key.
+\item \term{Duyệt}: \py{for k in d} hoặc \py{for k,v in d.items()}.
+\item \term{Cập nhật}: \py{d[k] = v}, \py{update()}, \py{setdefault()}.
+\item \term{Cấu trúc phức hợp}: dictionary of sets / dictionary of lists.
+\end{itemize}
+\begin{block}{Quy tắc lựa chọn} Chọn dict khi phải \textbf{tra cứu và tổng hợp theo khóa}. \end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Bảng lựa chọn cấu trúc dữ liệu}
+
+\small
+\begin{tabularx}{\linewidth}{p{4.7cm} X p{4.0cm}}
+\toprule
+\textbf{Yêu cầu} & \textbf{CTDL} & \textbf{Ví dụ ứng dụng}\\\midrule
+Lưu chuỗi theo vị trí, cho phép trùng & \term{list} & Doanh số theo ngày\\\midrule
+Lưu tập giá trị duy nhất & \term{set} & Tệp khách không trùng\\\midrule
+Tra một khóa đến một giá trị & \term{dict} & Mã hàng $\to$ giá\\\midrule
+Khóa $\to$ nhiều giá trị duy nhất & \term{dict of sets} & Từ $\to$ các trang\\\midrule
+Khóa $\to$ dãy dữ liệu có thứ tự & \term{dict of lists} & Mặt hàng $\to$ chuỗi doanh thu\\
+\bottomrule
+\end{tabularx}
+
+\end{frame}
+
+\begin{frame}[t]{Bài tập tự luyện tổng hợp}
+
+\begin{enumerate}
+\item \textbf{Kinh doanh:} Từ danh sách đơn hàng, tìm tập khách duy nhất và đếm số đơn theo sản phẩm.
+\item \textbf{Chuỗi cung ứng:} Tạo bản đồ sản phẩm $\to$ tập kho có hàng (không trùng).
+\item \textbf{Tài chính:} Dùng dictionary mã cổ phiếu $\to$ lượng nắm giữ; tính tổng số lượng.
+\item \textbf{Dữ liệu văn bản:} Chuẩn hóa câu, đếm số từ duy nhất và tần suất xuất hiện mỗi từ.
+\end{enumerate}
+\begin{alertblock}{Yêu cầu học tập}
+Đối với mỗi bài, giải thích: vì sao chọn set, dict hay cấu trúc kết hợp? Dự đoán kiểu dữ liệu và kết quả trả về của các phương thức được dùng.
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[t]{Tài liệu và hướng dẫn}
+
+\begin{itemize}
+\item \textbf{Giáo trình gốc:} Cay Horstmann, Rance Necaise, \emph{Python for Everyone}, Chương 8 -- Sets and Dictionaries.
+\item \textbf{Tài liệu đi kèm:} Bài giảng HTML tương tác của Chương 8 với ví dụ Python có thể chạy, kiểm tra nhanh và bài tập tự chấm.
+\item \textbf{Tài liệu hiện hành:} \url{https://docs.python.org/3/library/stdtypes.html} (mục Set Types và Mapping Types).
+\end{itemize}
+\medskip
+\begin{block}{Phân biệt hai hình thức}
+\textbf{Beamer}: trình chiếu và thảo luận trực tiếp.\\
+\textbf{HTML}: chạy mã, chấm quiz và ghi nhận tiến độ học.
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[t]{Tài liệu và nguồn hình minh họa}
+\small
+\begin{block}{Giáo trình nền tảng}
+Cay S. Horstmann \& Rance D. Necaise, \textit{Python for Everyone}, 2nd ed., Wiley, 2016. Chương 8: \textit{Sets and Dictionaries}, tr. 457--498.
+\end{block}
+\begin{block}{Hình được sử dụng}
+Hình 1--12 và Syntax 8.1 trích trực tiếp từ Chương 8 của giáo trình do người dùng cung cấp, được cắt từ bản PDF để trình chiếu. Các hình minh họa vẫn giữ nguyên hình thức gốc và có số trang dẫn nguồn trên từng slide.
+\end{block}
+\begin{block}{Ví dụ và bài tập}
+Các ví dụ được trích hoặc biên tập rút gọn từ các phần 8.1--8.3. Các bài quiz và luyện tập trước đây của bài giảng vẫn là nội dung biên soạn phục vụ dạy học.
+\end{block}
+\end{frame}
+
+\end{document}

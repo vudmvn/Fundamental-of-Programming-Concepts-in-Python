@@ -1,0 +1,507 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.88]}{\setmonofont{Liberation Mono}[Scale=0.88]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\geometry{top=1.35cm,bottom=1.35cm,left=1.65cm,right=1.65cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{correctgreen}{RGB}{10,120,40}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.8pt,topsep=0.4pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.3em,itemsep=0.8pt,topsep=0.4pt,parsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.12em,
+  belowskip=0.12em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Solutions \& Marking Scheme (Loops \& Functions) --- Code: 201}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{2.5pt}{1.0pt}
+\titlespacing*{\subsection}{0pt}{1.8pt}{0.8pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Midterm Exam Solutions (Loops and Functions, 60 Minutes)},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% ==============================================================================
+% PAGE 1: HEADER + INSTRUCTOR NOTE + SECTION A PART 1 (Q1 - Q10)
+% ==============================================================================
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.06cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY}}\\[0.04cm]
+  {\large\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}}\\[0.12cm]
+  \rule{\textwidth}{1.2pt}\\[0.12cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.06cm]
+  {\large\textbf{Course: Fundamental Programming Concepts in Python (DSAI1003)}}\\[0.06cm]
+  {\normalsize\textbf{Progress Midterm Exam: Loops, Iteration \& Modular Functions --- Code: 201}}\\[0.05cm]
+  {\footnotesize\textbf{Weighting:} 40\% Quiz, 30\% Fill-in, 30\% Full Code \quad | \quad \textbf{Difficulty:} 80\% Basic (80 pts), 20\% Medium (20 pts)}\\[0.08cm]
+  \rule{\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.05cm}
+
+\begin{tcolorbox}[colback=green!8, colframe=correctgreen, arc=1.2mm, boxrule=0.6pt, left=2.0mm, right=2.0mm, top=0.8mm, bottom=0.8mm]
+\small
+\textbf{Note for Instructors and Teaching Assistants:}
+This document contains the official answer keys, conceptual justifications, reference implementations, sample outputs, and itemized grading rubrics for the 60-minute Loops \& Functions Midterm Exam. All grading must follow these rubrics consistently.
+\end{tcolorbox}
+
+\vspace{0.05cm}
+
+\section*{Section A: Multiple-Choice Quiz Solutions (40 points --- 20 questions, 2 pts each)}
+\textit{Difficulty: 16 Basic questions (32 pts, 80\%), 4 Medium questions (8 pts, 20\%).}
+
+\subsection*{Part 1: Questions 1 to 10 (Loop Concepts \& Iteration Mechanics)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.10}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Level} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & Basic & A \texttt{for} loop implements definite iteration over a sequence/iterable. A \texttt{while} loop implements indefinite iteration driven by dynamic boolean conditions. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{C} & Basic & \texttt{range(2, 14, 3)} starts at 2, steps by 3, and excludes stop value 14: values are $2, 5, 8, 11 \rightarrow$ \texttt{[2, 5, 8, 11]}. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{C} & Basic & Variable \texttt{i} is initialized to 1 and never incremented inside the loop body; \texttt{i <= 5} remains permanently \texttt{True}, producing an infinite loop. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{A} & Basic & A priming read retrieves the initial input before the loop header so that the sentinel condition can be tested before the first iteration begins. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{B} & Basic & \texttt{continue} immediately abandons the remainder of the current iteration and jumps directly to the loop header for re-evaluation. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{A} & Medium & Hand-trace $k \in \{1, 3, 5, 7, 9, 11\}$: $k\%4==1$ holds for $k \in \{1, 5, 9\}$. Accumulated sum: $1 + 5 + 9 = 15$. Loop halts when $k=13$. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{D} & Basic & Setting \texttt{max\_val = 0} fails if all values are negative. Setting to the first element or \texttt{float('-inf')} ensures all candidate values compare correctly. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{C} & Basic & Traversal of \texttt{"DataSci2026"}: \texttt{ch.isdigit()} evaluates \texttt{True} exactly for digits \texttt{'2'}, \texttt{'0'}, \texttt{'2'}, \texttt{'6'} (total: \texttt{4}). & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{A} & Medium & Outer loop $i=1$: inner runs 4 times; $i=2$: 3 times; $i=3$: 2 times; $i=4$: 1 time. Total iterations: $4 + 3 + 2 + 1 = 10$. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{B} & Basic & In Python, a \texttt{break} statement strictly terminates the innermost enclosing loop, resuming execution at the statement directly following that loop. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A PART 2 + SECTION B INTRO & PROBLEM B1
+% ==============================================================================
+\subsection*{Part 2: Questions 11 to 20 (Functions, Modular Design \& Scope Mechanics)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.10}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Level} & \textbf{Conceptual Explanation \& Rule Reference} & \textbf{Marks} \\
+\hline
+\textbf{Q11} & \textbf{D} & Basic & Black-box abstraction mandates that callers rely exclusively on the interface contract (parameters, return type, behavior) without needing internal details. & 2 pts \\
+\hline
+\textbf{Q12} & \textbf{A} & Basic & A parameter is the formal variable identifier declared in the function definition header; an argument is the concrete value supplied during invocation. & 2 pts \\
+\hline
+\textbf{Q13} & \textbf{C} & Basic & Python functions that reach the end of their body without executing an explicit \texttt{return} statement implicitly return the singleton value \texttt{None} (\texttt{NoneType}). & 2 pts \\
+\hline
+\textbf{Q14} & \textbf{C} & Basic & Parameters with default values must strictly follow non-default parameters. In \texttt{def compute(val=10, rate, factor=1.0)}, non-default \texttt{rate} causes a \texttt{SyntaxError}. & 2 pts \\
+\hline
+\textbf{Q15} & \textbf{D} & Medium & Invocation: \texttt{weight=10}, default \texttt{rate=3.5}, keyword \texttt{base=15.0}. Return value: $10 \times 3.5 + 15.0 = 35.0 + 15.0 = 50.0$. & 2 pts \\
+\hline
+\textbf{Q16} & \textbf{A} & Basic & Local variables are allocated in the function's local frame when called and are destroyed when the call finishes and the frame is popped. & 2 pts \\
+\hline
+\textbf{Q17} & \textbf{B} & Basic & When a local identifier matches a global identifier, Python resolves references to the local scope first (LEGB rule), thereby shadowing the global variable. & 2 pts \\
+\hline
+\textbf{Q18} & \textbf{A} & Medium & Integers are immutable in Python. The parameter \texttt{s} binds to 60 locally; rebinding \texttt{s = s + 25} alters only the local frame. Outer variable \texttt{score} remains \texttt{60}. & 2 pts \\
+\hline
+\textbf{Q19} & \textbf{B} & Basic & When comma-separated expressions are returned (\texttt{return total, avg}), Python automatically packs them into a single immutable \texttt{tuple}. & 2 pts \\
+\hline
+\textbf{Q20} & \textbf{D} & Medium & Stepwise refinement decomposes a complex programming task into smaller, cohesive, independently testable, and reusable helper functions. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.6mm}
+\begin{tcolorbox}[colback=boxbg, colframe=primaryblue!45, arc=1.2mm, left=2.0mm, right=2.0mm, top=0.8mm, bottom=0.8mm]
+\small
+\textbf{Section A Distribution Summary:}\\
+$\bullet$ Basic: 16 Qs $\times$ 2 pts (Q1--Q5, Q7--Q8, Q10--Q14, Q16--Q17, Q19) = \textbf{32 points (80.0\% of Section A)}\\
+$\bullet$ Medium: 4 Qs $\times$ 2 pts (Q6, Q9, Q15, Q18, Q20) = \textbf{8 points (20.0\% of Section A)}\\
+$\bullet$ Section A Total: \textbf{40 points (40.0\% of total exam score)}
+\end{tcolorbox}
+
+\vspace{-1.0mm}
+\section*{Section B: Coding --- Fill-in Problems Solutions (30 points)}
+\textit{Difficulty: 24 points Basic (80\%), 6 points Medium (20\%).}
+
+\subsection*{Problem B1: Streaming Expense Tracker \& Running Total (12 points --- 4 blanks, 3 pts each [All Basic])}
+
+\begin{lstlisting}
+total_expense = 0.0
+item_count = 0
+amount = float(input("Enter expense amount (0 to stop): "))       # [B1.1] (3 pts - Basic)
+while amount > 0:                                                 # [B1.2] (3 pts - Basic)
+    total_expense = total_expense + amount                        # [B1.3] (3 pts - Basic)
+    item_count = item_count + 1
+    amount = float(input("Enter next expense (0 to stop): "))
+print(f"Total: ${total_expense:,.2f} across {item_count} items")  # [B1.4] (3 pts - Basic)
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Blank} & \textbf{Level} & \textbf{Accepted Answer(s) \& Grading Criteria} & \textbf{Marks} \\
+\hline
+\textbf{[B1.1]} & Basic & \texttt{float(input("Enter expense amount (0 to stop): "))} or \texttt{float(input())}\newline
+\textit{Award 3 pts. Award 1.5 pts if \texttt{int(input(...))} used.} & 3 pts \\
+\hline
+\textbf{[B1.2]} & Basic & \texttt{amount > 0} or \texttt{amount != 0}\newline
+\textit{Award 3 pts for correct sentinel comparison.} & 3 pts \\
+\hline
+\textbf{[B1.3]} & Basic & \texttt{total\_expense + amount}\newline
+\textit{Award 3 pts. Accept \texttt{total\_expense += amount} if written as statement.} & 3 pts \\
+\hline
+\textbf{[B1.4]} & Basic & \texttt{total\_expense:,.2f} or \texttt{total\_expense:,.2F}\newline
+\textit{Award 3 pts for comma and 2 decimals. Award 1.5 pts if comma omitted (\texttt{total\_expense:.2f}).} & 3 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION B PROBLEM B2 + SECTION B SUMMARY
+% ==============================================================================
+\subsection*{Problem B2: Modular Shopping Cart \& Discount Processor (18 points --- 6 blanks, 3 pts each)}
+
+\begin{lstlisting}
+def apply_discount(price, rate=0.10):                             # [B2.1] (3 pts - Basic)
+    return price * (1.0 - rate)
+
+prices = [25.0, 40.0, 100.0, 15.0, 60.0]
+total_discounted = 0.0
+max_price = 0.0
+
+for p in prices:                                                  # [B2.2] (3 pts - Basic)
+    disc_price = apply_discount(p)                                # [B2.3] (3 pts - Basic)
+    total_discounted = total_discounted + disc_price
+    if p > max_price:
+        max_price = p                                             # [B2.4] (3 pts - Basic)
+
+final_total = apply_discount(total_discounted, rate=0.05)         # [B2.5] (3 pts - Medium)
+avg_price = total_discounted / len(prices) if len(prices) > 0 else 0.0  # [B2.6] (3 pts - Medium)
+print(f"Final Total: ${final_total:.2f} | Max Item: ${max_price:.2f}")
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Blank} & \textbf{Level} & \textbf{Accepted Answer(s) \& Grading Criteria} & \textbf{Marks} \\
+\hline
+\textbf{[B2.1]} & Basic & \texttt{rate=0.10} or \texttt{rate=0.1}\newline
+\textit{Award 3 pts for correct default parameter specification.} & 3 pts \\
+\hline
+\textbf{[B2.2]} & Basic & \texttt{prices}\newline
+\textit{Award 3 pts for iterating directly over the list collection.} & 3 pts \\
+\hline
+\textbf{[B2.3]} & Basic & \texttt{apply\_discount(p)}\newline
+\textit{Award 3 pts for calling helper function with loop element \texttt{p}.} & 3 pts \\
+\hline
+\textbf{[B2.4]} & Basic & \texttt{p}\newline
+\textit{Award 3 pts for updating \texttt{max\_price} with current price.} & 3 pts \\
+\hline
+\textbf{[B2.5]} & Medium & \texttt{apply\_discount(total\_discounted, rate=0.05)} or \texttt{apply\_discount(total\_discounted, 0.05)}\newline
+\textit{Award 3 pts for re-invoking helper function with loyalty discount rate.} & 3 pts \\
+\hline
+\textbf{[B2.6]} & Medium & \texttt{total\_discounted / len(prices) if len(prices) > 0 else 0.0}\newline
+\textit{Award 3 pts for safe average calculation. Accept \texttt{total\_discounted / len(prices)} with 1.5 pts.} & 3 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1mm}
+\begin{tcolorbox}[colback=boxbg, colframe=primaryblue!45, arc=1.2mm, left=2.0mm, right=2.0mm, top=1.0mm, bottom=1.0mm]
+\small
+\textbf{Section B Summary:}\\
+$\bullet$ Basic: [B1.1]--[B1.4] (12 pts) + [B2.1]--[B2.4] (12 pts) = \textbf{24 points (80.0\% of Section B)}\\
+$\bullet$ Medium: [B2.5] (3 pts) + [B2.6] (3 pts) = \textbf{6 points (20.0\% of Section B)}\\
+$\bullet$ Section B Total: \textbf{30 points (30.0\% of total exam)}
+\end{tcolorbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION C PROBLEM C1 & PROBLEM C2
+% ==============================================================================
+\section*{Section C: Applied Full-Code Programming \& Design Solutions (30 points)}
+\textit{Difficulty Distribution: 24 points Basic (80\%), 6 points Medium (20\%). Problems C1 and C2 share the common athletic training scenario. Problem C3 evaluates a sentinel loop and quiz statistics.}
+
+\begin{tcolorbox}[colback=boxbg, colframe=secondaryteal, arc=1.2mm, boxrule=0.6pt, left=2.0mm, right=2.0mm, top=0.6mm, bottom=0.6mm]
+\textbf{\small Problem Scenario for C1 \& C2: Runner Fitness Activity \& Training Session Tracker}\\[0.1mm]
+\footnotesize
+A fitness tracking app logs a runner's performance across $N$ training sessions based on the following rules:
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item \textbf{Formulas per Session:}
+    $\text{Distance (km)} = \text{speed\_kmh} \times (\text{duration\_min} / 60.0)$; \quad
+    $\text{Calories Burned (kcal)} = \text{duration\_min} \times 11.5$.
+  \item Across all $N$ sessions, calculate total distance (km), total calories (kcal), and the maximum single-session distance.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.2mm}
+\subsection*{Problem C1: Algorithmic Specification \& Pseudocode (8 points --- [All Basic])}
+
+\begin{lstlisting}[language={}]
+BEGIN Fitness_Tracker
+    INPUT total_sessions
+    SET total_dist = 0.0, total_cal = 0.0, max_dist = 0.0
+    FOR session FROM 1 TO total_sessions DO:
+        INPUT duration_min, speed_kmh
+        SET dist = speed_kmh * (duration_min / 60.0)
+        SET cal = duration_min * 11.5
+        SET total_dist = total_dist + dist
+        SET total_cal = total_cal + cal
+        IF dist > max_dist THEN:
+            SET max_dist = dist
+        END IF
+    END FOR
+    PRINT total_dist, total_cal, max_dist
+END
+\end{lstlisting}
+
+\vspace{0.2mm}
+\subsection*{Problem C2: Modular Python Function Implementation (10 points --- [All Basic])}
+
+\begin{lstlisting}
+def calculate_session_stats(duration_min, speed_kmh):
+    """Computes distance (km) and calories burned for a single training session."""
+    distance = speed_kmh * (duration_min / 60.0)
+    calories = duration_min * 11.5
+    return distance, calories
+
+def main():
+    n = int(input("Enter number of training sessions: "))
+    total_distance = 0.0
+    total_calories = 0.0
+    
+    for i in range(1, n + 1):
+        dur = float(input(f"Session {i} duration (min): "))
+        spd = float(input(f"Session {i} speed (km/h): "))
+        dist, cal = calculate_session_stats(dur, spd)
+        print(f"Session {i}: Distance = {dist:.2f} km | Calories = {cal:.1f} kcal")
+        total_distance += dist
+        total_calories += cal
+        
+    print("-" * 56)
+    print(f"Total Sessions: {n} | Total Distance: {total_distance:.2f} km | Total Calories: {total_calories:.1f} kcal")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.06}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|X|c|c|}
+\hline
+\textbf{Combined Grading Rubric for Problems C1 \& C2 (18 points total)} & \textbf{Level} & \textbf{Marks} \\
+\hline
+\textbf{[C1] Algorithmic Flow:} Proper input initialization and iterative loop header traversing all $N$ sessions & Basic & 4.0 pts \\
+\hline
+\textbf{[C1] Computation Logic:} Correct formula evaluation, running totals accumulation, and simple max comparison & Basic & 4.0 pts \\
+\hline
+\hline
+\textbf{[C2] Function Design:} Correct signature, parameters, arithmetic formulas, and tuple return & Basic & 4.0 pts \\
+\hline
+\textbf{[C2] Driver Loop \& IO:} Prompts for $N$, loops $N$ times, invokes function, unpacks tuple, accumulates, formats output & Basic & 6.0 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: PROBLEM C3 IMPLEMENTATION & VERIFICATION TRACE
+% ==============================================================================
+\subsection*{Problem C3: Student Quiz Score Aggregator \& Performance Analyzer (12 points)}
+\textit{Difficulty Breakdown: 6 points Basic + 6 points Medium.}
+
+\textbf{Reference Python Implementation:}
+\begin{lstlisting}
+def is_passing(score, pass_mark=50.0):
+    """Returns True if score meets or exceeds pass_mark, False otherwise."""
+    return score >= pass_mark
+
+def main():
+    SENTINEL = -1.0
+    count = 0
+    passed_count = 0
+    total_sum = 0.0
+    highest_score = float("-inf")
+    
+    # Priming read
+    score = float(input("Enter quiz score (-1.0 to finish): "))
+    
+    # Sentinel-controlled loop
+    while score != SENTINEL:
+        count += 1
+        total_sum += score
+        
+        if score > highest_score:
+            highest_score = score
+            
+        if is_passing(score):
+            passed_count += 1
+            
+        score = float(input("Enter next score (-1.0 to finish): "))
+        
+    # Summary reporting
+    if count == 0:
+        print("No scores were recorded.")
+        return
+        
+    avg_score = total_sum / count
+    pass_rate = (passed_count / count) * 100.0
+    
+    print("\n" + "=" * 56)
+    print("CLASS QUIZ PERFORMANCE SUMMARY")
+    print("=" * 56)
+    print(f"Total Students: {count} | Passed: {passed_count} ({pass_rate:.1f}%)")
+    print(f"Average Score:  {avg_score:.2f} | Highest Score: {highest_score:.2f}")
+    print("=" * 56)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+\vspace{0.4mm}
+\textbf{Test Execution Trace \& Sample Output Verification:}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Input Sequence: 65.0, 82.5, 45.0, 92.5, 88.0, -1.0
+Execution Trace:
+- Valid student count = 5
+- Total sum = 65.0 + 82.5 + 45.0 + 92.5 + 88.0 = 373.0 -> Average = 74.60
+- Passing students (>= 50.0) = 4 (65.0, 82.5, 92.5, 88.0) -> Pass Rate = 80.0%
+- Highest score = 92.50
+\end{lstlisting}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: PROBLEM C3 RUBRIC & GRAND TOTAL SUMMARY TABLE
+% ==============================================================================
+\subsection*{Itemized Grading Rubric for Problem C3 (12 points)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.18}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|X|c|c|}
+\hline
+\textbf{Assessment Dimension \& Technical Criteria} & \textbf{Level} & \textbf{Marks} \\
+\hline
+\textbf{Modular Helper Function:} Defines \texttt{is\_passing(score, pass\_mark=50.0)} with default parameter and returns boolean outcome \texttt{score >= pass\_mark}. & Basic & 3.0 pts \\
+\hline
+\textbf{Sentinel Loop Mechanics:} Implements priming read, correct \texttt{while} loop termination on \texttt{-1.0}, and updates next read at the end of each iteration. & Basic & 3.0 pts \\
+\hline
+\textbf{Statistical Aggregators:} Accurately tallies total student count, running total sum, passing count (calling \texttt{is\_passing}), and dynamically tracks highest score. & Medium & 3.0 pts \\
+\hline
+\textbf{Zero-Data Guard \& Formatted Reporting:} Includes zero-student guard (\texttt{count == 0}), computes average and pass percentage, and prints formatted summary report. & Medium & 3.0 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{2mm}
+\begin{tcolorbox}[colback=primaryblue!6, colframe=primaryblue, arc=1.5mm, boxrule=0.8pt, left=3.0mm, right=3.0mm, top=1.8mm, bottom=1.8mm]
+\small
+\textbf{\large Overall Examination Structure, Weighting \& Difficulty Verification}\\[1.5mm]
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{|X|c|c|c||c|}
+\hline
+\textbf{Examination Component} & \textbf{Basic (80\%)} & \textbf{Medium (20\%)} & \textbf{Total Points} & \textbf{Exam Weight} \\
+\hline
+\textbf{Section A: Multiple-Choice Quiz} & 32 pts (16 Qs) & 8 pts (4 Qs) & 40 pts & 40\% \\
+\hline
+\textbf{Section B: Fill-in Problems (B1 \& B2)} & 24 pts (8 blanks) & 6 pts (2 blanks) & 30 pts & 30\% \\
+\hline
+\textbf{Section C: Programming \& Design (C1--C3)} & 24 pts & 6 pts & 30 pts & 30\% \\
+\hline
+\hline
+\textbf{Grand Total Score} & \textbf{80 points (80.0\%)} & \textbf{20 points (20.0\%)} & \textbf{100 points} & \textbf{100\%} \\
+\hline
+\end{tabularx}
+
+\vspace{1.5mm}
+\textbf{Pedagogical Alignment with Course Syllabus (DSAI1003):}
+\begin{itemize}[itemsep=0.2pt,topsep=0.2pt]
+  \item \textbf{Loops \& Iteration (Part 4):} Definite (\texttt{for}) and indefinite (\texttt{while}) loops, \texttt{range()} arguments, priming reads, sentinel-controlled loops, infinite loop avoidance, \texttt{break}/\texttt{continue}, accumulator and min/max patterns.
+  \item \textbf{Functions \& Modular Design (Part 5):} Black-box abstraction, \texttt{def} syntax, parameter passing, return statements vs. \texttt{print()}, default arguments, variable scope (local vs. global shadowing), tuple unpacking, and stepwise refinement.
+\end{itemize}
+\end{tcolorbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[0.8mm]
+  \textbf{\color{primaryblue}--- END OF SOLUTIONS \& MARKING SCHEME ---}
+\end{center}
+
+\end{document}

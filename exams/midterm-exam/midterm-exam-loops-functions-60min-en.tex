@@ -1,0 +1,589 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.88]}{\setmonofont{Liberation Mono}[Scale=0.88]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\geometry{top=1.3cm,bottom=1.3cm,left=1.65cm,right=1.65cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+\definecolor{borderblue}{RGB}{150,185,215}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.3pt,topsep=0.3pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.3em,itemsep=0.5pt,topsep=0.3pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.1pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.15em,
+  xrightmargin=0.15em,
+  aboveskip=0.10em,
+  belowskip=0.10em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Midterm Exam (Loops \& Functions, 60 Min) --- Code: 201}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\small\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{2.0pt}{0.5pt}
+\titlespacing*{\subsection}{0pt}{1.5pt}{0.4pt}
+
+\newtcolorbox{headerbox}{
+  colback=white,
+  colframe=primaryblue,
+  boxrule=0.7pt,
+  arc=1.2mm,
+  left=2.0mm,
+  right=2.0mm,
+  top=0.8mm,
+  bottom=0.8mm
+}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=DarkGray!45,
+  boxrule=0.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=0.8mm,
+  bottom=0.8mm,
+  title=\footnotesize\color{DarkGray}\textbf{#2},
+  #1
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Progress Midterm Examination (Loops and Functions, 60 Minutes)},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: OFFICIAL HEADER + SCORE TABLE + ANSWER SHEET + Q1 - Q5
+% =========================================================================
+
+\noindent
+\begin{minipage}[t]{0.64\textwidth}
+  \raggedright\small
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{COLLEGE OF TECHNOLOGY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.34\textwidth}
+  \raggedleft\footnotesize
+  \textbf{OFFICIAL PROGRESS EXAMINATION}\\
+  Academic Year: 2026--2027\\
+  Semester: Fall 2026 \quad Course: \textbf{DSAI1003}
+\end{minipage}
+
+\vspace{0.08em}
+
+\begin{center}
+  {\large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.04em]
+  {\normalsize\bfseries PROGRESS MIDTERM EXAM: LOOPS, ITERATION \& MODULAR FUNCTIONS}\\[0.04em]
+  {\footnotesize\textbf{Paper Code:} \textbf{201} \quad | \quad \textbf{Duration: 60 Minutes} \quad | \quad \textbf{Difficulty:} 80\% Basic, 20\% Medium}
+\end{center}
+
+\vspace{0.04em}
+
+\begin{headerbox}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+  \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.10em]
+  \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabular*}
+
+\vspace{0.12em}
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3.0pt}
+\begin{tabularx}{\linewidth}{|l|c|c|c||c|X|}
+\hline
+\textbf{Section} & \textbf{\shortstack{Sec A: Quiz\\(40\%)}} & \textbf{\shortstack{Sec B: Fill-in\\(30\%)}} & \textbf{\shortstack{Sec C: Code\\(30\%)}} & \textbf{\shortstack{Total\\(100\%)}} & \centering\arraybackslash \textbf{\shortstack{Examiner\\Signature}} \\
+\hline
+\textbf{Max Score} & 40 pts & 30 pts & 30 pts & \textbf{100 pts} & \\[0.22em]
+\cline{1-5}
+\textbf{Score} & & & & & \\[0.32em]
+\hline
+\end{tabularx}
+
+\vspace{0.10em}
+\raggedright
+\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and calculators are prohibited. Total score: 100 points (40\% Quiz, 30\% Fill-in, 30\% Full Code; 80\% Basic, 20\% Medium). Mark MCQs directly in the answer sheet grid. Write code solutions in designated boxes. Do not detach pages.
+\end{headerbox}
+
+\vspace{1.0mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write letters A, B, C, or D into corresponding boxes)}:
+\begin{center}
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Q} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+\textbf{Ans} & & & & & & & & & & \\[1.4mm]
+\hline
+\hline
+\textbf{Q} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} & \textbf{20} \\
+\hline
+\textbf{Ans} & & & & & & & & & & \\[1.4mm]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2.5mm}
+\section*{Section A: Multiple-Choice Quiz \hfill \normalsize\normalfont(40 points --- 20 questions, 2 pts each)}
+\textit{Select the single best answer. Questions marked [Basic] test core concepts; [Medium] test composite logic.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=1.8em,itemsep=0.6pt,topsep=0.2pt]
+
+\item \textbf{[Basic]} What is the fundamental operational distinction between a \texttt{for} loop and a \texttt{while} loop in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item A \texttt{for} loop executes indefinitely until an exception occurs, whereas a \texttt{while} loop executes a fixed number of times.
+  \item A \texttt{for} loop is designed for definite iteration over sequences or iterables, whereas a \texttt{while} loop performs indefinite iteration controlled by a boolean condition.
+  \item A \texttt{for} loop cannot use \texttt{break} or \texttt{continue}, whereas a \texttt{while} loop supports both.
+  \item A \texttt{while} loop requires an iterable object, while a \texttt{for} loop requires an explicit boolean test condition.
+\end{enumerate}
+
+\item \textbf{[Basic]} What sequence of integers is produced by evaluating \texttt{list(range(2, 14, 3))}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{[2, 5, 8, 11, 14]}
+  \item \texttt{[2, 6, 10, 14]}
+  \item \texttt{[2, 5, 8, 11]}
+  \item \texttt{[5, 8, 11, 14]}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} Consider the following loop intended to print integers from 1 to 5:\\
+\texttt{i = 1}\\
+\texttt{while i <= 5: print(i, end=" ")}\\
+What happens when this program executes?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item It displays \texttt{1 2 3 4 5} and terminates normally.
+  \item It raises a \texttt{NameError} because variable \texttt{i} is not declared.
+  \item It enters an infinite loop, repeatedly printing \texttt{1} because \texttt{i} is never updated inside the loop body.
+  \item A \texttt{SyntaxError} is raised by Python before runtime begins.
+\end{enumerate}
+
+\item \textbf{[Basic]} In sentinel-controlled loop design, what is the specific role of a \textbf{priming read}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item To obtain and evaluate the initial input value before the \texttt{while} condition is tested for the first time.
+  \item To compile user console input directly into executable bytecode.
+  \item To prevent any runtime exceptions from ever being raised during subsequent iterations.
+  \item To automatically close and flush the standard input stream.
+\end{enumerate}
+
+\item \textbf{[Basic]} What is the direct operational effect of executing a \texttt{continue} statement within a loop body?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item It terminates the entire loop immediately and transfers control to the statement following the loop.
+  \item It skips the remaining statements in the current iteration and jumps directly to the condition test/next iteration.
+  \item It pauses program execution for a specified number of milliseconds.
+  \item It restarts the loop from the beginning, resetting all loop variables to their initial values.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A (Q6 - Q13)
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=1.8em,itemsep=0.8pt,topsep=0.3pt,resume]
+
+\item \textbf{[Medium]} What is the final value of \texttt{total} evaluated by the loop:\\
+\texttt{total, k = 0, 1}\\
+\texttt{while k < 12:}\\
+\texttt{\phantom{XX}if k \% 4 == 1: total += k}\\
+\texttt{\phantom{XX}k += 2}
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{15}
+  \item \texttt{25}
+  \item \texttt{1}
+  \item \texttt{36}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} When finding the maximum value in an arbitrary non-empty sequence of numbers (where all values could be negative), how should the tracking variable \texttt{max\_val} be initialized?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item Initialized to \texttt{0}, because 0 is the universal neutral integer.
+  \item Initialized to \texttt{999999} to ensure all elements compare smaller.
+  \item Initialized to \texttt{None} and incremented by 1 during each iteration.
+  \item Initialized to the first element in the sequence, or to negative infinity (\texttt{float('-inf')}).
+\end{enumerate}
+
+\item \textbf{[Basic]} What is the output produced by the following character traversal loop?\\
+\texttt{word, digits = "DataSci2026", 0}\\
+\texttt{for ch in word:}\\
+\texttt{\phantom{XX}if ch.isdigit(): digits += 1}\\
+\texttt{print(digits)}
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{0}
+  \item \texttt{2}
+  \item \texttt{4}
+  \item \texttt{11}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Medium]} How many times is the statement \texttt{count += 1} executed in the following nested loop?\\
+\texttt{count = 0}\\
+\texttt{for i in range(1, 5):}\\
+\texttt{\phantom{XX}for j in range(i, 5): count += 1}
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{10}
+  \item \texttt{16}
+  \item \texttt{20}
+  \item \texttt{6}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} What is the behavior of the \texttt{break} statement when executed inside an inner nested loop?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item It terminates all enclosing loops simultaneously and halts the program.
+  \item It immediately terminates only the innermost enclosing loop, leaving outer loops running.
+  \item It skips only the current iteration of the inner loop without terminating it.
+  \item It raises an uncatchable \texttt{StopIteration} exception.
+\end{enumerate}
+
+\item \textbf{[Basic]} What is the primary software engineering rationale for treating a Python function as a \textbf{``black box''} during system design?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item It converts all source code lines into encrypted binary bytecode to hide algorithms from competitors.
+  \item It strictly prevents functions from accepting arguments or returning results to calling programs.
+  \item It mandates that all internal local variables be accessible throughout the global module namespace.
+  \item The caller needs to know only the function's interface (inputs, outputs, and purpose) without needing to understand its internal implementation.
+\end{enumerate}
+
+\item \textbf{[Basic]} In Python function mechanics, what is the precise technical difference between a \textbf{parameter} and an \textbf{argument}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item A parameter is the variable name listed in the function definition header; an argument is the actual value or expression passed when calling the function.
+  \item An argument is the variable name in \texttt{def}; a parameter is the concrete value supplied at invocation.
+  \item Parameters must strictly be numeric data types, whereas arguments can only be string literals.
+  \item There is no technical distinction; parameters and arguments are exact syntactic synonyms.
+\end{enumerate}
+
+\item \textbf{[Basic]} What value is returned by a Python function that completes execution without encountering an explicit \texttt{return} statement?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{0}
+  \item \texttt{""}
+  \item \texttt{None}
+  \item \texttt{False}
+\end{enumerate}
+\end{multicols}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION A (Q14 - Q20) + SECTION B INTRO & PROBLEM B1
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=1.8em,itemsep=0.7pt,topsep=0.3pt,resume]
+
+\item \textbf{[Basic]} Which of the following function definition headers will raise a \texttt{SyntaxError} in Python?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item \texttt{def compute(val, rate=0.05, factor=1.0):}
+  \item \texttt{def compute(val=10, rate=0.05, factor=1.0):}
+  \item \texttt{def compute(val=10, rate, factor=1.0):}
+  \item \texttt{def compute(val, rate, factor):}
+\end{enumerate}
+
+\item \textbf{[Medium]} Given \texttt{def fee(w, r=3.5, b=6.0): return w * r + b}, what is evaluated by \texttt{fee(10, b=15.0)}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{41.0}
+  \item \texttt{29.0}
+  \item \texttt{65.0}
+  \item \texttt{50.0}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} What is the exact \textbf{lifetime} of a local variable declared inside a Python function?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item It is created when the function is called and deallocated immediately when the function terminates.
+  \item It persists throughout the entire program execution until the Python process terminates.
+  \item It is permanently stored in disk cache and reloaded across consecutive script runs.
+  \item It exists only as long as its value is greater than zero.
+\end{enumerate}
+
+\item \textbf{[Basic]} What occurs when a local variable inside a function has the identical identifier as an existing global variable?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item Python raises an immediate \texttt{AmbiguousNameError} at compile time.
+  \item The local variable \textbf{shadows} (masks) the global variable within the local scope of the function.
+  \item The global variable automatically overwrites the local variable upon assignment.
+  \item Python merges both values into a combined two-element list.
+\end{enumerate}
+
+\item \textbf{[Medium]} What is printed by: \texttt{def inc(s): s += 25; return s} followed by \texttt{score = 60; inc(score); print(score)}?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{60}
+  \item \texttt{85}
+  \item \texttt{25}
+  \item \texttt{None}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Basic]} When a Python function executes \texttt{return total, avg}, what data structure is actually returned to the caller?
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*.]
+  \item \texttt{list}
+  \item \texttt{tuple}
+  \item \texttt{dict}
+  \item \texttt{set}
+\end{enumerate}
+\end{multicols}
+
+\item \textbf{[Medium]} In professional software engineering, what is the primary purpose of \textbf{stepwise refinement}?
+\begin{enumerate}[label=\Alph*.,leftmargin=1.8em]
+  \item Automatically convert interpreted Python code into hardware-level microcode.
+  \item Allow functions to alter global variables without declaring explicit \texttt{global} statements.
+  \item Eliminate the need for loop structures by relying exclusively on infinite recursive calls.
+  \item Decompose a complex problem into smaller, cohesive, independently testable functions.
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{-1.5mm}
+\section*{Section B: Coding --- Fill-in Problems \hfill \normalsize\normalfont(30 points --- 2 problems, 10 blanks)}
+\textit{Write missing Python expressions directly into designated answer slots. Difficulty: 24 pts Basic (80\%), 6 pts Medium (20\%).}
+
+\subsection*{Problem B1: Streaming Expense Tracker \& Running Total (12 points --- 4 blanks, 3 pts each [All Basic])}
+Complete the program below by providing expressions for blanks \textbf{[B1.1]} to \textbf{[B1.4]}.
+The utility reads individual positive expense amounts until the user enters the sentinel value \texttt{0}, computes the cumulative sum, counts items, and prints a formatted receipt.
+
+\begin{lstlisting}
+total_expense = 0.0
+item_count = 0
+
+# [B1.1] Priming read: prompt user for first expense amount and cast to float:
+amount = _______________________________________________________________  # Blank [B1.1] (3 pts - Basic)
+
+# [B1.2] While amount is greater than 0 (sentinel is 0):
+while __________________________________________________________________:  # Blank [B1.2] (3 pts - Basic)
+    # [B1.3] Accumulate amount into total_expense:
+    total_expense = ____________________________________________________  # Blank [B1.3] (3 pts - Basic)
+    item_count = item_count + 1
+    amount = float(input("Enter next expense (0 to stop): "))
+
+# [B1.4] Print final total formatted with commas and 2 decimals (e.g. 1,250.50):
+print(f"Total: ${______________________} across {item_count} items")       # Blank [B1.4] (3 pts - Basic)
+\end{lstlisting}
+
+\begin{answerbox}[height=1.8cm]{Answer Slots for Problem B1}
+\textbf{[B1.1]}: \dotfill \quad \textbf{[B1.2]}: \dotfill\\[1.5mm]
+\textbf{[B1.3]}: \dotfill \quad \textbf{[B1.4]}: \dotfill
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION B --- PROBLEM B2
+% ==============================================================================
+
+\subsection*{Problem B2: Modular Shopping Cart \& Discount Processor (18 points --- 6 blanks, 3 pts each)}
+\textit{Difficulty: Blanks [B2.1]--[B2.4] are Basic (12 pts); Blanks [B2.5]--[B2.6] are Medium (6 pts).}
+
+Complete the modular shopping cart processing utility below by providing expressions for blanks \textbf{[B2.1]} to \textbf{[B2.6]}.
+
+\begin{lstlisting}
+# Helper function to compute discounted price
+# [B2.1] Basic: Define function header with default parameter rate=0.10:
+def apply_discount(price, ______________________________________________):  # Blank [B2.1] (3 pts - Basic)
+    return price * (1.0 - rate)
+
+prices = [25.0, 40.0, 100.0, 15.0, 60.0]
+total_discounted = 0.0
+max_price = 0.0
+
+# [B2.2] Basic: Traverse through each item price in the prices list:
+for p in _______________________________________________________________:  # Blank [B2.2] (3 pts - Basic)
+    # [B2.3] Basic: Call helper function apply_discount on p with default rate:
+    disc_price = _______________________________________________________  # Blank [B2.3] (3 pts - Basic)
+    total_discounted = total_discounted + disc_price
+    
+    # [B2.4] Basic: Track the maximum original price seen so far:
+    if p > max_price:
+        max_price = ____________________________________________________  # Blank [B2.4] (3 pts - Basic)
+
+# [B2.5] Medium: Call apply_discount on total_discounted with special loyalty rate 0.05:
+final_total = __________________________________________________________  # Blank [B2.5] (3 pts - Medium)
+
+# [B2.6] Medium: Calculate average price per item safely avoiding ZeroDivisionError:
+avg_price = ____________________________________________________________  # Blank [B2.6] (3 pts - Medium)
+
+print(f"Final Total: ${final_total:.2f} | Max Item: ${max_price:.2f}")
+\end{lstlisting}
+
+\vspace{0.4mm}
+\begin{answerbox}[height=1.8cm]{Answer Slots for Problem B2}
+\textbf{[B2.1] (Basic):} \dotfill \quad \textbf{[B2.2] (Basic):} \dotfill\\[1.1mm]
+\textbf{[B2.3] (Basic):} \dotfill \quad \textbf{[B2.4] (Basic):} \dotfill\\[1.1mm]
+\textbf{[B2.5] (Medium):} \dotfill \quad \textbf{[B2.6] (Medium):} \dotfill
+\end{answerbox}
+
+\vspace{0.6mm}
+% ==============================================================================
+% SECTION C: IMMEDIATELY FOLLOWS SECTION B ON PAGE 4 (NO PAGEBREAK)
+% ==============================================================================
+\section*{Section C: Applied Full-Code Programming \& Design \hfill \normalsize\normalfont(30 points --- 3 problems)}
+\textit{Difficulty: 24 pts Basic (80\%), 6 pts Medium (20\%). Problems C1 and C2 share the common athletic training scenario below with two distinct requirements. Problem C3 evaluates a sentinel loop and score aggregation.}
+
+\begin{tcolorbox}[colback=boxbg, colframe=secondaryteal, arc=1.2mm, boxrule=0.6pt, left=2.0mm, right=2.0mm, top=0.6mm, bottom=0.6mm]
+\textbf{\small Problem Scenario for C1 \& C2: Runner Fitness Activity \& Training Session Tracker}\\[0.2mm]
+\footnotesize
+A fitness tracking application logs a runner's performance across $N$ training sessions based on the following rules:
+\begin{itemize}[itemsep=0.1pt,topsep=0.1pt]
+  \item \textbf{Inputs per Session:} Duration in minutes (\texttt{duration\_min}, float) and average speed in km/h (\texttt{speed\_kmh}, float).
+  \item \textbf{Formulas per Session:}
+    $\text{Distance (km)} = \text{speed\_kmh} \times (\text{duration\_min} / 60.0)$; \quad
+    $\text{Calories Burned (kcal)} = \text{duration\_min} \times 11.5$.
+  \item Across all $N$ sessions, the application calculates total distance (km), total calories (kcal), and identifies the maximum single-session distance.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.3mm}
+\subsection*{Problem C1: Algorithmic Specification \& Pseudocode (8 points --- [All Basic])}
+\textit{Requirement: Formulate structured \textbf{pseudocode} only (e.g., using \texttt{INPUT}, \texttt{COMPUTE} / \texttt{SET}, \texttt{FOR} / \texttt{WHILE}, \texttt{PRINT}). Do NOT write Python code.}
+
+Write a complete algorithm in pseudocode that inputs the session count $N$, iterates through all $N$ sessions, computes each session's distance and calories, and determines the \textbf{total distance}, \textbf{total calories}, and the \textbf{maximum single-session distance}.
+
+\begin{answerbox}[height=5.2cm]{Structured Pseudocode for Problem C1 (8 points --- Basic)}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION C --- PROBLEM C2 (MAXIMIZED CODING AREA)
+% ==============================================================================
+
+\subsection*{Problem C2: Modular Python Function Implementation (10 points --- [All Basic])}
+\textit{Requirement: Write a clean, modular Python program implementing the fitness tracking engine. Define the calculation function and implement the main batch processing loop.}
+
+Implement the program following these specifications:
+\begin{enumerate}[label=\arabic*.,leftmargin=1.8em,itemsep=0.5pt]
+  \item \textbf{Function \texttt{calculate\_session\_stats(duration\_min, speed\_kmh)}:}\\
+    Compute and return both \texttt{distance} (float) and \texttt{calories} (float) as a tuple using the formulas from Problem Scenario C1 \& C2.
+  \item \textbf{Batch Processing Loop:}
+    Prompt the user for the number of sessions $N$ (int). Use a loop to iterate $N$ times. In each iteration, prompt for \texttt{duration\_min} and \texttt{speed\_kmh}, call \texttt{calculate\_session\_stats()}, and print each session's itemized distance and calories.
+  \item \textbf{Accumulation \& Output Summary:}
+    Tally total distance (km) and total calories (kcal). After all sessions are processed, print the summary:
+\end{enumerate}
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Session 1: Distance = 5.00 km | Calories = 345.0 kcal
+Session 2: Distance = 7.50 km | Calories = 517.5 kcal
+--------------------------------------------------------
+Total Sessions: 2 | Total Distance: 12.50 km | Total Calories: 862.5 kcal
+\end{lstlisting}
+
+\vspace{0.8mm}
+\begin{answerbox}[height=18.0cm]{Python Implementation for Problem C2 (10 points --- Basic Modular Functions \& Loops)}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION C --- PROBLEM C3 (SENTINEL ITERATION & SCORE AGGREGATOR)
+% ==============================================================================
+
+\subsection*{Problem C3: Student Quiz Score Aggregator \& Performance Analyzer (12 points)}
+\textit{Difficulty Breakdown: 6 points Basic + 6 points Medium. Note: Requires a sentinel-controlled loop, modular pass-check helper function, and statistical performance tracking without complex branching.}
+
+An instructor enters student quiz scores (scale $0.0$ to $100.0$) until entering the sentinel value \texttt{-1.0}. Write a complete, concise Python program according to these specifications:
+
+\textbf{Requirements:}
+\begin{enumerate}[label=\arabic*.,leftmargin=1.8em,itemsep=0.5pt]
+  \item \textbf{Modular Helper Function [3 pts --- Basic]:}\\
+    Define a function \texttt{is\_passing(score, pass\_mark=50.0)} that returns \texttt{True} if $\text{score} \ge \text{pass\_mark}$, and \texttt{False} otherwise.
+  \item \textbf{Sentinel Loop \& Data Aggregation [5 pts --- 3 Basic + 2 Medium]:}\\
+    Use a \texttt{while} loop to prompt for student quiz scores until the sentinel \texttt{-1.0} is entered.\\
+    Inside the loop, update:
+    \begin{itemize}[itemsep=0.1pt]
+      \item The total count of students.
+      \item The running sum of all quiz scores.
+      \item The count of passing students (by calling \texttt{is\_passing(score)}).
+      \item The highest score recorded so far.
+    \end{itemize}
+  \item \textbf{Summary Report [4 pts --- Medium]:}\\
+    If no student scores were entered (count is 0), print \texttt{"No scores were recorded."} and terminate.\\
+    Otherwise, compute:
+    $\text{average score} = \text{total sum} / \text{total count}$ \quad and \quad
+    $\text{pass rate} = (\text{passing count} / \text{total count}) \times 100\%$.\\
+    Display the formatted summary report (scores with 2 decimals, pass rate with 1 decimal):
+\end{enumerate}
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+========================================================
+CLASS QUIZ PERFORMANCE SUMMARY
+========================================================
+Total Students: 5 | Passed: 4 (80.0%)
+Average Score:  74.60 | Highest Score: 92.50
+========================================================
+\end{lstlisting}
+
+\begin{answerbox}[height=9.8cm]{Python Implementation for Problem C3 (12 points --- 6 Basic + 6 Medium)}
+\end{answerbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[0.8mm]
+  \textbf{\color{primaryblue}--- END OF EXAMINATION PAPER ---}
+\end{center}
+
+\end{document}

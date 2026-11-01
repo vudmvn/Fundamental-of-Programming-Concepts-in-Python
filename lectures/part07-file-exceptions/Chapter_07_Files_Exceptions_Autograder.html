@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 7 · Files & Exceptions — Programming Exercises · Tự chấm Python</title>
+<style>
+:root{--ink:#142f43;--sub:#587284;--navy:#122c42;--navy2:#193c54;--line:#d9e6ed;--bg:#f3f8fb;--mint:#0c8179;--mintlight:#e3f6ef;--blue:#2b638f;--red:#a72d4b;--redlight:#fff0f2;--amber:#9d591f;--amberlight:#fff4db;--code:#13283e;--white:#fff}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:14px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg)}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #83c7d7;outline-offset:2px}
+.app{display:grid;grid-template-columns:292px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;overflow:auto;background:var(--navy);padding:20px 15px 18px;color:#d8ecf3;display:flex;flex-direction:column}.brand{padding:6px 10px 17px;border-bottom:1px solid #3a5366;display:flex;align-items:center;gap:11px}.logo{width:43px;height:43px;border:1px solid #72ccbd;border-radius:14px;display:grid;place-items:center;font-weight:900;font-family:monospace;font-size:18px;color:#94eee0;background:#16394d}.brand strong{font-size:14px;display:block;line-height:1.25;color:#fff}.brand small{color:#a5bbc9;display:block;font-size:11px;letter-spacing:.03em;margin-top:4px}.nav-stat{padding:18px 10px 12px}.nav-stat-top{display:flex;align-items:center;justify-content:space-between;font-size:12px}.nav-stat b{color:#a5efe2}.bar{height:8px;background:#355169;border-radius:99px;margin-top:11px;overflow:hidden}.bar>span{height:100%;background:linear-gradient(90deg,#33bcae,#9be6cc);display:block;width:0;transition:width .25s}.search{border:1px solid #496275;border-radius:10px;background:#183950;color:white;width:100%;padding:10px 11px;margin-bottom:9px;font-size:12px}.search::placeholder{color:#a6bbc6}.navgroups{padding:0 2px;display:flex;flex-direction:column;gap:17px;flex:1}.grouptitle{font-size:10px;letter-spacing:.11em;font-weight:800;color:#9fb9c7;padding:0 10px 7px;display:flex;justify-content:space-between}.navitem{border:1px solid transparent;background:transparent;color:#d2e1ea;padding:9px 9px;border-radius:10px;display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;margin-bottom:4px}.navitem:hover{background:#20445a}.navitem.active{background:#265267;border-color:#448b91}.navitem.done{color:#bcf5df}.navnum{width:43px;min-width:43px;height:27px;display:grid;place-items:center;border-radius:7px;background:#27485c;font-weight:800;color:#dceef5;font-size:11px}.navitem.done .navnum{background:#0d6e62;color:#d9fff5}.navitem strong{font-weight:680;font-size:11.6px;display:block;line-height:1.28}.navitem small{font-size:10px;color:#99bbc8;display:block;line-height:1.35;margin-top:3px}.sidefoot{border-top:1px solid #355469;padding:13px 10px 0;color:#adc4cf;font-size:11px}.sidefoot button{border:0;background:none;padding:0;margin-top:7px;text-decoration:underline;color:#b9d5de;font-size:11px}
+.main{min-width:0;padding:27px clamp(20px,3vw,45px) 38px;max-width:1650px;width:100%;margin:0 auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.breadcrumb{font-size:11px;letter-spacing:.12em;font-weight:790;color:#658596}.breadcrumb strong{color:var(--mint)}.topctrl{display:flex;align-items:center;gap:10px}.pill{font-size:11px;padding:7px 11px;border-radius:30px;background:#dff4f1;color:#176d6b;font-weight:740}.tinybtn{font-weight:740;border:1px solid #cbdce3;background:#fff;border-radius:11px;padding:8px 12px;color:#284659;font-size:12px}.hero{background:linear-gradient(120deg,#15394f,#155c65);color:#fff;padding:24px clamp(20px,3vw,36px);border-radius:19px;display:grid;grid-template-columns:1fr auto;gap:14px;box-shadow:0 15px 25px #16364d14}.hero .eyebrow{font-size:11px;font-weight:790;letter-spacing:.17em;color:#95ead8}.hero h1{font-size:clamp(26px,2.5vw,36px);margin:6px 0 9px;line-height:1.18;letter-spacing:-.022em}.hero p{font-size:13px;color:#c9e0e8;max-width:970px;margin:0}.hero-count{align-self:center;min-width:110px;text-align:center;border-left:1px solid #61919b65;padding-left:22px}.hero-count b{font-size:40px;line-height:1.1;display:block}.hero-count small{font-size:11px;color:#bde1db}.statrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:17px 0}.statbox{border:1px solid #d8e7ed;border-radius:14px;background:#fff;padding:14px 17px;box-shadow:0 5px 20px #10344a08}.statbox b{display:block;font-size:21px;line-height:1.3;margin-top:4px;color:#173f56}.statbox small{font-size:10.5px;font-weight:790;text-transform:uppercase;letter-spacing:.07em;color:#678090}
+.maincard{background:#fff;border:1px solid #dbe6ed;border-radius:17px;padding:clamp(18px,2.1vw,30px);box-shadow:0 10px 35px #16394f0b}.blocktop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.tag{display:inline-flex;align-items:center;padding:4px 9px;border-radius:8px;background:#e8f5f5;color:#187579;font-size:10px;font-weight:800;letter-spacing:.05em}.tag.gray{background:#edf3f6;color:#557182}.tag.amber{background:#fff0d6;color:#915b22}.maincard h2{font-size:clamp(23px,2.1vw,30px);line-height:1.23;margin:13px 0 12px}.prompt{color:#435d6c;font-size:14.2px;line-height:1.7;max-width:1140px}.contract{border:1px solid #cfe3e9;background:#f0f8fa;border-radius:12px;padding:13px 16px;margin-top:15px}.contract b{font-size:12px;color:#1b6575}.contract p{margin:5px 0 0;font-size:12.3px;line-height:1.65;color:#3f6571}.notice{padding:10px 13px;background:#fff8e9;border-left:3px solid #edb869;border-radius:7px;color:#87612d;font-size:12px;margin-top:12px}.workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(350px,.95fr);gap:19px;margin-top:21px;align-items:start}.codecard{border:1px solid #b9d0dd;background:var(--code);border-radius:13px;overflow:hidden}.codehead{padding:11px 14px;background:#1f4059;display:flex;align-items:center;justify-content:space-between;color:#bdd4e1;font-size:11px;font-weight:700}.dotset{display:flex;gap:5px}.dotset i{border-radius:50%;width:8px;height:8px;background:#cf8497}.dotset i:nth-child(2){background:#edc27b}.dotset i:nth-child(3){background:#91d8ad}#code{display:block;width:100%;min-height:330px;background:#12293e;color:#e2f3ff;border:0;resize:vertical;padding:16px 17px;white-space:pre;tab-size:4;line-height:1.65;font:12.9px/1.65 ui-monospace,Consolas,"Liberation Mono",monospace}#code:focus{outline:0}.codefoot{color:#9bc0d2;background:#1b3a50;padding:10px 14px;font-size:10px}.actionrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.btn{border:1px solid #c5dbe3;background:#fff;color:#294e64;border-radius:10px;font-size:12px;font-weight:750;padding:10px 13px}.btn.primary{background:#0b817b;color:white;border-color:#0b817b}.btn.primary:hover{background:#086e69}.btn.dark{background:#193d56;color:white;border-color:#193d56}.btn.warn{color:#8b5c27;border-color:#ebd3a5}.btn.ghost{background:#f6fafc}.btn:disabled{opacity:.48}.hint{display:none;margin-top:12px;border:1px solid #f0d7aa;background:#fff9ed;padding:11px 13px;border-radius:9px;color:#765828;font-size:12.5px}.hint.show{display:block}.rightstack{display:flex;flex-direction:column;gap:12px}.samplebox{border:1px solid #d9e7eb;background:#fbfdfe;border-radius:12px;padding:15px 17px}.boxheading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.boxheading strong{font-size:13px}.boxheading span{font-size:10px;background:#e8f3f4;color:#47727a;border-radius:99px;padding:4px 8px;font-weight:800}.filegroup{margin-bottom:12px}.filegroup b{display:block;font-size:11px;color:#597786;margin-bottom:6px}.filepill{border:1px solid #d5e4e9;border-radius:8px;margin-bottom:6px;background:white;overflow:hidden}.filepill summary{padding:7px 10px;font:700 11.2px ui-monospace,Consolas,monospace;cursor:pointer;color:#176d78}.filepill pre{margin:0;padding:11px;background:#f2f7f9;border-top:1px solid #d5e4e9;font:11px/1.5 ui-monospace,Consolas,monospace;max-height:170px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}.littlecode{background:#e9f2f6;color:#285368;padding:9px 10px;border-radius:8px;white-space:pre-wrap;word-break:break-word;font:11px/1.55 ui-monospace,Consolas,monospace}.muted{color:#6e8996;font-size:11px}.outputarea{background:#11293c;border-radius:10px;padding:13px;overflow:auto;max-height:230px;color:#dcf2fa;white-space:pre-wrap;word-break:break-word;min-height:56px;font:11.8px/1.6 ui-monospace,Consolas,monospace}.outputarea.empty{color:#88acbb}.judgebox{background:#f5fafb;border:1px solid #d9e7eb;border-radius:12px;padding:15px 17px;min-height:148px}.judgebox h3{font-size:13px;margin:0 0 10px}.judge-status{font-size:12px;font-weight:800;display:inline-flex;align-items:center;border-radius:8px;padding:6px 9px;background:#e8f1f4;color:#456473}.judge-status.good{background:#dff7eb;color:#0b7857}.judge-status.bad{background:#ffe8ec;color:#a6344f}.judge-status.loading{background:#fff1d4;color:#986125}.testline{display:flex;gap:10px;align-items:flex-start;font-size:11.8px;margin:10px 0;padding:10px;border-radius:9px;background:#fff;border:1px solid #e0e9ee}.testline .check{font-size:14px}.testline.good .check{color:#14836f}.testline.bad .check{color:#c0435b}.testline b{font-size:12px}.testline small{display:block;color:#61808c;margin-top:3px;line-height:1.45}.footerline{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:10px}.footerline .left{font-size:11px;color:#70909f}.summarybox{margin-top:20px;background:linear-gradient(120deg,#eaf8f3,#f1f8fd);border:1px solid #badfd3;border-radius:15px;padding:18px 20px}.summarybox h3{margin:0;font-size:15px}.summarybox p{color:#4a6572;font-size:12px;margin:6px 0}.summarybox .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.field{display:block;font-size:11.3px;color:#3e6875;font-weight:740}.field input{width:100%;border:1px solid #c9dfe5;border-radius:9px;background:#fff;color:#17394f;margin-top:5px;padding:9px 11px}.summaryactions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.smalltext{color:#5a7683;font-size:11px;margin-top:8px}.guide{margin-top:13px;border-top:1px solid #e5eef2;padding-top:11px;font-size:12px;color:#507081}.guide code,.contract code{color:#165c78;background:#dfeef3;padding:1px 4px;border-radius:4px}.mobilemenu{display:none}
+@media(max-width:1250px){.app{grid-template-columns:250px minmax(0,1fr)}.workspace{grid-template-columns:1fr}.rightstack{display:grid;grid-template-columns:1fr 1fr}.hero-count{display:none}}
+@media(max-width:850px){.app{display:block}.sidebar{position:static;height:auto;max-height:none;padding:12px 13px}.brand{border:0;padding:5px}.nav-stat{padding:10px}.navgroups{display:none}.sidebar.open .navgroups{display:flex}.sidefoot{display:none}.mobilemenu{display:inline-block}.main{padding:16px 13px}.hero{padding:20px}.statrow{grid-template-columns:repeat(2,1fr)}.workspace{display:block}.rightstack{display:flex;margin-top:15px}.summarybox .fields{grid-template-columns:1fr}}
+@media print{.sidebar,.topline,.statrow,.actionrow,.footerline{display:none}.app{display:block}.main{padding:0}.maincard{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <aside class="sidebar" id="side">
+  <div class="brand"><div class="logo">{7}</div><div><strong>PYTHON FOR EVERYONE</strong><small>Chapter 7 · Tự chấm bài lập trình</small></div></div>
+  <div class="nav-stat"><div class="nav-stat-top"><span>Đã hoàn thành</span><b id="sidecount">0 / 28</b></div><div class="bar"><span id="sidebar"></span></div><p style="font-size:10.5px;color:#a4beca;margin:11px 0 0">Không gồm bài Toolbox và Science. Có bài xử lý ảnh BMP (P7.24–P7.25).</p></div>
+  <input class="search" id="search" placeholder="Tìm mã bài / chủ đề…" aria-label="Tìm bài tập">
+  <div class="navgroups" id="navgroups"></div>
+  <div class="sidefoot">Tiến độ lưu ở trình duyệt đang dùng.<div><button type="button" id="resetProgress">Đặt lại toàn bộ tiến độ</button></div></div>
+ </aside>
+ <main class="main">
+  <div class="topline"><div class="breadcrumb"><strong>CHƯƠNG 07</strong> &nbsp; / &nbsp; FILES & EXCEPTIONS &nbsp; / &nbsp; PROGRAMMING EXERCISES</div><div class="topctrl"><span class="pill" id="coursePill">Bộ bài tập tự chấm</span><button class="tinybtn mobilemenu" id="mobilemenu">☰ Danh sách</button><button class="tinybtn" id="fullscreen">⛶ Toàn màn hình</button></div></div>
+  <header class="hero"><div><div class="eyebrow">THỰC HÀNH PYTHON · CHƯƠNG 7</div><h1>Files and Exceptions</h1><p>28 bài lập trình dựa trên phần Programming Exercises của giáo trình <i>Python for Everyone</i>. Làm việc với file văn bản, tham số dòng lệnh, xử lý ngoại lệ, mã hóa, BMP và dữ liệu thực tế; chạy bằng Python ngay trong trình duyệt.</p></div><div class="hero-count"><b>28</b><small>Bài tập · 83 ca kiểm thử</small></div></header>
+  <div class="statrow"><div class="statbox"><small>Bài đã đạt</small><b id="statPass">0/28</b></div><div class="statbox"><small>Ca kiểm thử đạt</small><b id="statTests">0/83</b></div><div class="statbox"><small>Tiến độ</small><b id="statPercent">0%</b></div><div class="statbox"><small>Bài hiện tại</small><b id="statCurrent">P7.1</b></div></div>
+  <section class="maincard" id="problem" aria-live="polite"></section>
+  <section class="summarybox" id="profileArea"><h3>Ghi nhận tiến độ học tập</h3><p>Nhập thông tin sinh viên để đưa vào ảnh PNG báo cáo kết quả. Báo cáo thể hiện tiến độ hiện tại, không phải chứng nhận chính thức.</p><div class="fields"><label class="field">Mã sinh viên<input id="studentId" maxlength="50" placeholder="Ví dụ: 11234567"></label><label class="field">Họ và tên<input id="studentName" maxlength="100" placeholder="Nguyễn Văn A"></label><label class="field">Lớp<input id="studentClass" maxlength="60" placeholder="DSEB65A"></label></div><div class="summaryactions"><button class="btn dark" id="exportPNG">Xuất PNG thống kê</button><button class="btn" id="exportJSON">Xuất JSON tiến độ</button></div><div class="smalltext" id="profileStatus">Dữ liệu học tập lưu cục bộ trên trình duyệt; mã nguồn và kết quả có thể được sinh viên tự thay đổi. Chức năng phù hợp tự học, không chống gian lận.</div></section>
+ </main>
+</div>
+<script id="pythonRunner" type="text/plain">
+let pyodide = null;
+const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+const CODE = String.raw`
+import os, io, sys, base64, json, tempfile, builtins, contextlib, traceback, pathlib
+payload = json.loads(__payload)
+program = payload['code']
+checks = payload['cases']
+results=[]
+
+def normalize(s):
+    return '\n'.join(line.rstrip() for line in s.replace('\r\n','\n').replace('\r','\n').strip().split('\n')) if s.strip() else ''
+
+def datum(spec):
+    if isinstance(spec,dict) and '__base64__' in spec:
+        return base64.b64decode(spec['__base64__'])
+    return spec.encode('utf-8')
+
+def match_file(actual, expectation):
+    exp=base64.b64decode(expectation)
+    if actual == exp: return True
+    try:
+        return normalize(actual.decode('utf-8')) == normalize(exp.decode('utf-8'))
+    except (UnicodeDecodeError,ValueError): return False
+
+for i,case in enumerate(checks):
+    oldcwd=os.getcwd(); oldargv=sys.argv; oldstdin=sys.stdin; oldinput=builtins.input
+    stdout=io.StringIO(); stderr=io.StringIO(); error=None; actual_files={}
+    try:
+        # Pyodide/Emscripten can raise OSError(EBUSY) when rmdir()
+        # removes a previously-active cwd. Do not use TemporaryDirectory here:
+        # each case gets a unique workspace which remains in the Worker's
+        # in-memory filesystem until this page/Worker is closed.
+        folder=tempfile.mkdtemp(prefix='pfe_ch7_')
+        os.chdir(folder)
+        for name,content in case.get('files',{}).items():
+            pathlib.Path(name).parent.mkdir(parents=True,exist_ok=True)
+            pathlib.Path(name).write_bytes(datum(content))
+        sys.argv=['main.py']+case.get('argv',[])
+        sys.stdin=io.StringIO(case.get('stdin',''))
+        builtins.input=lambda prompt='': oldinput()
+        scope={'__name__':'__main__','__file__':'main.py'}
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            try:
+                exec(compile(program,'<student-program>','exec'),scope,scope)
+            except SystemExit as ex:
+                if ex.code not in (None,0): raise
+        expected=case['expected']
+        expout=expected.get('stdout','')
+        ok_stdout=normalize(stdout.getvalue())==normalize(expout)
+        checks_file=[]
+        expfiles=expected.get('files',{})
+        for filename, value in expfiles.items():
+            alt='output.bmp' if filename=='image.bmp' else filename
+            if alt!=filename and os.path.isfile(alt):
+                actualname=alt
+            else: actualname=filename
+            if os.path.isfile(actualname):
+                data=pathlib.Path(actualname).read_bytes()
+                same=match_file(data,value)
+                if payload.get('sample') and len(data)<=6000:
+                    actual_files[actualname]=base64.b64encode(data).decode()
+            else:same=False
+            checks_file.append((filename,same))
+        ok_files=all(x[1] for x in checks_file)
+        ok=ok_stdout and ok_files
+        if not ok:
+            fails=[]
+            if not ok_stdout: fails.append('Đầu ra print() chưa khớp mẫu')
+            fails.extend(f'Tệp {fname} chưa khớp' for fname,status in checks_file if not status)
+            detail='; '.join(fails)
+        else: detail='Kết quả và tệp đầu ra khớp.'
+    except BaseException as e:
+        ok=False;detail=f'{type(e).__name__}: {str(e)[:180]}'
+        error=''.join(traceback.format_exception_only(type(e),e)).strip()[:300]
+    finally:
+        os.chdir(oldcwd);sys.argv=oldargv;sys.stdin=oldstdin;builtins.input=oldinput
+    results.append(dict(name=case['name'],ok=ok,detail=detail,stdout=stdout.getvalue()[:12000],stderr=stderr.getvalue()[:2000],files=actual_files,error=error))
+answer=json.dumps({'passed':sum(bool(r['ok']) for r in results),'total':len(results),'cases':results},ensure_ascii=False)
+answer  # Return the JSON string from Pyodide.runPython() to JavaScript.
+`;
+async function ensurePyodide(){
+ if(pyodide) return;
+ importScripts(PYODIDE+'pyodide.js');
+ pyodide=await loadPyodide({indexURL:PYODIDE});
+ self.postMessage({type:'ready'});
+}
+self.onmessage=async ev=>{
+ const {id,type,payload}=ev.data;
+ if(type!=='run')return;
+ try{
+  await ensurePyodide();
+  pyodide.globals.set('__payload',JSON.stringify(payload));
+  const raw=pyodide.runPython(CODE);
+  if(typeof raw !== 'string'){
+   throw new Error('Bộ chấm Python chưa trả về kết quả (không nhận được chuỗi JSON).');
+  }
+  let value;
+  try{ value=JSON.parse(raw); }
+  catch(parseError){ throw new Error('Bộ chấm trả về dữ liệu JSON không hợp lệ: '+parseError.message); }
+  if(!value || !Array.isArray(value.cases) || !Number.isInteger(value.passed) || !Number.isInteger(value.total)){
+   throw new Error('Bộ chấm trả về dữ liệu thiếu các trường kết quả.');
+  }
+  self.postMessage({type:'result',id,value});
+ }catch(e){self.postMessage({type:'error',id,error:String(e)});}
+};
+</script>
+<script>
+const EXERCISES=[
+  {
+    "id": "P7.1",
+    "n": 1,
+    "group": "01 · Đọc và ghi file",
+    "title": "Hello, World! qua tệp",
+    "desc": "Tạo tệp hello.txt, ghi thông điệp “Hello, World!”, đóng rồi mở lại, đọc và in nội dung.",
+    "io_desc": "Tạo hello.txt và in một dòng: Hello, World!.",
+    "cases": [
+      {
+        "name": "Tệp chưa tồn tại",
+        "files": {},
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "Hello, World!\n",
+          "files": {
+            "hello.txt": "SGVsbG8sIFdvcmxkIQ=="
+          }
+        }
+      },
+      {
+        "name": "Ghi đè tệp cũ",
+        "files": {
+          "hello.txt": "old text\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "Hello, World!\n",
+          "files": {
+            "hello.txt": "SGVsbG8sIFdvcmxkIQ=="
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: mở ở chế độ \"w\", dùng write(), sau đó mở ở chế độ \"r\".",
+    "difficulty": 1,
+    "note": "",
+    "starter": "# P7.1 – Hello, World! qua tệp\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.2",
+    "n": 2,
+    "group": "01 · Đọc và ghi file",
+    "title": "Đánh số từng dòng",
+    "desc": "Đọc toàn bộ dòng của tệp văn bản đầu vào; ghi sang tệp đầu ra, thêm tiền tố /* số dòng */ vào mỗi dòng (bắt đầu từ 1).",
+    "io_desc": "Hai dòng input(): tên tệp nguồn, tên tệp đích. Dòng được ghi theo mẫu `/* 1 */ Mary had a little lamb`. Dữ liệu đầu ra phải giữ ký tự xuống dòng.",
+    "cases": [
+      {
+        "name": "Bốn câu thơ",
+        "files": {
+          "poem.txt": "Mary had a little lamb\nWhose fleece was white as snow.\nAnd everywhere that Mary went,\nThe lamb was sure to go!\n"
+        },
+        "stdin": "poem.txt\nnumbered.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "numbered.txt": "LyogMSAqLyBNYXJ5IGhhZCBhIGxpdHRsZSBsYW1iCi8qIDIgKi8gV2hvc2UgZmxlZWNlIHdhcyB3aGl0ZSBhcyBzbm93LgovKiAzICovIEFuZCBldmVyeXdoZXJlIHRoYXQgTWFyeSB3ZW50LAovKiA0ICovIFRoZSBsYW1iIHdhcyBzdXJlIHRvIGdvIQo="
+          }
+        }
+      },
+      {
+        "name": "Tệp một dòng",
+        "files": {
+          "x.txt": "Hi\n"
+        },
+        "stdin": "x.txt\ny.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "y.txt": "LyogMSAqLyBIaQo="
+          }
+        }
+      },
+      {
+        "name": "Tệp rỗng",
+        "files": {
+          "empty.txt": ""
+        },
+        "stdin": "empty.txt\nout.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": ""
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: for i, line in enumerate(f, 1), ghi sang file khác.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.2 – Đánh số từng dòng\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.3",
+    "n": 3,
+    "group": "01 · Đọc và ghi file",
+    "title": "Đánh số dòng với argv",
+    "desc": "Lặp lại P7.2 nhưng ưu tiên nhận tên hai tệp qua tham số dòng lệnh; nếu thiếu, đọc tên tệp bằng input().",
+    "io_desc": "Nếu sys.argv có tên tệp nguồn và đích, sử dụng argv[1:3]; nếu không, dùng hai lần input(). Định dạng đầu ra giống P7.2.",
+    "cases": [
+      {
+        "name": "Dùng argv",
+        "files": {
+          "a.txt": "a\nb\n"
+        },
+        "stdin": "",
+        "argv": [
+          "a.txt",
+          "b.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "b.txt": "LyogMSAqLyBhCi8qIDIgKi8gYgo="
+          }
+        }
+      },
+      {
+        "name": "Thiếu argv, dùng input",
+        "files": {
+          "info.txt": "one\ntwo\n"
+        },
+        "stdin": "info.txt\nout.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "LyogMSAqLyBvbmUKLyogMiAqLyB0d28K"
+          }
+        }
+      },
+      {
+        "name": "Dòng dài",
+        "files": {
+          "f.txt": "Logistics and Python\n"
+        },
+        "stdin": "",
+        "argv": [
+          "f.txt",
+          "f2.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "f2.txt": "LyogMSAqLyBMb2dpc3RpY3MgYW5kIFB5dGhvbgo="
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: import sys; sys.argv[0] là tên chương trình.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.3 – Đánh số dòng với argv\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.4",
+    "n": 4,
+    "group": "01 · Đọc và ghi file",
+    "title": "Trung bình hai cột số thực",
+    "desc": "Đọc tệp gồm hai cột số thực phân cách bằng khoảng trắng; tính giá trị trung bình riêng cho từng cột.",
+    "io_desc": "Một dòng input(): tên tệp. In duy nhất `mean1 mean2`, mỗi số có đúng 2 chữ số thập phân; tệp có ít nhất một dòng dữ liệu.",
+    "cases": [
+      {
+        "name": "Ba dòng",
+        "files": {
+          "table.txt": "1 4\n3 6\n5 8\n"
+        },
+        "stdin": "table.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "3.00 6.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số âm",
+        "files": {
+          "t.txt": "-1 2.5\n3 1.5\n"
+        },
+        "stdin": "t.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "1.00 2.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một dòng",
+        "files": {
+          "t.txt": "2.75 3.25\n"
+        },
+        "stdin": "t.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "2.75 3.25\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: split(), float() và hai biến tổng.",
+    "difficulty": 1,
+    "note": "",
+    "starter": "# P7.4 – Trung bình hai cột số thực\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.5",
+    "n": 5,
+    "group": "01 · Đọc và ghi file",
+    "title": "Đếm ký tự, từ, dòng",
+    "desc": "Đọc một tệp văn bản và đếm tổng ký tự, số từ và số dòng.",
+    "io_desc": "Một dòng input(): tên tệp. In trên một dòng `characters words lines` (ba số nguyên, cách nhau bằng một dấu cách). Ký tự xuống dòng được tính vào số ký tự.",
+    "cases": [
+      {
+        "name": "Đoạn thơ",
+        "files": {
+          "text.txt": "Hello world\nPython is fun\n"
+        },
+        "stdin": "text.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "26 5 2\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chỉ dòng trống",
+        "files": {
+          "empty.txt": "\n\n"
+        },
+        "stdin": "empty.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "2 0 2\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tệp rỗng",
+        "files": {
+          "empty.txt": ""
+        },
+        "stdin": "empty.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "0 0 0\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: len(text), len(text.split()), len(text.splitlines()).",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.5 – Đếm ký tự, từ, dòng\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.6",
+    "n": 6,
+    "group": "02 · Tìm kiếm & xử lý",
+    "title": "Tìm từ trong nhiều tệp",
+    "desc": "Giống công cụ find.py trong sách: duyệt các tệp được liệt kê trên dòng lệnh và in các dòng chứa từ khóa.",
+    "io_desc": "sys.argv[1] = từ khóa; argv[2:] = tên các tệp. Với mỗi dòng khớp (phân biệt hoa/thường), in `filename: nội dung dòng`; giữ thứ tự tệp/dòng. Nếu không khớp, không in gì.",
+    "cases": [
+      {
+        "name": "Hai tệp",
+        "files": {
+          "report.txt": "a ring of fire\nhello\n",
+          "address.txt": "springtime\nnew ring road\n"
+        },
+        "stdin": "",
+        "argv": [
+          "ring",
+          "report.txt",
+          "address.txt"
+        ],
+        "expected": {
+          "stdout": "report.txt: a ring of fire\naddress.txt: springtime\naddress.txt: new ring road\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Phân biệt chữ hoa",
+        "files": {
+          "a.txt": "Error\nerror\nERROR\n"
+        },
+        "stdin": "",
+        "argv": [
+          "error",
+          "a.txt"
+        ],
+        "expected": {
+          "stdout": "a.txt: error\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không khớp",
+        "files": {
+          "a.txt": "Python 3\n"
+        },
+        "stdin": "",
+        "argv": [
+          "Java",
+          "a.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: sys.argv[1] là từ cần tìm, argv[2:] là các tên tệp.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.6 – Tìm từ trong nhiều tệp\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.7",
+    "n": 7,
+    "group": "02 · Tìm kiếm & xử lý",
+    "title": "Kiểm tra chính tả",
+    "desc": "Đọc các từ trong tệp văn bản và so sánh với danh sách từ hợp lệ. In các từ không tìm thấy trong danh sách.",
+    "io_desc": "input(): tên tệp cần kiểm tra. Danh sách từ hợp lệ cung cấp qua `dictionary.txt` (mỗi dòng một từ). Tách từ bằng các cụm chữ A–Z, không phân biệt chữ hoa; in từ sai chính tả theo thứ tự chữ cái, mỗi từ một dòng, không trùng.",
+    "cases": [
+      {
+        "name": "Có từ sai",
+        "files": {
+          "dictionary.txt": "hello\nworld\npython\n",
+          "essay.txt": "Hello wrld. Python Python is fun!\n"
+        },
+        "stdin": "essay.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "fun\nis\nwrld\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không sai",
+        "files": {
+          "dictionary.txt": "the\nquick\nfox\n",
+          "x.txt": "The QUICK fox.\n"
+        },
+        "stdin": "x.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      },
+      {
+        "name": "Từ sai lặp",
+        "files": {
+          "dictionary.txt": "cat\ndog\n",
+          "x.txt": "Cat, dod! dod.\n"
+        },
+        "stdin": "x.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "dod\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: re.findall(r\"[A-Za-z]+\", text), set và sorted.",
+    "difficulty": 2,
+    "note": "Danh sách từ của sách không đi kèm, nên bài chấm dùng file dictionary.txt mẫu mô phỏng.",
+    "starter": "# P7.7 – Kiểm tra chính tả\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.8",
+    "n": 8,
+    "group": "02 · Tìm kiếm & xử lý",
+    "title": "Đảo ngược từng dòng tại chỗ",
+    "desc": "Đọc một tệp và thay nội dung mỗi dòng bằng chuỗi ký tự theo thứ tự đảo ngược. Không đảo thứ tự các dòng.",
+    "io_desc": "Tên tệp nhận tại sys.argv[1]. Ghi đè chính tệp đó. Giữ số dòng và ký tự xuống dòng cuối mỗi dòng.",
+    "cases": [
+      {
+        "name": "Hai dòng",
+        "files": {
+          "hello.py": "# My first Python program.\nprint(\"Hello, World!\")\n"
+        },
+        "stdin": "",
+        "argv": [
+          "hello.py"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "hello.py": "Lm1hcmdvcnAgbm9odHlQIHRzcmlmIHlNICMKKSIhZGxyb1cgLG9sbGVIIih0bmlycAo="
+          }
+        }
+      },
+      {
+        "name": "Giữ dòng trống",
+        "files": {
+          "a.txt": "abc\n\nxyz\n"
+        },
+        "stdin": "",
+        "argv": [
+          "a.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "a.txt": "Y2JhCgp6eXgK"
+          }
+        }
+      },
+      {
+        "name": "Không có newline cuối",
+        "files": {
+          "a.txt": "one\ntwo"
+        },
+        "stdin": "",
+        "argv": [
+          "a.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "a.txt": "ZW5vCm93dA=="
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: s[::-1], đừng đảo ký tự \n.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.8 – Đảo ngược từng dòng tại chỗ\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.9",
+    "n": 9,
+    "group": "02 · Tìm kiếm & xử lý",
+    "title": "Đảo thứ tự các dòng",
+    "desc": "Đọc toàn bộ dòng của tệp nguồn, ghi chúng sang tệp đích theo thứ tự ngược lại.",
+    "io_desc": "Tên tệp nguồn và đích lấy lần lượt ở argv[1], argv[2]. Dữ liệu thử có dấu xuống dòng cuối mỗi dòng.",
+    "cases": [
+      {
+        "name": "Bốn dòng",
+        "files": {
+          "input.txt": "Mary\nFleece\nEverywhere\nThe lamb\n"
+        },
+        "stdin": "",
+        "argv": [
+          "input.txt",
+          "output.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "output.txt": "VGhlIGxhbWIKRXZlcnl3aGVyZQpGbGVlY2UKTWFyeQo="
+          }
+        }
+      },
+      {
+        "name": "Một dòng",
+        "files": {
+          "in.txt": "only\n"
+        },
+        "stdin": "",
+        "argv": [
+          "in.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "b25seQo="
+          }
+        }
+      },
+      {
+        "name": "Rỗng",
+        "files": {
+          "in.txt": ""
+        },
+        "stdin": "",
+        "argv": [
+          "in.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": ""
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: readlines(), reversed(), writelines().",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.9 – Đảo thứ tự các dòng\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.10",
+    "n": 10,
+    "group": "03 · Dữ liệu & lỗi",
+    "title": "Xu hướng tên trẻ qua các năm",
+    "desc": "Mở rộng Worked Example 7.1: đọc tên trẻ của năm được chọn và xác định có bao nhiêu tên đầu bảng đạt đến 50% tỷ lệ tích lũy, riêng nam và nữ. Lặp cho các năm khác để so sánh xu hướng.",
+    "io_desc": "Một dòng input(): tên tệp. Mỗi dòng có `rank boy_name boy_percent% girl_name girl_percent%`. In `BOYS n` và `GIRLS n` trên hai dòng. Việc diễn giải xu hướng giữa các năm là phần thảo luận, không chấm tự động.",
+    "cases": [
+      {
+        "name": "Năm 2010",
+        "files": {
+          "babynames2010.txt": "1 Jacob 6% Sophia 5%\n2 Ethan 5% Isabella 5%\n3 Noah 4% Emma 5%\n4 James 40% Ava 35%\n5 Liam 45% Mia 50%\n"
+        },
+        "stdin": "babynames2010.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "BOYS 4\nGIRLS 4\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Năm 2011",
+        "files": {
+          "babynames2011.txt": "1 Mason 14% Emma 20%\n2 Liam 20% Olivia 25%\n3 Noah 20% Ava 30%\n4 Jacob 40% Sophia 15%\n"
+        },
+        "stdin": "babynames2011.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "BOYS 3\nGIRLS 3\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Năm 2012",
+        "files": {
+          "babynames2012.txt": "1 Noah 51% Olivia 50%\n2 Liam 49% Emma 50%\n"
+        },
+        "stdin": "babynames2012.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "BOYS 1\nGIRLS 1\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: riêng cho boy/girl cộng dồn phần trăm và đếm đến khi >=50.",
+    "difficulty": 3,
+    "note": "Phần phát hiện xu hướng trong sách mang tính quan sát; hệ thống chỉ chấm bước tính số tên cần để đạt 50%.",
+    "starter": "# P7.10 – Xu hướng tên trẻ qua các năm\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.11",
+    "n": 11,
+    "group": "03 · Dữ liệu & lỗi",
+    "title": "Tách danh sách tên nam và nữ",
+    "desc": "Đọc dữ liệu tên trẻ theo định dạng Worked Example 7.1 và tách cột tên nam/nữ thành hai tệp riêng.",
+    "io_desc": "Đọc `babynames.txt` (rank, tên nam, %, tên nữ, %). Tạo `boynames.txt` và `girlnames.txt`, mỗi dòng một tên theo thứ tự xuất hiện.",
+    "cases": [
+      {
+        "name": "Ba hạng",
+        "files": {
+          "babynames.txt": "1 Jacob 6% Sophia 5%\n2 Liam 5% Emma 4%\n3 Ethan 4% Ava 3%\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "boynames.txt": "SmFjb2IKTGlhbQpFdGhhbgo=",
+            "girlnames.txt": "U29waGlhCkVtbWEKQXZhCg=="
+          }
+        }
+      },
+      {
+        "name": "Tên chung",
+        "files": {
+          "babynames.txt": "1 Alexis 10% Alexis 8%\n2 Lee 9% Morgan 9%\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "boynames.txt": "QWxleGlzCkxlZQo=",
+            "girlnames.txt": "QWxleGlzCk1vcmdhbgo="
+          }
+        }
+      },
+      {
+        "name": "Một hạng",
+        "files": {
+          "babynames.txt": "1 Bob 51% Alice 50%\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "boynames.txt": "Qm9iCg==",
+            "girlnames.txt": "QWxpY2UK"
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: `fields = line.split()`; fields[1] và fields[3].",
+    "difficulty": 2,
+    "note": "Các tệp mẫu được nhúng, không cần tải dữ liệu tên trẻ từ bên ngoài.",
+    "starter": "# P7.11 – Tách danh sách tên nam và nữ\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.12",
+    "n": 12,
+    "group": "03 · Dữ liệu & lỗi",
+    "title": "Tên chung cho cả nam và nữ",
+    "desc": "Tìm các tên xuất hiện đồng thời ở cột tên nam và cột tên nữ của bộ dữ liệu tên trẻ.",
+    "io_desc": "Đọc `babynames.txt` cùng định dạng P7.11. In mỗi tên chung một dòng, theo thứ tự chữ cái và không lặp. Phân biệt chữ hoa/thường như dữ liệu gốc.",
+    "cases": [
+      {
+        "name": "Alexis, Morgan",
+        "files": {
+          "babynames.txt": "1 Alexis 20% Sophia 10%\n2 Jacob 15% Morgan 8%\n3 Morgan 8% Alexis 5%\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "Alexis\nMorgan\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không chung",
+        "files": {
+          "babynames.txt": "1 A 10% X 10%\n2 B 10% Y 10%\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {}
+        }
+      },
+      {
+        "name": "Nhiều tên chung",
+        "files": {
+          "babynames.txt": "1 Sam 12% Robin 18%\n2 Robin 10% Sam 9%\n3 Lee 6% Lee 4%\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "Lee\nRobin\nSam\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: hai set và phép giao (`&`).",
+    "difficulty": 3,
+    "note": "",
+    "starter": "# P7.12 – Tên chung cho cả nam và nữ\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.13",
+    "n": 13,
+    "group": "03 · Dữ liệu & lỗi",
+    "title": "Tính tổng số thực với ngoại lệ",
+    "desc": "Đọc các số thực. Khi một giá trị không hợp lệ, cho nhập lại một lần; nếu cả hai lần đều sai thì dừng và in tổng các số đã đọc hợp lệ.",
+    "io_desc": "Đọc input() từng dòng. Nếu EOF thì dừng. In đúng một dòng `SUM: n.nn`. Thử lại tối đa hai lần cho một giá trị; các prompt không được tính vào đầu ra chuẩn.",
+    "cases": [
+      {
+        "name": "Có nhập lại hợp lệ",
+        "files": {},
+        "stdin": "2.5\nwrong\n4\n1.5\n",
+        "argv": [],
+        "expected": {
+          "stdout": "SUM: 8.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Sai 2 lần",
+        "files": {},
+        "stdin": "10\nno\nbad\n100\n",
+        "argv": [],
+        "expected": {
+          "stdout": "SUM: 10.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Toàn số hợp lệ",
+        "files": {},
+        "stdin": "1\n2\n-3\n5\n",
+        "argv": [],
+        "expected": {
+          "stdout": "SUM: 5.00\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: try / except ValueError; input() tới EOF thì dừng.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.13 – Tính tổng số thực với ngoại lệ\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.17",
+    "n": 17,
+    "group": "04 · Tệp và dòng lệnh",
+    "title": "Cộng dân số các quốc gia",
+    "desc": "Đọc tệp worldpop.txt chứa tên quốc gia (có thể nhiều từ) và số dân ở cuối dòng. Bỏ qua dòng European Union. Tính tổng dân số còn lại.",
+    "io_desc": "Dùng `worldpop.txt`, mỗi dòng có tên quốc gia và một số nguyên. In `TOTAL n`. Không được sửa tệp nguồn; tên có thể nhiều từ.",
+    "cases": [
+      {
+        "name": "Nhiều từ",
+        "files": {
+          "worldpop.txt": "Viet Nam   100\nUnited States 340\nEuropean Union 447\nJapan 125\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "TOTAL 565\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chỉ một nước",
+        "files": {
+          "worldpop.txt": "European Union 99\nLaos 7\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "TOTAL 7\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Khoảng trắng bất thường",
+        "files": {
+          "worldpop.txt": "  South Africa     60\nNew Zealand  5\nEuropean Union 440\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "TOTAL 65\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: rsplit(maxsplit=1), tên nằm bên trái; lọc European Union.",
+    "difficulty": 2,
+    "note": "Dùng tệp dân số thu nhỏ mô phỏng định dạng của worldpop.txt trong sách.",
+    "starter": "# P7.17 – Cộng dân số các quốc gia\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.18",
+    "n": 18,
+    "group": "04 · Tệp và dòng lệnh",
+    "title": "Sao chép tệp",
+    "desc": "Viết chương trình copyfile: sao chép nguyên nội dung từ tệp nguồn sang tệp đích, tên tệp từ dòng lệnh.",
+    "io_desc": "argv[1] = nguồn, argv[2] = đích; nội dung tệp đích phải giống hệt tệp nguồn. Không in gì.",
+    "cases": [
+      {
+        "name": "Văn bản",
+        "files": {
+          "report.txt": "Report 2026\nIncome 25\n"
+        },
+        "stdin": "",
+        "argv": [
+          "report.txt",
+          "report.sav"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "report.sav": "UmVwb3J0IDIwMjYKSW5jb21lIDI1Cg=="
+          }
+        }
+      },
+      {
+        "name": "Tệp rỗng",
+        "files": {
+          "empty.txt": ""
+        },
+        "stdin": "",
+        "argv": [
+          "empty.txt",
+          "empty.sav"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "empty.sav": ""
+          }
+        }
+      },
+      {
+        "name": "Nội dung UTF-8",
+        "files": {
+          "a.txt": "Học Python\n"
+        },
+        "stdin": "",
+        "argv": [
+          "a.txt",
+          "copy.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "copy.txt": "SOG7jWMgUHl0aG9uCg=="
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: để sao chép toàn vẹn có thể mở tệp ở chế độ rb/wb.",
+    "difficulty": 1,
+    "note": "",
+    "starter": "# P7.18 – Sao chép tệp\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.19",
+    "n": 19,
+    "group": "04 · Tệp và dòng lệnh",
+    "title": "Ghép nhiều tệp thành một",
+    "desc": "Viết công cụ catfiles: nối nội dung nhiều tệp theo thứ tự xuất hiện trên dòng lệnh.",
+    "io_desc": "argv[1:-1] = các nguồn, argv[-1] = tệp đích. Ghi kết quả nối nguyên vẹn (không tự thêm xuống dòng). Không in gì.",
+    "cases": [
+      {
+        "name": "Ba chương",
+        "files": {
+          "ch1.txt": "A\n",
+          "ch2.txt": "B\n",
+          "ch3.txt": "C\n"
+        },
+        "stdin": "",
+        "argv": [
+          "ch1.txt",
+          "ch2.txt",
+          "ch3.txt",
+          "book.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "book.txt": "QQpCCkMK"
+          }
+        }
+      },
+      {
+        "name": "Nguồn không có newline",
+        "files": {
+          "1.txt": "One ",
+          "2.txt": "two"
+        },
+        "stdin": "",
+        "argv": [
+          "1.txt",
+          "2.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "T25lIHR3bw=="
+          }
+        }
+      },
+      {
+        "name": "Nguồn rỗng",
+        "files": {
+          "a.txt": "",
+          "b.txt": "xyz"
+        },
+        "stdin": "",
+        "argv": [
+          "a.txt",
+          "b.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "eHl6"
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: vòng lặp qua sys.argv[1:-1], mở tệp đích một lần.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.19 – Ghép nhiều tệp thành một\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.20",
+    "n": 20,
+    "group": "05 · Mã hóa văn bản",
+    "title": "Mã thay thế theo từ khóa",
+    "desc": "Xây dựng bảng thay thế đơn bảng dựa trên từ khóa (ví dụ FEATHER): bỏ ký tự trùng trong từ khóa, sau đó thêm các chữ chưa dùng theo thứ tự Z→A. Mã hóa hoặc giải mã tệp.",
+    "io_desc": "sys.argv theo dạng `-e/-d -kKEY input.txt output.txt`; không có -e/-d thì mặc định -e. Chỉ đổi chữ cái A–Z, giữ nguyên hoa/thường, ký tự khác. Không có -k thì in ERROR.",
+    "cases": [
+      {
+        "name": "Mã hóa FEATHER",
+        "files": {
+          "plain.txt": "Hello, World! ABC xyz.\n"
+        },
+        "stdin": "",
+        "argv": [
+          "-e",
+          "-kFEATHER",
+          "plain.txt",
+          "enc.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "enc.txt": "WWh1dXAsIEdwbXV0ISBGRUEgZGNiLgo="
+          }
+        }
+      },
+      {
+        "name": "Giải mã FEATHER",
+        "files": {
+          "encrypted.txt": "FEATHR ZYX\n"
+        },
+        "stdin": "",
+        "argv": [
+          "-d",
+          "-kFEATHER",
+          "encrypted.txt",
+          "clear.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "clear.txt": "QUJDREVGIEdISQo="
+          }
+        }
+      },
+      {
+        "name": "Thiếu khóa",
+        "files": {
+          "p.txt": "ABC\n"
+        },
+        "stdin": "",
+        "argv": [
+          "p.txt",
+          "q.txt"
+        ],
+        "expected": {
+          "stdout": "ERROR\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: tạo chuỗi thay thế 26 ký tự; khi giải mã đảo ánh xạ.",
+    "difficulty": 3,
+    "note": "Bài theo sách; quy ước cờ -e/-d được chuẩn hóa để chấm trong trình duyệt.",
+    "starter": "# P7.20 – Mã thay thế theo từ khóa\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.21",
+    "n": 21,
+    "group": "05 · Mã hóa văn bản",
+    "title": "Phân bố tần suất chữ cái",
+    "desc": "Đọc một tệp văn bản và phân tích tần suất các chữ cái A–Z (không tính chữ số, dấu cách; không phân biệt hoa/thường).",
+    "io_desc": "Một dòng input(): tên tệp. In 26 dòng từ A tới Z theo mẫu `A 10.00%`. Với tệp không có chữ cái, mọi tần suất là 0.00%.",
+    "cases": [
+      {
+        "name": "Chữ lặp",
+        "files": {
+          "text.txt": "Aab! B?\n"
+        },
+        "stdin": "text.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "A 50.00%\nB 50.00%\nC 0.00%\nD 0.00%\nE 0.00%\nF 0.00%\nG 0.00%\nH 0.00%\nI 0.00%\nJ 0.00%\nK 0.00%\nL 0.00%\nM 0.00%\nN 0.00%\nO 0.00%\nP 0.00%\nQ 0.00%\nR 0.00%\nS 0.00%\nT 0.00%\nU 0.00%\nV 0.00%\nW 0.00%\nX 0.00%\nY 0.00%\nZ 0.00%\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một chữ",
+        "files": {
+          "t.txt": "ZZZ\n"
+        },
+        "stdin": "t.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "A 0.00%\nB 0.00%\nC 0.00%\nD 0.00%\nE 0.00%\nF 0.00%\nG 0.00%\nH 0.00%\nI 0.00%\nJ 0.00%\nK 0.00%\nL 0.00%\nM 0.00%\nN 0.00%\nO 0.00%\nP 0.00%\nQ 0.00%\nR 0.00%\nS 0.00%\nT 0.00%\nU 0.00%\nV 0.00%\nW 0.00%\nX 0.00%\nY 0.00%\nZ 100.00%\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có chữ",
+        "files": {
+          "empty.txt": "123?!\n"
+        },
+        "stdin": "empty.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "A 0.00%\nB 0.00%\nC 0.00%\nD 0.00%\nE 0.00%\nF 0.00%\nG 0.00%\nH 0.00%\nI 0.00%\nJ 0.00%\nK 0.00%\nL 0.00%\nM 0.00%\nN 0.00%\nO 0.00%\nP 0.00%\nQ 0.00%\nR 0.00%\nS 0.00%\nT 0.00%\nU 0.00%\nV 0.00%\nW 0.00%\nX 0.00%\nY 0.00%\nZ 0.00%\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: uppercase(), count() và tỉ lệ ×100.",
+    "difficulty": 2,
+    "note": "Sách cho phép tự bố trí bảng; bộ chấm chuẩn hóa thành 26 dòng để kết quả máy có thể so sánh.",
+    "starter": "# P7.21 – Phân bố tần suất chữ cái\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.22",
+    "n": 22,
+    "group": "05 · Mã hóa văn bản",
+    "title": "Mã Vigenère",
+    "desc": "Mã Vigenère dùng từ khóa lặp vòng; mỗi chữ cái được dịch theo chữ tương ứng trong khóa. Viết chương trình mã hóa/giải mã tệp.",
+    "io_desc": "argv: `-e/-d -kKEY input.txt output.txt`. Chỉ mã hóa A–Z, giữ nguyên hoa/thường và ký tự khác; ký tự không phải chữ không làm tăng vị trí của khóa.",
+    "cases": [
+      {
+        "name": "TIGER mã hóa",
+        "files": {
+          "in.txt": "Attack at dawn!\n"
+        },
+        "stdin": "",
+        "argv": [
+          "-e",
+          "-kTIGER",
+          "in.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "VGJ6ZXRkIGl6IGhycHYhCg=="
+          }
+        }
+      },
+      {
+        "name": "TIGER giải mã",
+        "files": {
+          "in.txt": "TIGER\n"
+        },
+        "stdin": "",
+        "argv": [
+          "-d",
+          "-kTIGER",
+          "in.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "QUFBQUEK"
+          }
+        }
+      },
+      {
+        "name": "Ký tự đặc biệt",
+        "files": {
+          "in.txt": "A-BC! 123\n"
+        },
+        "stdin": "",
+        "argv": [
+          "-e",
+          "-kCAT",
+          "in.txt",
+          "out.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "out.txt": "Qy1CViEgMTIzCg=="
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: shift = ord(key[i % len(key)]) - ord(\"A\").",
+    "difficulty": 3,
+    "note": "Quy ước: chỉ các chữ cái A–Z mới làm tăng vị trí từ khóa.",
+    "starter": "# P7.22 – Mã Vigenère\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.23",
+    "n": 23,
+    "group": "05 · Mã hóa văn bản",
+    "title": "Mã Playfair (theo mô tả sách)",
+    "desc": "Tạo bảng chữ cái 5×5 từ khóa, gộp I/J. Mã hóa theo cặp: hai chữ ở hai góc đối diện của hình chữ nhật đổi cột; nếu cùng hàng hoặc cột thì tráo vị trí như sách mô tả.",
+    "io_desc": "argv: `-e/-d -kKEY input.txt output.txt`. Chỉ xử lý chữ cái, đổi J→I, đưa về chữ hoa; bỏ dấu câu/khoảng trắng. Nếu độ dài lẻ, thêm X ở cuối. Mỗi cặp độc lập; giải mã theo cùng quy tắc.",
+    "cases": [
+      {
+        "name": "PLAYFAIR: AM",
+        "files": {
+          "a.txt": "AM"
+        },
+        "stdin": "",
+        "argv": [
+          "-e",
+          "-kPLAYFAIR",
+          "a.txt",
+          "b.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "b.txt": "Rkg="
+          }
+        }
+      },
+      {
+        "name": "Đổi I/J",
+        "files": {
+          "a.txt": "JIG!"
+        },
+        "stdin": "",
+        "argv": [
+          "-e",
+          "-kPLAYFAIR",
+          "a.txt",
+          "b.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "b.txt": "SUlLVg=="
+          }
+        }
+      },
+      {
+        "name": "Chuỗi lẻ",
+        "files": {
+          "a.txt": "HELLO"
+        },
+        "stdin": "",
+        "argv": [
+          "-d",
+          "-kMONKEY",
+          "a.txt",
+          "b.txt"
+        ],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "b.txt": "TE5MTEtW"
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: mapping ký tự → (row,col); nếu hai vị trí khác hàng và cột, đổi cột.",
+    "difficulty": 3,
+    "note": "Đây là đúng biến thể Playfair đơn giản của sách, khác quy tắc Playfair chuẩn khi 2 chữ cùng hàng/cột.",
+    "starter": "# P7.23 – Mã Playfair (theo mô tả sách)\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.24",
+    "n": 24,
+    "group": "06 · Tệp nhị phân BMP",
+    "title": "Bộ lọc ảnh hoàng hôn (BMP)",
+    "desc": "Dựa trên Section 7.4: xử lý ảnh BMP 24-bit bằng cách giảm thành phần xanh dương và xanh lá mỗi thành phần 30%, giữ màu đỏ.",
+    "io_desc": "Tệp ảnh 24-bit `image.bmp` có sẵn. Sửa ngay tệp nguồn hoặc xuất `output.bmp` (hệ thống kiểm tra output.bmp nếu có, ngược lại image.bmp). Với từng pixel BGR, B và G mới = int(original*0.70), R giữ nguyên; không đổi header/padding.",
+    "cases": [
+      {
+        "name": "2 × 2 pixels",
+        "files": {
+          "image.bmp": {
+            "__base64__": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAyGQyBAUGAAAA/33/AMgAAA=="
+          }
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "image.bmp": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAjEYyAgMGAAAAsn2yAMgAAA=="
+          }
+        }
+      },
+      {
+        "name": "3 × 1 pixels",
+        "files": {
+          "image.bmp": {
+            "__base64__": "Qk1CAAAAAAAAADYAAAAoAAAAAwAAAAEAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAChQeKDI8+rRkAAAA"
+          }
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "image.bmp": "Qk1CAAAAAAAAADYAAAAoAAAAAwAAAAEAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAABw4eHCM8r31kAAAA"
+          }
+        }
+      },
+      {
+        "name": "1 × 3 pixels",
+        "files": {
+          "image.bmp": {
+            "__base64__": "Qk1CAAAAAAAAADYAAAAoAAAAAQAAAAMAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wBQjNIA"
+          }
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "image.bmp": "Qk1CAAAAAAAAADYAAAAoAAAAAQAAAAMAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALKy/wA4YtIA"
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: dùng rb+, seek() và BGR; skip padding ở cuối mỗi dòng.",
+    "difficulty": 3,
+    "note": "Bài đồ họa P7.24 thuộc nhóm Programming Exercises (không gắn Toolbox hay Science), nên được giữ lại.",
+    "starter": "# P7.24 – Bộ lọc ảnh hoàng hôn (BMP)\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.25",
+    "n": 25,
+    "group": "06 · Tệp nhị phân BMP",
+    "title": "Chuyển BMP thành ảnh xám",
+    "desc": "Dựa trên Section 7.4: với mỗi pixel RGB, tính mức xám bằng 30% đỏ + 59% xanh lá + 11% xanh dương; ghi cả ba thành phần bằng mức xám.",
+    "io_desc": "Tệp ảnh 24-bit `image.bmp`. Sửa ngay tệp hoặc xuất `output.bmp`. gray = int(0.30*R + 0.59*G + 0.11*B). Giữ nguyên header/padding.",
+    "cases": [
+      {
+        "name": "2 × 2 pixels",
+        "files": {
+          "image.bmp": {
+            "__base64__": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAyGQyBAUGAAAA/33/AMgAAA=="
+          }
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "image.bmp": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAYGBgBQUFAAC7u7tYWFgAAA=="
+          }
+        }
+      },
+      {
+        "name": "3 × 1 pixels",
+        "files": {
+          "image.bmp": {
+            "__base64__": "Qk1CAAAAAAAAADYAAAAoAAAAAwAAAAEAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAChQeKDI8+rRkAAAA"
+          }
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "image.bmp": "Qk1CAAAAAAAAADYAAAAoAAAAAwAAAAEAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAFRUVMzMzo6OjAAAA"
+          }
+        }
+      },
+      {
+        "name": "1 × 3 pixels",
+        "files": {
+          "image.bmp": {
+            "__base64__": "Qk1CAAAAAAAAADYAAAAoAAAAAQAAAAMAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wBQjNIA"
+          }
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "image.bmp": "Qk1CAAAAAAAAADYAAAAoAAAAAQAAAAMAAAABABgAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wCampoA"
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: thứ tự kênh trong BMP là B, G, R, không phải RGB.",
+    "difficulty": 3,
+    "note": "Bài đồ họa P7.25 thuộc nhóm Programming Exercises, không thuộc Toolbox hay Science.",
+    "starter": "# P7.25 – Chuyển BMP thành ảnh xám\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.26",
+    "n": 26,
+    "group": "07 · Ứng dụng dữ liệu",
+    "title": "Trộn thư theo mẫu",
+    "desc": "Đọc tệp mẫu thư có placeholder |1|, |2|, ... và cơ sở dữ liệu gồm các trường cách nhau bằng dấu |. Tạo một thư cá nhân hóa cho mỗi bản ghi.",
+    "io_desc": "Đọc `template.txt`, `database.txt`. Ghi `letters.txt`: các thư theo đúng thứ tự dữ liệu, ngăn cách bằng dòng chứa `---`. Vị trí 1 ứng với trường đầu tiên. Dòng mẫu cuối có newline.",
+    "cases": [
+      {
+        "name": "Hai khách hàng",
+        "files": {
+          "template.txt": "Dear |1| |2|,\nWelcome to |3|.\n",
+          "database.txt": "Mr.|Lee|Hanoi\nMs.|Anna|Paris\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "letters.txt": "RGVhciBNci4gTGVlLApXZWxjb21lIHRvIEhhbm9pLgotLS0KRGVhciBNcy4gQW5uYSwKV2VsY29tZSB0byBQYXJpcy4K"
+          }
+        }
+      },
+      {
+        "name": "Lặp placeholder",
+        "files": {
+          "template.txt": "|1| says hello to |1|.\n",
+          "database.txt": "Alice\nBob\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "letters.txt": "QWxpY2Ugc2F5cyBoZWxsbyB0byBBbGljZS4KLS0tCkJvYiBzYXlzIGhlbGxvIHRvIEJvYi4K"
+          }
+        }
+      },
+      {
+        "name": "Một bản ghi",
+        "files": {
+          "template.txt": "Hi |2|!\n",
+          "database.txt": "Dr.|Smith\n"
+        },
+        "stdin": "",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "letters.txt": "SGkgU21pdGghCg=="
+          }
+        }
+      }
+    ],
+    "hint": "Gợi ý: re.sub(r\"\\|(\\d+)\\|\", ..., template).",
+    "difficulty": 3,
+    "note": "File mẫu nhân tạo; nội dung gốc trong sách minh họa bằng mẫu thư và các bản ghi phân tách dấu |.",
+    "starter": "# P7.26 – Trộn thư theo mẫu\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.27",
+    "n": 27,
+    "group": "07 · Ứng dụng dữ liệu",
+    "title": "Tra cứu ghép ba tệp",
+    "desc": "Ghép dữ liệu của ba tệp bằng tên người và mã định danh: tên–số điện thoại, tên–mã định danh, mã định danh–thu nhập. Trả lời truy vấn từ số điện thoại.",
+    "io_desc": "Các tệp `phones.txt` (name;phone), `ids.txt` (name;id), `income.txt` (id;income). Một dòng input(): số điện thoại. In `name | id | income`; nếu thiếu bất kỳ mắt xích cần thiết, in `NOT FOUND`. Dùng mã định danh giả trong bộ dữ liệu mẫu.",
+    "cases": [
+      {
+        "name": "Tìm thấy đầy đủ",
+        "files": {
+          "phones.txt": "An;0901\nBinh;0902\n",
+          "ids.txt": "An;ID01\nBinh;ID02\n",
+          "income.txt": "ID01;1000\nID02;2000\n"
+        },
+        "stdin": "0902\n",
+        "argv": [],
+        "expected": {
+          "stdout": "Binh | ID02 | 2000\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chưa có dữ liệu thu nhập",
+        "files": {
+          "phones.txt": "An;0901\n",
+          "ids.txt": "An;ID01\n",
+          "income.txt": "ID02;900\n"
+        },
+        "stdin": "0901\n",
+        "argv": [],
+        "expected": {
+          "stdout": "NOT FOUND\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số không tồn tại",
+        "files": {
+          "phones.txt": "An;0901\n",
+          "ids.txt": "An;ID01\n",
+          "income.txt": "ID01;1000\n"
+        },
+        "stdin": "9999\n",
+        "argv": [],
+        "expected": {
+          "stdout": "NOT FOUND\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: tra cứu theo 3 ánh xạ nối nhau; dùng get() tránh KeyError.",
+    "difficulty": 3,
+    "note": "Bộ kiểm thử chỉ sử dụng dữ liệu nhận dạng giả, không dùng SSN thật.",
+    "starter": "# P7.27 – Tra cứu ghép ba tệp\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.28",
+    "n": 28,
+    "group": "07 · Ứng dụng dữ liệu",
+    "title": "Bảng điểm theo mã sinh viên",
+    "desc": "Đọc danh sách tên lớp từ classes.txt, rồi tìm mã sinh viên trong từng tệp lớp để tổng hợp điểm của sinh viên đó.",
+    "io_desc": "Một dòng input(): mã SV. `classes.txt` gồm tên mã lớp; mỗi `CLASS.txt` có `studentID grade`. In dòng đầu `Student ID <id>`, sau đó `class grade` cho mỗi lớp có kết quả, theo thứ tự trong classes.txt.",
+    "cases": [
+      {
+        "name": "Học nhiều lớp",
+        "files": {
+          "classes.txt": "CSC2\nMTH121\n",
+          "CSC2.txt": "11234 A-\n16753 B+\n",
+          "MTH121.txt": "16753 C+\n"
+        },
+        "stdin": "16753\n",
+        "argv": [],
+        "expected": {
+          "stdout": "Student ID 16753\nCSC2 B+\nMTH121 C+\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có kết quả",
+        "files": {
+          "classes.txt": "CSC1\n",
+          "CSC1.txt": "100 A\n"
+        },
+        "stdin": "999\n",
+        "argv": [],
+        "expected": {
+          "stdout": "Student ID 999\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một lớp",
+        "files": {
+          "classes.txt": "DS101\n",
+          "DS101.txt": "V001 A\nV002 B\n"
+        },
+        "stdin": "V002\n",
+        "argv": [],
+        "expected": {
+          "stdout": "Student ID V002\nDS101 B\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: for course in classes: open(course+\".txt\") và so sánh mã SV.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.28 – Bảng điểm theo mã sinh viên\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.29",
+    "n": 29,
+    "group": "08 · Ứng dụng kinh doanh",
+    "title": "Doanh số theo dịch vụ khách sạn",
+    "desc": "Đọc dữ liệu bán hàng khách sạn: khách;loại dịch vụ;số tiền;ngày. Tính doanh thu từng loại dịch vụ. Xử lý lỗi tệp không tồn tại hoặc định dạng sai.",
+    "io_desc": "Một dòng input(): tên tệp. Dòng hợp lệ có 4 trường cách nhau `;` và tiền phải chuyển được thành số. In `Service: 123.45` theo thứ tự tên dịch vụ tăng dần. Nếu thiếu tệp hoặc bất kỳ dòng nào sai, chỉ in `ERROR`.",
+    "cases": [
+      {
+        "name": "Ba dịch vụ",
+        "files": {
+          "sales.txt": "Anh;Dinner;150.5;2026-01-01\nBinh;Lodging;200;2026-01-01\nChi;Dinner;49.5;2026-01-02\n"
+        },
+        "stdin": "sales.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "Dinner: 200.00\nLodging: 200.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Dòng sai",
+        "files": {
+          "bad.txt": "A;Dinner;bad;2026-01-01\n"
+        },
+        "stdin": "bad.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "ERROR\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tệp không tồn tại",
+        "files": {},
+        "stdin": "missing.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "ERROR\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: try/except (OSError, ValueError), dict cho totals.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.29 – Doanh số theo dịch vụ khách sạn\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.30",
+    "n": 30,
+    "group": "08 · Ứng dụng kinh doanh",
+    "title": "Tách file theo loại dịch vụ",
+    "desc": "Từ tệp bán hàng theo định dạng P7.29, tạo tệp riêng cho từng loại dịch vụ, ghi lại nguyên dòng thuộc loại đó.",
+    "io_desc": "Một dòng input(): tên tệp; ví dụ dịch vụ Dinner tạo Dinner.txt. Giữ thứ tự các dòng, giữ newline cuối mỗi bản ghi. Nếu file thiếu/định dạng không hợp lệ, in `ERROR` và không tạo tệp kết quả.",
+    "cases": [
+      {
+        "name": "Dinner và Conference",
+        "files": {
+          "sales.txt": "A;Dinner;100;2026-01-01\nB;Conference;300;2026-01-02\nC;Dinner;200;2026-01-03\n"
+        },
+        "stdin": "sales.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "Conference.txt": "QjtDb25mZXJlbmNlOzMwMDsyMDI2LTAxLTAyCg==",
+            "Dinner.txt": "QTtEaW5uZXI7MTAwOzIwMjYtMDEtMDEKQztEaW5uZXI7MjAwOzIwMjYtMDEtMDMK"
+          }
+        }
+      },
+      {
+        "name": "Một dịch vụ",
+        "files": {
+          "s.txt": "A;Lodging;120;2026-01-01\n"
+        },
+        "stdin": "s.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "",
+          "files": {
+            "Lodging.txt": "QTtMb2RnaW5nOzEyMDsyMDI2LTAxLTAxCg=="
+          }
+        }
+      },
+      {
+        "name": "Sai định dạng",
+        "files": {
+          "bad.txt": "A;Dinner;ABC;2026-01-01\n"
+        },
+        "stdin": "bad.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "ERROR\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: gom lines theo loại dịch vụ, kiểm tra hợp lệ trước khi ghi file.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.30 – Tách file theo loại dịch vụ\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  },
+  {
+    "id": "P7.31",
+    "n": 31,
+    "group": "08 · Ứng dụng kinh doanh",
+    "title": "Đối chiếu tiền quỹ cuối ngày",
+    "desc": "Đọc giao dịch tiền mặt trong ngày, mỗi dòng gồm mã hóa đơn, số tiền, P (trả ra) hoặc R (nhận vào). Đối chiếu tiền quỹ cuối ngày thực tế với giá trị tính được.",
+    "io_desc": "Ba dòng input(): tiền đầu ngày, tiền cuối ngày thực tế, tên tệp. Tính expected = đầu + tổng(R) − tổng(P). In `EXPECTED n.nn` và `MATCH` hoặc `MISMATCH`.",
+    "cases": [
+      {
+        "name": "Khớp số dư",
+        "files": {
+          "cash.txt": "A01 100 R\nB02 20 P\n"
+        },
+        "stdin": "1000\n1080\ncash.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "EXPECTED 1080.00\nMATCH\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Lệch",
+        "files": {
+          "cash.txt": "1 50 P\n2 20 R\n"
+        },
+        "stdin": "500\n480\ncash.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "EXPECTED 470.00\nMISMATCH\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không giao dịch",
+        "files": {
+          "empty.txt": ""
+        },
+        "stdin": "240\n240\nempty.txt\n",
+        "argv": [],
+        "expected": {
+          "stdout": "EXPECTED 240.00\nMATCH\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gợi ý: nhận vào R = cộng; chi ra P = trừ.",
+    "difficulty": 2,
+    "note": "",
+    "starter": "# P7.31 – Đối chiếu tiền quỹ cuối ngày\n# Đọc yêu cầu và dữ liệu mẫu bên trái.\n# Dùng open(...), input(), sys.argv nếu đề bài yêu cầu.\n\n"
+  }
+];
+const STORE='pfe-ch7-exercises-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+const initial=()=>({current:0, drafts:{},passed:{},lastResults:{},bestTests:{},attempts:{},studentId:'',studentName:'',studentClass:'',startedAt:Date.now(),completedAt:null});
+let state=initial();try{const saved=JSON.parse(localStorage.getItem(STORE));if(saved&&typeof saved==='object')state={...initial(),...saved};}catch(_){}
+let current=Number.isInteger(state.current)&&state.current>=0&&state.current<EXERCISES.length?state.current:0;
+let worker=null,workerReady=false,pending=null,watchdog=null,seq=0;
+function save(){state.current=current;if(passedCount()===EXERCISES.length&&!state.completedAt)state.completedAt=Date.now();try{localStorage.setItem(STORE,JSON.stringify(state));}catch(_){} }
+function passedCount(){return EXERCISES.filter(x=>state.passed[x.id]).length}
+function totalTests(){return EXERCISES.reduce((n,x)=>n+x.cases.length,0)}
+function passedTests(){return EXERCISES.reduce((n,x)=>n+(Number(state.bestTests[x.id])||0),0)}
+function fmt(ts){return ts?new Date(ts).toLocaleString('vi-VN',{dateStyle:'medium',timeStyle:'short'}):'—'}
+function bytesFromBase64(s){const raw=atob(s);return Uint8Array.from(raw,c=>c.charCodeAt(0))}
+function fileText(content){
+ if(typeof content==='string')return content;
+ const data=bytesFromBase64(content.__base64__);
+ if(data[0]===66&&data[1]===77&&data.length>54){
+  const view=new DataView(data.buffer),w=view.getInt32(18,true),h=view.getInt32(22,true);
+  return `[Ảnh BMP 24-bit: ${w} × ${h} pixels, ${data.length} bytes. Dữ liệu nhị phân được cung cấp sẵn cho bài làm.]`;
+ }
+ return `[Tệp nhị phân: ${data.length} bytes]`;
+}
+function b64Text(s){
+ const bin=atob(s);const arr=Uint8Array.from(bin,c=>c.charCodeAt(0));
+ try{return new TextDecoder('utf-8',{fatal:true}).decode(arr);}catch{return `[${arr.length} bytes dữ liệu nhị phân]`}
+}
+function groupName(g){return g.split(' · ')[1]||g}
+function redrawNav(){
+ const search=$('search').value.toLowerCase().trim();
+ const groups=[...new Set(EXERCISES.map(x=>x.group))];
+ $('navgroups').innerHTML=groups.map(group=>{
+  const matches=EXERCISES.map((x,i)=>({...x,i})).filter(x=>x.group===group&&(!search||`${x.id} ${x.title} ${x.desc}`.toLowerCase().includes(search)));
+  if(!matches.length)return '';
+  const count=matches.filter(x=>state.passed[x.id]).length;
+  return `<div class="navgroup"><div class="grouptitle"><span>${esc(group)}</span><span>${count}/${matches.length}</span></div>${matches.map(x=>`<button type="button" class="navitem ${current===x.i?'active':''} ${state.passed[x.id]?'done':''}" data-index="${x.i}"><span class="navnum">${state.passed[x.id]?'✓':esc(x.id)}</span><span><strong>${esc(x.title)}</strong><small>${x.cases.length} ca kiểm thử · Mức ${x.difficulty}</small></span></button>`).join('')}</div>`;
+ }).join('');
+ $('navgroups').querySelectorAll('[data-index]').forEach(btn=>btn.onclick=()=>navigate(+btn.dataset.index));
+ $('sidecount').textContent=`${passedCount()} / ${EXERCISES.length}`;
+ $('sidebar').style.width=`${100*passedCount()/EXERCISES.length}%`;
+}
+function updateStats(){
+ $('statPass').textContent=`${passedCount()}/${EXERCISES.length}`;
+ $('statTests').textContent=`${passedTests()}/${totalTests()}`;
+ $('statPercent').textContent=Math.round(100*passedCount()/EXERCISES.length)+'%';
+ $('statCurrent').textContent=EXERCISES[current].id;
+ $('coursePill').textContent=passedCount()===EXERCISES.length?'✓ Đã đạt toàn bộ':'Bài tự chấm · Không cần nộp file';
+ redrawNav();
+}
+function previewSample(c){
+ const files=Object.entries(c.files||{});
+ const filehtml=files.length?files.map(([name,data])=>`<details class="filepill"><summary>📄 ${esc(name)} <span class="muted">(${typeof data==='string'?new TextEncoder().encode(data).length:bytesFromBase64(data.__base64__).length} bytes)</span></summary><pre>${esc(fileText(data))}</pre></details>`).join(''):'<div class="muted">Không có tệp đầu vào.</div>';
+ const outfiles=Object.entries(c.expected.files||{});
+ let expectedhtml=outfiles.map(([name,base])=>`<details class="filepill"><summary>✓ ${esc(name)} · tệp cần tạo</summary><pre>${esc(b64Text(base))}</pre></details>`).join('');
+ if(!expectedhtml)expectedhtml='<div class="muted">Không yêu cầu tạo tệp đầu ra.</div>';
+ return `<div class="samplebox"><div class="boxheading"><strong>Dữ liệu mẫu · ${esc(c.name)}</strong><span>TEST 1</span></div><div class="filegroup"><b>Tệp đầu vào có sẵn</b>${filehtml}</div><div class="filegroup"><b>sys.argv[1:]</b><div class="littlecode">${esc(JSON.stringify(c.argv||[]))}</div></div><div class="filegroup"><b>input() — mỗi dòng là một giá trị</b><div class="littlecode">${esc(c.stdin||'(không có)')}</div></div><div class="filegroup"><b>Kết quả print() dự kiến</b><div class="littlecode">${esc(c.expected.stdout||'(không in ra màn hình)')}</div></div><div class="filegroup"><b>Tệp đầu ra cần tạo</b>${expectedhtml}</div></div>`;
+}
+function render(){
+ const t=EXERCISES[current],draft=state.drafts[t.id]??t.starter;
+ $('problem').innerHTML=`<div class="blocktop"><span class="tag">${esc(t.id)}</span><span class="tag gray">${esc(groupName(t.group))}</span><span class="tag amber">MỨC ${t.difficulty}/3</span><span class="tag ${state.passed[t.id]?'':'gray'}">${state.passed[t.id]?'✓ ĐÃ ĐẠT':'CHƯA ĐẠT'}</span></div><h2>${esc(t.title)}</h2><div class="prompt">${esc(t.desc)}</div><div class="contract"><b>QUY ƯỚC ĐẦU VÀO / ĐẦU RA ĐỂ TỰ CHẤM</b><p>${esc(t.io_desc)}</p></div>${t.note?`<div class="notice">${esc(t.note)}</div>`:''}<div class="workspace"><div><div class="codecard"><div class="codehead"><div class="dotset"><i></i><i></i><i></i></div><span>main.py · Python 3</span><span>Tab = 4 dấu cách</span></div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Mã nguồn bài tập Python"></textarea><div class="codefoot">Ctrl + Enter: chạy thử mẫu · Mỗi lần chấm chạy trong thư mục tệp ảo riêng biệt · Mã nguồn lưu tự động</div></div><div class="actionrow"><button class="btn dark" id="testSample">▶ Chạy thử mẫu</button><button class="btn primary" id="grade">✓ Chấm ${t.cases.length} ca kiểm thử</button><button class="btn ghost" id="showHint">💡 Gợi ý</button><button class="btn warn" id="resetCode">↺ Khôi phục</button></div><div class="hint" id="hint">${esc(t.hint)}</div><div class="guide">Đề bài được diễn giải từ <i>Python for Everyone, Chapter 7</i>; những bài phụ thuộc tệp sách được cấp dữ liệu thử tương đương. Bộ chấm chạy Python bằng Pyodide, cần Internet cho lần tải đầu tiên. Có thể dùng <code>open()</code>, <code>sys.argv</code>, <code>input()</code> và thư viện chuẩn.</div></div><div class="rightstack">${previewSample(t.cases[0])}<div class="judgebox" id="resultsBox"><h3>Kiểm tra kết quả</h3><div id="judgeContent"></div><div id="consoleContainer" style="display:none;margin-top:12px"><div class="filegroup"><b>Đầu ra Python</b><pre class="outputarea" id="consoleText"></pre></div></div></div></div></div><div class="footerline"><div class="left">${current+1}/${EXERCISES.length} · ${t.id} · Lần chấm: ${state.attempts[t.id]||0}</div><div style="display:flex;gap:8px"><button type="button" class="btn" id="prev" ${current===0?'disabled':''}>← Bài trước</button><button type="button" class="btn primary" id="next" ${current===EXERCISES.length-1?'disabled':''}>Bài tiếp theo →</button></div></div>`;
+ $('code').value=draft;
+ const editor=$('code');
+ editor.addEventListener('input',()=>{state.drafts[t.id]=editor.value;save()});
+ editor.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){
+   e.preventDefault();let a=editor.selectionStart,b=editor.selectionEnd;
+   editor.setRangeText('    ',a,b,'end');editor.dispatchEvent(new Event('input'));
+  }
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();run('sample');}
+ });
+ $('testSample').onclick=()=>run('sample');$('grade').onclick=()=>run('grade');
+ $('showHint').onclick=()=>{$('hint').classList.toggle('show');};
+ $('resetCode').onclick=()=>{if(confirm('Khôi phục mã bắt đầu?')){editor.value=t.starter;state.drafts[t.id]=editor.value;save();}};
+ $('prev').onclick=()=>navigate(current-1);$('next').onclick=()=>navigate(current+1);
+ if(state.lastResults[t.id]) showResult(state.lastResults[t.id],false);
+ else $('judgeContent').innerHTML='<div class="muted">Viết chương trình và bấm “Chạy thử mẫu” hoặc “Chấm”.</div>';
+ updateStats();
+}
+function navigate(idx){
+ if(idx<0||idx>=EXERCISES.length)return;
+ if(pending){abortRun('Đã dừng kiểm tra khi chuyển bài.');}
+ current=idx;save();render();window.scrollTo({top:0,behavior:'instant'});
+ if(window.innerWidth<850) $('side').classList.remove('open');
+}
+function newWorker(){
+ const url=URL.createObjectURL(new Blob([$('pythonRunner').textContent],{type:'text/javascript'}));
+ let w=new Worker(url); URL.revokeObjectURL(url);
+ workerReady=false;
+ w.onmessage=e=>{
+  const m=e.data;
+  if(m.type==='ready'){workerReady=true; if(pending){clearTimeout(watchdog);watchdog=setTimeout(()=>abortRun('Quá thời gian thực thi (20 giây). Kiểm tra vòng lặp vô hạn.'),20000);setStatus('Python đã sẵn sàng. Đang chạy kiểm thử…','loading');}return;}
+  if(!pending || m.id!==pending.id)return;
+  clearTimeout(watchdog);const runInfo=pending;pending=null;toggleRun(false);
+  if(m.type==='error'){setStatus('Lỗi môi trường Python: '+m.error,'bad');return;}
+  const result={...m.value,mode:runInfo.mode,when:Date.now()};
+  const t=EXERCISES[runInfo.idx];
+  if(runInfo.idx===current){showResult(result,true);}
+  if(runInfo.mode==='grade'){
+    state.attempts[t.id]=(state.attempts[t.id]||0)+1;
+    state.bestTests[t.id]=Math.max(state.bestTests[t.id]||0,result.passed);
+    if(result.passed===t.cases.length)state.passed[t.id]=true;
+    state.lastResults[t.id]=result;save();updateStats();
+    if(runInfo.idx===current) $('problem').querySelector('.blocktop .tag:last-child').textContent=state.passed[t.id]?'✓ ĐÃ ĐẠT':'CHƯA ĐẠT';
+  }
+ };
+ w.onerror=e=>{abortRun('Không thể chạy Python: '+(e.message||'Worker error'));};
+ return w;
+}
+function toggleRun(busy){for(const id of ['testSample','grade']){const el=$(id);if(el)el.disabled=busy}}
+function setStatus(label,type=''){const host=$('judgeContent');if(!host)return;host.innerHTML=`<div class="judge-status ${type}">${esc(label)}</div>`;}
+function abortRun(message){if(watchdog)clearTimeout(watchdog);if(worker){worker.terminate();worker=null;}workerReady=false;pending=null;toggleRun(false);setStatus(message,'bad');}
+function run(mode){
+ if(pending)return;
+ const t=EXERCISES[current],code=$('code').value;
+ if(!code.trim()){setStatus('Hãy nhập mã Python trước khi chạy.','bad');return;}
+ if(!worker){try{worker=newWorker()}catch(e){setStatus('Không thể tạo Python Worker: '+e.message,'bad');return;}}
+ const id=++seq;pending={id,idx:current,mode};toggleRun(true);
+ const tests=mode==='sample'?[t.cases[0]]:t.cases;
+ setStatus(workerReady?'Đang chạy Python…':'Đang tải Python (Pyodide) lần đầu; cần Internet…','loading');
+ watchdog=setTimeout(()=>abortRun('Hết thời gian tải/chạy Python. Vui lòng thử lại khi có Internet.'),workerReady?20000:90000);
+ worker.postMessage({type:'run',id,payload:{code,cases:tests,sample:mode==='sample'}});
+}
+function showResult(r,fresh){
+ const t=EXERCISES[current];
+ const passed=r.passed===r.total&&r.total>0;
+ const label=r.mode==='sample'?'KẾT QUẢ CHẠY THỬ':'KẾT QUẢ CHẤM BÀI';
+ $('judgeContent').innerHTML=`<div class="judge-status ${passed?'good':'bad'}">${passed?'✓':'✗'} ${label} · ${r.passed}/${r.total} ca đạt</div><div>${(r.cases||[]).map((x,i)=>`<div class="testline ${x.ok?'good':'bad'}"><span class="check">${x.ok?'✓':'✗'}</span><div><b>${esc(x.name)}</b><small>${esc(x.detail)}${x.error?' · '+esc(x.error):''}</small></div></div>`).join('')}</div>${r.mode==='sample'?'<div class="muted">Chạy thử chỉ kiểm tra dữ liệu mẫu, không đánh dấu hoàn thành. Bấm “Chấm” để kiểm tra tất cả ca.</div>':''}`;
+ if(r.mode==='sample'&&r.cases&&r.cases[0]){
+  const c=r.cases[0];$('consoleContainer').style.display='block';$('consoleText').textContent=c.stdout||'(Chương trình không in kết quả ra màn hình)';
+  if(Object.keys(c.files||{}).length){
+   const note=document.createElement('div');note.className='muted';note.textContent='Tệp đầu ra đã được hệ thống kiểm tra trực tiếp trong thư mục tệp ảo.';
+   $('consoleContainer').appendChild(note);
+  }
+ }
+}
+function exportJson(){
+ const payload={course:'Python for Everyone – Chapter 7',timestamp:new Date().toISOString(),student:{id:state.studentId,name:state.studentName,class:state.studentClass},passed:state.passed,bestTests:state.bestTests,attempts:state.attempts,completedAt:state.completedAt};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});downloadBlob(blob,'ch07_progress_'+(state.studentId||'anonymous')+'.json');
+}
+function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportPng(){
+ const miss=[['studentId','mã sinh viên'],['studentName','họ và tên'],['studentClass','lớp']].find(([k])=>!String(state[k]||'').trim());
+ if(miss){$('profileStatus').textContent='Vui lòng điền '+miss[1]+' trước khi xuất PNG.';$(miss[0]).focus();return;}
+ const W=1500,H=1050,cv=document.createElement('canvas');cv.width=W*2;cv.height=H*2;const ctx=cv.getContext('2d');ctx.scale(2,2);
+ const grad=ctx.createLinearGradient(0,0,W,H);grad.addColorStop(0,'#f2fbf8');grad.addColorStop(1,'#edf6fb');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+ ctx.fillStyle='#13384f';ctx.fillRect(0,0,W,155);
+ ctx.fillStyle='#84dfcb';ctx.font='bold 22px system-ui,sans-serif';ctx.fillText('PYTHON FOR EVERYONE · CHAPTER 7',70,56);
+ ctx.fillStyle='#ffffff';ctx.font='bold 42px system-ui,sans-serif';ctx.fillText(passedCount()===EXERCISES.length?'BÁO CÁO HOÀN THÀNH BÀI TẬP':'BÁO CÁO TIẾN ĐỘ BÀI TẬP',70,112);
+ ctx.fillStyle='#fff';ctx.fillRect(55,180,W-110,H-240);ctx.strokeStyle='#d6e7ed';ctx.lineWidth=2;ctx.strokeRect(55,180,W-110,H-240);
+ const text=(s,x,y,font,color='#15384b')=>{ctx.font=font;ctx.fillStyle=color;ctx.fillText(String(s),x,y);};
+ text('THÔNG TIN SINH VIÊN',90,236,'bold 20px system-ui,sans-serif','#087a73');
+ text('Mã sinh viên',90,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentId,90,314,'bold 26px system-ui,sans-serif');
+ text('Họ và tên',570,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentName,570,314,'bold 26px system-ui,sans-serif');
+ text('Lớp',1110,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentClass,1110,314,'bold 26px system-ui,sans-serif');
+ const boxes=[['Bài tập đạt',passedCount()+'/'+EXERCISES.length],['Ca kiểm thử đạt',passedTests()+'/'+totalTests()],['Tiến độ',Math.round(100*passedCount()/EXERCISES.length)+'%'],['Tình trạng',passedCount()===EXERCISES.length?'Hoàn tất':'Đang học']];
+ boxes.forEach(([label,v],i)=>{let x=90+i*335,y=355;ctx.fillStyle='#f0f8fa';ctx.fillRect(x,y,312,122);ctx.strokeStyle='#d5e8ea';ctx.strokeRect(x,y,312,122);text(label,x+16,y+33,'bold 15px system-ui,sans-serif','#6b8896');text(v,x+16,y+86,'bold 27px system-ui,sans-serif','#153e51');});
+ text('THỐNG KÊ THEO NHÓM BÀI',90,530,'bold 20px system-ui,sans-serif','#087a73');
+ const groups=[...new Set(EXERCISES.map(x=>x.group))];
+ groups.forEach((g,i)=>{const x=i%2?760:90,y=575+Math.floor(i/2)*64;const all=EXERCISES.filter(t=>t.group===g);const n=all.filter(t=>state.passed[t.id]).length;text(g.replace(/^\d+ · /,''),x,y,'bold 16px system-ui,sans-serif');text(n+'/'+all.length,x+540,y,'bold 18px system-ui,sans-serif','#0a8174');ctx.fillStyle='#dbe8ec';ctx.fillRect(x,y+10,580,6);ctx.fillStyle='#18a592';ctx.fillRect(x,y+10,580*n/all.length,6);});
+ const fY=935;ctx.strokeStyle='#d5e4e8';ctx.beginPath();ctx.moveTo(90,fY-36);ctx.lineTo(W-90,fY-36);ctx.stroke();
+ text('Ngày bắt đầu: '+fmt(state.startedAt),90,fY,'14px system-ui,sans-serif','#66818e');
+ text('Hoàn thành: '+fmt(state.completedAt),580,fY,'14px system-ui,sans-serif','#66818e');
+ text('Xuất báo cáo: '+fmt(Date.now()),1000,fY,'14px system-ui,sans-serif','#66818e');
+ text('Bản ghi được tạo và lưu trên trình duyệt của sinh viên; không phải kết quả thi được xác thực.',90,976,'14px system-ui,sans-serif','#6b8490');
+ cv.toBlob(b=>{if(b){downloadBlob(b,'ch07_'+state.studentId.replace(/[^a-z0-9_-]/gi,'_')+'_progress.png');$('profileStatus').textContent='Đã tạo PNG báo cáo tiến độ.';}},'image/png');
+}
+$('search').addEventListener('input',redrawNav);
+$('mobilemenu').onclick=()=>$('side').classList.toggle('open');
+$('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.()};
+$('resetProgress').onclick=()=>{if(confirm('Xóa toàn bộ mã đang viết, kết quả chấm và thông tin sinh viên trong trình duyệt này?')){state=initial();current=0;save();render();for(const k of ['studentId','studentName','studentClass'])$(k).value='';}};
+for(const k of ['studentId','studentName','studentClass']){$(k).value=state[k]||'';$(k).addEventListener('input',()=>{state[k]=$(k).value;save()})}
+$('exportPNG').onclick=exportPng;$('exportJSON').onclick=exportJson;
+save();render();
+</script>
+</body>
+</html>

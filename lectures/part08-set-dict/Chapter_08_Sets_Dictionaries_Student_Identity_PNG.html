@@ -1,0 +1,2160 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light" />
+<title>Chương 8 · Sets & Dictionaries | Python Interactive Course</title>
+<style>
+:root{--navy:#10263b;--navy2:#15364e;--ink:#10263b;--sub:#506276;--border:#d8e2ea;--surface:#fff;--paper:#f5f8fc;--aqua:#047a88;--aquaLight:#e7f8f7;--orange:#ec8842;--gold:#ffe8b9;--error:#a93544;--ok:#09725b;--rounded:18px;--shadow:0 18px 45px rgba(21,54,78,.075)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Arial",sans-serif;line-height:1.55}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}.app{min-height:100vh;display:grid;grid-template-columns:268px minmax(0,1fr)}
+.sidebar{background:var(--navy);color:#e9f5fc;padding:22px 16px 26px;display:flex;flex-direction:column;min-height:100vh;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:8px 12px 23px;border-bottom:1px solid rgba(255,255,255,.13);display:flex;align-items:center;gap:12px}.brandmark{width:38px;height:38px;border:1px solid #72cccc;border-radius:13px;color:#80e4d9;display:grid;place-items:center;font-family:monospace;font-weight:900;font-size:18px}.brandname{font-weight:780;line-height:1.2}.brandname small{display:block;color:#a5c2d1;font-size:11px;margin-top:4px;font-weight:500;letter-spacing:.09em;text-transform:uppercase}.navheading{font-size:10px;letter-spacing:.18em;font-weight:800;color:#9fb8ca;padding:22px 12px 12px}.module-list{display:flex;flex-direction:column;gap:7px}.mod-btn{border:1px solid transparent;background:transparent;color:#c6dae5;text-align:left;padding:11px 10px;border-radius:11px;display:flex;gap:11px;align-items:flex-start;width:100%;transition:background .14s,border-color .14s}.mod-btn:hover:not(:disabled){background:rgba(255,255,255,.07)}.mod-btn.active{background:#214359;border-color:#3a7787;color:#fff}.mod-btn.locked{opacity:.5}.mod-num{flex:none;width:27px;height:27px;border-radius:8px;background:#2c5064;display:grid;place-items:center;font-size:11px;font-weight:800}.mod-btn.passed .mod-num{background:#0d6d63;color:white}.mod-btn .mod-title{font-weight:660;font-size:12.5px;line-height:1.24}.mod-btn .mod-sub{font-size:10px;line-height:1.3;margin-top:5px;color:#a3c0cc}.sidebottom{margin-top:auto;padding:24px 12px 8px;color:#b8cfda;font-size:11px}.sidebottom .meta-line{margin-bottom:10px}.sidebottom button{background:none;color:#a9cbd6;border:0;padding:0;text-decoration:underline;font-size:11px;text-underline-offset:3px}.sideprogress{height:6px;border-radius:10px;background:#31546a;overflow:hidden;margin:8px 0 10px}.sideprogress>div{height:100%;background:#70d2c3;transition:width .3s}
+.main{padding:24px 34px 20px;min-width:0;display:flex;flex-direction:column;gap:16px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.coursepath{font-size:12px;letter-spacing:.03em;color:#637c8d}.coursepath b{color:var(--aqua)}.top-actions{display:flex;gap:8px;align-items:center}.smallbtn{font-size:12px;font-weight:700;border:1px solid #cbdbe3;background:white;border-radius:10px;padding:8px 13px;color:var(--navy);white-space:nowrap}.smallbtn:hover{border-color:#7fb8c0}.pill{font-size:11px;padding:6px 10px;background:var(--aquaLight);color:#096b72;border-radius:999px;font-weight:750;white-space:nowrap}.progressline{height:5px;background:#dfe8ec;border-radius:99px;overflow:hidden}.progressline span{display:block;background:linear-gradient(90deg,#1e8d8c,#77cdbb);height:100%;transition:width .22s}
+.stage{background:var(--surface);min-height:min(68vh,735px);border-radius:var(--rounded);box-shadow:var(--shadow);border:1px solid #e0e9ee;padding:clamp(24px,3vw,44px) clamp(24px,4vw,56px) 26px;display:flex;flex-direction:column;gap:16px;overflow:hidden}.slide-header{border-bottom:1px solid #e2eaf0;padding-bottom:18px}.eyebrow{font-weight:800;letter-spacing:.17em;color:var(--aqua);font-size:11px;text-transform:uppercase;margin-bottom:10px}.slide-header h1{font-size:clamp(26px,2.4vw,39px);letter-spacing:-.035em;line-height:1.14;margin:0 0 10px;font-weight:825}.lead{font-size:clamp(14px,1.25vw,17px);color:var(--sub);max-width:1000px;line-height:1.6;margin:0}.content{font-size:clamp(13px,1vw,16px);flex:1}.content h3{font-size:17px;margin:0 0 13px;color:#12364a}.content p{margin:0 0 11px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}.twocol>div{min-width:0}.twocol>div:has(h3){padding:4px}.point-list{padding-left:20px;margin:10px 0}.point-list li{padding-left:4px;margin:10px 0;color:#354b5c}.point-list li::marker{color:#1e9696}.code-window{border-radius:12px;background:#14293e;overflow:hidden;margin:0 0 12px;border:1px solid #29455a}.code-head{font:700 10px/1 system-ui,sans-serif;color:#bed4df;letter-spacing:.15em;display:flex;align-items:center;gap:12px;padding:14px 17px 7px}.dotset{display:inline-flex;gap:4px}.dotset i{width:7px;height:7px;border-radius:50%;background:#59849a;display:block}.dotset i:first-child{background:#e97c6b}.dotset i:nth-child(2){background:#eaba5d}.dotset i:nth-child(3){background:#71c7a6}pre,code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}.code-window pre{margin:0;white-space:pre;overflow:auto;color:#eaf5ff;font-size:13.2px;line-height:1.72;padding:10px 18px 18px;tab-size:4}.output-window{border:1px solid #d3e4df;background:#f0faf5;padding:10px 15px;border-radius:10px;color:#235a52;font-size:12px;margin-top:-3px;margin-bottom:12px}.output-window strong{display:block;font-size:10px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}.output-window pre{margin:0;white-space:pre-wrap;font-size:12px}.teaching-note{border-left:4px solid #319e9c;padding:12px 15px;background:#eef9f8;border-radius:0 10px 10px 0;margin:17px 0;color:#295568}.teaching-note strong{font-size:13px;color:#087985}.teaching-note p{margin:4px 0 0;font-size:13px}.teaching-note.warn{border-color:#f6a15b;background:#fff6eb}.teaching-note.warn strong{color:#a85c14}.content code:not(pre code){background:#edf2f6;border:1px solid #dfe8ef;color:#17506a;border-radius:4px;padding:1px 4px;font-size:.9em}.mini-table{border-collapse:collapse;width:100%;font-size:12.3px}.mini-table td,.mini-table th{padding:8px 9px;border-bottom:1px solid #e0e7eb;text-align:left}.mini-table th{color:#386676;background:#edf8f7}
+.slide-footer{display:flex;align-items:center;justify-content:space-between;color:#81929e;font-size:11px;border-top:1px solid #e5edf1;padding-top:15px;margin-top:auto;gap:10px}.slide-footer strong{color:#31576b}.slide-index{font-variant-numeric:tabular-nums}.navfooter{display:flex;align-items:center;justify-content:space-between;gap:14px}.nav-arrows{display:flex;gap:9px}.primary{background:var(--aqua);border:1px solid var(--aqua);color:white;border-radius:11px;padding:11px 22px;font-size:13px;font-weight:790;box-shadow:0 5px 10px rgba(4,122,136,.1)}.primary:hover:not(:disabled){background:#066a74}.secondary{background:white;color:var(--navy);border:1px solid #cbd9e3;border-radius:11px;padding:11px 18px;font-size:13px;font-weight:760}.secondary:hover:not(:disabled){background:#f0f7f8}.footleft{font-size:12px;color:#5b7281}.footleft strong{color:#196577}
+.lab{background:#f6fafb;border:1px solid #dbe9e9;border-radius:14px;padding:16px 17px;margin-top:10px}.lab h4{font-size:14px;margin:0 0 8px}.lab-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.lab-buttons button{border:1px solid #80b5bc;background:white;color:#126c76;font-weight:700;border-radius:9px;padding:7px 14px}.lab-buttons button.selected{background:#056f7f;color:#fff}.tokens{display:flex;gap:7px;flex-wrap:wrap;min-height:45px;align-items:center}.token{background:#dff5ee;border:1px solid #8bccc0;border-radius:8px;color:#075b59;padding:6px 12px;font-weight:800;font-size:12px}.emptyprompt{font-size:12px;color:#65798a}.lab-result{font-size:12px;color:#245e69;margin-top:9px;font-weight:680}.lab input{padding:10px 12px;background:#fff;border:1px solid #afcbd5;border-radius:9px;min-width:120px;max-width:100%;width:55%}.lab .helper{font-size:12px;color:#617687}.venn{display:flex;gap:8px;margin:12px 0;align-items:center}.venn .ring{height:80px;width:130px;border-radius:50%;border:3px solid #75afb6;display:grid;place-items:center;color:#205973;font-size:13px;font-weight:800;background:#c3eaf1a6}.venn .ring + .ring{margin-left:-45px;border-color:#e5a761;background:#ffdfb7a8;color:#7a4925}
+.checkpoint{display:grid;grid-template-columns:1fr minmax(340px,1fr);gap:22px;align-items:start}.quiz-panel,.coding-panel{border:1px solid #dae7e9;border-radius:15px;padding:18px;background:#fbfdfd;min-width:0}.checkpoint h3{font-size:16px;margin:0 0 6px}.checkpoint .muted{color:#657b85;font-size:12px;margin-bottom:15px}.question{border-top:1px solid #e3eaee;padding:14px 0}.question h4{font-size:12.8px;margin:0 0 10px;line-height:1.55}.answers{display:grid;gap:7px}.answer{border:1px solid #d5e1e8;background:white;border-radius:9px;padding:8px 10px;font-size:12px;display:flex;align-items:flex-start;gap:9px;cursor:pointer;text-align:left}.answer:hover{background:#f1f9f9}.answer.sel{border-color:#24999c;background:#e7f9f6}.answer input{margin-top:3px;accent-color:#0b8590}.answer code{white-space:normal}.q-feedback{font-size:11.7px;padding:8px 10px;margin-top:8px;border-radius:8px}.q-feedback.good{background:#e2f7ed;color:#145d47}.q-feedback.bad{background:#fff1ed;color:#973f3e}.pass-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:14px}.result-status{font-size:12px;font-weight:750}.result-status.pass{color:var(--ok)}.result-status.fail{color:var(--error)}.grader-note{font-size:11px;color:#748895;margin-top:10px}.editor{width:100%;min-height:220px;resize:vertical;padding:15px 13px;background:#152b40;color:#edf7ff;border:1px solid #456373;border-radius:10px;font:13px/1.64 ui-monospace,Consolas,monospace;tab-size:4;white-space:pre;outline-offset:2px}.editor:focus{outline:2px solid #7bccc5}.editor-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:11px}.feedback{font-size:12.3px;color:#456274;background:#eef6f8;border-radius:10px;padding:11px;margin-top:12px;white-space:pre-wrap}.feedback.good{background:#e5f7f0;color:#17644e}.feedback.bad{background:#fdf0ef;color:#873542}.hint{display:none;border:1px solid #f0cb8a;background:#fff7e6;color:#7b581a;padding:12px 13px;border-radius:10px;font-size:12px;margin-top:10px}.hint.show{display:block}.achievement{border:1px solid #a9d3c2;border-radius:13px;padding:13px 15px;background:#eefaf5;margin-top:15px;color:#12614e;font-size:12px}.achievement b{font-size:14px}.code-instruction{font-size:13px;line-height:1.7;margin-bottom:12px}.code-instruction code{background:#e9f3f3;color:#126774;border-radius:3px;padding:1px 4px}.score-box{font-size:11px;color:#516f80;background:#e8f3f5;border-radius:8px;padding:7px 9px;display:inline-block;margin-bottom:10px}
+#completion{display:none}#completion.show{display:block}.completion-card{border:1px solid #add9ca;background:linear-gradient(125deg,#effbf4 0%,#f4fbfe 100%);color:#12665a;padding:20px;border-radius:16px;box-shadow:0 10px 26px rgba(18,102,90,.08)}.completion-card h2{margin:6px 0 8px;font-size:28px;line-height:1.18;color:#12485b}.completion-badge{display:inline-flex;align-items:center;gap:8px;background:#dcf4eb;color:#0b7463;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.completion-top{display:flex;gap:18px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}.completion-top p{margin:0;color:#3f6572;font-size:13px;max-width:860px}.completion-actions{display:flex;flex-direction:column;gap:10px;min-width:min(100%,280px)}.name-field{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#215764}.name-field input{border:1px solid #c8dbe3;border-radius:10px;background:#fff;padding:10px 12px;color:#183645}.name-field input:focus{outline:2px solid #71c7be;outline-offset:1px}.completion-actions .form-note{font-size:11px;color:#5d7883;margin:0}.completion-actions .field-error{font-size:11px;color:#ad3440;margin:0;display:none}.completion-actions .field-error.show{display:block}.completion-actions-row{display:flex;gap:10px;flex-wrap:wrap}.completion-actions-row button{flex:1}.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.summary-card{background:rgba(255,255,255,.84);border:1px solid #d7e9e4;border-radius:13px;padding:14px}.summary-card b{display:block;font-size:12.5px;color:#174654;margin-bottom:6px}.summary-card p,.summary-card li{font-size:12px;color:#4d6976;line-height:1.55}.summary-card ul{margin:6px 0 0 18px;padding:0}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.stat-card{background:#fff;border:1px solid #d9e8eb;border-radius:13px;padding:14px 15px}.stat-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#66828d;font-weight:800}.stat-value{font-size:24px;line-height:1.15;font-weight:850;color:#103f51;margin-top:7px}.stat-note{font-size:11.5px;color:#58717d;margin-top:5px}.export-status{margin-top:12px;font-size:12px;color:#486773}.summary-banner{margin-top:14px;padding:11px 14px;border-radius:12px;background:#e8f5f3;border:1px solid #cfe5df;color:#205f61;font-size:12.4px}.summary-chipline{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.summary-chip{background:#fff;border:1px solid #d6e6ea;color:#18495b;padding:8px 10px;border-radius:999px;font-size:11.2px;font-weight:700}.certificate-note{margin-top:10px;font-size:11px;color:#5f7c86}.summary-sheet{display:grid;grid-template-columns:1.25fr .95fr;gap:14px;margin-top:18px}.summary-sheet .summary-card{height:100%}
+@media(max-width:970px){.stat-grid,.summary-grid,.summary-sheet{grid-template-columns:1fr}}
+@media(max-width:1150px){.app{grid-template-columns:220px 1fr}.main{padding:18px}.checkpoint{grid-template-columns:1fr}.stage{min-height:65vh;padding:24px}}@media(max-width:820px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto;min-height:auto;padding:13px}.brand{padding:5px 12px 12px}.module-list{display:flex;flex-direction:row;overflow:auto;gap:7px;padding:4px}.module-list .mod-btn{min-width:140px}.navheading,.sidebottom,.mod-sub{display:none}.sidebar .brand{border:0}.main{padding:14px;gap:11px}.stage{padding:20px;min-height:70vh}.twocol{grid-template-columns:1fr}.checkpoint{grid-template-columns:1fr}.code-window pre{font-size:12px}.topbar{gap:7px}.smallbtn{font-size:11px;padding:7px 8px}}
+@media print{.sidebar,.navfooter,.topbar,.progressline{display:none}.app{display:block}.main{padding:0}.stage{box-shadow:none;border:0;border-radius:0;height:auto;min-height:auto;overflow:visible}.checkpoint{display:block}.quiz-panel,.coding-panel{break-inside:avoid}}
+
+/* Chapter goals, outcomes, and course orientation */
+.intro-nav{display:flex;flex-direction:column;gap:6px;margin-top:2px}
+.intro-nav .mod-btn{padding:10px 11px}
+.intro-nav .mod-btn .mod-num{background:#2e6673;color:#d8fcf3}
+.goal-lead{color:#385b69;font-size:14px;margin-bottom:15px!important}
+.goal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.goal-card{background:#f7fbfd;border:1px solid #dbe9ed;border-radius:12px;padding:16px 17px;min-width:0}
+.goal-card b{font-size:13px;color:#123b4c;display:block;margin-bottom:5px}
+.goal-card p{font-size:12.8px;color:#526b78;margin:0}
+.goal-number{font:800 11px ui-monospace,monospace;letter-spacing:.05em;color:#08838a;margin-bottom:7px}
+.goal-card.wide{grid-column:span 2;background:#eaf8f5;border-color:#b8dfd8}
+.overview-path{background:#f0f6f9;border:1px solid #d8e6ed;border-radius:11px;padding:13px 16px;color:#385d6d;font-size:12.5px;margin-top:14px}
+.outcomes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.outcome-card{display:flex;gap:12px;padding:12px 14px;border:1px solid #dce9ec;border-radius:11px;background:#fbfdfd}
+.outcome-id{height:30px;min-width:40px;display:grid;place-items:center;background:#dcf2ee;color:#08766f;font-size:11px;font-weight:850;border-radius:8px}
+.outcome-card b{font-size:12.5px;color:#173c4b}
+.outcome-card p{font-size:12px;line-height:1.48;color:#58707d;margin:5px 0 0}
+.outcome-card .route{color:#087e80;font-weight:700;font-size:11px;margin-top:6px}
+.learning-criterion{font-size:12px;color:#4c6875;background:#eaf5f6;border-radius:11px;padding:12px 15px;margin-top:13px}
+.lesson-outcome{font-size:12px;margin-top:13px;padding:9px 13px;background:#eef8f6;border:1px solid #d2e8e2;color:#215c5a;border-radius:10px}
+.lesson-outcome strong{color:#077a78}
+@media(max-width:970px){.goal-grid,.outcomes-grid{grid-template-columns:1fr}.goal-card.wide{grid-column:span 1}}
+@media print{.intro-nav{display:none}}
+
+/* Executable, editable source on every teaching slide */
+.code-window .example-editor{display:block;width:100%;min-height:70px;resize:vertical;border:0;border-radius:0;outline:0;color:#eaf5ff;background:#14293e;padding:10px 18px 16px;font:13.2px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;white-space:pre;overflow:auto}
+.code-window .example-editor:focus{box-shadow:inset 0 0 0 2px #69c9b4}
+.example-tools{display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding:9px 13px;background:#203b50;border-top:1px solid #35546a}
+.example-tools button{font-size:12px;font-weight:750;border-radius:8px;padding:7px 12px;border:1px solid #467b86;background:#e5f7f3;color:#105c65;cursor:pointer}
+.example-tools button:hover{background:#c1ece4}
+.example-tools .reset-example{background:transparent;border-color:#567889;color:#cde4ea}
+.example-tools .reset-example:hover{background:#2c4b60}
+.example-tools button:disabled{opacity:.52;cursor:progress}
+.example-tools details{font-size:11px;color:#c2dbe5;margin-left:auto}
+.example-tools summary{cursor:pointer;padding:5px 1px}
+.example-tools .stdin-input{display:block;width:min(420px,65vw);margin:7px 0 3px;resize:vertical;padding:9px;font:12px/1.5 monospace;color:#eaf6ff;background:#10273a;border:1px solid #527a88;border-radius:7px}
+.example-results{display:none;padding:12px 16px;border-top:1px solid #44657b;background:#102b39;color:#dcf9f1}
+.example-results.active{display:block}
+.example-results.error{background:#402932;color:#ffdddd}
+.example-results .result-heading{font-weight:800;text-transform:uppercase;font-size:10px;letter-spacing:.09em;margin-bottom:7px}
+.example-results pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;color:inherit;font:12px/1.6 ui-monospace,Consolas,monospace;padding:0}
+@media print{.example-tools{display:none}.code-window .example-editor{height:auto;resize:none}}
+
+/* Set + Map advanced learning guides */
+.api-scroll{max-width:100%;overflow-x:auto;margin:15px 0 21px;border:1px solid #cfdee6;border-radius:12px;background:#fff;overscroll-behavior-x:contain}
+.api-table{width:100%;min-width:760px;border-collapse:collapse;font-size:12.5px;line-height:1.5}
+.api-table th{background:#173e53;color:#f5ffff;text-align:left;padding:11px 12px;font-size:11px;letter-spacing:.025em;position:sticky;top:0}
+.api-table td{padding:11px 12px;border-top:1px solid #e2ecf1;vertical-align:top;color:#365461}
+.api-table tr:nth-child(even){background:#f7fbfc}
+.api-table td:first-child{width:27%;font-weight:700;color:#124c5b}
+.api-table td:nth-child(2){width:28%}.api-table td:nth-child(3){width:19%}
+.api-table code{font-size:12px;white-space:normal;overflow-wrap:anywhere;color:#08596a}
+.guide-callout{background:#edf9f5;border:1px solid #bfe1d7;border-radius:13px;padding:16px 18px;margin-bottom:18px;color:#195c57}
+.guide-callout strong{font-size:16px;display:block;margin-bottom:5px}.guide-callout p{margin:0!important;font-size:13px;line-height:1.7}
+.guide-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:19px}
+.guide-panel{background:#f8fbfd;border:1px solid #d9e8ef;border-radius:12px;padding:16px 19px}
+.guide-panel h3{margin:0 0 8px!important;font-size:15px!important}.guide-panel ul{margin:0;padding-left:20px}.guide-panel li{font-size:13px;color:#3e6070;margin:6px 0;line-height:1.55}
+.guide-note{border-radius:12px;border:1px solid #cae3e9;background:#f0f8fc;padding:14px 17px;margin:14px 0 20px;font-size:13px;color:#2f5768}
+.guide-note b{display:block;font-size:13px;margin-bottom:5px}.guide-note p{margin:0!important}
+.guide-note.warning{background:#fff7eb;border-color:#f2d7ad;color:#79521f}.guide-note.modern{background:#f1f3ff;border-color:#d6daf5;color:#49547a}
+.guide-expected{background:#f4f9fa;border:1px solid #d9e7ec;border-radius:10px;padding:12px 14px;margin:-4px 0 18px}
+.guide-expected b{font-size:11px;color:#407485;display:block;margin-bottom:6px}.guide-expected pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.7 ui-monospace,Consolas,monospace;color:#234a5d}
+.guide-hint{color:#657f8b;font-size:12px}.lesson-reference{border-left:4px solid #48b4aa;background:#eef8f6;padding:11px 16px;border-radius:0 11px 11px 0;margin:18px 0;font-size:13px;color:#315d63}
+.guide-link-row{margin:18px 0}.guide-link-row button{font-size:12px}
+@media(max-width:860px){.guide-columns{grid-template-columns:1fr}.api-table{min-width:660px}}
+
+
+/* Sequential theory and two-item formative quiz (end-of-stage gate remains mandatory). */
+.deep-details{margin:16px 0;border:1px solid #d3e4e8;border-radius:13px;background:#f8fcfd;overflow:hidden}
+.deep-details>summary{padding:13px 16px;color:#126679;font-weight:760;cursor:pointer;font-size:13px;list-style-position:inside}
+.deep-inner{padding:4px 16px 16px}
+.deep-details .guide-callout{margin-top:10px}
+.quick-check{margin:26px 0 18px;border:1px solid #b5dcd7;border-radius:15px;background:linear-gradient(130deg,#f0faf7,#f8fcff);padding:20px}
+.quick-label{font-size:10px;font-weight:900;letter-spacing:.17em;color:#0b7e78;margin-bottom:4px}
+.quick-check h3{font-size:19px;margin:0 0 4px!important;color:#133b4d}
+.quick-intro{font-size:12px;color:#5b7480;margin-bottom:18px!important}
+.quick-question{margin:12px 0;background:rgba(255,255,255,.95);border:1px solid #dce9ec;border-radius:11px;padding:13px 15px}
+.quick-question>b{font-size:12.5px;color:#225366}.quick-question p{font-size:13px;margin:5px 0 10px}
+.quick-options{display:flex;flex-direction:column;gap:8px}.quick-options label{display:flex;align-items:center;gap:8px;font-size:13px;padding:7px 9px;border:1px solid #e2ebef;border-radius:9px;cursor:pointer;background:#fbfdfd}.quick-options label:has(input:checked){background:#e8f7f3;border-color:#9fd5c9}
+.quick-input{border:1px solid #b9cfd9;background:#fff;padding:10px 12px;border-radius:9px;width:min(100%,480px);font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#174558}
+.quick-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.quick-buttons .primary,.quick-buttons .secondary{font-size:12px;padding:9px 13px}
+.quick-status{font-size:12px;color:#7a5a25;font-weight:750}.quick-status.ok{color:#08705b}
+.quick-feedback{display:none;padding:10px 13px;border-radius:10px;margin-top:10px;font-size:12.5px;line-height:1.65}.quick-feedback.pass,.quick-feedback.fail,.quick-feedback.hint{display:block}.quick-feedback.pass{background:#e6f8ef;color:#116b55}.quick-feedback.fail{background:#fff3e9;color:#815321}.quick-feedback.hint{background:#e8f4f7;color:#296071}
+@media(max-width:700px){.quick-check{padding:14px}.quick-buttons{align-items:stretch}.quick-buttons button{flex:1}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="brandmark">{8}</div><div class="brandname">PYTHON FOR EVERYONE<small>Interactive Learning</small></div></div>
+<div class="navheading">KHỞI ĐỘNG</div>
+<div class="intro-nav" id="introList"></div>
+<div class="navheading">LỘ TRÌNH CHƯƠNG 8</div>
+<div class="module-list" id="moduleList"></div>
+<div class="sidebottom"><div class="meta-line"><b id="doneText">0 / 8</b> chặng đã hoàn thành</div><div class="sideprogress"><div id="sideBar" style="width:0%"></div></div><div class="meta-line">Kiểm tra nhanh: <b id="quickDoneCount">0/8</b> chặng đạt · không bắt buộc</div><div class="meta-line">Mở khóa: quiz ≥ 2/3 <b>và</b> vượt bài code</div><button id="resetAll" type="button">Đặt lại tiến độ</button></div>
+</aside>
+<main class="main">
+<div class="topbar"><div class="coursepath"><b>CHƯƠNG 08</b> &nbsp; / &nbsp; SETS AND DICTIONARIES</div><div class="top-actions"><span class="pill" id="pageStatus">Bài học mở</span><button type="button" class="smallbtn" id="fullScreen">⛶ Toàn màn hình</button></div></div>
+<div class="progressline"><span id="progressBar" style="width:0%"></span></div>
+<section class="stage" id="slide" aria-live="polite"></section>
+<div class="navfooter"><div class="footleft" id="navHint">← → để chuyển slide</div><div class="nav-arrows"><button type="button" class="secondary" id="prev">← Trước</button><button type="button" class="primary" id="next">Tiếp theo →</button></div></div>
+<div id="completion" aria-live="polite"></div>
+</main>
+</div>
+<script id="graderWorker" type="text/plain">
+let pyodideInstance = null;
+const BASE = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+const RUNNER = String.raw`
+import json, io, contextlib, traceback
+payload = json.loads(__grading_payload)
+src = payload['source']
+checks = payload['tests']
+dict_of_sets = payload.get('dictSetValues', False)
+feedback = []
+passed = 0
+marker = '# === BAI LAM ==='
+
+def prepare(v):
+    if isinstance(v, dict) and list(v.keys()) == ['__set__']:
+        return set(v['__set__'])
+    return v
+
+def match(actual, spec):
+    kind = spec['kind']
+    value = spec['value']
+    if kind == 'set':
+        return isinstance(actual, set) and actual == set(value)
+    if kind == 'list':
+        return isinstance(actual, list) and actual == value
+    if kind == 'dict':
+        if not isinstance(actual, dict):
+            return False
+        if dict_of_sets:
+            if set(actual) != set(value):
+                return False
+            return all(isinstance(actual[k], set) and actual[k] == set(v) for k, v in value.items())
+        return actual == value
+    return actual == value
+
+if marker not in src:
+    result = {'passed': 0, 'total': len(checks), 'cases': [], 'error': 'Giữ nguyên dòng # === BAI LAM === để hệ thống nhận biết phần dữ liệu đầu vào.'}
+else:
+    header, body = src.split(marker, 1)
+    for i, test in enumerate(checks):
+        try:
+            local = {}
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                exec(compile(header, '<student-input>', 'exec'), local, local)
+                for k, val in test['inputs'].items():
+                    local[k] = prepare(val)
+                exec(compile(body, '<student-code>', 'exec'), local, local)
+            failures = []
+            for key, spec in test['expected'].items():
+                if key not in local or not match(local[key], spec):
+                    failures.append(key)
+            good = not failures
+            if good: passed += 1
+            feedback.append({'ok': good, 'name': test['name'] if test.get('public') else 'Bộ kiểm thử bổ sung ' + str(i), 'detail': ('Đạt' if good else 'Chưa đúng biến: ' + ', '.join(failures))})
+        except Exception as exc:
+            feedback.append({'ok': False, 'name': test['name'] if test.get('public') else 'Bộ kiểm thử bổ sung ' + str(i), 'detail': type(exc).__name__ + ': ' + str(exc)[:180]})
+    result = {'passed': passed, 'total': len(checks), 'cases': feedback}
+json.dumps(result, ensure_ascii=False)
+`;
+const RUN_EXAMPLE = String.raw`
+import contextlib, json, traceback
+payload = json.loads(__example_payload)
+source = payload.get('source', '')
+stdin = payload.get('stdin', '')
+class OutputLimit:
+    def __init__(self, maximum=12000):
+        self.maximum, self.text, self.truncated = maximum, '', False
+    def write(self, value):
+        value = str(value)
+        remaining = self.maximum-len(self.text)
+        if len(value) > remaining: self.truncated = True
+        if remaining > 0: self.text += value[:remaining]
+        return len(value)
+    def flush(self): pass
+    def getvalue(self):
+        return self.text + ('\n... (đầu ra đã được rút gọn)' if self.truncated else '')
+output = OutputLimit()
+lines = iter(stdin.splitlines())
+def example_input(prompt=''):
+    output.write(prompt)
+    try:
+        return next(lines)
+    except StopIteration:
+        raise EOFError('Thiếu dữ liệu input(). Hãy mở mục Dữ liệu nhập và thêm giá trị, mỗi dòng một giá trị.')
+namespace = {'__name__':'__main__', 'input': example_input}
+ok = True
+try:
+    with contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
+        exec(compile(source, '<code-trong-slide>', 'exec'), namespace, namespace)
+except BaseException as exc:
+    ok = False
+    output.write('\n' + ''.join(traceback.format_exception_only(type(exc), exc)))
+    positions = [f.lineno for f in traceback.extract_tb(exc.__traceback__) if f.filename == '<code-trong-slide>']
+    if positions:
+        output.write('Dòng gây lỗi: ' + str(positions[-1]))
+result = {'ok': ok, 'output': output.getvalue()}
+json.dumps(result, ensure_ascii=False)
+`;
+async function boot(){
+  if(pyodideInstance) return pyodideInstance;
+  importScripts(BASE + 'pyodide.js');
+  pyodideInstance = await loadPyodide({indexURL: BASE});
+  self.postMessage({type:'loaded'});
+  return pyodideInstance;
+}
+self.onmessage = async (event) => {
+  const req = event.data;
+  if(req.type !== 'grade' && req.type !== 'example') return;
+  try {
+    const py = await boot();
+    const isExample = req.type === 'example';
+    py.globals.set(isExample ? '__example_payload' : '__grading_payload', JSON.stringify(req.payload));
+    const raw = await py.runPythonAsync(isExample ? RUN_EXAMPLE : RUNNER);
+    self.postMessage({type: isExample ? 'example-result' : 'result', id:req.id, value:JSON.parse(raw)});
+  }catch(err){self.postMessage({type:'error',id:req.id,error:String(err?.message || err)});}
+};
+</script>
+<script>
+'use strict';
+const MODULES = [
+  {
+    "id": "8.1.1",
+    "short": "Tạo và sử dụng set",
+    "topic": "Sets · Khái niệm và khởi tạo",
+    "slides": [
+      {
+        "kicker": "CHẶNG 1 · LÝ THUYẾT & VÍ DỤ",
+        "title": "CTDL Set: bản chất và trường hợp sử dụng",
+        "lead": "Nắm cách tổ chức dữ liệu của set, lựa chọn đúng trong bài toán và hiểu kết quả của các lệnh khởi tạo.",
+        "body": "<div class=\"guide-callout\"><strong>Set (tập hợp) dùng để trả lời câu hỏi “phần tử này có trong nhóm không?”<\/strong><p>Set giữ các phần tử <b>duy nhất<\/b>, không có chỉ số vị trí. Thích hợp khi cần loại trùng, tìm phần chung, phần riêng hoặc kiểm tra tư cách thành viên.<\/p><\/div>\n<div class=\"guide-columns\"><div class=\"guide-panel\"><h3>Khi nào chọn set?<\/h3><ul><li>Đếm số mã sản phẩm khác nhau.<\/li><li>Lọc khách hàng đã đăng ký nhiều lần.<\/li><li>Tìm khách có ở cả kênh online và cửa hàng.<\/li><li>Kiểm tra mã đã xuất hiện hay chưa.<\/li><\/ul><\/div><div class=\"guide-panel\"><h3>Đặc điểm cần nhớ<\/h3><ul><li><b>Không trùng<\/b>, không truy cập bằng <code>s[0]<\/code>.<\/li><li>Phần tử phải <b>hashable<\/b>, ví dụ <code>str<\/code>, <code>int<\/code>, tuple có thành phần hashable.<\/li><li>Set thông thường có thể thêm/xóa phần tử.<\/li><li>Không dựa vào thứ tự duyệt; dùng <code>sorted(s)<\/code> nếu cần hiển thị có thứ tự.<\/li><\/ul><\/div><\/div><h3>Cách khởi tạo và trả về<\/h3><div class=\"api-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp / phương thức<\/th><th>Mục đích<\/th><th>Kết quả trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>set()<\/code><\/td><td>Tạo set rỗng.<\/td><td>Một set rỗng: set()<\/td><td>Không dùng {} vì đó là dict rỗng.<\/td><\/tr><tr><td><code>set(iterable)<\/code><\/td><td>Tạo set từ list, tuple, chuỗi...; tự bỏ phần tử trùng.<\/td><td>Đối tượng set mới.<\/td><td>Phần tử phải hashable.<\/td><\/tr><tr><td><code>{a, b, c}<\/code><\/td><td>Tạo set trực tiếp.<\/td><td>Đối tượng set mới.<\/td><td>Các phần tử trùng chỉ xuất hiện một lần.<\/td><\/tr><tr><td><code>len(s)<\/code><\/td><td>Đếm số phần tử duy nhất.<\/td><td>int.<\/td><td>Không làm thay đổi s.<\/td><\/tr><tr><td><code>x in s / x not in s<\/code><\/td><td>Kiểm tra thành viên.<\/td><td>bool: True hoặc False.<\/td><td>Nếu x không hashable: TypeError.<\/td><\/tr><tr><td><code>sorted(s)<\/code><\/td><td>Sắp xếp để hiển thị.<\/td><td>list mới có thứ tự.<\/td><td>Có thể TypeError nếu các phần tử không so sánh được.<\/td><\/tr><\/tbody><\/table><\/div><h3>Ví dụ 1 · Mã hàng không trùng lặp<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>products = [\"Tea\", \"Coffee\", \"Tea\", \"Juice\"]\nunique = set(products)\nprint(len(unique))\nprint(sorted(unique))\nprint(\"Tea\" in unique)\nprint(type({}).__name__, type(set()).__name__)<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>3\n[&#x27;Coffee&#x27;, &#x27;Juice&#x27;, &#x27;Tea&#x27;]\nTrue\ndict set<\/pre><\/div><div class=\"guide-note info\"><b>So sánh nhanh<\/b><p><b>list<\/b> giữ thứ tự, chấp nhận trùng và truy cập theo chỉ số; <b>set<\/b> giữ phần tử duy nhất, phù hợp so sánh tập hợp; <b>dict<\/b> ánh xạ từng khóa duy nhất tới một giá trị.<\/p><\/div>"
+      },
+      {
+        "kicker": "8.1 · SETS",
+        "title": "Một tập hợp chỉ lưu các phần tử khác nhau",
+        "lead": "Set là cấu trúc phù hợp khi điều quan trọng là “có hay không”, không phải vị trí.",
+        "body": "<div class=\"twocol\"><div><h3>List<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>items = [&quot;Tea&quot;, &quot;Coffee&quot;, &quot;Tea&quot;]\nprint(len(items))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>3<\/pre><\/div><ul class=\"point-list\"><li>Cho phép <b>phần tử trùng nhau<\/b>.<\/li><li>Có thứ tự và truy cập bằng chỉ số <code>items[0]<\/code>.<\/li><\/ul><\/div><div><h3>Set<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>items = {&quot;Tea&quot;, &quot;Coffee&quot;, &quot;Tea&quot;}\nprint(len(items))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>2<\/pre><\/div><ul class=\"point-list\"><li>Các phần tử <b>duy nhất<\/b>.<\/li><li>Không truy cập bằng chỉ số và không có thứ tự vị trí cố định.<\/li><\/ul><\/div><\/div><div class=\"teaching-note info\"><strong>Ý tưởng cốt lõi<\/strong><p>Thêm một phần tử đã tồn tại sẽ không làm tăng số phần tử của tập hợp.<\/p><\/div><div class=\"lesson-reference\"><b>Mục đích:<\/b> dùng set khi chỉ quan tâm phần tử <b>có/không<\/b>, <b>duy nhất<\/b>, hoặc cần phép toán tập hợp. Mỗi phần tử phải hashable; <b>không truy cập bằng chỉ số<\/b>.<\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"0\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1.1 · CÚ PHÁP",
+        "title": "Tạo set, kiểm tra, duyệt phần tử",
+        "lead": "Phân biệt dấu ngoặc nhọn dùng cho set với từ điển rỗng.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>cast = {&quot;Luigi&quot;, &quot;Gumbys&quot;, &quot;Spiny&quot;}\nother = set([&quot;Luigi&quot;, &quot;Gumbys&quot;])\nempty = set()   # set rỗng\nnotASet = {}    # dict rỗng\n\nprint(len(cast))\nprint(&quot;Luigi&quot; in cast)\nprint(&quot;Arthur&quot; not in cast)<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>3\nTrue\nTrue<\/pre><\/div><\/div><div><h3>Quy tắc cần nhớ<\/h3><ul class=\"point-list\"><li><code>{1, 2}<\/code> là một set.<\/li><li><code>set()<\/code> tạo set rỗng.<\/li><li><code>{}<\/code> tạo dictionary rỗng.<\/li><li>Dùng <code>in<\/code>, <code>not in<\/code> để kiểm tra thành viên.<\/li><\/ul><\/div><\/div><div class=\"lesson-reference\"><b>Kết quả:<\/b> <code>set(iterable)<\/code> trả về set mới; <code>len(s)<\/code> trả về số nguyên; <code>x in s<\/code> trả về Boolean; <code>sorted(s)<\/code> trả về <b>list<\/b>.<\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1.1 · THỬ NGHIỆM",
+        "title": "Thêm phần tử và quan sát sự trùng lặp",
+        "lead": "Bấm các nút dưới đây: số thẻ trong set chỉ tăng khi gặp giá trị mới.",
+        "body": "<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>names = set()\nnames.add(&quot;An&quot;)\nnames.add(&quot;Binh&quot;)\nnames.add(&quot;An&quot;)\n\nfor name in sorted(names):\n    print(name)<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>An\nBinh<\/pre><\/div><div class=\"teaching-note info\"><strong>Không dựa vào thứ tự của set<\/strong><p>Nếu cần hiển thị theo thứ tự, sử dụng <code>sorted(mySet)<\/code>; kết quả là một <code>list<\/code>.<\/p><\/div>",
+        "interactive": {
+          "kind": "setBuilder",
+          "values": [
+            "An",
+            "Bình",
+            "Chi",
+            "An",
+            "Dũng",
+            "Bình"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Câu lệnh nào tạo set rỗng?",
+        "options": [
+          "{}",
+          "set()",
+          "[]",
+          "dict()"
+        ],
+        "answer": 1,
+        "why": "<code>{}<\/code> là dictionary rỗng."
+      },
+      {
+        "q": "Sau <code>s = {1, 1, 2}<\/code>, giá trị <code>len(s)<\/code> là?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "Báo lỗi"
+        ],
+        "answer": 1,
+        "why": "Set tự loại bỏ giá trị trùng nhau."
+      },
+      {
+        "q": "Lệnh nào kiểm tra phần tử <code>\"An\"<\/code> thuộc set <code>names<\/code>?",
+        "options": [
+          "names[\"An\"]",
+          "\"An\" in names",
+          "names.index(\"An\")",
+          "names == \"An\""
+        ],
+        "answer": 1,
+        "why": "Dùng toán tử <code>in<\/code> để kiểm tra thành viên."
+      }
+    ],
+    "coding": {
+      "title": "Đếm sản phẩm khác nhau",
+      "level": "Mức 1 · Điền lệnh",
+      "instructions": "Cho danh sách tên sản phẩm. Tạo set <code>uniqueProducts<\/code>, sau đó gán số lượng phần tử khác nhau vào <code>uniqueCount<\/code>. Hãy thay <code>___<\/code> bằng lệnh đúng.",
+      "starter": "products = [\"Tea\", \"Coffee\", \"Tea\", \"Juice\"]\n# === BAI LAM ===\nuniqueProducts = ___\nuniqueCount = ___",
+      "hint": "Sử dụng <code>set(products)<\/code> và <code>len(...)<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "uniqueProducts": {
+              "kind": "set",
+              "value": [
+                "Coffee",
+                "Juice",
+                "Tea"
+              ]
+            },
+            "uniqueCount": {
+              "kind": "value",
+              "value": 3
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Chỉ một loại",
+          "inputs": {
+            "products": [
+              "Tea",
+              "Tea",
+              "Tea"
+            ]
+          },
+          "expected": {
+            "uniqueProducts": {
+              "kind": "set",
+              "value": [
+                "Tea"
+              ]
+            },
+            "uniqueCount": {
+              "kind": "value",
+              "value": 1
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Danh sách rỗng",
+          "inputs": {
+            "products": []
+          },
+          "expected": {
+            "uniqueProducts": {
+              "kind": "set",
+              "value": []
+            },
+            "uniqueCount": {
+              "kind": "value",
+              "value": 0
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "8.1.2",
+    "short": "Cập nhật set",
+    "topic": "Sets · Thêm, xóa, làm rỗng",
+    "slides": [
+      {
+        "kicker": "CHẶNG 2 · LÝ THUYẾT & VÍ DỤ",
+        "title": "Set: các phương thức thêm, xóa và kết quả",
+        "lead": "Đọc chữ ký phương thức, xác định có làm thay đổi dữ liệu hay không, kiểm tra giá trị trả về và các ngoại lệ.",
+        "body": "<div class=\"guide-callout\"><strong>Phân biệt hai nhóm thao tác<\/strong><p><b>Nhóm thay đổi tại chỗ<\/b> thường trả về <code>None<\/code>; <b>nhóm tạo tập hợp mới<\/b> trả về một đối tượng <code>set<\/code>. Các phương thức kiểm tra điều kiện trả về <code>bool<\/code>.<\/p><\/div><h3>Thêm, xóa và sao chép set<\/h3><div class=\"api-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp / phương thức<\/th><th>Mục đích<\/th><th>Kết quả trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>s.add(x)<\/code><\/td><td>Thêm x; không tạo bản sao của phần tử đã có.<\/td><td>None.<\/td><td>TypeError nếu x không hashable.<\/td><\/tr><tr><td><code>s.update(iterable)<\/code><\/td><td>Thêm nhiều phần tử từ iterable vào s.<\/td><td>None.<\/td><td>Phần tử không hashable gây TypeError.<\/td><\/tr><tr><td><code>s.discard(x)<\/code><\/td><td>Xóa x nếu có.<\/td><td>None.<\/td><td>Không phát sinh KeyError nếu x vắng mặt.<\/td><\/tr><tr><td><code>s.remove(x)<\/code><\/td><td>Xóa x.<\/td><td>None.<\/td><td>KeyError nếu x vắng mặt.<\/td><\/tr><tr><td><code>s.pop()<\/code><\/td><td>Lấy và xóa một phần tử bất kỳ.<\/td><td>Phần tử vừa lấy.<\/td><td>KeyError nếu set rỗng; không biết trước phần tử nào được chọn.<\/td><\/tr><tr><td><code>s.clear()<\/code><\/td><td>Xóa toàn bộ phần tử.<\/td><td>None.<\/td><td>s trở thành set rỗng.<\/td><\/tr><tr><td><code>s.copy()<\/code><\/td><td>Tạo bản sao nông.<\/td><td>Một set mới.<\/td><td>Không thay đổi s.<\/td><\/tr><\/tbody><\/table><\/div><h3>Ví dụ 2 · Giá trị trả về của các thao tác<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>s = {\"Tea\", \"Coffee\"}\nresult = s.add(\"Juice\")\nprint(result is None)\nprint(sorted(s))\ns.discard(\"Milk\")\ns.remove(\"Tea\")\nprint(sorted(s))\nprint(sorted(s.copy()))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>True\n[&#x27;Coffee&#x27;, &#x27;Juice&#x27;, &#x27;Tea&#x27;]\n[&#x27;Coffee&#x27;, &#x27;Juice&#x27;]\n[&#x27;Coffee&#x27;, &#x27;Juice&#x27;]<\/pre><\/div><h3>Ví dụ 3 · remove() và discard()<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>codes = {\"A\", \"B\"}\nprint(codes.discard(\"Z\"))\ntry:\n    codes.remove(\"Z\")\nexcept KeyError as error:\n    print(type(error).__name__)\nprint(sorted(codes))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>None\nKeyError\n[&#x27;A&#x27;, &#x27;B&#x27;]<\/pre><\/div><div class=\"guide-note warning\"><b>Cần tránh<\/b><p>Không viết <code>s = s.add(x)<\/code>: biến <code>s<\/code> sẽ nhận <code>None<\/code>. Đúng là <code>s.add(x)<\/code> để thay đổi tập hợp tại chỗ.<\/p><\/div>"
+      },
+      {
+        "kicker": "8.1.2 · THAO TÁC",
+        "title": "Thêm và xóa phần tử trong tập hợp",
+        "lead": "Set có thể thay đổi sau khi tạo bằng các phương thức <code>add<\/code>, <code>discard<\/code>, <code>remove<\/code>, <code>clear<\/code>.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>cast = {&quot;Luigi&quot;, &quot;Spiny&quot;}\ncast.add(&quot;Arthur&quot;)\ncast.add(&quot;Spiny&quot;)\ncast.discard(&quot;Luigi&quot;)\nprint(sorted(cast))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>[&#x27;Arthur&#x27;, &#x27;Spiny&#x27;]<\/pre><\/div><\/div><div><h3>Ý nghĩa phương thức<\/h3><ul class=\"point-list\"><li><code>add(x)<\/code> thêm x nếu chưa có.<\/li><li><code>discard(x)<\/code> xóa x nếu có.<\/li><li><code>remove(x)<\/code> xóa x; lỗi nếu x không có.<\/li><li><code>clear()<\/code> loại toàn bộ phần tử.<\/li><\/ul><\/div><\/div><div class=\"lesson-reference\"><b>Giá trị trả về:<\/b> <code>add<\/code>, <code>discard<\/code>, <code>remove<\/code> và <code>clear<\/code> đều trả về <code>None<\/code>; <code>remove(x)<\/code> ném <code>KeyError<\/code> nếu x vắng mặt.<\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"1\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1.2 · LỖI THƯỜNG GẶP",
+        "title": "discard và remove khác nhau ở đâu?",
+        "lead": "Cùng xóa phần tử, nhưng hành vi với giá trị không tồn tại là khác nhau.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>customers = {&quot;An&quot;, &quot;Bình&quot;}\ncustomers.discard(&quot;Chi&quot;)\nprint(sorted(customers))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>[&#x27;An&#x27;, &#x27;Bình&#x27;]<\/pre><\/div><\/div><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>customers = {&quot;An&quot;, &quot;Bình&quot;}\ncustomers.remove(&quot;Chi&quot;)<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>KeyError: &#x27;Chi&#x27;<\/pre><\/div><\/div><\/div><div class=\"teaching-note warn\"><strong>Lưu ý khi viết chương trình<\/strong><p>Dùng <code>discard()<\/code> khi việc phần tử không tồn tại là bình thường; dùng <code>remove()<\/code> khi cần phát hiện trường hợp đó.<\/p><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1.2 · TÌNH HUỐNG",
+        "title": "Danh sách khách hàng tham gia khuyến mãi",
+        "lead": "Set giúp quản lý khách đã đăng ký; đăng ký lại không bị đếm hai lần.",
+        "body": "<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>registered = {&quot;KH01&quot;, &quot;KH02&quot;}\nregistered.add(&quot;KH03&quot;)\nregistered.add(&quot;KH01&quot;)\nregistered.discard(&quot;KH02&quot;)\nprint(len(registered))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>2<\/pre><\/div><div class=\"teaching-note info\"><strong>Kiến thức cần vận dụng<\/strong><p>Set phù hợp khi cần tập khách hàng không trùng nhau, nhưng nếu cần gắn mỗi khách với doanh số, ta sẽ dùng <b>dictionary<\/b>.<\/p><\/div>",
+        "interactive": null
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Thêm phần tử mới vào set <code>s<\/code> bằng?",
+        "options": [
+          "s.append(x)",
+          "s.add(x)",
+          "s.insert(x)",
+          "s.push(x)"
+        ],
+        "answer": 1,
+        "why": "<code>add()<\/code> là phương thức thêm phần tử của set."
+      },
+      {
+        "q": "<code>s.discard(99)<\/code> khi 99 không có trong s sẽ?",
+        "options": [
+          "Không thay đổi s",
+          "Xóa toàn bộ s",
+          "Ném KeyError",
+          "Thêm 99"
+        ],
+        "answer": 0,
+        "why": "<code>discard<\/code> không báo lỗi nếu phần tử vắng mặt."
+      },
+      {
+        "q": "Lệnh nào xóa toàn bộ set <code>s<\/code>?",
+        "options": [
+          "s.popall()",
+          "s.empty()",
+          "s.clear()",
+          "clear(s)"
+        ],
+        "answer": 2,
+        "why": "<code>clear()<\/code> làm set trở thành rỗng."
+      }
+    ],
+    "coding": {
+      "title": "Cập nhật khách hàng đang tham gia",
+      "level": "Mức 1 · Điền lệnh",
+      "instructions": "Từ set <code>active<\/code>, thêm khách <code>newCustomer<\/code> và loại khách <code>leavingCustomer<\/code> nếu có. Gán số khách còn lại vào <code>nActive<\/code>.",
+      "starter": "active = {\"KH01\", \"KH02\"}\nnewCustomer = \"KH03\"\nleavingCustomer = \"KH02\"\n# === BAI LAM ===\nactive.___(newCustomer)\nactive.___(leavingCustomer)\nnActive = ___",
+      "hint": "<code>add<\/code>, <code>discard<\/code>, <code>len<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "active": {
+              "kind": "set",
+              "value": [
+                "KH01",
+                "KH03"
+              ]
+            },
+            "nActive": {
+              "kind": "value",
+              "value": 2
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Trùng tên và xóa không tồn tại",
+          "inputs": {
+            "active": {
+              "__set__": [
+                "KH01",
+                "KH02"
+              ]
+            },
+            "newCustomer": "KH01",
+            "leavingCustomer": "KH99"
+          },
+          "expected": {
+            "active": {
+              "kind": "set",
+              "value": [
+                "KH01",
+                "KH02"
+              ]
+            },
+            "nActive": {
+              "kind": "value",
+              "value": 2
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Tập rỗng ban đầu",
+          "inputs": {
+            "active": {
+              "__set__": []
+            },
+            "newCustomer": "KH07",
+            "leavingCustomer": "KH01"
+          },
+          "expected": {
+            "active": {
+              "kind": "set",
+              "value": [
+                "KH07"
+              ]
+            },
+            "nActive": {
+              "kind": "value",
+              "value": 1
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "8.1.3–4",
+    "short": "Phép toán tập hợp",
+    "topic": "Sets · Quan hệ và phép toán",
+    "slides": [
+      {
+        "kicker": "CHẶNG 3 · LÝ THUYẾT & VÍ DỤ",
+        "title": "Set: hợp, giao, hiệu, tập con",
+        "lead": "Các phép toán trong Mục 8.1 của giáo trình; bổ sung một số phương thức hiện hành để sinh viên tra cứu.",
+        "body": "<div class=\"guide-callout\"><strong>Phép toán tập hợp không làm thay đổi toán hạng khi dùng phương thức không có hậu tố <code>_update<\/code>.<\/strong><p>Giúp so sánh hai nhóm khách hàng, đối chiếu dữ liệu và tìm nhóm chênh lệch.<\/p><\/div><h3>Phép toán tạo tập hợp và kiểm tra quan hệ<\/h3><div class=\"api-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp / phương thức<\/th><th>Mục đích<\/th><th>Kết quả trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>a.union(b) / a | b<\/code><\/td><td>Phép hợp: phần tử thuộc a hoặc b.<\/td><td>set mới.<\/td><td>Toán tử | cần toán hạng dạng set; union() nhận iterable.<\/td><\/tr><tr><td><code>a.intersection(b) / a &amp; b<\/code><\/td><td>Phép giao: phần tử thuộc cả hai.<\/td><td>set mới.<\/td><td>Không làm thay đổi a, b.<\/td><\/tr><tr><td><code>a.difference(b) / a - b<\/code><\/td><td>Phép hiệu: thuộc a nhưng không thuộc b.<\/td><td>set mới.<\/td><td>a-b khác b-a nói chung.<\/td><\/tr><tr><td><code>a.symmetric_difference(b) / a ^ b<\/code><\/td><td>Phần chỉ thuộc đúng một trong hai tập.<\/td><td>set mới.<\/td><td>Mở rộng thêm so với ba phép toán cơ bản của sách.<\/td><\/tr><tr><td><code>a.issubset(b) / a &lt;= b<\/code><\/td><td>Mọi phần tử của a đều có trong b.<\/td><td>bool.<\/td><td>Set rỗng là tập con của mọi set.<\/td><\/tr><tr><td><code>a.issuperset(b) / a &gt;= b<\/code><\/td><td>a chứa mọi phần tử của b.<\/td><td>bool.<\/td><td>Mở rộng.<\/td><\/tr><tr><td><code>a.isdisjoint(b)<\/code><\/td><td>Hai tập không có phần tử chung.<\/td><td>bool.<\/td><td>Mở rộng.<\/td><\/tr><tr><td><code>a.intersection_update(b)<\/code><\/td><td>Giữ lại trong a những phần tử chung.<\/td><td>None; a bị sửa.<\/td><td>Không phải kết quả set mới.<\/td><\/tr><\/tbody><\/table><\/div><h3>Ví dụ 4 · Phân nhóm khách hàng<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>online = {\"An\", \"Binh\", \"Chi\"}\nstore = {\"Binh\", \"Dung\"}\nprint(sorted(online | store))\nprint(sorted(online &amp; store))\nprint(sorted(online - store))\nprint(sorted(online ^ store))\nprint({\"Binh\"}.issubset(online))\nprint(online.isdisjoint(store))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>[&#x27;An&#x27;, &#x27;Binh&#x27;, &#x27;Chi&#x27;, &#x27;Dung&#x27;]\n[&#x27;Binh&#x27;]\n[&#x27;An&#x27;, &#x27;Chi&#x27;]\n[&#x27;An&#x27;, &#x27;Chi&#x27;, &#x27;Dung&#x27;]\nTrue\nFalse<\/pre><\/div><div class=\"guide-note info\"><b>Ứng dụng<\/b><p>Dùng <code>online & store<\/code> để tìm khách mua ở cả hai kênh, <code>online - store<\/code> để tìm khách chỉ mua online, và <code>online | store<\/code> để tính tệp khách hàng không trùng.<\/p><\/div>"
+      },
+      {
+        "kicker": "8.1.3 · TẬP CON",
+        "title": "Một set là tập con khi mọi phần tử đều thuộc set kia",
+        "lead": "Dùng <code>issubset()<\/code> để kiểm tra quan hệ bao hàm; <code>==<\/code> để so sánh hai tập hợp.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>canadian = {&quot;Red&quot;, &quot;White&quot;}\nbritish = {&quot;Red&quot;, &quot;Blue&quot;, &quot;White&quot;}\nitalian = {&quot;Red&quot;, &quot;Green&quot;, &quot;White&quot;}\n\nprint(canadian.issubset(british))\nprint(italian.issubset(british))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>True\nFalse<\/pre><\/div><\/div><div><h3>Phân biệt<\/h3><ul class=\"point-list\"><li><code>A.issubset(B)<\/code>: mọi phần tử của A đều thuộc B.<\/li><li><code>A == B<\/code>: A và B có đúng cùng các phần tử.<\/li><li>Tập con <b>thực sự<\/b>: <code>A.issubset(B) and A != B<\/code>.<\/li><\/ul><\/div><\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"2\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1.4 · BA PHÉP TOÁN",
+        "title": "Hợp, giao, hiệu",
+        "lead": "Quan sát hai tập khách hàng và lựa chọn phép toán để xem kết quả.",
+        "body": "<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>a = {&quot;An&quot;, &quot;Bình&quot;, &quot;Chi&quot;}\nb = {&quot;Bình&quot;, &quot;Chi&quot;, &quot;Dũng&quot;}\n\nprint(sorted(a.union(b)))\nprint(sorted(a.intersection(b)))\nprint(sorted(a.difference(b)))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>[&#x27;An&#x27;, &#x27;Bình&#x27;, &#x27;Chi&#x27;, &#x27;Dũng&#x27;]\n[&#x27;Bình&#x27;, &#x27;Chi&#x27;]\n[&#x27;An&#x27;]<\/pre><\/div><div class=\"teaching-note info\"><strong>Thao tác tạo tập mới<\/strong><p><code>union<\/code>, <code>intersection<\/code>, <code>difference<\/code> trả về set mới, không thay đổi a và b.<\/p><\/div><div class=\"lesson-reference\"><b>Phân biệt kết quả:<\/b> <code>union<\/code>, <code>intersection<\/code> và <code>difference<\/code> trả về set mới, không sửa set gốc. Các phép kiểm tra như <code>issubset<\/code> trả về <code>bool<\/code>.<\/div>",
+        "interactive": {
+          "kind": "setOps"
+        }
+      },
+      {
+        "kicker": "8.1.4 · ỨNG DỤNG",
+        "title": "Phép hiệu phụ thuộc vào thứ tự của hai tập",
+        "lead": "Ví dụ tìm nhóm khách mua online mà chưa mua tại cửa hàng.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>online = {&quot;KH1&quot;, &quot;KH2&quot;, &quot;KH3&quot;}\ninStore = {&quot;KH2&quot;, &quot;KH4&quot;}\nonlyOnline = online.difference(inStore)\nonlyStore = inStore.difference(online)\nprint(sorted(onlyOnline))\nprint(sorted(onlyStore))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>[&#x27;KH1&#x27;, &#x27;KH3&#x27;]\n[&#x27;KH4&#x27;]<\/pre><\/div><\/div><div><h3>So sánh nhanh<\/h3><ul class=\"point-list\"><li>A ∪ B = B ∪ A (hợp).<\/li><li>A ∩ B = B ∩ A (giao).<\/li><li>Nói chung A − B ≠ B − A (hiệu).<\/li><li>Chọn phép toán theo câu hỏi nghiệp vụ.<\/li><\/ul><\/div><\/div>",
+        "interactive": null
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Phép nào tìm các phần tử thuộc <b>cả<\/b> A và B?",
+        "options": [
+          "A.union(B)",
+          "A.intersection(B)",
+          "A.difference(B)",
+          "A.issubset(B)"
+        ],
+        "answer": 1,
+        "why": "Intersection là giao của hai tập."
+      },
+      {
+        "q": "Với A={1,2}, B={2,3}, <code>A.difference(B)<\/code> là?",
+        "options": [
+          "{2}",
+          "{1}",
+          "{3}",
+          "{1,3}"
+        ],
+        "answer": 1,
+        "why": "Giữ phần tử thuộc A nhưng không thuộc B."
+      },
+      {
+        "q": "Lệnh kiểm tra A là tập con của B là?",
+        "options": [
+          "A.issubset(B)",
+          "A.union(B)",
+          "A.clear(B)",
+          "A[0] in B"
+        ],
+        "answer": 0,
+        "why": "<code>issubset<\/code> kiểm tra quan hệ tập con."
+      }
+    ],
+    "coding": {
+      "title": "Phân loại khách hàng của hai kênh",
+      "level": "Mức 1 · Hoàn thiện các phép toán",
+      "instructions": "Với các set <code>online<\/code>, <code>store<\/code>, tính <code>both<\/code> (khách ở cả hai kênh), <code>allCustomers<\/code> và <code>onlineOnly<\/code>.",
+      "starter": "online = {\"An\", \"Bình\", \"Chi\"}\nstore = {\"Bình\", \"Dũng\"}\n# === BAI LAM ===\nboth = online.___(store)\nallCustomers = online.___(store)\nonlineOnly = online.___(store)",
+      "hint": "Theo thứ tự: <code>intersection<\/code>, <code>union<\/code>, <code>difference<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "both": {
+              "kind": "set",
+              "value": [
+                "Bình"
+              ]
+            },
+            "allCustomers": {
+              "kind": "set",
+              "value": [
+                "An",
+                "Bình",
+                "Chi",
+                "Dũng"
+              ]
+            },
+            "onlineOnly": {
+              "kind": "set",
+              "value": [
+                "An",
+                "Chi"
+              ]
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Hai tập giống nhau",
+          "inputs": {
+            "online": {
+              "__set__": [
+                "A",
+                "B"
+              ]
+            },
+            "store": {
+              "__set__": [
+                "A",
+                "B"
+              ]
+            }
+          },
+          "expected": {
+            "both": {
+              "kind": "set",
+              "value": [
+                "A",
+                "B"
+              ]
+            },
+            "allCustomers": {
+              "kind": "set",
+              "value": [
+                "A",
+                "B"
+              ]
+            },
+            "onlineOnly": {
+              "kind": "set",
+              "value": []
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Không có phần tử chung",
+          "inputs": {
+            "online": {
+              "__set__": [
+                "A",
+                "C"
+              ]
+            },
+            "store": {
+              "__set__": [
+                "B",
+                "D"
+              ]
+            }
+          },
+          "expected": {
+            "both": {
+              "kind": "set",
+              "value": []
+            },
+            "allCustomers": {
+              "kind": "set",
+              "value": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ]
+            },
+            "onlineOnly": {
+              "kind": "set",
+              "value": [
+                "A",
+                "C"
+              ]
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "8.1 · Vận dụng",
+    "short": "Từ vựng duy nhất",
+    "topic": "Sets · Bài toán đếm từ khác nhau",
+    "slides": [
+      {
+        "kicker": "CHẶNG 4 · LÝ THUYẾT & VÍ DỤ",
+        "title": "Ứng dụng Set: đếm dữ liệu không trùng",
+        "lead": "Chọn set để đếm số từ, mã sản phẩm hoặc khách hàng duy nhất.",
+        "body": "\n<div class=\"guide-callout\"><strong>Từ dữ liệu thô đến số lượng giá trị khác nhau<\/strong><p>Mục tiêu của chặng là viết chương trình đếm từ duy nhất: chuẩn hóa chuỗi, tách từ, tạo <code>set<\/code> và đếm bằng <code>len()<\/code>. Đây là cách dùng set phổ biến trong xử lý văn bản.<\/p><\/div>\n<div class=\"guide-columns\"><section class=\"guide-panel\"><h3>Các bước giải<\/h3><ul><li>Chuẩn hóa: <code>lower()<\/code> đưa về chữ thường.<\/li><li>Tách từ: <code>split()<\/code> tạo danh sách chuỗi.<\/li><li>Lọc dấu câu: <code>strip('.,!?')<\/code> hoặc quy tắc phù hợp.<\/li><li>Loại trùng: dùng <code>set(...)<\/code> và đếm bằng <code>len(...)<\/code>.<\/li><\/ul><\/section><section class=\"guide-panel\"><h3>Ứng dụng<\/h3><ul><li>Đếm loại mã đơn hàng.<\/li><li>Đếm khách mua hàng duy nhất.<\/li><li>Đếm nhãn sản phẩm.<\/li><li>Thống kê từ khóa không trùng trong mô tả.<\/li><\/ul><\/section><\/div>\n<div class=\"table-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp<\/th><th>Chức năng<\/th><th>Trả về<\/th><th>Lưu ý / ngoại lệ<\/th><\/tr><\/thead><tbody><tr><td><code>text.lower()<\/code><\/td><td>Chuyển chữ về dạng thường.<\/td><td><code>str<\/code> mới.<\/td><td>Không sửa <code>text<\/code> gốc.<\/td><\/tr><tr><td><code>text.split()<\/code><\/td><td>Tách theo khoảng trắng.<\/td><td><code>list[str]<\/code>.<\/td><td>Không tự loại dấu câu.<\/td><\/tr><tr><td><code>word.strip('.,!?')<\/code><\/td><td>Loại các ký tự chỉ định ở hai đầu.<\/td><td><code>str<\/code> mới.<\/td><td>Không tự xóa dấu trong giữa từ.<\/td><\/tr><tr><td><code>set(words)<\/code><\/td><td>Loại phần tử lặp.<\/td><td><code>set<\/code> mới.<\/td><td>Phần tử phải hashable.<\/td><\/tr><tr><td><code>len(unique)<\/code><\/td><td>Đếm phần tử.<\/td><td><code>int<\/code>.<\/td><td>Không thay đổi set.<\/td><\/tr><\/tbody><\/table><\/div>\n<h3>Ví dụ mẫu · Đếm từ không trùng<\/h3>\n<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>text = \"Coffee tea, coffee! Juice tea.\"\nwords = [w.strip(\".,!?\") for w in text.lower().split()]\nunique_words = set(words)\nprint(sorted(unique_words))\nprint(\"Số từ duy nhất:\", len(unique_words))<\/code><\/pre><\/div>\n<div class=\"guide-expected\"><b>KẾT QUẢ DỰ KIẾN<\/b><pre>['coffee', 'juice', 'tea']\nSố từ duy nhất: 3<\/pre><\/div>\n<div class=\"guide-note warning\"><b>Sai lầm phổ biến<\/b><p><code>set(text)<\/code> tạo tập ký tự chứ không phải tập từ. Hãy <code>split()<\/code> thành các từ trước khi tạo set.<\/p><\/div>\n"
+      },
+      {
+        "kicker": "WORKED EXAMPLE 8.1",
+        "title": "Đếm số từ không trùng lặp trong một văn bản",
+        "lead": "Chuyển từng từ về cùng kiểu viết, loại dấu câu đơn giản, rồi đưa vào set.",
+        "body": "<div class=\"twocol\"><div><h3>Quy trình<\/h3><ul class=\"point-list\"><li>Bắt đầu bằng <code>uniqueWords = set()<\/code>.<\/li><li>Duyệt lần lượt từng từ.<\/li><li>Chuẩn hóa về chữ thường.<\/li><li>Thêm vào set và lấy <code>len(uniqueWords)<\/code>.<\/li><\/ul><\/div><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>text = &quot;Data is useful. Data is valuable!&quot;\nuniqueWords = set()\nfor word in text.split():\n    cleaned = word.strip(&quot;.,!?&quot;).lower()\n    if cleaned:\n        uniqueWords.add(cleaned)\nprint(len(uniqueWords))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>4<\/pre><\/div><\/div><\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"3\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1 · KIỂM THỬ",
+        "title": "Vì sao phải chuẩn hóa văn bản?",
+        "lead": "Nếu không làm sạch, <code>\"Data\"<\/code>, <code>\"data\"<\/code>, <code>\"data!\"<\/code> sẽ được xem là các giá trị khác nhau.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>text = \"Sale, sale SALE!\"\nprint(len(set(text.split())))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>3<\/pre><\/div><\/div><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>text = \"Sale, sale SALE!\"\nuniqueWords = set()\nfor word in text.split():\n    cleanWord = word.strip(\",!.\").lower()\n    uniqueWords.add(cleanWord)\nprint(len(uniqueWords))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>1<\/pre><\/div><\/div><\/div><div class=\"teaching-note info\"><strong>Giới hạn ví dụ cơ bản<\/strong><p>Cách dùng <code>strip<\/code> chỉ xử lý dấu câu ở đầu/cuối; bài toán tách từ tổng quát có thể cần xử lý phức tạp hơn.<\/p><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.1 · TƯƠNG TÁC",
+        "title": "Tự thử đếm từ khác nhau",
+        "lead": "Gõ một câu, sau đó xem cách tập hợp loại bỏ những từ lặp lại.",
+        "body": "<div class=\"teaching-note info\"><strong>Gợi ý<\/strong><p>Thử nhập: <i>Python python! Data data.<\/i> và so sánh tổng từ với số từ duy nhất.<\/p><\/div>",
+        "interactive": {
+          "kind": "uniqueWords"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Để đếm số từ khác nhau, cấu trúc phù hợp nhất là?",
+        "options": [
+          "list",
+          "tuple",
+          "set",
+          "int"
+        ],
+        "answer": 2,
+        "why": "Set loại bỏ các từ lặp lại."
+      },
+      {
+        "q": "Vì sao sử dụng <code>word.lower()<\/code> trước khi thêm vào set?",
+        "options": [
+          "Tăng số phần tử",
+          "Không phân biệt chữ hoa/chữ thường",
+          "Đổi từ thành số",
+          "Tự động xóa từ trùng"
+        ],
+        "answer": 1,
+        "why": "Chuẩn hóa giúp Data và data được xem như cùng một từ."
+      },
+      {
+        "q": "Đếm phần tử của <code>words<\/code> sau khi loại trùng bằng?",
+        "options": [
+          "count(words)",
+          "len(words)",
+          "size(words)",
+          "words.length"
+        ],
+        "answer": 1,
+        "why": "Hàm <code>len()<\/code> cho số phần tử set."
+      }
+    ],
+    "coding": {
+      "title": "Đếm từ khác nhau",
+      "level": "Mức 2 · Tự hoàn thiện đoạn lệnh",
+      "instructions": "Biến <code>tokens<\/code> là danh sách từ được tách sẵn. Tạo <code>uniqueWords<\/code>, làm sạch mỗi từ (bỏ các dấu <code>.,!?<\/code> ở đầu/cuối và chuyển thành chữ thường), không thêm chuỗi rỗng. Gán kết quả vào <code>nUnique<\/code>.",
+      "starter": "tokens = [\"Data,\", \"science\", \"data\", \"Python!\", \"python\"]\n# === BAI LAM ===\nuniqueWords = set()\nfor word in tokens:\n    # Làm sạch từ và thêm vào uniqueWords\n    pass\nnUnique = ___",
+      "hint": "Mẫu: <code>cleanWord = word.strip(\".,!?\").lower()<\/code>, kiểm tra <code>if cleanWord:<\/code> rồi <code>uniqueWords.add(cleanWord)<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "uniqueWords": {
+              "kind": "set",
+              "value": [
+                "data",
+                "science",
+                "python"
+              ]
+            },
+            "nUnique": {
+              "kind": "value",
+              "value": 3
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Không có từ hợp lệ",
+          "inputs": {
+            "tokens": [
+              "!!!",
+              "",
+              "..."
+            ]
+          },
+          "expected": {
+            "uniqueWords": {
+              "kind": "set",
+              "value": []
+            },
+            "nUnique": {
+              "kind": "value",
+              "value": 0
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Lặp và khác chữ hoa/thường",
+          "inputs": {
+            "tokens": [
+              "Apple",
+              "apple,",
+              "PEAR",
+              "pear!",
+              "apple"
+            ]
+          },
+          "expected": {
+            "uniqueWords": {
+              "kind": "set",
+              "value": [
+                "apple",
+                "pear"
+              ]
+            },
+            "nUnique": {
+              "kind": "value",
+              "value": 2
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "8.2.1–3",
+    "short": "Khởi tạo từ điển",
+    "topic": "Dictionaries · Khóa và giá trị",
+    "slides": [
+      {
+        "kicker": "CHẶNG 5 · LÝ THUYẾT & VÍ DỤ",
+        "title": "CTDL Map: Dictionary và mục đích sử dụng",
+        "lead": "Hiểu ánh xạ khóa–giá trị, phân biệt dictionary với set và tra cứu theo khóa.",
+        "body": "<div class=\"guide-callout\"><strong>Dictionary là cấu trúc Map (ánh xạ) trong Python.<\/strong><p>Mỗi <b>khóa<\/b> duy nhất ánh xạ tới một <b>giá trị<\/b>; có thể tra cứu theo khóa thay vì tìm theo vị trí. Thích hợp cho bảng giá, điểm số, thông tin sinh viên, tồn kho, đếm tần suất.<\/p><\/div>\n<div class=\"guide-columns\"><div class=\"guide-panel\"><h3>Bản chất<\/h3><ul><li>Một <b>key<\/b> tương ứng một <b>value<\/b>.<\/li><li>Khóa duy nhất, phải hashable (ví dụ str, int, tuple hashable).<\/li><li>Giá trị có thể là số, chuỗi, list, set, dict khác.<\/li><li>Gán lại khóa đã có sẽ cập nhật value, không thêm một key mới.<\/li><\/ul><\/div><div class=\"guide-panel\"><h3>Khi nào dùng Map/dict?<\/h3><ul><li>Tra mã hàng → giá bán.<\/li><li>Tra mã sinh viên → điểm.<\/li><li>Đếm tên sản phẩm → số lần xuất hiện.<\/li><li>Gom sản phẩm → danh sách doanh số theo cửa hàng.<\/li><\/ul><\/div><\/div><h3>Tạo dictionary và truy vấn<\/h3><div class=\"api-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp / phương thức<\/th><th>Mục đích<\/th><th>Kết quả trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>{} / dict()<\/code><\/td><td>Tạo dictionary rỗng.<\/td><td>Đối tượng dict mới.<\/td><td>{} không phải set.<\/td><\/tr><tr><td><code>{\"A\": 10, \"B\": 20}<\/code><\/td><td>Tạo dictionary với các cặp key: value.<\/td><td>Đối tượng dict.<\/td><td>Khóa lặp trong literal: giá trị cuối cùng được giữ.<\/td><\/tr><tr><td><code>d[key]<\/code><\/td><td>Đọc giá trị tại key.<\/td><td>Giá trị tương ứng.<\/td><td>KeyError nếu key chưa tồn tại.<\/td><\/tr><tr><td><code>d.get(key[, default])<\/code><\/td><td>Tra cứu với giá trị dự phòng.<\/td><td>Giá trị hoặc default; nếu không truyền default là None.<\/td><td>Không thêm key vào dict.<\/td><\/tr><tr><td><code>key in d<\/code><\/td><td>Kiểm tra key có tồn tại hay không.<\/td><td>bool.<\/td><td>Kiểm tra khóa, không kiểm tra value.<\/td><\/tr><tr><td><code>len(d)<\/code><\/td><td>Đếm số cặp key: value.<\/td><td>int.<\/td><td>Không thay đổi d.<\/td><\/tr><tr><td><code>d[key] = value<\/code><\/td><td>Thêm mới hoặc cập nhật khóa.<\/td><td>Câu lệnh gán, không có giá trị trả về.<\/td><td>Khóa phải hashable.<\/td><\/tr><\/tbody><\/table><\/div><h3>Ví dụ 5 · Bảng giá và tra cứu an toàn<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>prices = {\"Tea\": 25000, \"Coffee\": 35000}\nprint(prices[\"Tea\"])\nprint(prices.get(\"Milk\", -1))\nprint(\"Coffee\" in prices)\nprices[\"Tea\"] = 27000\nprices[\"Juice\"] = 30000\nprint(prices[\"Tea\"], len(prices))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>25000\n-1\nTrue\n27000 3<\/pre><\/div><div class=\"guide-note info\"><b>Map (CTDL) khác hàm map()<\/b><p>Tài liệu gọi <b>dictionary<\/b> là <b>map<\/b> vì biểu diễn ánh xạ <code>key → value<\/code>. Đây là khái niệm khác với hàm dựng sẵn <code>map(function, iterable)<\/code>, hàm áp dụng một phép biến đổi cho nhiều giá trị.<\/p><\/div><div class=\"guide-note modern\"><b>Ghi chú về phiên bản Python<\/b><p>Sách xuất bản năm 2016 mô tả việc duyệt dictionary không theo thứ tự cố định. Trong Python <b>3.7 trở lên<\/b>, dict giữ <b>thứ tự chèn<\/b>; tuy vậy, thứ tự khóa không phải là thứ tự sắp xếp. Dùng <code>sorted(d)<\/code> nếu cần tăng dần.<\/p><\/div>"
+      },
+      {
+        "kicker": "8.2 · DICTIONARIES",
+        "title": "Một khóa ánh xạ tới một giá trị",
+        "lead": "Dictionary là một cấu trúc kết hợp <b>key → value<\/b>, thay vì truy cập theo vị trí.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>prices = {\n    &quot;Tea&quot;: 25000,\n    &quot;Coffee&quot;: 35000,\n    &quot;Juice&quot;: 40000\n}\nprint(prices[&quot;Coffee&quot;])<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>35000<\/pre><\/div><\/div><div><h3>Điểm quan trọng<\/h3><ul class=\"point-list\"><li>Mỗi khóa (<b>key<\/b>) là duy nhất.<\/li><li>Các khóa khác nhau có thể cùng giá trị.<\/li><li>Khóa phải hashable (ví dụ <code>str<\/code>, <code>int<\/code>, <code>tuple<\/code> bất biến phù hợp).<\/li><li>Không dùng chỉ số vị trí để truy cập phần tử.<\/li><\/ul><\/div><\/div><div class=\"lesson-reference\"><b>Map trong Python:<\/b> một khóa <b>duy nhất<\/b> ánh xạ đến một giá trị. CTDL map được cài đặt bởi <code>dict<\/code>, không phải hàm dựng sẵn <code>map()<\/code>.<\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"4\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.2.1–2 · TRUY CẬP",
+        "title": "Sử dụng [] hay get()?",
+        "lead": "Truy cập trực tiếp thích hợp khi chắc chắn khóa tồn tại; <code>get<\/code> an toàn khi khóa có thể vắng mặt.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>contacts = {&quot;An&quot;: &quot;0901&quot;, &quot;Bình&quot;: &quot;0902&quot;}\nprint(contacts[&quot;An&quot;])\nprint(contacts.get(&quot;Chi&quot;, &quot;Chưa có&quot;))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>0901\nChưa có<\/pre><\/div><\/div><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>contacts = {&quot;An&quot;: &quot;0901&quot;}\nif &quot;Chi&quot; in contacts:\n    print(contacts[&quot;Chi&quot;])\nelse:\n    print(&quot;Không tìm thấy&quot;)<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>Không tìm thấy<\/pre><\/div><\/div><\/div><div class=\"teaching-note warn\"><strong>Lỗi thường gặp<\/strong><p><code>d[missingKey]<\/code> gây <code>KeyError<\/code>. Còn <code>d.get(missingKey, default)<\/code> trả về giá trị mặc định.<\/p><\/div><div class=\"lesson-reference\"><b>Ngoại lệ:<\/b> <code>d[key]<\/code> gây <code>KeyError<\/code> nếu thiếu khóa; <code>d.get(key, default)<\/code> trả về <code>default<\/code> và không tạo khóa mới.<\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.2 · THỬ NGHIỆM",
+        "title": "Tra cứu bảng giá theo tên sản phẩm",
+        "lead": "Nhập tên chính xác của mặt hàng để kiểm tra hành vi của dictionary.",
+        "body": "<div class=\"teaching-note info\"><strong>So sánh hai trường hợp<\/strong><p>Nhập <b>Tea<\/b> và <b>Milk<\/b>. Khi không có khóa, sử dụng <code>get(...)<\/code> sẽ trả giá trị mặc định.<\/p><\/div>",
+        "interactive": {
+          "kind": "dictLookup"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Trong dictionary, điều nào đúng?",
+        "options": [
+          "Một khóa xuất hiện nhiều lần ở nhiều mục",
+          "Mọi giá trị phải khác nhau",
+          "Mỗi khóa là duy nhất",
+          "Truy cập luôn bằng vị trí"
+        ],
+        "answer": 2,
+        "why": "Mỗi khóa ánh xạ tới một giá trị."
+      },
+      {
+        "q": "Khi không có khóa <code>\"X\"<\/code>, biểu thức <code>d.get(\"X\", 0)<\/code> trả về?",
+        "options": [
+          "0",
+          "KeyError",
+          "\"X\"",
+          "[]"
+        ],
+        "answer": 0,
+        "why": "<code>get<\/code> có thể cung cấp giá trị mặc định."
+      },
+      {
+        "q": "Biểu thức <code>{}<\/code> tạo ra?",
+        "options": [
+          "set rỗng",
+          "dict rỗng",
+          "list rỗng",
+          "tuple rỗng"
+        ],
+        "answer": 1,
+        "why": "Dấu ngoặc nhọn rỗng tạo dictionary."
+      }
+    ],
+    "coding": {
+      "title": "Tra cứu giá bán",
+      "level": "Mức 1 · Điền lệnh",
+      "instructions": "Dựa trên dictionary <code>prices<\/code>, lấy giá của <code>product<\/code>; nếu không tồn tại, dùng <code>-1<\/code>. Đồng thời xác định biến Boolean <code>available<\/code> cho biết sản phẩm có trong bảng giá hay không.",
+      "starter": "prices = {\"Tea\": 25000, \"Coffee\": 35000}\nproduct = \"Tea\"\n# === BAI LAM ===\nprice = prices.___(product, -1)\navailable = product ___ prices",
+      "hint": "Sử dụng phương thức <code>get<\/code> và toán tử <code>in<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "price": {
+              "kind": "value",
+              "value": 25000
+            },
+            "available": {
+              "kind": "value",
+              "value": true
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Không có mặt hàng",
+          "inputs": {
+            "product": "Milk"
+          },
+          "expected": {
+            "price": {
+              "kind": "value",
+              "value": -1
+            },
+            "available": {
+              "kind": "value",
+              "value": false
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Bảng giá thay đổi",
+          "inputs": {
+            "prices": {
+              "Tea": 30000,
+              "Milk": 10000
+            },
+            "product": "Milk"
+          },
+          "expected": {
+            "price": {
+              "kind": "value",
+              "value": 10000
+            },
+            "available": {
+              "kind": "value",
+              "value": true
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "8.2.4–5",
+    "short": "Duyệt và cập nhật",
+    "topic": "Dictionaries · Quản lý và thống kê",
+    "slides": [
+      {
+        "kicker": "CHẶNG 6 · LÝ THUYẾT & VÍ DỤ",
+        "title": "Dictionary: bảng phương thức, return, ngoại lệ",
+        "lead": "Tra cứu nhanh cú pháp; phân biệt các phương thức thay đổi tại chỗ với phương thức lấy dữ liệu.",
+        "body": "<div class=\"guide-callout\"><strong>Đọc phương thức theo ba câu hỏi: làm gì, trả về gì, có thể gây lỗi gì?<\/strong><p>Các phương thức dưới đây bao phủ nội dung cơ bản 8.2 và mở rộng một số phương thức thông dụng của Python hiện hành.<\/p><\/div><h3>Cập nhật, xóa, duyệt và sao chép dictionary<\/h3><div class=\"api-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp / phương thức<\/th><th>Mục đích<\/th><th>Kết quả trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>d.pop(k)<\/code><\/td><td>Xóa cặp có khóa k.<\/td><td>Giá trị đã xóa.<\/td><td>KeyError nếu k không tồn tại.<\/td><\/tr><tr><td><code>d.pop(k, default)<\/code><\/td><td>Xóa k nếu có, dự phòng nếu thiếu.<\/td><td>Giá trị đã xóa hoặc default.<\/td><td>Không KeyError nếu đã cho default.<\/td><\/tr><tr><td><code>del d[k]<\/code><\/td><td>Xóa cặp có khóa k.<\/td><td>Câu lệnh, không trả về giá trị.<\/td><td>KeyError nếu k không tồn tại.<\/td><\/tr><tr><td><code>d.popitem()<\/code><\/td><td>Xóa cặp được thêm cuối (Python ≥3.7).<\/td><td>tuple (key, value).<\/td><td>KeyError nếu dict rỗng.<\/td><\/tr><tr><td><code>d.update(other)<\/code><\/td><td>Thêm mới hoặc cập nhật nhiều cặp.<\/td><td>None.<\/td><td>Lỗi nếu dữ liệu đầu vào không hợp lệ.<\/td><\/tr><tr><td><code>d.setdefault(k, default)<\/code><\/td><td>Lấy giá trị của k hoặc thêm default nếu thiếu.<\/td><td>Giá trị đang lưu tại k.<\/td><td>Có thể làm thay đổi d.<\/td><\/tr><tr><td><code>d.keys()<\/code><\/td><td>Lấy góc nhìn các khóa.<\/td><td>dict_keys view (không phải list).<\/td><td>View phản ánh thay đổi của dict.<\/td><\/tr><tr><td><code>d.values()<\/code><\/td><td>Lấy góc nhìn các giá trị.<\/td><td>dict_values view.<\/td><td>Có thể có giá trị trùng.<\/td><\/tr><tr><td><code>d.items()<\/code><\/td><td>Lấy góc nhìn các cặp.<\/td><td>dict_items view gồm (key, value).<\/td><td>Thường dùng: for k, v in d.items().<\/td><\/tr><tr><td><code>d.copy()<\/code><\/td><td>Sao chép nông dictionary.<\/td><td>dict mới.<\/td><td>Các đối tượng lồng nhau chưa được sao chép sâu.<\/td><\/tr><tr><td><code>d.clear()<\/code><\/td><td>Xóa toàn bộ mục.<\/td><td>None.<\/td><td>Dictionary rỗng.<\/td><\/tr><\/tbody><\/table><\/div><h3>Ví dụ 6 · update, setdefault, pop và giá trị trả về<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>inventory = {\"Tea\": 10, \"Coffee\": 7}\nprint(inventory.setdefault(\"Milk\", 0))\nprint(inventory.setdefault(\"Tea\", 99))\nprint(inventory.update({\"Tea\": 12}))\nprint(inventory.pop(\"Coffee\"))\nprint(inventory.pop(\"Unknown\", -1))\nfor product, stock in inventory.items():\n    print(product, stock)<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>0\n10\nNone\n7\n-1\nTea 12\nMilk 0<\/pre><\/div><h3>Ví dụ 7 · keys, values, items và view<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>sales = {\"Tea\": 12, \"Coffee\": 8}\nkeys_view = sales.keys()\nprint(type(keys_view).__name__)\nprint(list(keys_view))\nprint(list(sales.values()))\nprint(list(sales.items()))\nsales[\"Milk\"] = 5\nprint(list(keys_view))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>dict_keys\n[&#x27;Tea&#x27;, &#x27;Coffee&#x27;]\n[12, 8]\n[(&#x27;Tea&#x27;, 12), (&#x27;Coffee&#x27;, 8)]\n[&#x27;Tea&#x27;, &#x27;Coffee&#x27;, &#x27;Milk&#x27;]<\/pre><\/div><div class=\"guide-note warning\"><b>Lỗi hay gặp<\/b><p><code>result = d.update({...})<\/code> đặt <code>result<\/code> bằng <code>None<\/code>, không phải dictionary. Với <code>pop<\/code>, ngược lại, phương thức trả về <b>giá trị vừa xóa<\/b>. Với <code>get<\/code>, dictionary <b>không bị thay đổi<\/b>.<\/p><\/div><details class=\"deep-details\"><summary>📖 Mở rộng: Ngoại lệ và lập trình an toàn với Set/Map<\/summary><div class=\"deep-inner\"><div class=\"guide-callout\"><strong>Phòng lỗi trước khi chạy<\/strong><p>Với set và dict, các lỗi thường liên quan đến <b>khóa/phần tử không tồn tại<\/b>, <b>dữ liệu không hashable<\/b> hoặc <b>thay đổi cấu trúc trong khi duyệt<\/b>.<\/p><\/div><h3>Những ngoại lệ thường gặp<\/h3><div class=\"api-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp / phương thức<\/th><th>Mục đích<\/th><th>Kết quả trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>s.remove(x)<\/code><\/td><td>Xóa một phần tử khỏi set.<\/td><td>None nếu thành công.<\/td><td>KeyError khi x không có.<\/td><\/tr><tr><td><code>s.pop()<\/code><\/td><td>Xóa phần tử bất kỳ.<\/td><td>Phần tử vừa lấy.<\/td><td>KeyError nếu set rỗng.<\/td><\/tr><tr><td><code>d[key] / del d[key]<\/code><\/td><td>Tra/xóa theo khóa bắt buộc tồn tại.<\/td><td>Giá trị / không có return.<\/td><td>KeyError khi thiếu khóa.<\/td><\/tr><tr><td><code>d.pop(key) / d.popitem()<\/code><\/td><td>Xóa khóa hoặc cặp cuối.<\/td><td>Giá trị / cặp (key,value).<\/td><td>KeyError nếu thiếu key hoặc dict rỗng.<\/td><\/tr><tr><td><code>s.add([]) / d[[]] = 1<\/code><\/td><td>Dùng list làm phần tử/khóa.<\/td><td>Không có kết quả hợp lệ.<\/td><td>TypeError: unhashable type: list.<\/td><\/tr><tr><td><code>s[0]<\/code><\/td><td>Truy cập theo chỉ số.<\/td><td>Không hợp lệ.<\/td><td>TypeError: set is not subscriptable.<\/td><\/tr><tr><td><code>for k in d: ... del d[k]<\/code><\/td><td>Vừa duyệt vừa thay đổi kích thước dict.<\/td><td>Không hợp lệ.<\/td><td>Thường gặp RuntimeError: dictionary changed size during iteration.<\/td><\/tr><\/tbody><\/table><\/div><h3>Ví dụ 8 · Bắt ngoại lệ, không làm gián đoạn bài học<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>data = {\"A\": 3}\ntry:\n    print(data[\"B\"])\nexcept KeyError:\n    print(\"KeyError: chưa có khóa B\")\n\nmyset = set()\ntry:\n    myset.remove(\"Z\")\nexcept KeyError:\n    print(\"KeyError: chưa có phần tử Z\")\n\ntry:\n    myset.add([])\nexcept TypeError:\n    print(\"TypeError: list không hashable\")<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>KeyError: chưa có khóa B\nKeyError: chưa có phần tử Z\nTypeError: list không hashable<\/pre><\/div><h3>Ví dụ 9 · Viết an toàn hơn<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>stock = {\"Tea\": 8}\nproduct = \"Milk\"\nprint(stock.get(product, 0))\nprint(stock.pop(\"Coffee\", None))\ncolors = {\"Red\", \"Blue\"}\ncolors.discard(\"Green\")\nprint(sorted(colors))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>0\nNone\n[&#x27;Blue&#x27;, &#x27;Red&#x27;]<\/pre><\/div><div class=\"guide-note info\"><b>Mẹo xử lý<\/b><p>Kiểm tra <code>key in d<\/code> trước khi truy cập khi cần phân biệt rõ trạng thái tồn tại; dùng <code>get<\/code> khi cần giá trị mặc định; dùng <code>discard<\/code> nếu thiếu phần tử set không được coi là lỗi. Không thay đổi kích thước dict/set trực tiếp trong vòng lặp của chính nó; duyệt trên bản sao nếu cần.<\/p><\/div><\/div><\/details>"
+      },
+      {
+        "kicker": "8.2.3–4 · CẬP NHẬT",
+        "title": "Thêm, sửa, xóa các cặp khóa–giá trị",
+        "lead": "Gán <code>d[key] = value<\/code> để thêm mục mới hoặc cập nhật giá trị của khóa đã có.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>stock = {&quot;Tea&quot;: 10, &quot;Coffee&quot;: 5}\nstock[&quot;Milk&quot;] = 8\nstock[&quot;Tea&quot;] = 12\nstock.pop(&quot;Coffee&quot;, None)\nprint(stock)<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>{&#x27;Tea&#x27;: 12, &#x27;Milk&#x27;: 8}<\/pre><\/div><\/div><div><h3>Các thao tác chính<\/h3><ul class=\"point-list\"><li><code>d[key] = value<\/code> — thêm hoặc cập nhật.<\/li><li><code>d.pop(key, default)<\/code> — lấy và xóa.<\/li><li><code>del d[key]<\/code> — xóa, lỗi nếu thiếu khóa.<\/li><li><code>len(d)<\/code> — số cặp khóa–giá trị.<\/li><\/ul><\/div><\/div><div class=\"lesson-reference\"><b>Giá trị trả về:<\/b> <code>pop(key)<\/code> trả về giá trị đã xóa; <code>update(...)<\/code>, <code>clear()<\/code> trả về <code>None<\/code>; <code>pop(key)<\/code> có thể gây <code>KeyError<\/code>.<\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"5\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.2.5 · DUYỆT",
+        "title": "Duyệt keys, values và items",
+        "lead": "Lặp trực tiếp trên dictionary sẽ duyệt các <b>khóa<\/b>, không phải các giá trị.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>stock = {\"Tea\": 12, \"Milk\": 8}\nfor product in sorted(stock):\n    print(product, stock[product])<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>Milk 8\nTea 12<\/pre><\/div><\/div><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>stock = {\"Tea\": 12, \"Milk\": 8}\nfor product, quantity in stock.items():\n    print(product, quantity)\n\nvalues = list(stock.values())\nprint(sum(values))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>Tea 12\nMilk 8\n20<\/pre><\/div><\/div><\/div><div class=\"teaching-note info\"><strong>Thứ tự hiển thị<\/strong><p>Bộ ví dụ cố định ở trên cho thấy thứ tự chèn trong Python hiện đại; khi cần <b>thứ tự bảng chữ cái<\/b>, hãy dùng <code>sorted(stock)<\/code>.<\/p><\/div><div class=\"lesson-reference\"><b>View objects:<\/b> <code>keys()<\/code>, <code>values()<\/code>, <code>items()<\/code> trả về view phản ánh thay đổi của dictionary; <code>list(d.items())<\/code> chuyển thành danh sách cặp.<\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.2 · VẬN DỤNG",
+        "title": "Đếm tần suất xuất hiện",
+        "lead": "Dictionary phù hợp hơn set khi cần biết <b>mỗi giá trị xuất hiện bao nhiêu lần<\/b>.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>words = [&quot;tea&quot;, &quot;coffee&quot;, &quot;tea&quot;, &quot;juice&quot;]\ncounts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1\nprint(counts)<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>{&#x27;tea&#x27;: 2, &#x27;coffee&#x27;: 1, &#x27;juice&#x27;: 1}<\/pre><\/div><\/div><div><h3>So sánh cấu trúc<\/h3><ul class=\"point-list\"><li><b>Set<\/b>: có những từ nào?<\/li><li><b>Dictionary<\/b>: mỗi từ xuất hiện mấy lần?<\/li><li><b>List<\/b>: toàn bộ các từ theo thứ tự ban đầu.<\/li><\/ul><\/div><\/div>",
+        "interactive": null
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Duyệt <code>for x in d:<\/code> với d là dictionary thì x lần lượt là?",
+        "options": [
+          "Các giá trị",
+          "Các khóa",
+          "Các cặp (khóa, giá trị)",
+          "Chỉ số 0, 1, 2"
+        ],
+        "answer": 1,
+        "why": "Duyệt trực tiếp dictionary là duyệt khóa."
+      },
+      {
+        "q": "Biểu thức <code>d.items()<\/code> dùng để?",
+        "options": [
+          "Trả danh sách khóa",
+          "Duyệt cặp (key, value)",
+          "Xóa mọi mục",
+          "Sắp xếp dữ liệu"
+        ],
+        "answer": 1,
+        "why": "<code>items<\/code> tạo lượt duyệt các cặp."
+      },
+      {
+        "q": "Lệnh nào tăng bộ đếm của từ <code>w<\/code> lên 1 an toàn cả khi chưa có?",
+        "options": [
+          "counts[w] += 1",
+          "counts[w] = counts.get(w, 0) + 1",
+          "counts.add(w)",
+          "counts.remove(w)"
+        ],
+        "answer": 1,
+        "why": "Giá trị mặc định 0 tránh KeyError ở lần xuất hiện đầu tiên."
+      }
+    ],
+    "coding": {
+      "title": "Đếm số lần xuất hiện của mặt hàng",
+      "level": "Mức 2 · Tự viết vòng lặp",
+      "instructions": "Với list <code>orders<\/code>, tạo dictionary <code>counts<\/code> sao cho mỗi mặt hàng có số lần xuất hiện tương ứng. Không dùng thư viện bổ sung.",
+      "starter": "orders = [\"Tea\", \"Coffee\", \"Tea\", \"Juice\", \"Tea\"]\n# === BAI LAM ===\ncounts = {}\nfor item in orders:\n    # Cập nhật bộ đếm theo item\n    pass",
+      "hint": "Trong vòng lặp: <code>counts[item] = counts.get(item, 0) + 1<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "counts": {
+              "kind": "dict",
+              "value": {
+                "Tea": 3,
+                "Coffee": 1,
+                "Juice": 1
+              }
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Không có đơn",
+          "inputs": {
+            "orders": []
+          },
+          "expected": {
+            "counts": {
+              "kind": "dict",
+              "value": {}
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Tên sản phẩm khác nhau",
+          "inputs": {
+            "orders": [
+              "A",
+              "B",
+              "A",
+              "C",
+              "B"
+            ]
+          },
+          "expected": {
+            "counts": {
+              "kind": "dict",
+              "value": {
+                "A": 2,
+                "B": 2,
+                "C": 1
+              }
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "8.3.1",
+    "short": "Dictionary of sets",
+    "topic": "Complex Structures · Tạo bảng chỉ mục",
+    "slides": [
+      {
+        "kicker": "CHẶNG 7 · LÝ THUYẾT & VÍ DỤ",
+        "title": "Dictionary of Sets: tạo chỉ mục không trùng",
+        "lead": "Kết hợp dict và set để nhóm và truy vấn dữ liệu.",
+        "body": "\n<div class=\"guide-callout\"><strong>Một khóa ánh xạ tới nhiều phần tử duy nhất<\/strong><p><code>dict<\/code> liên kết mỗi khóa với một <code>set<\/code> để lưu danh sách không trùng. Ứng dụng: sản phẩm → các kho còn hàng; từ khóa → các trang chứa từ khóa.<\/p><\/div>\n<div class=\"guide-columns\"><section class=\"guide-panel\"><h3>Khi nào dùng <code>dict of sets<\/code>?<\/h3><ul><li>Mỗi nhóm có nhiều phần tử.<\/li><li>Cần tránh phần tử lặp trong cùng nhóm.<\/li><li>Cần kiểm tra sự tồn tại của một phần tử trong nhóm.<\/li><\/ul><\/section><section class=\"guide-panel\"><h3>Cách thiết kế<\/h3><ul><li>Khởi tạo dictionary <code>index = {}<\/code>.<\/li><li>Chưa có khóa thì gán <code>index[key] = set()<\/code>.<\/li><li>Dùng <code>index[key].add(value)<\/code> để tích lũy.<\/li><li>Muốn hiển thị ổn định: dùng <code>sorted(index[key])<\/code>.<\/li><\/ul><\/section><\/div>\n<div class=\"table-scroll\"><table class=\"api-table\"><thead><tr><th>Cú pháp<\/th><th>Chức năng<\/th><th>Trả về<\/th><th>Lỗi / lưu ý<\/th><\/tr><\/thead><tbody><tr><td><code>d[key] = set()<\/code><\/td><td>Tạo nhóm dữ liệu cho key.<\/td><td>Câu lệnh gán, không có giá trị trả về.<\/td><td>Khóa cần hashable.<\/td><\/tr><tr><td><code>d[key].add(x)<\/code><\/td><td>Đưa x vào nhóm.<\/td><td><code>None<\/code>.<\/td><td>Phải tồn tại <code>key<\/code>; <code>x<\/code> hashable.<\/td><\/tr><tr><td><code>d.setdefault(key, set())<\/code><\/td><td>Lấy set hiện tại hoặc tạo khi thiếu.<\/td><td>Set đang lưu trong dict.<\/td><td>Phương thức có thể làm thay đổi dict.<\/td><\/tr><tr><td><code>sorted(d[key])<\/code><\/td><td>Hiển thị nhóm có thứ tự.<\/td><td><code>list<\/code>.<\/td><td>Các phần tử phải so sánh được.<\/td><\/tr><\/tbody><\/table><\/div>\n<h3>Ví dụ mẫu · Mã sản phẩm theo kho<\/h3>\n<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>records = [(\"Tea\", \"WH1\"), (\"Tea\", \"WH2\"),\n           (\"Tea\", \"WH1\"), (\"Coffee\", \"WH2\")]\nwarehouses = {}\nfor product, warehouse in records:\n    if product not in warehouses:\n        warehouses[product] = set()\n    warehouses[product].add(warehouse)\nfor product in sorted(warehouses):\n    print(product, sorted(warehouses[product]))<\/code><\/pre><\/div>\n<div class=\"guide-expected\"><b>KẾT QUẢ DỰ KIẾN<\/b><pre>Coffee ['WH2']\nTea ['WH1', 'WH2']<\/pre><\/div>\n<div class=\"guide-note\"><b>So sánh với dictionary of lists<\/b><p>Nếu muốn lưu lại mọi lượt xuất hiện theo thứ tự (kể cả lặp), hãy dùng <code>list<\/code> thay cho <code>set<\/code>.<\/p><\/div>\n"
+      },
+      {
+        "kicker": "8.3 · CẤU TRÚC KẾT HỢP",
+        "title": "Dictionary có thể chứa một set làm giá trị",
+        "lead": "Một khóa tương ứng với <b>nhiều giá trị duy nhất<\/b>. Ví dụ: mỗi từ xuất hiện ở những trang nào?",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>index = {\n    &quot;python&quot;: {2, 5, 7},\n    &quot;set&quot;: {6, 7},\n    &quot;dict&quot;: {8}\n}\nprint(sorted(index[&quot;python&quot;]))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>[2, 5, 7]<\/pre><\/div><\/div><div><h3>Tại sao hiệu quả?<\/h3><ul class=\"point-list\"><li>Khóa dictionary bảo đảm <b>mỗi từ xuất hiện một lần<\/b>.<\/li><li>Set trang bảo đảm <b>không trùng số trang<\/b>.<\/li><li><code>sorted(...)<\/code> dùng khi cần trình bày chỉ mục có thứ tự.<\/li><\/ul><\/div><\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"6\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.3.1 · THÊM DỮ LIỆU",
+        "title": "Tạo bảng chỉ mục từ bản ghi (từ, trang)",
+        "lead": "Nếu khóa chưa tồn tại, tạo set rỗng trước khi thêm trang.",
+        "body": "<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>records = [(&quot;type&quot;, 6), (&quot;index&quot;, 7),\n           (&quot;type&quot;, 8), (&quot;type&quot;, 8)]\nindex = {}\nfor term, page in records:\n    if term not in index:\n        index[term] = set()\n    index[term].add(page)\n\nprint(sorted(index[&quot;type&quot;]))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>[6, 8]<\/pre><\/div><div class=\"teaching-note info\"><strong>Liên hệ giáo trình<\/strong><p>Đây là cấu trúc <b>dictionary of sets<\/b> được dùng trong bài toán xây dựng mục từ (book index) ở Mục 8.3.1.<\/p><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.3.1 · KIỂM THỬ",
+        "title": "Một từ có thể xuất hiện nhiều lần trên cùng một trang",
+        "lead": "Việc thêm lặp trang không làm phát sinh mục trùng.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>index = {}\nfor term, page in [(\"A\", 2), (\"A\", 2), (\"A\", 3)]:\n    if term not in index:\n        index[term] = set()\n    index[term].add(page)\nprint(index[\"A\"])<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>{2, 3}<\/pre><\/div><\/div><div><h3>Để in báo cáo<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>index = {\"A\": {2, 3}}\nfor term in sorted(index):\n    print(term, sorted(index[term]))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>A [2, 3]<\/pre><\/div><\/div><\/div>",
+        "interactive": null
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Cấu trúc phù hợp để lưu các trang <b>không trùng<\/b> theo từng từ là?",
+        "options": [
+          "dict of sets",
+          "set of lists",
+          "list of floats",
+          "str"
+        ],
+        "answer": 0,
+        "why": "Key = từ; value = set chứa các số trang duy nhất."
+      },
+      {
+        "q": "Với <code>index[\"data\"] = {3, 4}<\/code>, lệnh thêm trang 4 sẽ?",
+        "options": [
+          "Tạo hai số 4",
+          "Không đổi tập",
+          "Báo lỗi",
+          "Xóa trang 3"
+        ],
+        "answer": 1,
+        "why": "Set không chứa phần tử trùng."
+      },
+      {
+        "q": "Trước khi gọi <code>index[term].add(page)<\/code> với khóa mới, cần?",
+        "options": [
+          "Gán index[term] = set()",
+          "Gán index[term] = 0",
+          "Gán index[term] = []",
+          "Gán index[term] = \"\""
+        ],
+        "answer": 0,
+        "why": "Phải có giá trị kiểu set cho khóa mới."
+      }
+    ],
+    "coding": {
+      "title": "Xây dựng chỉ mục trang",
+      "level": "Mức 2 · Hoàn thiện thuật toán",
+      "instructions": "Cho <code>records<\/code> là list các cặp (từ, số trang). Tạo dictionary <code>index<\/code> ánh xạ mỗi từ tới set các trang khác nhau.",
+      "starter": "records = [(\"data\", 2), (\"python\", 3), (\"data\", 5), (\"data\", 2)]\n# === BAI LAM ===\nindex = {}\nfor term, page in records:\n    # Tạo set mới nếu từ chưa có, rồi thêm page\n    pass",
+      "hint": "Tham khảo: <code>if term not in index: index[term] = set()<\/code>, sau đó <code>index[term].add(page)<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "index": {
+              "kind": "dict",
+              "value": {
+                "data": [
+                  2,
+                  5
+                ],
+                "python": [
+                  3
+                ]
+              }
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Nhiều trang trùng",
+          "inputs": {
+            "records": [
+              [
+                "A",
+                1
+              ],
+              [
+                "A",
+                1
+              ],
+              [
+                "A",
+                2
+              ],
+              [
+                "B",
+                1
+              ]
+            ]
+          },
+          "expected": {
+            "index": {
+              "kind": "dict",
+              "value": {
+                "A": [
+                  1,
+                  2
+                ],
+                "B": [
+                  1
+                ]
+              }
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Không có bản ghi",
+          "inputs": {
+            "records": []
+          },
+          "expected": {
+            "index": {
+              "kind": "dict",
+              "value": {}
+            }
+          },
+          "public": false
+        }
+      ],
+      "dictSetValues": true
+    }
+  },
+  {
+    "id": "8.3.2",
+    "short": "Dictionary of lists",
+    "topic": "Complex Structures · Báo cáo doanh số",
+    "slides": [
+      {
+        "kicker": "CHẶNG 8 · LÝ THUYẾT & VÍ DỤ",
+        "title": "Ví dụ mẫu: chọn Set/Map trong bài toán thực tế",
+        "lead": "Bài toán ngắn có thể sửa dữ liệu và xem kết quả tức thì, kết nối khái niệm với xử lý dữ liệu.",
+        "body": "<div class=\"guide-callout\"><strong>Chọn cấu trúc từ câu hỏi nghiệp vụ<\/strong><p>Không nhất thiết dùng nhiều cấu trúc phức tạp. Chọn <b>set<\/b> khi chỉ cần phần tử khác nhau, chọn <b>dict<\/b> khi cần ánh xạ khóa–giá trị, kết hợp khi một khóa tương ứng nhiều dữ liệu.<\/p><\/div>\n<div class=\"guide-columns\"><div class=\"guide-panel\"><h3>Tình huống<\/h3><ul><li><b>Kinh doanh:<\/b> đếm số khách không trùng.<\/li><li><b>Chuỗi cung ứng:<\/b> mã sản phẩm → danh sách kho có hàng.<\/li><li><b>Tài chính:<\/b> mã cổ phiếu → số lượng nắm giữ.<\/li><li><b>Phân tích dữ liệu:<\/b> từ → số lần xuất hiện.<\/li><\/ul><\/div><div class=\"guide-panel\"><h3>Cách chọn<\/h3><ul><li><code>set<\/code> cho danh sách mã duy nhất.<\/li><li><code>dict[str, int]<\/code> cho mã → lượng.<\/li><li><code>dict[str, set]<\/code> cho mã → nhiều kho không trùng.<\/li><li><code>dict[str, list]<\/code> cho mã → chuỗi dữ liệu có thứ tự.<\/li><\/ul><\/div><\/div><h3>Ví dụ 10 · Khách hàng và sản phẩm<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>sales = [(\"An\", \"Tea\"), (\"An\", \"Tea\"),\n         (\"Binh\", \"Coffee\"), (\"Chi\", \"Tea\")]\ncustomers = set()\nproductCounts = {}\nfor customer, product in sales:\n    customers.add(customer)\n    productCounts[product] = productCounts.get(product, 0) + 1\nprint(sorted(customers))\nprint(productCounts)<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>[&#x27;An&#x27;, &#x27;Binh&#x27;, &#x27;Chi&#x27;]\n{&#x27;Tea&#x27;: 3, &#x27;Coffee&#x27;: 1}<\/pre><\/div><h3>Ví dụ 11 · Sản phẩm nằm ở những kho nào?<\/h3><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON · VÍ DỤ MẪU<\/div><pre><code>stockRecords = [(\"Tea\", \"WH1\"), (\"Tea\", \"WH2\"),\n                (\"Tea\", \"WH1\"), (\"Coffee\", \"WH2\")]\nlocations = {}\nfor product, warehouse in stockRecords:\n    if product not in locations:\n        locations[product] = set()\n    locations[product].add(warehouse)\nfor product in sorted(locations):\n    print(product, sorted(locations[product]))<\/code><\/pre><\/div><div class=\"guide-expected\"><b>Kết quả dự kiến<\/b><pre>Coffee [&#x27;WH2&#x27;]\nTea [&#x27;WH1&#x27;, &#x27;WH2&#x27;]<\/pre><\/div><div class=\"guide-note info\"><b>Hoạt động tự luyện<\/b><p>Hãy đổi dữ liệu trong hai ví dụ; dự đoán kết quả, chạy Python, rồi tự trả lời: nếu cần giữ <b>mỗi lần phát sinh giao dịch<\/b> theo thời gian, nên thay set bằng cấu trúc nào?<\/p><\/div>"
+      },
+      {
+        "kicker": "8.3.2 · NHIỀU GIÁ TRỊ",
+        "title": "Dictionary of lists dùng để lưu bảng dữ liệu",
+        "lead": "Mỗi khóa là mặt hàng; list tương ứng ghi doanh số tại từng cửa hàng.",
+        "body": "<div class=\"twocol\"><div><div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>salesData = {\n  &quot;Tea&quot;: [120, 150, 100],\n  &quot;Coffee&quot;: [200, 180, 220],\n  &quot;Juice&quot;: [80, 95, 110]\n}\nprint(sum(salesData[&quot;Tea&quot;]))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>370<\/pre><\/div><\/div><div><h3>Vì sao là list?<\/h3><ul class=\"point-list\"><li>Vị trí <code>[0]<\/code>, <code>[1]<\/code>, <code>[2]<\/code> có ý nghĩa: cửa hàng 1, 2, 3.<\/li><li>Giữ cả giá trị lặp vì mỗi cửa hàng là một vị trí khác nhau.<\/li><li>Dictionary cho phép tra cứu dữ liệu theo tên mặt hàng.<\/li><\/ul><\/div><\/div><div class=\"guide-link-row\"><button type=\"button\" class=\"secondary\" data-stage-ref=\"7\">📖 Ôn lý thuyết và ví dụ đầu chặng<\/button><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.3.2 · BÁO CÁO",
+        "title": "Tổng doanh số theo sản phẩm",
+        "lead": "Lặp qua các cặp khóa–list và tính tổng của từng dòng.",
+        "body": "<div class=\"code-window\"><div class=\"code-head\"><span class=\"dotset\"><i><\/i><i><\/i><i><\/i><\/span>PYTHON<\/div><pre><code>salesData = {\n    &quot;Tea&quot;: [120, 150],\n    &quot;Coffee&quot;: [200, 180]\n}\nproductTotals = {}\nfor product, sales in salesData.items():\n    productTotals[product] = sum(sales)\n\nprint(productTotals)\nprint(sum(productTotals.values()))<\/code><\/pre><\/div><div class=\"output-window\"><strong>Đầu ra dự kiến<\/strong><pre>{&#x27;Tea&#x27;: 270, &#x27;Coffee&#x27;: 380}\n650<\/pre><\/div><div class=\"teaching-note info\"><strong>Mở rộng<\/strong><p>Nếu muốn tính tổng theo từng cửa hàng, duyệt từng vị trí trong mỗi list (các dòng có cùng số cửa hàng).<\/p><\/div>",
+        "interactive": null
+      },
+      {
+        "kicker": "8.3 · TỔNG KẾT",
+        "title": "Chọn cấu trúc dữ liệu theo câu hỏi",
+        "lead": "Cùng dữ liệu nhưng nhu cầu khác nhau sẽ dẫn tới cấu trúc lưu trữ khác nhau.",
+        "body": "<div class=\"twocol\"><div><h3>Bảng chọn nhanh<\/h3><table class=\"mini-table\"><tr><th>Nhu cầu<\/th><th>Cấu trúc<\/th><\/tr><tr><td>Giữ thứ tự, có thể trùng<\/td><td><code>list<\/code><\/td><\/tr><tr><td>Chỉ giữ phần tử duy nhất<\/td><td><code>set<\/code><\/td><\/tr><tr><td>Ánh xạ khóa → giá trị<\/td><td><code>dict<\/code><\/td><\/tr><tr><td>Khóa → nhiều giá trị duy nhất<\/td><td><code>dict of sets<\/code><\/td><\/tr><tr><td>Khóa → dãy có thứ tự<\/td><td><code>dict of lists<\/code><\/td><\/tr><\/table><\/div><div><h3>Bài học đã hoàn tất<\/h3><ul class=\"point-list\"><li>8.1 — Set: tạo, sửa, phép toán và đếm giá trị khác nhau.<\/li><li>8.2 — Dictionary: truy cập, sửa, duyệt và đếm tần suất.<\/li><li>8.3 — Cấu trúc kết hợp cho chỉ mục và báo cáo.<\/li><li>Mục mở rộng giáo trình: hashing, modules, JSON và đồ họa (không thuộc bài thực hành cơ bản).<\/li><\/ul><\/div><\/div>",
+        "interactive": null
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Để giữ doanh số từng cửa hàng theo vị trí, value nên là?",
+        "options": [
+          "set",
+          "list",
+          "int",
+          "bool"
+        ],
+        "answer": 1,
+        "why": "List giữ thứ tự vị trí và các giá trị có thể lặp lại."
+      },
+      {
+        "q": "Với <code>d = {\"Tea\": [10, 20]}<\/code>, <code>sum(d[\"Tea\"])<\/code> bằng?",
+        "options": [
+          "2",
+          "10",
+          "20",
+          "30"
+        ],
+        "answer": 3,
+        "why": "10 + 20 = 30."
+      },
+      {
+        "q": "Cấu trúc <code>dict of sets<\/code> phù hợp hơn <code>dict of lists<\/code> khi?",
+        "options": [
+          "Cần giữ mọi giá trị trùng",
+          "Muốn truy cập vị trí số 0",
+          "Không muốn có giá trị trùng theo mỗi khóa",
+          "Phải giữ thứ tự nhập"
+        ],
+        "answer": 2,
+        "why": "Set bỏ trùng, list giữ thứ tự và cho phép trùng."
+      }
+    ],
+    "coding": {
+      "title": "Lập báo cáo tổng doanh số",
+      "level": "Mức 2 · Tự hoàn thiện vòng lặp",
+      "instructions": "Cho <code>salesData<\/code> là dictionary of lists. Tạo <code>productTotals<\/code>: tổng của từng mặt hàng; và <code>grandTotal<\/code>: tổng doanh số tất cả mặt hàng.",
+      "starter": "salesData = {\"Tea\": [120, 150], \"Coffee\": [200, 180]}\n# === BAI LAM ===\nproductTotals = {}\nfor product, sales in salesData.items():\n    # Tính tổng theo product\n    pass\ngrandTotal = ___",
+      "hint": "Sử dụng <code>sum(sales)<\/code> rồi <code>sum(productTotals.values())<\/code>.",
+      "tests": [
+        {
+          "name": "Dữ liệu mẫu",
+          "inputs": {},
+          "expected": {
+            "productTotals": {
+              "kind": "dict",
+              "value": {
+                "Tea": 270,
+                "Coffee": 380
+              }
+            },
+            "grandTotal": {
+              "kind": "value",
+              "value": 650
+            }
+          },
+          "public": true
+        },
+        {
+          "name": "Dữ liệu rỗng",
+          "inputs": {
+            "salesData": {}
+          },
+          "expected": {
+            "productTotals": {
+              "kind": "dict",
+              "value": {}
+            },
+            "grandTotal": {
+              "kind": "value",
+              "value": 0
+            }
+          },
+          "public": false
+        },
+        {
+          "name": "Nhiều mặt hàng và số cửa hàng khác nhau",
+          "inputs": {
+            "salesData": {
+              "A": [
+                1,
+                2,
+                3
+              ],
+              "B": [
+                4
+              ],
+              "C": [
+                5,
+                5
+              ]
+            }
+          },
+          "expected": {
+            "productTotals": {
+              "kind": "dict",
+              "value": {
+                "A": 6,
+                "B": 4,
+                "C": 10
+              }
+            },
+            "grandTotal": {
+              "kind": "value",
+              "value": 20
+            }
+          },
+          "public": false
+        }
+      ]
+    }
+  }
+];
+const KEY = 'pfe-ch8-interactive-v1';
+
+
+const INTRO_SLIDES = [
+  {
+    "kicker": "GIỚI THIỆU CHƯƠNG 08 · CHAPTER GOALS",
+    "title": "Mục tiêu bài học",
+    "lead": "Sets & Dictionaries — Chương 8, Python for Everyone. Năm mục tiêu cốt lõi được chuyển ngữ theo phần Chapter Goals của giáo trình.",
+    "body": "<div class=\"goal-grid\">\n   <article class=\"goal-card\"><div class=\"goal-number\">MỤC TIÊU 01<\/div><b>Xây dựng và sử dụng set<\/b><p>Hiểu tập hợp các giá trị duy nhất, tạo set và kiểm tra phần tử thuộc tập hợp.<\/p><\/article>\n   <article class=\"goal-card\"><div class=\"goal-number\">MỤC TIÊU 02<\/div><b>Thực hiện các phép toán tập hợp<\/b><p>Vận dụng phép hợp, giao, hiệu và quan hệ tập con khi xử lý dữ liệu.<\/p><\/article>\n   <article class=\"goal-card\"><div class=\"goal-number\">MỤC TIÊU 03<\/div><b>Xây dựng và sử dụng dictionary<\/b><p>Tổ chức dữ liệu thành các cặp khóa–giá trị; thêm, sửa, xóa và duyệt các mục.<\/p><\/article>\n   <article class=\"goal-card\"><div class=\"goal-number\">MỤC TIÊU 04<\/div><b>Tra cứu dữ liệu bằng dictionary<\/b><p>Truy xuất giá trị qua khóa, kiểm tra khóa có tồn tại và xử lý khóa bị thiếu.<\/p><\/article>\n   <article class=\"goal-card wide\"><div class=\"goal-number\">MỤC TIÊU 05<\/div><b>Làm việc với cấu trúc dữ liệu phức hợp<\/b><p>Kết hợp dictionary với set hoặc list để lưu nhóm dữ liệu, lập chỉ mục và tổng hợp thông tin.<\/p><\/article>\n  <\/div><div class=\"overview-path\"><b>Lộ trình học:<\/b> 8 chặng → mỗi chặng 4 slide nội dung → 3 câu quiz + 1 bài lập trình → đạt cả hai mới mở khóa chặng tiếp theo.<\/div>"
+  },
+  {
+    "kicker": "CHUẨN ĐẦU RA · LEARNING OUTCOMES",
+    "title": "Sau chương này, sinh viên làm được gì?",
+    "lead": "Các chuẩn đầu ra dưới đây cụ thể hóa mục tiêu của giáo trình thành những năng lực có thể đánh giá qua quiz và bài lập trình Python.",
+    "body": "<div class=\"outcomes-grid\">\n   <article class=\"outcome-card\"><span class=\"outcome-id\">LO1<\/span><div><b>Phân biệt và chọn cấu trúc dữ liệu<\/b><p>Giải thích sự khác biệt giữa list, set và dictionary; chọn cấu trúc phù hợp với nhu cầu lưu trữ và truy xuất.<\/p><div class=\"route\">Chặng 1, 5<\/div><\/div><\/article>\n   <article class=\"outcome-card\"><span class=\"outcome-id\">LO2<\/span><div><b>Thao tác set cơ bản<\/b><p>Tạo set từ dữ liệu đầu vào, kiểm tra membership, thêm và xóa phần tử; nhận biết dữ liệu trùng lặp.<\/p><div class=\"route\">Chặng 1–2<\/div><\/div><\/article>\n   <article class=\"outcome-card\"><span class=\"outcome-id\">LO3<\/span><div><b>Áp dụng đại số tập hợp<\/b><p>Tính hợp, giao, hiệu và kiểm tra quan hệ tập con để trả lời câu hỏi xử lý dữ liệu.<\/p><div class=\"route\">Chặng 3<\/div><\/div><\/article>\n   <article class=\"outcome-card\"><span class=\"outcome-id\">LO4<\/span><div><b>Tổ chức và tra cứu dictionary<\/b><p>Khởi tạo, cập nhật, xóa, duyệt và truy xuất an toàn các cặp khóa–giá trị.<\/p><div class=\"route\">Chặng 5–6<\/div><\/div><\/article>\n   <article class=\"outcome-card\"><span class=\"outcome-id\">LO5<\/span><div><b>Giải bài toán dữ liệu duy nhất<\/b><p>Viết chương trình đếm số từ khác nhau, chuẩn hóa dữ liệu và sử dụng set hiệu quả.<\/p><div class=\"route\">Chặng 4<\/div><\/div><\/article>\n   <article class=\"outcome-card\"><span class=\"outcome-id\">LO6<\/span><div><b>Xây dựng cấu trúc dữ liệu lồng nhau<\/b><p>Thiết kế dictionary of sets và dictionary of lists cho bài toán chỉ mục, phân nhóm hoặc báo cáo.<\/p><div class=\"route\">Chặng 7–8<\/div><\/div><\/article>\n  <\/div><div class=\"learning-criterion\"><b>Tiêu chí hoàn thành:<\/b> Với mỗi chặng, trả lời đúng ít nhất <b>2/3 câu trắc nghiệm<\/b> và vượt qua <b>100% ca kiểm thử Python<\/b> trong bài lập trình.<\/div>"
+  },
+  {
+    "kicker": "SUMMARY · TỔNG KẾT NỘI DUNG HỌC",
+    "title": "Bản đồ kiến thức của Chương 8",
+    "lead": "Tổng kết kiến thức của toàn chương; dùng để ôn tập sau các chặng hoặc tra cứu nhanh khi luyện tập.",
+    "body": "<div class=\"summary-grid\">\n   <article class=\"summary-card\"><b>1. Set là gì?<\/b><p>Set lưu các phần tử <b>không trùng lặp<\/b>. Dùng khi cần loại bỏ lặp, kiểm tra phần tử có tồn tại hay đếm số giá trị khác nhau.<\/p><\/article>\n   <article class=\"summary-card\"><b>2. Phép toán tập hợp<\/b><p>Hợp (<code>|<\/code>), giao (<code>&<\/code>), hiệu (<code>-<\/code>) và tập con (<code>&lt;=<\/code>) giúp trả lời các câu hỏi so sánh và lọc dữ liệu.<\/p><\/article>\n   <article class=\"summary-card\"><b>3. Dictionary là gì?<\/b><p>Dictionary lưu dữ liệu dạng <b>khóa → giá trị<\/b>. Phù hợp cho tra cứu nhanh, gán nhãn dữ liệu, đếm tần suất và tổng hợp báo cáo.<\/p><\/article>\n   <article class=\"summary-card\"><b>4. Tra cứu an toàn<\/b><p>Luôn cân nhắc <code>key in d<\/code> hoặc <code>d.get(key)<\/code> để tránh lỗi khi khóa chưa tồn tại.<\/p><\/article>\n   <article class=\"summary-card\"><b>5. Cấu trúc lồng nhau<\/b><p><code>dict[str, set]<\/code> và <code>dict[str, list]<\/code> rất hữu ích cho lập chỉ mục, gom nhóm, lưu danh sách theo danh mục và xử lý dữ liệu thực tế.<\/p><\/article>\n   <article class=\"summary-card\"><b>6. Năng lực cần đạt<\/b><ul><li>Tự chọn đúng cấu trúc dữ liệu.<\/li><li>Viết được thao tác cơ bản với set và dictionary.<\/li><li>Hoàn thành các bài tập quiz và lập trình có kiểm thử.<\/li><\/ul><\/article>\n  <\/div><div class=\"summary-banner\"><b>Gợi ý ôn tập:<\/b> Sau khi học xong, hãy tự trả lời ba câu hỏi: <i>Khi nào dùng set?<\/i> <i>Khi nào dùng dictionary?<\/i> và <i>Cấu trúc dữ liệu lồng nhau nào phù hợp cho bài toán của mình?<\/i><\/div><div class=\"summary-chipline\"><span class=\"summary-chip\">Set<\/span><span class=\"summary-chip\">Unique values<\/span><span class=\"summary-chip\">Set operations<\/span><span class=\"summary-chip\">Dictionary<\/span><span class=\"summary-chip\">Lookup<\/span><span class=\"summary-chip\">Nested data structures<\/span><\/div>"
+  }
+];
+const MODULE_OUTCOMES = [
+ 'LO1–LO2 · Tạo set từ các giá trị và nhận biết tính không trùng lặp.',
+ 'LO2 · Sử dụng các phương thức thêm, xóa và kiểm tra phần tử của set.',
+ 'LO3 · Vận dụng union, intersection, difference và quan hệ tập con.',
+ 'LO5 · Dùng set để đếm và quản lý từ khác nhau trong văn bản.',
+ 'LO1–LO4 · Biểu diễn dữ liệu theo khóa–giá trị và tra cứu bằng dictionary.',
+ 'LO4 · Duyệt, cập nhật và tổng hợp các mục của dictionary.',
+ 'LO6 · Tạo dictionary of sets để xây dựng bảng chỉ mục.',
+ 'LO6 · Tạo dictionary of lists để quản lý và tổng hợp dữ liệu.'
+];
+const MODULE_COUNT = MODULES.length;
+const STEPS_PER_MODULE = 5;
+const CHECKPOINT_PAGE = STEPS_PER_MODULE-1;
+const QUICK_CHECKS = [
+  {
+    "topic1": "Đặc điểm của set",
+    "q": "Vì sao set phù hợp để thống kê số mã sản phẩm khác nhau từ một danh sách có giá trị lặp?",
+    "options": [
+      "Set tự giữ mỗi phần tử duy nhất một lần",
+      "Set lưu các phần tử theo chỉ số 0, 1, 2, ...",
+      "Set tự sắp xếp các mã theo thứ tự chữ cái"
+    ],
+    "answer": 0,
+    "why": "Set loại phần tử trùng lặp; nó không có chỉ số vị trí và không tự sắp xếp.",
+    "topic2": "Kiểm tra thành viên",
+    "fill": "Điền toán tử kiểm tra mã Tea có thuộc tập unique hay không: \"Tea\" ____ unique",
+    "accepted": [
+      "in"
+    ],
+    "hint": "Dùng toán tử kiểm tra thành viên, cho kết quả True hoặc False."
+  },
+  {
+    "topic1": "Giá trị trả về",
+    "q": "Sau lệnh result = s.add(\"Juice\"), biến result nhận giá trị nào?",
+    "options": [
+      "True nếu thêm thành công",
+      "None",
+      "Set mới chứa thêm Juice"
+    ],
+    "answer": 1,
+    "why": "add() thay đổi set tại chỗ và trả về None, không trả về set mới.",
+    "topic2": "Xóa an toàn khi vắng phần tử",
+    "fill": "Điền phương thức để xóa \"Unknown\" mà không gây KeyError khi phần tử vắng mặt: s.____(\"Unknown\")",
+    "accepted": [
+      "discard"
+    ],
+    "hint": "Phương thức này không gây KeyError nếu phần tử chưa có trong set."
+  },
+  {
+    "topic1": "Ý nghĩa phép hiệu",
+    "q": "Nếu online và store là hai set tên khách hàng, online - store biểu diễn nhóm nào?",
+    "options": [
+      "Khách mua ở cả hai kênh",
+      "Khách chỉ có trong nhóm online",
+      "Toàn bộ khách của hai kênh, không trùng"
+    ],
+    "answer": 1,
+    "why": "Phép hiệu A - B gồm các phần tử thuộc A nhưng không thuộc B.",
+    "topic2": "Kiểm tra quan hệ tập con",
+    "fill": "Điền phương thức để kiểm tra set a có là tập con của b: a.____(b)",
+    "accepted": [
+      "issubset"
+    ],
+    "hint": "Tên phương thức bắt đầu bằng is và dùng để kiểm tra subset; trả về bool."
+  },
+  {
+    "topic1": "Phân biệt ký tự và từ",
+    "q": "Nếu text là một chuỗi, set(text) trực tiếp tạo tập hợp gồm những gì?",
+    "options": [
+      "Các từ sau khi tách bằng khoảng trắng",
+      "Các ký tự khác nhau trong chuỗi",
+      "Số lần xuất hiện của mỗi từ"
+    ],
+    "answer": 1,
+    "why": "Lặp trực tiếp trên str cho từng ký tự. Muốn có tập từ, cần tách từ bằng split() trước.",
+    "topic2": "Chuẩn hóa chữ hoa và chữ thường",
+    "fill": "Điền phương thức chuyển text về chữ thường trước khi tách từ: words = text.____().split()",
+    "accepted": [
+      "lower"
+    ],
+    "hint": "Phương thức xử lý str tạo chuỗi mới với các chữ cái viết thường."
+  },
+  {
+    "topic1": "Cấu trúc khóa–giá trị",
+    "q": "Trong một dictionary d, biểu thức \"Tea\" in d kiểm tra điều gì?",
+    "options": [
+      "\"Tea\" có xuất hiện trong các giá trị hay không",
+      "\"Tea\" có là một khóa trong dictionary hay không",
+      "Giá trị gắn với \"Tea\" có lớn hơn 0 hay không"
+    ],
+    "answer": 1,
+    "why": "Toán tử in đối với dictionary kiểm tra khóa, không kiểm tra các value.",
+    "topic2": "Tra cứu khóa thiếu an toàn",
+    "fill": "Điền phương thức tra cứu khóa \"Milk\" và trả về 0 nếu chưa có: d.____(\"Milk\", 0)",
+    "accepted": [
+      "get"
+    ],
+    "hint": "Khác d[key], phương thức này nhận giá trị dự phòng khi khóa thiếu và không tự thêm khóa."
+  },
+  {
+    "topic1": "Dạng dữ liệu khi duyệt",
+    "q": "Phương thức d.items() trả về đối tượng nào trong Python 3?",
+    "options": [
+      "Một dict_items view chứa các cặp (key, value)",
+      "Một list mới chỉ gồm value",
+      "Một set mới chỉ gồm key"
+    ],
+    "answer": 0,
+    "why": "items() trả về dict_items view, thường được duyệt bằng for key, value in d.items().",
+    "topic2": "Xóa khóa có giá trị dự phòng",
+    "fill": "Điền phương thức xóa khóa \"Unknown\" và trả về -1 khi khóa thiếu: inventory.____(\"Unknown\", -1)",
+    "accepted": [
+      "pop"
+    ],
+    "hint": "Phương thức này vừa xóa cặp key–value khi tồn tại, vừa trả về giá trị (hoặc default)."
+  },
+  {
+    "topic1": "Lựa chọn kiểu dữ liệu cho nhóm",
+    "q": "Muốn lưu mỗi sản phẩm tương ứng nhiều kho và không lặp mã kho, nên chọn cấu trúc nào?",
+    "options": [
+      "Dictionary of lists vì luôn giữ trùng",
+      "Dictionary of sets",
+      "Một set đơn không phân biệt sản phẩm"
+    ],
+    "answer": 1,
+    "why": "Dictionary of sets lưu nhóm theo key và dùng set để loại mã kho trùng trong mỗi nhóm.",
+    "topic2": "Thêm kho vào nhóm có sẵn",
+    "fill": "Sau khi index[\"Tea\"] đã là một set, điền phương thức để ghi nhận kho WH1: index[\"Tea\"].____(\"WH1\")",
+    "accepted": [
+      "add"
+    ],
+    "hint": "Phương thức thêm một phần tử vào set hiện có, trả về None."
+  },
+  {
+    "topic1": "Lựa chọn cấu trúc cho lịch sử giao dịch",
+    "q": "Một mã hàng cần lưu mọi lượt bán theo đúng thứ tự, kể cả hai lượt có số tiền bằng nhau. Nên dùng kiểu giá trị nào trong dictionary?",
+    "options": [
+      "set",
+      "list",
+      "bool"
+    ],
+    "answer": 1,
+    "why": "List giữ thứ tự và các giá trị trùng; set sẽ loại giá trị trùng nên không phù hợp để lưu lịch sử giao dịch.",
+    "topic2": "Đếm tần suất bằng dictionary",
+    "fill": "Điền phương thức để đếm số lần xuất hiện của product (mặc định 0): counts[product] = counts.____(product, 0) + 1",
+    "accepted": [
+      "get"
+    ],
+    "hint": "Phương thức đọc value theo key, với tham số thứ hai làm giá trị mặc định."
+  }
+];
+const MARKER = '# === BAI LAM ===';
+const RUNNABLE_EXAMPLE_COUNT = MODULES.reduce((sum,m)=>sum + m.slides.reduce((acc,s)=>acc + ((s.body.match(/class="code-window"/g)||[]).length),0),0) + INTRO_SLIDES.reduce((sum,s)=>sum + ((s.body.match(/class="code-window"/g)||[]).length),0);
+const q = id => document.getElementById(id);
+const escapeHTML = v => String(v ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const initial = () => ({passed:{},quizPassed:{},codePassed:{},answers:{},drafts:{},quizScores:{},examples:{},scratch:{},quickChecks:{},quickCheckVersion:2,layoutVersion:2,learnerName:'',studentId:'',studentClass:'',startedAt:null,completedAt:null,lastSavedAt:null,lastExportedAt:null,exportedCount:0,current:-INTRO_SLIDES.length});
+let state = initial();
+try { const saved = JSON.parse(localStorage.getItem(KEY)); if(saved && typeof saved === 'object') state = {...initial(), ...saved}; } catch(_) {}
+
+// Convert earlier saved progress (three content slides + one checkpoint per module).
+// Quiz results and passed modules are not invalidated when the teaching slides expand.
+if (state.layoutVersion !== 2) {
+ const oldPos = Number.isInteger(state.current) ? state.current : -10;
+ if(oldPos >= 0){
+  const m=Math.floor(oldPos/4),p=oldPos%4;
+  state.current=m*STEPS_PER_MODULE+(p===3?CHECKPOINT_PAGE:p+1);
+ } else {
+  state.current=-INTRO_SLIDES.length;
+ }
+ const examples={};
+ const oldIntroStage={2:0,3:1,4:2,5:4,6:5,7:5,8:7};
+ for(const [key,val] of Object.entries(state.examples||{})){
+  const parts=key.split('.');
+  if(parts[0]==='intro' && oldIntroStage[parts[1]]!==undefined){
+   const mid=oldIntroStage[parts[1]];
+   const offset=Number(parts[1])===7?2:0;
+   examples[`${mid}.0.${Number(parts[2])+offset}`]=val;
+  }else if(/^\d+$/.test(parts[0])){
+   examples[`${parts[0]}.${Number(parts[1])+1}.${parts[2]}`]=val;
+  }else examples[key]=val;
+ }
+ const scratch={};
+ for(const [key,val] of Object.entries(state.scratch||{})){
+  const parts=key.split('.');
+  if(/^\d+$/.test(parts[0])) scratch[`${parts[0]}.${Number(parts[1])+1}`]=val;
+  else scratch[key]=val;
+ }
+ state.examples=examples; state.scratch=scratch; state.quickChecks=state.quickChecks||{};
+ state.layoutVersion=2;
+ try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}
+}
+// Reset only earlier formative-check answers after changing the assessed content.
+// Quiz and programming checkpoint results, unlocks, drafts, and completion are retained.
+if(state.quickCheckVersion !== 2){
+ state.quickChecks={}; state.quickCheckVersion=2;
+ try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}
+}
+let current = Number.isInteger(state.current) ? state.current : -INTRO_SLIDES.length;
+let worker = null, workerLoaded = false, gradePending = null, requestCount = 0, graderTimeout = null;
+let examplePending = null, exampleTimeout = null;
+function ensureMilestones(){
+ if(!state.startedAt) state.startedAt = Date.now();
+ if(allDone() && !state.completedAt) state.completedAt = Date.now();
+}
+ensureMilestones();
+
+function persist(){ ensureMilestones(); state.current = current; state.lastSavedAt = Date.now(); try{localStorage.setItem(KEY,JSON.stringify(state));}catch(_){} }
+function isUnlocked(i){return i === 0 || !!state.passed[i-1];}
+function accessibleStep(step){return (step >= -INTRO_SLIDES.length && step < 0) || (step >= 0 && step < MODULE_COUNT * STEPS_PER_MODULE && isUnlocked(Math.floor(step/STEPS_PER_MODULE)));}
+function allDone(){return MODULES.every((_,i) => !!state.passed[i]);}
+function maxAllowed(){let i=0;while(i<MODULE_COUNT-1 && state.passed[i]) i++;return i;}
+function move(step){if(!accessibleStep(step))return;if(examplePending)abortExample('Đã dừng ví dụ khi chuyển trang.');current=step;persist();render();window.scrollTo({top:0,behavior:'instant'});}
+function progress(){return MODULES.filter((_,i)=>state.passed[i]).length}
+function renderNavigation(){
+ ensureMilestones();
+ const mid=current<0 ? -1 : Math.floor(current/STEPS_PER_MODULE);
+ q('introList').innerHTML = INTRO_SLIDES.map((item,i)=>{
+  const step = i - INTRO_SLIDES.length;
+  const label = i===0 ? 'Chapter Goals' : i===1 ? 'Learning Outcomes' : 'Summary';
+  const num = i===0 ? 'G' : i===1 ? 'LO' : 'Σ';
+  return `<button type="button" class="mod-btn ${current===step?'active':''}" data-intro="${step}"><span class="mod-num">${num}</span><span><div class="mod-title">${item.title}</div><div class="mod-sub">${label}</div></span></button>`;
+ }).join('');
+ q('introList').querySelectorAll('[data-intro]').forEach(btn=>btn.onclick=()=>move(+btn.dataset.intro));
+ q('moduleList').innerHTML = MODULES.map((m,i)=>{
+  const unlocked=isUnlocked(i), pass=!!state.passed[i];
+  return `<button class="mod-btn ${mid===i?'active':''} ${pass?'passed':''} ${!unlocked?'locked':''}" data-mod="${i}" ${unlocked?'':'disabled'} title="${unlocked?'Mở bài học':'Cần vượt bài kiểm tra chặng trước'}"><span class="mod-num">${pass?'✓':unlocked?String(i+1).padStart(2,'0'):'🔒'}</span><span><div class="mod-title">${escapeHTML(m.short)}</div><div class="mod-sub">${escapeHTML(m.id)} · ${pass?'Đã vượt qua':unlocked?'Đang học':'Chưa mở khóa'}</div></span></button>`;
+ }).join('');
+ q('moduleList').querySelectorAll('[data-mod]').forEach(btn=>btn.onclick=()=>move(+btn.dataset.mod*STEPS_PER_MODULE));
+ q('doneText').textContent=`${progress()} / ${MODULE_COUNT}`;
+ q('quickDoneCount').textContent=`${quickCheckCount()}/${MODULE_COUNT}`;
+ q('sideBar').style.width=`${100*progress()/MODULE_COUNT}%`;
+ q('progressBar').style.width=`${100*(current+INTRO_SLIDES.length)/(MODULE_COUNT*STEPS_PER_MODULE+INTRO_SLIDES.length)}%`;
+ q('pageStatus').textContent=current<0?'Định hướng học tập':state.passed[mid]?'Đã vượt qua':current%STEPS_PER_MODULE===CHECKPOINT_PAGE?'Đang kiểm tra':'Bài học mở';
+ q('prev').disabled=current===-INTRO_SLIDES.length;
+ const next=current+1;
+ q('next').disabled=next >= MODULE_COUNT*STEPS_PER_MODULE || !accessibleStep(next);
+ q('next').textContent=current>=0 && current%STEPS_PER_MODULE===CHECKPOINT_PAGE && !state.passed[mid] ? '🔒 Cần đạt kiểm tra' : (next>=MODULE_COUNT*STEPS_PER_MODULE?'Đã hoàn thành':'Tiếp theo →');
+ q('navHint').innerHTML = current<0
+  ? `Định hướng · Slide <strong>${current+INTRO_SLIDES.length+1}/${INTRO_SLIDES.length}</strong> · <span>← → điều hướng</span>`
+  : `Chặng <strong>${mid+1}/${MODULE_COUNT}</strong> · Slide ${current+INTRO_SLIDES.length+1}/${MODULE_COUNT*STEPS_PER_MODULE+INTRO_SLIDES.length} · <span>← → điều hướng</span>`;
+ renderCompletionPanel();
+}
+function renderIntroduction(){
+ const index=current+INTRO_SLIDES.length, intro=INTRO_SLIDES[index];
+ q('slide').innerHTML=`<header class="slide-header"><div class="eyebrow">${intro.kicker}</div><h1>${intro.title}</h1><p class="lead">${intro.lead}</p></header><div class="content">${intro.body}</div><footer class="slide-footer"><span><strong>PYTHON FOR EVERYONE</strong> · CHƯƠNG 8 · ĐỊNH HƯỚNG HỌC TẬP</span><span class="slide-index">Mở đầu ${index+1} / ${INTRO_SLIDES.length}</span></footer>`;
+ renderExecutableExamples("intro",index);
+}
+function formatDate(ts){
+ if(!ts) return '—';
+ try{return new Date(ts).toLocaleString('vi-VN',{dateStyle:'medium',timeStyle:'short'});}catch(_){return new Date(ts).toLocaleString('vi-VN');}
+}
+function getCompletionStats(){
+ const completedModules = progress();
+ const quizPassedCount = MODULES.filter((_,i)=>!!state.quizPassed[i]).length;
+ const codePassedCount = MODULES.filter((_,i)=>!!state.codePassed[i]).length;
+ const totalQuizCorrect = MODULES.reduce((sum,_,i)=>sum + (Number(state.quizScores[i])||0),0);
+ const totalQuizQuestions = MODULE_COUNT * 3;
+ const quickPassedCount=quickCheckCount();
+ const completionPercent = Math.round(completedModules / MODULE_COUNT * 100);
+ return {completedModules,quizPassedCount,codePassedCount,totalQuizCorrect,totalQuizQuestions,quickPassedCount,completionPercent};
+}
+function renderCompletionPanel(){
+ const host=q('completion');
+ if(!host) return;
+ if(!allDone()){
+  host.className='';
+  host.innerHTML='';
+  return;
+ }
+ ensureMilestones();
+ const stats=getCompletionStats();
+ const learner=escapeHTML(state.learnerName || '');
+ const studentId=escapeHTML(state.studentId || '');
+ const studentClass=escapeHTML(state.studentClass || '');
+ host.className='show';
+ host.innerHTML=`<div class="completion-card">
+   <div class="completion-top">
+    <div>
+      <div class="completion-badge">✓ Course completed</div>
+      <h2>Hoàn thành Chương 8 – Sets & Dictionaries</h2>
+      <p>Bạn đã vượt qua đầy đủ các yêu cầu mở khóa của chương: hoàn thành <b>${stats.completedModules}/${MODULE_COUNT}</b> chặng học, đạt quiz ở từng chặng và vượt qua tất cả các bài lập trình cơ bản.</p>
+      <div class="certificate-note">Ngày bắt đầu: <b>${formatDate(state.startedAt)}</b> · Ghi nhận hoàn thành: <b>${formatDate(state.completedAt)}</b></div>
+    </div>
+    <div class="completion-actions">
+      <label class="name-field">Mã sinh viên
+        <input id="studentId" type="text" maxlength="40" required placeholder="Ví dụ: 11234567" value="${studentId}" autocomplete="off">
+      </label>
+      <label class="name-field">Họ và tên
+        <input id="learnerName" type="text" maxlength="80" required placeholder="Ví dụ: Nguyễn Văn A" value="${learner}" autocomplete="name">
+      </label>
+      <label class="name-field">Lớp
+        <input id="studentClass" type="text" maxlength="60" required placeholder="Ví dụ: DSEB65A" value="${studentClass}" autocomplete="off">
+      </label>
+      <p class="form-note">Nhập đủ 3 thông tin để ghi vào ảnh PNG. Thông tin chỉ lưu trong trình duyệt này.</p>
+      <p class="field-error" id="identityError" role="alert"></p>
+      <div class="completion-actions-row">
+        <button type="button" class="primary" id="exportPngBtn">🖼 Export PNG</button>
+        <button type="button" class="secondary" id="jumpSummaryBtn">Tổng kết chương</button>
+      </div>
+      <div class="export-status" id="exportStatus">${state.lastExportedAt ? 'Đã xuất PNG lần gần nhất: <b>'+formatDate(state.lastExportedAt)+'</b>' : 'Bạn có thể xuất ảnh PNG làm minh chứng hoàn thành bài học.'}</div>
+    </div>
+   </div>
+   <div class="summary-banner" style="margin-top:17px">Kiểm tra nhanh tại trang lý thuyết: <b>${stats.quickPassedCount}/${MODULE_COUNT}</b> chặng đã đạt. Phần này dùng để tự luyện và không ảnh hưởng kết quả mở khóa.</div>
+   <div class="stat-grid">
+    <article class="stat-card"><div class="stat-label">Chặng hoàn thành</div><div class="stat-value">${stats.completedModules}/${MODULE_COUNT}</div><div class="stat-note">Tiến độ tổng thể: ${stats.completionPercent}%</div></article>
+    <article class="stat-card"><div class="stat-label">Quiz đạt</div><div class="stat-value">${stats.quizPassedCount}/${MODULE_COUNT}</div><div class="stat-note">Ngưỡng mỗi chặng: tối thiểu 2/3 câu</div></article>
+    <article class="stat-card"><div class="stat-label">Lập trình đạt</div><div class="stat-value">${stats.codePassedCount}/${MODULE_COUNT}</div><div class="stat-note">Phải vượt 100% bộ kiểm thử của từng chặng</div></article>
+    <article class="stat-card"><div class="stat-label">Tổng số câu quiz đúng</div><div class="stat-value">${stats.totalQuizCorrect}/${stats.totalQuizQuestions}</div><div class="stat-note">Tổng hợp toàn bộ 8 chặng học</div></article>
+    <article class="stat-card"><div class="stat-label">Ví dụ Python tương tác</div><div class="stat-value">${RUNNABLE_EXAMPLE_COUNT}</div><div class="stat-note">Ví dụ minh họa trong các slide đều có thể chạy</div></article>
+    <article class="stat-card"><div class="stat-label">Tình trạng chương</div><div class="stat-value">Hoàn tất</div><div class="stat-note">Đã mở khóa và vượt toàn bộ chặng học</div></article>
+   </div>
+   <div class="summary-sheet">
+    <article class="summary-card">
+      <b>Tổng kết nội dung đã học</b>
+      <ul>
+        <li><b>Set</b> lưu các phần tử duy nhất, hỗ trợ loại bỏ dữ liệu trùng lặp và kiểm tra membership hiệu quả.</li>
+        <li><b>Phép toán tập hợp</b> như hợp, giao, hiệu và tập con giúp xử lý dữ liệu theo logic rõ ràng.</li>
+        <li><b>Dictionary</b> lưu dữ liệu theo cặp khóa–giá trị, phù hợp cho tra cứu, đếm tần suất và gom nhóm.</li>
+        <li><b>Tra cứu an toàn</b> cần dùng <code>in</code> hoặc <code>get()</code> để giảm lỗi khóa thiếu.</li>
+        <li><b>Cấu trúc lồng nhau</b> như dictionary of sets/lists rất quan trọng trong các bài toán chỉ mục và tổng hợp dữ liệu.</li>
+      </ul>
+    </article>
+    <article class="summary-card">
+      <b>Checklist chuẩn đầu ra</b>
+      <ul>
+        <li>Phân biệt được list, set và dictionary.</li>
+        <li>Viết được thao tác thêm, xóa, duyệt và tra cứu.</li>
+        <li>Áp dụng set operations cho dữ liệu thực tế.</li>
+        <li>Xây dựng được cấu trúc dữ liệu phức hợp.</li>
+        <li>Hoàn thành được bài kiểm tra quiz và lập trình cơ bản.</li>
+      </ul>
+      <div class="summary-banner"><b>Khuyến nghị:</b> Sau chương này, sinh viên nên luyện thêm các bài đếm tần suất từ, lập chỉ mục tài liệu và gom nhóm dữ liệu theo danh mục bằng dictionary.</div>
+    </article>
+   </div>
+  </div>`;
+ for(const [id,key] of [['studentId','studentId'],['learnerName','learnerName'],['studentClass','studentClass']]){
+  const input=q(id);
+  if(input) input.addEventListener('input',()=>{state[key]=input.value;persist();const error=q('identityError');if(error){error.textContent='';error.classList.remove('show');}});
+ }
+ q('exportPngBtn')?.addEventListener('click',exportCompletionPNG);
+ q('jumpSummaryBtn')?.addEventListener('click',()=>move(-1));
+}
+function roundRect(ctx,x,y,w,h,r){
+ const rr=Math.min(r,w/2,h/2); ctx.beginPath();
+ ctx.moveTo(x+rr,y); ctx.arcTo(x+w,y,x+w,y+h,rr); ctx.arcTo(x+w,y+h,x,y+h,rr); ctx.arcTo(x,y+h,x,y,rr); ctx.arcTo(x,y,x+w,y,rr); ctx.closePath();
+}
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,color='#244857'){
+ ctx.fillStyle=color;
+ const paras=String(text).split('\n');
+ let cy=y;
+ paras.forEach((para,pi)=>{
+  const words=para.split(/\s+/).filter(Boolean);
+  let line='';
+  words.forEach(word=>{
+   const test=line ? line + ' ' + word : word;
+   if(ctx.measureText(test).width > maxWidth && line){ ctx.fillText(line,x,cy); cy+=lineHeight; line=word; }
+   else line=test;
+  });
+  if(line){ctx.fillText(line,x,cy); cy+=lineHeight;}
+  if(pi<paras.length-1) cy+=lineHeight*0.35;
+ });
+ return cy;
+}
+function exportCompletionPNG(){
+ if(!allDone()) return;
+ ensureMilestones();
+ const stats=getCompletionStats();
+ const name=(state.learnerName||'').trim();
+ const studentId=(state.studentId||'').trim();
+ const studentClass=(state.studentClass||'').trim();
+ const fields=[['studentId',studentId,'Mã sinh viên'],['learnerName',name,'Họ và tên'],['studentClass',studentClass,'Lớp']];
+ const missing=fields.find(field=>!field[1]);
+ if(missing){
+  const error=q('identityError');
+  if(error){error.textContent=`Vui lòng nhập ${missing[2].toLowerCase()} trước khi xuất PNG.`;error.classList.add('show');}
+  q(missing[0])?.focus();
+  return;
+ }
+ const canvas=document.createElement('canvas');
+ const W=1480,H=1135,dpr=Math.max(1,window.devicePixelRatio||1);
+ canvas.width=W*dpr; canvas.height=H*dpr; canvas.style.width=W+'px'; canvas.style.height=H+'px';
+ const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+ const grad=ctx.createLinearGradient(0,0,W,H); grad.addColorStop(0,'#f2fbf8'); grad.addColorStop(0.55,'#f8fbff'); grad.addColorStop(1,'#eef8ff');
+ ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+ ctx.fillStyle='#10324a'; ctx.fillRect(0,0,W,135);
+ ctx.fillStyle='#7fe3d3'; ctx.font='700 22px system-ui,Segoe UI,sans-serif'; ctx.fillText('PYTHON FOR EVERYONE · INTERACTIVE LEARNING',70,55);
+ ctx.fillStyle='#ffffff'; ctx.font='800 42px system-ui,Segoe UI,sans-serif'; ctx.fillText('GHI NHẬN HOÀN THÀNH · CHƯƠNG 8',70,98);
+ roundRect(ctx,60,165,W-120,H-195,28); ctx.fillStyle='rgba(255,255,255,0.95)'; ctx.fill(); ctx.strokeStyle='#d6e6ea'; ctx.lineWidth=2; ctx.stroke();
+ ctx.fillStyle='#116b63'; ctx.font='800 18px system-ui,Segoe UI,sans-serif'; ctx.fillText('SETS & DICTIONARIES',95,218);
+ ctx.fillStyle='#69808b'; ctx.font='700 14px system-ui,Segoe UI,sans-serif'; ctx.fillText('HỌ VÀ TÊN',95,255);
+ ctx.fillStyle='#153c52'; ctx.font='800 34px system-ui,Segoe UI,sans-serif';
+ let displayName=name;
+ while(ctx.measureText(displayName).width>1255 && ctx.font.includes('34px')){ctx.font='800 28px system-ui,Segoe UI,sans-serif';}
+ if(ctx.measureText(displayName).width>1255){ ctx.font='800 23px system-ui,Segoe UI,sans-serif'; }
+ ctx.fillText(displayName,95,292);
+ ctx.fillStyle='#69808b'; ctx.font='700 14px system-ui,Segoe UI,sans-serif';
+ ctx.fillText('MÃ SINH VIÊN',95,336); ctx.fillText('LỚP',790,336);
+ ctx.fillStyle='#153c52'; ctx.font='800 24px system-ui,Segoe UI,sans-serif';
+ ctx.fillText(studentId,95,368);
+ ctx.fillText(studentClass,790,368);
+ ctx.fillStyle='#4f6d79'; ctx.font='16px system-ui,Segoe UI,sans-serif';
+ wrapCanvasText(ctx,'Đã hoàn thành đầy đủ bài học tương tác Chương 8, bao gồm các phần lý thuyết, quiz và bài lập trình Python cơ bản có kiểm thử tự động.',95,404,1230,26);
+ const boxData=[
+  ['Chặng hoàn thành',`${stats.completedModules}/${MODULE_COUNT}`,'Tiến độ tổng thể'],
+  ['Quiz đạt',`${stats.quizPassedCount}/${MODULE_COUNT}`,'Mỗi chặng cần tối thiểu 2/3 câu'],
+  ['Lập trình đạt',`${stats.codePassedCount}/${MODULE_COUNT}`,'Tất cả bộ kiểm thử đều vượt qua'],
+  ['Tổng số câu đúng',`${stats.totalQuizCorrect}/${stats.totalQuizQuestions}`,'Thống kê toàn chương'],
+  ['Ví dụ Python tương tác',String(RUNNABLE_EXAMPLE_COUNT),'Ví dụ trong slide có thể chạy'],
+  ['Ngày hoàn thành',formatDate(state.completedAt),'Ghi nhận từ trình duyệt hiện tại']
+ ];
+ const startX=95,startY=465,boxW=390,boxH=114,gx=26,gy=22;
+ boxData.forEach((item,idx)=>{
+  const col=idx%3,row=Math.floor(idx/3),x=startX+col*(boxW+gx),y=startY+row*(boxH+gy);
+  roundRect(ctx,x,y,boxW,boxH,18); ctx.fillStyle='#f8fcfe'; ctx.fill(); ctx.strokeStyle='#d7e6eb'; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.fillStyle='#69808b'; ctx.font='700 14px system-ui,Segoe UI,sans-serif'; ctx.fillText(item[0],x+18,y+28);
+  ctx.fillStyle='#123d50'; ctx.font='800 28px system-ui,Segoe UI,sans-serif';
+  const value = String(item[1]);
+  const maxWidth = boxW - 36;
+  let fontSize = 28;
+  while(ctx.measureText(value).width > maxWidth && fontSize > 16){ fontSize -= 1; ctx.font=`800 ${fontSize}px system-ui,Segoe UI,sans-serif`; }
+  ctx.fillText(value,x+18,y+64);
+  ctx.fillStyle='#5c7480'; ctx.font='13px system-ui,Segoe UI,sans-serif'; wrapCanvasText(ctx,item[2],x+18,y+88,boxW-36,18,'#5c7480');
+ });
+ ctx.fillStyle='#15465b'; ctx.font='800 22px system-ui,Segoe UI,sans-serif'; ctx.fillText('Tổng kết nội dung đã học',95,767);
+ ctx.fillStyle='#5c7480';ctx.font='700 14px system-ui,Segoe UI,sans-serif';ctx.fillText(`Kiểm tra nhanh: ${stats.quickPassedCount}/${MODULE_COUNT} chặng đạt`,980,767);
+ ctx.fillStyle='#456775'; ctx.font='16px system-ui,Segoe UI,sans-serif';
+ const bullets=[
+  'Set lưu các phần tử duy nhất và thích hợp để loại bỏ dữ liệu trùng lặp.',
+  'Các phép toán hợp, giao, hiệu và tập con giúp xử lý quan hệ giữa các nhóm dữ liệu.',
+  'Dictionary tổ chức dữ liệu theo khóa–giá trị để tra cứu, đếm và tổng hợp hiệu quả.',
+  'Cấu trúc dictionary of sets hoặc dictionary of lists hỗ trợ nhiều bài toán thực tế.'
+ ];
+ let y=808; bullets.forEach((b)=>{ctx.fillStyle='#0d8176'; ctx.beginPath(); ctx.arc(106,y-5,4,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#456775'; y=wrapCanvasText(ctx,b,122,y,1210,25,'#456775')+8;});
+ ctx.strokeStyle='#d9e7eb'; ctx.beginPath(); ctx.moveTo(90,H-120); ctx.lineTo(W-90,H-120); ctx.stroke();
+ ctx.fillStyle='#61808a'; ctx.font='14px system-ui,Segoe UI,sans-serif';
+ ctx.fillText(`Xuất PNG lúc: ${formatDate(Date.now())}`,95,H-84);
+ ctx.fillText(`Số lần export: ${Number(state.exportedCount||0)+1}`,95,H-56);
+ ctx.fillText('Nguồn: bài giảng HTML tương tác Chương 8 – Sets & Dictionaries',W-540,H-56);
+ const finishDownload = (url) => { const a=document.createElement('a'); a.href=url; a.download='chapter8_'+studentId.replace(/[^a-zA-Z0-9_-]/g,'_')+'_completion.png'; document.body.appendChild(a); a.click(); a.remove(); if(url.startsWith('blob:')) setTimeout(()=>URL.revokeObjectURL(url),1200); };
+ if(canvas.toBlob){
+  canvas.toBlob(blob=>{ if(!blob) return; const url=URL.createObjectURL(blob); finishDownload(url); },'image/png');
+ }else{
+  const url=canvas.toDataURL('image/png'); finishDownload(url);
+ }
+ state.lastExportedAt = Date.now(); state.exportedCount = Number(state.exportedCount||0)+1; persist();
+ const status=q('exportStatus'); if(status) status.innerHTML=`Đã xuất PNG lúc <b>${formatDate(state.lastExportedAt)}</b> · tổng số lần export: <b>${state.exportedCount}</b>.`;
+}
+function renderSlide(){
+ if(current<0){renderIntroduction();return}
+ const mid=Math.floor(current/STEPS_PER_MODULE),page=current%STEPS_PER_MODULE,module=MODULES[mid];
+ if(page===CHECKPOINT_PAGE) return renderGate(mid);
+ const data=module.slides[page];
+ q('slide').innerHTML=`<header class="slide-header"><div class="eyebrow">${escapeHTML(data.kicker)}</div><h1>${escapeHTML(data.title)}</h1><p class="lead">${data.lead}</p>${page===0?`<div class="lesson-outcome"><strong>Chuẩn đầu ra chặng này:</strong> ${escapeHTML(MODULE_OUTCOMES[mid])}</div>`:''}</header><div class="content">${data.body}${page===0?'<div id="quickCheck"></div>':''}${data.interactive?'<div id="interactiveArea"></div>':''}</div><footer class="slide-footer"><span><strong>CHƯƠNG 8</strong> / ${escapeHTML(module.id)} / ${escapeHTML(module.topic)}</span><span class="slide-index">${page+1} / ${STEPS_PER_MODULE} · Sau 4 slide là kiểm tra</span></footer>`;
+ if(data.interactive)renderInteractive(data.interactive);
+ renderExecutableExamples(mid,page);
+ if(page===0)renderQuickCheck(mid);
+ q('slide').querySelectorAll('[data-stage-ref]').forEach(btn=>btn.addEventListener('click',()=>move(Number(btn.dataset.stageRef)*STEPS_PER_MODULE)));
+}
+
+// All dark Python examples are real, editable programs, not screenshot-like snippets.
+function codeTextareaTabs(editor){
+ editor.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){
+   e.preventDefault();const a=editor.selectionStart,b=editor.selectionEnd;
+   editor.value=editor.value.slice(0,a)+'    '+editor.value.slice(b);editor.selectionStart=editor.selectionEnd=a+4;
+   editor.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+  if(e.key==='Enter' && (e.ctrlKey||e.metaKey)){
+   e.preventDefault();editor.closest('.code-window')?.querySelector('[data-example-run]')?.click();
+  }
+ });
+}
+
+function quickCheckCount(){return MODULES.filter((_,i)=>!!state.quickChecks?.[i]?.passed).length}
+function renderQuickCheck(mid){
+ const host=q('quickCheck');if(!host)return;
+ const spec=QUICK_CHECKS[mid],saved=state.quickChecks?.[mid]||{};
+ host.innerHTML=`<section class="quick-check" aria-label="Kiểm tra nhanh chặng ${mid+1}">
+  <div class="quick-label">TỰ KIỂM TRA · CHẶNG ${mid+1}</div>
+  <h3>Kiểm tra nhanh sau khi đọc lý thuyết</h3>
+  <p class="quick-intro">Hai câu kiểm tra <b>hai nội dung khác nhau</b>: nhận biết/giải thích và vận dụng thao tác Python. Có thể làm lại; kiểm tra mở khóa chính thức nằm ở cuối chặng.</p>
+  <div class="quick-question"><b>Câu 1 · ${escapeHTML(spec.topic1)}</b><p>${escapeHTML(spec.q)}</p><div class="quick-options">${spec.options.map((op,i)=>`<label><input type="radio" name="quickOpt" value="${i}" ${saved.choice===i?'checked':''}><span>${escapeHTML(op)}</span></label>`).join('')}</div></div>
+  <div class="quick-question"><b>Câu 2 · ${escapeHTML(spec.topic2)} (điền cú pháp)</b><p>${escapeHTML(spec.fill)}</p><input type="text" class="quick-input" id="quickSyntax" spellcheck="false" autocomplete="off" placeholder="Điền đoạn mã còn thiếu" value="${escapeHTML(saved.syntax||'')}"></div>
+  <div class="quick-buttons"><button type="button" class="primary" id="quickGrade">Kiểm tra kết quả</button><button type="button" class="secondary" id="quickHint">Xem gợi ý</button><span class="quick-status" id="quickStatus"></span></div><div class="quick-feedback" id="quickFeedback" aria-live="polite"></div>
+ </section>`;
+ const syntax=q('quickSyntax'),status=q('quickStatus'),feedback=q('quickFeedback');
+ const renderPrevious=()=>{
+  if(saved.passed){status.textContent='✓ Đã đạt';status.className='quick-status ok'}
+  else if(saved.attempted){status.textContent='Có thể thử lại';status.className='quick-status'}
+ };
+ renderPrevious();
+ q('quickGrade').addEventListener('click',()=>{
+  const choice=host.querySelector('input[name="quickOpt"]:checked');
+  const answer=syntax.value.trim();
+  if(!choice || !answer){feedback.textContent='Hãy chọn một đáp án và điền cú pháp Python trước khi chấm.';feedback.className='quick-feedback fail';return}
+  const correctChoice=Number(choice.value)===spec.answer;
+  const normalize=s=>String(s).trim().replace(/\s+/g,'').replace(/[“”‘’]/g,"'");
+  const correctSyntax=spec.accepted.some(x=>normalize(x)===normalize(answer));
+  const score=Number(correctChoice)+Number(correctSyntax);
+  const already=!!state.quickChecks?.[mid]?.passed;
+  state.quickChecks=state.quickChecks||{};
+  state.quickChecks[mid]={choice:Number(choice.value),syntax:answer,attempted:true,passed:score===2||already,score};
+  persist();
+  status.textContent=score===2?'✓ Đạt 2/2':`Đúng ${score}/2 · thử lại`;
+  status.className='quick-status '+(score===2?'ok':'');
+  feedback.innerHTML=(correctChoice?'✓':'✗')+' Câu 1: '+escapeHTML(spec.why)+'<br>'+
+    (correctSyntax?'✓ Câu 2: cú pháp chính xác.':'✗ Câu 2: cú pháp đúng là <code>'+escapeHTML(spec.accepted[0])+'</code>.');
+  feedback.className='quick-feedback '+(score===2?'pass':'fail');
+  if(allDone()) renderCompletionPanel();
+  const done=q('quickDoneCount');if(done)done.textContent=`${quickCheckCount()}/${MODULE_COUNT}`;
+ });
+ q('quickHint').addEventListener('click',()=>{
+  feedback.textContent='Gợi ý: '+spec.hint;
+  feedback.className='quick-feedback hint';
+ });
+ syntax.addEventListener('keydown',e=>{if(e.key==='Enter')q('quickGrade').click()});
+}
+function renderExecutableExamples(mid,page){
+ const windows=Array.from(q('slide').querySelectorAll('.content .code-window'));
+ windows.forEach((win,index)=>{
+  const code=win.querySelector('pre code');if(!code)return;
+  const original=code.textContent.trim();
+  const exampleKey=`${mid}.${page}.${index}`;
+  const h=Math.max(75,Math.min(330,original.split('\n').length*22+30));
+  const pre=code.closest('pre');
+  const wrap=document.createElement('div');wrap.className='example-interactive';
+  wrap.innerHTML=`<textarea class="example-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Chỉnh sửa ví dụ Python ${index+1}" style="height:${h}px"></textarea><div class="example-tools"><button type="button" data-example-run>▶ Chạy Python</button><button type="button" class="reset-example" data-example-reset>↺ Khôi phục</button><details><summary>Dữ liệu nhập (input)</summary><textarea class="stdin-input" rows="3" placeholder="Mỗi dòng một giá trị cho input()" aria-label="Dữ liệu nhập cho Python"></textarea></details></div><div class="example-results" role="status" aria-live="polite"><div class="result-heading">Kết quả Python</div><pre></pre></div>`;
+  pre.replaceWith(wrap);
+  const editor=wrap.querySelector('.example-editor'),input=wrap.querySelector('.stdin-input'),run=wrap.querySelector('[data-example-run]'),reset=wrap.querySelector('[data-example-reset]'),result=wrap.querySelector('.example-results');
+  editor.value=state.examples?.[exampleKey]?.source??original;
+  input.value=state.examples?.[exampleKey]?.stdin??'';
+  const save=()=>{state.examples=state.examples||{};state.examples[exampleKey]={source:editor.value,stdin:input.value};persist()};
+  editor.addEventListener('input',save);input.addEventListener('input',save);codeTextareaTabs(editor);
+  run.onclick=()=>runExample({source:editor.value,stdin:input.value,button:run,result});
+  reset.onclick=()=>{editor.value=original;input.value='';save();result.className='example-results';result.querySelector('pre').textContent='';};
+  const header=win.querySelector('.code-head');if(header)header.append(document.createTextNode(' · CÓ THỂ CHẠY'));
+ });
+}
+function renderExampleFeedback(target,text,isError=false,isScratch=false){
+ if(!target || !target.isConnected)return;
+ if(isScratch){target.className='scratch-feedback'+(isError?' error':'');target.style.display='block';target.textContent=text;}
+ else {target.className='example-results active'+(isError?' error':'');target.querySelector('pre').textContent=text;}
+}
+function abortExample(message){
+ if(exampleTimeout){clearTimeout(exampleTimeout);exampleTimeout=null}
+ if(!examplePending)return;
+ const p=examplePending;examplePending=null;
+ if(worker){worker.terminate();worker=null;workerLoaded=false}
+ p.button.disabled=false;
+ renderExampleFeedback(p.result,'Không thể hoàn tất: '+message,true,p.isScratch);
+}
+function runExample({source,stdin,button,result,isScratch=false}){
+ if(gradePending){renderExampleFeedback(result,'Đang chấm bài lập trình. Vui lòng chạy lại sau.',true,isScratch);return}
+ if(examplePending){renderExampleFeedback(result,'Python đang thực thi ví dụ khác. Vui lòng đợi hoặc chuyển trang để dừng.',true,isScratch);return}
+ if(!source.trim()){renderExampleFeedback(result,'Hãy nhập một đoạn Python trước khi chạy.',true,isScratch);return}
+ if(!worker){try{worker=makeWorker()}catch(e){renderExampleFeedback(result,'Không thể khởi tạo Python: '+String(e),true,isScratch);return}}
+ const id=++requestCount;
+ examplePending={id,button,result,isScratch};
+ button.disabled=true;
+ renderExampleFeedback(result,workerLoaded?'Đang thực thi Python…':'Đang tải bộ thực thi Python lần đầu (cần Internet)…',false,isScratch);
+ exampleTimeout=setTimeout(()=>abortExample('Không tải được Python trong 90 giây. Kiểm tra kết nối mạng.'),workerLoaded?12000:90000);
+ worker.postMessage({type:'example',id,payload:{source,stdin}});
+}
+function finishExample(msg){
+ const p=examplePending;if(!p)return;
+ clearTimeout(exampleTimeout);exampleTimeout=null;examplePending=null;
+ p.button.disabled=false;
+ if(msg.type==='error')renderExampleFeedback(p.result,'Lỗi Python: '+msg.error,true,p.isScratch);
+ else {
+  const r=msg.value;
+  renderExampleFeedback(p.result,r.output||'(Đã chạy xong, không có nội dung in ra. Hãy thử print(...).)',!r.ok,p.isScratch);
+ }
+}
+
+function renderInteractive(spec){
+ const div=q('interactiveArea');
+ if(spec.kind==='setBuilder'){
+  let chosen=[];
+  div.innerHTML=`<div class="lab"><h4>Thử thêm tên vào set</h4><div class="lab-buttons" id="addButtons"></div><div class="helper">Các giá trị hiện có:</div><div class="tokens" id="setChips"></div><div class="lab-result" id="setCount"></div><button class="secondary" id="resetSet" style="padding:6px 12px;font-size:11px">Làm lại</button></div>`;
+  spec.values.forEach((value,i)=>{let b=document.createElement('button');b.textContent='+ '+value;b.addEventListener('click',()=>{if(!chosen.includes(value))chosen.push(value);update()});q('addButtons').appendChild(b)});
+  function update(){q('setChips').innerHTML=chosen.length?chosen.map(x=>`<span class="token">${escapeHTML(x)}</span>`).join(''):'<span class="emptyprompt">set() · chưa có phần tử</span>';q('setCount').textContent=`len(s) = ${chosen.length}`};q('resetSet').onclick=()=>{chosen=[];update()};update();
+ } else if(spec.kind==='setOps'){
+  const a=new Set(['An','Bình','Chi']),b=new Set(['Bình','Chi','Dũng']);let op='union';
+  div.innerHTML='<div class="lab"><h4>Chọn phép toán</h4><div class="venn"><div class="ring">A</div><div class="ring">B</div></div><div class="helper">A = {An, Bình, Chi} &nbsp; | &nbsp; B = {Bình, Chi, Dũng}</div><div class="lab-buttons" id="opButtons"></div><div class="tokens" id="opResult"></div><div class="lab-result" id="opText"></div></div>';
+  [['union','Hợp · A ∪ B'],['intersection','Giao · A ∩ B'],['aMinus','Hiệu · A − B'],['bMinus','Hiệu · B − A']].forEach(([key,label])=>{let t=document.createElement('button');t.textContent=label;t.dataset.op=key;t.onclick=()=>{op=key;draw()};q('opButtons').appendChild(t)});
+  function draw(){const arr=op==='union'?[...new Set([...a,...b])]:op==='intersection'?[...a].filter(x=>b.has(x)):op==='aMinus'?[...a].filter(x=>!b.has(x)):[...b].filter(x=>!a.has(x));q('opResult').innerHTML=arr.map(x=>`<span class="token">${escapeHTML(x)}</span>`).join('');q('opText').textContent=`Kết quả có ${arr.length} phần tử`;q('opButtons').querySelectorAll('button').forEach(btn=>btn.classList.toggle('selected',btn.dataset.op===op))};draw();
+ } else if(spec.kind==='dictLookup'){
+  const prices={Tea:25000,Coffee:35000,Juice:40000};
+  div.innerHTML='<div class="lab"><h4>Tra cứu dictionary</h4><p class="helper"><code>prices = {"Tea": 25000, "Coffee": 35000, "Juice": 40000}</code></p><div class="lab-buttons"><input id="lookupKey" aria-label="Tên sản phẩm" value="Tea"/><button id="doLookup">Tra cứu</button></div><div class="lab-result" id="lookupResult"></div></div>';
+  function lookup(){const k=q('lookupKey').value; q('lookupResult').textContent=Object.hasOwn(prices,k)?`prices.get("${k}", -1) → ${prices[k].toLocaleString('vi-VN')} đồng`:`prices.get("${k}", -1) → -1 (không có khóa)`};q('doLookup').onclick=lookup;q('lookupKey').addEventListener('keydown',e=>{if(e.key==='Enter')lookup()});lookup();
+ } else if(spec.kind==='uniqueWords'){
+  div.innerHTML='<div class="lab"><h4>Trình thử đếm từ</h4><textarea id="demoText" style="width:100%;height:70px;padding:9px;border:1px solid #bbd6d8;border-radius:9px;resize:vertical">Python python! Data data.</textarea><div class="lab-buttons"><button id="countNow">Đếm số từ duy nhất</button></div><div class="tokens" id="wordsChips"></div><div class="lab-result" id="wordsResult"></div></div>';
+  function count(){const parts=q('demoText').value.split(/\s+/).filter(Boolean);const words=[...new Set(parts.map(x=>x.replace(/^[.,!?]+|[.,!?]+$/g,'').toLowerCase()).filter(Boolean))];q('wordsChips').innerHTML=words.length?words.map(x=>`<span class="token">${escapeHTML(x)}</span>`).join(''):'<span class="emptyprompt">Không có từ hợp lệ</span>';q('wordsResult').textContent=`${parts.length} từ ban đầu · ${words.length} từ duy nhất`};q('countNow').onclick=count;count();
+ }
+}
+function renderGate(mid){
+ const m=MODULES[mid],qs=m.quiz,task=m.coding,answers=state.answers[mid]||{};
+ q('slide').innerHTML=`<header class="slide-header"><div class="eyebrow">KIỂM TRA MỞ KHÓA · CHẶNG ${mid+1}/${MODULE_COUNT}</div><h1>Kiểm tra & thực hành Python</h1><p class="lead">Hoàn thành cả hai phần để mở khóa bài học tiếp theo: đúng tối thiểu <b>2/3 câu quiz</b> và vượt qua <b>tất cả bộ kiểm thử lập trình</b>.</p></header><div class="content checkpoint"><div class="quiz-panel"><h3>01 · Kiểm tra kiến thức</h3><div class="muted">Chọn một phương án ở mỗi câu, sau đó bấm “Chấm quiz”.</div><div class="score-box">Trắc nghiệm: 3 câu · ngưỡng đạt 2/3</div><div id="questionList"></div><div class="pass-row"><button class="primary" id="gradeQuiz">Chấm quiz</button><span id="quizStatus" class="result-status"></span></div></div><div class="coding-panel"><h3>02 · Bài tập lập trình</h3><div class="muted">${escapeHTML(task.level)} · kiểm tra bằng Python thực tế</div><div class="score-box">${escapeHTML(task.title)} · ${task.tests.length} bộ kiểm thử</div><div class="code-instruction">${task.instructions}</div><textarea class="editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" id="codeEditor" aria-label="Trình soạn thảo Python"></textarea><div class="editor-actions"><button class="primary" id="runCode">▶ Chạy & chấm Python</button><button class="secondary" id="showHint">Gợi ý</button><button class="secondary" id="resetCode">Mẫu ban đầu</button></div><div class="hint" id="hintBox">${task.hint}</div><div class="grader-note">Ví dụ trong slide và bài tập đều chạy Python thật. Lần đầu cần Internet để tải bộ thực thi Python (Pyodide). Bài làm được kiểm tra bằng Python trong một Web Worker. Không cần cài Python.</div><div id="codeFeedback" class="feedback" style="display:none"></div></div></div><div id="gateAchievement"></div><footer class="slide-footer"><span><strong>KIỂM TRA TIẾN ĐỘ</strong> · ${escapeHTML(m.topic)}</span><span class="slide-index">${STEPS_PER_MODULE} / ${STEPS_PER_MODULE} · ${escapeHTML(m.id)}</span></footer>`;
+ q('questionList').innerHTML=qs.map((item,qi)=>`<div class="question" id="question-${qi}"><h4>Câu ${qi+1}. ${item.q}</h4><div class="answers">${item.options.map((op,oi)=>`<label class="answer ${answers[qi]===oi?'sel':''}"><input type="radio" name="q${qi}" value="${oi}" ${answers[qi]===oi?'checked':''}><span>${op}</span></label>`).join('')}</div><div id="qfeedback-${qi}"></div></div>`).join('');
+ q('questionList').querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{const question=+input.name.slice(1);const a={...(state.answers[mid]||{})};a[question]=+input.value;state.answers[mid]=a;persist();q(`question-${question}`).querySelectorAll('.answer').forEach(el=>el.classList.toggle('sel',el.querySelector('input').checked))}));
+ q('gradeQuiz').onclick=()=>gradeQuiz(mid);
+ q('codeEditor').value=state.drafts[mid]??task.starter;
+ q('codeEditor').addEventListener('input',()=>{state.drafts[mid]=q('codeEditor').value;persist()});
+ q('codeEditor').addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();let t=e.target,start=t.selectionStart,end=t.selectionEnd;t.value=t.value.slice(0,start)+'    '+t.value.slice(end);t.selectionStart=t.selectionEnd=start+4;state.drafts[mid]=t.value;persist()}});
+ q('runCode').onclick=()=>runCode(mid);
+ q('showHint').onclick=()=>{let el=q('hintBox');el.classList.toggle('show');q('showHint').textContent=el.classList.contains('show')?'Ẩn gợi ý':'Gợi ý'};
+ q('resetCode').onclick=()=>{if(!confirm('Khôi phục mẫu bài làm? Nội dung đang viết sẽ bị thay thế.'))return;q('codeEditor').value=task.starter;state.drafts[mid]=task.starter;persist()};
+ refreshGate(mid);
+}
+function gradeQuiz(mid){
+ const m=MODULES[mid],ans=state.answers[mid]||{};
+ if(m.quiz.some((_,i)=>!Number.isInteger(ans[i]))){alert('Vui lòng chọn đáp án cho cả 3 câu trước khi chấm.');return}
+ const score=m.quiz.reduce((acc,item,i)=>acc+(ans[i]===item.answer?1:0),0);
+ state.quizScores[mid]=score;
+ if(score>=2) state.quizPassed[mid]=true;
+ state.passed[mid]=!!state.quizPassed[mid] && !!state.codePassed[mid];
+ persist();refreshGate(mid);renderNavigation();
+}
+function refreshGate(mid){
+ const m=MODULES[mid],qscore=state.quizScores[mid],answers=state.answers[mid]||{};
+ q('quizStatus').textContent=qscore===undefined?'Chưa chấm':`Kết quả: ${qscore}/3 · ${state.quizPassed[mid]?'Đạt':'Chưa đạt'}`;
+ q('quizStatus').className='result-status '+(state.quizPassed[mid]?'pass':qscore===undefined?'':'fail');
+ m.quiz.forEach((item,i)=>{
+  const el=q(`qfeedback-${i}`);
+  if(qscore===undefined){el.innerHTML='';return}
+  const good=answers[i]===item.answer;
+  el.innerHTML=`<div class="q-feedback ${good?'good':'bad'}"><b>${good?'✓ Đúng':'✗ Chưa đúng'}.</b> ${item.why}</div>`;
+ });
+ if(state.codePassed[mid]){
+  const el=q('codeFeedback');el.style.display='block';el.className='feedback good';if(!el.dataset.hasCurrent)el.textContent='✓ Bài lập trình đã đạt ở một lần kiểm thử trước. Bạn có thể chạy lại để kiểm tra phiên bản mới.';
+ }
+ const div=q('gateAchievement');
+ div.innerHTML=state.passed[mid]?`<div class="achievement"><b>✓ Đã vượt qua chặng ${mid+1}</b><br>${mid<MODULE_COUNT-1?'Bài học '+(mid+2)+' đã được mở khóa. Bấm “Tiếp theo” để học tiếp.':'Bạn đã vượt toàn bộ bài kiểm tra của Chương 8.'}</div>`:`<div class="achievement" style="background:#f5f8fb;border-color:#d8e4eb;color:#52717f"><b>🔒 Bài học tiếp theo đang khóa</b><br>Quiz: ${state.quizPassed[mid]?'✓ Đạt':'chưa đạt'} · Lập trình: ${state.codePassed[mid]?'✓ Đạt':'chưa đạt'}.</div>`;
+ q('next').disabled=!state.passed[mid] || mid===MODULE_COUNT-1;
+ q('next').textContent=state.passed[mid]?(mid===MODULE_COUNT-1?'Đã hoàn thành':'Tiếp theo →'):'🔒 Cần đạt kiểm tra';
+}
+function makeWorker(){
+ const content=q('graderWorker').textContent;
+ const workerUrl=URL.createObjectURL(new Blob([content],{type:'application/javascript'}));
+ const result=new Worker(workerUrl);URL.revokeObjectURL(workerUrl);
+ workerLoaded=false;
+ result.onmessage=e=>{
+  const msg=e.data;
+  if(msg.type==='loaded'){
+    workerLoaded=true;
+    if(gradePending){clearTimeout(graderTimeout);graderTimeout=setTimeout(()=>abortGrade('Mã chạy quá lâu (> 15 giây) hoặc chứa vòng lặp vô hạn.'),15000);setGradeFeedback('Đã tải Python. Đang chạy các bộ kiểm thử...',false)}
+    if(examplePending){clearTimeout(exampleTimeout);exampleTimeout=setTimeout(()=>abortExample('Mã chạy quá 12 giây, có thể chứa vòng lặp vô hạn.'),12000);renderExampleFeedback(examplePending.result,'Đang thực thi Python…',false,examplePending.isScratch)}
+    return;
+  }
+  if(examplePending && msg.id===examplePending.id){finishExample(msg);return}
+  if(!gradePending || msg.id!==gradePending.id)return;
+  clearTimeout(graderTimeout);
+  const {mid}=gradePending;gradePending=null;
+  if(msg.type==='error')setGradeFeedback('Lỗi môi trường Python: '+msg.error,false,true);
+  else processGrading(mid,msg.value);
+  const btn=q('runCode');if(btn)btn.disabled=false;
+ };
+ result.onerror=ev=>{
+  const detail=ev.message||'Không thể tải Pyodide. Kiểm tra kết nối Internet.';
+  if(examplePending)abortExample(detail);
+  if(gradePending)abortGrade(detail);
+ };
+ return result;
+}
+function setGradeFeedback(text,success=false,isError=false){
+ const el=q('codeFeedback');if(!el)return;
+ el.style.display='block';el.dataset.hasCurrent='true';el.className='feedback '+(success?'good':isError?'bad':'');el.textContent=text;
+}
+function abortGrade(msg){
+ if(graderTimeout) clearTimeout(graderTimeout);
+ if(worker){worker.terminate();worker=null}workerLoaded=false;gradePending=null;
+ const btn=q('runCode');if(btn)btn.disabled=false;
+ setGradeFeedback('Không thể hoàn tất lượt chấm: '+msg+' Bạn có thể thử lại.',false,true);
+}
+function runCode(mid){
+ if(gradePending) return;
+ if(examplePending)abortExample('Chuyển sang chấm bài lập trình.');
+ const source=q('codeEditor').value;
+ if(!source.includes(MARKER)){setGradeFeedback('Thiếu dòng # === BAI LAM === trong mã nguồn. Vui lòng giữ nguyên dòng phân cách.',false,true);return}
+ const coding=MODULES[mid].coding;
+ if(!worker){try{worker=makeWorker()}catch(err){setGradeFeedback('Trình duyệt không hỗ trợ tạo Web Worker: '+String(err),false,true);return}}
+ const id=++requestCount;
+ gradePending={mid,id};
+ q('runCode').disabled=true;
+ setGradeFeedback(workerLoaded?'Đang chạy kiểm thử Python...':'Đang tải bộ thực thi Python lần đầu. Cần kết nối mạng...',false);
+ graderTimeout=setTimeout(()=>abortGrade('Quá thời gian tải Python (90 giây).'),workerLoaded?15000:90000);
+ worker.postMessage({type:'grade',id,payload:{source,tests:coding.tests,dictSetValues:!!coding.dictSetValues}});
+}
+function processGrading(mid,res){
+ const good=!res.error && res.passed===res.total && res.total>0;
+ const lines=(res.cases||[]).map((x,i)=>`${x.ok?'✓':'✗'} ${x.name}: ${x.detail}`);
+ setGradeFeedback(`${good?'✓ ĐẠT':'✗ CHƯA ĐẠT'} · ${res.passed||0}/${res.total||0} bộ kiểm thử\n${res.error||lines.join('\n')}`,good,!good);
+ if(good)state.codePassed[mid]=true;
+ state.passed[mid]=!!state.quizPassed[mid]&&!!state.codePassed[mid];
+ persist();refreshGate(mid);renderNavigation();
+}
+function render(){if(!accessibleStep(current))current=maxAllowed()*STEPS_PER_MODULE;renderNavigation();renderSlide()}
+q('prev').onclick=()=>move(current-1);
+q('next').onclick=()=>move(current+1);
+q('resetAll').onclick=()=>{if(!confirm('Xóa toàn bộ điểm quiz, bài code đã lưu và tiến độ mở khóa trên trình duyệt này?'))return;state=initial();current=-INTRO_SLIDES.length;persist();render()};
+q('fullScreen').onclick=()=>{if(document.fullscreenElement){document.exitFullscreen?.();return}document.documentElement.requestFullscreen?.()};
+document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey)return;if(e.target.closest('textarea,input,button'))return;if(e.key==='ArrowRight'){e.preventDefault();move(current+1)}else if(e.key==='ArrowLeft'){e.preventDefault();move(current-1)}});
+render();
+</script>
+</body>
+</html>

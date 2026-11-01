@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chương 6 · Lists & Tuples — Bài tập Python tự chấm</title>
+<style>
+:root{--ink:#142f43;--sub:#587284;--navy:#122c42;--navy2:#193c54;--line:#d9e6ed;--bg:#f3f8fb;--mint:#0c8179;--mintlight:#e3f6ef;--blue:#2b638f;--red:#a72d4b;--redlight:#fff0f2;--amber:#9d591f;--amberlight:#fff4db;--code:#13283e;--white:#fff}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:14px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg)}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #83c7d7;outline-offset:2px}
+.app{display:grid;grid-template-columns:292px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;overflow:auto;background:var(--navy);padding:20px 15px 18px;color:#d8ecf3;display:flex;flex-direction:column}.brand{padding:6px 10px 17px;border-bottom:1px solid #3a5366;display:flex;align-items:center;gap:11px}.logo{width:43px;height:43px;border:1px solid #72ccbd;border-radius:14px;display:grid;place-items:center;font-weight:900;font-family:monospace;font-size:18px;color:#94eee0;background:#16394d}.brand strong{font-size:14px;display:block;line-height:1.25;color:#fff}.brand small{color:#a5bbc9;display:block;font-size:11px;letter-spacing:.03em;margin-top:4px}.nav-stat{padding:18px 10px 12px}.nav-stat-top{display:flex;align-items:center;justify-content:space-between;font-size:12px}.nav-stat b{color:#a5efe2}.bar{height:8px;background:#355169;border-radius:99px;margin-top:11px;overflow:hidden}.bar>span{height:100%;background:linear-gradient(90deg,#33bcae,#9be6cc);display:block;width:0;transition:width .25s}.search{border:1px solid #496275;border-radius:10px;background:#183950;color:white;width:100%;padding:10px 11px;margin-bottom:9px;font-size:12px}.search::placeholder{color:#a6bbc6}.navgroups{padding:0 2px;display:flex;flex-direction:column;gap:17px;flex:1}.grouptitle{font-size:10px;letter-spacing:.11em;font-weight:800;color:#9fb9c7;padding:0 10px 7px;display:flex;justify-content:space-between}.navitem{border:1px solid transparent;background:transparent;color:#d2e1ea;padding:9px 9px;border-radius:10px;display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;margin-bottom:4px}.navitem:hover{background:#20445a}.navitem.active{background:#265267;border-color:#448b91}.navitem.done{color:#bcf5df}.navnum{width:43px;min-width:43px;height:27px;display:grid;place-items:center;border-radius:7px;background:#27485c;font-weight:800;color:#dceef5;font-size:11px}.navitem.done .navnum{background:#0d6e62;color:#d9fff5}.navitem strong{font-weight:680;font-size:11.6px;display:block;line-height:1.28}.navitem small{font-size:10px;color:#99bbc8;display:block;line-height:1.35;margin-top:3px}.sidefoot{border-top:1px solid #355469;padding:13px 10px 0;color:#adc4cf;font-size:11px}.sidefoot button{border:0;background:none;padding:0;margin-top:7px;text-decoration:underline;color:#b9d5de;font-size:11px}
+.main{min-width:0;padding:27px clamp(20px,3vw,45px) 38px;max-width:1650px;width:100%;margin:0 auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.breadcrumb{font-size:11px;letter-spacing:.12em;font-weight:790;color:#658596}.breadcrumb strong{color:var(--mint)}.topctrl{display:flex;align-items:center;gap:10px}.pill{font-size:11px;padding:7px 11px;border-radius:30px;background:#dff4f1;color:#176d6b;font-weight:740}.tinybtn{font-weight:740;border:1px solid #cbdce3;background:#fff;border-radius:11px;padding:8px 12px;color:#284659;font-size:12px}.hero{background:linear-gradient(120deg,#15394f,#155c65);color:#fff;padding:24px clamp(20px,3vw,36px);border-radius:19px;display:grid;grid-template-columns:1fr auto;gap:14px;box-shadow:0 15px 25px #16364d14}.hero .eyebrow{font-size:11px;font-weight:790;letter-spacing:.17em;color:#95ead8}.hero h1{font-size:clamp(26px,2.5vw,36px);margin:6px 0 9px;line-height:1.18;letter-spacing:-.022em}.hero p{font-size:13px;color:#c9e0e8;max-width:970px;margin:0}.hero-count{align-self:center;min-width:110px;text-align:center;border-left:1px solid #61919b65;padding-left:22px}.hero-count b{font-size:40px;line-height:1.1;display:block}.hero-count small{font-size:11px;color:#bde1db}.statrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:17px 0}.statbox{border:1px solid #d8e7ed;border-radius:14px;background:#fff;padding:14px 17px;box-shadow:0 5px 20px #10344a08}.statbox b{display:block;font-size:21px;line-height:1.3;margin-top:4px;color:#173f56}.statbox small{font-size:10.5px;font-weight:790;text-transform:uppercase;letter-spacing:.07em;color:#678090}
+.maincard{background:#fff;border:1px solid #dbe6ed;border-radius:17px;padding:clamp(18px,2.1vw,30px);box-shadow:0 10px 35px #16394f0b}.blocktop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.tag{display:inline-flex;align-items:center;padding:4px 9px;border-radius:8px;background:#e8f5f5;color:#187579;font-size:10px;font-weight:800;letter-spacing:.05em}.tag.gray{background:#edf3f6;color:#557182}.tag.amber{background:#fff0d6;color:#915b22}.maincard h2{font-size:clamp(23px,2.1vw,30px);line-height:1.23;margin:13px 0 12px}.prompt{color:#435d6c;font-size:14.2px;line-height:1.7;max-width:1140px}.contract{border:1px solid #cfe3e9;background:#f0f8fa;border-radius:12px;padding:13px 16px;margin-top:15px}.contract b{font-size:12px;color:#1b6575}.contract p{margin:5px 0 0;font-size:12.3px;line-height:1.65;color:#3f6571}.notice{padding:10px 13px;background:#fff8e9;border-left:3px solid #edb869;border-radius:7px;color:#87612d;font-size:12px;margin-top:12px}.workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(350px,.95fr);gap:19px;margin-top:21px;align-items:start}.codecard{border:1px solid #b9d0dd;background:var(--code);border-radius:13px;overflow:hidden}.codehead{padding:11px 14px;background:#1f4059;display:flex;align-items:center;justify-content:space-between;color:#bdd4e1;font-size:11px;font-weight:700}.dotset{display:flex;gap:5px}.dotset i{border-radius:50%;width:8px;height:8px;background:#cf8497}.dotset i:nth-child(2){background:#edc27b}.dotset i:nth-child(3){background:#91d8ad}#code{display:block;width:100%;min-height:330px;background:#12293e;color:#e2f3ff;border:0;resize:vertical;padding:16px 17px;white-space:pre;tab-size:4;line-height:1.65;font:12.9px/1.65 ui-monospace,Consolas,"Liberation Mono",monospace}#code:focus{outline:0}.codefoot{color:#9bc0d2;background:#1b3a50;padding:10px 14px;font-size:10px}.actionrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.btn{border:1px solid #c5dbe3;background:#fff;color:#294e64;border-radius:10px;font-size:12px;font-weight:750;padding:10px 13px}.btn.primary{background:#0b817b;color:white;border-color:#0b817b}.btn.primary:hover{background:#086e69}.btn.dark{background:#193d56;color:white;border-color:#193d56}.btn.warn{color:#8b5c27;border-color:#ebd3a5}.btn.ghost{background:#f6fafc}.btn:disabled{opacity:.48}.hint{display:none;margin-top:12px;border:1px solid #f0d7aa;background:#fff9ed;padding:11px 13px;border-radius:9px;color:#765828;font-size:12.5px}.hint.show{display:block}.rightstack{display:flex;flex-direction:column;gap:12px}.samplebox{border:1px solid #d9e7eb;background:#fbfdfe;border-radius:12px;padding:15px 17px}.boxheading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.boxheading strong{font-size:13px}.boxheading span{font-size:10px;background:#e8f3f4;color:#47727a;border-radius:99px;padding:4px 8px;font-weight:800}.filegroup{margin-bottom:12px}.filegroup b{display:block;font-size:11px;color:#597786;margin-bottom:6px}.littlecode{background:#e9f2f6;color:#285368;padding:9px 10px;border-radius:8px;white-space:pre-wrap;word-break:break-word;font:11px/1.55 ui-monospace,Consolas,monospace}.muted{color:#6e8996;font-size:11px}.outputarea{background:#11293c;border-radius:10px;padding:13px;overflow:auto;max-height:230px;color:#dcf2fa;white-space:pre-wrap;word-break:break-word;min-height:56px;font:11.8px/1.6 ui-monospace,Consolas,monospace}.outputarea.empty{color:#88acbb}.judgebox{background:#f5fafb;border:1px solid #d9e7eb;border-radius:12px;padding:15px 17px;min-height:148px}.judgebox h3{font-size:13px;margin:0 0 10px}.judge-status{font-size:12px;font-weight:800;display:inline-flex;align-items:center;border-radius:8px;padding:6px 9px;background:#e8f1f4;color:#456473}.judge-status.good{background:#dff7eb;color:#0b7857}.judge-status.bad{background:#ffe8ec;color:#a6344f}.judge-status.loading{background:#fff1d4;color:#986125}.testline{display:flex;gap:10px;align-items:flex-start;font-size:11.8px;margin:10px 0;padding:10px;border-radius:9px;background:#fff;border:1px solid #e0e9ee}.testline .check{font-size:14px}.testline.good .check{color:#14836f}.testline.bad .check{color:#c0435b}.testline b{font-size:12px}.testline small{display:block;color:#61808c;margin-top:3px;line-height:1.45}.footerline{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:10px}.footerline .left{font-size:11px;color:#70909f}.summarybox{margin-top:20px;background:linear-gradient(120deg,#eaf8f3,#f1f8fd);border:1px solid #badfd3;border-radius:15px;padding:18px 20px}.summarybox h3{margin:0;font-size:15px}.summarybox p{color:#4a6572;font-size:12px;margin:6px 0}.summarybox .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.field{display:block;font-size:11.3px;color:#3e6875;font-weight:740}.field input{width:100%;border:1px solid #c9dfe5;border-radius:9px;background:#fff;color:#17394f;margin-top:5px;padding:9px 11px}.summaryactions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.smalltext{color:#5a7683;font-size:11px;margin-top:8px}.guide{margin-top:13px;border-top:1px solid #e5eef2;padding-top:11px;font-size:12px;color:#507081}.guide code,.contract code{color:#165c78;background:#dfeef3;padding:1px 4px;border-radius:4px}.mobilemenu{display:none}
+@media(max-width:1250px){.app{grid-template-columns:250px minmax(0,1fr)}.workspace{grid-template-columns:1fr}.rightstack{display:grid;grid-template-columns:1fr 1fr}.hero-count{display:none}}
+@media(max-width:850px){.app{display:block}.sidebar{position:static;height:auto;max-height:none;padding:12px 13px}.brand{border:0;padding:5px}.nav-stat{padding:10px}.navgroups{display:none}.sidebar.open .navgroups{display:flex}.sidefoot{display:none}.mobilemenu{display:inline-block}.main{padding:16px 13px}.hero{padding:20px}.statrow{grid-template-columns:repeat(2,1fr)}.workspace{display:block}.rightstack{display:flex;margin-top:15px}.summarybox .fields{grid-template-columns:1fr}}
+@media print{.sidebar,.topline,.statrow,.actionrow,.footerline{display:none}.app{display:block}.main{padding:0}.maincard{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <aside class="sidebar" id="side">
+  <div class="brand"><div class="logo">{6}</div><div><strong>PYTHON FOR EVERYONE</strong><small>Chapter 6 · Tự chấm bài lập trình</small></div></div>
+  <div class="nav-stat"><div class="nav-stat-top"><span>Đã hoàn thành</span><b id="sidecount">0 / 43</b></div><div class="bar"><span id="sidebar"></span></div><p style="font-size:10.5px;color:#a4beca;margin:11px 0 0">34 bài gốc P6.1–P6.34, tách P6.4 thành 10 phần nhỏ → 43 mục chấm. Không gồm Science P6.35–P6.38 và Toolbox P6.39–P6.49.</p></div>
+  <input class="search" id="search" placeholder="Tìm mã bài / chủ đề…" aria-label="Tìm bài tập">
+  <div class="navgroups" id="navgroups"></div>
+  <div class="sidefoot">Tiến độ lưu ở trình duyệt đang dùng.<div><button type="button" id="resetProgress">Đặt lại toàn bộ tiến độ</button></div></div>
+ </aside>
+ <main class="main">
+  <div class="topline"><div class="breadcrumb"><strong>CHƯƠNG 06</strong> &nbsp; / &nbsp; LISTS & TUPLES &nbsp; / &nbsp; PROGRAMMING EXERCISES</div><div class="topctrl"><span class="pill" id="coursePill">Bộ bài tập tự chấm</span><button class="tinybtn mobilemenu" id="mobilemenu">☰ Danh sách</button><button class="tinybtn" id="fullscreen">⛶ Toàn màn hình</button></div></div>
+  <header class="hero"><div><div class="eyebrow">THỰC HÀNH PYTHON · CHƯƠNG 6</div><h1>Lists and Tuples</h1><p>43 mục thực hành tương ứng 34 bài P6.1–P6.34 trong <i>Python for Everyone</i> (P6.4 tách thành 10 phần). Nội dung tập trung vào list, các thuật toán trên list, mô phỏng, bảng hai chiều và ứng dụng kinh doanh. Các bài Science và Toolbox đã được loại bỏ.</p></div><div class="hero-count"><b>43</b><small>Mục thực hành · 129 ca kiểm thử</small></div></header>
+  <div class="statrow"><div class="statbox"><small>Bài đã đạt</small><b id="statPass">0/43</b></div><div class="statbox"><small>Ca kiểm thử đạt</small><b id="statTests">0/129</b></div><div class="statbox"><small>Tiến độ</small><b id="statPercent">0%</b></div><div class="statbox"><small>Bài hiện tại</small><b id="statCurrent">P6.1</b></div></div>
+  <section class="maincard" id="problem" aria-live="polite"></section>
+  <section class="summarybox" id="profileArea"><h3>Ghi nhận tiến độ học tập</h3><p>Nhập thông tin sinh viên để đưa vào ảnh PNG báo cáo kết quả. Báo cáo thể hiện tiến độ hiện tại, không phải chứng nhận chính thức.</p><div class="fields"><label class="field">Mã sinh viên<input id="studentId" maxlength="50" placeholder="Ví dụ: 11234567"></label><label class="field">Họ và tên<input id="studentName" maxlength="100" placeholder="Nguyễn Văn A"></label><label class="field">Lớp<input id="studentClass" maxlength="60" placeholder="DSEB65A"></label></div><div class="summaryactions"><button class="btn dark" id="exportPNG">Xuất PNG thống kê</button><button class="btn" id="exportJSON">Xuất JSON tiến độ</button></div><div class="smalltext" id="profileStatus">Dữ liệu học tập lưu cục bộ trên trình duyệt; mã nguồn và kết quả có thể được sinh viên tự thay đổi. Chức năng phù hợp tự học, không chống gian lận.</div></section>
+ </main>
+</div>
+<script id="pythonRunner" type="text/plain">
+let pyodide = null;
+const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+const CODE = String.raw`
+import os, io, sys, base64, json, tempfile, builtins, contextlib, traceback, pathlib
+payload = json.loads(__payload)
+program = payload['code']
+checks = payload['cases']
+results=[]
+
+def normalize(s):
+    return '\n'.join(line.rstrip() for line in s.replace('\r\n','\n').replace('\r','\n').strip().split('\n')) if s.strip() else ''
+
+def datum(spec):
+    if isinstance(spec,dict) and '__base64__' in spec:
+        return base64.b64decode(spec['__base64__'])
+    return spec.encode('utf-8')
+
+def match_file(actual, expectation):
+    exp=base64.b64decode(expectation)
+    if actual == exp: return True
+    try:
+        return normalize(actual.decode('utf-8')) == normalize(exp.decode('utf-8'))
+    except (UnicodeDecodeError,ValueError): return False
+
+for i,case in enumerate(checks):
+    oldcwd=os.getcwd(); oldargv=sys.argv; oldstdin=sys.stdin; oldinput=builtins.input
+    stdout=io.StringIO(); stderr=io.StringIO(); error=None; actual_files={}
+    try:
+        # Pyodide/Emscripten can raise OSError(EBUSY) when rmdir()
+        # removes a previously-active cwd. Do not use TemporaryDirectory here:
+        # each case gets a unique workspace which remains in the Worker's
+        # in-memory filesystem until this page/Worker is closed.
+        folder=tempfile.mkdtemp(prefix='pfe_ch6_')
+        os.chdir(folder)
+        for name,content in case.get('files',{}).items():
+            pathlib.Path(name).parent.mkdir(parents=True,exist_ok=True)
+            pathlib.Path(name).write_bytes(datum(content))
+        sys.argv=['main.py']+case.get('argv',[])
+        sys.stdin=io.StringIO(case.get('stdin',''))
+        builtins.input=lambda prompt='': oldinput()
+        scope={'__name__':'__main__','__file__':'main.py'}
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            try:
+                exec(compile(program,'<student-program>','exec'),scope,scope)
+                if case.get('postlude'):
+                    exec(compile(case['postlude'],'<function-check>','exec'),scope,scope)
+            except SystemExit as ex:
+                if ex.code not in (None,0): raise
+        expected=case['expected']
+        expout=expected.get('stdout','')
+        ok_stdout=normalize(stdout.getvalue())==normalize(expout)
+        checks_file=[]
+        expfiles=expected.get('files',{})
+        for filename, value in expfiles.items():
+            alt='output.bmp' if filename=='image.bmp' else filename
+            if alt!=filename and os.path.isfile(alt):
+                actualname=alt
+            else: actualname=filename
+            if os.path.isfile(actualname):
+                data=pathlib.Path(actualname).read_bytes()
+                same=match_file(data,value)
+                if payload.get('sample') and len(data)<=6000:
+                    actual_files[actualname]=base64.b64encode(data).decode()
+            else:same=False
+            checks_file.append((filename,same))
+        ok_files=all(x[1] for x in checks_file)
+        ok=ok_stdout and ok_files
+        if not ok:
+            fails=[]
+            if not ok_stdout: fails.append('Đầu ra print() chưa khớp mẫu')
+            fails.extend(f'Tệp {fname} chưa khớp' for fname,status in checks_file if not status)
+            detail='; '.join(fails)
+        else: detail='Kết quả và tệp đầu ra khớp.'
+    except BaseException as e:
+        ok=False;detail=f'{type(e).__name__}: {str(e)[:180]}'
+        error=''.join(traceback.format_exception_only(type(e),e)).strip()[:300]
+    finally:
+        os.chdir(oldcwd);sys.argv=oldargv;sys.stdin=oldstdin;builtins.input=oldinput
+    results.append(dict(name=case['name'],ok=ok,detail=detail,stdout=stdout.getvalue()[:12000],stderr=stderr.getvalue()[:2000],files=actual_files,error=error))
+answer=json.dumps({'passed':sum(bool(r['ok']) for r in results),'total':len(results),'cases':results},ensure_ascii=False)
+answer  # Return the JSON string from Pyodide.runPython() to JavaScript.
+`;
+async function ensurePyodide(){
+ if(pyodide) return;
+ importScripts(PYODIDE+'pyodide.js');
+ pyodide=await loadPyodide({indexURL:PYODIDE});
+ self.postMessage({type:'ready'});
+}
+self.onmessage=async ev=>{
+ const {id,type,payload}=ev.data;
+ if(type!=='run')return;
+ try{
+  await ensurePyodide();
+  pyodide.globals.set('__payload',JSON.stringify(payload));
+  const raw=pyodide.runPython(CODE);
+  if(typeof raw !== 'string'){
+   throw new Error('Bộ chấm Python chưa trả về kết quả (không nhận được chuỗi JSON).');
+  }
+  let value;
+  try{ value=JSON.parse(raw); }
+  catch(parseError){ throw new Error('Bộ chấm trả về dữ liệu JSON không hợp lệ: '+parseError.message); }
+  if(!value || !Array.isArray(value.cases) || !Number.isInteger(value.passed) || !Number.isInteger(value.total)){
+   throw new Error('Bộ chấm trả về dữ liệu thiếu các trường kết quả.');
+  }
+  self.postMessage({type:'result',id,value});
+ }catch(e){self.postMessage({type:'error',id,error:String(e)});}
+};
+</script>
+<script>
+const EXERCISES=[
+  {
+    "id": "P6.1",
+    "n": 1,
+    "group": "01 · Khởi tạo và duyệt list",
+    "title": "Bốn cách duyệt danh sách",
+    "desc": "Khởi tạo 10 số nguyên ngẫu nhiên, rồi hiển thị bốn nhóm: phần tử ở chỉ số chẵn, phần tử có giá trị chẵn, các phần tử đảo ngược, phần tử đầu và cuối.",
+    "io_desc": "Để kiểm thử được, viết `summarize(values)` nhận list 10 số nguyên, trả về tuple gồm 4 list theo thứ tự nêu trong đề. Bộ chấm sẽ in `repr()` của tuple. Khi thử tự do, có thể tạo list bằng random.",
+    "cases": [
+      {
+        "name": "Mười số",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(summarize([1,4,9,16,25,3,2,8,5,6]))",
+        "expected": {
+          "stdout": "([1, 9, 25, 2, 5], [4, 16, 2, 8, 6], [6, 5, 8, 2, 3, 25, 16, 9, 4, 1], [1, 6])\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số âm và số 0",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(summarize([0,-2,-3,4,-5,6,7,-8,9,10]))",
+        "expected": {
+          "stdout": "([0, -3, -5, 7, 9], [0, -2, 4, 6, -8, 10], [10, 9, -8, 7, 6, -5, 4, -3, -2, 0], [0, 10])\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Các số giống nhau",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(summarize([5]*10))",
+        "expected": {
+          "stdout": "([5, 5, 5, 5, 5], [], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 5])\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Chỉ số chẵn: range(0, len(values), 2). Giá trị chẵn: x % 2 == 0.",
+    "note": "Bản sách sinh dữ liệu ngẫu nhiên; bộ chấm cung cấp trước list để kiểm tra chính xác bốn kết quả.",
+    "difficulty": 2,
+    "starter": "# P6.1 — Bốn cách duyệt danh sách\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.2",
+    "n": 2,
+    "group": "01 · Khởi tạo và duyệt list",
+    "title": "Nhập 10 số không trùng",
+    "desc": "Nhập các số và chỉ thêm vào list khi chưa tồn tại. Khi list có đủ mười số phân biệt thì hiển thị danh sách và dừng.",
+    "io_desc": "Viết chương trình dùng `input()` liên tục để đọc số nguyên, bỏ giá trị trùng; khi đủ 10 giá trị in list với `print(values)` và dừng. Không in lời nhắc. Bộ chấm có thể cung cấp nhiều dòng hơn cần thiết.",
+    "cases": [
+      {
+        "name": "Một vài số trùng",
+        "stdin": "1\n2\n3\n2\n4\n5\n6\n7\n8\n9\n10\n",
+        "argv": [],
+        "files": {},
+        "postlude": "",
+        "expected": {
+          "stdout": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Có số âm",
+        "stdin": "-3\n0\n-3\n1\n2\n3\n4\n5\n6\n7\n8\n",
+        "argv": [],
+        "files": {},
+        "postlude": "",
+        "expected": {
+          "stdout": "[-3, 0, 1, 2, 3, 4, 5, 6, 7, 8]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Trùng rất nhiều",
+        "stdin": "5\n5\n5\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n",
+        "argv": [],
+        "files": {},
+        "postlude": "",
+        "expected": {
+          "stdout": "[5, 6, 7, 8, 9, 10, 11, 12, 13, 14]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng `if number not in values:` trước `append()`.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.2 — Nhập 10 số không trùng\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.3",
+    "n": 3,
+    "group": "01 · Khởi tạo và duyệt list",
+    "title": "Sàng số nguyên tố bằng list",
+    "desc": "Lập list các số nguyên từ 2 đến 10.000, loại các bội số của 2 (trừ 2), 3 (trừ 3), ... đến 100, rồi in các số còn lại.",
+    "io_desc": "Để chấm nhiều trường hợp, viết `remainingPrimes(limit)` trả về list tất cả số nguyên tố từ 2 đến `limit` (tăng dần). Đề gốc dùng limit=10.000; bộ chấm sẽ gọi ở giới hạn khác nhau và kiểm tra toàn bộ list.",
+    "cases": [
+      {
+        "name": "Giới hạn 30",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(remainingPrimes(30))",
+        "expected": {
+          "stdout": "[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Giới hạn nhỏ",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(remainingPrimes(1)); print(remainingPrimes(2))",
+        "expected": {
+          "stdout": "[]\n[2]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Sàng đến 10.000",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "ps=remainingPrimes(10000)\nassert ps == [x for x in range(2,10001) if all(x%k for k in range(2,int(x**0.5)+1))]\nprint(len(ps),ps[:7],ps[-5:])",
+        "expected": {
+          "stdout": "1229 [2, 3, 5, 7, 11, 13, 17] [9931, 9941, 9949, 9967, 9973]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Bắt đầu từ list(range(2, limit + 1)), bỏ bội số của các số từ 2 đến căn bậc hai của limit.",
+    "note": "Đề gốc in list nguyên tố đến 10.000; hệ thống kiểm tra hàm trả về để tự động thử cả giới hạn biên.",
+    "difficulty": 3,
+    "starter": "# P6.3 — Sàng số nguyên tố bằng list\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4a",
+    "n": 4,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Đổi chỗ đầu–cuối",
+    "desc": "Trong P6.4(a), đổi chỗ phần tử đầu tiên và cuối cùng trong một list số nguyên.",
+    "io_desc": "Viết `swapEnds(values)` thay đổi list tại chỗ; không cần return. List rỗng/1 phần tử phải được giữ nguyên.",
+    "cases": [
+      {
+        "name": "Danh sách 5 số",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,4,9,16,25];swapEnds(x);print(x)",
+        "expected": {
+          "stdout": "[25, 4, 9, 16, 1]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chỉ một phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[8];swapEnds(x);print(x)",
+        "expected": {
+          "stdout": "[8]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[];swapEnds(x);print(x)",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gán đồng thời `values[0], values[-1] = values[-1], values[0]` với điều kiện độ dài ≥ 2.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4a — Đổi chỗ đầu–cuối\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4b",
+    "n": 5,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Dịch phải xoay vòng",
+    "desc": "Trong P6.4(b), đưa phần tử cuối lên đầu, dịch tất cả phần tử còn lại sang phải một vị trí.",
+    "io_desc": "Viết `rotateRight(values)` thay đổi list tại chỗ, không cần return. Rỗng/1 phần tử giữ nguyên.",
+    "cases": [
+      {
+        "name": "Dãy gốc",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,4,9,16,25];rotateRight(x);print(x)",
+        "expected": {
+          "stdout": "[25, 1, 4, 9, 16]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hai phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[7,9];rotateRight(x);print(x)",
+        "expected": {
+          "stdout": "[9, 7]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Danh sách rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[];rotateRight(x);print(x)",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Lấy phần tử cuối bằng pop() và chèn vào vị trí 0 bằng insert().",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4b — Dịch phải xoay vòng\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4c",
+    "n": 6,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Đổi mọi số chẵn thành 0",
+    "desc": "Trong P6.4(c), thay giá trị của tất cả phần tử chẵn bằng số 0.",
+    "io_desc": "Viết `zeroEvens(values)` thay đổi list tại chỗ; số âm chẵn và 0 cũng được coi là chẵn.",
+    "cases": [
+      {
+        "name": "Số xen kẽ",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,4,9,16,25];zeroEvens(x);print(x)",
+        "expected": {
+          "stdout": "[1, 0, 9, 0, 25]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Âm và 0",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[0,-2,-3,-4,7];zeroEvens(x);print(x)",
+        "expected": {
+          "stdout": "[0, 0, -3, 0, 7]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có số chẵn",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,3,5];zeroEvens(x);print(x)",
+        "expected": {
+          "stdout": "[1, 3, 5]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt bằng chỉ số để gán lại `values[i]`.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4c — Đổi mọi số chẵn thành 0\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4d",
+    "n": 7,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Giá trị lớn hơn của hai hàng xóm",
+    "desc": "Trong P6.4(d), thay mỗi phần tử (trừ đầu và cuối) bằng số lớn hơn giữa hai phần tử hàng xóm.",
+    "io_desc": "Viết `replaceByNeighborMax(values)` thay đổi list tại chỗ. Mọi hàng xóm phải lấy từ bản sao của **list ban đầu**, không dùng các giá trị vừa thay. List ít hơn 3 phần tử giữ nguyên.",
+    "cases": [
+      {
+        "name": "Dãy số từ sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,4,9,16,25];replaceByNeighborMax(x);print(x)",
+        "expected": {
+          "stdout": "[1, 9, 16, 25, 25]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Tăng giảm",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[8,3,6,2,9,1];replaceByNeighborMax(x);print(x)",
+        "expected": {
+          "stdout": "[8, 8, 3, 9, 2, 1]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Ít phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[3,1];replaceByNeighborMax(x);print(x)",
+        "expected": {
+          "stdout": "[3, 1]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Lấy `old = values[:]` trước vòng lặp; với i từ 1 đến len(values)-2, dùng `max(old[i-1], old[i+1])`.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4d — Giá trị lớn hơn của hai hàng xóm\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4e",
+    "n": 8,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Xóa phần tử giữa",
+    "desc": "Trong P6.4(e), xóa phần tử chính giữa nếu chiều dài lẻ, hoặc xóa hai phần tử ở giữa nếu chiều dài chẵn.",
+    "io_desc": "Viết `removeMiddle(values)` thay đổi list tại chỗ. Với list rỗng không làm gì.",
+    "cases": [
+      {
+        "name": "Độ dài lẻ",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,2,3,4,5];removeMiddle(x);print(x)",
+        "expected": {
+          "stdout": "[1, 2, 4, 5]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Độ dài chẵn",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,2,3,4,5,6];removeMiddle(x);print(x)",
+        "expected": {
+          "stdout": "[1, 2, 5, 6]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng và một phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "a=[];b=[9];removeMiddle(a);removeMiddle(b);print(a,b)",
+        "expected": {
+          "stdout": "[] []\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Xác định chỉ số giữa bằng `len(values)//2`, rồi dùng `del` trên một slice.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4e — Xóa phần tử giữa\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4f",
+    "n": 9,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Đưa các số chẵn ra trước",
+    "desc": "Trong P6.4(f), đưa mọi số chẵn ra đầu list, giữ nguyên thứ tự tương đối trong nhóm chẵn và trong nhóm lẻ.",
+    "io_desc": "Viết `evensFirst(values)` thay đổi list tại chỗ; không cần return.",
+    "cases": [
+      {
+        "name": "Xen kẽ",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,4,9,16,25,2,6];evensFirst(x);print(x)",
+        "expected": {
+          "stdout": "[4, 16, 2, 6, 1, 9, 25]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Âm và 0",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[-3,0,-4,7,-2];evensFirst(x);print(x)",
+        "expected": {
+          "stdout": "[0, -4, -2, -3, 7]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chỉ số lẻ",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,3,5];evensFirst(x);print(x)",
+        "expected": {
+          "stdout": "[1, 3, 5]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Lọc hai danh sách theo x%2 rồi nối và gán `values[:] = ...`.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4f — Đưa các số chẵn ra trước\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4g",
+    "n": 10,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Tìm số lớn thứ hai",
+    "desc": "Trong P6.4(g), trả về giá trị lớn thứ hai của list số nguyên.",
+    "io_desc": "Viết `secondLargest(values)`. Quy ước chấm: giá trị lớn thứ hai phải **khác** giá trị lớn nhất; dữ liệu luôn có ít nhất hai giá trị phân biệt. Không thay đổi list.",
+    "cases": [
+      {
+        "name": "Dãy tăng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(secondLargest([1,4,9,16,25]))",
+        "expected": {
+          "stdout": "16\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Có phần tử trùng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(secondLargest([8,10,10,8,3]))",
+        "expected": {
+          "stdout": "8\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số âm",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(secondLargest([-10,-8,-3,-20]))",
+        "expected": {
+          "stdout": "-8\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Có thể theo dõi largest và secondLargest qua một vòng lặp; bỏ qua bản sao lớn nhất.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4g — Tìm số lớn thứ hai\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4h",
+    "n": 11,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Kiểm tra list đã sắp xếp",
+    "desc": "Trong P6.4(h), xác định list đã có thứ tự tăng dần hay chưa.",
+    "io_desc": "Viết `isSorted(values)` trả về bool. Quy ước: **không giảm** (các phần tử bằng nhau được chấp nhận). List rỗng/1 phần tử trả True.",
+    "cases": [
+      {
+        "name": "Đã sắp xếp",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(isSorted([1,2,2,4,5]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Có nghịch thế",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(isSorted([1,3,2]))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Biên rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(isSorted([]),isSorted([9]))",
+        "expected": {
+          "stdout": "True True\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "So sánh từng cặp kề nhau; dừng khi thấy values[i] > values[i+1].",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4h — Kiểm tra list đã sắp xếp\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4i",
+    "n": 12,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Hai phần tử kề nhau bằng nhau",
+    "desc": "Trong P6.4(i), kiểm tra có hai phần tử kề nhau bị trùng.",
+    "io_desc": "Viết `hasAdjacentDuplicate(values)` trả bool. Không cần xét các cặp không kề nhau.",
+    "cases": [
+      {
+        "name": "Có trùng kề",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(hasAdjacentDuplicate([1,2,2,3]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Trùng không kề",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(hasAdjacentDuplicate([1,2,3,1]))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(hasAdjacentDuplicate([]),hasAdjacentDuplicate([8]))",
+        "expected": {
+          "stdout": "False False\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng vòng lặp từ 0 đến len(values)-2.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4i — Hai phần tử kề nhau bằng nhau\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.4j",
+    "n": 13,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Phát hiện phần tử trùng bất kỳ",
+    "desc": "Trong P6.4(j), kiểm tra list có hai phần tử bằng nhau, không nhất thiết phải đứng kề nhau.",
+    "io_desc": "Viết `hasDuplicate(values)` trả về bool. Các phần tử trong test là số nguyên.",
+    "cases": [
+      {
+        "name": "Trùng không kề",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(hasDuplicate([1,2,3,1]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không trùng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(hasDuplicate([8,7,6]))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng và đồng nhất",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(hasDuplicate([]),hasDuplicate([5,5]))",
+        "expected": {
+          "stdout": "False True\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Có thể dùng set nếu đã học, hoặc kiểm tra từng phần tử trong list đã duyệt.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.4j — Phát hiện phần tử trùng bất kỳ\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.5",
+    "n": 14,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Đánh dấu giá trị nhỏ nhất và lớn nhất",
+    "desc": "Mở rộng chương trình largest.py ở §6.3 để đánh dấu cả giá trị nhỏ nhất và lớn nhất.",
+    "io_desc": "Viết `markExtremes(values)` trả về **list chuỗi**. Mỗi chuỗi có dạng `\"7\"`, `\"7 <== smallest value\"`, `\"9 <== largest value\"`; nếu một giá trị vừa là min vừa là max thì dùng `\"<== smallest and largest value\"`. Đánh dấu mọi lần xuất hiện của min/max.",
+    "cases": [
+      {
+        "name": "Có một min một max",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markExtremes([3,8,1,6]))",
+        "expected": {
+          "stdout": "['3', '8 <== largest value', '1 <== smallest value', '6']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Trùng min max",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markExtremes([1,1,5,5,3]))",
+        "expected": {
+          "stdout": "['1 <== smallest value', '1 <== smallest value', '5 <== largest value', '5 <== largest value', '3']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Các số bằng nhau và rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markExtremes([4,4]));print(markExtremes([]))",
+        "expected": {
+          "stdout": "['4 <== smallest and largest value', '4 <== smallest and largest value']\n[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Xác định min/max rồi duyệt từng phần tử để bổ sung nhãn. Mở rộng quy ước cho trường hợp tất cả giá trị bằng nhau.",
+    "note": "Dạng trả về list chuỗi được dùng thay cho in trực tiếp để kiểm thử được cả cách đánh dấu khi có phần tử trùng.",
+    "difficulty": 2,
+    "starter": "# P6.5 — Đánh dấu giá trị nhỏ nhất và lớn nhất\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.6",
+    "n": 15,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Tổng trừ phần tử nhỏ nhất",
+    "desc": "Viết hàm sumWithoutSmallest tính tổng danh sách ngoại trừ **một lần xuất hiện** của phần tử nhỏ nhất, qua một vòng lặp.",
+    "io_desc": "Viết đúng tên hàm `sumWithoutSmallest(values)` trả về số. Giả thiết list có ít nhất một phần tử. Không loại hết các phần tử cùng bằng giá trị min.",
+    "cases": [
+      {
+        "name": "Các số khác nhau",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sumWithoutSmallest([1,4,9,16,25]))",
+        "expected": {
+          "stdout": "54\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Min trùng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sumWithoutSmallest([2,2,2,8]))",
+        "expected": {
+          "stdout": "12\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một số và số âm",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sumWithoutSmallest([5]));print(sumWithoutSmallest([-10,-2,-3]))",
+        "expected": {
+          "stdout": "0\n-5\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Trong một vòng lặp, cập nhật biến tổng và biến nhỏ nhất; cuối cùng trả `total - smallest`.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.6 — Tổng trừ phần tử nhỏ nhất\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.7",
+    "n": 16,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Xóa giá trị nhỏ nhất không dùng min/remove",
+    "desc": "Viết hàm removeMin xóa **một lần** giá trị nhỏ nhất khỏi danh sách, không dùng hàm min hoặc phương thức remove.",
+    "io_desc": "Viết đúng hàm `removeMin(values)` sửa list tại chỗ. Giả thiết có thể có list rỗng (giữ nguyên). Không dùng `min()` hoặc `values.remove()`.",
+    "cases": [
+      {
+        "name": "Min nằm giữa",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[5,2,9,1,4];removeMin(x);print(x)",
+        "expected": {
+          "stdout": "[5, 2, 9, 4]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Min lặp",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[2,1,1,5];removeMin(x);print(x)",
+        "expected": {
+          "stdout": "[2, 1, 5]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[];removeMin(x);print(x)",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Giữ chỉ số minIndex qua vòng lặp; cuối cùng gọi pop(minIndex).",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.7 — Xóa giá trị nhỏ nhất không dùng min/remove\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.8",
+    "n": 17,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Tổng xen dấu",
+    "desc": "Tính tổng luân phiên dấu của mọi phần tử list: vị trí 0 cộng, 1 trừ, 2 cộng, 3 trừ, ...",
+    "io_desc": "Viết `alternatingSum(values)` trả về số. Với list rỗng, kết quả bằng 0.",
+    "cases": [
+      {
+        "name": "Ví dụ trong sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(alternatingSum([1,4,9,16,9,7,4,9,11]))",
+        "expected": {
+          "stdout": "-2\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Âm và 0",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(alternatingSum([0,-5,3,-2]))",
+        "expected": {
+          "stdout": "10\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Ít phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(alternatingSum([]),alternatingSum([7]))",
+        "expected": {
+          "stdout": "0 7\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt enumerate: i chẵn cộng x; i lẻ trừ x.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.8 — Tổng xen dấu\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.9",
+    "n": 18,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Đảo ngược list tại chỗ",
+    "desc": "Đảo ngược thứ tự phần tử của một danh sách như ví dụ 1,4,9,16,... trong sách.",
+    "io_desc": "Viết `reverseList(values)` thay đổi list tại chỗ; không cần return, không in. Bộ kiểm thử kiểm tra biến values sau khi gọi.",
+    "cases": [
+      {
+        "name": "Ví dụ sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,4,9,16,9,7,4,9,11];reverseList(x);print(x)",
+        "expected": {
+          "stdout": "[11, 9, 4, 7, 9, 16, 9, 4, 1]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chẵn phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,2,3,4];reverseList(x);print(x)",
+        "expected": {
+          "stdout": "[4, 3, 2, 1]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[];reverseList(x);print(x)",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng hai chỉ số i, j đi từ hai phía vào giữa; hoán đổi values[i] và values[j].",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.9 — Đảo ngược list tại chỗ\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.10",
+    "n": 19,
+    "group": "02 · Biến đổi list / thao tác tại chỗ",
+    "title": "Đổi chỗ hai nửa danh sách",
+    "desc": "Hiện thực thuật toán §6.6: với list có số phần tử chẵn, đổi chỗ nửa đầu và nửa sau.",
+    "io_desc": "Viết `swapHalves(values)` thay đổi list tại chỗ. Chỉ kiểm thử các list có độ dài chẵn (kể cả 0).",
+    "cases": [
+      {
+        "name": "Ví dụ §6.6",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[9,13,21,4,11,7,1,3];swapHalves(x);print(x)",
+        "expected": {
+          "stdout": "[11, 7, 1, 3, 9, 13, 21, 4]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hai phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,2];swapHalves(x);print(x)",
+        "expected": {
+          "stdout": "[2, 1]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[];swapHalves(x);print(x)",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Đặt half=len(values)//2, duyệt i từ 0 đến half-1 và đổi values[i] với values[i+half].",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.10 — Đổi chỗ hai nửa danh sách\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.11",
+    "n": 20,
+    "group": "03 · So sánh và đa tập",
+    "title": "Hai list bằng nhau theo thứ tự",
+    "desc": "Hai list bằng nhau khi cùng độ dài, phần tử tại cùng vị trí đều bằng nhau.",
+    "io_desc": "Viết đúng `equals(a,b)` trả bool, không thay đổi hai list. Không cần dùng `a == b` nếu muốn luyện vòng lặp.",
+    "cases": [
+      {
+        "name": "Giống hoàn toàn",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(equals([1,2,2],[1,2,2]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đổi thứ tự",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(equals([1,2,3],[3,2,1]))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Độ dài khác và rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(equals([1],[1,1]),equals([],[]))",
+        "expected": {
+          "stdout": "False True\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Kiểm tra độ dài trước, sau đó so từng vị trí.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.11 — Hai list bằng nhau theo thứ tự\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.12",
+    "n": 21,
+    "group": "03 · So sánh và đa tập",
+    "title": "Cùng tập giá trị, bỏ qua trùng lặp",
+    "desc": "Hai list được xem là tương đương nếu chứa cùng các giá trị, bất kể thứ tự và số lần lặp.",
+    "io_desc": "Viết đúng `sameSet(a,b)` trả bool. Dữ liệu kiểm thử là số nguyên.",
+    "cases": [
+      {
+        "name": "Ví dụ sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sameSet([1,4,9,16,9,7,4,9,11],[11,11,7,9,16,4,1]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Thiếu phần tử",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sameSet([1,2,2],[1,1]))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng và số âm",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sameSet([],[]),sameSet([-1,-1,2],[2,-1]))",
+        "expected": {
+          "stdout": "True True\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Có thể dùng set(a)==set(b) hoặc kiểm tra mỗi phần tử có nằm trong list còn lại không.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.12 — Cùng tập giá trị, bỏ qua trùng lặp\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.13",
+    "n": 22,
+    "group": "03 · So sánh và đa tập",
+    "title": "Cùng phần tử và bội số",
+    "desc": "Hai list tương đương nếu chứa cùng các giá trị với cùng số lần xuất hiện, bất kể thứ tự.",
+    "io_desc": "Viết đúng `sameElements(a,b)` trả bool, không sửa hai list. Các phần tử là số nguyên.",
+    "cases": [
+      {
+        "name": "Ví dụ đúng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sameElements([1,4,9,16,9,7,4,9,11],[11,1,4,9,16,9,7,4,9]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Bội số khác",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sameElements([1,4,9,16,9,7,4,9,11],[11,11,7,9,16,4,1,4,9]))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Độ dài khác",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(sameElements([],[]),sameElements([2,2],[2]))",
+        "expected": {
+          "stdout": "True False\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Có thể sao chép và sắp xếp cả hai list, sau đó so sánh; hoặc đếm tần suất theo phần tử.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.13 — Cùng phần tử và bội số\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.14",
+    "n": 23,
+    "group": "04 · Dữ liệu ngẫu nhiên và runs",
+    "title": "Mô phỏng tung xúc xắc và đếm mặt",
+    "desc": "Phát triển Worked Example 6.2: thay việc nhập thủ công bằng việc sinh ngẫu nhiên các mặt xúc xắc rồi đếm tần suất 1–6.",
+    "io_desc": "Viết `rollCounts(n,seed)` trả về list 6 số đếm cho các mặt 1..6. Dùng `random.Random(seed).randint(1,6)` đúng n lần (seed cố định giúp chấm lặp lại).",
+    "cases": [
+      {
+        "name": "20 lượt tung",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(rollCounts(20,42))",
+        "expected": {
+          "stdout": "[7, 4, 1, 1, 2, 5]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "100 lượt tung",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(rollCounts(100,7))",
+        "expected": {
+          "stdout": "[23, 15, 12, 15, 25, 10]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có lượt tung",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(rollCounts(0,0))",
+        "expected": {
+          "stdout": "[0, 0, 0, 0, 0, 0]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Khởi tạo rng = random.Random(seed), counters=[0]*6, tăng counters[roll-1].",
+    "note": "Bài sách sinh ngẫu nhiên không cố định; bộ chấm cung cấp n và seed để kiểm tra kết quả lặp lại.",
+    "difficulty": 2,
+    "starter": "# P6.14 — Mô phỏng tung xúc xắc và đếm mặt\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.15",
+    "n": 24,
+    "group": "04 · Dữ liệu ngẫu nhiên và runs",
+    "title": "Đánh dấu mọi run liên tiếp",
+    "desc": "Một run là dãy hai hoặc nhiều phần tử kề nhau có cùng giá trị. Đưa mỗi run vào ngoặc đơn khi in các lượt gieo xúc xắc.",
+    "io_desc": "Viết `markRuns(values)` nhận list các mặt 1..6, trả về một chuỗi có số cách nhau bằng 1 khoảng trắng; dấu `(` liền với số đầu run và `)` liền với số cuối run. Ví dụ `[1,2,5,5,3]` → `1 2 (5 5) 3`.",
+    "cases": [
+      {
+        "name": "Hai run trong dãy",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markRuns([1,2,5,5,3,2,2,2,4]))",
+        "expected": {
+          "stdout": "1 2 (5 5) 3 (2 2 2) 4\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đầu và cuối run",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markRuns([6,6,1,2,3,3]))",
+        "expected": {
+          "stdout": "(6 6) 1 2 (3 3)\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có run",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markRuns([1,2,3,4]))",
+        "expected": {
+          "stdout": "1 2 3 4\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tìm i,j sao cho values[i:j] gồm các phần tử bằng nhau, thêm ngoặc nếu j-i>=2.",
+    "note": "Bộ chấm sử dụng list định sẵn thay cho 20 lần tung ngẫu nhiên; khi học sinh có thể tự sinh danh sách ngẫu nhiên.",
+    "difficulty": 2,
+    "starter": "# P6.15 — Đánh dấu mọi run liên tiếp\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.16",
+    "n": 25,
+    "group": "04 · Dữ liệu ngẫu nhiên và runs",
+    "title": "Chỉ đánh dấu run dài nhất",
+    "desc": "Giống P6.15 nhưng chỉ đưa **run dài nhất** vào ngoặc đơn; nếu nhiều run cùng dài nhất, chọn run xuất hiện trước.",
+    "io_desc": "Viết `markLongestRun(values)` trả chuỗi giống định dạng P6.15. Nếu không có run dài ≥ 2 thì không thêm ngoặc.",
+    "cases": [
+      {
+        "name": "Dãy có run lớn nhất",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markLongestRun([1,2,5,5,3,2,2,2,4]))",
+        "expected": {
+          "stdout": "1 2 5 5 3 (2 2 2) 4\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hai run cùng dài",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markLongestRun([2,2,3,3,4,5]))",
+        "expected": {
+          "stdout": "(2 2) 3 3 4 5\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có run và rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(markLongestRun([1,2,3]));print(repr(markLongestRun([])))",
+        "expected": {
+          "stdout": "1 2 3\n''\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tìm vị trí bắt đầu và độ dài của run tốt nhất trong một vòng lặp, rồi dựng chuỗi có ngoặc.",
+    "note": "Đề sách sinh dữ liệu ngẫu nhiên; bộ chấm cung cấp list sẵn để kiểm tra phần đánh dấu.",
+    "difficulty": 2,
+    "starter": "# P6.16 — Chỉ đánh dấu run dài nhất\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.17",
+    "n": 26,
+    "group": "04 · Dữ liệu ngẫu nhiên và runs",
+    "title": "Sắp xếp list số ngẫu nhiên",
+    "desc": "Sinh 20 số nguyên 0–99, in list ban đầu và list sau khi dùng phương thức `sort()`.",
+    "io_desc": "Viết `sortValues(values)` nhận list và **sắp xếp tại chỗ tăng dần bằng `.sort()`**. Bộ chấm in list sau khi gọi; không cần in trong hàm.",
+    "cases": [
+      {
+        "name": "Số không thứ tự",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[99,0,12,7,33,7];sortValues(x);print(x)",
+        "expected": {
+          "stdout": "[0, 7, 7, 12, 33, 99]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Số âm bổ sung",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[-9,5,-1,0];sortValues(x);print(x)",
+        "expected": {
+          "stdout": "[-9, -1, 0, 5]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đã sắp và rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "x=[1,2,3];sortValues(x);print(x);y=[];sortValues(y);print(y)",
+        "expected": {
+          "stdout": "[1, 2, 3]\n[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Gọi `values.sort()` trong hàm.",
+    "note": "Đề sách yêu cầu tạo 20 số ngẫu nhiên; bộ chấm cung cấp list mẫu để kiểm tra việc sắp xếp.",
+    "difficulty": 2,
+    "starter": "# P6.17 — Sắp xếp list số ngẫu nhiên\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.18",
+    "n": 27,
+    "group": "04 · Dữ liệu ngẫu nhiên và runs",
+    "title": "Tạo 10 hoán vị ngẫu nhiên",
+    "desc": "Sinh mười hoán vị của dãy 1..10 bằng cách lấy ngẫu nhiên từng phần tử từ list còn lại và chuyển vào hoán vị.",
+    "io_desc": "Viết `generatePermutations()` trả về list 10 hoán vị; mỗi hoán vị là list 10 số 1..10 không lặp. Bộ chấm kiểm tra tính hợp lệ của từng hoán vị (không bắt đầu ra ngẫu nhiên phải giống lời giải tham chiếu).",
+    "cases": [
+      {
+        "name": "Kiểm tra cấu trúc 10x10",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "ps=generatePermutations()\nassert isinstance(ps,list) and len(ps)==10\nassert all(isinstance(p,list) and len(p)==10 and sorted(p)==list(range(1,11)) for p in ps)\nprint('10 hoán vị hợp lệ')",
+        "expected": {
+          "stdout": "10 hoán vị hợp lệ\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Thử lại để kiểm tra điều kiện",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "ps=generatePermutations()\nassert len(ps)==10 and all(sorted(p)==list(range(1,11)) for p in ps)\nprint('Không thiếu hoặc lặp số trong hoán vị')",
+        "expected": {
+          "stdout": "Không thiếu hoặc lặp số trong hoán vị\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Các hoán vị độc lập",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "ps=generatePermutations()\nassert len({id(p) for p in ps})==10\nassert all(sorted(p)==list(range(1,11)) for p in ps)\nprint('Mỗi hoán vị là một list riêng')",
+        "expected": {
+          "stdout": "Mỗi hoán vị là một list riêng\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "available=list(range(1,11)); lặp lại việc pop ngẫu nhiên từ available cho đến khi rỗng.",
+    "note": "Bài yêu cầu sinh kết quả ngẫu nhiên; bộ chấm xác minh tính chất của 10 hoán vị thay vì so sánh chuỗi đầu ra cố định.",
+    "difficulty": 3,
+    "starter": "# P6.18 — Tạo 10 hoán vị ngẫu nhiên\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.19",
+    "n": 28,
+    "group": "05 · Mô phỏng bằng list",
+    "title": "Mô phỏng lựa chọn buồng trống",
+    "desc": "Mô phỏng từng khách chọn buồng vệ sinh nằm giữa dãy buồng trống dài nhất, để ở xa nhất so với các buồng đã có người.",
+    "io_desc": "Viết `fillStalls(n)` trả về list các sơ đồ sau **mỗi** lượt chọn. Sơ đồ là chuỗi gồm n ký tự `_` hoặc `X`, cách nhau bằng dấu cách. Quy ước hòa: chọn dãy trống xa bên trái trước; với dãy có hai ô giữa, chọn ô bên **phải** (ví dụ n=10 chọn ô số 6 theo đánh số 1-based).",
+    "cases": [
+      {
+        "name": "10 buồng như sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(fillStalls(10)[:4])",
+        "expected": {
+          "stdout": "['_ _ _ _ _ X _ _ _ _', '_ _ X _ _ X _ _ _ _', '_ _ X _ _ X _ _ X _', '_ X X _ _ X _ _ X _']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một buồng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(fillStalls(1))",
+        "expected": {
+          "stdout": "['X']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "5 buồng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(fillStalls(5))",
+        "expected": {
+          "stdout": "['_ _ X _ _', '_ X X _ _', '_ X X _ X', 'X X X _ X', 'X X X X X']\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tìm các đoạn liên tiếp chưa dùng; chọn đoạn dài nhất (hòa chọn bên trái), đánh dấu vị trí trung tâm.",
+    "note": "Bài sách yêu cầu in sơ đồ; dạng hàm trả list sơ đồ giúp kiểm tra được từng bước. Quy ước hòa đã ghi rõ.",
+    "difficulty": 3,
+    "starter": "# P6.19 — Mô phỏng lựa chọn buồng trống\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.20",
+    "n": 29,
+    "group": "05 · Mô phỏng bằng list",
+    "title": "Bulgarian Solitaire",
+    "desc": "Từ các chồng thẻ có tổng 45 thẻ: ở mỗi bước lấy 1 thẻ của mỗi chồng để tạo chồng mới, loại chồng rỗng. Lặp đến khi còn các chồng độ dài 1..9.",
+    "io_desc": "Viết `solitaireStep(piles)` trả list chồng sau một bước theo thứ tự: các chồng còn lại (bỏ chồng rỗng), rồi chồng mới. Viết `playSolitaire(piles)` trả list trạng thái **sau mỗi bước** cho đến khi `sorted(piles)==[1,...,9]`; không thêm trạng thái ban đầu. Không thay đổi input. Test cung cấp các khởi đầu có tổng 45.",
+    "cases": [
+      {
+        "name": "Một bước từ ví dụ sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(solitaireStep([20,5,1,9,10]))",
+        "expected": {
+          "stdout": "[19, 4, 8, 9, 5]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đến đích từ 45",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "states=playSolitaire([45])\nassert states and sorted(states[-1])==list(range(1,10))\nassert all(sum(s)==45 for s in states)\nprint(len(states),states[0],sorted(states[-1]))",
+        "expected": {
+          "stdout": "36 [44, 1] [1, 2, 3, 4, 5, 6, 7, 8, 9]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đã ở cấu hình đích",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(playSolitaire([9,8,7,6,5,4,3,2,1]))",
+        "expected": {
+          "stdout": "[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Hàm step: chồng lớn hơn 1 trừ đi 1, rồi thêm len(piles) làm chồng mới; play lặp đến cấu hình 1..9.",
+    "note": "Đề gốc sinh trạng thái khởi đầu ngẫu nhiên; bộ chấm kiểm tra phép chuyển và hội tụ từ dữ liệu khởi đầu xác định.",
+    "difficulty": 3,
+    "starter": "# P6.20 — Bulgarian Solitaire\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.21",
+    "n": 30,
+    "group": "06 · List hai chiều và ma trận",
+    "title": "Kiểm tra magic square 4×4",
+    "desc": "Kiểm tra 16 số có tạo thành ma phương 4×4 hay không: đủ 1..16 đúng một lần, tổng mọi hàng/cột/hai đường chéo bằng nhau.",
+    "io_desc": "Viết `isMagic4(values)` nhận list 16 số theo thứ tự từng hàng, trả về bool. Không cần đọc từ input() trong phiên bản tự chấm.",
+    "cases": [
+      {
+        "name": "Ma phương sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(isMagic4([16,3,2,13,5,10,11,8,9,6,7,12,4,15,14,1]))",
+        "expected": {
+          "stdout": "True\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Sai do trùng số",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(isMagic4([1]*16))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Đúng tập số nhưng tổng sai",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(isMagic4(list(range(1,17))))",
+        "expected": {
+          "stdout": "False\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tách các hàng bằng slicing; kiểm tra sorted(values)==list(range(1,17)), rồi tính tổng hàng/cột/đường chéo.",
+    "note": "Sách yêu cầu nhập 16 số; bộ chấm truyền list 16 số vào hàm.",
+    "difficulty": 2,
+    "starter": "# P6.21 — Kiểm tra magic square 4×4\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.22",
+    "n": 31,
+    "group": "06 · List hai chiều và ma trận",
+    "title": "Tạo magic square bậc lẻ",
+    "desc": "Dựng ma phương n×n với n lẻ theo thuật toán trong sách: bắt đầu tại hàng cuối và cột giữa; đi xuống-phải có vòng, nếu bị chiếm thì đi lên.",
+    "io_desc": "Viết `makeMagicSquare(n)` trả về list gồm n list (mỗi list n số nguyên). Chỉ kiểm thử n lẻ dương (1,3,5,7). Phải theo đúng quy tắc để có hướng đặt giống sách.",
+    "cases": [
+      {
+        "name": "Ma phương n=3",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(makeMagicSquare(3))",
+        "expected": {
+          "stdout": "[[4, 9, 2], [3, 5, 7], [8, 1, 6]]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Ma phương n=5 như sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(makeMagicSquare(5))",
+        "expected": {
+          "stdout": "[[11, 18, 25, 2, 9], [10, 12, 19, 21, 3], [4, 6, 13, 20, 22], [23, 5, 7, 14, 16], [17, 24, 1, 8, 15]]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Biên n=1",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(makeMagicSquare(1))",
+        "expected": {
+          "stdout": "[[1]]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Khởi tạo mảng 0, bắt đầu row=n-1,col=n//2; giữ vị trí cũ trước khi thử xuống-phải.",
+    "note": 3,
+    "difficulty": 2,
+    "starter": "# P6.22 — Tạo magic square bậc lẻ\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.23",
+    "n": 32,
+    "group": "06 · List hai chiều và ma trận",
+    "title": "Trung bình các ô lân cận",
+    "desc": "Viết hàm tính trung bình tối đa 8 ô xung quanh một ô của bảng hai chiều; ở biên chỉ tính các hàng xóm thực sự tồn tại.",
+    "io_desc": "Viết đúng `neighborAverage(values,row,column)` trả về số thực. Dữ liệu bảng chữ nhật có ít nhất 2 ô; ô đang xét không được tính. Kết quả float được in với `format(..., \".4f\")`.",
+    "cases": [
+      {
+        "name": "Ô giữa",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(f'{neighborAverage([[1,2,3],[4,5,6],[7,8,9]],1,1):.4f}')",
+        "expected": {
+          "stdout": "5.0000\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Ô góc",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(f'{neighborAverage([[1,2,3],[4,5,6],[7,8,9]],0,0):.4f}')",
+        "expected": {
+          "stdout": "3.6667\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Ô biên bảng không vuông",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(f'{neighborAverage([[3,9,6],[4,2,1]],0,1):.4f}')",
+        "expected": {
+          "stdout": "3.2000\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt dr, dc trong {-1,0,1}; bỏ (0,0), kiểm tra chỉ số trong bảng rồi lấy trung bình.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.23 — Trung bình các ô lân cận\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.24",
+    "n": 33,
+    "group": "07 · Biểu đồ và trò chơi",
+    "title": "Biểu đồ thanh bằng dấu *",
+    "desc": "Đọc một dãy số dương và in biểu đồ thanh bằng các dấu *, với thanh của số lớn nhất dài 40 dấu, các thanh khác tỷ lệ tương ứng.",
+    "io_desc": "Viết `barChart(values)` trả list chuỗi, một chuỗi cho mỗi thanh. Quy ước số dấu sao `int(40*v/max(values)+0.5)` (làm tròn gần nhất kiểu half-up). Dữ liệu toàn số dương và không rỗng.",
+    "cases": [
+      {
+        "name": "Ví dụ phần trăm",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(barChart([55,100,70,65,35]))",
+        "expected": {
+          "stdout": "['**********************', '****************************************', '****************************', '**************************', '**************']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Có hai giá trị bằng max",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(barChart([1,2,2]))",
+        "expected": {
+          "stdout": "['********************', '****************************************', '****************************************']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một thanh",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(barChart([8]))",
+        "expected": {
+          "stdout": "['****************************************']\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Đầu tiên tìm max(values), sau đó nhân mỗi giá trị với 40/max để đổi thành độ dài thanh.",
+    "note": "Bài gốc yêu cầu vẽ biểu đồ; phiên bản tự chấm dùng list chuỗi biểu diễn thanh để kiểm tra chính xác.",
+    "difficulty": 2,
+    "starter": "# P6.24 — Biểu đồ thanh bằng dấu *\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.25",
+    "n": 34,
+    "group": "07 · Biểu đồ và trò chơi",
+    "title": "Biểu đồ thanh có số âm",
+    "desc": "Mở rộng P6.24 để dữ liệu có thể gồm số âm: thanh âm kéo về bên trái trục dọc, thanh dương về bên phải.",
+    "io_desc": "Viết `signedBarChart(values)` trả list chuỗi. Đặt trục `|` ở vị trí sau **40 khoảng trắng**; với số âm, đặt n dấu `*` ngay trước trục; với số dương, đặt n dấu `*` ngay sau trục. n=`int(40*abs(v)/maxAbs +0.5)`. Nếu toàn 0 thì chỉ có trục ở đúng vị trí.",
+    "cases": [
+      {
+        "name": "Âm và dương",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(signedBarChart([-10,5,10]))",
+        "expected": {
+          "stdout": "['****************************************|', '                                        |********************', '                                        |****************************************']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Chỉ số âm",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(signedBarChart([-2,-4,-8]))",
+        "expected": {
+          "stdout": "['                              **********|', '                    ********************|', '****************************************|']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Có số 0",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(signedBarChart([0,-1,1]))",
+        "expected": {
+          "stdout": "['                                        |', '****************************************|', '                                        |****************************************']\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng maxAbs để lấy tỉ lệ chung, biểu diễn trục tại vị trí cố định.",
+    "note": "Sách không quy định định dạng chính xác của biểu đồ có số âm; bộ chấm dùng trục `|` và căn 40 ký tự như mô tả.",
+    "difficulty": 3,
+    "starter": "# P6.25 — Biểu đồ thanh có số âm\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.26",
+    "n": 35,
+    "group": "07 · Biểu đồ và trò chơi",
+    "title": "Biểu đồ thanh kèm nhãn",
+    "desc": "Mở rộng P6.24 bằng cách thêm nhãn/caption bên trái mỗi thanh; biểu đồ được căn cột như ví dụ quốc gia trong sách.",
+    "io_desc": "Viết `labeledBarChart(labels,values)` trả list chuỗi: nhãn được **căn phải** theo độ dài nhãn dài nhất, tiếp một dấu cách rồi các `*` theo quy ước P6.24. Dữ liệu toàn số dương, cùng số nhãn và số giá trị.",
+    "cases": [
+      {
+        "name": "Ví dụ quốc gia",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(labeledBarChart(['Egypt','France','Japan'],[55,100,70]))",
+        "expected": {
+          "stdout": "[' Egypt **********************', 'France ****************************************', ' Japan ****************************']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Nhãn dài và số nhỏ",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(labeledBarChart(['A','Long Label'],[1,8]))",
+        "expected": {
+          "stdout": "['         A *****', 'Long Label ****************************************']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Nhãn bằng nhau",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(labeledBarChart(['AA','BB'],[5,5]))",
+        "expected": {
+          "stdout": "['AA ****************************************', 'BB ****************************************']\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tìm chiều dài nhãn tối đa, căn phải bằng rjust(), sau đó thêm phần thanh.",
+    "note": "Quy ước định dạng bổ sung để có thể chấm tự động.",
+    "difficulty": 2,
+    "starter": "# P6.26 — Biểu đồ thanh kèm nhãn\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.27",
+    "n": 36,
+    "group": "07 · Biểu đồ và trò chơi",
+    "title": "Đặt chỗ trong rạp",
+    "desc": "Biểu diễn bảng giá vé bằng list hai chiều. Khi bán một ghế, đổi giá thành 0. Có thể chọn ghế trực tiếp hoặc chọn mức giá.",
+    "io_desc": "Viết `sellSeat(prices,row,col)` trả True và đổi prices[row][col] thành 0 nếu ghế hợp lệ/chưa bán; trả False nếu không hợp lệ. Viết `sellByPrice(prices,price)` tìm **ghế đầu tiên theo thứ tự hàng–cột** có đúng giá, bán ghế đó và trả `(row,col)`; nếu không có thì trả None.",
+    "cases": [
+      {
+        "name": "Chọn ghế cụ thể",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "p=[[10,20],[20,30]];print(sellSeat(p,0,1),p)",
+        "expected": {
+          "stdout": "True [[10, 0], [20, 30]]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Bán bằng mức giá",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "p=[[10,20,20],[20,30,30]];print(sellByPrice(p,20),p)",
+        "expected": {
+          "stdout": "(0, 1) [[10, 0, 20], [20, 30, 30]]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Ghế đã bán và giá không có",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "p=[[0,10],[10,20]];print(sellSeat(p,0,0),sellByPrice(p,30),p)",
+        "expected": {
+          "stdout": "False None [[0, 10], [10, 20]]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Khi chọn theo giá, duyệt row-major: hàng từ trên xuống, cột từ trái qua. Đừng bán ghế 0.",
+    "note": "Bài gốc nhập tương tác nhiều lượt; bộ chấm tách thành hai thao tác lõi để có thể kiểm thử riêng.",
+    "difficulty": 3,
+    "starter": "# P6.27 — Đặt chỗ trong rạp\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.28",
+    "n": 37,
+    "group": "07 · Biểu đồ và trò chơi",
+    "title": "Trò chơi Tic-tac-toe",
+    "desc": "Hai người lần lượt đánh dấu X và O lên bảng 3×3; người thắng là người tạo ba dấu liên tiếp theo hàng/cột/đường chéo.",
+    "io_desc": "Viết `playTicTacToe(moves)` trả tuple `(status, board)` trong đó status là `\"X\"`, `\"O\"`, `\"DRAW\"` hoặc `\"ONGOING\"`, còn board là list 3 chuỗi dài 3, ký tự X/O/`.`. Các nước đi là list `(row,col)` đánh số 0–2; nước đi trùng/ngoài bảng bị bỏ qua **không đổi lượt**; dừng ngay khi thắng/hòa.",
+    "cases": [
+      {
+        "name": "X thắng hàng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(playTicTacToe([(0,0),(1,0),(0,1),(1,1),(0,2)]))",
+        "expected": {
+          "stdout": "('X', ['XXX', 'OO.', '...'])\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Nước đi lỗi không đổi lượt",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(playTicTacToe([(0,0),(0,0),(2,2)]))",
+        "expected": {
+          "stdout": "('ONGOING', ['X..', '...', '..O'])\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Bảng hòa",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(playTicTacToe([(0,0),(0,1),(0,2),(1,1),(1,0),(1,2),(2,1),(2,0),(2,2)]))",
+        "expected": {
+          "stdout": "('DRAW', ['XOX', 'XOO', 'OXX'])\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Kiểm tra thắng sau mỗi nước: 3 hàng, 3 cột và 2 đường chéo. Chỉ đổi lượt nếu nước đi hợp lệ.",
+    "note": "Bài gốc là chương trình hỏi tọa độ; bộ chấm cung cấp trước chuỗi nước đi để kiểm tra logic của trò chơi.",
+    "difficulty": 3,
+    "starter": "# P6.28 — Trò chơi Tic-tac-toe\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.29",
+    "n": 38,
+    "group": "08 · Ghép list và bài toán kinh doanh",
+    "title": "Nối hai danh sách",
+    "desc": "Viết một hàm ghép hai list theo thứ tự a rồi b và trả về list mới.",
+    "io_desc": "Viết đúng `appendList(a,b)` trả list mới, **không thay đổi a, b**.",
+    "cases": [
+      {
+        "name": "Ví dụ trong sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "a=[1,4,9,16];b=[9,7,4,9,11];print(appendList(a,b))",
+        "expected": {
+          "stdout": "[1, 4, 9, 16, 9, 7, 4, 9, 11]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(appendList([],[1,2]));print(appendList([3],[]))",
+        "expected": {
+          "stdout": "[1, 2]\n[3]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không sửa đầu vào",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "a=[1];b=[2];res=appendList(a,b);print(res,a,b)",
+        "expected": {
+          "stdout": "[1, 2] [1] [2]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng phép cộng hai list hoặc tạo list mới và extend hai nguồn.",
+    "note": 1,
+    "difficulty": 2,
+    "starter": "# P6.29 — Nối hai danh sách\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.30",
+    "n": 39,
+    "group": "08 · Ghép list và bài toán kinh doanh",
+    "title": "Trộn xen kẽ hai list",
+    "desc": "Viết hàm merge đưa lần lượt một phần tử từ a, một phần tử từ b; nếu một list kết thúc trước, thêm phần còn lại của list dài hơn.",
+    "io_desc": "Viết đúng `merge(a,b)` trả list mới, không sửa đầu vào.",
+    "cases": [
+      {
+        "name": "Ví dụ sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(merge([1,4,9,16],[9,7,4,9,11]))",
+        "expected": {
+          "stdout": "[1, 9, 4, 7, 9, 4, 16, 9, 11]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một list rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(merge([],['a','b']))",
+        "expected": {
+          "stdout": "['a', 'b']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "List a dài hơn",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(merge([1,2,3,4],[9]))",
+        "expected": {
+          "stdout": "[1, 9, 2, 3, 4]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt i đến max(len(a), len(b))-1; chỉ append khi chỉ số hợp lệ.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.30 — Trộn xen kẽ hai list\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.31",
+    "n": 40,
+    "group": "08 · Ghép list và bài toán kinh doanh",
+    "title": "Ghép hai list đã sắp xếp",
+    "desc": "Nhận hai list đã tăng dần và ghép thành một list mới vẫn tăng dần bằng cách so sánh phần tử đầu chưa xử lý của hai list.",
+    "io_desc": "Viết đúng `mergeSorted(a,b)` trả list mới tăng dần; giữ lại các phần tử trùng; không sửa hai list đầu vào.",
+    "cases": [
+      {
+        "name": "Ví dụ sách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(mergeSorted([1,4,9,16],[4,7,9,9,11]))",
+        "expected": {
+          "stdout": "[1, 4, 4, 7, 9, 9, 9, 11, 16]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Rỗng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(mergeSorted([],[-1,1]))",
+        "expected": {
+          "stdout": "[-1, 1]\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Có số âm và trùng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(mergeSorted([-5,0,0,3],[-6,0,4]))",
+        "expected": {
+          "stdout": "[-6, -5, 0, 0, 0, 3, 4]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Dùng hai chỉ số i,j và luôn lấy phần tử bé hơn, sau đó thêm phần còn lại.",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.31 — Ghép hai list đã sắp xếp\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.32",
+    "n": 41,
+    "group": "08 · Ghép list và bài toán kinh doanh",
+    "title": "Chiết khấu cửa hàng thú cưng",
+    "desc": "Cửa hàng giảm 20% tổng giá các mặt hàng không phải thú cưng nếu đơn hàng có ít nhất một thú cưng và ít nhất năm mặt hàng khác.",
+    "io_desc": "Viết đúng `discount(prices,isPet,nItems)` trả số tiền giảm (float). `prices[i]` là giá, `isPet[i]` là bool; chỉ xét nItems phần tử đầu, không giảm giá bản thân thú cưng. Bộ chấm in kết quả định dạng hai chữ số thập phân.",
+    "cases": [
+      {
+        "name": "Có 1 thú cưng và 5 món khác",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(f'{discount([200,10,20,30,40,50],[True,False,False,False,False,False],6):.2f}')",
+        "expected": {
+          "stdout": "30.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Thiếu món khác",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(f'{discount([100,10,20,30,40],[True,False,False,False,False],5):.2f}')",
+        "expected": {
+          "stdout": "0.00\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Không có thú cưng",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(f'{discount([10,20,30,40,50],[False]*5,5):.2f}')",
+        "expected": {
+          "stdout": "0.00\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Đếm số thú cưng, số món không phải thú cưng; nếu đủ điều kiện trả 0.2 * tổng giá món không phải thú cưng.",
+    "note": 2,
+    "difficulty": 2,
+    "starter": "# P6.32 — Chiết khấu cửa hàng thú cưng\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.33",
+    "n": 42,
+    "group": "08 · Ghép list và bài toán kinh doanh",
+    "title": "Khách hàng chi tiêu cao nhất",
+    "desc": "Mỗi khoản mua hàng có doanh số và tên khách hàng ở hai list song song. Trả tên khách có doanh số lớn nhất.",
+    "io_desc": "Viết đúng `nameOfBestCustomer(sales,customers)` trả về chuỗi tên. Hai list cùng độ dài ≥1; nếu hòa doanh số, lấy người xuất hiện trước.",
+    "cases": [
+      {
+        "name": "Doanh số khác nhau",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(nameOfBestCustomer([100,450,230],['An','Binh','Chi']))",
+        "expected": {
+          "stdout": "Binh\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hòa doanh số",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(nameOfBestCustomer([300,500,500],['A','B','C']))",
+        "expected": {
+          "stdout": "B\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Một khách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(nameOfBestCustomer([88],['Minh']))",
+        "expected": {
+          "stdout": "Minh\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Duyệt list sales để lấy chỉ số của doanh số lớn nhất, sau đó trả customers[index].",
+    "note": "",
+    "difficulty": 2,
+    "starter": "# P6.33 — Khách hàng chi tiêu cao nhất\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  },
+  {
+    "id": "P6.34",
+    "n": 43,
+    "group": "08 · Ghép list và bài toán kinh doanh",
+    "title": "Danh sách top khách hàng",
+    "desc": "Mở rộng P6.33: trả danh sách topN khách hàng có doanh số cao nhất; nếu số khách ít hơn topN, trả tất cả.",
+    "io_desc": "Viết đúng `nameOfBestCustomers(sales,customers,topN)` trả list tên giảm dần theo doanh số. Khi hòa, giữ thứ tự xuất hiện ban đầu; topN≤0 trả []. Không sửa hai list.",
+    "cases": [
+      {
+        "name": "Top 2",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(nameOfBestCustomers([100,450,230],['An','Binh','Chi'],2))",
+        "expected": {
+          "stdout": "['Binh', 'Chi']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Top vượt số khách",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(nameOfBestCustomers([20,40],['A','B'],5))",
+        "expected": {
+          "stdout": "['B', 'A']\n",
+          "files": {}
+        }
+      },
+      {
+        "name": "Hòa thứ tự, top 0",
+        "stdin": "",
+        "argv": [],
+        "files": {},
+        "postlude": "print(nameOfBestCustomers([5,5,8],['A','B','C'],3));print(nameOfBestCustomers([5],['A'],0))",
+        "expected": {
+          "stdout": "['C', 'A', 'B']\n[]\n",
+          "files": {}
+        }
+      }
+    ],
+    "hint": "Tạo danh sách chỉ số và sắp xếp theo (-sales[i],i) để giữ ổn định khi hòa.",
+    "note": 3,
+    "difficulty": 2,
+    "starter": "# P6.34 — Danh sách top khách hàng\n# Đọc đề bài và quy ước chấm; viết lời giải dưới đây.\n\n"
+  }
+];
+const STORE='pfe-ch6-exercises-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+const initial=()=>({current:0, drafts:{},passed:{},lastResults:{},bestTests:{},attempts:{},studentId:'',studentName:'',studentClass:'',startedAt:Date.now(),completedAt:null});
+let state=initial();try{const saved=JSON.parse(localStorage.getItem(STORE));if(saved&&typeof saved==='object')state={...initial(),...saved};}catch(_){}
+let current=Number.isInteger(state.current)&&state.current>=0&&state.current<EXERCISES.length?state.current:0;
+let worker=null,workerReady=false,pending=null,watchdog=null,seq=0;
+function save(){state.current=current;if(passedCount()===EXERCISES.length&&!state.completedAt)state.completedAt=Date.now();try{localStorage.setItem(STORE,JSON.stringify(state));}catch(_){} }
+function passedCount(){return EXERCISES.filter(x=>state.passed[x.id]).length}
+function totalTests(){return EXERCISES.reduce((n,x)=>n+x.cases.length,0)}
+function passedTests(){return EXERCISES.reduce((n,x)=>n+(Number(state.bestTests[x.id])||0),0)}
+function fmt(ts){return ts?new Date(ts).toLocaleString('vi-VN',{dateStyle:'medium',timeStyle:'short'}):'—'}
+function groupName(g){return g.split(' · ')[1]||g}
+function redrawNav(){
+ const search=$('search').value.toLowerCase().trim();
+ const groups=[...new Set(EXERCISES.map(x=>x.group))];
+ $('navgroups').innerHTML=groups.map(group=>{
+  const matches=EXERCISES.map((x,i)=>({...x,i})).filter(x=>x.group===group&&(!search||`${x.id} ${x.title} ${x.desc}`.toLowerCase().includes(search)));
+  if(!matches.length)return '';
+  const count=matches.filter(x=>state.passed[x.id]).length;
+  return `<div class="navgroup"><div class="grouptitle"><span>${esc(group)}</span><span>${count}/${matches.length}</span></div>${matches.map(x=>`<button type="button" class="navitem ${current===x.i?'active':''} ${state.passed[x.id]?'done':''}" data-index="${x.i}"><span class="navnum">${state.passed[x.id]?'✓':esc(x.id)}</span><span><strong>${esc(x.title)}</strong><small>${x.cases.length} ca kiểm thử · Mức ${x.difficulty}</small></span></button>`).join('')}</div>`;
+ }).join('');
+ $('navgroups').querySelectorAll('[data-index]').forEach(btn=>btn.onclick=()=>navigate(+btn.dataset.index));
+ $('sidecount').textContent=`${passedCount()} / ${EXERCISES.length}`;
+ $('sidebar').style.width=`${100*passedCount()/EXERCISES.length}%`;
+}
+function updateStats(){
+ $('statPass').textContent=`${passedCount()}/${EXERCISES.length}`;
+ $('statTests').textContent=`${passedTests()}/${totalTests()}`;
+ $('statPercent').textContent=Math.round(100*passedCount()/EXERCISES.length)+'%';
+ $('statCurrent').textContent=EXERCISES[current].id;
+ $('coursePill').textContent=passedCount()===EXERCISES.length?'✓ Đã đạt toàn bộ':'Bài tập Python · Tự chấm trực tiếp';
+ redrawNav();
+}
+function previewSample(c){
+ const stdin=String(c.stdin||'');
+ const hasStdin=stdin.length>0;
+ const hasPostlude=Boolean(c.postlude);
+ const expected=c.expected||{};
+ return `<div class="samplebox">
+  <div class="boxheading"><strong>Dữ liệu mẫu · ${esc(c.name)}</strong><span>TEST 1</span></div>
+  ${hasStdin?`<div class="filegroup"><b>Giá trị nhập qua input()</b><div class="littlecode">${esc(stdin)}</div></div>`:''}
+  ${hasPostlude?`<div class="filegroup"><b>Lời gọi hàm mẫu</b><div class="littlecode">${esc(c.postlude)}</div></div>`:''}
+  <div class="filegroup"><b>Kết quả dự kiến</b><div class="littlecode">${esc(expected.stdout||'(không in ra màn hình)')}</div></div>
+ </div>`;
+}
+function render(){
+ const t=EXERCISES[current],draft=state.drafts[t.id]??t.starter;
+ $('problem').innerHTML=`<div class="blocktop"><span class="tag">${esc(t.id)}</span><span class="tag gray">${esc(groupName(t.group))}</span><span class="tag amber">MỨC ${t.difficulty}/3</span><span class="tag ${state.passed[t.id]?'':'gray'}">${state.passed[t.id]?'✓ ĐÃ ĐẠT':'CHƯA ĐẠT'}</span></div><h2>${esc(t.title)}</h2><div class="prompt">${esc(t.desc)}</div><div class="contract"><b>QUY ƯỚC ĐẦU VÀO / ĐẦU RA ĐỂ TỰ CHẤM</b><p>${esc(t.io_desc)}</p></div>${t.note?`<div class="notice">${esc(t.note)}</div>`:''}<div class="workspace"><div><div class="codecard"><div class="codehead"><div class="dotset"><i></i><i></i><i></i></div><span>Python 3 · Mã nguồn</span><span>Tab = 4 dấu cách</span></div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Mã nguồn bài tập Python"></textarea><div class="codefoot">Ctrl + Enter: chạy thử mẫu · Mỗi ca kiểm thử sử dụng thư mục tệp ảo riêng · Mã nguồn lưu tự động</div></div><div class="actionrow"><button class="btn dark" id="testSample">▶ Chạy thử mẫu</button><button class="btn primary" id="grade">✓ Chấm ${t.cases.length} ca kiểm thử</button><button class="btn ghost" id="showHint">💡 Gợi ý</button><button class="btn warn" id="resetCode">↺ Khôi phục</button></div><div class="hint" id="hint">${esc(t.hint)}</div><div class="guide">Đề bài được diễn giải từ <i>Python for Everyone, Chapter 6</i>; các bài ngẫu nhiên hoặc trò chơi có quy ước tự chấm riêng được giải thích trong từng đề. Các bài yêu cầu viết hàm sẽ được kiểm tra bằng cách gọi hàm với nhiều dữ liệu đầu vào. Bài yêu cầu nhập số sử dụng <code>input()</code> theo mẫu đã cung cấp.</div></div><div class="rightstack">${previewSample(t.cases[0])}<div class="judgebox" id="resultsBox"><h3>Kiểm tra kết quả</h3><div id="judgeContent"></div><div id="consoleContainer" style="display:none;margin-top:12px"><div class="filegroup"><b>Đầu ra Python</b><pre class="outputarea" id="consoleText"></pre></div></div></div></div></div><div class="footerline"><div class="left">${current+1}/${EXERCISES.length} · ${t.id} · Lần chấm: ${state.attempts[t.id]||0}</div><div style="display:flex;gap:8px"><button type="button" class="btn" id="prev" ${current===0?'disabled':''}>← Bài trước</button><button type="button" class="btn primary" id="next" ${current===EXERCISES.length-1?'disabled':''}>Bài tiếp theo →</button></div></div>`;
+ $('code').value=draft;
+ const editor=$('code');
+ editor.addEventListener('input',()=>{state.drafts[t.id]=editor.value;save()});
+ editor.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){
+   e.preventDefault();let a=editor.selectionStart,b=editor.selectionEnd;
+   editor.setRangeText('    ',a,b,'end');editor.dispatchEvent(new Event('input'));
+  }
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();run('sample');}
+ });
+ $('testSample').onclick=()=>run('sample');$('grade').onclick=()=>run('grade');
+ $('showHint').onclick=()=>{$('hint').classList.toggle('show');};
+ $('resetCode').onclick=()=>{if(confirm('Khôi phục mã bắt đầu?')){editor.value=t.starter;state.drafts[t.id]=editor.value;save();}};
+ $('prev').onclick=()=>navigate(current-1);$('next').onclick=()=>navigate(current+1);
+ if(state.lastResults[t.id]) showResult(state.lastResults[t.id],false);
+ else $('judgeContent').innerHTML='<div class="muted">Viết chương trình và bấm “Chạy thử mẫu” hoặc “Chấm”.</div>';
+ updateStats();
+}
+function navigate(idx){
+ if(idx<0||idx>=EXERCISES.length)return;
+ if(pending){abortRun('Đã dừng kiểm tra khi chuyển bài.');}
+ current=idx;save();render();window.scrollTo({top:0,behavior:'instant'});
+ if(window.innerWidth<850) $('side').classList.remove('open');
+}
+function newWorker(){
+ const url=URL.createObjectURL(new Blob([$('pythonRunner').textContent],{type:'text/javascript'}));
+ let w=new Worker(url); URL.revokeObjectURL(url);
+ workerReady=false;
+ w.onmessage=e=>{
+  const m=e.data;
+  if(m.type==='ready'){workerReady=true; if(pending){clearTimeout(watchdog);watchdog=setTimeout(()=>abortRun('Quá thời gian thực thi (20 giây). Kiểm tra vòng lặp vô hạn.'),20000);setStatus('Python đã sẵn sàng. Đang chạy kiểm thử…','loading');}return;}
+  if(!pending || m.id!==pending.id)return;
+  clearTimeout(watchdog);const runInfo=pending;pending=null;toggleRun(false);
+  if(m.type==='error'){setStatus('Lỗi môi trường Python: '+m.error,'bad');return;}
+  const result={...m.value,mode:runInfo.mode,when:Date.now()};
+  const t=EXERCISES[runInfo.idx];
+  if(runInfo.idx===current){showResult(result,true);}
+  if(runInfo.mode==='grade'){
+    state.attempts[t.id]=(state.attempts[t.id]||0)+1;
+    state.bestTests[t.id]=Math.max(state.bestTests[t.id]||0,result.passed);
+    if(result.passed===t.cases.length)state.passed[t.id]=true;
+    state.lastResults[t.id]=result;save();updateStats();
+    if(runInfo.idx===current) $('problem').querySelector('.blocktop .tag:last-child').textContent=state.passed[t.id]?'✓ ĐÃ ĐẠT':'CHƯA ĐẠT';
+  }
+ };
+ w.onerror=e=>{abortRun('Không thể chạy Python: '+(e.message||'Worker error'));};
+ return w;
+}
+function toggleRun(busy){for(const id of ['testSample','grade']){const el=$(id);if(el)el.disabled=busy}}
+function setStatus(label,type=''){const host=$('judgeContent');if(!host)return;host.innerHTML=`<div class="judge-status ${type}">${esc(label)}</div>`;}
+function abortRun(message){if(watchdog)clearTimeout(watchdog);if(worker){worker.terminate();worker=null;}workerReady=false;pending=null;toggleRun(false);setStatus(message,'bad');}
+function run(mode){
+ if(pending)return;
+ const t=EXERCISES[current],code=$('code').value;
+ if(!code.trim()){setStatus('Hãy nhập mã Python trước khi chạy.','bad');return;}
+ if(!worker){try{worker=newWorker()}catch(e){setStatus('Không thể tạo Python Worker: '+e.message,'bad');return;}}
+ const id=++seq;pending={id,idx:current,mode};toggleRun(true);
+ const tests=mode==='sample'?[t.cases[0]]:t.cases;
+ setStatus(workerReady?'Đang chạy Python…':'Đang tải Python (Pyodide) lần đầu; cần Internet…','loading');
+ watchdog=setTimeout(()=>abortRun('Hết thời gian tải/chạy Python. Vui lòng thử lại khi có Internet.'),workerReady?20000:90000);
+ worker.postMessage({type:'run',id,payload:{code,cases:tests,sample:mode==='sample'}});
+}
+function showResult(r,fresh){
+ const t=EXERCISES[current];
+ const passed=r.passed===r.total&&r.total>0;
+ const label=r.mode==='sample'?'KẾT QUẢ CHẠY THỬ':'KẾT QUẢ CHẤM BÀI';
+ $('judgeContent').innerHTML=`<div class="judge-status ${passed?'good':'bad'}">${passed?'✓':'✗'} ${label} · ${r.passed}/${r.total} ca đạt</div><div>${(r.cases||[]).map((x,i)=>`<div class="testline ${x.ok?'good':'bad'}"><span class="check">${x.ok?'✓':'✗'}</span><div><b>${esc(x.name)}</b><small>${esc(x.detail)}${x.error?' · '+esc(x.error):''}</small></div></div>`).join('')}</div>${r.mode==='sample'?'<div class="muted">Chạy thử chỉ kiểm tra dữ liệu mẫu, không đánh dấu hoàn thành. Bấm “Chấm” để kiểm tra tất cả ca.</div>':''}`;
+ if(r.mode==='sample'&&r.cases&&r.cases[0]){
+  const c=r.cases[0];$('consoleContainer').style.display='block';$('consoleText').textContent=c.stdout||'(Chương trình không in kết quả ra màn hình)';
+ }
+}
+function exportJson(){
+ const payload={course:'Python for Everyone – Chapter 6',timestamp:new Date().toISOString(),student:{id:state.studentId,name:state.studentName,class:state.studentClass},passed:state.passed,bestTests:state.bestTests,attempts:state.attempts,completedAt:state.completedAt};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});downloadBlob(blob,'ch06_progress_'+(state.studentId||'anonymous')+'.json');
+}
+function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportPng(){
+ const miss=[['studentId','mã sinh viên'],['studentName','họ và tên'],['studentClass','lớp']].find(([k])=>!String(state[k]||'').trim());
+ if(miss){$('profileStatus').textContent='Vui lòng điền '+miss[1]+' trước khi xuất PNG.';$(miss[0]).focus();return;}
+ const W=1500,H=1050,cv=document.createElement('canvas');cv.width=W*2;cv.height=H*2;const ctx=cv.getContext('2d');ctx.scale(2,2);
+ const grad=ctx.createLinearGradient(0,0,W,H);grad.addColorStop(0,'#f2fbf8');grad.addColorStop(1,'#edf6fb');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+ ctx.fillStyle='#13384f';ctx.fillRect(0,0,W,155);
+ ctx.fillStyle='#84dfcb';ctx.font='bold 22px system-ui,sans-serif';ctx.fillText('PYTHON FOR EVERYONE · CHAPTER 6',70,56);
+ ctx.fillStyle='#ffffff';ctx.font='bold 42px system-ui,sans-serif';ctx.fillText(passedCount()===EXERCISES.length?'BÁO CÁO HOÀN THÀNH BÀI TẬP':'BÁO CÁO TIẾN ĐỘ BÀI TẬP',70,112);
+ ctx.fillStyle='#fff';ctx.fillRect(55,180,W-110,H-240);ctx.strokeStyle='#d6e7ed';ctx.lineWidth=2;ctx.strokeRect(55,180,W-110,H-240);
+ const text=(s,x,y,font,color='#15384b')=>{ctx.font=font;ctx.fillStyle=color;ctx.fillText(String(s),x,y);};
+ text('THÔNG TIN SINH VIÊN',90,236,'bold 20px system-ui,sans-serif','#087a73');
+ text('Mã sinh viên',90,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentId,90,314,'bold 26px system-ui,sans-serif');
+ text('Họ và tên',570,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentName,570,314,'bold 26px system-ui,sans-serif');
+ text('Lớp',1110,281,'bold 16px system-ui,sans-serif','#6c8793');text(state.studentClass,1110,314,'bold 26px system-ui,sans-serif');
+ const boxes=[['Bài tập đạt',passedCount()+'/'+EXERCISES.length],['Ca kiểm thử đạt',passedTests()+'/'+totalTests()],['Tiến độ',Math.round(100*passedCount()/EXERCISES.length)+'%'],['Tình trạng',passedCount()===EXERCISES.length?'Hoàn tất':'Đang học']];
+ boxes.forEach(([label,v],i)=>{let x=90+i*335,y=355;ctx.fillStyle='#f0f8fa';ctx.fillRect(x,y,312,122);ctx.strokeStyle='#d5e8ea';ctx.strokeRect(x,y,312,122);text(label,x+16,y+33,'bold 15px system-ui,sans-serif','#6b8896');text(v,x+16,y+86,'bold 27px system-ui,sans-serif','#153e51');});
+ text('THỐNG KÊ THEO NHÓM BÀI',90,530,'bold 20px system-ui,sans-serif','#087a73');
+ const groups=[...new Set(EXERCISES.map(x=>x.group))];
+ groups.forEach((g,i)=>{const x=i%2?760:90,y=575+Math.floor(i/2)*64;const all=EXERCISES.filter(t=>t.group===g);const n=all.filter(t=>state.passed[t.id]).length;text(g.replace(/^\d+ · /,''),x,y,'bold 16px system-ui,sans-serif');text(n+'/'+all.length,x+540,y,'bold 18px system-ui,sans-serif','#0a8174');ctx.fillStyle='#dbe8ec';ctx.fillRect(x,y+10,580,6);ctx.fillStyle='#18a592';ctx.fillRect(x,y+10,580*n/all.length,6);});
+ const fY=935;ctx.strokeStyle='#d5e4e8';ctx.beginPath();ctx.moveTo(90,fY-36);ctx.lineTo(W-90,fY-36);ctx.stroke();
+ text('Ngày bắt đầu: '+fmt(state.startedAt),90,fY,'14px system-ui,sans-serif','#66818e');
+ text('Hoàn thành: '+fmt(state.completedAt),580,fY,'14px system-ui,sans-serif','#66818e');
+ text('Xuất báo cáo: '+fmt(Date.now()),1000,fY,'14px system-ui,sans-serif','#66818e');
+ text('Bản ghi được tạo và lưu trên trình duyệt của sinh viên; không phải kết quả thi được xác thực.',90,976,'14px system-ui,sans-serif','#6b8490');
+ cv.toBlob(b=>{if(b){downloadBlob(b,'ch06_'+state.studentId.replace(/[^a-z0-9_-]/gi,'_')+'_progress.png');$('profileStatus').textContent='Đã tạo PNG báo cáo tiến độ.';}},'image/png');
+}
+$('search').addEventListener('input',redrawNav);
+$('mobilemenu').onclick=()=>$('side').classList.toggle('open');
+$('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.()};
+$('resetProgress').onclick=()=>{if(confirm('Xóa toàn bộ mã đang viết, kết quả chấm và thông tin sinh viên trong trình duyệt này?')){state=initial();current=0;save();render();for(const k of ['studentId','studentName','studentClass'])$(k).value='';}};
+for(const k of ['studentId','studentName','studentClass']){$(k).value=state[k]||'';$(k).addEventListener('input',()=>{state[k]=$(k).value;save()})}
+$('exportPNG').onclick=exportPng;$('exportJSON').onclick=exportJson;
+save();render();
+</script>
+</body>
+</html>
