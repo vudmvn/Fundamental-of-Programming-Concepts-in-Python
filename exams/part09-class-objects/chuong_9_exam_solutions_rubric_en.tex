@@ -1,0 +1,459 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.90]}{\setmonofont{Liberation Mono}[Scale=0.90]}
+
+\usepackage[top=1.5cm, bottom=1.6cm, left=1.75cm, right=1.75cm]{geometry}
+\setlength{\headheight}{18pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{correctgreen}{RGB}{20,108,55}
+\definecolor{rubricred}{RGB}{160,30,30}
+\definecolor{boxbg}{RGB}{248,250,252}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{primaryblue}\bfseries,
+  commentstyle=\color{secondaryteal}\itshape,
+  stringstyle=\color{rubricred},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Objects and Classes Solutions and Marking Rubric},
+    pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\color{correctgreen}\textbf{Official Solutions \& Marking Rubric: Chapter 9}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[C]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\textbf{Total: 100 Points}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{secondaryteal}}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{3pt}{2pt}
+\titlespacing*{\subsection}{0pt}{2pt}{1pt}
+
+\newtcolorbox{solbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  boxrule=0.7pt,
+  top=1.2mm,
+  bottom=1.2mm,
+  left=2.5mm,
+  right=2.5mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=2.5mm},
+  boxed title style={colback=green!8, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\newtcolorbox{rubricbox}[1][]{
+  enhanced,
+  colback=white,
+  colframe=rubricred!80,
+  arc=1.5mm,
+  boxrule=0.7pt,
+  top=1.2mm,
+  bottom=1.2mm,
+  left=2.5mm,
+  right=2.5mm,
+  title=\textbf{\color{rubricred}Marking Rubric \& Scoring Criteria},
+  coltitle=rubricred,
+  attach boxed title to top left={yshift=-2mm, xshift=2.5mm},
+  boxed title style={colback=red!6, colframe=rubricred!80, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.05cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY --- FACULTY OF DATA SCIENCE \& AI}}\\[0.15cm]
+  \rule{\textwidth}{1pt}\\[0.2cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.1cm]
+  {\large\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}\\[0.05cm]
+  {\normalsize\textbf{Progress Exam: Objects and Classes (Chapter 9)} \quad | \quad Total: 100 Points}\\[0.15cm]
+  \rule{\textwidth}{0.5pt}
+\end{center}
+
+\begin{tcolorbox}[colback=green!6, colframe=correctgreen, arc=1.5mm, top=1mm, bottom=1mm]
+\small
+\textbf{Note for Examiners and Teaching Assistants:}
+This marking guide provides complete keys, rigorous explanations, step-by-step traces, reference Python implementations, and point-by-point deduction criteria to ensure fair and unified grading across all student cohorts.
+\end{tcolorbox}
+
+\vspace{0.1cm}
+\section*{Section A: Object-Oriented Programming Foundations (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\small
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Language Rule} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & A class serves as an abstract blueprint or type definition defining attributes and behaviors, whereas an object is a concrete runtime instance created in memory from that blueprint. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{B} & In Python, \texttt{\_\_init\_\_} is the instance initialization method (constructor) automatically called after the object is allocated to set its initial state via \texttt{self}. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & In Python method binding, calling \texttt{instance.method(arg)} translates behind the scenes to \texttt{Class.method(instance, arg)}. The explicit parameter \texttt{self} captures the receiving object instance. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{B} & Python follows the convention where a single leading underscore (e.g., \texttt{\_balance}) signals that an attribute is internal/private (encapsulation). It is not enforced by hardware or compiler barriers. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{C} & An accessor inspects or computes state without modifying the object (\texttt{getTotal()}), while a mutator alters the object's internal state variables (\texttt{addItem()}). & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{B} & Variable assignment \texttt{c2 = c1} copies the object reference, not the object. Both names point to the same memory instance in the heap. Two clicks increment the shared count to 2. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{C} & The \texttt{is} operator tests identity (whether two references denote the identical memory address: \texttt{id(a) == id(b)}). Distinct constructor calls create distinct objects in heap, so \texttt{acc1 is acc2} is \texttt{False}. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{A} & Instance variables belong to specific object instances (defined using \texttt{self.\_var}), whereas class variables are declared in the class body and shared across all instances of that class. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{C} & Python automatically invokes \texttt{obj.\_\_str\_\_()} whenever \texttt{str(obj)} or \texttt{print(obj)} is called. It must return a human-readable informal string representation of the object. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{C} & In Python, \texttt{None} is an instance of \texttt{NoneType}. Attempting to call an arbitrary method on \texttt{None} causes Python to raise an \texttt{AttributeError: 'NoneType' object has no attribute '...'}. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\section*{Section B: Output Tracing, Object Mechanics \& Diagnostics (25 points)}
+
+\subsection*{Q11. Exact Output of Multi-Object State Tracing (5 points)}
+\begin{solbox}{Model Output for Q11}
+\begin{verbatim}
+c1: 8 | c2: 10
+c1 is c3: True | c1 is c2: False
+\end{verbatim}
+\end{solbox}
+\textbf{State Trace:}
+\texttt{c1} starts with count 0, step 2; \texttt{c2} starts with count 0, step 5. \texttt{c3 = c1} creates an alias to \texttt{c1}. After \texttt{c1.click()}, \texttt{c1} count is 2. After \texttt{c2.click()}, \texttt{c2} count is 5. Calling \texttt{c3.boost(3)} scales \texttt{c1}'s step to 6. Calling \texttt{c3.click()} increments \texttt{c1} to $2 + 6 = 8$. Calling \texttt{c2.click()} increments \texttt{c2} to $5 + 5 = 10$. Finally, \texttt{c1 is c3} evaluates to \texttt{True} (shared object) while \texttt{c1 is c2} is \texttt{False}.\newline
+\textbf{Scoring:} 2 pts for correct counter counts; 2 pts for identity booleans; 1 pt for exact formatting and labels.
+
+\subsection*{Q12. Evaluate Class and Object Expressions (5 points --- 1 pt each)}
+\begin{enumerate}[label=\alph*),itemsep=1.5pt]
+\item \texttt{isinstance(it, Item)} evaluates to \textbf{\texttt{True}} (direct instance of class \texttt{Item}).
+\item Exception class: \textbf{\texttt{AttributeError}} (attempting to read nonexistent attribute \texttt{price}).
+\item \texttt{len(a)} = \textbf{\texttt{3}} (\texttt{b = a} aliases mutable list; mutating \texttt{b} updates \texttt{a} to \texttt{[10, 20, 30]}).
+\item Value in \texttt{\_numerator}: \textbf{\texttt{1}} ($\gcd(4, 12) = 4 \implies 4 // 4 = 1$).
+\item \texttt{bool(None)} evaluates to \textbf{\texttt{False}} (\texttt{None} evaluates to falsy in boolean context).
+\end{enumerate}
+
+\subsection*{Q13. Diagnose and Correct Three Object-Oriented Defects (5 points)}
+\begin{center}
+\renewcommand{\arraystretch}{1.22}
+\small
+\begin{tabularx}{\textwidth}{|p{4.5cm}|X|X|}
+\hline
+\textbf{Erroneous Code} & \textbf{Problem / Root Cause} & \textbf{Correction} \\
+\hline
+{\ttfamily\scriptsize class Account:}\newline{\ttfamily\scriptsize \ \ def deposit(amount):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_balance += amount} & Signature lacks \texttt{self}. Calling \texttt{acc.deposit(100)} passes \texttt{acc} as 1st argument, causing \texttt{TypeError}. & Include \texttt{self} as 1st parameter:\newline{\ttfamily\scriptsize def deposit(self, amount):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_balance += amount} (2 pts) \\
+\hline
+{\ttfamily\scriptsize class Counter:}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self): self.\_val = 0}\newline{\ttfamily\scriptsize \ \ def click(self): \_val += 1} & \texttt{\_val} lacks prefix \texttt{self.}; treated as unassigned local variable, raising \texttt{UnboundLocalError}. & Access attribute via \texttt{self}:\newline{\ttfamily\scriptsize def click(self):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_val += 1} (2 pts) \\
+\hline
+{\ttfamily\scriptsize class Student:}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self, name, tags=[]):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_tags = tags} & Dangerous mutable default \texttt{[]}, created once and shared across all instances without explicit list. & Use \texttt{None} default sentinel:\newline{\ttfamily\scriptsize def \_\_init\_\_(self, name, tags=None):}\newline{\ttfamily\scriptsize \ \ self.\_tags = [] if tags is None else list(tags)} (1 pt) \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection*{Q14. Bank Account State Tracing with Overdraft \& Fee Rules (5 points)}
+\begin{solbox}{Console Output for Q14}
+\begin{verbatim}
+Final Balance: 252.00
+\end{verbatim}
+\end{solbox}
+\textbf{State Trace (3 pts):} Initial balance \$200.00 $\to$ \texttt{deposit(100.0)}: balance = \$300.00 $\to$ \texttt{withdraw(350.0)}: $350 > 300$ triggers \$10 penalty without withdrawal: balance = \$290.00 $\to$ \texttt{withdraw(50.0)}: $50 \le 290$, normal withdrawal: balance = \$240.00 $\to$ \texttt{add\_interest(5.0)}: $240 + 240 \times 0.05 = \mathbf{\$252.00}$. Output format: \texttt{252.00} (2 pts).
+
+\subsection*{Q15. Object References vs Shallow Copies in Object Attributes (5 points)}
+\begin{solbox}{Answers for Q15}
+\begin{verbatim}
+Cart 1: ['Book', 'Pen', 'Ruler', 'Eraser']
+Cart 2: ['Book', 'Pen']
+\end{verbatim}
+\end{solbox}
+\textbf{Technical Explanation (2 pts):} \texttt{c1} stored the reference to \texttt{raw} directly (\texttt{self.\_items = raw}). Any mutation on \texttt{raw} or \texttt{c1} modifies the shared list in place. \texttt{c2} was instantiated with \texttt{list(raw)}, which created an independent shallow copy containing \texttt{["Book", "Pen"]} at that moment; subsequent mutations to \texttt{raw} do not affect \texttt{c2}.
+
+\newpage
+\section*{Section C: Object-Oriented Design \& Modular Class Decomposition (25 points)}
+
+\subsection*{Task 1: Public Methods, Parameters, Return Types, and Invariants (6 points --- 1.5 pts each)}
+\begin{itemize}[itemsep=2pt]
+\item \texttt{\_\_init\_\_(self, card\_id: str, initial\_balance: float = 0.0, daily\_cap: float = 8.0) -> None}:\\
+  Initializes instance variables \texttt{\_card\_id}, \texttt{\_balance}, \texttt{\_daily\_cap}, \texttt{\_daily\_spent = 0.0}, and \texttt{\_rides = []}. Enforces invariants: $\text{\_balance} \ge 0$, $\text{\_daily\_cap} > 0$.
+\item \texttt{top\_up(self, amount: float) -> float}:\\
+  Precondition: \texttt{amount > 0}. Increases \texttt{\_balance} by \texttt{amount}. Returns new balance.
+\item \texttt{tap\_ride(self, station: str, base\_fare: float) -> bool}:\\
+  Precondition: \texttt{base\_fare > 0}. Computes effective fare subject to daily cap; deducts from balance if sufficient; logs ride and returns \texttt{True}; otherwise denies entry and returns \texttt{False}.
+\item \texttt{reset\_daily(self) -> None}:\\
+  Postcondition: Resets \texttt{\_daily\_spent} to \texttt{0.0} at start of a new calendar day.
+\end{itemize}
+
+\subsection*{Task 2: Implementation of Core Method \texttt{tap\_ride} (7 points)}
+\begin{solbox}{Model Implementation for Task 2}
+\begin{lstlisting}
+def tap_ride(self, station, base_fare):
+    # 1. Calculate remaining cap margin and effective fare
+    remaining_cap = max(0.0, self._daily_cap - self._daily_spent)
+    effective_fare = min(base_fare, remaining_cap)
+    
+    # 2. Guard against insufficient balance
+    if self._balance < effective_fare:
+        return False  # Turnstile gate entry denied
+    
+    # 3. Mutate internal state and record trip audit entry
+    self._balance -= effective_fare
+    self._daily_spent += effective_fare
+    self._rides.append((station, effective_fare))
+    return True
+\end{lstlisting}
+\end{solbox}
+\textbf{Marking Rubric for Task 2:} 2 pts for capping formula; 2 pts for balance guard check returning \texttt{False}; 2 pts for updating balance, daily spent, and ride list; 1 pt for returning \texttt{True}.
+
+\subsection*{Task 3: Hand-Trace a Transit Simulation Sequence (6 points --- 1.5 pts per step)}
+Initial State: \texttt{balance = \$15.00}, \texttt{daily\_cap = \$8.00}, \texttt{daily\_spent = \$0.00}.
+\begin{enumerate}[itemsep=1.5pt]
+\item \texttt{tap\_ride("Central", 3.50)}:
+  $\text{Fare} = \min(3.50, 8.00 - 0.00) = \mathbf{\$3.50} \implies \text{Balance} = 15.00 - 3.50 = \mathbf{\$11.50}, \quad \text{Daily} = \mathbf{\$3.50}$
+\item \texttt{tap\_ride("WestEnd", 3.00)}:
+  $\text{Fare} = \min(3.00, 8.00 - 3.50) = \mathbf{\$3.00} \implies \text{Balance} = 11.50 - 3.00 = \mathbf{\$8.50}, \quad \text{Daily} = \mathbf{\$6.50}$
+\item \texttt{tap\_ride("NorthGate", 3.00)}:
+  $\text{Remaining Cap} = 8.00 - 6.50 = 1.50 \implies \text{Fare} = \mathbf{\$1.50} \implies \text{Balance} = \mathbf{\$7.00}, \quad \text{Daily} = \mathbf{\$8.00}$ (Cap reached!)
+\item \texttt{tap\_ride("Campus", 2.50)}:
+  $\text{Remaining Cap} = 8.00 - 8.00 = 0.00 \implies \text{Fare} = \mathbf{\$0.00} \implies \text{Balance} = \mathbf{\$7.00}, \quad \text{Daily} = \mathbf{\$8.00}$ (Free ride)
+\end{enumerate}
+\textbf{Final State:} Final \texttt{\_balance} = \textbf{\$7.00}; Final \texttt{\_daily\_spent} = \textbf{\$8.00}; Total successful rides = \textbf{4}.
+
+\subsection*{Task 4: Technical Analysis \& Object-Oriented Principles (6 points --- 3 pts each)}
+\begin{enumerate}[label=\alph*),itemsep=1.5pt]
+\item \textbf{Encapsulation and Invariant Enforcement (3 pts):}
+  Encapsulation guarantees that internal variables (\texttt{\_balance}, \texttt{\_daily\_spent}) can only be altered through validated public methods. Direct external writes (e.g., \texttt{card.\_balance = -50.0}) would violate invariants, bypass the daily fare-capping logic, and prevent transaction logging.
+\item \textbf{Pass-by-Object-Reference Semantics (3 pts):}
+  Python passes objects by reference. When passing \texttt{card} to \texttt{batch\_process(card)}, the parameter receives a reference to the existing instance in heap memory, not a clone. Calling mutator methods inside the function alters the caller's original card object directly.
+\end{enumerate}
+
+\newpage
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Commercial Bank Account with Tiered Overdraft (15 points)}
+
+\begin{solbox}{Complete Reference Implementation for Problem 1}
+\begin{lstlisting}
+class CommercialAccount:
+    """Represents a commercial checking account with overdraft facilities."""
+
+    def __init__(self, acc_num, owner, balance=0.0, overdraft_limit=100.0):
+        if balance < 0 or overdraft_limit < 0:
+            raise ValueError("Balance and overdraft limit must be non-negative.")
+        self._acc_num = str(acc_num)
+        self._owner = str(owner)
+        self._balance = float(balance)
+        self._overdraft_limit = float(overdraft_limit)
+        self._ledger = ["Account Opened"]
+
+    def deposit(self, amount):
+        if amount <= 0:
+            raise ValueError("Deposit amount must be positive.")
+        self._balance += amount
+        self._ledger.append(f"Deposit: +${amount:.2f}")
+        return self._balance
+
+    def withdraw(self, amount):
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be positive.")
+        if amount <= self._balance:
+            self._balance -= amount
+            self._ledger.append(f"Standard: -${amount:.2f}")
+            return True
+        elif amount <= self._balance + self._overdraft_limit:
+            self._balance -= (amount + 10.0)  # $10 overdraft penalty fee
+            self._ledger.append(f"Overdraft: -${amount:.2f} (Fee: $10.00)")
+            return True
+        else:
+            self._ledger.append(f"Declined: -${amount:.2f}")
+            return False
+
+    def transfer_to(self, target_acc, amount):
+        if self.withdraw(amount):
+            target_acc.deposit(amount)
+            return True
+        return False
+
+    def get_ledger(self):
+        return list(self._ledger)
+
+    def __str__(self):
+        return f"Account[#{self._acc_num}, {self._owner}]: Balance = ${self._balance:.2f}"
+
+def main():
+    a1 = CommercialAccount("A101", "Alice Corp", 150.0, overdraft_limit=100.0)
+    b2 = CommercialAccount("B202", "Bob Ltd", 50.0)
+    a1.deposit(50.0)
+    a1.withdraw(250.0)
+    a1.transfer_to(b2, 30.0)
+    print(a1)
+    print(b2)
+    for record in a1.get_ledger():
+        print(f"  * {record}")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\begin{solbox}{Model Console Execution Output}
+\begin{verbatim}
+Account[#A101, Alice Corp]: Balance = $-100.00
+Account[#B202, Bob Ltd]: Balance = $80.00
+  * Account Opened
+  * Deposit: +$50.00
+  * Overdraft: -$250.00 (Fee: $10.00)
+  * Overdraft: -$30.00 (Fee: $10.00)
+\end{verbatim}
+\end{solbox}
+
+\begin{rubricbox}
+\begin{itemize}[leftmargin=1.5em,itemsep=1.5pt]
+\item \textbf{Constructor \& Attributes (3 pts):} Validation of non-negative balance and overdraft limit (1 pt); initializing attributes \texttt{\_acc\_num}, \texttt{\_owner}, \texttt{\_balance}, \texttt{\_overdraft\_limit}, and \texttt{\_ledger} with opening entry (2 pts).
+\item \textbf{\texttt{deposit(self, amount)} (2 pts):} Guard check \texttt{amount > 0} (1 pt); balance update and formatted string logging (1 pt).
+\item \textbf{\texttt{withdraw(self, amount)} (5 pts):} Guard check \texttt{amount > 0} (1 pt); standard branch deducting amount and logging (1.5 pts); overdraft branch deducting amount + \$10 fee within limit and logging (1.5 pts); declined branch logging without balance change (1 pt).
+\item \textbf{\texttt{transfer\_to(self, target, amount)} (2 pts):} Atomic execution via withdrawal result triggering target deposit (2 pts).
+\item \textbf{\texttt{\_\_str\_\_} \& \texttt{main()} (3 pts):} Correct formatting string representation matching spec (1 pt); driver test demonstration (2 pts).
+\end{itemize}
+\end{rubricbox}
+
+\newpage
+\subsection*{Problem 2: Immutable Rational Number Class with Operator Overloading (\texttt{Fraction}) (15 points)}
+
+\begin{solbox}{Complete Reference Implementation for Problem 2}
+\begin{lstlisting}
+import math
+
+class Fraction:
+    """An immutable rational number represented by coprime numerator and denominator."""
+
+    def __init__(self, numerator=0, denominator=1):
+        if denominator == 0:
+            raise ZeroDivisionError("Denominator cannot be zero.")
+        if denominator < 0:
+            numerator, denominator = -numerator, -denominator
+        common = math.gcd(abs(numerator), denominator)
+        self._num = numerator // common
+        self._den = denominator // common
+
+    def get_numerator(self): return self._num
+    def get_denominator(self): return self._den
+
+    def __str__(self):
+        if self._num == 0: return "0"
+        if self._den == 1: return f"{self._num}"
+        return f"{self._num}/{self._den}"
+
+    def __add__(self, other):
+        n = self._num * other._den + other._num * self._den
+        d = self._den * other._den
+        return Fraction(n, d)
+
+    def __sub__(self, other):
+        n = self._num * other._den - other._num * self._den
+        d = self._den * other._den
+        return Fraction(n, d)
+
+    def __mul__(self, other):
+        return Fraction(self._num * other._num, self._den * other._den)
+
+    def __eq__(self, other):
+        if not isinstance(other, Fraction): return False
+        return self._num == other._num and self._den == other._den
+
+    def to_float(self): return self._num / self._den
+
+def main():
+    f1 = Fraction(1, 6); f2 = Fraction(1, 3)
+    print(f"f1 = {f1}, f2 = {f2}")
+    print(f"Addition: {f1} + {f2} = {f1 + f2}")          # 1/2
+    print(f"Subtraction: {f1} - {f2} = {f1 - f2}")       # -1/6
+    print(f"Multiplication: {f1} * {f2} = {f1 * f2}")    # 1/18
+    print(f"Float value of {f1 + f2}: {(f1 + f2).to_float()}")
+
+    f3 = Fraction(-2, -4); f4 = Fraction(3, -9)
+    print(f"Reduced Fraction(-2, -4) = {f3} | Fraction(3, -9) = {f4}")
+    print(f"Equality check (f1 + f2 == f3): {(f1 + f2) == f3}")
+
+    try:
+        Fraction(5, 0)
+    except ZeroDivisionError as err:
+        print(f"Caught expected error: {err}")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\begin{solbox}{Model Console Execution Output}
+\begin{verbatim}
+f1 = 1/6, f2 = 1/3
+Addition: 1/6 + 1/3 = 1/2
+Subtraction: 1/6 - 1/3 = -1/6
+Multiplication: 1/6 * 1/3 = 1/18
+Float value of 1/2: 0.5
+Reduced Fraction(-2, -4) = 1/2 | Fraction(3, -9) = -1/3
+Equality check (f1 + f2 == f3): True
+Caught expected error: Denominator cannot be zero.
+\end{verbatim}
+\end{solbox}
+
+\begin{rubricbox}
+\begin{itemize}[leftmargin=1.5em,itemsep=1.5pt]
+\item \textbf{Constructor Validation \& Invariants (4 pts):} Raising \texttt{ZeroDivisionError} when \texttt{denominator == 0} (1 pt); normalizing negative signs to numerator (1.5 pts); reducing to lowest terms via \texttt{math.gcd} and storing in \texttt{\_num} and \texttt{\_den} (1.5 pts).
+\item \textbf{Immutability \& Accessors (1 pt):} Ensuring attributes are not mutated and providing \texttt{get\_numerator} / \texttt{get\_denominator}.
+\item \textbf{String Representation \texttt{\_\_str\_\_} (2 pts):} Handling \texttt{0}, integer denominator \texttt{1}, and standard fraction format \texttt{f"\{num\}/\{den\}"}.
+\item \textbf{Operator Overloading \texttt{\_\_add\_\_}, \texttt{\_\_sub\_\_}, \texttt{\_\_mul\_\_} (4 pts):} Correct mathematical formulas returning a fresh \texttt{Fraction} instance for each operation.
+\item \textbf{Equality \texttt{\_\_eq\_\_} \& \texttt{to\_float()} (2 pts):} Comparing canonical reduced numerators and denominators (1 pt); float division (1 pt).
+\item \textbf{\texttt{main()} Demonstration Driver (2 pts):} Testing addition, subtraction, multiplication, sign reduction, equality, and catching \texttt{ZeroDivisionError}.
+\end{itemize}
+\end{rubricbox}
+
+\vfill
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[1mm]
+\textbf{\color{primaryblue}--- END OF SOLUTIONS \& RUBRIC ---}
+\end{center}
+
+\end{document}

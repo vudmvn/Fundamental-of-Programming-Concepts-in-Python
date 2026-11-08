@@ -1,0 +1,435 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.90]}{\setmonofont{Liberation Mono}[Scale=0.90]}
+
+\usepackage[top=1.6cm, bottom=1.8cm, left=1.8cm, right=1.8cm]{geometry}
+\setlength{\headheight}{18pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{correctgreen}{RGB}{20,108,55}
+\definecolor{rubricred}{RGB}{160,30,30}
+\definecolor{boxbg}{RGB}{248,250,252}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{primaryblue}\bfseries,
+  commentstyle=\color{secondaryteal}\itshape,
+  stringstyle=\color{rubricred},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Sets and Dictionaries Solutions and Marking Rubric},
+    pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\color{correctgreen}\textbf{Official Solutions \& Marking Rubric: Chapter 8}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[C]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\textbf{Total: 100 Points}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{secondaryteal}}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1pt}
+
+\newtcolorbox{solbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  boxrule=0.7pt,
+  top=1.5mm,
+  bottom=1.5mm,
+  left=2.5mm,
+  right=2.5mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=2.5mm},
+  boxed title style={colback=green!8, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\newtcolorbox{rubricbox}[1][]{
+  enhanced,
+  colback=white,
+  colframe=rubricred!80,
+  arc=1.5mm,
+  boxrule=0.7pt,
+  top=1.5mm,
+  bottom=1.5mm,
+  left=2.5mm,
+  right=2.5mm,
+  title=\textbf{\color{rubricred}Marking Rubric \& Scoring Criteria},
+  coltitle=rubricred,
+  attach boxed title to top left={yshift=-2mm, xshift=2.5mm},
+  boxed title style={colback=red!6, colframe=rubricred!80, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.1cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY --- FACULTY OF DATA SCIENCE \& AI}}\\[0.2cm]
+  \rule{\textwidth}{1pt}\\[0.25cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.15cm]
+  {\large\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}\\[0.1cm]
+  {\normalsize\textbf{Progress Exam: Sets and Dictionaries (Chapter 8)} \quad | \quad Total: 100 Points}\\[0.2cm]
+  \rule{\textwidth}{0.5pt}
+\end{center}
+
+\begin{tcolorbox}[colback=green!6, colframe=correctgreen, arc=1.5mm]
+\small
+\textbf{Note for Examiners and Teaching Assistants:}
+This marking guide provides complete keys, rigorous explanations, step-by-step traces, reference Python implementations, and point-by-point deduction criteria to ensure fair and unified grading across all student cohorts.
+\end{tcolorbox}
+
+\vspace{0.2cm}
+\section*{Section A: Set \& Dictionary Foundations (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.28}
+\small
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Language Rule} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{B} & In Python, \texttt{\{\}} creates an empty dictionary for historical syntax reasons. To create an empty set, the built-in function \texttt{set()} must be called without arguments. & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{C} & Set elements must be hashable and immutable. Lists are mutable and do not define a hash method (raising \texttt{TypeError: unhashable type: 'list'}), whereas tuples, strings, and frozensets are hashable. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{C} & The \texttt{remove(x)} method deletes element \texttt{x} from the set, but raises a \texttt{KeyError} if \texttt{x} is absent. The \texttt{discard(x)} method safely removes \texttt{x} if present and does nothing if absent. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{D} & The symmetric difference operator \texttt{\textasciicircum} returns elements that are in either set, but not in both: $(A \cup B) \setminus (A \cap B)$. For $\{1,2,3,4\} \text{\textasciicircum} \{3,4,5,6\}$, common elements $\{3,4\}$ are excluded, yielding $\{1,2,5,6\}$. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{B} & The \texttt{<=} operator tests if the left set is a subset of the right set ($A \subseteq B$). Since every element of $A=\{1,2\}$ is in $B=\{1,2,3\}$, $A \le B$ evaluates to \texttt{True}. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{C} & Dictionary keys must be immutable and hashable. A list is a mutable container whose contents can change, which would corrupt the hash bucket indexing. Attempting to use a list as a key raises \texttt{TypeError}. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{C} & The \texttt{dict.get(key, default)} method looks up a key safely. If the key exists, its value is returned; if not, it returns the provided default value (\texttt{0}) without mutating the dictionary. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{B} & Default iteration over a dictionary (\texttt{for x in d:}) yields its keys. To iterate over values or pairs, one must explicitly call \texttt{d.values()} or \texttt{d.items()}. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{B} & \texttt{d.pop(key, default)} removes the specified key and returns its value. Providing the default argument \texttt{0} ensures that no \texttt{KeyError} is raised if the key does not exist. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{A} & Sets and dictionaries are implemented as dynamic hash tables. Hashing directly maps a key to a bucket address, enabling expected $O(1)$ constant-time lookup, whereas linear search in a list requires $O(n)$ comparisons. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\section*{Section B: Output Tracing, Dictionary Mechanics \& Diagnostics (25 points)}
+
+\subsection*{Q11. Exact Output of Course Roster (5 points)}
+\begin{solbox}{Model Output for Q11}
+\begin{verbatim}
+CS101: 2 students
+MA201: 2 students
+In both courses: ['Alice']
+\end{verbatim}
+\end{solbox}
+\textbf{Explanation \& Rationale:}
+\begin{itemize}
+\item In \texttt{"CS101"}, students \texttt{"Alice"}, \texttt{"Charlie"}, and \texttt{"Alice"} are added. Because sets enforce uniqueness, the duplicate \texttt{"Alice"} is ignored, resulting in set \texttt{\{"Alice", "Charlie"\}} of size 2.
+\item In \texttt{"MA201"}, \texttt{"Bob"}, \texttt{"Alice"}, and \texttt{"Bob"} are added, resulting in \texttt{\{"Alice", "Bob"\}} of size 2.
+\item Sorting the keys prints \texttt{"CS101"} then \texttt{"MA201"}.
+\item The intersection \texttt{roster["CS101"] \& roster["MA201"]} is \texttt{\{"Alice"\}}. Sorted list conversion yields \texttt{['Alice']}.
+\end{itemize}
+\textbf{Scoring:} 2 pts for correct course counts; 2 pts for correct intersection result; 1 pt for exact formatting and brackets.
+
+\subsection*{Q12. Evaluate Set and Dictionary Expressions (5 points --- 1 pt each)}
+\begin{enumerate}[label=\alph*)]
+\item \texttt{len(s)} = \textbf{\texttt{3}} \quad (The set comprehension yields $\{0, 1, 2\}$, which has cardinality 3).
+\item \texttt{\{1, 2, 3\} - \{2, 3, 4\}} = \textbf{\texttt{\{1\}}} \quad (Set difference removes common elements $\{2, 3\}$ from the left set).
+\item \texttt{d.get("c", 99)} = \textbf{\texttt{99}} \quad (Key \texttt{"c"} is absent, returning the supplied default).
+\item \texttt{list(dict.fromkeys(["kiwi", "apple", "kiwi", "pear"]))} = \textbf{\texttt{['kiwi', 'apple', 'pear']}} \quad (Preserves insertion order of unique keys).
+\item Exception class: \textbf{\texttt{KeyError}} \quad (Attempting direct indexing with a missing key).
+\end{enumerate}
+
+\subsection*{Q13. Diagnose and Correct Three Defects (5 points)}
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\small
+\begin{tabularx}{\textwidth}{|p{4.6cm}|X|X|}
+\hline
+\textbf{Erroneous Code} & \textbf{Problem / Cause} & \textbf{Correction} \\
+\hline
+{\ttfamily\scriptsize item\_map[[1, 2]] = "Origin"} & List \texttt{[1, 2]} is mutable and unhashable, raising \texttt{TypeError}. & Use an immutable tuple as key:\newline{\ttfamily\scriptsize item\_map[(1, 2)] = "Origin"} (2 pts) \\
+\hline
+{\ttfamily\scriptsize counts["clicks"] += 1} & Accessing a nonexistent key raises \texttt{KeyError}. & Use \texttt{get()} with default 0:\newline{\ttfamily\scriptsize counts["clicks"] = counts.get("clicks", 0) + 1} (2 pts) \\
+\hline
+{\ttfamily\scriptsize tags.remove("ai")} & \texttt{remove()} raises \texttt{KeyError} if element \texttt{"ai"} is absent. & Use \texttt{discard()} for safe deletion:\newline{\ttfamily\scriptsize tags.discard("ai")} (1 pt) \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection*{Q14. Frequency Counting \& Character Distribution Analysis (5 points)}
+\begin{solbox}{Console Output for Q14}
+\begin{verbatim}
+Repeated chars: ['a', 'c', 't']
+Count of 'a': 3
+Count of 'z': 0
+\end{verbatim}
+\end{solbox}
+\textbf{Explanation (2 pts):} \texttt{ch.isalpha()} returns \texttt{False} for the hyphen (\texttt{'-'}), so it is excluded from the frequency dictionary. The counts are: \texttt{'a': 3, 't': 2, 'c': 2, 'd': 1, 'n': 1, 'l': 1, 'y': 1, 'i': 1, 's': 1}. Sorting the characters with count $\ge 2$ gives \texttt{['a', 'c', 't']}. \texttt{freq.get("z", 0)} returns 0 because \texttt{'z'} was never inserted.
+
+\subsection*{Q15. Multi-Set Basket Analysis (5 points)}
+\begin{itemize}
+\item Let $A = \{\text{Notebook}, \text{Pen}, \text{Highlighter}\}$, $B = \{\text{Pen}, \text{Stapler}, \text{Desk Lamp}\}$, $C = \{\text{Notebook}, \text{Pen}, \text{Desk Lamp}, \text{Binder}\}$.
+\item (1) Common to all: $A \cap B \cap C = \mathbf{\{\text{"Pen"}\}}$ (2 pts).
+\item (2) Customer A alone: $A \setminus (B \cup C) = \{\text{Notebook}, \text{Pen}, \text{Highlighter}\} \setminus \{\text{Notebook}, \text{Pen}, \text{Stapler}, \text{Desk Lamp}, \text{Binder}\} = \mathbf{\{\text{"Highlighter"}\}}$ (2 pts).
+\item (3) Total distinct items: $|A \cup B \cup C| = |\{\text{Notebook}, \text{Pen}, \text{Highlighter}, \text{Stapler}, \text{Desk Lamp}, \text{Binder}\}| = \mathbf{6}$ items (1 pt).
+\end{itemize}
+
+\newpage
+\section*{Section C: Data Structure Design \& Modular Decomposition (25 points)}
+
+\subsection*{Task 1: Function Signatures, Parameters and Return Types (6 points --- 2 pts each)}
+\begin{itemize}
+\item \texttt{build\_profiles(tx\_list)}:
+  \begin{itemize}
+  \item \textbf{Input:} \texttt{list[tuple[str, str, float, set[str]]]} (Transactions).
+  \item \textbf{Return Type:} \texttt{tuple[dict[str, float], dict[str, set[str]]]} (Pair of spending dictionary and tag profiles dictionary).
+  \item \textbf{Purpose:} Accumulates total money spent and unions product tag sets per customer ID.
+  \end{itemize}
+\item \texttt{build\_category\_catalog(tx\_list)}:
+  \begin{itemize}
+  \item \textbf{Input:} \texttt{list[tuple[str, str, float, set[str]]]}.
+  \item \textbf{Return Type:} \texttt{dict[str, set[str]]}.
+  \item \textbf{Purpose:} Computes the universal union of tags associated with each product category.
+  \end{itemize}
+\item \texttt{recommend\_category\_tags(cust\_id, category, profiles, catalog)}:
+  \begin{itemize}
+  \item \textbf{Input:} \texttt{cust\_id} (str), \texttt{category} (str), \texttt{profiles} (\texttt{dict[str, set[str]]}), \texttt{catalog} (\texttt{dict[str, set[str]]}).
+  \item \textbf{Return Type:} \texttt{set[str]}.
+  \item \textbf{Purpose:} Returns category tags not yet acquired by the specified customer.
+  \end{itemize}
+\end{itemize}
+
+\subsection*{Task 2: Modular Logic Implementation (7 points)}
+\begin{solbox}{Model Implementation for Task 2}
+\begin{lstlisting}
+def recommend_category_tags(cust_id, category, profiles, catalog):
+    if category not in catalog:
+        return set()  # Category does not exist
+    category_tags = catalog[category]
+    customer_tags = profiles.get(cust_id, set())  # Empty set if new customer
+    return category_tags - customer_tags  # Set difference
+\end{lstlisting}
+\end{solbox}
+\textbf{Marking:} 2 pts for safe retrieval of category; 2 pts for handling missing customer; 3 pts for applying set difference \texttt{category\_tags - customer\_tags}.
+
+\subsection*{Task 3: Hand-Trace Calculation (6 points --- 2 pts each)}
+\begin{enumerate}
+\item \texttt{profiles["C101"]}: Customer \texttt{C101} has transactions with \texttt{\{"wireless", "audio", "gadget"\}} and \texttt{\{"wireless", "charger"\}}.
+  $$\text{Tag Profile} = \mathbf{\{\text{"wireless", "audio", "gadget", "charger"\}}}$$
+\item \texttt{category\_catalog["Electronics"]}: Transactions in Electronics are from C101 (2 txs) and C102 (1 tx: \texttt{\{"audio", "accessory"\}}).
+  $$\text{Category Tags} = \mathbf{\{\text{"wireless", "audio", "gadget", "charger", "accessory"\}}}$$
+\item Recommended tags for \texttt{"C102"} in \texttt{"Electronics"}:
+  $$\text{C102's current tags} = \{\text{"fiction", "paperback", "audio", "accessory"}\}$$
+  $$\text{Recommended} = \text{Electronics Tags} \setminus \text{C102 Tags} = \mathbf{\{\text{"wireless", "gadget", "charger"\}}}$$
+\end{enumerate}
+
+\subsection*{Task 4: Technical Analysis \& Design Decisions (6 points --- 3 pts each)}
+\begin{enumerate}[label=\alph*)]
+\item \textbf{Performance of Dictionary of Sets vs List of Tuples (3 pts):}
+  Testing \texttt{tag in customer\_tags} takes $O(1)$ average time with a set because Python hashes the string tag directly to a bucket index. Looking up the customer in the dictionary also takes $O(1)$. In contrast, searching a flat list of tuples \texttt{[(cust\_id, tag), ...]} requires a linear scan ($O(N)$ comparisons) across all historical transactions, causing severe slowdown as transaction volume grows.
+\item \textbf{Hash Contract and Immutability of Keys (3 pts):}
+  A dictionary stores key-value pairs in buckets determined by \texttt{hash(key)}. If a key were mutable (e.g., a list or set) and modified after insertion, its hash value would change. The dictionary would then search the wrong hash bucket for lookups, making the item unfindable and violating internal invariant consistency. Therefore, Python enforces that all dictionary keys and set elements must be immutable and hashable.
+\end{enumerate}
+
+\newpage
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Text Concordance \& Inverted Word Index (15 points)}
+
+\begin{solbox}{Complete Reference Solution for Problem 1}
+\begin{lstlisting}
+import string
+
+def clean_word(raw):
+    """Strip punctuation, convert to lowercase, discard if non-alphanumeric."""
+    cleaned = raw.strip(string.punctuation).lower()
+    if cleaned.isalnum():
+        return cleaned
+    return ""
+
+def build_concordance(lines, stopwords):
+    """Build a dictionary mapping words to sets of 1-based line numbers."""
+    concordance = {}
+    for line_no, line in enumerate(lines, start=1):
+        words = line.split()
+        for token in words:
+            word = clean_word(token)
+            if len(word) >= 3 and word not in stopwords:
+                if word not in concordance:
+                    concordance[word] = set()
+                concordance[word].add(line_no)
+    return concordance
+
+def query_terms(concordance, search_terms):
+    """Return set of line numbers containing ALL search terms (intersection)."""
+    if not search_terms:
+        return set()
+    cleaned_terms = [clean_word(t) for t in search_terms if clean_word(t)]
+    if not cleaned_terms:
+        return set()
+    # If any term is not in concordance, intersection is empty
+    for t in cleaned_terms:
+        if t not in concordance:
+            return set()
+    # Initialize with the line set of the first term
+    result = set(concordance[cleaned_terms[0]])
+    for t in cleaned_terms[1:]:
+        result &= concordance[t]
+    return result
+
+def main():
+    lines = [
+        "Python is an expressive and versatile language.",
+        "Data science with Python is powerful and popular.",
+        "Versatile libraries make Python great for data.",
+        "Statistics and machine learning rely on Python."
+    ]
+    stopwords = {"is", "an", "and", "with", "for", "on"}
+    
+    concordance = build_concordance(lines, stopwords)
+    print("--- CONCORDANCE INDEX ---")
+    for word in sorted(concordance.keys()):
+        print(f"{word:12s} -> lines: {sorted(concordance[word])}")
+    
+    query = ["python", "data", "versatile"]
+    matching_lines = query_terms(concordance, query)
+    print("\nQuery", query, "matches line(s):", sorted(matching_lines))
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\begin{rubricbox}
+\begin{itemize}[leftmargin=1.5em,itemsep=1.5pt]
+\item \textbf{\texttt{clean\_word(raw)} (3 points):} Correct stripping of punctuation and lowercasing (2 pts); proper alphanumeric check and return of empty string on invalid token (1 pt).
+\item \textbf{\texttt{build\_concordance(lines, stopwords)} (6 points):} Correct 1-based line enumeration (1 pt); splitting and filtering stopwords and length $\ge 3$ (2 pts); correctly initializing set per word and adding line number without duplicate entries (3 pts).
+\item \textbf{\texttt{query\_terms(concordance, terms)} (4 points):} Correct handling of missing terms returning empty set (1 pt); proper sequential set intersection (\texttt{\&=} or \texttt{set.intersection}) (3 pts).
+\item \textbf{\texttt{main()} and Code Quality (2 points):} Clean execution with specified sample corpus (1 pt); proper PEP-8 formatting, modular structure, and guard \texttt{\_\_name\_\_ == "\_\_main\_\_"} (1 pt).
+\end{itemize}
+\end{rubricbox}
+
+\newpage
+\subsection*{Problem 2: Cohort Skill Matrix \& Project Team Allocation (15 points)}
+
+\begin{solbox}{Complete Reference Solution for Problem 2}
+\begin{lstlisting}
+def find_qualified(cohort, required_skills):
+    """Return sorted list of student names who possess all required skills."""
+    qualified = []
+    for student, skills in cohort.items():
+        if required_skills.issubset(skills):
+            qualified.append(student)
+    return sorted(qualified)
+
+def skill_gaps(cohort, student_name, required_skills):
+    """Return set of skills missing for the given student."""
+    if student_name not in cohort:
+        return set(required_skills)
+    student_skills = cohort[student_name]
+    return required_skills - student_skills
+
+def cohort_skill_summary(cohort):
+    """Return tuple of (universal_skills, all_unique_skills)."""
+    if not cohort:
+        return (set(), set())
+    # Universal: intersection across all students
+    all_sets = list(cohort.values())
+    universal = set(all_sets[0])
+    for s in all_sets[1:]:
+        universal &= s
+    # Unique: union across all students
+    unique = set()
+    for s in all_sets:
+        unique |= s
+    return (universal, unique)
+
+def main():
+    cohort = {
+        "Minh":  {"python", "sql", "git", "statistics"},
+        "Linh":  {"python", "git", "html", "css"},
+        "Duc":   {"python", "sql", "git", "machine-learning"},
+        "Trang": {"python", "git", "statistics", "tableau"}
+    }
+    project_reqs = {"python", "sql", "git"}
+    
+    print("--- PROJECT TEAM ALLOCATION REPORT ---")
+    qualified = find_qualified(cohort, project_reqs)
+    print("Qualified students for project:", qualified)
+    
+    for name in cohort:
+        gaps = skill_gaps(cohort, name, project_reqs)
+        if gaps:
+            print(f"Student {name:5s} needs additional training in: {sorted(gaps)}")
+        else:
+            print(f"Student {name:5s} meets all requirements!")
+            
+    universal, all_unique = cohort_skill_summary(cohort)
+    print("\nSkills mastered by EVERY student in cohort:", sorted(universal))
+    print(f"Total distinct skills across cohort ({len(all_unique)}):", sorted(all_unique))
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\begin{rubricbox}
+\begin{itemize}[leftmargin=1.5em,itemsep=1.5pt]
+\item \textbf{\texttt{find\_qualified(cohort, reqs)} (4 points):} Correct use of \texttt{issubset()} or \texttt{<=} (3 pts); returns properly sorted list of student names (1 pt).
+\item \textbf{\texttt{skill\_gaps(cohort, student, reqs)} (4 points):} Handles student absent from cohort edge case (1 pt); applies set difference \texttt{required - student} correctly (3 pts).
+\item \textbf{\texttt{cohort\_skill\_summary(cohort)} (5 points):} Handles empty cohort edge case (1 pt); correctly computes multi-set intersection for universal skills (2 pts); correctly computes multi-set union for unique catalog (2 pts).
+\item \textbf{\texttt{main()} and Demonstration (2 points):} Complete driver with formatted output matching specifications (1 pt); idiomatic Python, clean modular functions, no external packages (1 pt).
+\end{itemize}
+\end{rubricbox}
+
+\vfill
+\begin{center}
+\rule{0.5\textwidth}{0.4pt}\\[1mm]
+\textbf{\color{primaryblue}--- END OF SOLUTIONS \& RUBRIC ---}
+\end{center}
+
+\end{document}
