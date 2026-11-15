@@ -1,0 +1,455 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.90]}{\setmonofont{Liberation Mono}[Scale=0.90]}
+
+\usepackage[top=1.4cm, bottom=1.5cm, left=1.65cm, right=1.65cm]{geometry}
+\setlength{\headheight}{16pt}
+
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{correctgreen}{RGB}{20,108,55}
+\definecolor{rubricred}{RGB}{160,30,30}
+\definecolor{boxbg}{RGB}{248,250,252}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{primaryblue}\bfseries,
+  commentstyle=\color{secondaryteal}\itshape,
+  stringstyle=\color{rubricred},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{boxbg},
+  breaklines=true,
+  aboveskip=0.15em,
+  belowskip=0.15em,
+  tabsize=4
+}
+\lstset{style=pythonstyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=secondaryteal,
+    pdftitle={DSAI1003 - Inheritance and Polymorphism Solutions and Marking Rubric},
+    pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{primaryblue}\textbf{DSAI1003: Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\color{correctgreen}\textbf{Official Solutions \& Marking Rubric: Chapter 10}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[C]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\footnotesize\textbf{Total: 100 Points}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{secondaryteal}}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{2.5pt}{1.5pt}
+\titlespacing*{\subsection}{0pt}{2pt}{1pt}
+
+\newtcolorbox{solbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=correctgreen,
+  arc=1.5mm,
+  boxrule=0.7pt,
+  top=1.0mm,
+  bottom=1.0mm,
+  left=2.5mm,
+  right=2.5mm,
+  title=\textbf{\color{correctgreen}#2},
+  coltitle=correctgreen,
+  attach boxed title to top left={yshift=-2mm, xshift=2.5mm},
+  boxed title style={colback=green!8, colframe=correctgreen, arc=1mm},
+  #1
+}
+
+\newtcolorbox{rubricbox}[1][]{
+  enhanced,
+  colback=white,
+  colframe=rubricred!80,
+  arc=1.5mm,
+  boxrule=0.7pt,
+  top=1.0mm,
+  bottom=1.0mm,
+  left=2.5mm,
+  right=2.5mm,
+  title=\textbf{\color{rubricred}Marking Rubric \& Scoring Criteria},
+  coltitle=rubricred,
+  attach boxed title to top left={yshift=-2mm, xshift=2.5mm},
+  boxed title style={colback=red!6, colframe=rubricred!80, arc=1mm},
+  #1
+}
+
+\begin{document}
+
+\begin{center}
+  {\Large\textbf{NATIONAL ECONOMICS UNIVERSITY (NEU)}}\\[0.05cm]
+  {\large\textbf{COLLEGE OF TECHNOLOGY --- FACULTY OF DATA SCIENCE \& AI}}\\[0.12cm]
+  \rule{\textwidth}{1pt}\\[0.15cm]
+  {\LARGE\bfseries\color{primaryblue}OFFICIAL SOLUTIONS \& MARKING RUBRIC}\\[0.08cm]
+  {\large\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}\\[0.04cm]
+  {\normalsize\textbf{Progress Exam: Inheritance and Polymorphism (Chapter 10)} \quad | \quad Total: 100 Points}\\[0.12cm]
+  \rule{\textwidth}{0.5pt}
+\end{center}
+
+\begin{tcolorbox}[colback=green!6, colframe=correctgreen, arc=1.5mm, top=1mm, bottom=1mm]
+\small
+\textbf{Note for Examiners and Teaching Assistants:}
+This marking guide provides complete answer keys, step-by-step trace tables, rigorous explanations of language semantics, reference Python implementations, and point-by-point deduction criteria to ensure fair, unified grading across all cohorts.
+\end{tcolorbox}
+
+\vspace{0.05cm}
+\section*{Section A: Inheritance \& Polymorphism Foundations (20 points)}
+\textit{2 points per question. Total = 20 points.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.20}
+\small
+\begin{tabularx}{\textwidth}{|c|c|X|c|}
+\hline
+\textbf{Q\#} & \textbf{Key} & \textbf{Conceptual Explanation \& Language Rule} & \textbf{Marks} \\
+\hline
+\textbf{Q1} & \textbf{C} & The ``is-a'' relationship models inheritance (a \texttt{Car} is a specialized type of \texttt{Vehicle}). Attributes such as \texttt{Engine} or lists of \texttt{Tire} represent the ``has-a'' relationship (composition/aggregation). & 2 pts \\
+\hline
+\textbf{Q2} & \textbf{D} & In Python, subclass inheritance is declared by placing the superclass in parentheses after the class name: \texttt{class Subclass(Superclass):}. Keywords like \texttt{extends} or \texttt{inherits} are from Java/C\# and are syntax errors in Python. & 2 pts \\
+\hline
+\textbf{Q3} & \textbf{B} & A subclass that defines its own \texttt{\_\_init\_\_} shadows the superclass constructor. Calling \texttt{super().\_\_init\_\_(...)} explicitly ensures all instance variables defined by the base class are initialized properly. & 2 pts \\
+\hline
+\textbf{Q4} & \textbf{A} & Method overriding occurs when a subclass defines a method with the same name and signature as a superclass method. Python's runtime lookup resolves the method starting from the subclass, overriding the base implementation. & 2 pts \\
+\hline
+\textbf{Q5} & \textbf{A} & Calling \texttt{self.get\_salary()} inside \texttt{Manager.get\_salary()} invokes the overridden method itself recursively without a base termination condition, resulting in a fatal \texttt{RecursionError}. One must use \texttt{super().get\_salary()}. & 2 pts \\
+\hline
+\textbf{Q6} & \textbf{D} & Polymorphism allows client code to treat instances of different subclasses uniformly through a common base interface. Python dynamically determines at runtime which concrete overridden method to dispatch based on actual object type. & 2 pts \\
+\hline
+\textbf{Q7} & \textbf{C} & \texttt{isinstance(boss, Employee)} returns \texttt{True} because \texttt{Executive} transitively inherits from \texttt{Employee}. However, \texttt{type(boss) is Employee} returns \textbf{\texttt{False}} because \texttt{type(boss)} yields exactly \texttt{Executive}. & 2 pts \\
+\hline
+\textbf{Q8} & \textbf{B} & \texttt{issubclass(ChoiceQuestion, Question)} evaluates to \texttt{True} because \texttt{ChoiceQuestion} derives directly from \texttt{Question}. The reverse is \texttt{False}. & 2 pts \\
+\hline
+\textbf{Q9} & \textbf{A} & In standard Python without heavy abstract base class modules, a template/abstract method is conventionally defined in the superclass by raising \texttt{NotImplementedError("...")} to enforce subclass overrides. & 2 pts \\
+\hline
+\textbf{Q10} & \textbf{C} & As emphasized in Horstmann Section 10.1, inheritance should model structural and behavioral specialization, not simple variations in data values (such as fuel capacity or color). These belong in instance attributes of a single \texttt{Car} class. & 2 pts \\
+\hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\section*{Section B: Output Tracing, Inheritance Mechanics \& Diagnostics (25 points)}
+
+\subsection*{Q11. Exact Output of Multi-Class Inheritance \& Dynamic Dispatch Tracing (5 points)}
+\begin{solbox}{Model Console Output for Q11}
+\begin{verbatim}
+Device[Generic: 50W]
+Device[Echo: 15W, IP=192.168.1.10]
+True | False
+\end{verbatim}
+\end{solbox}
+\textbf{State Trace:}
+\texttt{d1.status()} calls \texttt{Device.status(d1)} $\implies$ inside, \texttt{self.specs()} calls \texttt{Device.specs(d1)} returning \texttt{"Generic: 50W"}. \texttt{d2.status()} calls inherited \texttt{status()}; inside, \texttt{self.specs()} dynamically dispatches to \texttt{SmartDevice.specs(d2)}, invoking \texttt{super().specs()} and appending \texttt{", IP=192.168.1.10"}. \texttt{isinstance(d2, Device)} is \texttt{True}; \texttt{isinstance(d1, SmartDevice)} is \texttt{False}.\newline
+\textbf{Scoring:} 2 pts for line 1; 2 pts for dynamic dispatch in line 2; 1 pt for line 3 booleans.
+
+\subsection*{Q12. Evaluate Class Hierarchy, Type Introspection \& Inheritance Expressions (5 points --- 1 pt each)}
+\begin{enumerate}[label=\alph*),itemsep=1.0pt]
+\item \lstinline|isinstance(c, A)| evaluates to \textbf{\texttt{True}} (\texttt{C} inherits transitively from \texttt{A} via \texttt{B}).
+\item \lstinline|issubclass(A, B)| evaluates to \textbf{\texttt{False}} (\texttt{A} is superclass of \texttt{B}, not its subclass).
+\item \lstinline|type(b) is A| evaluates to \textbf{\texttt{False}} (\texttt{type(b)} is strictly \texttt{B}, not \texttt{A}).
+\item \lstinline|issubclass(C, (A, list))| evaluates to \textbf{\texttt{True}} (matches candidate superclass \texttt{A}).
+\item \lstinline|isinstance(b, (str, C))| evaluates to \textbf{\texttt{False}} (\texttt{b} is neither \texttt{str} nor subclass \texttt{C}).
+\end{enumerate}
+
+\subsection*{Q13. Diagnose and Correct Three Object-Oriented Inheritance Defects (5 points)}
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\small
+\begin{tabularx}{\textwidth}{|p{4.5cm}|X|X|}
+\hline
+\textbf{Erroneous Code} & \textbf{Problem / Root Cause} & \textbf{Correction} \\
+\hline
+{\ttfamily\scriptsize class Animal:}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self, name):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_name = name}\newline{\ttfamily\scriptsize class Dog(Animal):}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self, name, breed):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_breed = breed} & Subclass fails to delegate to superclass constructor; inherited attribute \texttt{\_name} is uninitialized, raising \texttt{AttributeError}. & Call \texttt{super().\_\_init\_\_}:\newline{\ttfamily\scriptsize def \_\_init\_\_(self, name, breed):}\newline{\ttfamily\scriptsize \ \ super().\_\_init\_\_(name)}\newline{\ttfamily\scriptsize \ \ self.\_breed = breed} (2 pts) \\
+\hline
+{\ttfamily\scriptsize class Employee:}\newline{\ttfamily\scriptsize \ \ def get\_salary(self): return 5000.0}\newline{\ttfamily\scriptsize class Manager(Employee):}\newline{\ttfamily\scriptsize \ \ def get\_salary(self):}\newline{\ttfamily\scriptsize \ \ \ \ return self.get\_salary() + 1000.0} & Calling \texttt{self.get\_salary()} inside overridden method causes infinite recursion, raising \texttt{RecursionError}. & Invoke superclass method:\newline{\ttfamily\scriptsize def get\_salary(self):}\newline{\ttfamily\scriptsize \ \ return super().get\_salary() + 1000.0} (2 pts) \\
+\hline
+{\ttfamily\scriptsize class Base:}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self): self.\_\_token = 99}\newline{\ttfamily\scriptsize class Sub(Base):}\newline{\ttfamily\scriptsize \ \ def show(self): return self.\_\_token} & Double underscores trigger private name mangling (\texttt{\_Base\_\_token}); subclass cannot read it via \texttt{self.\_\_token}. & Use protected convention:\newline{\ttfamily\scriptsize self.\_token = 99} in \texttt{Base},\newline or provide accessor \texttt{get\_token()} (1 pt) \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection*{Q14. Savings Account Minimum Balance State Tracing with Overriding (5 points)}
+\begin{solbox}{Console Output for Q14}
+\begin{verbatim}
+Interest: 30.00 | Balance: 300.00
+\end{verbatim}
+\end{solbox}
+\textbf{State Trace (3 pts):} Initial \texttt{\_b = 1000}, \texttt{\_m = 1000} $\to$ \texttt{s.withdraw(300)}: \texttt{\_b = 700}, \texttt{\_m = 700} $\to$ \texttt{s.withdraw(400)}: \texttt{\_b = 300}, \texttt{\_m = 300} $\to$ \texttt{s.interest()} computes $300 \times 0.1 = \mathbf{30.00}$. Final balance remains $\mathbf{300.00}$. Output format: \texttt{Interest: 30.00 | Balance: 300.00} (2 pts).
+
+\subsection*{Q15. Dynamic Method Dispatch vs Type Checking in Polymorphic Fleets (5 points)}
+\begin{solbox}{Output for Q15}
+\begin{verbatim}
+[5.0, 12.0, 2.5]
+\end{verbatim}
+\end{solbox}
+\textbf{Technical Explanation (3 pts):}
+Polymorphism allows client code to treat all vehicles uniformly through \texttt{toll()}. At runtime, Python looks up each object's actual class and executes its specialized implementation without requiring explicit type checks (\texttt{isinstance(v, Bus)}). If a new subclass (e.g., \texttt{Truck} with toll \$18.00) is introduced, client loops run unmodified, adhering strictly to the Open-Closed Principle (OCP).
+
+\newpage
+\section*{Section C: Object-Oriented Design \& Hierarchical Class Decomposition (25 points)}
+
+\subsection*{Task 1: Hierarchy Specification, Parameters, and Contracts (6 points --- 1.5 pts each)}
+\begin{itemize}[itemsep=1.5pt]
+\item \texttt{\_\_init\_\_(self) -> None}:\\
+  Contract: Must invoke \texttt{super().\_\_init\_\_()} to initialize inherited attributes \texttt{\_text} and \texttt{\_answer}; initializes \texttt{\_choices = []}.
+\item \texttt{addChoice(self, choice: str, correct: bool = False) -> None}:\\
+  Invariant: Appends \texttt{choice} to \texttt{\_choices}. If \texttt{correct is True}, registers its 1-based index \texttt{str(len(self.\_choices))} as the correct answer via \texttt{self.setAnswer(...)}.
+\item \texttt{display(self) -> None}:\\
+  Output Contract: Invokes \texttt{super().display()} to print question text, then prints each choice formatted as \texttt{"1: choice"}, \texttt{"2: choice"}, etc.
+\item \textbf{Override Check on \texttt{checkAnswer}:}\\
+  \texttt{ChoiceQuestion} does \textbf{not} need to override \texttt{checkAnswer(response)}. Since \texttt{addChoice} records answer as a digit string, inherited \texttt{Question.checkAnswer} compares stripped strings case-insensitively, validating the user's choice index without duplicate code.
+\end{itemize}
+
+\subsection*{Task 2: Implementation of Subclass \texttt{ChoiceQuestion} (7 points)}
+\begin{solbox}{Model Implementation for Task 2}
+\begin{lstlisting}
+class ChoiceQuestion(Question):
+    """A question with multiple choice options."""
+    def __init__(self):
+        super().__init__()
+        self._choices = []
+
+    def addChoice(self, choice, correct=False):
+        self._choices.append(choice)
+        if correct:
+            self.setAnswer(str(len(self._choices)))
+
+    def display(self):
+        super().display()
+        for i, choice in enumerate(self._choices, 1):
+            print(f"{i}: {choice}")
+\end{lstlisting}
+\end{solbox}
+\textbf{Marking Rubric for Task 2:} 2 pts for \texttt{\_\_init\_\_} calling \texttt{super()}; 2.5 pts for \texttt{addChoice} registering choice index; 2.5 pts for \texttt{display} calling \texttt{super().display()} and iterating with 1-based numbering.
+
+\subsection*{Task 3: Hand-Trace a Polymorphic Quiz Execution Sequence (6 points --- 1.5 pts per step)}
+\begin{enumerate}[itemsep=1.0pt]
+\item User inputs \texttt{"guido van rossum"} for $Q_1$:\\
+  Method dispatched: \textbf{\texttt{Question.checkAnswer}} \quad Result: \textbf{\texttt{True}} (Case-insensitive match).
+\item User inputs \texttt{"2"} for $Q_2$:\\
+  Method dispatched: \textbf{\texttt{Question.checkAnswer}} (inherited by \texttt{ChoiceQuestion}) \quad Result: \textbf{\texttt{True}}.
+\item User inputs \texttt{"0.333"} for $Q_3$:\\
+  Method dispatched: \textbf{\texttt{NumericQuestion.checkAnswer}} \quad Result: \textbf{\texttt{True}} ($|0.333 - 0.33| = 0.003 \le 0.01$).
+\end{enumerate}
+\textbf{Summary:} Total Quiz Score = \textbf{3 / 3}. Manual type branching required? \textbf{No} (dynamic polymorphic dispatch).
+
+\subsection*{Task 4: Technical Analysis \& Object-Oriented Principles (6 points --- 3 pts each)}
+\begin{enumerate}[label=\alph*),itemsep=1.5pt]
+\item \textbf{Dynamic Method Dispatch Mechanics (3 pts):}\\
+  When executing \texttt{q.display()}, Python inspects \texttt{type(q)}. It searches for \texttt{display} in the object's class namespace first. For a \texttt{ChoiceQuestion} instance, it resolves to \texttt{ChoiceQuestion.display}; for a base \texttt{Question} instance, it resolves to \texttt{Question.display}. Method resolution order (MRO) ensures the most specialized override runs.
+\item \textbf{Software Engineering Advantages of Inheritance (3 pts):}\\
+  Inheritance avoids code duplication (promotes DRY) by reusing \texttt{\_text}, \texttt{\_answer}, \texttt{setText}, \texttt{setAnswer}, and \texttt{checkAnswer}. Furthermore, it enables substitutability (Liskov Substitution Principle), allowing client code to manage heterogeneous questions polymorphically in a single list.
+\end{enumerate}
+
+\newpage
+\section*{Section D: Applied Programming in Python (30 points)}
+
+\subsection*{Problem 1: Corporate Personnel \& Tiered Payroll Hierarchy (15 points)}
+
+\begin{solbox}{Complete Reference Implementation for Problem 1}
+\begin{lstlisting}
+class Employee:
+    """Base class representing a corporate employee."""
+    def __init__(self, emp_id, name, base_salary):
+        if not emp_id or not isinstance(emp_id, str): raise ValueError("Invalid employee ID.")
+        if base_salary < 0: raise ValueError("Base salary cannot be negative.")
+        self._emp_id, self._name, self._base_salary = str(emp_id), str(name), float(base_salary)
+
+    def get_salary(self): return self._base_salary
+    def get_bonus(self): return 0.0
+    def total_compensation(self): return self.get_salary() + self.get_bonus()
+    def __str__(self): return f"Employee[#{self._emp_id}, {self._name}]: Total = ${self.total_compensation():.2f}"
+
+class Manager(Employee):
+    """Subclass representing a manager with performance bonus."""
+    def __init__(self, emp_id, name, base_salary, bonus=0.0):
+        super().__init__(emp_id, name, base_salary)
+        if bonus < 0: raise ValueError("Bonus cannot be negative.")
+        self._bonus = float(bonus)
+
+    def set_bonus(self, bonus):
+        if bonus < 0: raise ValueError("Bonus cannot be negative.")
+        self._bonus = float(bonus)
+
+    def get_bonus(self): return self._bonus
+    def __str__(self):
+        return f"Manager[#{self._emp_id}, {self._name}]: Salary = ${self.get_salary():.2f}, Bonus = ${self.get_bonus():.2f}, Total = ${self.total_compensation():.2f}"
+
+class Executive(Manager):
+    """Subclass representing an executive officer with stock dividends."""
+    def __init__(self, emp_id, name, base_salary, bonus=0.0, shares=0):
+        super().__init__(emp_id, name, base_salary, bonus)
+        if shares < 0: raise ValueError("Shares cannot be negative.")
+        self._shares = int(shares)
+
+    def grant_shares(self, count):
+        if count < 0: raise ValueError("Cannot grant negative shares.")
+        self._shares += count
+
+    def get_bonus(self): return super().get_bonus() + self._shares * 5.0
+    def __str__(self): return f"Executive[#{self._emp_id}, {self._name}]: Shares = {self._shares}, Total = ${self.total_compensation():.2f}"
+
+def main():
+    e1 = Employee("E101", "Alice Smith", 4500.0)
+    m1 = Manager("M202", "Bob Johnson", 7000.0, 1500.0)
+    x1 = Executive("X303", "Carol Danvers", 12000.0, 4000.0, shares=500)
+
+    staff = [e1, m1, x1]
+    total_payroll = sum(m.total_compensation() for m in staff)
+    print("--- CORPORATE PAYROLL AUDIT ---")
+    for member in staff: print(member)
+    print(f"Total Monthly Payroll Expenditure: ${total_payroll:.2f}")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\begin{solbox}{Model Console Execution Output}
+\begin{verbatim}
+--- CORPORATE PAYROLL AUDIT ---
+Employee[#E101, Alice Smith]: Total = $4500.00
+Manager[#M202, Bob Johnson]: Salary = $7000.00, Bonus = $1500.00, Total = $8500.00
+Executive[#X303, Carol Danvers]: Shares = 500, Total = $18500.00
+Total Monthly Payroll Expenditure: $31500.00
+\end{verbatim}
+\end{solbox}
+
+\newpage
+\begin{rubricbox}
+\begin{itemize}[leftmargin=1.5em,itemsep=2.0pt]
+\item \textbf{Base Class \texttt{Employee} (4 pts):} Defensive validation for \texttt{emp\_id} and non-negative \texttt{base\_salary} (1.5 pts); accessors \texttt{get\_salary}, default \texttt{get\_bonus} (1 pt); \texttt{total\_compensation} and formatted \texttt{\_\_str\_\_} (1.5 pts).
+\item \textbf{Subclass \texttt{Manager} (4 pts):} Explicit invocation of \texttt{super().\_\_init\_\_} (1.5 pts); validation on bonus (1 pt); overriding \texttt{get\_bonus} and specialized \texttt{\_\_str\_\_} (1.5 pts).
+\item \textbf{Subclass \texttt{Executive} (4 pts):} Constructor calling \texttt{super().\_\_init\_\_} and storing validated \texttt{\_shares} (1.5 pts); \texttt{grant\_shares} mutator (0.5 pt); overriding \texttt{get\_bonus} via \texttt{super().get\_bonus() + shares * 5.0} (1 pt); customized \texttt{\_\_str\_\_} (1 pt).
+\item \textbf{\texttt{main()} Driver \& Polymorphic Processing (3 pts):} Correct instantiation of the three hierarchy levels (1 pt); polymorphic iteration computing total payroll (\$31500.00) (1 pt); error-handling demonstration (1 pt).
+\end{itemize}
+\end{rubricbox}
+
+\newpage
+\subsection*{Problem 2: Polymorphic Bank Account Fee \& Interest Hierarchy (15 points)}
+
+\begin{solbox}{Complete Reference Implementation for Problem 2}
+\begin{lstlisting}
+class BankAccount:
+    """Base class for all bank accounts."""
+    def __init__(self, acc_num, balance=0.0):
+        if balance < 0: raise ValueError("Initial balance cannot be negative.")
+        self._acc_num, self._balance = str(acc_num), float(balance)
+    def deposit(self, amount):
+        if amount <= 0: raise ValueError("Deposit amount must be positive.")
+        self._balance += amount
+    def withdraw(self, amount):
+        if amount <= 0: raise ValueError("Withdrawal amount must be positive.")
+        if amount > self._balance: return False
+        self._balance -= amount; return True
+    def month_end(self): pass  # Template hook for monthly close
+    def get_balance(self): return self._balance
+    def __str__(self): return f"BankAccount[#{self._acc_num}]: Balance = ${self._balance:.2f}"
+
+class SavingsAccount(BankAccount):
+    """Interest-bearing account calculating interest on minimum monthly balance."""
+    def __init__(self, acc_num, balance=0.0, rate=6.0):
+        super().__init__(acc_num, balance)
+        if rate < 0: raise ValueError("Interest rate cannot be negative.")
+        self._rate, self._min_balance = float(rate), self._balance
+    def withdraw(self, amount):
+        success = super().withdraw(amount)
+        if success and self._balance < self._min_balance: self._min_balance = self._balance
+        return success
+    def month_end(self):
+        interest = self._min_balance * (self._rate / 12.0) / 100.0
+        self.deposit(interest); self._min_balance = self._balance
+        return interest
+    def __str__(self): return f"SavingsAccount[#{self._acc_num}]: Balance = ${self._balance:.2f} (MinBal = ${self._min_balance:.2f})"
+
+class CheckingAccount(BankAccount):
+    """Transaction-fee checking account with free monthly allowance."""
+    def __init__(self, acc_num, balance=0.0, free=3, fee=1.50):
+        super().__init__(acc_num, balance)
+        self._free, self._fee, self._trans = int(free), float(fee), 0
+    def deposit(self, amount):
+        super().deposit(amount); self._trans += 1
+    def withdraw(self, amount):
+        success = super().withdraw(amount)
+        if success: self._trans += 1
+        return success
+    def month_end(self):
+        total_fee = max(0, self._trans - self._free) * self._fee
+        if total_fee > 0: self._balance -= total_fee
+        self._trans = 0; return total_fee
+    def __str__(self): return f"CheckingAccount[#{self._acc_num}]: Balance = ${self._balance:.2f} (Trans = {self._trans})"
+
+def main():
+    sa = SavingsAccount("SA-101", 1200.0, rate=6.0)
+    ca = CheckingAccount("CA-202", 500.0, free=2, fee=2.00)
+    sa.deposit(300.0); sa.withdraw(500.0)
+    ca.deposit(200.0); ca.withdraw(100.0); ca.withdraw(50.0); ca.withdraw(50.0)
+    accounts = [sa, ca]
+    print("--- PRE-CLOSING PORTFOLIO STATUS ---")
+    for acc in accounts: print(acc)
+    print("\n--- EXECUTING POLYMORPHIC MONTH-END BATCH ---")
+    for acc in accounts:
+        acc.month_end(); print(acc)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{solbox}
+
+\newpage
+\begin{solbox}{Model Console Execution Output}
+\begin{verbatim}
+--- PRE-CLOSING PORTFOLIO STATUS ---
+SavingsAccount[#SA-101]: Balance = $1000.00 (MinBal = $1000.00)
+CheckingAccount[#CA-202]: Balance = $500.00 (Trans = 4)
+
+--- EXECUTING POLYMORPHIC MONTH-END BATCH ---
+SavingsAccount[#SA-101]: Balance = $1005.00 (MinBal = $1005.00)
+CheckingAccount[#CA-202]: Balance = $496.00 (Trans = 0)
+\end{verbatim}
+\end{solbox}
+
+\begin{rubricbox}
+\begin{itemize}[leftmargin=1.5em,itemsep=2.0pt]
+\item \textbf{Base Class \texttt{BankAccount} (4 pts):} Non-negative balance validation (1 pt); validated \texttt{deposit} and \texttt{withdraw} returning boolean (1.5 pts); template hook \texttt{month\_end} and formatted string representation (1.5 pts).
+\item \textbf{Subclass \texttt{SavingsAccount} (4 pts):} Constructor calling \texttt{super()} and initializing \texttt{\_min\_balance = self.\_balance} (1.5 pts); overridden \texttt{withdraw} updating minimum balance upon successful withdrawal (1.5 pts); overridden \texttt{month\_end} depositing monthly interest on minimum balance and resetting minimum balance (1 pt).
+\item \textbf{Subclass \texttt{CheckingAccount} (4 pts):} Constructor calling \texttt{super()} and initializing transaction counter (1 pt); overridden \texttt{deposit} and \texttt{withdraw} delegating to \texttt{super()} and incrementing count on success (1.5 pts); overridden \texttt{month\_end} calculating excess fee beyond free allowance, deducting from balance, and resetting counter (1.5 pts).
+\item \textbf{Polymorphic Driver \texttt{main()} (3 pts):} Executing transactions accurately matching test scenario (1 pt); executing batch monthly close via polymorphic loop \texttt{for acc in accounts: acc.month\_end()} (1 pt); verifying exact final balances of \$1005.00 and \$496.00 (1 pt).
+\end{itemize}
+\end{rubricbox}
+
+\vfill
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[1mm]
+\textbf{\color{primaryblue}--- END OF SOLUTIONS \& RUBRIC ---}
+\end{center}
+
+\end{document}

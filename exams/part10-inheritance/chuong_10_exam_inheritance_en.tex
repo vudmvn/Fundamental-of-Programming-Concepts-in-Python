@@ -1,0 +1,387 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.90]}{\setmonofont{Liberation Mono}[Scale=0.90]}
+\usepackage[english]{babel}
+\usepackage[top=1.35cm,bottom=1.35cm,left=1.65cm,right=1.65cm]{geometry}
+\usepackage{xcolor,enumitem,listings,booktabs,array,amsmath,amssymb,titlesec,fancyhdr,parskip,tabularx,lastpage,hyperref}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+
+\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.15em,
+  belowskip=0.15em,
+  tabsize=4
+}
+
+\pagestyle{fancy}\fancyhf{}\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Inheritance \& Polymorphism Exam -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{2.5pt}{1pt}\titlespacing*{\subsection}{0pt}{1.5pt}{1pt}
+
+\newtcolorbox{headerbox}{colback=white,colframe=primaryblue,boxrule=0.7pt,arc=1.5mm,left=2.5mm,right=2.5mm,top=1mm,bottom=1mm}
+\newtcolorbox{answerbox}[2][]{enhanced,colback=white,colframe=DarkGray!45,boxrule=0.5pt,arc=1mm,left=2mm,right=2mm,top=1mm,bottom=1mm,title=\footnotesize\color{DarkGray}\textbf{#2},#1}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Inheritance and Polymorphism Progress Exam},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - NEU}
+}
+
+\begin{document}
+% =========================================================================
+% PAGE 1: INSTITUTIONAL HEADER, ANSWER SHEET, SECTION A (Q1-Q5)
+% =========================================================================
+\noindent
+\begin{minipage}[t]{0.63\textwidth}\raggedright\small
+\textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+\textbf{COLLEGE OF TECHNOLOGY}\\
+\textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.35\textwidth}\raggedleft\footnotesize
+\textbf{PROGRESS EXAMINATION}\\
+Academic Year: 2026--2027\\
+Semester: Fall 2026 \quad \textbf{DSAI1003}
+\end{minipage}
+\vspace{0.1em}
+\begin{center}
+{\Large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.05em]
+{\normalsize\bfseries PROGRESS EXAM: INHERITANCE AND POLYMORPHISM (CHAPTER 10)}\\[0.05em]
+{\normalsize\textbf{Paper Code:} \rule{1.5cm}{0.4pt} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding distribution)}
+\end{center}
+\begin{headerbox}
+\begin{tabularx}{\linewidth}{@{}X X@{}}
+\textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.15em]
+\textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabularx}
+\vspace{1.5mm}
+\centering\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{|l|c|c|c|c||c|c|}\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\ \hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.2em] \cline{1-6}
+\textbf{Score} & & & & & & \\[0.35em] \hline
+\end{tabular}
+\vspace{1mm}\raggedright\scriptsize
+\textbf{Instructions:} Closed-book examination; no electronic devices or Internet access permitted. Answer all questions. Unless otherwise specified, assume Python 3 standard runtime semantics. Standard built-in libraries (such as \texttt{math}) are permitted; third-party packages (such as NumPy, Pandas) are strictly prohibited. For program-design tasks, implement modular class hierarchies with clean encapsulation, explicit superclass delegation, and a \texttt{main()} demonstration driver. Do not detach pages.
+\end{headerbox}
+\vspace{1mm}
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write A, B, C, or D in each cell.)}
+\begin{center}\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}\hline
+\textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\ \hline
+\textbf{Answer} & & & & & & & & & & \\[1.5mm] \hline
+\end{tabular}\end{center}
+\vspace{-2.5mm}
+\section*{Section A: Inheritance \& Polymorphism Foundations \hfill \normalsize\normalfont(20 points)}
+\textit{Answer all 10 questions. Each correct answer is worth 2 points. Suggested time: 12 minutes.}
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt]
+\item In object-oriented programming, which relationship correctly exemplifies \textbf{inheritance} (the ``is-a'' relationship)?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item A \texttt{Car} maintains an internal attribute referencing an instance of \texttt{Engine}.
+\item A \texttt{Car} holds a list containing four \texttt{Tire} objects.
+\item A \texttt{Car} is a specialized subclass inheriting state and behaviors from base class \texttt{Vehicle}.
+\item A \texttt{Car} stores a dictionary mapping service dates to maintenance invoices.
+\end{enumerate}
+\item What is the standard Python syntax for declaring a subclass \texttt{SavingsAccount} that inherits from \texttt{BankAccount}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{class SavingsAccount extends BankAccount:} \quad \Alph*.~ \texttt{class SavingsAccount inherits BankAccount:}
+\item \texttt{class BankAccount(SavingsAccount):} \quad \Alph*.~ \texttt{class SavingsAccount(BankAccount):}
+\end{enumerate}
+\item When a subclass defines its own constructor \texttt{\_\_init\_\_}, why is it essential to invoke \texttt{super().\_\_init\_\_(...)}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item It allocates dynamic heap memory specifically reserved for base class bytecode.
+\item It executes the superclass constructor to properly initialize inherited instance attributes.
+\item The Python interpreter automatically deletes base methods if \texttt{super().\_\_init\_\_()} is omitted.
+\item It prevents any external client code from instantiating the superclass.
+\end{enumerate}
+\item What occurs when a subclass defines a method with the \textbf{identical name and signature} as a method in its superclass?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item The subclass method overrides (replaces) the superclass implementation for instances of the subclass.
+\item A \texttt{NameError} is raised at runtime due to duplicate method declarations in the hierarchy.
+\item The Python runtime executes both the superclass method and subclass method concurrently in threads.
+\item The superclass method is permanently erased from memory for instances of all classes.
+\end{enumerate}
+\item In a \texttt{Manager} subclass that overrides \texttt{get\_salary(self)}, why must it call \texttt{super().get\_salary()} rather than \texttt{self.get\_salary()}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item Calling \texttt{self.get\_salary()} causes infinite recursive calls to \texttt{Manager.get\_salary()}, raising \texttt{RecursionError}.
+\item Calling \texttt{super().get\_salary()} automatically converts the monetary output into a float.
+\item Python syntax strictly forbids the keyword \texttt{self} from being referenced inside overridden methods.
+\item Calling \texttt{self.get\_salary()} forces the calculation to run in restricted kernel sandbox mode.
+\end{enumerate}
+\end{enumerate}
+\newpage
+
+% =========================================================================
+% PAGE 2: Q6-Q10 AND SECTION B Q11
+% =========================================================================
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt,resume]
+\item What is the core capability provided by \textbf{polymorphism} in an object-oriented Python program?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item It forces all subclasses to store identical instance attribute values across memory addresses.
+\item It restricts method invocations so that only base class definitions can ever be executed at runtime.
+\item It converts diverse objects into serialized JSON strings prior to function processing.
+\item It allows code to treat objects of different subclasses uniformly, dynamically invoking overridden methods at runtime based on the actual object type.
+\end{enumerate}
+\item Given \texttt{class Employee: pass}, \texttt{class Manager(Employee): pass}, and \texttt{class Executive(Manager): pass}. If \texttt{boss = Executive()}, which expression evaluates to \textbf{False}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{isinstance(boss, Executive)} \quad \Alph*.~ \texttt{isinstance(boss, Employee)} \quad \Alph*.~ \texttt{type(boss) is Employee} \quad \Alph*.~ \texttt{isinstance(boss, Manager)}
+\end{enumerate}
+\item Given base class \texttt{Question} and derived class \texttt{ChoiceQuestion(Question)}, which expression evaluates to \textbf{True}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item \texttt{issubclass(Question, ChoiceQuestion)} \quad \Alph*.~ \texttt{issubclass(ChoiceQuestion, Question)} \quad \Alph*.~ \texttt{issubclass(Question, object) is False}
+\end{enumerate}
+\item In standard Python class design, how does a base class author conventionally enforce that subclasses must implement a template method?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item Define the method with body: \lstinline|raise NotImplementedError("Subclasses must override this method")|.
+\item Prepend the method header with the mandatory keyword: \texttt{abstract def method(self):}.
+\item Enclose the method name in quadruple underscores: \texttt{def \_\_\_\_process\_\_\_\_(self):}.
+\item Omit the method entirely from the superclass so Python auto-generates it at runtime.
+\end{enumerate}
+\item According to Horstmann Section 10.1, which scenario represents an \textbf{inappropriate} use of inheritance?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+\item Defining \texttt{SavingsAccount} as a subclass of \texttt{BankAccount} to introduce minimum balance tracking.
+\item Defining \texttt{ChoiceQuestion} as a subclass of \texttt{Question} to manage selectable options and numbering.
+\item Creating subclasses \texttt{SedanCar} and \texttt{CompactCar} when they differ solely in numerical fuel capacity values.
+\item Defining \texttt{Manager} as a subclass of \texttt{Employee} to incorporate department bonus calculations.
+\end{enumerate}
+\end{enumerate}
+\vspace{-1mm}
+\section*{Section B: Output Tracing, Inheritance Mechanics \& Diagnostics \hfill \normalsize\normalfont(25 points)}
+\textit{Answer Q11--Q15. Each question is worth 5 points. Suggested time: 15 minutes.}
+\subsection*{Q11. Exact Output of Multi-Class Inheritance \& Dynamic Dispatch Tracing (5 points)}
+Predict the \textbf{exact console output} of the following Python program, including brackets, spacing, and capitalization.
+\begin{lstlisting}
+class Device:
+    def __init__(self, brand, power): self._brand, self._power = brand, power
+    def specs(self): return f"{self._brand}: {self._power}W"
+    def status(self): return f"Device[{self.specs()}]"
+
+class SmartDevice(Device):
+    def __init__(self, brand, power, ip):
+        super().__init__(brand, power); self._ip = ip
+    def specs(self): return f"{super().specs()}, IP={self._ip}"
+
+d1 = Device("Generic", 50)
+d2 = SmartDevice("Echo", 15, "192.168.1.10")
+print(d1.status())
+print(d2.status())
+print(f"{isinstance(d2, Device)} | {isinstance(d1, SmartDevice)}")
+\end{lstlisting}
+\begin{answerbox}[height=2.5cm]{Output Box for Q11}\end{answerbox}
+\newpage
+
+% =========================================================================
+% PAGE 3: Q12-Q15
+% =========================================================================
+\subsection*{Q12. Evaluate Class Hierarchy, Type Introspection \& Inheritance Expressions (5 points)}
+Given \texttt{class A: pass; class B(A): pass; class C(B): pass; b = B(); c = C()}. Write evaluated literals or booleans:
+\begin{enumerate}[label=\alph*),leftmargin=2em,itemsep=1pt]
+\item Evaluated boolean result of \lstinline|isinstance(c, A)|: \hrulefill
+\item Evaluated boolean result of \lstinline|issubclass(A, B)|: \hrulefill
+\item Evaluated boolean result of \lstinline|type(b) is A|: \hrulefill
+\item Evaluated boolean result of \lstinline|issubclass(C, (A, list))|: \hrulefill
+\item Evaluated boolean result of \lstinline|isinstance(b, (str, C))|: \hrulefill
+\end{enumerate}
+\vspace{-2mm}
+\subsection*{Q13. Diagnose and Correct Three Object-Oriented Inheritance Defects (5 points)}
+For each defect, identify the underlying bug and provide the corrected Python code snippet.\par
+\vspace{0.3mm}
+\renewcommand{\arraystretch}{1.05}\small
+\begin{tabularx}{\linewidth}{|p{4.8cm}|X|X|}\hline
+\textbf{Erroneous Code} & \textbf{Problem / Root Cause} & \textbf{Correction} \\ \hline
+{\ttfamily\scriptsize class Animal:}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self, name):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_name = name}\newline{\ttfamily\scriptsize class Dog(Animal):}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self, name, breed):}\newline{\ttfamily\scriptsize \ \ \ \ self.\_breed = breed}\newline{\itshape Goal: initialize name \& breed} & & \\[3.0mm]\hline
+{\ttfamily\scriptsize class Employee:}\newline{\ttfamily\scriptsize \ \ def get\_salary(self): return 5000.0}\newline{\ttfamily\scriptsize class Manager(Employee):}\newline{\ttfamily\scriptsize \ \ def get\_salary(self):}\newline{\ttfamily\scriptsize \ \ \ \ return self.get\_salary() + 1000.0}\newline{\itshape Goal: add \$1000 bonus to base} & & \\[3.0mm]\hline
+{\ttfamily\scriptsize class Base:}\newline{\ttfamily\scriptsize \ \ def \_\_init\_\_(self): self.\_\_token = 99}\newline{\ttfamily\scriptsize class Sub(Base):}\newline{\ttfamily\scriptsize \ \ def show(self): return self.\_\_token}\newline{\itshape Goal: read token in subclass} & & \\[3.0mm]\hline
+\end{tabularx}\normalsize
+\vspace{-2mm}
+\subsection*{Q14. Savings Account Minimum Balance State Tracing with Overriding (5 points)}
+Predict exact console output of the code below and show \texttt{\_b} and \texttt{\_m} after each step.
+\begin{lstlisting}
+class Account:
+    def __init__(self, b): self._b = b
+    def withdraw(self, a): self._b -= a
+class Savings(Account):
+    def __init__(self, b, r=0.1): super().__init__(b); self._r, self._m = r, b
+    def withdraw(self, a): super().withdraw(a); self._m = min(self._m, self._b)
+    def interest(self): return self._m * self._r
+
+s = Savings(1000); s.withdraw(300); s.withdraw(400)
+print(f"Interest: {s.interest():.2f} | Balance: {s._b:.2f}")
+\end{lstlisting}
+\begin{answerbox}[height=1.5cm]{Output and Trace Table for Q14}\end{answerbox}
+\vspace{-2mm}
+\subsection*{Q15. Dynamic Method Dispatch vs Type Checking in Polymorphic Fleets (5 points)}
+Analyze the code: (1) Output of the print statement; (2) Why polymorphism eliminates manual \lstinline|isinstance()| checks.
+\begin{lstlisting}
+class Car:
+    def toll(self): return 5.0
+class Bus(Car):
+    def toll(self): return 12.0
+class EV(Car):
+    def toll(self): return super().toll() * 0.5   # 50% clean fuel discount
+print([v.toll() for v in [Car(), Bus(), EV()]])
+\end{lstlisting}
+\begin{answerbox}[height=1.4cm]{Answers and Technical Explanation for Q15}\end{answerbox}
+\newpage
+
+% =========================================================================
+% PAGE 4: SECTION C (DESIGN & CLASS DECOMPOSITION)
+% =========================================================================
+\section*{Section C: Object-Oriented Design \& Hierarchical Class Decomposition \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all four tasks. Suggested time: 15 minutes.}
+\begin{tcolorbox}[colback=boxbg,colframe=secondaryteal,arc=1.5mm,boxrule=0.6pt,top=1.5mm,bottom=1.5mm]
+\textbf{Problem Specification: Automated Online Assessment \& Examination Engine (\texttt{Question} Hierarchy)}\\[0.5mm]
+\small
+An academic e-learning platform deploys an extensible hierarchy of examination questions (Horstmann Section 10.1--10.3).
+\begin{itemize}
+\item \textbf{Base Class \texttt{Question}:} Maintains a question prompt \texttt{\_text} (str) and a correct answer \texttt{\_answer} (str).
+  \begin{itemize}
+  \item \texttt{setText(questionText)}: Assigns the question prompt string.
+  \item \texttt{setAnswer(correctResponse)}: Sets expected answer string (stripped of leading/trailing whitespace).
+  \item \texttt{checkAnswer(response)}: Case-insensitive check comparing \texttt{response.strip().lower()} to \texttt{self.\_answer.lower()}. Returns boolean.
+  \item \texttt{display()}: Prints the question text \texttt{self.\_text} directly to console.
+  \end{itemize}
+\item \textbf{Subclass \texttt{ChoiceQuestion(Question)}:} Extends \texttt{Question} to manage multiple-choice options.
+  \begin{itemize}
+  \item Initializes inherited state via \texttt{super().\_\_init\_\_()} and creates an empty list \texttt{\_choices = []}.
+  \item \texttt{addChoice(choice, correct=False)}: Appends \texttt{choice} to \texttt{\_choices}. If \texttt{correct} is \texttt{True}, registers option's 1-based index (e.g., \texttt{"1"}, \texttt{"2"}) as the correct answer via \texttt{self.setAnswer(str(len(self.\_choices)))}.
+  \item Overrides \texttt{display()}: Invokes \texttt{super().display()}, then prints each choice prefixed by its 1-based number: \texttt{"1: choice"}, \texttt{"2: choice"}, etc.
+  \end{itemize}
+\item \textbf{Subclass \texttt{NumericQuestion(Question)}:} Extends \texttt{Question} to accept floating-point numbers within tolerance $\varepsilon$ (e.g., $0.01$). Overrides \texttt{setAnswer(expected\_val)} to store float value, and overrides \texttt{checkAnswer(response)} to parse float safely and return $\text{True}$ iff $|\text{float}(\text{response}) - \text{expected}| \le \varepsilon$.
+\end{itemize}
+\end{tcolorbox}
+\vspace{0.5mm}
+\textbf{Task 1: Specify Public Methods, Parameter Types, Return Types, and Inheritance Contracts (6 points)}
+Specify the method signatures and behavioral contracts for \texttt{ChoiceQuestion}:
+\begin{itemize}[leftmargin=1.8em,itemsep=1.5pt]
+\item \texttt{\_\_init\_\_(self)} $\rightarrow$ Return Type: \rule{2.5cm}{0.4pt} \quad Base delegation contract: \dotfill
+\item \texttt{addChoice(self, choice: str, correct: bool = False)} $\rightarrow$ Return Type: \rule{2.0cm}{0.4pt} \quad Invariant: \dotfill
+\item \texttt{display(self)} $\rightarrow$ Return Type: \rule{2.5cm}{0.4pt} \quad Console output contract: \dotfill
+\item Does \texttt{ChoiceQuestion} need to override \texttt{checkAnswer(response)}? Explain: \dotfill
+\end{itemize}
+
+\textbf{Task 2: Implement the Complete Subclass \texttt{ChoiceQuestion} (7 points)}
+Write a modular Python class definition for \texttt{ChoiceQuestion(Question)}. Implement \texttt{\_\_init\_\_}, \texttt{addChoice}, and \texttt{display}.
+\begin{answerbox}[height=3.8cm]{Python Implementation for Task 2}\end{answerbox}
+
+\textbf{Task 3: Hand-Trace a Polymorphic Quiz Execution Sequence (6 points)}
+Trace the execution of a quiz containing: $Q_1$ (\texttt{Question}: "Who created Python?", ans: "Guido van Rossum"), $Q_2$ (\texttt{ChoiceQuestion}: "First release year?", Choices: 1985, 1991 [correct], 2000), and $Q_3$ (\texttt{NumericQuestion}: "Value of 1/3?", ans: 0.33, $\varepsilon=0.01$).
+\begin{enumerate}[label=\arabic*.,leftmargin=1.8em,itemsep=1pt]
+\item User inputs \texttt{"guido van rossum"} for $Q_1$ $\rightarrow$ Method dispatched: \rule{3.0cm}{0.4pt} \quad Result (\texttt{True}/\texttt{False}): \rule{1.5cm}{0.4pt}
+\item User inputs \texttt{"2"} for $Q_2$ $\rightarrow$ Method dispatched: \rule{3.0cm}{0.4pt} \quad Result (\texttt{True}/\texttt{False}): \rule{1.5cm}{0.4pt}
+\item User inputs \texttt{"0.333"} for $Q_3$ $\rightarrow$ Method dispatched: \rule{3.0cm}{0.4pt} \quad Result (\texttt{True}/\texttt{False}): \rule{1.5cm}{0.4pt}
+\end{enumerate}
+Total Quiz Score: \rule{2.5cm}{0.4pt} \quad Did any question require manual \texttt{if/elif type} branching? \rule{2.0cm}{0.4pt}
+
+\vspace{0.5mm}
+\textbf{Task 4: Technical Analysis \& Object-Oriented Principles (6 points)}
+\begin{enumerate}[label=\alph*),leftmargin=1.8em,itemsep=1.5pt]
+\item In the polymorphic loop \lstinline|for q in quiz: q.display()|, explain how the Python runtime determines whether to execute \texttt{Question.display()} or \texttt{ChoiceQuestion.display()}.\\[-1pt]\rule{\linewidth}{0.4pt}
+\item Why is inheriting from \texttt{Question} superior to creating an independent \texttt{ChoiceQuestion} class from scratch? Discuss code reuse and interface polymorphism.\\[-1pt]\rule{\linewidth}{0.4pt}
+\end{enumerate}
+\newpage
+
+% =========================================================================
+% PAGE 5: SECTION D, PROBLEM 1
+% =========================================================================
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+\textit{Write complete, modular Python 3 programs. Use clean encapsulation, explicit superclass delegation with \texttt{super()}, proper parameter validation, and a \texttt{main()} demonstration driver. Standard library only. Suggested time: 18 minutes.}
+
+\subsection*{Problem 1: Corporate Personnel \& Tiered Payroll Hierarchy (15 points)}
+Implement an inheritance hierarchy modeling corporate compensation across standard employees, managers, and executives.
+\textbf{Requirements:}
+\begin{enumerate}[label=\arabic*.,leftmargin=2em,itemsep=1.2pt]
+\item Base class \texttt{Employee}:
+  \begin{itemize}
+  \item \texttt{\_\_init\_\_(self, emp\_id, name, base\_salary)}: Validate that \texttt{emp\_id} is a non-empty string and \texttt{base\_salary >= 0.0} (raise \texttt{ValueError} if invalid). Store as \texttt{\_emp\_id}, \texttt{\_name}, \texttt{\_base\_salary} (float).
+  \item Accessors: \texttt{get\_salary(self)} returns \texttt{\_base\_salary}; \texttt{get\_bonus(self)} returns default \texttt{0.0}.
+  \item \texttt{total\_compensation(self)}: Returns \lstinline|self.get_salary() + self.get_bonus()|.
+  \item \texttt{\_\_str\_\_(self)}: Returns \lstinline|f"Employee[#{self._emp_id}, {self._name}]: Total = ${self.total_compensation():.2f}"|.
+  \end{itemize}
+\item Subclass \texttt{Manager(Employee)}:
+  \begin{itemize}
+  \item \texttt{\_\_init\_\_(self, emp\_id, name, base\_salary, bonus=0.0)}: Explicitly call \texttt{super().\_\_init\_\_} for base attributes. Validate \texttt{bonus >= 0.0} and store in \texttt{\_bonus} (float).
+  \item Mutator: \texttt{set\_bonus(self, bonus)} updates \texttt{\_bonus} (validating $\ge 0.0$).
+  \item Overrides \texttt{get\_bonus(self)}: Returns \texttt{self.\_bonus}.
+  \item Overrides \texttt{\_\_str\_\_(self)}: Returns \lstinline|f"Manager[#{self._emp_id}, {self._name}]: Salary = ${self.get_salary():.2f}, Bonus = ${self.get_bonus():.2f}, Total = ${self.total_compensation():.2f}"|.
+  \end{itemize}
+\item Subclass \texttt{Executive(Manager)}:
+  \begin{itemize}
+  \item \texttt{\_\_init\_\_(self, emp\_id, name, base\_salary, bonus=0.0, shares=0)}: Call \texttt{super().\_\_init\_\_}. Validate \texttt{shares >= 0} and store in \texttt{\_shares} (int).
+  \item Mutator: \texttt{grant\_shares(self, count)} adds positive integer \texttt{count} to \texttt{\_shares}.
+  \item Overrides \texttt{get\_bonus(self)}: Returns \lstinline|super().get_bonus() + self._shares * 5.0| (adds \$5.00 dividend per stock share).
+  \item Overrides \texttt{\_\_str\_\_(self)}: Returns \lstinline|f"Executive[#{self._emp_id}, {self._name}]: Shares = {self._shares}, Total = ${self.total_compensation():.2f}"|.
+  \end{itemize}
+\item \texttt{main()}: Instantiate an \texttt{Employee} (\#E101, "Alice Smith", \$4500.00), a \texttt{Manager} (\#M202, "Bob Johnson", \$7000.00, bonus \$1500.00), and an \texttt{Executive} (\#X303, "Carol Danvers", \$12000.00, bonus \$4000.00, 500 shares). Store them in a list \texttt{staff}, iterate polymorphically to print each profile and compute total monthly payroll expenditure (\$31500.00). Catch a \texttt{ValueError} on negative salary.
+\end{enumerate}
+\begin{answerbox}[height=8.5cm]{Python Solution for Problem 1}\end{answerbox}
+\newpage
+
+% =========================================================================
+% PAGE 6: SECTION D, PROBLEM 2
+% =========================================================================
+\subsection*{Problem 2: Polymorphic Bank Account Fee \& Interest Hierarchy (15 points)}
+Implement a polymorphic banking hierarchy modeling specialized fee-based checking and interest-bearing savings accounts, directly applying Horstmann Section 10.4.
+\textbf{Requirements:}
+\begin{enumerate}[label=\arabic*.,leftmargin=2em,itemsep=1.0pt]
+\item Base class \texttt{BankAccount}:
+  \begin{itemize}[itemsep=0.5pt]
+  \item \texttt{\_\_init\_\_(self, acc\_num, balance=0.0)}: Validate \texttt{balance >= 0.0}; store \texttt{\_acc\_num} (str) and \texttt{\_balance} (float).
+  \item \texttt{deposit(self, amount)}: Validate \texttt{amount > 0.0}; add to \texttt{\_balance}.
+  \item \texttt{withdraw(self, amount)}: Validate \texttt{amount > 0.0}. If \texttt{amount <= self.\_balance}, deduct and return \texttt{True}; else return \texttt{False}.
+  \item \texttt{month\_end(self)}: Template method for end-of-month processing. Base class body executes \texttt{pass}.
+  \item \texttt{get\_balance(self)}: Returns current balance. \texttt{\_\_str\_\_(self)}: Returns formatted string.
+  \end{itemize}
+\item Subclass \texttt{SavingsAccount(BankAccount)}:
+  \begin{itemize}[itemsep=0.5pt]
+  \item \texttt{\_\_init\_\_(self, acc\_num, balance=0.0, rate=6.0)}: Delegate via \texttt{super()}; store \texttt{\_rate} (float); initialize \texttt{\_min\_balance = self.\_balance}.
+  \item Overrides \texttt{withdraw(self, amount)}: Call \lstinline|super().withdraw(amount)|. If successful and balance falls below minimum, update \texttt{\_min\_balance = self.\_balance}. Return success.
+  \item Overrides \texttt{month\_end(self)}: Calculate monthly interest: $\text{interest} = \text{\_min\_balance} \times (\text{rate}/12) / 100$. Deposit interest, reset $\text{\_min\_balance} = \text{\_balance}$, and return \texttt{interest}.
+  \end{itemize}
+\item Subclass \texttt{CheckingAccount(BankAccount)}:
+  \begin{itemize}[itemsep=0.5pt]
+  \item \texttt{\_\_init\_\_(self, acc\_num, balance=0.0, free=3, fee=1.50)}: Delegate via \texttt{super()}; store \texttt{\_free} (int), \texttt{\_fee} (float), initialize \texttt{\_trans = 0}.
+  \item Overrides \texttt{deposit(self, amount)} and \texttt{withdraw(self, amount)}: Delegate to \texttt{super()} and increment \texttt{\_trans} upon success.
+  \item Overrides \texttt{month\_end(self)}: Deduct excess fees $\max(0, \text{\_trans} - \text{\_free}) \times \text{\_fee}$ from balance. Reset $\text{\_trans} = 0$, and return fee charged.
+  \end{itemize}
+\item \texttt{main()}: Create \texttt{SavingsAccount("SA-101", 1200.0, 6.0)} and \texttt{CheckingAccount("CA-202", 500.0, free=2, fee=2.00)}. Perform deposit and withdrawal operations. In a polymorphic loop \lstinline|for acc in [sa, ca]: acc.month_end()|, execute monthly close and verify final balances (\$1005.00 and \$496.00).
+\end{enumerate}
+\begin{answerbox}[height=8.5cm]{Python Solution for Problem 2}\end{answerbox}
+\vfill
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[1mm]
+\textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+\end{center}
+\end{document}
