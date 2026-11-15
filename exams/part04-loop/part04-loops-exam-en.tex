@@ -1,0 +1,521 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Tinos}}
+\IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Liberation Mono}[Scale=0.92]}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\geometry{top=1.5cm,bottom=1.5cm,left=1.7cm,right=1.7cm}
+
+\definecolor{primaryblue}{RGB}{18,65,115}
+\definecolor{secondaryteal}{RGB}{14,102,110}
+\definecolor{SoftBlue}{RGB}{232,242,250}
+\definecolor{CodeBg}{RGB}{248,250,252}
+\definecolor{DarkGray}{RGB}{55,55,55}
+\definecolor{boxbg}{RGB}{248,250,252}
+\definecolor{borderblue}{RGB}{150,185,215}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=1.5pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{topsep=0.5pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!75!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{primaryblue!80!black}\itshape,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{primaryblue!45},
+  backgroundcolor=\color{CodeBg},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em,
+  aboveskip=0.2em,
+  belowskip=0.2em,
+  tabsize=4
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[L]{\footnotesize\textbf{DSAI1003 -- Fundamental Programming Concepts in Python}}
+\fancyhead[R]{\footnotesize\textbf{Loops \& Iteration Patterns Exam -- 60 Minutes}}
+\fancyfoot[L]{\scriptsize Faculty of Data Science and Artificial Intelligence -- National Economics University}
+\fancyfoot[R]{\footnotesize Page \thepage\ of 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{primaryblue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{3.5pt}{1.5pt}
+\titlespacing*{\subsection}{0pt}{2.5pt}{1pt}
+
+\newtcolorbox{headerbox}{
+  colback=white,
+  colframe=primaryblue,
+  boxrule=0.7pt,
+  arc=1.5mm,
+  left=2.5mm,
+  right=2.5mm,
+  top=1.2mm,
+  bottom=1.2mm
+}
+
+\newtcolorbox{answerbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=DarkGray!45,
+  boxrule=0.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=1.2mm,
+  bottom=1.2mm,
+  title=\footnotesize\color{DarkGray}\textbf{#2},
+  #1
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaryblue,
+  urlcolor=primaryblue,
+  pdftitle={DSAI1003 - Loops and Iteration Patterns in Python Exam},
+  pdfauthor={Faculty of Data Science and Artificial Intelligence - National Economics University (NEU)}
+}
+
+\begin{document}
+
+% =========================================================================
+% PAGE 1: OFFICIAL HEADER + ANSWER SHEET + SECTION A (Q1 - Q5)
+% =========================================================================
+
+\noindent
+\begin{minipage}[t]{0.64\textwidth}
+  \raggedright\small
+  \textbf{NATIONAL ECONOMICS UNIVERSITY}\\
+  \textbf{COLLEGE OF TECHNOLOGY}\\
+  \textbf{FACULTY OF DATA SCIENCE \& ARTIFICIAL INTELLIGENCE (FDA)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.34\textwidth}
+  \raggedleft\footnotesize
+  \textbf{OFFICIAL PROGRESS EXAMINATION}\\
+  Academic Year: 2026--2027\\
+  Semester: Fall 2026 \quad Course Code: \textbf{DSAI1003}
+\end{minipage}
+
+\vspace{0.15em}
+
+\begin{center}
+  {\Large\bfseries\color{primaryblue} FUNDAMENTAL PROGRAMMING CONCEPTS IN PYTHON}\\[0.08em]
+  {\normalsize\bfseries PROGRESS EXAM: LOOPS \& ITERATION PATTERNS}\\[0.08em]
+  {\normalsize\textbf{Paper Code:} \rule{1.6cm}{0.4pt} \quad | \quad \textbf{Duration: 60 Minutes} (Excluding paper distribution)}
+\end{center}
+
+\vspace{0.05em}
+
+\begin{headerbox}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll@{}}
+  \textbf{Candidate Full Name:} \dotfill & \textbf{Student ID (MSSV):} \dotfill \\[0.2em]
+  \textbf{Class / Cohort:} \dotfill & \textbf{Exam Room / Seat No.:} \dotfill
+\end{tabular*}
+
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{4.5pt}
+\centering
+\begin{tabular}{|l|c|c|c|c||c|c|}
+\hline
+\textbf{Section} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Total (100)} & \textbf{Examiner Signature} \\
+\hline
+\textbf{Max Score} & 20 & 25 & 25 & 30 & \textbf{100} & \\[0.3em]
+\cline{1-6}
+\textbf{Score} & & & & & & \\[0.4em]
+\hline
+\end{tabular}
+
+\vspace{0.15em}
+\raggedright
+\scriptsize
+\textbf{Instructions:} Closed-book examination. All electronic devices and internet access are prohibited. Answer all questions directly in the designated spaces. In programming tasks, apply iteration structures (\texttt{while}, \texttt{for}), \texttt{range()}, sentinel handling, accumulator patterns, and nested loops. Do \textbf{not} define custom functions (\texttt{def}) unless explicitly requested. Assume user input follows the requested type format. Do not detach pages.
+\end{headerbox}
+
+\vspace{1mm}
+\noindent
+\textbf{MULTIPLE-CHOICE ANSWER SHEET} \textit{(Write A, B, C, or D in the corresponding box)}:
+\begin{center}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Question} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+\textbf{Answer} & & & & & & & & & & \\[1.8mm]
+\hline
+\end{tabular}
+\end{center}
+\vspace{-2.5mm}
+\section*{Section A: Loops \& Iteration Concepts \hfill \normalsize\normalfont(20 points)}
+\textit{Answer all 10 questions. Each correct answer carries 2 points. Suggested time: 12 minutes.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt]
+
+\item When should a programmer select an event-controlled \texttt{while} loop rather than a count-controlled \texttt{for} loop?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item When the exact number of iterations is known in advance before entering the loop.
+  \item When repeating a block until an external event or sentinel condition occurs during execution.
+  \item When traversing every character of a fixed-length string from start to finish.
+  \item When generating an arithmetic progression of integers with a constant step size.
+\end{enumerate}
+
+\item What sequence of integers is generated by the expression \texttt{list(range(10, 2, -3))}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{[10, 7, 4]}
+  \item \texttt{[10, 7, 4, 1]}
+  \item \texttt{[10, 8, 6, 4, 2]}
+  \item An empty list \texttt{[]}, because the starting value is greater than the stopping value.
+\end{enumerate}
+
+\item What is the primary cause of an \textbf{infinite loop} in a \texttt{while} statement?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item The loop body executes too quickly for the CPU register cache to update.
+  \item The continuation condition never evaluates to \texttt{False} because the control variable is not modified.
+  \item The loop counter exceeds Python's maximum integer limit (\texttt{sys.maxsize}).
+  \item The loop contains an \texttt{if} statement with more than three \texttt{elif} branches.
+\end{enumerate}
+
+\item An algorithm intended to print numbers from 1 to 5 inclusive prints 1 to 4 because the condition is \texttt{count < 5} instead of \texttt{count <= 5}. What type of defect is this?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item A syntax error caught during byte-code compilation.
+  \item A name collision error in local namespace resolution.
+  \item An off-by-one error, which is a classic form of logic error.
+  \item A runtime exception raising an \texttt{IndexError}.
+\end{enumerate}
+
+\item Why is a \textbf{priming read} essential in a sentinel-controlled \texttt{while} loop?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item It converts user input into a floating-point value automatically.
+  \item It obtains the initial input value before testing the condition, preventing the sentinel from being processed as valid data.
+  \item It forces Python's garbage collector to allocate memory for the accumulator variable.
+  \item It causes the loop to run at least twice regardless of the input value.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 2: SECTION A (Q6 - Q10) + SECTION B Q11
+% ==============================================================================
+
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2em,itemsep=1.5pt,topsep=1pt,resume]
+
+\item In a nested loop where the outer loop iterates $R$ times and the inner loop iterates $C$ times, how many total times does the inner loop body execute?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item $R + C$ times
+  \item $R \times C$ times
+  \item $R^C$ times
+  \item Exactly $\max(R, C)$ times
+\end{enumerate}
+
+\item What is the operational distinction between the \texttt{break} and \texttt{continue} statements?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{break} restarts the current iteration from the beginning; \texttt{continue} terminates the entire program.
+  \item \texttt{break} immediately exits the enclosing loop; \texttt{continue} skips the remainder of the current iteration and advances to the next.
+  \item \texttt{break} is valid only in \texttt{for} loops; \texttt{continue} is valid only in \texttt{while} loops.
+  \item \texttt{break} skips the inner loop only; \texttt{continue} exits both inner and outer loops simultaneously.
+\end{enumerate}
+
+\item When searching for the maximum value in a non-empty sequence of positive and negative numbers, what is the safest initialization strategy for \texttt{max\_val}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item Always initialize \texttt{max\_val = 0}.
+  \item Initialize \texttt{max\_val} to the first element of the sequence or negative infinity (\texttt{float('-inf')}).
+  \item Always initialize \texttt{max\_val = 999999}.
+  \item Leave \texttt{max\_val} unassigned until the first comparison statement executes.
+\end{enumerate}
+
+\item What does the following loop output: \texttt{for ch in "NEU2026": if ch.isdigit(): print(ch, end="")}?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item \texttt{NEU}
+  \item \texttt{2026}
+  \item \texttt{N E U 2 0 2 6}
+  \item \texttt{True}
+\end{enumerate}
+
+\item In Python, when does the optional \texttt{else} block attached to a \texttt{for} or \texttt{while} loop execute?
+\begin{enumerate}[label=\Alph*.,leftmargin=2em]
+  \item Every time an iteration finishes normally.
+  \item Only when the loop encounters a \texttt{break} statement.
+  \item When the loop completes all scheduled iterations without encountering a \texttt{break}.
+  \item Only when an unexpected runtime exception is raised inside the loop.
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{1mm}
+\section*{Section B: Output Tracing, Logic Diagnosis \& Error Correction \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all questions Q11--Q15 directly in the designated spaces. Suggested time: 15 minutes.}
+
+\subsection*{Q11. Exact Output Tracing with Nested Loops, Accumulator \& Conditions (5 points)}
+Trace the following program carefully and write its exact console output:
+
+\begin{lstlisting}
+total = 0
+for i in range(1, 4):
+    for j in range(1, 4):
+        if i == j:
+            continue
+        if i + j > 4:
+            break
+        total += i * 10 + j
+        print(f"[{i},{j}]", end=" ")
+print(f"\nFinal Total: {total}")
+\end{lstlisting}
+
+\begin{answerbox}[height=3.4cm]{Output Box for Q11}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 3: SECTION B, Q12--Q15
+% ==============================================================================
+
+\subsection*{Q12. Complete Variable State Hand-Trace Table (5 points)}
+Trace the following \texttt{while} loop until termination. Fill in the state trace table for each iteration:
+
+\begin{minipage}[t]{0.48\textwidth}
+\begin{lstlisting}
+n = 432
+rev = 0
+step = 0
+while n > 0:
+    digit = n % 10
+    rev = rev * 10 + digit
+    n = n // 10
+    step += 1
+\end{lstlisting}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Step} & \textbf{\texttt{n}} & \textbf{\texttt{digit}} & \textbf{\texttt{rev}} & \textbf{\texttt{n > 0}} \\
+\hline
+Initial & 432 & -- & 0 & True \\[1.5mm]
+\hline
+1 & & & & \\[1.5mm]
+\hline
+2 & & & & \\[1.5mm]
+\hline
+3 & & & & \\[1.5mm]
+\hline
+Final & & -- & & False \\[1.5mm]
+\hline
+\end{tabular}
+\end{minipage}
+
+\vspace{1mm}
+\subsection*{Q13. Diagnose and Correct Three Common Loop Defects (5 points)}
+Identify the exact error and write the corrected code snippet in the table below:
+
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{|X|p{4.2cm}|p{6.0cm}|}
+\hline
+\textbf{Flawed Snippet} & \textbf{Defect Classification} & \textbf{Exact Corrected Line(s)} \\
+\hline
+\texttt{i = 1; sum\_val = 0}\\
+\texttt{while i <= 10:}\\
+\texttt{\ \ \ \ sum\_val += i}\\
+(Intended: sum 1 to 10) & & \\[3.2mm]
+\hline
+\texttt{total = 0}\\
+\texttt{for i in range(1, 5):}\\
+\texttt{\ \ \ \ total += i}\\
+(Intended: sum 1 to 5 inclusive) & & \\[3.2mm]
+\hline
+\texttt{for i in range(3):}\\
+\texttt{\ \ \ \ val = input("Enter: ")}\\
+\texttt{print("Read:", val)}\\
+(Intended: print every entry) & & \\[3.2mm]
+\hline
+\end{tabularx}
+
+\vspace{1mm}
+\subsection*{Q14. String Iteration \& Filtering Accumulator Pattern (5 points)}
+Predict the exact printed output of the following character aggregation program:
+
+\begin{lstlisting}
+text = "DSFE-Ai@2026#VN"
+digits = ""
+vowels = ""
+vowel_set = "aeiouAEIOU"
+for ch in text:
+    if ch.isdigit():
+        digits += ch
+    elif ch in vowel_set:
+        vowels += ch.upper()
+print(f"Vowels: {vowels}, Digits: {digits}")
+print(f"Total Kept: {len(vowels) + len(digits)}")
+\end{lstlisting}
+
+\begin{answerbox}[height=2.2cm]{Output Box for Q14}
+\end{answerbox}
+
+\vspace{1mm}
+\subsection*{Q15. Sentinel Loop Architecture \& Protection Against Anomalies (5 points)}
+\begin{itemize}[leftmargin=2em]
+  \item Explain why the statement \texttt{total += val} placed immediately after \texttt{val = float(input())} in a \texttt{while val != -1:} loop introduces a logic defect when the sentinel \texttt{-1} is entered: \hrulefill
+  \item What conditional check must be placed \textbf{before} dividing by \texttt{count} when computing the average of sentinel-entered numbers? \hrulefill
+\end{itemize}
+
+\newpage
+
+% ==============================================================================
+% PAGE 4: SECTION C
+% ==============================================================================
+
+\section*{Section C: Program Design \& Logic Specification \hfill \normalsize\normalfont(25 points)}
+\textit{Answer all tasks. Suggested time: 15 minutes.}
+
+\begin{tcolorbox}[colback=boxbg,colframe=secondaryteal,arc=1.5mm,boxrule=0.6pt,top=1.5mm,bottom=1.5mm]
+\textbf{Problem Specification: Retail Cash Register \& Daily Sales Aggregator}\\[0.5mm]
+\small
+A retail shop requires an automated sales transaction aggregator that processes invoice amounts until the cashier signals end-of-shift by entering \texttt{-1} (sentinel):
+\begin{itemize}[itemsep=0.5pt,topsep=0.5pt]
+  \item \textbf{Input Validation:} Any negative transaction other than \texttt{-1} is invalid. The program must warn the cashier and prompt again without adding to the transaction count or revenue. Zero is also rejected.
+  \item \textbf{Accumulation:} Keep track of: (1) \texttt{total\_revenue}, (2) \texttt{valid\_count}, (3) \texttt{max\_sale}, and (4) \texttt{high\_value\_count} (sales $\ge \$500.00$).
+  \item \textbf{Summary Metrics:} At termination, calculate the \texttt{average\_sale}. If no valid transactions were recorded, display an appropriate notice and set all monetary metrics to \$0.00.
+  \item \textbf{VIP Flag:} If \texttt{total\_revenue} exceeds \$2,000.00 or \texttt{high\_value\_count} $\ge 3$, flag the shift as \texttt{"Target Exceeded"}.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5mm}
+\textbf{Task 1: Identify Loop Type, Sentinel \& State Variables} (6 points)
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Loop Structure \& Termination Condition:} \hrulefill\\[3mm]
+  \item \textbf{Accumulator \& Counter Variables:} \hrulefill\\[3mm]
+  \item \textbf{Initialization Values for State Variables:} \hrulefill
+\end{itemize}
+
+\vspace{0.5mm}
+\textbf{Task 2: Write the Structured Iteration Logic in Ordered Steps} (7 points)\\
+Formulate sequential pseudo-logic showing the priming read, loop condition, validation branch, accumulators, and post-loop summary.
+
+\begin{answerbox}[height=5.2cm]{Program-Logic Work Area}
+\end{answerbox}
+
+\vspace{0.5mm}
+\textbf{Task 3: Hand Trace / Step-by-Step Test Case Execution} (6 points)\\
+Given the input stream: \texttt{150.0}, \texttt{-25.0} (invalid), \texttt{600.0}, \texttt{350.0}, \texttt{-1.0} (sentinel). Trace the final metrics:
+
+\begin{answerbox}[height=3.5cm]{Calculation Box for Task 3}
+\end{answerbox}
+
+\vspace{0.5mm}
+\textbf{Task 4: Explain Two Design Decisions} (6 points)
+\begin{enumerate}[label=\alph*),leftmargin=2em]
+  \item Why is a \texttt{while} loop strictly required instead of a \texttt{for} loop for this cashier application?\\[3.5mm]
+  \hrulefill
+  \item How does your logic prevent a \texttt{ZeroDivisionError} if the cashier enters \texttt{-1} on the very first prompt?\\[3.5mm]
+  \hrulefill
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% PAGE 5: SECTION D, PROBLEM 1
+% ==============================================================================
+
+\section*{Section D: Applied Programming in Python \hfill \normalsize\normalfont(30 points)}
+\textit{Write complete, syntactically correct Python statements. Apply proper iteration structures (\texttt{while}, \texttt{for}), input validation, and formatting. Do \textbf{not} define custom functions (\texttt{def}). Suggested time: 18 minutes.}
+
+\subsection*{Problem 1: Compound Savings Target \& Milestone Growth Simulator (15 points)}
+Write a Python program that simulates the year-by-year compounding growth of an investment until it reaches or exceeds a specified target amount.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=1pt]
+  \item Prompt for initial deposit \texttt{principal} (float) and annual interest rate \texttt{annual\_rate} in percent (float).
+  \item Prompt for the financial goal \texttt{target\_balance} (float).
+  \item \textbf{Input Validation:} Use a \texttt{while} loop to ensure \texttt{principal > 0}, \texttt{annual\_rate > 0}, and \texttt{target\_balance > principal}. Re-prompt until valid.
+  \item Use a \texttt{while} loop to simulate growth year by year until \texttt{balance >= target\_balance}.
+  \item In each year: \texttt{interest = balance * (annual\_rate / 100)}; \texttt{balance += interest}.
+  \item Print a formatted progress table showing: \texttt{Year}, \texttt{Start Balance}, \texttt{Interest Earned}, and \texttt{End Balance} (all balances formatted with 2 decimal places).
+  \item After loop termination, display: Total Years Required, Final Balance, and Total Interest Earned across all years.
+\end{enumerate}
+
+The output should follow this format:
+\begin{lstlisting}
+Year    Start Balance     Interest Earned   End Balance      
+-------------------------------------------------------------
+1       $1000.00          $70.00            $1070.00         
+2       $1070.00          $74.90            $1144.90         
+...
+Target of $2000.00 reached in 11 years! Total Interest: $1104.89
+\end{lstlisting}
+
+\begin{answerbox}[height=13.2cm]{Python Solution for Problem 1}
+\end{answerbox}
+
+\newpage
+
+% ==============================================================================
+% PAGE 6: SECTION D, PROBLEM 2
+% ==============================================================================
+
+\subsection*{Problem 2: Numerical Sequence Scanner \& Adjacent Fluctuation Analyzer (15 points)}
+Write a Python program that scans a sequence of daily stock price quotations, computes statistical summary values, and monitors adjacent day-to-day market fluctuations.
+
+\textbf{Requirements:}
+\begin{enumerate}[leftmargin=2em,label=\arabic*.,itemsep=1pt]
+  \item Prompt the user for the number of trading days $N$ (integer). Validate with a loop so that $N \ge 3$.
+  \item Using a \texttt{for} loop running $N$ times, prompt the user for each day's price (float, $> 0$).
+  \item Accumulate the sum to compute the overall \texttt{mean\_price} after all inputs are read.
+  \item Track the \textbf{highest price} and \textbf{lowest price} observed across the $N$ days.
+  \item For every day after Day 1, compute the price change from the previous day: $\Delta = \text{price}_{\text{current}} - \text{price}_{\text{previous}}$.
+  \item Track: (a) count of gain days ($\Delta > 0$), (b) count of loss days ($\Delta < 0$), and (c) the \textbf{largest single-day surge} ($\max \Delta$).
+  \item Display a neatly formatted report showing: Number of Days, Average Price, Highest Price, Lowest Price, Days Up, Days Down, and Maximum Single-Day Surge (all prices formatted to 2 decimal places).
+\end{enumerate}
+
+The output should follow this format:
+\begin{lstlisting}
+--- MARKET SEQUENCE ANALYSIS REPORT ---
+Trading Days Analyzed: 5
+Price Range: $102.50 to $118.20 | Mean Price: $110.84
+Upward Days: 3 | Downward Days: 1
+Largest Single-Day Surge: +$8.50
+\end{lstlisting}
+
+\begin{answerbox}[height=15.2cm]{Python Solution for Problem 2}
+\end{answerbox}
+
+\vfill
+\begin{center}
+  \rule{0.5\textwidth}{0.4pt}\\[1mm]
+  \textbf{\color{primaryblue}--- END OF EXAM PAPER ---}
+\end{center}
+
+\end{document}
